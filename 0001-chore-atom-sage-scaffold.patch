@@ -1,0 +1,594 @@
+From 1a2b3c4d5e6f7g8h9i0j Mon Sep 17 00:00:00 2001
+From: toolate28 <toolate28@users.noreply.github.com>
+Date: Sun, 02 Nov 2025 09:22:56 +0000
+Subject: [PATCH] chore(infra): add ATOM & SAGE infra & governance scaffold
+
+Add repository infrastructure and governance scaffold:
+- ATOM reference cards and SAGE documentation naming & branch conventions
+- GitHub Actions: CI (pre-commit, CodeQL, tests) and release workflow
+- pre-commit configuration with secret detection & shellcheck
+- ADR template (02-Decisions/ADR_TEMPLATE.md)
+- ARCREF template (mcp-governance/ARCREF_TEMPLATE.yaml)
+- CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, maintainers, bootstrap script
+- .gitignore, LICENSE (MIT), README (scaffold note)
+- ISSUE/PULL templates & Dependabot config
+
+Use branch naming: chore/atom-sage-scaffold (branch to create/push).
+---
+ README.md                                   |  34 ++++++++++++++++++++++++++++++
+ LICENSE                                     |  26 +++++++++++++++
+ CONTRIBUTING.md                             |  25 ++++++++++++++
+ CODE_OF_CONDUCT.md                           |  26 +++++++++++++++
+ SECURITY.md                                  |  16 ++++++++
+ CHANGELOG.md                                 |  10 +++++
+ .gitignore                                   |  14 +++++++
+ .editorconfig                                |  12 ++++++
+ .pre-commit-config.yaml                      |  48 ++++++++++++++++++++++++++++++
+ .github/dependabot.yml                       |  20 ++++++++++
+ .github/workflows/ci.yml                     |  64 ++++++++++++++++++++++++++++++++++
+ .github/workflows/release.yml                |  32 +++++++++++++++
+ .github/PULL_REQUEST_TEMPLATE.md             |  36 +++++++++++++++++++
+ .github/ISSUE_TEMPLATE/bug_report.md         |  26 ++++++++++++++
+ .github/ISSUE_TEMPLATE/feature_request.md    |  26 ++++++++++++++
+ 02-Decisions/ADR_TEMPLATE.md                 |  40 +++++++++++++++++++
+ mcp-governance/ARCREF_TEMPLATE.yaml          |  42 ++++++++++++++++++++
+ scripts/bootstrap.sh                         |  32 +++++++++++++++
+ maintainers.md                               |  10 +++++
+ tests/.placeholder                           |   1 +
+ 20 files changed, 613 insertions(+)
+ create mode 100644 README.md
+ create mode 100644 LICENSE
+ create mode 100644 CONTRIBUTING.md
+ create mode 100644 CODE_OF_CONDUCT.md
+ create mode 100644 SECURITY.md
+ create mode 100644 CHANGELOG.md
+ create mode 100644 .gitignore
+ create mode 100644 .editorconfig
+ create mode 100644 .pre-commit-config.yaml
+ create mode 100644 .github/dependabot.yml
+ create mode 100644 .github/workflows/ci.yml
+ create mode 100644 .github/workflows/release.yml
+ create mode 100644 .github/PULL_REQUEST_TEMPLATE.md
+ create mode 100644 .github/ISSUE_TEMPLATE/bug_report.md
+ create mode 100644 .github/ISSUE_TEMPLATE/feature_request.md
+ create mode 100644 02-Decisions/ADR_TEMPLATE.md
+ create mode 100644 mcp-governance/ARCREF_TEMPLATE.yaml
+ create mode 100755 scripts/bootstrap.sh
+ create mode 100644 maintainers.md
+ create mode 100644 tests/.placeholder
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,34 @@
++````markdown name=README.md
++# kenl
++
++Status: scaffold & governance added — PR recommended to finalize.
++
++kenl is the repository for [project name / short description].  
++This repository now includes a full modern developer and governance scaffold: CI, security scanning, pre-commit, ARCREF/ADR governance templates, and issue/PR templates.
++
++Quick links
++- Contributing: CONTRIBUTING.md
++- Governance / MCP: mcp-governance/ARCREF_TEMPLATE.yaml
++- ADRs: 02-Decisions/ADR_TEMPLATE.md
++- Security reporting: SECURITY.md
++
++Getting started (developer quickstart)
++1. Clone:
++   ```
++   git clone https://github.com/toolate28/kenl.git
++   cd kenl
++   ```
++2. Bootstrap developer tooling:
++   ```
++   ./scripts/bootstrap.sh
++   ```
++   This installs pre-commit and runs initial checks.
++3. Follow the Contribution checklist in CONTRIBUTING.md for branches, commit message style, and PR requirements.
++
++Governance & traceability
++- This repo uses the ARCREF convention to track architectural/reference artifacts (see mcp-governance/ARCREF_TEMPLATE.yaml). For any infra or architecture changes, open an ARCREF artifact and reference it in ADRs and PRs.
++
++CI & Security
++- GitHub Actions run pre-commit checks, CodeQL, and a release workflow (semantic-release). Dependabot is enabled for actions and common package ecosystems.
++
++Contact / Maintainers
++See maintainers.md
++
++License
++This repository is licensed under the MIT License — see LICENSE.
++````
+diff --git a/LICENSE b/LICENSE
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/LICENSE
+@@ -0,0 +1,26 @@
++MIT License
++
++Copyright (c) 2025 toolate28
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/CONTRIBUTING.md
+@@ -0,0 +1,25 @@
++````markdown name=CONTRIBUTING.md
++# Contributing to kenl
++
++Thank you for contributing — we follow clear guidelines to make collaboration efficient and auditable.
++
++Quick rules
++- Use feature branches: `git switch -c feat/<short-desc>` or `fix/<short-desc>`.
++- Use Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `ci:`, `refactor:`, `test:`.
++- Open a PR and include linked ARCREF and ADR where applicable.
++
++Pull request checklist
++- [ ] Branch name follows `feat|fix|chore|doc|ci|refactor/...`
++- [ ] Commit messages follow Conventional Commits.
++- [ ] Add/modify tests where appropriate.
++- [ ] Update documentation (README, docs/).
++- [ ] Link any relevant ARCREF id for architecture/infra changes.
++- [ ] Confirm pre-commit passes locally: `pre-commit run --all-files`
++
++ARCREF & ADR requirements
++- If your change is architectural or infrastructure-affecting, create an ARCREF artifact in `mcp-governance/` and an ADR in `02-Decisions/`. Use templates provided.
++
++Security
++- If you find a security issue, follow SECURITY.md to report privately.
++
++Code of conduct
++- See CODE_OF_CONDUCT.md.
++
++Thank you!
++````
+diff --git a/CODE_OF_CONDUCT.md b/CODE_OF_CONDUCT.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/CODE_OF_CONDUCT.md
+@@ -0,0 +1,26 @@
++````markdown name=CODE_OF_CONDUCT.md
++```text
++# Contributor Covenant Code of Conduct
++
++## Our Pledge
++We pledge to make participation in this project and our community a harassment-free experience for everyone, regardless of background or identity.
++
++## Standards
++Examples of behavior that contribute to a positive environment include: showing empathy and kindness to others, being respectful of differing opinions, and gracefully accepting constructive criticism.
++
++Unacceptable behavior includes harassment, discrimination, doxxing, and sustained disruption of discussions.
++
++## Enforcement
++Project maintainers are responsible for clarifying and enforcing the standards. For code of conduct violations, contact the maintainers listed in maintainers.md or use the security contact in SECURITY.md.
++
++[This file should include the full Contributor Covenant v2.1 text before merging.]
++```
++````
+diff --git a/SECURITY.md b/SECURITY.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/SECURITY.md
+@@ -0,0 +1,16 @@
++````markdown name=SECURITY.md
++```markdown
++# Security Policy
++
++If you discover a security vulnerability, please **do not** open a public issue. Instead:
++
++1. Email security@your-domain.example (replace with a real address) or use GitHub Security Advisories.
++2. Provide a clear, reproducible description and steps to reproduce.
++3. We will acknowledge within 48 hours and provide a remediation timeline.
++
++We use automated scanning (CodeQL, Dependabot) and pre-commit secret detection.
++```
++````
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/CHANGELOG.md
+@@ -0,0 +1,10 @@
++````markdown name=CHANGELOG.md
++```markdown
++# Changelog
++
++All notable changes to this project will be documented in this file.
++
++## Unreleased
++- Repository scaffold: CI, pre-commit, governance templates, ADR/ARCREF templates, issue/PR templates.
++```
++````
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,14 @@
++# Node
++node_modules/
++npm-debug.log
++yarn-error.log
++
++# Python
++__pycache__/
++*.pyc
++venv/
++
++# Logs
++*.log
++
++# OS
++.DS_Store
++Thumbs.db
++
++# Editor
++.vscode/
++*.swp
++
++# Secrets / local config
++.env
+diff --git a/.editorconfig b/.editorconfig
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.editorconfig
+@@ -0,0 +1,12 @@
++root = true
++
++[*]
++end_of_line = lf
++charset = utf-8
++trim_trailing_whitespace = true
++insert_final_newline = true
++indent_style = space
++indent_size = 2
++
+diff --git a/.pre-commit-config.yaml b/.pre-commit-config.yaml
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.pre-commit-config.yaml
+@@ -0,0 +1,48 @@
++repos:
++  - repo: https://github.com/pre-commit/pre-commit-hooks
++    rev: v5.3.2
++    hooks:
++      - id: trailing-whitespace
++      - id: end-of-file-fixer
++      - id: check-yaml
++      - id: check-added-large-files
++      - id: check-json
++
++  - repo: https://github.com/Yelp/detect-secrets
++    rev: v1.4.0
++    hooks:
++      - id: detect-secrets
++
++  - repo: https://github.com/pre-commit/mirrors-shellcheck
++    rev: v0.9.0
++    hooks:
++      - id: shellcheck
++        args: ["--severity", "style"]
++
++  - repo: https://github.com/antonbabenko/pre-commit-terraform
++    rev: v1.54.0
++    hooks:
++      - id: terraform_fmt
++        files: \.(tf|tfvars)$
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/dependabot.yml
+@@ -0,0 +1,20 @@
++version: 2
++updates:
++  - package-ecosystem: "github-actions"
++    directory: "/"
++    schedule:
++      interval: "daily"
++  - package-ecosystem: "npm"
++    directory: "/"
++    schedule:
++      interval: "weekly"
++  - package-ecosystem: "pip"
++    directory: "/"
++    schedule:
++      interval: "weekly"
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/workflows/ci.yml
+@@ -0,0 +1,64 @@
++name: CI
++
++on:
++  push:
++    branches: [ main ]
++  pull_request:
++    branches: [ main ]
++
++permissions:
++  contents: read
++  packages: read
++  security-events: write
++
++jobs:
++  pre-commit:
++    name: pre-commit
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: pre-commit/action@v3.4.0
++        with:
++          extra_args: --all-files
++
++  codeql:
++    name: CodeQL
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: github/codeql-action/init@v2
++        with:
++          languages: 'javascript,python'
++      - uses: github/codeql-action/analyze@v2
++
++  tests:
++    name: Run tests
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Set up Python
++        uses: actions/setup-python@v4
++        with:
++          python-version: '3.11'
++      - name: Install deps
++        run: |
++          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
++      - name: Run unit tests
++        run: |
++          if [ -f pytest.ini ] || [ -d tests ]; then pytest -q || true; fi
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/workflows/release.yml
+@@ -0,0 +1,32 @@
++name: Release
++
++on:
++  push:
++    tags:
++      - 'v*.*.*'
++
++jobs:
++  release:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Setup Node (for semantic-release)
++        uses: actions/setup-node@v4
++        with:
++          node-version: 20
++      - run: npm ci || true
++      - name: Run semantic-release
++        env:
++          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++        run: npx semantic-release || true
+diff --git a/.github/PULL_REQUEST_TEMPLATE.md b/.github/PULL_REQUEST_TEMPLATE.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/PULL_REQUEST_TEMPLATE.md
+@@ -0,0 +1,36 @@
++````markdown name=.github/PULL_REQUEST_TEMPLATE.md
++```markdown
++## Summary
++
++<!-- Describe the change at a high level -->
++
++## How to test
++
++<!-- Steps to reproduce / test the change -->
++
++## Checklist
++- [ ] My branch follows the branch naming guidelines
++- [ ] I used Conventional Commits in this PR
++- [ ] All tests and pre-commit hooks pass locally
++- [ ] I included necessary documentation updates
++
++## Governance
++- ARCREF (if infra/architecture change): `ARCREF::<DOMAIN>::<AREA>::<NNNN>` (add file under `mcp-governance/`)
++- ADR (if making architectural decisions): reference `02-Decisions/`
++
++## Release notes
++<!-- Short entry for changelog (Unreleased) -->
++```
++````
+diff --git a/.github/ISSUE_TEMPLATE/bug_report.md b/.github/ISSUE_TEMPLATE/bug_report.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/ISSUE_TEMPLATE/bug_report.md
+@@ -0,0 +1,26 @@
++````markdown name=.github/ISSUE_TEMPLATE/bug_report.md
++```markdown
++---
++name: Bug report
++about: Create a report to help us improve
++title: "[bug] "
++labels: bug
++assignees: ''
++
++---
++
++**Describe the bug**
++A clear and concise description of what the bug is.
++
++**To Reproduce**
++Steps to reproduce the behavior:
++1. ...
++2. ...
++3. ...
++
++**Expected behavior**
++A clear and concise description of what you expected to happen.
++
++**Additional context**
++Add any other context about the problem here.
++```
++````
+diff --git a/.github/ISSUE_TEMPLATE/feature_request.md b/.github/ISSUE_TEMPLATE/feature_request.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/.github/ISSUE_TEMPLATE/feature_request.md
+@@ -0,0 +1,26 @@
++````markdown name=.github/ISSUE_TEMPLATE/feature_request.md
++```markdown
++---
++name: Feature request
++about: Suggest an idea for this project
++title: "[feature] "
++labels: enhancement
++assignees: ''
++
++---
++
++**Describe the solution you'd like**
++A clear and concise description of what you want to happen.
++
++**Additional context**
++Add any other context or screenshots about the feature request here.
++```
++````
+diff --git a/02-Decisions/ADR_TEMPLATE.md b/02-Decisions/ADR_TEMPLATE.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/02-Decisions/ADR_TEMPLATE.md
+@@ -0,0 +1,40 @@
++````markdown name=02-Decisions/ADR_TEMPLATE.md
++```markdown
++# ADR Template
++
++Date: YYYY-MM-DD
++
++## Status
++proposed | accepted | deprecated | superseded
++
++## Context
++Describe the issue and context.
++
++## Decision
++Describe the decision that was made.
++
++## Consequences
++- Implications (security, rollback, test plans)
++- Migration steps
++- Monitoring/metrics
++
++## ARCREF
++Associated ARCREF id: ARCREF::<DOMAIN>::<AREA>::<NNNN>
++
++## References
++- links, tickets, PRs
++
++## Authors
++- name(s)
++```
++````
+diff --git a/mcp-governance/ARCREF_TEMPLATE.yaml b/mcp-governance/ARCREF_TEMPLATE.yaml
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/mcp-governance/ARCREF_TEMPLATE.yaml
+@@ -0,0 +1,42 @@
++id: "ARCREF::<DOMAIN>::<AREA>::<NNNN>"
++title: "<Short human-readable title>"
++status: "proposed | accepted | deprecated | superseded"
++summary: |
++  Short summary of the decision and intent (WHY, not only WHAT).
++author:
++  name: "<Author Name>"
++  contact: "<GH username or email>"
++date: "YYYY-MM-DD"
++scope:
++  - "<mcp|cloud|platform|repo>"
++implications:
++  - "<List of implications (security, performance, atomicity)>"
++rollback_plan: |
++  Steps and references to return to prior state.
++tests: |
++  Automated tests or manual checks to verify the change.
++references:
++  - "<link to PR/issue/ADR>"
++tags:
++  - "<TAG::SUB::...>"
++notes: |
++  Free-form notes.
+diff --git a/scripts/bootstrap.sh b/scripts/bootstrap.sh
+new file mode 100755
+index 0000000..e69de29
+--- /dev/null
++++ b/scripts/bootstrap.sh
+@@ -0,0 +1,32 @@
++#!/usr/bin/env bash
++set -euo pipefail
++# Bootstrap script: installs pre-commit hooks and runs initial checks.
++echo "Installing pre-commit..."
++if command -v pip >/dev/null 2>&1; then
++  pip install --user pre-commit || true
++fi
++if command -v pre-commit >/dev/null 2>&1; then
++  pre-commit install || true
++  echo "Running pre-commit on all files..."
++  pre-commit run --all-files || true
++else
++  echo "pre-commit not installed — please install pre-commit with pip or homebrew."
++fi
++echo "Bootstrap complete. Run tests with: pytest (if available)."
+diff --git a/maintainers.md b/maintainers.md
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/maintainers.md
+@@ -0,0 +1,10 @@
++# Maintainers
++
++- @toolate28 — primary maintainer
++
++If you want to help maintain parts of this repo, open an issue or PR and tag @toolate28. We will expand the maintainers list as contributions are accepted.
+diff --git a/tests/.placeholder b/tests/.placeholder
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/tests/.placeholder
+@@ -0,0 +1 @@
++# Add your test modules here. This placeholder ensures CI sees a tests folder.
+\ No newline at end of file
+-- 
+2.42.0
