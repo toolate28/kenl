@@ -1,3 +1,12 @@
+---
+project: Bazza-DX SAGE Framework
+status: current
+version: 2025-11-06
+classification: OWI-DOC
+atom: ATOM-DOC-20251106-019
+owi-version: 1.0.0
+---
+
 # kenl
 
 Status: scaffold & governance added — PR recommended to finalize.
