@@ -20,7 +20,7 @@ Traditional operations tracking captures *what* happened but loses *why*. When s
 
 - Average recovery time: **30-60 minutes**
 - Context lost: **40%**
-- Cost of inefficiency: **$2.5M/year** (average organization)
+- Manual reconstruction required
 - Traceability: **Zero**
 
 ## The ATOM+SAGE Solution
@@ -103,7 +103,7 @@ atom-analytics --summary
 # ATOM+SAGE automatically reconstructs context and resumes
 ```
 
-## Three Market-Ready Solutions
+## Specialized Applications
 
 ### 1. ATOM-SEC: AI Security & Red-Teaming
 Turn AI interactions into forensic evidence. Every prompt becomes traceable and auditable.
@@ -181,12 +181,9 @@ Core functionality requires only POSIX shell (available everywhere).
 
 ## Documentation
 
-- [Launch Presentation](./docs/LAUNCH_PRESENTATION.md) - 12-slide executive overview
-- [Validation Case Study](./docs/VALIDATION_COMPLETE.md) - Real-world 7-minute recovery
-- [Architecture Deep Dive](./docs/ARCHITECTURE.md) - Technical design
-- [Getting Started Guide](./docs/GETTING_STARTED.md) - Step-by-step tutorial
-- [API Reference](./docs/API_REFERENCE.md) - Complete function reference
-- [Business Model](./docs/BUSINESS_MODEL.md) - Open core strategy
+- [Validation Case Study](./docs/VALIDATION_COMPLETE.md) - Real-world 7-minute recovery forensics
+- [Getting Started Guide](./docs/GETTING_STARTED.md) - 15-minute onboarding tutorial
+- [Fork Documentation](./forks/) - Specialized application guides
 
 ## Examples
 
@@ -210,36 +207,37 @@ We welcome contributions! See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guide
 
 ## License
 
-MIT License - see [LICENSE](../../LICENSE) for details.
+MIT License - see [LICENSE](./LICENSE) for details.
 
-Open source core is free forever. Enterprise features available for $99/user/month.
+Fully open source. Contributions welcome!
 
 ## Community & Support
 
 - **GitHub Issues**: Bug reports and feature requests
 - **Discussions**: Questions and community support
-- **Email**: contact@atom-sage.dev
-- **Documentation**: Full docs at atom-sage.dev
+- **Documentation**: Comprehensive guides in `./docs/`
+- **Contributing**: See [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ## Roadmap
 
-**Q1 2025**
-- [x] Core ATOM engine (✓ Production ready)
-- [x] SAGE framework (✓ Production ready)
-- [x] Validation case study (✓ Complete)
-- [ ] Python bindings
-- [ ] Web dashboard
+**v1.0 (Released)**
+- [x] Core ATOM engine (Pure POSIX shell)
+- [x] SAGE framework (Intent-driven operations)
+- [x] Validation case study (7-minute recovery)
+- [x] Python analytics tools
+- [x] Example workflows
 
-**Q2 2025**
-- [ ] ATOM-SEC public beta
-- [ ] ATOM-GOV public beta
-- [ ] MCP marketplace integrations
-- [ ] Enterprise pilot program
+**v1.1 (Planned)**
+- [ ] Additional language bindings (Ruby, Go)
+- [ ] Web-based dashboard
+- [ ] MCP server integrations
+- [ ] Enhanced analytics
 
-**Q3 2025**
-- [ ] ATOM-EOL public launch (aligned with Win10 EOL)
-- [ ] Certification program
-- [ ] Channel partnerships
+**v2.0 (Future)**
+- [ ] ATOM-SEC public release
+- [ ] ATOM-GOV public release
+- [ ] ATOM-EOL public release
+- [ ] Community contribution framework
 
 ## The Revolution
 

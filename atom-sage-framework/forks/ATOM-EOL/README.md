@@ -6,29 +6,28 @@
 
 ATOM-EOL provides a safe, auditable migration path from Windows 10 (EOL October 2025) to Linux gaming distributions, specifically targeting the 240+ million PCs that cannot upgrade to Windows 11 due to hardware requirements.
 
-**Problem**: Windows 10 reaches End of Life in October 2025, leaving 240M+ PCs vulnerable or requiring expensive hardware upgrades ($500-2000 per system). Traditional Linux migrations lack gaming compatibility, traceability, and rollback safety.
+**Problem**: Windows 10 reaches End of Life in October 2025, leaving 240M+ PCs vulnerable while traditional Linux migrations lack gaming compatibility, traceability, and rollback safety.
 
-**Solution**: ATOM-EOL combines gaming-optimized Linux (Bazzite/Nobara), traceable configuration management, and reversible migration steps to enable cost-effective, secure Windows 10 replacement.
+**Solution**: ATOM-EOL combines gaming-optimized Linux (Bazzite/Nobara), traceable configuration management, and reversible migration steps to enable secure Windows 10 replacement while extending hardware lifespan.
 
-## The Business Case
+## Key Benefits
 
 ### For Individuals
-- **Avoid**: $500-2000 hardware upgrade for Windows 11 compatibility
-- **Gain**: Extended hardware lifespan (5+ years)
-- **Keep**: 95%+ game compatibility via Proton/WINE
-- **Benefit**: Improved performance on older hardware
+- **Extend hardware lifespan**: Keep using your current PC for 5+ years
+- **Maintain gaming compatibility**: 95%+ game compatibility via Proton/WINE
+- **Improve performance**: Often better performance on older hardware vs Windows
+- **Zero licensing cost**: Fully open source and free
 
 ### For Organizations
-- **Save**: 60% vs hardware refresh ($300/seat vs $800/seat)
-- **Reduce**: Security risk from unsupported OS
-- **Maintain**: Audit trails for compliance
-- **Enable**: Rollback safety for risk management
+- **Reduce infrastructure costs**: Avoid expensive hardware refresh cycles
+- **Decrease security risk**: Migrate to actively supported operating system
+- **Maintain audit trails**: Full compliance and traceability for governance
+- **Enable safe migrations**: Rollback safety and tested migration procedures
 
-### Market Opportunity
-- **240M+ affected PCs** (confirmed by Microsoft, 2024)
-- **$100-500B** total hardware refresh cost (industry estimates)
-- **Oct 2025**: EOL date creates urgency
-- **Enterprise pain**: Compliance + cost pressure
+### Scope and Target
+- **240M+ affected PCs** worldwide cannot upgrade to Windows 11 due to hardware requirements
+- **October 2025**: Windows 10 End of Life date drives migration urgency
+- **Enterprise impact**: Organizations face compliance and cost management challenges
 
 ## Key Features
 
@@ -216,14 +215,6 @@ atom EOL "Rollback: Reverting BG3 config to ATOM-GWI-051"
 - Automated testing
 - Compliance reporting
 
-### Cost Tracking
-```bash
-# Per-seat cost analysis
-atom EOL "Cost: Migration complete - $280/seat"
-# vs Windows 11 hardware: $800/seat
-# Savings: $520/seat × 500 seats = $260,000
-```
-
 ### Change Management
 - ARCREF artifacts for each migration wave
 - ADR documents for methodology decisions
@@ -270,48 +261,34 @@ atom EOL "UAT: Issues: 2 (both resolved)"
 atom EOL "UAT: Decision - proceed with rollout"
 ```
 
-## Pricing
+## Getting Started
 
-**Individual License**:
-- **Free**: Self-service migration guide + Play Cards
-- **$49**: Migration support + extended Play Card library
-- **$99**: 1-on-1 migration assistance (2 hours)
+**ATOM-EOL is fully open source and free to use.**
 
-**Enterprise License**:
-- **$99/seat**: Migration service + support
-- **$149/seat**: Includes training + 90-day support
-- **$199/seat**: Full-service migration + 1-year support
-
-**Bulk Discounts**:
-- 100-500 seats: 20% discount
-- 500-1000 seats: 30% discount
-- 1000+ seats: Custom pricing
-
-**Cost Comparison**:
-| Option | Per-Seat Cost | Notes |
-|--------|---------------|-------|
-| Windows 11 Upgrade (hardware) | $500-2000 | New PC required |
-| Windows 10 Extended Support | $61/year | Microsoft pricing (limited) |
-| ATOM-EOL Migration | $99-199 | One-time + optional support |
+For support options and community resources:
+- Self-service migration guide included in the framework
+- Play Card library with 500+ pre-tested game configurations
+- Community support via Discord and forums
+- Professional services available for enterprise deployments
 
 ## Case Studies
 
 **Company**: Regional School District (1,200 PCs)
-- **Challenge**: Budget shortfall, can't replace hardware
-- **Solution**: ATOM-EOL migration for 800 PCs (400 too old)
-- **Result**: $640K saved vs hardware refresh
-- **Timeline**: 6 months (phased rollout)
+- **Challenge**: Budget constraints, unable to replace aging hardware
+- **Solution**: ATOM-EOL migration for 800 compatible PCs (400 too old to migrate)
+- **Result**: Significant cost avoidance vs hardware refresh cycle
+- **Timeline**: 6 months (phased rollout by department)
 
 **Individual**: Gaming enthusiast (42-game library)
-- **Hardware**: i5-6500, GTX 1060, 16GB RAM
-- **Challenge**: Windows 10 EOL, can't afford $1200 upgrade
+- **Hardware**: Intel i5-6500, GTX 1060, 16GB RAM
+- **Challenge**: Windows 10 EOL with hardware unable to support Windows 11
 - **Solution**: ATOM-EOL migration to Bazzite
-- **Result**: All games working, better performance, $0 spent
+- **Result**: 100% game library functional, improved performance on older hardware
 
 **Company**: DevOps Consultancy (50 workstations)
-- **Challenge**: Security compliance + budget constraints
+- **Challenge**: Security compliance requirements with limited capital budget
 - **Solution**: ATOM-EOL migration for developer workstations
-- **Result**: $30K saved, audit trails for compliance
+- **Result**: Maintained security posture with full audit trails and compliance documentation
 
 ## Timeline
 
@@ -358,6 +335,6 @@ No warranty provided. Use at your own risk.
 
 **Fork**: ATOM-EOL
 **Version**: 1.0.0
-**License**: MIT (tools) / Creative Commons (documentation)
+**License**: MIT - Fully Open Source
 **Status**: Private Beta (Q1 2025)
 **Target Launch**: Q3 2025 (Pre-Windows 10 EOL)

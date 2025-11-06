@@ -201,21 +201,6 @@ atom-analytics export pentest-abc-$(date +%Y%m%d).json
 
 (Use air-gapped deployment for high-risk operations)
 
-## Pricing
-
-**ATOM-SEC Licensing**:
-- Open source core (MIT license): Free
-- Enterprise features: $199/user/month
-  - Encrypted trails
-  - Compliance reporting
-  - Legal evidence support
-  - Priority support
-
-**Enterprise Add-ons**:
-- Air-gapped deployment: $999/month
-- Expert witness services: Custom pricing
-- Incident response retainer: Custom pricing
-
 ## Integration
 
 ### SIEM Integration
@@ -266,5 +251,5 @@ Unauthorized use may be illegal. Consult legal counsel before deployment.
 
 **Fork**: ATOM-SEC
 **Version**: 1.0.0
-**License**: MIT (core) / Commercial (enterprise features)
+**License**: MIT - Fully Open Source
 **Status**: Production Ready

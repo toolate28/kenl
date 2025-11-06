@@ -76,15 +76,15 @@ mcp_policy:
       audit: true
 ```
 
-### 2. Cost Management
+### 2. Resource Management
 ```yaml
-# Policy: Rate limit expensive operations
+# Policy: Rate limit resource-intensive operations
 mcp_policy:
   perplexity_mcp:
     research_queries:
       rate_limit: 100/hour
-      cost_tracking: true
-      alert_threshold: $50/day
+      resource_tracking: true
+      alert_threshold: high_utilization
 ```
 
 ### 3. Compliance Requirements
@@ -152,7 +152,7 @@ atom_gov:
       path: ~/.config/mcp/servers/perplexity
       policies:
         - rate_limit: 100/hour
-        - cost_limit: $100/day
+        - resource_limit: high
         - audit_level: full
 
     - name: ollama_mcp
@@ -174,9 +174,8 @@ atom_gov:
       timeout: 1h
       fallback: deny
 
-    cost_limit:
-      type: budget
-      currency: USD
+    resource_limit:
+      type: resource_quota
       enforcement: hard
       alert_threshold: 80%
 
@@ -241,21 +240,21 @@ policy:
     alert_on_limit: true
 ```
 
-### Cost Management
+### Resource Management
 ```yaml
-# Track and limit costs
+# Track and limit resource usage
 policy:
-  name: monthly_budget
+  name: monthly_quota
   trigger:
     mcp_server: perplexity_mcp
   action:
-    budget:
-      limit: $500/month
+    quota:
+      limit: high_usage
       per: tenant
       enforcement: soft  # warn but allow
-      alert_threshold: $400
+      alert_threshold: 80%
   audit:
-    cost_tracking: true
+    resource_tracking: true
     reporting: monthly
 ```
 
@@ -360,27 +359,6 @@ atom-gov metrics --format prometheus > /var/lib/prometheus/mcp_metrics.prom
 - Health monitoring
 - Performance optimization
 
-## Pricing
-
-**ATOM-GOV Licensing**:
-- Open source core (MIT license): Free
-  - Single server governance
-  - Basic audit trails
-  - Community support
-
-- Enterprise Edition: $299/server/month
-  - Multi-tenancy support
-  - Advanced policies
-  - Compliance reporting
-  - Priority support
-
-- Enterprise Plus: $999/organization/month
-  - Unlimited servers
-  - HA deployment
-  - Custom policies
-  - 24/7 support
-  - Expert consultation
-
 ## Case Studies
 
 **Company**: SaaS Platform (5000 customers)
@@ -412,5 +390,5 @@ atom-gov metrics --format prometheus > /var/lib/prometheus/mcp_metrics.prom
 
 **Fork**: ATOM-GOV
 **Version**: 1.0.0
-**License**: MIT (core) / Commercial (enterprise)
+**License**: MIT - Fully Open Source
 **Status**: Beta (Public beta Q1 2025)

@@ -19,19 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-ENTERPRISE FEATURES NOTICE:
-
-Certain features marked as "Enterprise" in the documentation are subject to
-separate commercial licensing terms. These features include but are not limited to:
-
-- ATOM-SEC: Encrypted audit trails, compliance reporting, expert witness services
-- ATOM-GOV: Multi-tenancy, advanced policies, HA deployment
-- ATOM-EOL: Full-service migration, enterprise support contracts
-
-Contact: licensing@atom-sage.dev for commercial licensing inquiries.
-
-The core ATOM+SAGE framework (intent-driven operations, basic audit trails,
-recovery tools) remains free and open source under the MIT License.
