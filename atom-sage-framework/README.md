@@ -137,29 +137,49 @@ Traceable, reversible Windows 10 → Linux migration for 240M incompatible PCs.
 
 ## Architecture Overview
 
-```
-┌─────────────────────────────────────────────┐
-│           ATOM Trail Engine                 │
-│  (Pure POSIX shell, zero dependencies)      │
-└─────────────────────────────────────────────┘
-         │                    │
-         ▼                    ▼
-┌────────────────┐   ┌────────────────────────┐
-│ SAGE Framework │   │  OWI Methodology       │
-│ (Guided Ops)   │   │  (Optimization)        │
-└────────────────┘   └────────────────────────┘
-         │                    │
-         └──────────┬─────────┘
-                    ▼
-┌─────────────────────────────────────────────┐
-│  Recovery | Governance | Analytics | CTFWI  │
-└─────────────────────────────────────────────┘
-         │                    │
-         ▼                    ▼
-┌──────────────┐       ┌─────────────────┐
-│ AI Assistants│       │  MCP Servers    │
-│ Claude, GPT  │       │  Cloud, Git     │
-└──────────────┘       └─────────────────┘
+```mermaid
+graph TB
+    subgraph "ATOM Trail Engine (Pure POSIX Shell)"
+        ATOM[ATOM Tag Generator]
+        TRAIL[Trail Logger]
+        COUNTER[Auto-increment Counter]
+    end
+
+    subgraph "SAGE Framework"
+        SAGE[System-Aware Guided Evolution]
+        CTFWI[CTFWI Validation]
+        RECOVERY[Recovery Engine]
+    end
+
+    subgraph "OWI Methodology"
+        GWI[Gaming-With-Intent]
+        CWI[Configuring-With-Intent]
+        BWI[Building-With-Intent]
+    end
+
+    subgraph "Applications"
+        AI[AI Assistants<br/>Claude, GPT, Copilot]
+        MCP[MCP Servers<br/>Cloudflare, Perplexity]
+        GAMES[Gaming Profiles<br/>Play Cards]
+    end
+
+    ATOM --> TRAIL
+    TRAIL --> COUNTER
+    TRAIL --> SAGE
+    SAGE --> CTFWI
+    SAGE --> RECOVERY
+    SAGE --> GWI
+    SAGE --> CWI
+    SAGE --> BWI
+
+    RECOVERY --> AI
+    GWI --> GAMES
+    CWI --> MCP
+    BWI --> AI
+
+    style ATOM fill:#9cf,stroke:#333,stroke-width:2px
+    style SAGE fill:#fc9,stroke:#333,stroke-width:2px
+    style RECOVERY fill:#9f6,stroke:#333,stroke-width:3px
 ```
 
 ## Key Features
