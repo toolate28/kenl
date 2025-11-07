@@ -44,3 +44,26 @@ dev-env-setup-log.txt
 # ASCII art / logos
 *-logos.txt
 kenl-logos.txt
+
+# Session and temporary documentation
+SESSION_COMPLETE_*.md
+PRE_REBASE_DOCUMENTATION.md
+*_BACKUP.md
+network-*-backup.txt
+
+# ATOM trail and integrity checks
+atom_trail.log
+integrity_checks.log
+
+# CTF markers and encoded data
+.atom_session_*_encoded
+.network_validation_cache
+.pre_rebase_checkpoint
+
+# System documentation snapshots (kept locally)
+SYSTEM_INTELLIGENCE_REPORT.md
+POST_UPDATE_CONFIGURATION_SUMMARY.md
+GAMING_CONFIGURATION_COMPLETE_*.md
+NEXT_BOOT_CHECKLIST.md
+REBASE_POST_MORTEM.md
+PROTON_WINE_ASSESSMENT.md
