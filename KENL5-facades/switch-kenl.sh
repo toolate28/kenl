@@ -22,6 +22,9 @@ show_contexts() {
     echo "  3) KENL3-dev        💻  Blue    - Bazzite-DX Development"
     echo "  4) KENL4-monitoring 📊  Green   - Monitoring & Observability"
     echo "  5) KENL5-facades    🎨  Yellow  - Facades & Theming"
+    echo "  6) KENL6-social     🌐  Orange  - Social Gaming & Community"
+    echo "  8) KENL8-security   🔐  Magenta - Security & Privacy"
+    echo " 10) KENL10-backup    💾  Brown   - Intelligent Backup & Sync"
     echo ""
 }
 
@@ -131,6 +134,15 @@ case "${1:-}" in
         ;;
     5|kenl5|facades)
         activate_context "5-facades"
+        ;;
+    6|kenl6|social)
+        activate_context "6-social"
+        ;;
+    8|kenl8|security)
+        activate_context "8-security"
+        ;;
+    10|kenl10|backup)
+        activate_context "10-backup"
         ;;
     install)
         install_systemwide
