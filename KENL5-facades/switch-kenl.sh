@@ -16,6 +16,7 @@ mkdir -p "$CONFIG_DIR"
 show_contexts() {
     echo "Available KENL contexts:"
     echo ""
+    echo "  0) KENL0-system     ⚙️  White   - System Operations (Elevated)"
     echo "  1) KENL1-framework  ⚛️  Purple  - ATOM+SAGE+OWI Core"
     echo "  2) KENL2-gaming     🎮  Red     - Bazzite Gaming (GWI)"
     echo "  3) KENL3-dev        💻  Blue    - Bazzite-DX Development"
@@ -113,6 +114,9 @@ show_current() {
 
 # Main command handler
 case "${1:-}" in
+    0|kenl0|system)
+        activate_context "0-system"
+        ;;
     1|kenl1|framework)
         activate_context "1-framework"
         ;;
