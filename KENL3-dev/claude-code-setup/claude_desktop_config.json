@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "cloudflare": {
+      "command": "npx",
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "YOUR_API_TOKEN_HERE",
+        "CLOUDFLARE_ACCOUNT_ID": "3ddeb355f4954bb1ee4f9486b2908e7e"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/YOUR_USERNAME/.config/bazza-dx", "/home/YOUR_USERNAME/.config/gaming-intent", "/home/YOUR_USERNAME/projects"]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/home/YOUR_USERNAME/projects/bazza-dx"]
+    }
+  },
+  "globalShortcut": "CommandOrControl+Shift+Space"
+}
