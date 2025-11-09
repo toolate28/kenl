@@ -1,442 +1,373 @@
 ---
-project: Bazza-DX Surface Pro 4 Windows Testing Platform
-status: testing
+project: Surface Pro 4 Windows Support Documentation
+status: active
 version: 2025-11-09
-classification: OWI-DOC
-atom: ATOM-DOC-20251109-001
-owi-version: 1.0.0
 platform: Windows 10 (Surface Pro 4)
 ---
 
-# CLAUDE.md - Surface Pro 4 Windows Testing Platform
+# CLAUDE.md - Surface Pro 4 Platform Guide
 
-This file provides guidance to Claude Code when working with Surface Pro 4 devices for Windows-based testing and validation of the Bazza-DX ecosystem migration strategies.
+This file provides guidance when working with Surface Pro 4 devices for Windows troubleshooting and support.
 
 ## Platform Overview
 
-**Surface Pro 4** serves as a representative Windows 10 EOL testing platform for the Bazza-DX project's Windows migration strategies.
+**Surface Pro 4** - Windows 10 testing and troubleshooting platform
 
 **Device Specifications:**
 - **Release Date**: October 2015
 - **Operating System**: Windows 10 (EOL: October 14, 2025)
 - **Windows 11 Compatible**: No (lacks TPM 2.0 and minimum CPU requirements)
 - **Surface Support EOL**: October 2021 (hardware support ended)
-- **Status**: Critical EOL platform - representative of 240M+ affected PCs
+- **Status**: End-of-life platform requiring migration planning
 
-## Repository Purpose
+## Purpose
 
-This Surface Pro 4 platform serves dual purposes:
+1. **Immediate**: Investigate and resolve domain controller connectivity problems
+2. **Long-term**: Test Windows → Linux migration strategies
 
-1. **Long-term Goal**: Test and validate Windows variations of Bazza-DX migration tooling
-2. **Immediate Goal**: Investigate and resolve domain controller connectivity problems on Windows 10
+## Critical Issues
 
-## Critical Issues & Known Problems
+### 1. Domain Controller Connectivity (HIGH PRIORITY)
 
-### 1. Windows 10 End of Life (October 14, 2025)
-
-**Impact**: No security updates, increased vulnerability, no technical support
-
-**Mitigation Options**:
-- Extended Security Updates (ESU) program (free with Microsoft account sync, or $30/year until Oct 2026)
-- Migration to Linux (Bazzite-DX recommended)
-- Device replacement (Surface Pro 5 or newer for Windows 11 support)
-
-**Related Documentation**: `WINDOWS_10_EOL_ISSUES.md`
-
-### 2. Windows 11 Incompatibility
-
-**Surface Pro 4 cannot officially upgrade to Windows 11** due to:
-- Missing TPM 2.0 chip
-- CPU below minimum requirements (6th gen Intel, requires 8th gen+)
-- Released before November 2017 cutoff
-
-**Workarounds** (unsupported, high risk):
-- Bypass installation checks (see `WINDOWS_11_UNOFFICIAL_INSTALL.md` - NOT RECOMMENDED)
-- Known issues: Surface Pen glitches, Type Cover failures, system instability
-
-### 3. "Flickergate" - Screen Flickering Issue
-
-**Severity**: High - Hardware defect affecting 1,600+ reported users
-
-**Symptoms**:
-- Constant screen flickering during/after startup
-- Duplicated or stretched taskbar
-- Black lines flashing across display
-- Progressive worsening over time
-
-**Root Cause**: Hardware defect (display controller failure), not software-fixable
-
-**Status**: Microsoft replacement program ended (device EOL October 2021)
-
-**Temporary Mitigations**:
-- Update Intel HD Graphics drivers (may help in early stages)
-- Reduce screen brightness
-- External monitor usage (workaround for critical work)
-- **Not Recommended**: Freezer method (temporary, risks condensation damage)
-
-**Related Documentation**: `SURFACE_PRO_4_HARDWARE_ISSUES.md`
-
-### 4. Battery Issues
-
-**Common Problems**:
-- Rapid battery degradation (8+ year old devices)
-- Swollen batteries (safety hazard - discontinue use immediately)
-- Won't hold charge / requires constant connection
-
-**Diagnosis**:
-```powershell
-# Generate battery health report
-powercfg /batteryreport /output "C:\battery-report.html"
-
-# Check battery capacity
-# Design Capacity vs Full Charge Capacity ratio
-# <50% indicates replacement needed
-```
-
-**Solutions**:
-- Battery replacement (iFixit difficulty: Difficult, requires heat gun)
-- Use as desktop-tethered device
-- Device retirement/replacement
-
-### 5. Domain Controller Connectivity Issues
-
-**High Priority** - Active investigation focus
-
-**Common Scenarios**:
+**Common Problems:**
 - "Active Directory Domain Controller could not be contacted"
 - Authentication failures after Windows updates
-- Network location detection failures
-- Firewall profile misapplication (Domain vs Public)
+- Network profile stuck on "Public" instead of "Domain"
+- Firewall blocking domain traffic
 
-**Related Documentation**: `DOMAIN_CONTROLLER_TROUBLESHOOTING.md`
+**Quick Fix (90% success rate):**
+```powershell
+Restart-NetAdapter *
+Get-NetConnectionProfile  # Should show "DomainAuthenticated"
+```
 
-## Development Environment Setup
+**See**: `DOMAIN_CONTROLLER_TROUBLESHOOTING.md` for complete guide
 
-### PowerShell Execution Policy
+### 2. Windows 10 End of Life (October 14, 2025)
+
+**Impact:** No security updates, increasing vulnerability
+
+**Options:**
+- **ESU Program**: Free (with Microsoft account) or $30/year until Oct 2026
+- **New Hardware**: Windows 11 compatible device ($500-$1000)
+- **Linux Migration**: Bazzite-DX (free, recommended for Surface Pro 4)
+- **Keep Using**: High risk, only for offline/non-critical use
+
+**See**: `WINDOWS_10_EOL_ISSUES.md` for detailed planning
+
+### 3. Hardware Issues
+
+**"Flickergate" - Screen Flickering:**
+- Hardware defect affecting 1,600+ users
+- Display controller failure (not fixable via software)
+- Use external monitor as workaround
+- No fix available (hardware EOL 2021)
+
+**Battery Problems:**
+- 8-9 year old batteries failing
+- Swollen batteries = immediate safety hazard (stop using)
+- Check health: `powercfg /batteryreport /output "C:\battery-report.html"`
+
+### 4. Windows 11 Incompatibility
+
+Surface Pro 4 **cannot** upgrade to Windows 11:
+- Missing TPM 2.0
+- CPU too old (6th gen Intel, needs 8th gen+)
+- Unofficial workarounds NOT RECOMMENDED (Surface Pen/keyboard failures)
+
+## Getting Started
+
+### First-Time Setup
 
 ```powershell
-# Check current execution policy
-Get-ExecutionPolicy
-
-# Set for current user (recommended for development)
+# 1. Set PowerShell execution policy
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Verify
-Get-ExecutionPolicy -List
+# 2. Create working directory
+New-Item -ItemType Directory -Path "C:\SystemLogs" -Force
+
+# 3. Create system restore point
+Checkpoint-Computer -Description "Before troubleshooting" -RestorePointType MODIFY_SETTINGS
+
+# 4. Run baseline diagnostics
+systeminfo > C:\SystemLogs\systeminfo.txt
+ipconfig /all > C:\SystemLogs\network-baseline.txt
 ```
 
-### Git Configuration
+### Git Configuration (if using version control)
 
 ```powershell
-# Configure Git for Windows
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
-git config --global core.autocrlf true  # Windows line endings
-git config --global init.defaultBranch main
-
-# Verify
-git config --list
+git config --global core.autocrlf true
 ```
 
-### Windows Subsystem for Linux (WSL) - Optional
+## Common Tasks
 
-For ATOM+SAGE framework compatibility:
+### Domain Controller Diagnostics
 
 ```powershell
-# Install WSL2 (requires Windows 10 version 1903+)
-wsl --install
-
-# Default: Ubuntu (compatible with KENL distrobox environment)
-# Reboot required
-
-# After reboot, set up Ubuntu user
-# Then install framework:
-cd /mnt/c/Users/YourName/kenl/atom-sage-framework
-./install.sh
+# Quick diagnostic suite
+Test-ComputerSecureChannel -Verbose
+Get-NetConnectionProfile
+nslookup your-domain.com
+nltest /dclist:your-domain.com
 ```
 
-## ATOM Tag System on Windows
-
-### PowerShell Functions
-
-Create `$PROFILE` functions for ATOM tagging:
+### Fix Network Profile Issue
 
 ```powershell
-# Edit PowerShell profile
-notepad $PROFILE
+# If stuck on "Public" network:
+Restart-NetAdapter *
+Start-Sleep -Seconds 10
+Get-NetConnectionProfile  # Verify "DomainAuthenticated"
+```
 
-# Add these functions:
-function atom {
-    param(
-        [Parameter(Mandatory=$true)]
-        [string]$Type,
-        [Parameter(Mandatory=$true)]
-        [string]$Message
-    )
+### Reset Domain Trust
 
-    $date = Get-Date -Format "yyyyMMdd"
-    $logDir = "$env:USERPROFILE\.atom-logs"
-    $logFile = "$logDir\atom-$date.log"
+```powershell
+# Requires domain admin credentials
+Test-ComputerSecureChannel -Repair -Credential (Get-Credential)
+Test-ComputerSecureChannel -Verbose  # Verify fixed
+```
 
-    if (-not (Test-Path $logDir)) {
-        New-Item -ItemType Directory -Path $logDir | Out-Null
-    }
+### Check Windows Update Status
 
-    $counter = (Get-Content $logFile -ErrorAction SilentlyContinue | Measure-Object -Line).Lines + 1
-    $atomTag = "ATOM-$Type-$date-$('{0:D3}' -f $counter)"
+```powershell
+# Check for pending updates
+Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 10
+
+# Force Group Policy update (after DC fix)
+gpupdate /force
+```
+
+## Documentation Structure
+
+**For End Users:**
+- `START_HERE.md` - One-page friendly guide (non-technical)
+
+**For Tech Support:**
+- `QUICK_START_GUIDE.md` - Practical troubleshooting (copy-paste scripts)
+- `DOMAIN_CONTROLLER_TROUBLESHOOTING.md` - Complete DC reference
+- `WINDOWS_10_EOL_ISSUES.md` - EOL planning and migration
+
+**For Development:**
+- This file (`CLAUDE.md`) - Platform overview and quick reference
+
+## Logging & Tracking
+
+### Simple Logging System
+
+```powershell
+# Create logging function (add to PowerShell profile)
+function Log-Action {
+    param([string]$Message, [string]$Level = "INFO")
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-
-    "$timestamp [$atomTag] $Message" | Tee-Object -FilePath $logFile -Append
+    $logFile = "C:\SystemLogs\system-log-$(Get-Date -Format 'yyyy-MM').log"
+    "$timestamp [$Level] $Message" | Tee-Object -FilePath $logFile -Append
 }
 
-# Usage examples:
-# atom STATUS "Starting domain controller diagnostics"
-# atom CFG "Modified firewall rules for DC connectivity"
-# atom TASK "TODO: Test authentication after Group Policy update"
+# Usage
+Log-Action "Fixed network profile issue" -Level SUCCESS
+Log-Action "Investigating DNS configuration" -Level INFO
 ```
 
-### Alternative: WSL-based ATOM
+**Logs Location**: `C:\SystemLogs\`
 
-If WSL is installed, use native ATOM commands:
+## Security Best Practices
+
+### Post-EOL Hardening (if staying on Windows 10)
 
 ```powershell
-wsl bash -c "atom STATUS 'Starting Windows testing session'"
-wsl bash -c "atom-analytics --summary"
+# 1. Enable Windows Defender
+Set-MpPreference -DisableRealtimeMonitoring $false
+
+# 2. Enable ransomware protection
+Set-MpPreference -EnableControlledFolderAccess Enabled
+
+# 3. Enable firewall
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+
+# 4. Disable SMBv1 (major vulnerability)
+Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart
 ```
 
-## Governance Framework - Windows Adaptations
+### Backup Strategy
 
-### ARCREF for Windows Changes
-
-When making Windows registry, Group Policy, or system-level changes, create ARCREF artifacts following the template:
-
-**Required Sections for Windows**:
-- **Rollback Plan**: Must include registry backup commands or System Restore point creation
-- **Testing**: Include test scripts (PowerShell) for verification
-- **Dependencies**: List required Windows features, roles, or KB updates
-
-**Example**:
-```yaml
-id: ARCREF::WIN::DC-CONNECTIVITY::001
-title: "Fix Domain Controller Firewall Profile Misapplication"
-platform: Windows 10 Pro (Surface Pro 4)
-rollback:
-  restore_point: true
-  registry_backup: "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess"
-  powershell_command: "Restore-Computer -RestorePoint 'Pre-DC-Fix'"
+```
+1. System Image: Weekly (Control Panel → Backup and Restore)
+2. File Backup: Daily (File History or cloud sync)
+3. Offsite Copy: Cloud storage or external drive
 ```
 
-### ADR for Windows Strategy Decisions
+## Common Workflows
 
-Document Windows-specific decisions in `02-Decisions/`:
+### Domain Connectivity Issue
 
-- ADR-00X-WINDOWS-EOL-STRATEGY.md
-- ADR-00X-WSL-INTEGRATION.md
-- ADR-00X-DOMAIN-CONTROLLER-APPROACH.md
+1. **Reproduce**: Document exact error message
+2. **Quick Fix**: Try `Restart-NetAdapter *`
+3. **Diagnose**: Run diagnostic commands (see above)
+4. **Fix**: Apply appropriate solution from troubleshooting guide
+5. **Verify**: Test domain authentication, Group Policy
+6. **Document**: Log what fixed it for future reference
 
-## Testing Workflow
+### Windows 10 EOL Planning
 
-### Pre-Test Checklist
+1. **Assess**: Determine criticality and usage patterns
+2. **Options**: Review ESU, new hardware, Linux, or keep-using
+3. **Test**: If Linux, boot Bazzite-DX live USB (no changes)
+4. **Decide**: Choose migration path within 3-6 months
+5. **Execute**: Implement chosen solution
+6. **Verify**: Ensure all workflows functional
 
-- [ ] Create System Restore point
-- [ ] Document current state (ATOM-STATUS tag)
-- [ ] Backup critical registry keys
-- [ ] Document Group Policy settings (if domain-joined)
-- [ ] Run baseline diagnostics
+### Hardware Issue Triage
 
-### Domain Controller Testing
+1. **Screen Flicker**: No software fix → External monitor or replace
+2. **Battery Swelling**: STOP USING → Safety hazard
+3. **Battery Drain**: Check report → Replace or use tethered
+4. **Performance**: Disk cleanup, check for malware
 
-See `DOMAIN_CONTROLLER_TROUBLESHOOTING.md` for detailed procedures.
+## Troubleshooting Priorities
 
-**Quick Diagnostic Commands**:
+**Immediate (Fix Now):**
+1. Domain controller connectivity failures
+2. Swollen battery (safety)
+3. Critical security updates missing
 
+**Short-term (This Week):**
+1. Enroll in ESU program (if Windows 10 EOL passed)
+2. Backup system image
+3. Investigate screen flickering (if present)
+
+**Medium-term (This Month):**
+1. Decide on Windows 10 EOL strategy
+2. Test migration path (if Linux)
+3. Clean up disk space
+
+**Long-term (This Quarter):**
+1. Execute migration plan
+2. Archive old system
+3. Retire or repurpose device
+
+## Quick Reference Commands
+
+### Diagnostics
 ```powershell
-# Test domain connectivity
-Test-ComputerSecureChannel -Verbose
-
-# Verify DNS resolution
-nslookup your-domain.com
-Resolve-DnsName -Name _ldap._tcp.dc._msdcs.your-domain.com -Type SRV
-
-# Check firewall profiles
-Get-NetConnectionProfile
-
-# List domain controllers
-nltest /dclist:your-domain.com
-
-# Verify trust relationship
-nltest /sc_verify:your-domain.com
+systeminfo                                    # System information
+ipconfig /all                                 # Network configuration
+Test-ComputerSecureChannel -Verbose           # Domain trust
+Get-NetConnectionProfile                      # Network profile
+nltest /dclist:domain.com                     # List domain controllers
+gpresult /r                                   # Group Policy status
 ```
 
-### Post-Test Validation
-
-- [ ] Verify system stability
-- [ ] Check event logs (System, Application, Security)
-- [ ] Test domain authentication
-- [ ] Document results with ATOM tags
-- [ ] Update ARCREF if configuration changed
-- [ ] Commit findings to repository
-
-## Branch Naming Convention
-
-Follow kenl standards with Windows platform indicators:
-
-```
-feat/windows-<description>      # Windows-specific features
-fix/surface-<description>        # Surface Pro 4 specific fixes
-test/dc-connectivity-<issue>     # Domain controller tests
-docs/windows-<topic>             # Windows documentation
+### Fixes
+```powershell
+Restart-NetAdapter *                          # Reset network adapters
+ipconfig /flushdns                            # Clear DNS cache
+gpupdate /force                               # Force Group Policy update
+Test-ComputerSecureChannel -Repair            # Reset domain trust
 ```
 
-## Commit Message Format
+### Maintenance
+```powershell
+powercfg /batteryreport                       # Battery health
+cleanmgr /sageset:1                           # Disk cleanup setup
+Get-HotFix                                    # Installed updates
+Get-MpComputerStatus                          # Windows Defender status
+```
 
-Use Conventional Commits with Windows platform tags:
+## When to Escalate
+
+**Call IT Support Immediately:**
+- Complete domain connectivity failure (quick fix doesn't work)
+- "Trust relationship failed" error
+- Cannot access any network resources
+- Security breach suspected
+
+**Contact Vendor/Hardware Support:**
+- Screen flickering worsening
+- Battery swollen or hot
+- Hardware damage or failure
+
+**Self-Service (Use Documentation):**
+- Intermittent network issues
+- Windows 10 EOL planning
+- General performance optimization
+- Software installation questions
+
+## Resources
+
+### Microsoft Official
+- [Surface Pro 4 Support](https://support.microsoft.com/surface/surface-pro-4-update-history)
+- [Windows 10 EOL](https://support.microsoft.com/windows/windows-10-support-has-ended)
+- [Active Directory Troubleshooting](https://learn.microsoft.com/troubleshoot/windows-server/active-directory/)
+
+### Community
+- /r/Surface - Surface-specific issues
+- /r/sysadmin - Domain/enterprise troubleshooting
+- TechNet Forums - Windows Server/AD issues
+
+### This Repository
+- Main project: `/README.md`
+- Windows support: `windows-support/README.md`
+- All Surface Pro 4 docs: `windows-support/surface-pro-4/`
+
+## Contributing
+
+When documenting fixes or issues:
+
+1. **Test on actual hardware** (Surface Pro 4 if possible)
+2. **Document environment**: Windows version, build number, domain-joined status
+3. **Include commands**: PowerShell/cmd commands that worked
+4. **Verify persistence**: Does fix survive reboot?
+5. **Note rollback**: How to undo if it breaks something
+6. **Update docs**: Add to appropriate guide
+
+### Commit Message Format
 
 ```
 <type>: <subject> [Windows/Surface Pro 4]
 
-[Optional body with details]
-[Optional commands run]
+Brief description of what was done and why.
 
-ATOM-<TYPE>-<YYYYMMDD>-<NNN>
-Platform: Windows 10 (Surface Pro 4)
+Tested on: Windows 10 Pro Build XXXXX
+Domain-joined: Yes/No
+Result: Success/Partial/Failed
 ```
 
-Example:
+**Example:**
 ```
-fix: resolve domain controller firewall profile issue [Windows/Surface Pro 4]
+fix: resolve Public network profile on domain network [Windows/Surface Pro 4]
 
-Applied KB5060842 patch to fix Public profile misapplication on
-domain-joined Surface Pro 4 devices. Verified Domain profile now
-applies correctly after restart.
+Restarting network adapters fixes network location detection issue.
+Network profile now correctly shows DomainAuthenticated.
 
-Testing:
-- Pre-patch: Get-NetConnectionProfile showed Public
-- Post-patch: Get-NetConnectionProfile shows DomainAuthenticated
-- DC connectivity: nltest /sc_verify succeeded
-
-ATOM-CFG-20251109-002
-Platform: Windows 10 Pro (Build 19045.5247) - Surface Pro 4
+Tested on: Windows 10 Pro Build 19045.5247
+Domain-joined: Yes
+Result: Success - fix persists after reboot
 ```
 
-## Security Considerations
+## Migration Path
 
-### Windows 10 Post-EOL Risks
+If migrating away from Surface Pro 4 + Windows 10:
 
-- **No security updates** after October 14, 2025 (or Oct 2026 with ESU)
-- **Increased vulnerability** to exploits
-- **Compliance risks** for regulated environments
-
-### Mitigation Strategies
-
-1. **Network Isolation**: Separate VLAN for EOL testing devices
-2. **Limited Privileges**: Non-admin account for daily use
-3. **Endpoint Protection**: Third-party AV (Windows Defender updates ending)
-4. **Snapshot/Backup**: Regular full-disk images
-5. **Air-gap Critical Tests**: Disconnect from network when possible
-
-### Domain Controller Testing Security
-
-- Use **test domain** environment only
-- Never test on production domain controllers
-- Document all Group Policy changes
-- Use staged rollout (test OU → production OU)
-
-## Key Documentation Files
-
-### Surface Pro 4 Specific
-- `SURFACE_PRO_4_HARDWARE_ISSUES.md` - Flickergate, battery, known defects
-- `WINDOWS_10_EOL_ISSUES.md` - End of life challenges and solutions
-- `DOMAIN_CONTROLLER_TROUBLESHOOTING.md` - Active Directory connectivity
-
-### Windows Testing Strategy
-- `WINDOWS_MIGRATION_TESTING.md` - Test plans for Bazzite migration tools
-- `WSL_INTEGRATION.md` - Windows Subsystem for Linux setup
-- `POWERSHELL_ATOM_TOOLKIT.md` - Native Windows ATOM implementation
-
-### Cross-Platform Compatibility
-- Reference main `CLAUDE.md` for ATOM+SAGE framework core concepts
-- Reference `atom-sage-framework/` for Linux-based tooling
-- Document platform differences in ADRs
-
-## Ecosystem Context - Windows Perspective
-
-The Bazza-DX ecosystem targets Windows 10 EOL migration:
-
-**Windows Side (this platform)**:
-- **Current**: Windows 10 Pro (Surface Pro 4)
-- **Challenges**: EOL, Windows 11 incompatibility, domain controller issues
-- **Testing**: Migration tool validation, compatibility verification
-
-**Linux Target (main project)**:
-- **Target**: Bazzite-DX (Fedora Atomic/rpm-ostree)
-- **Gaming**: Proton/GE-Proton, GameScope, MangoHud
-- **Dev**: KENL distrobox (Ubuntu 24.04 + Claude Code)
-
-**Migration Path**:
 ```
-Windows 10 (Surface Pro 4)
+Current State: Windows 10 (Surface Pro 4)
     ↓
-[Testing/Validation Phase - YOU ARE HERE]
+Temporary Extension: ESU Program (Oct 2026)
     ↓
-Bazzite-DX (Gaming-focused Fedora Atomic)
-    ↓
-Gaming-With-Intent ecosystem
+Choose Migration Path:
+    ├─→ New Windows 11 Hardware ($500-$1000)
+    ├─→ Linux (Bazzite-DX, free)
+    └─→ Retire Device (repurpose or recycle)
 ```
 
-## Immediate Priorities
-
-### Active Investigation: Domain Controller Connectivity
-
-**Goal**: Document, diagnose, and resolve DC connectivity issues on Windows 10
-
-**Approach**:
-1. Reproduce issue in controlled environment
-2. Capture diagnostic data (Event Viewer, network traces)
-3. Test known fixes (KB patches, firewall rules, registry tweaks)
-4. Document rollback-safe solutions
-5. Create ARCREF + ADR for validated fixes
-
-**Expected Deliverables**:
-- `DOMAIN_CONTROLLER_TROUBLESHOOTING.md` (step-by-step guide)
-- ARCREF artifact for any system changes
-- ADR documenting decision rationale
-- PowerShell diagnostic scripts
-- Test validation results
-
-## Support & Resources
-
-### Microsoft Resources
-- [Surface Pro 4 Update History](https://support.microsoft.com/surface/surface-pro-4-update-history)
-- [Windows 10 EOL Information](https://support.microsoft.com/windows/windows-10-support-has-ended)
-- [Active Directory Troubleshooting](https://learn.microsoft.com/troubleshoot/windows-server/active-directory/active-directory-overview)
-
-### Community Resources
-- Surface Pro 4 Flickergate tracking thread (Microsoft Answers)
-- /r/Surface subreddit (user-reported issues and fixes)
-- TechNet forums (domain controller troubleshooting)
-
-### Related Projects
-- Main kenl repository: [github.com/toolate28/kenl](https://github.com/toolate28/kenl)
-- ATOM+SAGE framework: `../atom-sage-framework/`
-- Bazza-DX ecosystem documentation
-
-## Contributing
-
-When contributing Windows/Surface Pro 4 findings:
-
-1. Test on actual Surface Pro 4 hardware (not VMs when possible)
-2. Document Windows version and build number
-3. Include PowerShell version in test reports
-4. Note domain-joined vs standalone differences
-5. Verify fixes survive reboots
-6. Include rollback procedures
-
-Follow standard kenl contribution guidelines (CONTRIBUTING.md) with Windows-specific adaptations noted above.
+**Recommendation**: ESU (1 year) → Test Linux in dual-boot → Full migration or new hardware
 
 ---
 
-**Platform**: Windows 10 Pro (Build 19045.x) - Surface Pro 4
-**Status**: Active Testing
+**Platform**: Windows 10 Pro - Surface Pro 4
+**Status**: Active Support
 **Last Updated**: 2025-11-09
-**ATOM**: ATOM-DOC-20251109-001
+**Focus**: Domain connectivity + EOL planning
