@@ -2,7 +2,179 @@
 
 **Icon:** 📚 | **Color:** Cyan | **Status:** Reference Library
 
-Curated collection of CSS snippets, Bazzite/Bazzite-DX resources, distrobox guides, and community links.
+Curated collection of CSS snippets, Bazzite/Bazzite-DX resources, distrobox guides, community links, and **one-click setup scripts** for essential applications.
+
+---
+
+## 🚀 Quick Setup Scripts
+
+**One-command installations** for essential tools. All scripts include ATOM trail integration.
+
+### Available Scripts
+
+| Script | What It Installs | Command |
+|--------|------------------|---------|
+| 🦊 **Floorp Browser** | Privacy-focused Firefox fork | `./downloads/floorp-browser.sh` |
+| 🔐 **Proton Services** | Proton VPN, Mail Bridge | `./downloads/proton-setup.sh` |
+| 📥 **Torrent Clients** | qBittorrent, Transmission, Deluge | `./downloads/torrent-clients.sh` |
+| 💾 **Bootable USB Tools** | Ventoy, Balena Etcher | `./downloads/bootable-usb.sh` |
+| 💬 **Discord Clients** | Vesktop, ArmCord, Equicord | `./downloads/discord-clients.sh` |
+| 📰 **RSS Feeds** | Bazzite & Linux gaming news | `./rss-feeds/setup-rss.sh` |
+
+**Usage:**
+```bash
+cd ~/kenl/KENL12-resources
+./downloads/floorp-browser.sh  # Interactive menu
+./rss-feeds/setup-rss.sh       # Setup RSS feeds
+```
+
+[See detailed download links below ↓](#direct-download-links)
+
+---
+
+## 📥 Direct Download Links
+
+### Browsers
+
+**Floorp Browser** (Firefox-based, privacy-focused):
+- [Latest Release](https://github.com/Floorp-Projects/Floorp/releases/latest)
+- [Linux x86_64 .tar.bz2](https://github.com/Floorp-Projects/Floorp/releases)
+- Features: Tree tabs, vertical tabs, enhanced privacy
+- **Quick setup**: `./downloads/floorp-browser.sh`
+
+**LibreWolf** (Firefox without telemetry):
+- [LibreWolf Releases](https://librewolf.net/installation/)
+- Flatpak: `flatpak install flathub io.gitlab.librewolf-community`
+
+**Brave** (Chromium-based, built-in ad blocker):
+- [Brave Download](https://brave.com/linux/)
+- Flatpak: `flatpak install flathub com.brave.Browser`
+
+### Privacy & VPN
+
+**Proton Services**:
+- [Proton VPN](https://protonvpn.com/download) - Free tier available
+- [Proton Mail Bridge](https://proton.me/mail/bridge#download) - Requires paid plan
+- Flatpak (VPN): `flatpak install flathub com.protonvpn.www`
+- Flatpak (Mail): `flatpak install flathub ch.protonmail.protonmail-bridge`
+- **Quick setup**: `./downloads/proton-setup.sh`
+
+**Mullvad VPN** (Privacy-focused, no logs):
+- [Mullvad Download](https://mullvad.net/en/download/)
+- Best for: Privacy advocates, torrenting
+
+### Torrent Clients
+
+**qBittorrent** (Recommended):
+- [qBittorrent Download](https://www.qbittorrent.org/download.php)
+- Flatpak: `flatpak install flathub org.qbittorrent.qBittorrent`
+- Features: Web UI, RSS, search plugins
+
+**Transmission** (Lightweight):
+- Flatpak: `flatpak install flathub com.transmissionbt.Transmission`
+- Best for: Simple torrenting, low RAM
+
+**Deluge** (Plugin ecosystem):
+- Flatpak: `flatpak install flathub org.deluge_torrent.deluge`
+- Best for: Advanced users, automation
+
+**Quick setup**: `./downloads/torrent-clients.sh`
+
+### Bootable USB Creation
+
+**Ventoy** (Multi-boot USB, drag-and-drop ISOs):
+- [Ventoy Releases](https://github.com/ventoy/Ventoy/releases/latest)
+- [Linux .tar.gz](https://github.com/ventoy/Ventoy/releases)
+- **Recommended**: Best for keeping multiple ISOs on one USB
+- **Quick setup**: `./downloads/bootable-usb.sh`
+
+**Balena Etcher** (Simple ISO flashing):
+- [Etcher Download](https://etcher.balena.io/#download-etcher)
+- Flatpak: `flatpak install flathub io.balena.Etcher`
+- Best for: Single ISO writes
+
+**Rufus** (via Wine, Windows tool):
+- [Rufus Download](https://rufus.ie/downloads/)
+- Note: Ventoy recommended over Rufus on Linux
+
+### Discord Clients
+
+**Vesktop** (Vencord + screen share audio) ⭐ **Recommended**:
+- [Vesktop Releases](https://github.com/Vencord/Vesktop/releases)
+- Flatpak: `flatpak install flathub dev.vencord.Vesktop`
+- Why: Screen share with audio works on Linux!
+
+**ArmCord** (Lightweight, privacy-focused):
+- [ArmCord Releases](https://github.com/ArmCord/ArmCord/releases/latest)
+- [Linux .rpm](https://github.com/ArmCord/ArmCord/releases)
+
+**Equicord** (Equicord mod):
+- [Equicord Releases](https://github.com/Equicord/Equicord/releases)
+- [Linux AppImage](https://github.com/Equicord/Equicord/releases)
+
+**Quick setup**: `./downloads/discord-clients.sh`
+
+### Proxies & Network Tools
+
+**Nginx Proxy Manager** (Reverse proxy with Web UI):
+- [NPM Docker](https://nginxproxymanager.com/setup/)
+- See: `~/kenl/KENL11-media/proxies/` for docker-compose
+
+**Caddy** (Automatic HTTPS reverse proxy):
+- [Caddy Download](https://caddyserver.com/download)
+- Best for: Simple HTTPS setups
+
+**Privoxy** (HTTP proxy, ad filtering):
+- Install: `rpm-ostree install privoxy`
+- Best for: Local ad blocking
+
+**Squid** (Caching proxy):
+- Install: `rpm-ostree install squid`
+- Best for: Network caching
+
+---
+
+## 📰 RSS Feeds & News
+
+**Setup Script**: `./rss-feeds/setup-rss.sh`
+
+Automatically configures RSS reader with curated feeds:
+
+### Included Feed Categories
+
+**🎮 Bazzite & Universal Blue:**
+- Bazzite News (Discourse)
+- Universal Blue Announcements
+- Bazzite GitHub Releases
+
+**🐧 Linux Gaming:**
+- GamingOnLinux
+- Boiling Steam
+- ProtonDB Recent Reports
+
+**🍷 Proton & Compatibility:**
+- Proton GE Releases (GloriousEggroll)
+- Valve Proton Releases
+
+**📦 Fedora & Atomic:**
+- Fedora Magazine
+- Fedora Project News
+
+**🔧 Hardware & Drivers:**
+- Phoronix (Linux hardware news)
+- Mesa Releases (graphics drivers)
+
+**💬 Reddit Communities:**
+- r/Bazzite
+- r/linux_gaming
+- r/SteamDeck
+- r/Fedora
+
+**Supported RSS Readers:**
+- Newsboat (terminal-based)
+- Akregator (KDE)
+- Liferea (GTK)
+- Any reader (OPML export)
 
 ---
 
