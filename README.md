@@ -33,6 +33,16 @@ graph LR
     D -->|Share| E[🌐 Friend uses same config instantly]
     E -->|Backup| F[💾 Config saved to ATOM trail]
     F -.->|Crash?| B
+
+    style A fill:#ff6b6b
+    style E fill:#51cf66
+    style F fill:#845ef7
+```
+
+**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail of your system.
+
+---
+
 ## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
 
 **If you're here for Windows support, start here:**
@@ -60,13 +70,6 @@ graph LR
 ---
 
 ## Quick Start
-
-    style A fill:#ff6b6b
-    style E fill:#51cf66
-    style F fill:#845ef7
-```
-
-**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail of your system.
 
 ---
 
@@ -106,39 +109,39 @@ graph TB
         KENL10[💾 KENL10-backup<br/>Intelligent Snapshots]
     end
 
-    modules/KENL0 -.->|Manages| modules/KENL1
-    modules/KENL1 -.->|Powers| modules/KENL2
-    modules/KENL1 -.->|Powers| modules/KENL3
-    modules/KENL1 -.->|Powers| modules/KENL11
-    modules/KENL2 -->|Uses| modules/KENL9
-    modules/KENL2 -->|Uses| modules/KENL8
-    modules/KENL2 -->|Uses| modules/KENL6
-    modules/KENL3 -->|Monitored by| modules/KENL4
-    modules/KENL5 -->|Themes| modules/KENL2
-    modules/KENL5 -->|Themes| modules/KENL3
-    modules/KENL5 -->|Themes| modules/KENL9
-    modules/KENL5 -->|Themes| modules/KENL11
-    modules/KENL9 -->|Backed up by| modules/KENL10
-    modules/KENL10 -->|Backs up| modules/KENL2
-    modules/KENL10 -->|Backs up| modules/KENL3
-    modules/KENL10 -->|Backs up| modules/KENL11
-    modules/KENL8 -->|Secures| modules/KENL6
-    modules/KENL8 -->|Secures| modules/KENL9
-    modules/KENL8 -->|Secures| modules/KENL11
-    modules/KENL11 -->|Uses| modules/KENL9
+    KENL0 -.->|Manages| KENL1
+    KENL1 -.->|Powers| KENL2
+    KENL1 -.->|Powers| KENL3
+    KENL1 -.->|Powers| KENL11
+    KENL2 -->|Uses| KENL9
+    KENL2 -->|Uses| KENL8
+    KENL2 -->|Uses| KENL6
+    KENL3 -->|Monitored by| KENL4
+    KENL5 -->|Themes| KENL2
+    KENL5 -->|Themes| KENL3
+    KENL5 -->|Themes| KENL9
+    KENL5 -->|Themes| KENL11
+    KENL9 -->|Backed up by| KENL10
+    KENL10 -->|Backs up| KENL2
+    KENL10 -->|Backs up| KENL3
+    KENL10 -->|Backs up| KENL11
+    KENL8 -->|Secures| KENL6
+    KENL8 -->|Secures| KENL9
+    KENL8 -->|Secures| KENL11
+    KENL11 -->|Uses| KENL9
 
-    style modules/KENL0 fill:#f8f9fa,stroke:#495057
-    style modules/KENL1 fill:#e5dbff,stroke:#7950f2
-    style modules/KENL2 fill:#ffe3e3,stroke:#fa5252
-    style modules/KENL3 fill:#d0ebff,stroke:#228be6
-    style modules/KENL4 fill:#d3f9d8,stroke:#51cf66
-    style modules/KENL5 fill:#fff3bf,stroke:#fab005
-    style modules/KENL6 fill:#ffe8cc,stroke:#fd7e14
-    style modules/KENL7 fill:#b2f2bb,stroke:#2f9e44
-    style modules/KENL8 fill:#f3d9fa,stroke:#da77f2
-    style modules/KENL9 fill:#d0bfff,stroke:#9775fa
-    style modules/KENL10 fill:#e7dcc8,stroke:#8b6d47
-    style modules/KENL11 fill:#ffc9c9,stroke:#ff6b6b
+    style KENL0 fill:#f8f9fa,stroke:#495057
+    style KENL1 fill:#e5dbff,stroke:#7950f2
+    style KENL2 fill:#ffe3e3,stroke:#fa5252
+    style KENL3 fill:#d0ebff,stroke:#228be6
+    style KENL4 fill:#d3f9d8,stroke:#51cf66
+    style KENL5 fill:#fff3bf,stroke:#fab005
+    style KENL6 fill:#ffe8cc,stroke:#fd7e14
+    style KENL7 fill:#b2f2bb,stroke:#2f9e44
+    style KENL8 fill:#f3d9fa,stroke:#da77f2
+    style KENL9 fill:#d0bfff,stroke:#9775fa
+    style KENL10 fill:#e7dcc8,stroke:#8b6d47
+    style KENL11 fill:#ffc9c9,stroke:#ff6b6b
 ```
 
 ### Quick Guide
@@ -177,26 +180,26 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant User
-    participant modules/KENL2 as 🎮 modules/KENL2-gaming
+    participant KENL2 as 🎮 KENL2-gaming
     participant ProtonDB
-    participant modules/KENL8 as 🔐 modules/KENL8-security
-    participant modules/KENL10 as 💾 modules/KENL10-backup
+    participant KENL8 as 🔐 KENL8-security
+    participant KENL10 as 💾 KENL10-backup
 
     User->>KENL2: "Setup Halo Infinite"
-    modules/KENL2->>ProtonDB: Research compatibility
+    KENL2->>ProtonDB: Research compatibility
     ProtonDB-->>KENL2: Gold rating, GE-Proton 9-18
-    modules/KENL2->>KENL2: Configure Proton + DXVK
-    modules/KENL2->>User: Test game
+    KENL2->>KENL2: Configure Proton + DXVK
+    KENL2->>User: Test game
     User->>KENL2: ✅ Works! 118 FPS
-    modules/KENL2->>KENL2: Create Play Card
-    modules/KENL2->>KENL10: Snapshot config
-    modules/KENL10-->>User: ✅ Saved to ATOM trail
+    KENL2->>KENL2: Create Play Card
+    KENL2->>KENL10: Snapshot config
+    KENL10-->>User: ✅ Saved to ATOM trail
 
     Note over User,KENL10: Friend wants same setup
 
     User->>KENL8: Encrypt Play Card
-    modules/KENL8->>KENL2: Share via Matrix
-    modules/KENL2-->>User: Friend downloads & applies instantly
+    KENL8->>KENL2: Share via Matrix
+    KENL2-->>User: Friend downloads & applies instantly
 ```
 
 **The difference**:
@@ -359,10 +362,7 @@ graph LR
     B -->|Download GE-Proton| C[9-18 installed]
     C -->|Apply settings| D[Play Card created]
     D -->|Snapshot| E[ATOM-PLAYCARD-xxx]
-
-  **ATOM-SEC**: AI security testing with forensic audit trails
-  **ATOM-GOV**: MCP governance with policy-as-code
-  **ATOM-EOL**: Windows 10 EOL migration framework
+```
 
 **Why:** Automates the trial-and-error process, documents working config in Play Card.
 
@@ -448,16 +448,16 @@ create-devbox python-ml
 ```mermaid
 sequenceDiagram
     participant User
-    participant modules/KENL3
+    participant KENL3 as 💻 KENL3-dev
     participant Distrobox
     participant Container
 
     User->>KENL3: create-devbox python-ml
-    modules/KENL3->>Distrobox: Create Ubuntu 24.04 container
+    KENL3->>Distrobox: Create Ubuntu 24.04 container
     Distrobox->>Container: Install Python 3.12
     Container->>Container: Install ML libraries (numpy, pandas, torch)
     Container->>KENL3: ✅ Ready
-    modules/KENL3->>User: Container "python-ml" ready
+    KENL3->>User: Container "python-ml" ready
 
     Note over User,Container: ATOM trail: ATOM-DEV-20251110-xxx
 ```
@@ -536,7 +536,7 @@ rebase-safe bazzite-41-latest
 **What changes:**
 ```mermaid
 stateDiagram-v2
-    [*] --> Snapshot: modules/KENL10 creates backup
+    [*] --> Snapshot: KENL10 creates backup
     Snapshot --> Download: Fetch new deployment
     Download --> Reboot: Apply changes
     Reboot --> Verify: Boot into new system
@@ -687,11 +687,11 @@ sequenceDiagram
     autonumber
 
     participant U as 👤 User
-    participant K2 as 🎮 modules/KENL2
-    participant K1 as ⚛️ modules/KENL1
-    participant K8 as 🔐 modules/KENL8
-    participant K10 as 💾 modules/KENL10
-    participant K4 as 📊 modules/KENL4
+    participant K2 as 🎮 KENL2-gaming
+    participant K1 as ⚛️ KENL1-framework
+    participant K8 as 🔐 KENL8-security
+    participant K10 as 💾 KENL10-backup
+    participant K4 as 📊 KENL4-monitoring
 
     U->>K2: "Setup Elden Ring"
     K2->>K1: Log intent (ATOM-GAMING-xxx)
