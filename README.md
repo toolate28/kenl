@@ -45,7 +45,7 @@ graph LR
 
 ## The KENL Ecosystem
 
-KENL is a modular system of **9 specialized layers** that work together seamlessly on Bazzite:
+KENL is a modular system of **10 specialized layers** that work together seamlessly on Bazzite:
 
 ```mermaid
 graph TB
@@ -57,11 +57,13 @@ graph TB
     subgraph Gaming["🎮 Gaming Stack"]
         KENL2[🎮 KENL2-gaming<br/>Play Cards & Proton]
         KENL6[🌐 KENL6-social<br/>Share Configs]
+        KENL9[📚 KENL9-library<br/>Multi-OS Libraries]
     end
 
     subgraph Development["💻 Development"]
         KENL3[💻 KENL3-dev<br/>Distrobox Environments]
         KENL4[📊 KENL4-monitoring<br/>Performance Metrics]
+        KENL7[🎓 KENL7-learning<br/>Tutorials & Guides]
     end
 
     subgraph UX["🎨 User Experience"]
@@ -76,14 +78,18 @@ graph TB
     KENL0 -.->|Manages| KENL1
     KENL1 -.->|Powers| KENL2
     KENL1 -.->|Powers| KENL3
+    KENL2 -->|Uses| KENL9
     KENL2 -->|Uses| KENL8
     KENL2 -->|Uses| KENL6
     KENL3 -->|Monitored by| KENL4
     KENL5 -->|Themes| KENL2
     KENL5 -->|Themes| KENL3
+    KENL5 -->|Themes| KENL9
+    KENL9 -->|Backed up by| KENL10
     KENL10 -->|Backs up| KENL2
     KENL10 -->|Backs up| KENL3
     KENL8 -->|Secures| KENL6
+    KENL8 -->|Secures| KENL9
 
     style KENL0 fill:#f8f9fa,stroke:#495057
     style KENL1 fill:#e5dbff,stroke:#7950f2
@@ -92,7 +98,9 @@ graph TB
     style KENL4 fill:#d3f9d8,stroke:#51cf66
     style KENL5 fill:#fff3bf,stroke:#fab005
     style KENL6 fill:#ffe8cc,stroke:#fd7e14
+    style KENL7 fill:#b2f2bb,stroke:#2f9e44
     style KENL8 fill:#f3d9fa,stroke:#da77f2
+    style KENL9 fill:#d0bfff,stroke:#9775fa
     style KENL10 fill:#e7dcc8,stroke:#8b6d47
 ```
 
@@ -107,7 +115,9 @@ graph TB
 | 📊 **KENL4** | Monitoring | Checking FPS, temps, system health |
 | 🎨 **KENL5** | Theming | Switching contexts, customizing shell prompts |
 | 🌐 **KENL6** | Social gaming | Sharing Play Cards with friends |
+| 🎓 **KENL7** | Learning | Git, rpm-ostree, GPG tutorials |
 | 🔐 **KENL8** | Security | Encrypting files, managing GPG keys |
+| 📚 **KENL9** | Library management | Shared Steam libraries (dual-boot), save sync |
 | 💾 **KENL10** | Backups | Creating snapshots, restoring configs |
 
 ---
@@ -546,7 +556,9 @@ graph TB
         K4[KENL4<br/>Monitoring]
         K5[KENL5<br/>Facades]
         K6[KENL6<br/>Social]
+        K7[KENL7<br/>Learning]
         K8[KENL8<br/>Security]
+        K9[KENL9<br/>Library]
         K10[KENL10<br/>Backup]
     end
 
@@ -556,9 +568,12 @@ graph TB
     K1 -->|Powers all| K4
     K1 -->|Powers all| K5
     K1 -->|Powers all| K6
+    K1 -->|Powers all| K7
     K1 -->|Powers all| K8
+    K1 -->|Powers all| K9
     K1 -->|Powers all| K10
 
+    K2 -.->|Uses| K9
     K2 -.->|Encrypts with| K8
     K2 -.->|Shares via| K6
     K2 -.->|Backed up by| K10
@@ -566,7 +581,10 @@ graph TB
     K3 -.->|Backed up by| K10
     K5 -.->|Themes| K2
     K5 -.->|Themes| K3
+    K5 -.->|Themes| K9
     K6 -.->|Secured by| K8
+    K9 -.->|Backed up by| K10
+    K9 -.->|Secured by| K8
 
     style K0 fill:#f8f9fa,stroke:#495057,stroke-width:3px
     style K1 fill:#e5dbff,stroke:#7950f2,stroke-width:3px
@@ -575,7 +593,9 @@ graph TB
     style K4 fill:#d3f9d8,stroke:#51cf66
     style K5 fill:#fff3bf,stroke:#fab005
     style K6 fill:#ffe8cc,stroke:#fd7e14
+    style K7 fill:#b2f2bb,stroke:#2f9e44
     style K8 fill:#f3d9fa,stroke:#da77f2
+    style K9 fill:#d0bfff,stroke:#9775fa
     style K10 fill:#e7dcc8,stroke:#8b6d47
 ```
 
@@ -717,7 +737,9 @@ atom-analytics --summary
 - **[KENL4 - Monitoring](./KENL4-monitoring/README.md)**: Performance metrics
 - **[KENL5 - Facades](./KENL5-facades/README.md)**: Visual theming, context switching
 - **[KENL6 - Social](./KENL6-social/README.md)**: Sharing Play Cards
+- **[KENL7 - Learning](./KENL7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
 - **[KENL8 - Security](./KENL8-security/README.md)**: Encryption, GPG, vaults
+- **[KENL9 - Library](./KENL9-library/README.md)**: Multi-OS game libraries, save sync
 - **[KENL10 - Backup](./KENL10-backup/README.md)**: Intelligent snapshots
 
 ### 🧪 Real World Scenarios
