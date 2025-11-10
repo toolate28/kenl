@@ -27,16 +27,19 @@ owi-version: 1.0.0
 
 ```mermaid
 graph LR
-    A[🎮 Want to play Halo] -->|Research| B[KENL finds ProtonDB gold rating]
-    B -->|Configure| C[KENL sets up Proton GE + DXVK]
-    C -->|Document| D[KENL creates Play Card]
-    D -->|Share| E[🌐 Friend uses same config instantly]
-    E -->|Backup| F[💾 Config saved to ATOM trail]
+    A([🎮 Want to play Halo])  -->|Research| B{KENL finds ProtonDB<br/>gold rating}
+    B -->|Configure| C[[KENL sets up<br/>Proton GE + DXVK]]
+    C -->|Document| D[(KENL creates<br/>Play Card)]
+    D -->|Share| E([🌐 Friend uses<br/>config instantly])
+    E -->|Backup| F[💾 Config saved<br/>to ATOM trail]
     F -.->|Crash?| B
 
-    style A fill:#ff6b6b
-    style E fill:#51cf66
-    style F fill:#845ef7
+    style A fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
+    style B fill:#ffd43b,stroke:#fab005,stroke-width:2px
+    style C fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
+    style D fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+    style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
+    style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
 ```
 
 **Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail of your system.
@@ -130,18 +133,18 @@ graph TB
     KENL8 -->|Secures| KENL11
     KENL11 -->|Uses| KENL9
 
-    style KENL0 fill:#f8f9fa,stroke:#495057
-    style KENL1 fill:#e5dbff,stroke:#7950f2
-    style KENL2 fill:#ffe3e3,stroke:#fa5252
-    style KENL3 fill:#d0ebff,stroke:#228be6
-    style KENL4 fill:#d3f9d8,stroke:#51cf66
-    style KENL5 fill:#fff3bf,stroke:#fab005
-    style KENL6 fill:#ffe8cc,stroke:#fd7e14
-    style KENL7 fill:#b2f2bb,stroke:#2f9e44
-    style KENL8 fill:#f3d9fa,stroke:#da77f2
-    style KENL9 fill:#d0bfff,stroke:#9775fa
-    style KENL10 fill:#e7dcc8,stroke:#8b6d47
-    style KENL11 fill:#ffc9c9,stroke:#ff6b6b
+    style KENL0 fill:#f8f9fa,stroke:#495057,stroke-width:3px,color:#000
+    style KENL1 fill:#e5dbff,stroke:#7950f2,stroke-width:4px,color:#000
+    style KENL2 fill:#ffe3e3,stroke:#fa5252,stroke-width:3px,color:#000
+    style KENL3 fill:#d0ebff,stroke:#228be6,stroke-width:2px,color:#000
+    style KENL4 fill:#d3f9d8,stroke:#51cf66,stroke-width:2px,color:#000
+    style KENL5 fill:#fff3bf,stroke:#fab005,stroke-width:2px,color:#000
+    style KENL6 fill:#ffe8cc,stroke:#fd7e14,stroke-width:2px,color:#000
+    style KENL7 fill:#b2f2bb,stroke:#2f9e44,stroke-width:2px,color:#000
+    style KENL8 fill:#f3d9fa,stroke:#da77f2,stroke-width:2px,color:#000
+    style KENL9 fill:#d0bfff,stroke:#9775fa,stroke-width:2px,color:#000
+    style KENL10 fill:#e7dcc8,stroke:#8b6d47,stroke-width:2px,color:#000
+    style KENL11 fill:#ffc9c9,stroke:#ff6b6b,stroke-width:2px,color:#000
 ```
 
 ### Quick Guide
@@ -358,10 +361,16 @@ setup-game "Halo Infinite"
 **What changes:**
 ```mermaid
 graph LR
-    A[No config] -->|Research ProtonDB| B[Gold rating found]
-    B -->|Download GE-Proton| C[9-18 installed]
-    C -->|Apply settings| D[Play Card created]
+    A([No config]) -->|Research ProtonDB| B{Gold rating<br/>found}
+    B -->|Download GE-Proton| C[[9-18<br/>installed]]
+    C -->|Apply settings| D[(Play Card<br/>created)]
     D -->|Snapshot| E[ATOM-PLAYCARD-xxx]
+
+    style A fill:#ffc9c9,stroke:#fa5252,stroke-width:2px
+    style B fill:#ffd43b,stroke:#fab005,stroke-width:2px
+    style C fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
+    style D fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+    style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
 ```
 
 **Why:** Automates the trial-and-error process, documents working config in Play Card.
