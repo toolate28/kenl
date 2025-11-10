@@ -139,9 +139,9 @@ atom-analytics --recovery
 
 ### Specialized Applications
 
-**ATOM-SEC**: AI security testing with forensic audit trails
-**ATOM-GOV**: MCP governance with policy-as-code
-**ATOM-EOL**: Windows 10 EOL migration framework
+  **ATOM-SEC**: AI security testing with forensic audit trails
+  **ATOM-GOV**: MCP governance with policy-as-code
+  **ATOM-EOL**: Windows 10 EOL migration framework
 
 [Explore all applications →](./atom-sage-framework/README.md)
 

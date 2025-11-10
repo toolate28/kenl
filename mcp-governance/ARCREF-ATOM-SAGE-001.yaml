@@ -1,7 +1,7 @@
 id: "ARCREF::BWI::ATOM-SAGE::001"
 title: "ATOM+SAGE Intent-Driven Operations Framework Launch"
 status: "accepted"
-summary: "Launching ATOM+SAGE framework as the operational foundation for Building-With-Intent (BWI) methodology, enabling 7-minute crash recovery and 100% intent preservation through traceable audit trails"
+summary: "Launching ATOM+SAGE framework as the operational foundation for Building-With-Intent (BWI) methodology, enabling in-minutes crash recovery and 100% intent preservation through traceable audit trails"
 
 author:
   name: "Claude Code"
