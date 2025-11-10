@@ -149,20 +149,20 @@ graph TB
 
 ### Quick Guide
 
-| modules/KENL | Purpose | You'll use this when... |
-|------|---------|-------------------------|
-| ⚙️ **KENL0** | System operations | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
-| ⚛️ **KENL1** | Framework core | Everything (automatic ATOM trail logging) |
-| 🎮 **KENL2** | Gaming | Playing games, optimizing Proton, sharing configs |
-| 💻 **KENL3** | Development | Coding, containers, building projects |
-| 📊 **KENL4** | Monitoring | Checking FPS, temps, system health |
-| 🎨 **KENL5** | Theming | Switching contexts, customizing shell prompts |
-| 🌐 **KENL6** | Social gaming | Sharing Play Cards with friends |
-| 🎓 **KENL7** | Learning | Git, rpm-ostree, GPG tutorials |
-| 🔐 **KENL8** | Security | Encrypting files, managing GPG keys |
-| 📚 **KENL9** | Library management | Shared Steam libraries (dual-boot), save sync |
-| 💾 **KENL10** | Backups | Creating snapshots, restoring configs |
-| 📺 **KENL11** | Media server | Automated torrenting, Radarr/Sonarr, Jellyfin |
+| modules/KENL  | Purpose            | You'll use this when...                              |
+|---------------|--------------------|------------------------------------------------------|
+| ⚙️ **KENL0**  | System operations  | Updating BIOS, rebasing Bazzite, managing rpm-ostree|
+| ⚛️ **KENL1**  | Framework core     | Everything (automatic ATOM trail logging)            |
+| 🎮 **KENL2**  | Gaming             | Playing games, optimizing Proton, sharing configs    |
+| 💻 **KENL3**  | Development        | Coding, containers, building projects                |
+| 📊 **KENL4**  | Monitoring         | Checking FPS, temps, system health                   |
+| 🎨 **KENL5**  | Theming            | Switching contexts, customizing shell prompts        |
+| 🌐 **KENL6**  | Social gaming      | Sharing Play Cards with friends                      |
+| 🎓 **KENL7**  | Learning           | Git, rpm-ostree, GPG tutorials                       |
+| 🔐 **KENL8**  | Security           | Encrypting files, managing GPG keys                  |
+| 📚 **KENL9**  | Library management | Shared Steam libraries (dual-boot), save sync        |
+| 💾 **KENL10** | Backups            | Creating snapshots, restoring configs                |
+| 📺 **KENL11** | Media server       | Automated torrenting, Radarr/Sonarr, Jellyfin       |
 
 ---
 
@@ -909,25 +909,25 @@ Every operation builds knowledge. Every knowledge entry enhances recovery. Every
 
 It's also a play on "kernel" - modules/KENL sits between you and your system, making complex operations simple and safe.
 ### Windows Support (Start Here If You Need Help!)
-| Resource | Link |
-|----------|------|
-| **🆘 Need Help?** | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
-| **📄 End User Guide** | [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) |
-| **🔧 IT Support Guide** | [QUICK_START_GUIDE.md](./windows-support/surface-pro-4/QUICK_START_GUIDE.md) |
-| **📚 All Windows Docs** | [windows-support/](./windows-support/) |
-| **Domain Controller Issues** | [DOMAIN_CONTROLLER_TROUBLESHOOTING.md](./windows-support/surface-pro-4/DOMAIN_CONTROLLER_TROUBLESHOOTING.md) |
-| **Windows 10 EOL Planning** | [WINDOWS_10_EOL_ISSUES.md](./windows-support/surface-pro-4/WINDOWS_10_EOL_ISSUES.md) |
+| Resource                       | Link                                                                                                       |
+|--------------------------------|------------------------------------------------------------------------------------------------------------|
+| **🆘 Need Help?**              | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)                        |
+| **📄 End User Guide**          | [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md)                                            |
+| **🔧 IT Support Guide**        | [QUICK_START_GUIDE.md](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)                              |
+| **📚 All Windows Docs**        | [windows-support/](./windows-support/)                                                                     |
+| **Domain Controller Issues**   | [DOMAIN_CONTROLLER_TROUBLESHOOTING.md](./windows-support/surface-pro-4/DOMAIN_CONTROLLER_TROUBLESHOOTING.md) |
+| **Windows 10 EOL Planning**    | [WINDOWS_10_EOL_ISSUES.md](./windows-support/surface-pro-4/WINDOWS_10_EOL_ISSUES.md)                      |
 
 ### Developer Resources
-| Resource | Link |
-|----------|------|
-| **ATOM+SAGE Framework** | [./atom-sage-framework/](./atom-sage-framework/) |
-| **Getting Started** | [./atom-sage-framework/docs/GETTING_STARTED.md](./atom-sage-framework/docs/GETTING_STARTED.md) |
-| **Validation Study** | [./atom-sage-framework/docs/VALIDATION_COMPLETE.md](./atom-sage-framework/docs/VALIDATION_COMPLETE.md) |
-| **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| **Governance Templates** | ARCREF: [mcp-governance/](./mcp-governance/) / ADR: [02-Decisions/](./02-Decisions/) |
-| **Security Policy** | [SECURITY.md](./SECURITY.md) |
-| **Issue Tracking** | [GitHub Issues](https://github.com/toolate28/kenl/issues) |
+| Resource                   | Link                                                                                                  |
+|----------------------------|-------------------------------------------------------------------------------------------------------|
+| **ATOM+SAGE Framework**    | [./atom-sage-framework/](./atom-sage-framework/)                                                      |
+| **Getting Started**        | [./atom-sage-framework/docs/GETTING_STARTED.md](./atom-sage-framework/docs/GETTING_STARTED.md)       |
+| **Validation Study**       | [./atom-sage-framework/docs/VALIDATION_COMPLETE.md](./atom-sage-framework/docs/VALIDATION_COMPLETE.md) |
+| **Contributing**           | [CONTRIBUTING.md](./CONTRIBUTING.md)                                                                  |
+| **Governance Templates**   | ARCREF: [mcp-governance/](./mcp-governance/) / ADR: [02-Decisions/](./02-Decisions/)                  |
+| **Security Policy**        | [SECURITY.md](./SECURITY.md)                                                                          |
+| **Issue Tracking**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)                                             |
 
 ---
 
