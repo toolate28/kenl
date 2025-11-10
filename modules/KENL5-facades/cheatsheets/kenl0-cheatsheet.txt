@@ -1,0 +1,40 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║   ⚙️  KENL0: SYSTEM OPERATIONS (Elevated Privileges)                          ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   🔧 QUICK ACTIONS                        📦 RPM-OSTREE                       ║
+║   ───────────────                         ──────────────                      ║
+║   qa-update          Update + verify      os-status        Check deployments ║
+║   qa-rebase          Rebase + clean       os-update        Update system     ║
+║   qa-ujust           ujust menu           os-rollback      Revert to prev    ║
+║                                            os-clean         Remove old        ║
+║                                                                               ║
+║   ⚡ SYSTEM FUNCTIONS                     📦 FLATPAK                          ║
+║   ─────────────────                       ─────────                          ║
+║   full-update        Update everything    fpl              List installed    ║
+║   deep-clean         Free 15-30GB         fpi <app>        Install app       ║
+║   safe-rebase        Rebase w/ confirm    fpup             Update all        ║
+║   health-check       System diagnostics   fpun <app>       Uninstall         ║
+║   emergency-rollback Rollback + reboot                                       ║
+║                                                                               ║
+║   🐳 DISTROBOX                            🚀 UJUST (Bazzite)                  ║
+║   ───────────                             ─────────────────                  ║
+║   dbl                List containers      ujust update                       ║
+║   dbe <name>         Enter container      ujust rebase-stable                ║
+║   dbcr <name>        Create container     ujust install-proton-ge            ║
+║   dbst <name>        Stop container       ujust setup-gaming                 ║
+║                                            ujust nvidia-cache-clear           ║
+║                                                                               ║
+║   🎮 GAMING                               ⚠️  SAFETY                          ║
+║   ────────                                ────────                           ║
+║   proton-list        Show Proton          • ATOM trail logs all operations   ║
+║   steam-logs         View Steam logs      • CTFWI validates before execute   ║
+║   update-gaming      Update gaming stack  • Rollback points created auto     ║
+║                                            • Confirmation prompts on danger   ║
+║                                                                               ║
+║   💡 TIP: Use 'kenl-switch 0' to enter this context                           ║
+║        All commands logged to ATOM trail (ATOM-SYSTEM-*)                     ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
