@@ -72,7 +72,7 @@ graph LR
     style D fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
     style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
     style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
-    ```
+```
 
 **Result:** Documented → Reproducible → Shareable → Rollback-safe
 
