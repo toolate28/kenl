@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-015
 owi-version: 1.0.0
 ---
 
-# The KENL Build Proect
+# The KENL Build Project
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
