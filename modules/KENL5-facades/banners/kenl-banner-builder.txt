@@ -13,7 +13,7 @@
 ║      ╔═══════════════════════════════════════════════════════════════╗      ║
 ║      ║                                                               ║      ║
 ║      ║   "Those weird people who can recover from a system crash    ║      ║
-║      ║    in 7 minutes while everyone else is Googling errors."     ║      ║
+║      ║    in <10 min while everyone else is Googling errors."   ║      ║
 ║      ║                                                               ║      ║
 ║      ║   Traits: Compulsively document WHY, not just WHAT           ║      ║
 ║      ║           Get excited about YAML Play Cards                  ║      ║
@@ -24,7 +24,7 @@
 ║                                                                              ║
 ║   Current Build Status:                                                     ║
 ║   ✓ ATOM Trail:        📝 Tracking enabled                                  ║
-║   ✓ SAGE Recovery:     🏠 7-minute rollback ready                           ║
+║   ✓ SAGE Recovery:     🏠 Rapid rollback ready (85% faster)                 ║
 ║   ✓ Play Cards:        🎮 Configuration validated                           ║
 ║   ✓ Immutable Base:    💾 rpm-ostree locked                                 ║
 ║                                                                              ║

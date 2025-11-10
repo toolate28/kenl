@@ -14,7 +14,7 @@
 ║   ✓ System state           ✓ Development projects        ║
 ║                                                           ║
 ║   ⚛️  ATOM-AWARE: Snapshots include full context for     ║
-║      7-minute disaster recovery                          ║
+║      rapid disaster recovery (85% faster)                ║
 ║                                                           ║
 ║   ☁️  CLOUD SYNC                                          ║
 ║   cloud-backends/<provider>-config.sh                    ║

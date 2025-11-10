@@ -19,8 +19,8 @@ KENL1 is the **core methodology framework** providing intent-driven operations f
 This framework **validated itself** during development:
 - **Date**: 2025-11-06
 - **Incident**: Catastrophic crash during framework development
-- **Recovery**: 7 minutes, 147 characters of input (half a tweet)
-- **Result**: 85% faster recovery, 100% context preservation
+- **Recovery Time**: <10 min with 147 characters of input (half a tweet)
+- **Result**: 85% faster than traditional recovery (30-60 min), 100% context preservation
 
 ---
 

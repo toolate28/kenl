@@ -56,7 +56,7 @@ graph LR
     style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
 ```
 
-**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail.
+**Result**: 85% faster crash recovery, shareable gaming configs, complete audit trail.
 
 ---
 
@@ -200,9 +200,9 @@ fps_1440p_ultra: 118
 
 Share with friends. They get identical performance.
 
-### ⚡ 7-Minute Crash Recovery
+### ⚡ Rapid Crash Recovery
 
-System crashes? KENL reconstructs what you were doing, why, and what to do next.
+System crashes? KENL reconstructs what you were doing, why, and what to do next. **85% faster** than manual recovery (30-60 min → <10 min).
 
 [See validation study →](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
 
