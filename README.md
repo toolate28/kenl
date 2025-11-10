@@ -55,8 +55,8 @@ owi-version: 1.0.0
     ```
 **Solution**: KENL captures *why* you did things, not just *what*. When something breaks, recovery is automatic.
 
-```mermaid
-graph LR
+    ```mermaid
+    graph LR
     A([🎮 Want to play Halo])  -->|Research| B{KENL finds ProtonDB<br/>gold rating}
     B -->|Configure| C[[KENL sets up<br/>Proton GE + DXVK]]
     C -->|Document| D[(KENL creates<br/>Play Card)]
@@ -70,7 +70,7 @@ graph LR
     style D fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
     style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
     style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
-```
+    ```
 
 **Result**: 85% faster crash recovery, shareable gaming configs, complete audit trail.
 
@@ -80,8 +80,8 @@ graph LR
 
 KENL is **11 specialized modules** that work together on Bazzite:
 
-```mermaid
-graph TB
+    ```mermaid
+    graph TB
     subgraph Core["🔧 Core Operations"]
         KENL0[⚙️ KENL0-system<br/>Privileged OS Tasks]
         KENL1[⚛️ KENL1-framework<br/>ATOM+SAGE+OWI]
@@ -145,7 +145,7 @@ graph TB
     style KENL9 fill:#d0bfff,stroke:#9775fa
     style KENL10 fill:#e7dcc8,stroke:#8b6d47
     style KENL11 fill:#ffc9c9,stroke:#ff6b6b
-```
+    ```
 ---
 
 ## Quick Start
@@ -208,42 +208,41 @@ System crashes during firmware update? KENL Builds reconstructs:
 Walkthrough "storyboards" for complex operations
 
   - 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
-        - 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
-            - 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
-                - 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
-                    - 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
+  - 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
+  - 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
+  - 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
+  - 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
 
 **Why:** Isolates dev tools from gaming/system context, prevents command conflicts.
 
-```bash
-# Create new distrobox for project
-create-devbox python-ml
-```
+    ```bash
+    # Create new distrobox for project
+    create-devbox python-ml
+    ```
 
 **What changes:**
-```mermaid
-sequenceDiagram
+    
+    ```mermaid
+    sequenceDiagram
     participant User
     participant KENL Builds3
     participant Distrobox
     participant Container
-
     User->>KENL3: create-devbox python-ml
     KENL Builds3->>Distrobox: Create Ubuntu 24.04 container
     Distrobox->>Container: Install Python 3.12
     Container->>Container: Install ML libraries (numpy, pandas, torch)
     Container->>KENL3: ✅ Ready
     KENL Builds3->>User: Container "python-ml" ready
-
     Note over User,Container: ATOM trail: ATOM-DEV-20251110-xxx
-```
+    ```
 
 **Why:** Containerized environments prevent system pollution, each project gets clean deps.
 
-```bash
-# Monitor resource usage
-kenl-monitor start
-```
+    ```bash
+    # Monitor resource usage
+    kenl-monitor start
+    ```
 
 **What changes:**
 | Metric    | Before  | After                         |
@@ -258,60 +257,54 @@ kenl-monitor start
 ---
 
 ### For System Admins
-
-```bash
-# Switch to system context (elevated privileges)
-kenl-switch 0
-```
-
+    ```bash
+    # Switch to system context (elevated privileges)
+    kenl-switch 0
+    ```
 **What changes:**
-```diff
-- bazza@bazzite:~$                    # Default shell (user)
-+ ⚙️ KENL Builds0 bazza@bazzite:~$           # System context (elevated)
-
-Loaded:
-+ rpm-ostree shortcuts (os-status, os-update, os-rollback)
-+ ujust integration (Bazzite quick actions)
-+ Firmware update helpers
-+ Chainable system operations (rebase-clean, update-verify)
-
-Environment:
-+ KENL Builds_PRIVILEGED=1                   # Enables sudo-required commands
-+ ATOM_SYSTEM_OPS=1                   # All ops logged to system ATOM trail
-```
+    ```diff
+    - bazza@bazzite:~$                            # Default shell (user)
+    + ⚙️ KENL Builds0 bazza@bazzite:~$           # System context (elevated)
+    Loaded:
+    + rpm-ostree shortcuts (os-status, os-update, os-rollback)
+    + ujust integration (Bazzite quick actions)
+    + Firmware update helpers
+    + Chainable system operations (rebase-clean, update-verify)
+    Environment:
+    +  KENL Builds_PRIVILEGED=1                   # Enables sudo-required commands
+    + ATOM_SYSTEM_OPS=1                           # All ops logged to system ATOM trail
+    ```
 
 **Why:** Visual reminder you're in privileged context, prevents accidental destructive commands in wrong shell.
 
-```bash
-# Check for Bazzite updates
-os-check-updates
-```
+    ```bash
+    # Check for Bazzite updates
+    os-check-updates
+    ```
 
 **What changes:**
-```
-Current:  bazzite:bazzite/stable/x86_64/desktop - 40.20251001.0
+    ```Current:  bazzite:bazzite/stable/x86_64/desktop - 40.20251001.0
           ├─ Kernel: 6.11.3
           ├─ Mesa: 24.2.4
           └─ NVIDIA: 565.57.01
-
-Available: bazzite:bazzite/stable/x86_64/desktop - 41.20251110.0 ⬆️
+      Available: bazzite:bazzite/stable/x86_64/desktop - 41.20251110.0 ⬆️
           ├─ Kernel: 6.12.1 (+security patches)
           ├─ Mesa: 24.3.0 (+5% Vulkan performance)
           └─ NVIDIA: 570.86.10 (+DLSS 3.5)
-
-Changelog: 47 commits, 12 security fixes, 3 gaming improvements
-```
+    Changelog: 47 commits, 12 security fixes, 3 gaming improvements
+    ```
 
 **Why:** Shows *what* will change before you commit, helps decide if update is worth potential breakage.
 
-```bash
-# Rebase to latest with automatic rollback
-rebase-safe bazzite-41-latest
-```
+    ```bash
+    # Rebase to latest with automatic rollback
+    rebase-safe bazzite-41-latest
+    ```
 
 **What changes:**
-```mermaid
-stateDiagram-v2
+    
+    ```mermaid
+    stateDiagram-v2
     [*] --> Snapshot: KENL Builds10 creates backup
     Snapshot --> Download: Fetch new deployment
     Download --> Reboot: Apply changes
@@ -330,137 +323,15 @@ stateDiagram-v2
         - GPU driver loaded
         - Steam starts
     end note
-```
+    ```
 
 **Why:** If rebase breaks system (bad driver, kernel panic), automatic rollback restores previous working state in <2 minutes.
-
 ---
-
-## Documentation
-
-### Core Framework
-  - [ATOM+SAGE Framework](./modules/KENL1-framework/README.md) - Intent-driven operations
-  - [Getting Started Guide](./modules/KENL1-framework/docs/GETTING_STARTED.md)
-  - [Validation Study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
-
-### Gaming
-  - [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
-  - [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
-  - [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
-
-    subgraph KENL1["⚛️ KENL Builds1-framework (ATOM Trail)"]
-        D[Log intent]
-        E[Validate with CTFWI]
-        F[Execute operation]
-        G[Record outcome]
-    end
-
-    subgraph Storage["💾 Storage"]
-        H[(ATOM Trail<br/>~/.kenl/atom-trail/)]
-        I[(Play Cards<br/>~/.kenl/play-cards/)]
-        J[(Snapshots<br/>~/.kenl/snapshots/)]
-    end
-
-    subgraph Recovery["🔄 Recovery"]
-        K[System crash]
-        L[Read ATOM trail]
-        M[Reconstruct context]
-        N[Resume operations]
-    end
-
-    A -->|KENL2| D
-    B -->|KENL3| D
-    C -->|KENL0| D
-
-### Windows Support
-  - [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
-  - [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
-  - [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
-
-    G --> H
-    G -.->|Gaming| I
-    G -.->|Before changes| J
-
-    K --> L
-    L --> H
-    H --> M
-    M --> N
-    N -.-> D
-
-    style KENL Builds1 fill:#e5dbff,stroke:#7950f2
-    style Storage fill:#d3f9d8,stroke:#51cf66
-    style Recovery fill:#ffe3e3,stroke:#fa5252
-```
-
-### KENL Builds Dependency Graph
-
-```mermaid
-graph TB
-    subgraph Foundation
-        K0[KENL0<br/>System Ops]
-        K1[KENL1<br/>Framework]
-    end
-
-    subgraph Applications
-        K2[KENL2<br/>Gaming]
-        K3[KENL3<br/>Dev]
-        K4[KENL4<br/>Monitoring]
-        K5[KENL5<br/>Facades]
-        K6[KENL6<br/>Social]
-        K7[KENL7<br/>Learning]
-        K8[KENL8<br/>Security]
-        K9[KENL9<br/>Library]
-        K10[KENL10<br/>Backup]
-        K11[KENL11<br/>Media]
-    end
-
-    K0 -->|Manages OS| K1
-    K1 -->|Powers all| K2
-    K1 -->|Powers all| K3
-    K1 -->|Powers all| K4
-    K1 -->|Powers all| K5
-    K1 -->|Powers all| K6
-    K1 -->|Powers all| K7
-    K1 -->|Powers all| K8
-    K1 -->|Powers all| K9
-    K1 -->|Powers all| K10
-    K1 -->|Powers all| K11
-
-    K2 -.->|Uses| K9
-    K2 -.->|Encrypts with| K8
-    K2 -.->|Shares via| K6
-    K2 -.->|Backed up by| K10
-    K3 -.->|Monitored by| K4
-    K3 -.->|Backed up by| K10
-    K5 -.->|Themes| K2
-    K5 -.->|Themes| K3
-    K5 -.->|Themes| K9
-    K5 -.->|Themes| K11
-    K6 -.->|Secured by| K8
-    K9 -.->|Backed up by| K10
-    K9 -.->|Secured by| K8
-    K11 -.->|Uses| K9
-    K11 -.->|Secured by| K8
-    K11 -.->|Backed up by| K10
-
-    style K0 fill:#f8f9fa,stroke:#495057,stroke-width:3px
-    style K1 fill:#e5dbff,stroke:#7950f2,stroke-width:3px
-    style K2 fill:#ffe3e3,stroke:#fa5252
-    style K3 fill:#d0ebff,stroke:#228be6
-    style K4 fill:#d3f9d8,stroke:#51cf66
-    style K5 fill:#fff3bf,stroke:#fab005
-    style K6 fill:#ffe8cc,stroke:#fd7e14
-    style K7 fill:#b2f2bb,stroke:#2f9e44
-    style K8 fill:#f3d9fa,stroke:#da77f2
-    style K9 fill:#d0bfff,stroke:#9775fa
-    style K10 fill:#e7dcc8,stroke:#8b6d47
-    style K11 fill:#ffc9c9,stroke:#ff6b6b
-```
 
 ### Data Flow: Gaming Session
 
-```mermaid
-sequenceDiagram
+    ```mermaid
+    sequenceDiagram
     autonumber
 
     participant U as 👤 User
@@ -493,45 +364,16 @@ sequenceDiagram
     K1->>K10: Update snapshot with metrics
 
     Note over U,K10: Complete audit trail:<br/>Research → Config → Test → Share
-```
+    ```
 
----
-
-## Benefits for Bazzite Users  / New Linux Users / The Easily-excited hobbyist
-
-|-----------------------------------------------------------------------------|       
-|## 🎮 Gaming Enhancements                                                   
-|-----------------------------------------------------------------------------|
-| Trial-and-error Proton configs | ProtonDB research → automatic config       |
-| Forgotten what worked          | Play Cards document exact setup            |
-| Can't help friends             | Encrypted sharing, instant setup           |
-| Lost configs after reinstall   | KENL Builds10 snapshots restore everything |
-| No performance history         | KENL Builds4 tracks FPS/frametime over time|
-|## 💻 Development
-|-----------------------------------------------------------------------------|
-| Manual distrobox creation      | Templates with automatic config            |
-| Lost work after crashes        | ATOM trail restores context                |
-| No resource monitoring         | KENL Builds4 tracks container CPU/RAM      |
-| Inconsistent environments      | Play Card-style "Dev Cards"                |
-|## 🔧 System Operations
-|-----------------------------------------------------------------------------|
-| `rpm-ostree upgrade` → hope    | Automatic rollback on failure              |
-| Firmware updates = risky       | USB recovery drive + snapshot              |
-| Forgot last rebase version     | ATOM trail shows full history              |
-| Manual ujust commands          | Chainable quick-actions                    |
-|## 🔐 Security & Privacy
-|-----------------------------------------------------------------------------|
-| Configs shared in plaintext    | GPG encryption built-in                    |
-| Secrets in git repos           | Pre-commit secret detection                |
-| No audit trail                 | Every operation logged                     |
-| Manual key management          | KENL Builds8 vault integration             |
-|-----------------------------------------------------------------------------|
----
-### 🏗️ Architecture & Methodology
+### 🏗️ Full Architecture & 'With-Intent' Methodology
 
 - **[OWI Framework Overview](./OWI_FRAMEWORK_OVERVIEW.md)**: Gaming/Configuring/Building-With-Intent
 - **[CLAUDE.md](./CLAUDE.md)**: Guidance for Claude Code instances
 - **[ADR Template](./02-Decisions/ADR_TEMPLATE.md)**: Architectural decisions
+
+
+### Contributing: We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Community & Support
 
@@ -540,24 +382,6 @@ sequenceDiagram
 - **Matrix**: `#kenl:matrix.org` (coming soon)
 - **Discord**: Bazzite Discord - #kenl channel (coming soon)
 
-### Contributing: We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md)
-
-    - Code style guidelines & formatting standards
-    - Commit message format (Conventional Commits)
-     - Pre-commit hooks and testing
-    - ARCREF + ADR requirements for architectural changes
-
----
-
-## Support & Community
-
-| Resource                  | Link                                                                               |
-|---------------------------|------------------------------------------------------------------------------------|
-| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)                          |
-| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)                |
-| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                                    |
-| **Windows Support**       | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
-|----------------------------------------------------------------------------------------------------------------|
-
+___________________________________________________________________________________________________________
 **Status**: Production Ready | **Version**: 1.0.0 | **Platform**: Bazzite (Fedora Atomic)
 **Last Updated**: 2025-11-10 | **Made with intent** by the Bazza-DX community 🎮💻🔐
