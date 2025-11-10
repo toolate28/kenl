@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-015
 owi-version: 1.0.0
 ---
 
-# modules/KENL
+# The KENL Build Proect
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
@@ -16,8 +16,6 @@ owi-version: 1.0.0
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
 
 > KENL transforms your Bazzite system into a self-documenting gaming and development platform with automatic crash recovery, shareable configurations, and complete audit trails.
-
----
 
 ## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
 
@@ -29,14 +27,32 @@ owi-version: 1.0.0
 | **IT Support**            | [Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)                       |
 | **Request Help**          | [Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)           |
 | **Windows Alternatives**  | [Linux Options for Windows 10 EOL](./windows-support/alternatives/README.md)                    |
-| **All Documentation**     | [windows-support/](./windows-support/)                                                           |
+| **All Documentation**     | [windows-support/](./windows-support/)                                                          |
 
 ---
 
-## Why modules/KENL?
+## Why KENL?
 
-**Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed.
+**Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed. 
 
+    ```
+    kenl/
+    ├── modules/                      # All KENL modules (0-12)
+    │   ├── KENL0-system/             # System operations
+    │   ├── KENL1-framework/          # ATOM+SAGE+OWI core
+    │   ├── KENL2-gaming/             # Gaming configs & Play Cards
+    │   ├── KENL3-dev/                # Development environments
+    │   └── ... (KENL4-12)
+    ├── governance/                   # ARCREF + ADR documents
+    │   ├── mcp-governance/           # ARCREF artifacts
+    │   └── 02-Decisions/             # ADR documents
+    ├── windows-support/              # Windows 10 EOL & Surface Pro 4
+    │   ├── surface-pro-4/            # Troubleshooting guides
+    │   └── alternatives/             # Linux migration options
+    ├── scripts/                      # Bootstrap & automation
+    ├── CONTRIBUTING.md               # Contribution guidelines
+    └── README.md                     # This file
+    ```
 **Solution**: KENL captures *why* you did things, not just *what*. When something breaks, recovery is automatic.
 
 ```mermaid
@@ -62,18 +78,18 @@ graph LR
 
 ## Quick Start
 
-```bash
-# Clone repository
-git clone https://github.com/toolate28/kenl.git ~/.kenl
+    ```bash
+    # Clone repository
+    git clone https://github.com/toolate28/kenl.git ~/.kenl
 
-# Bootstrap environment
-cd ~/.kenl && ./scripts/bootstrap.sh
+    # Bootstrap environment
+    cd ~/.kenl && ./scripts/bootstrap.sh
 
-# Explore modules (pick your context)
-cd modules/KENL2-gaming    # For gaming setup
-cd modules/KENL3-dev       # For development
-cd modules/KENL0-system    # For system operations
-```
+    # Explore modules (pick your context)
+    cd modules/KENL2-gaming    # For gaming setup
+    cd modules/KENL3-dev       # For development
+    cd modules/KENL0-system    # For system operations
+    ```
 
 **Then read the module README for your use case** (see table below).
 
@@ -154,21 +170,21 @@ graph TB
 
 ## Module Navigation
 
-| Module           | Purpose                    | Documentation                                         |
-|------------------|----------------------------|-------------------------------------------------------|
-| ⚙️ **KENL0**     | System operations          | [modules/KENL0-system/](./modules/KENL0-system/)      |
-| ⚛️ **KENL1**     | Framework core (ATOM+SAGE) | [modules/KENL1-framework/](./modules/KENL1-framework/)|
-| 🎮 **KENL2**     | Gaming & Play Cards        | [modules/KENL2-gaming/](./modules/KENL2-gaming/)      |
-| 💻 **KENL3**     | Development                | [modules/KENL3-dev/](./modules/KENL3-dev/)            |
-| 📊 **KENL4**     | Monitoring & metrics       | [modules/KENL4-monitoring/](./modules/KENL4-monitoring/)|
-| 🎨 **KENL5**     | Theming & context          | [modules/KENL5-facades/](./modules/KENL5-facades/)    |
-| 🌐 **KENL6**     | Social & sharing           | [modules/KENL6-social/](./modules/KENL6-social/)      |
-| 🎓 **KENL7**     | Learning & tutorials       | [modules/KENL7-learning/](./modules/KENL7-learning/)  |
-| 🔐 **KENL8**     | Security & encryption      | [modules/KENL8-security/](./modules/KENL8-security/)  |
-| 📚 **KENL9**     | Library management         | [modules/KENL9-library/](./modules/KENL9-library/)    |
-| 💾 **KENL10**    | Backups & snapshots        | [modules/KENL10-backup/](./modules/KENL10-backup/)    |
-| 📺 **KENL11**    | Media server automation    | [modules/KENL11-media/](./modules/KENL11-media/)      |
-
+| Module           | Purpose                    | Documentation                                            |
+|----------------------------------------------------------------------------------------------------------|
+| ⚙️ **KENL0**     | System operations          | [modules/KENL0-system/](./modules/KENL0-system/)         |
+| ⚛️ **KENL1**     | Framework core (ATOM+SAGE) | [modules/KENL1-framework/](./modules/KENL1-framework/)   |
+| 🎮 **KENL2**     | Gaming & Play Cards        | [modules/KENL2-gaming/](./modules/KENL2-gaming/)         |
+| 💻 **KENL3**     | Development                | [modules/KENL3-dev/](./modules/KENL3-dev/)               |
+| 📊 **KENL4**     | Monitoring & metrics       | [modules/KENL4-monitoring/](./modules/KENL4-monitoring/) |
+| 🎨 **KENL5**     | Theming & context          | [modules/KENL5-facades/](./modules/KENL5-facades/)       |
+| 🌐 **KENL6**     | Social & sharing           | [modules/KENL6-social/](./modules/KENL6-social/)         |
+| 🎓 **KENL7**     | Learning & tutorials       | [modules/KENL7-learning/](./modules/KENL7-learning/)     |
+| 🔐 **KENL8**     | Security & encryption      | [modules/KENL8-security/](./modules/KENL8-security/)     |
+| 📚 **KENL9**     | Library management         | [modules/KENL9-library/](./modules/KENL9-library/)       |
+| 💾 **KENL10**    | Backups & snapshots        | [modules/KENL10-backup/](./modules/KENL10-backup/)       |
+| 📺 **KENL11**    | Media server automation    | [modules/KENL11-media/](./modules/KENL11-media/)         |
+|----------------------------------------------------------------------------------------------------------|
 **Pick the module that matches your task, then read its README.**
 
 ---
@@ -179,24 +195,24 @@ graph TB
 
 Every operation creates an ATOM trail entry with full context:
 
-```bash
-ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
-ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
-ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
-```
+    ```bash
+    ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
+    ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
+    ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
+    ```
 
-When something breaks, you know *exactly* what changed.
+      > When something breaks, you know *exactly* what changed.
 
 ### 📋 Play Cards = Shareable Gaming Configs
 
 Document game configurations as YAML:
 
-```yaml
-game: Halo Infinite
-proton: GE-Proton 9-18
-launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
-fps_1440p_ultra: 118
-```
+    ```yaml
+    game: Halo Infinite
+    proton: GE-Proton 9-18
+    launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
+    fps_1440p_ultra: 118
+    ```
 
 Share with friends. They get identical performance.
 
@@ -210,74 +226,51 @@ System crashes? KENL reconstructs what you were doing, why, and what to do next.
 
 Visual shell themes prevent mistakes:
 
-```bash
-🎮 KENL2 user@bazzite:~$    # Gaming context
-💻 KENL3 user@bazzite:~$    # Dev context
-⚙️ KENL0 user@bazzite:~$    # System ops (elevated)
-```
+    ```bash
+    🎮 KENL2 user@bazzite:~$    # Gaming context
+    💻 KENL3 user@bazzite:~$    # Dev context
+    ⚙️ KENL0 user@bazzite:~$    # System ops (elevated)
+    ```
 
 ---
 
 ## Real-World Scenarios
 
-KENL includes complete "storyboards" for complex operations:
+Walkthrough "storyboards" for complex operations
 
-- 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
-- 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
-- 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
-- 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
-- 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
-
----
-
-## Repository Structure
-
-```
-kenl/
-├── modules/                      # All KENL modules (0-12)
-│   ├── KENL0-system/             # System operations
-│   ├── KENL1-framework/          # ATOM+SAGE+OWI core
-│   ├── KENL2-gaming/             # Gaming configs & Play Cards
-│   ├── KENL3-dev/                # Development environments
-│   └── ... (KENL4-12)
-├── governance/                   # ARCREF + ADR documents
-│   ├── mcp-governance/           # ARCREF artifacts
-│   └── 02-Decisions/             # ADR documents
-├── windows-support/              # Windows 10 EOL & Surface Pro 4
-│   ├── surface-pro-4/            # Troubleshooting guides
-│   └── alternatives/             # Linux migration options
-├── scripts/                      # Bootstrap & automation
-├── CONTRIBUTING.md               # Contribution guidelines
-└── README.md                     # This file
-```
+  - 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
+        - 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
+            - 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
+                - 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
+                    - 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
 
 ---
 
 ## Documentation
 
 ### Core Framework
-- [ATOM+SAGE Framework](./modules/KENL1-framework/README.md) - Intent-driven operations
-- [Getting Started Guide](./modules/KENL1-framework/docs/GETTING_STARTED.md)
-- [Validation Study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
+  - [ATOM+SAGE Framework](./modules/KENL1-framework/README.md) - Intent-driven operations
+  - [Getting Started Guide](./modules/KENL1-framework/docs/GETTING_STARTED.md)
+  - [Validation Study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
 
 ### Gaming
-- [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
-- [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
-- [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
+  - [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
+  - [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
+  - [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
 
 ### Development
-- [Development Setup](./modules/KENL3-dev/README.md) - Distrobox environments
-- [Claude Code Integration](./modules/KENL3-dev/claude-code-setup/claude-configuration-guide.md)
+  - [Development Setup](./modules/KENL3-dev/README.md) - Distrobox environments
+  - [Claude Code Integration](./modules/KENL3-dev/claude-code-setup/claude-configuration-guide.md)
 
 ### Windows Support
-- [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
-- [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
-- [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
+  - [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
+  - [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
+  - [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
 
 ### Governance
-- [ARCREF Template](./governance/mcp-governance/ARCREF_TEMPLATE.yaml) - Infrastructure decisions
-- [ADR Template](./governance/02-Decisions/ADR_TEMPLATE.md) - Architectural decisions
-- [CLAUDE.md](./CLAUDE.md) - Guidance for Claude Code
+  - [ARCREF Template](./governance/mcp-governance/ARCREF_TEMPLATE.yaml) - Infrastructure decisions
+  - [ADR Template](./governance/02-Decisions/ADR_TEMPLATE.md) - Architectural decisions
+  - [CLAUDE.md](./CLAUDE.md) - Guidance for Claude Code
 
 ---
 
@@ -294,11 +287,11 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 
 ## Support & Community
 
-| Resource                  | Link                                                                  |
-|---------------------------|-----------------------------------------------------------------------|
-| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)             |
-| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)   |
-| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                       |
+| Resource                  | Link                                                                               |
+|---------------------------|------------------------------------------------------------------------------------|
+| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)                          |
+| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)                |
+| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                                    |
 | **Windows Support**       | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
 
 ---
@@ -308,14 +301,6 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 MIT License - see [LICENSE](./LICENSE) for details.
 
 KENL is fully open source. Fork it, modify it, share it.
-
----
-
-## Why "KENL"?
-
-**Knowledge Enhanced Navigation Layer**
-
-Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
 
 ---
 
