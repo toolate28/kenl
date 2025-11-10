@@ -45,7 +45,7 @@ graph LR
 
 ## The KENL Ecosystem
 
-KENL is a modular system of **10 specialized layers** that work together seamlessly on Bazzite:
+KENL is a modular system of **11 specialized layers** that work together seamlessly on Bazzite:
 
 ```mermaid
 graph TB
@@ -66,6 +66,10 @@ graph TB
         KENL7[🎓 KENL7-learning<br/>Tutorials & Guides]
     end
 
+    subgraph Media["📺 Media & Streaming"]
+        KENL11[📺 KENL11-media<br/>Seedbox & Automation]
+    end
+
     subgraph UX["🎨 User Experience"]
         KENL5[🎨 KENL5-facades<br/>Visual Identity]
     end
@@ -78,6 +82,7 @@ graph TB
     KENL0 -.->|Manages| KENL1
     KENL1 -.->|Powers| KENL2
     KENL1 -.->|Powers| KENL3
+    KENL1 -.->|Powers| KENL11
     KENL2 -->|Uses| KENL9
     KENL2 -->|Uses| KENL8
     KENL2 -->|Uses| KENL6
@@ -85,11 +90,15 @@ graph TB
     KENL5 -->|Themes| KENL2
     KENL5 -->|Themes| KENL3
     KENL5 -->|Themes| KENL9
+    KENL5 -->|Themes| KENL11
     KENL9 -->|Backed up by| KENL10
     KENL10 -->|Backs up| KENL2
     KENL10 -->|Backs up| KENL3
+    KENL10 -->|Backs up| KENL11
     KENL8 -->|Secures| KENL6
     KENL8 -->|Secures| KENL9
+    KENL8 -->|Secures| KENL11
+    KENL11 -->|Uses| KENL9
 
     style KENL0 fill:#f8f9fa,stroke:#495057
     style KENL1 fill:#e5dbff,stroke:#7950f2
@@ -102,6 +111,7 @@ graph TB
     style KENL8 fill:#f3d9fa,stroke:#da77f2
     style KENL9 fill:#d0bfff,stroke:#9775fa
     style KENL10 fill:#e7dcc8,stroke:#8b6d47
+    style KENL11 fill:#ffc9c9,stroke:#ff6b6b
 ```
 
 ### Quick Guide
@@ -119,6 +129,7 @@ graph TB
 | 🔐 **KENL8** | Security | Encrypting files, managing GPG keys |
 | 📚 **KENL9** | Library management | Shared Steam libraries (dual-boot), save sync |
 | 💾 **KENL10** | Backups | Creating snapshots, restoring configs |
+| 📺 **KENL11** | Media server | Automated torrenting, Radarr/Sonarr, Jellyfin |
 
 ---
 
@@ -560,6 +571,7 @@ graph TB
         K8[KENL8<br/>Security]
         K9[KENL9<br/>Library]
         K10[KENL10<br/>Backup]
+        K11[KENL11<br/>Media]
     end
 
     K0 -->|Manages OS| K1
@@ -572,6 +584,7 @@ graph TB
     K1 -->|Powers all| K8
     K1 -->|Powers all| K9
     K1 -->|Powers all| K10
+    K1 -->|Powers all| K11
 
     K2 -.->|Uses| K9
     K2 -.->|Encrypts with| K8
@@ -582,9 +595,13 @@ graph TB
     K5 -.->|Themes| K2
     K5 -.->|Themes| K3
     K5 -.->|Themes| K9
+    K5 -.->|Themes| K11
     K6 -.->|Secured by| K8
     K9 -.->|Backed up by| K10
     K9 -.->|Secured by| K8
+    K11 -.->|Uses| K9
+    K11 -.->|Secured by| K8
+    K11 -.->|Backed up by| K10
 
     style K0 fill:#f8f9fa,stroke:#495057,stroke-width:3px
     style K1 fill:#e5dbff,stroke:#7950f2,stroke-width:3px
@@ -597,6 +614,7 @@ graph TB
     style K8 fill:#f3d9fa,stroke:#da77f2
     style K9 fill:#d0bfff,stroke:#9775fa
     style K10 fill:#e7dcc8,stroke:#8b6d47
+    style K11 fill:#ffc9c9,stroke:#ff6b6b
 ```
 
 ### Data Flow: Gaming Session
@@ -741,6 +759,7 @@ atom-analytics --summary
 - **[KENL8 - Security](./KENL8-security/README.md)**: Encryption, GPG, vaults
 - **[KENL9 - Library](./KENL9-library/README.md)**: Multi-OS game libraries, save sync
 - **[KENL10 - Backup](./KENL10-backup/README.md)**: Intelligent snapshots
+- **[KENL11 - Media](./KENL11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
 
 ### 🧪 Real World Scenarios
 
