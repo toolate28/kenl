@@ -283,39 +283,196 @@ Complete gaming stack:
 ```bash
 # Switch to gaming context
 kenl-switch 2
+```
 
+**What changes:**
+```diff
+- bazza@bazzite:~$                    # Default shell
++ 🎮 KENL2 bazza@bazzite:~$           # Gaming context
+
+Loaded:
++ Proton optimization aliases
++ Steam compatibility functions
++ Play Card management commands
++ ProtonDB research tools
+```
+
+**Why:** Activates gaming-specific tools and creates ATOM trail entries for game configs.
+
+```bash
 # Setup a game (automatic research + config)
 setup-game "Halo Infinite"
+```
 
+**What changes:**
+```mermaid
+graph LR
+    A[No config] -->|Research ProtonDB| B[Gold rating found]
+    B -->|Download GE-Proton| C[9-18 installed]
+    C -->|Apply settings| D[Play Card created]
+    D -->|Snapshot| E[ATOM-PLAYCARD-xxx]
+
+    style A fill:#ffe3e3
+    style E fill:#d3f9d8
+```
+
+**Why:** Automates the trial-and-error process, documents working config in Play Card.
+
+```bash
 # Share your config with a friend
 share-playcard halo-infinite.yaml friend@matrix.org
 ```
+
+**What changes:**
+| Before | After |
+|--------|-------|
+| Local Play Card only | Encrypted `.gpg` file created |
+| No sharing capability | Sent via Matrix DM |
+| Friend must recreate config | Friend applies instantly |
+
+**Why:** GPG encryption ensures only intended recipient can use config, ATOM trail logs sharing event.
+
+---
 
 ### For Developers
 
 ```bash
 # Switch to dev context
 kenl-switch 3
+```
 
+**What changes:**
+```diff
+- bazza@bazzite:~$                    # Default shell
++ 💻 KENL3 bazza@bazzite:~$           # Development context
+
+Loaded:
++ Distrobox management commands
++ Git workflow aliases (gst, gco, gp)
++ Container networking helpers
++ Development environment templates
+```
+
+**Why:** Isolates dev tools from gaming/system context, prevents command conflicts.
+
+```bash
 # Create new distrobox for project
 create-devbox python-ml
+```
 
+**What changes:**
+```mermaid
+sequenceDiagram
+    participant User
+    participant KENL3
+    participant Distrobox
+    participant Container
+
+    User->>KENL3: create-devbox python-ml
+    KENL3->>Distrobox: Create Ubuntu 24.04 container
+    Distrobox->>Container: Install Python 3.12
+    Container->>Container: Install ML libraries (numpy, pandas, torch)
+    Container->>KENL3: ✅ Ready
+    KENL3->>User: Container "python-ml" ready
+
+    Note over User,Container: ATOM trail: ATOM-DEV-20251110-xxx
+```
+
+**Why:** Containerized environments prevent system pollution, each project gets clean deps.
+
+```bash
 # Monitor resource usage
 kenl-monitor start
 ```
+
+**What changes:**
+| Metric | Before | After |
+|--------|--------|-------|
+| CPU usage | Unknown | Real-time graph |
+| RAM usage | Unknown | Per-container breakdown |
+| Disk I/O | Unknown | Read/write rates |
+| Network | Unknown | Upload/download per container |
+
+**Why:** KENL4 monitoring tracks which containers consume resources, helps optimize.
+
+---
 
 ### For System Admins
 
 ```bash
 # Switch to system context (elevated privileges)
 kenl-switch 0
+```
 
+**What changes:**
+```diff
+- bazza@bazzite:~$                    # Default shell (user)
++ ⚙️ KENL0 bazza@bazzite:~$           # System context (elevated)
+
+Loaded:
++ rpm-ostree shortcuts (os-status, os-update, os-rollback)
++ ujust integration (Bazzite quick actions)
++ Firmware update helpers
++ Chainable system operations (rebase-clean, update-verify)
+
+Environment:
++ KENL_PRIVILEGED=1                   # Enables sudo-required commands
++ ATOM_SYSTEM_OPS=1                   # All ops logged to system ATOM trail
+```
+
+**Why:** Visual reminder you're in privileged context, prevents accidental destructive commands in wrong shell.
+
+```bash
 # Check for Bazzite updates
 os-check-updates
+```
 
+**What changes:**
+```
+Current:  bazzite:bazzite/stable/x86_64/desktop - 40.20251001.0
+          ├─ Kernel: 6.11.3
+          ├─ Mesa: 24.2.4
+          └─ NVIDIA: 565.57.01
+
+Available: bazzite:bazzite/stable/x86_64/desktop - 41.20251110.0 ⬆️
+          ├─ Kernel: 6.12.1 (+security patches)
+          ├─ Mesa: 24.3.0 (+5% Vulkan performance)
+          └─ NVIDIA: 570.86.10 (+DLSS 3.5)
+
+Changelog: 47 commits, 12 security fixes, 3 gaming improvements
+```
+
+**Why:** Shows *what* will change before you commit, helps decide if update is worth potential breakage.
+
+```bash
 # Rebase to latest with automatic rollback
 rebase-safe bazzite-41-latest
 ```
+
+**What changes:**
+```mermaid
+stateDiagram-v2
+    [*] --> Snapshot: KENL10 creates backup
+    Snapshot --> Download: Fetch new deployment
+    Download --> Reboot: Apply changes
+    Reboot --> Verify: Boot into new system
+    Verify --> Success: All checks pass ✅
+    Verify --> Rollback: Failure detected ❌
+    Success --> [*]
+    Rollback --> Reboot2: rpm-ostree rollback
+    Reboot2 --> Restored: Back to working state
+    Restored --> [*]
+
+    note right of Verify
+        Checks:
+        - System boots
+        - Network works
+        - GPU driver loaded
+        - Steam starts
+    end note
+```
+
+**Why:** If rebase breaks system (bad driver, kernel panic), automatic rollback restores previous working state in <2 minutes.
 
 ---
 
