@@ -1,0 +1,28 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🌐 KENL6: SOCIAL - Gaming Community & Sharing          ║
+╠═══════════════════════════════════════════════════════════╣
+║   🎴 SHARE PLAY CARD                                      ║
+║   cd ~/kenl/KENL6-social                                 ║
+║   ./share-playcard.sh                                    ║
+║   # Interactive: Select card, enter recipient            ║
+║                                                           ║
+║   📥 IMPORT PLAY CARD                                     ║
+║   cd ~/kenl/KENL2-gaming                                 ║
+║   ./import-playcard.sh <received-card.gpg>               ║
+║                                                           ║
+║   💬 COMMUNITY CHANNELS                                   ║
+║   Matrix:   #kenl:matrix.org                             ║
+║   Discord:  #kenl (invite link in README)                ║
+║   Reddit:   r/linux_gaming, r/Bazzite                    ║
+║                                                           ║
+║   🔐 Security: Uses KENL8 GPG encryption                  ║
+║   📤 Formats: Encrypted .gpg, JSON, YAML                  ║
+║                                                           ║
+║   📂 FEATURES                                             ║
+║   playcard-share/          Share configs securely        ║
+║   lfg-matchmaking/         Find gaming groups            ║
+║   leaderboards/            FPS rankings, stats           ║
+║   community-profiles/      Player profiles               ║
+║   matrix-integration/      Matrix bot                    ║
+║   discord-integration/     Discord webhook               ║
+╚═══════════════════════════════════════════════════════════╝

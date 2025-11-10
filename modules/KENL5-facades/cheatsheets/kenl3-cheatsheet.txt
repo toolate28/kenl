@@ -1,0 +1,62 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║   💻 KENL3: DEVELOPMENT - Distrobox & Containers                              ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   🐳 DISTROBOX                            📦 CONTAINER MANAGEMENT             ║
+║   ───────────                             ─────────────────────             ║
+║   dbl                 List containers     dbcr <name> <image>                ║
+║   dbe <name>          Enter container     → ubuntu-dev ubuntu:24.04          ║
+║   dbst <name>         Stop container      → fedora-dev fedora:39             ║
+║   dbrm <name>         Remove container    → arch-dev archlinux:latest        ║
+║   dbup <name>         Update packages                                        ║
+║                                            create-devbox <name>               ║
+║                                            → KENL3 wrapper, auto-config      ║
+║                                                                               ║
+║   🔨 GIT WORKFLOW                         🌿 BRANCHING                        ║
+║   ──────────────                          ──────────                         ║
+║   gst                 Status              gco -b feat/name  Create branch    ║
+║   ga <file>           Add file            gco main          Switch to main   ║
+║   gc "msg"            Commit              gp                Push             ║
+║   gp                  Push                gl                Pull             ║
+║   gl                  Pull                gm main           Merge main       ║
+║   gd                  Diff                                                   ║
+║                                                                               ║
+║   📝 COMMON TASKS                         🔍 PROJECT NAVIGATION               ║
+║   ──────────────                          ─────────────────────             ║
+║   Inside container:                       fd <pattern>      Find files       ║
+║   apt update && apt upgrade               rg <pattern>      Search code      ║
+║   pip install <package>                   tree -L 2         Show structure   ║
+║   npm install                             bat <file>        Syntax highlight ║
+║   cargo build                                                                ║
+║                                                                               ║
+║   🚀 QUICK ENVS                           📊 MONITORING                       ║
+║   ────────────                            ───────────                        ║
+║   create-devbox python-ml                 kenl-monitor start                 ║
+║   → Python 3.12 + ML libs                 → Track CPU/RAM per container     ║
+║                                            → Watch disk I/O                   ║
+║   create-devbox nodejs-web                → Network usage                    ║
+║   → Node.js 20 + npm/yarn                                                    ║
+║                                            htop              System monitor   ║
+║   create-devbox rust-dev                  docker stats      Container stats  ║
+║   → Rust + cargo                                                             ║
+║                                                                               ║
+║   🔐 SSH & GPG                            💾 BACKUPS                          ║
+║   ───────────                             ────────                           ║
+║   ssh-keygen -t ed25519                   kenl-switch 10                     ║
+║   ssh-add ~/.ssh/id_ed25519               snapshot-create "dev-env"          ║
+║   gpg --list-keys                         → Backs up container configs       ║
+║                                            → ATOM trail included             ║
+║                                                                               ║
+║   💡 WORKFLOW:                                                                ║
+║   1. create-devbox my-project ubuntu:24.04                                   ║
+║   2. dbe my-project                                                          ║
+║   3. apt update && apt install build-essential git python3                   ║
+║   4. cd ~/code/my-project                                                    ║
+║   5. [Develop code, test, commit]                                            ║
+║   6. exit                                                                    ║
+║                                                                               ║
+║   💡 TIP: Home directory (~/) shared between host and containers!             ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
