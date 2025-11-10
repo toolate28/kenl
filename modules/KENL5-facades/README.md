@@ -334,6 +334,17 @@ KENL5 works perfectly with distrobox:
 
 ---
 
+## Documentation Formatting
+
+KENL5 manages theming and visual identity. When editing documentation with Mermaid diagrams or tables:
+
+📝 **See [../../CONTRIBUTING.md](../../CONTRIBUTING.md#documentation-formatting-standards)** for:
+- Mermaid diagram syntax and styling conventions
+- Table formatting and column alignment rules
+- Color coding standards for visual hierarchy
+
+---
+
 ## Customization
 
 ### Creating Custom Themes

@@ -15,64 +15,73 @@ owi-version: 1.0.0
 [![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
 
-> **KENL** transforms your Bazzite system into an intelligent, self-documenting gaming and development powerhouse. Every operation is traceable, every configuration is verified, and every crash is recoverable in minutes.
+> KENL transforms your Bazzite system into a self-documenting gaming and development platform with automatic crash recovery, shareable configurations, and complete audit trails.
+
+---
+
+## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
+
+**If you're here for Windows support, start here:**
+
+| You Need                  | Go Here                                                                                         |
+|---------------------------|-------------------------------------------------------------------------------------------------|
+| **End User Help**         | [START HERE - Human-Friendly Guide](./windows-support/surface-pro-4/START_HERE.md)              |
+| **IT Support**            | [Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)                       |
+| **Request Help**          | [Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)           |
+| **Windows Alternatives**  | [Linux Options for Windows 10 EOL](./windows-support/alternatives/README.md)                    |
+| **All Documentation**     | [windows-support/](./windows-support/)                                                           |
 
 ---
 
 ## Why KENL Builds?
 
-**Problem**: Modern gaming PCs are complex. Proton versions, DXVK settings, kernel parameters, GPU drivers - hundreds of variables affect performance. When something breaks, you're left guessing what changed.
+**Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed.
 
 **Solution**: KENL Builds captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, KENL Builds knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
 
 ```mermaid
 graph LR
-    A[🎮 Want to play Halo] -->|Research| B[KENL finds ProtonDB gold rating]
-    B -->|Configure| C[KENL sets up Proton GE + DXVK]
-    C -->|Document| D[KENL creates Play Card]
-    D -->|Share| E[🌐 Friend uses same config instantly]
-    E -->|Backup| F[💾 Config saved to ATOM trail]
+    A([🎮 Want to play Halo])  -->|Research| B{KENL finds ProtonDB<br/>gold rating}
+    B -->|Configure| C[[KENL sets up<br/>Proton GE + DXVK]]
+    C -->|Document| D[(KENL creates<br/>Play Card)]
+    D -->|Share| E([🌐 Friend uses<br/>config instantly])
+    E -->|Backup| F[💾 Config saved<br/>to ATOM trail]
     F -.->|Crash?| B
-## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
 
-**If you're here for Windows support, start here:**
+    style A fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
+    style B fill:#ffd43b,stroke:#fab005,stroke-width:2px
+    style C fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
+    style D fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+    style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
+    style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+```
 
-### For End Users (Need Help)
-👉 **[START HERE - Human-Friendly Guide](./windows-support/surface-pro-4/START_HERE.md)**
-- One-page guide in plain English
-- 30-second fix for common network issues
-- Windows 10 end-of-life options explained
-
-### For IT Support (Troubleshooting)
-👉 **[Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)**
-- Copy-paste PowerShell fixes
-- 5-15 minute diagnostics
-- System investigation procedures
-
-### Request Help (Open a PR)
-👉 **[Windows Support Request Template](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)**
-- Just paste screenshots or error messages
-- We'll help troubleshoot and fix your issue
-- See [PR Template Guide](./.github/PULL_REQUEST_TEMPLATE/README.md)
-
-**Complete documentation:** [`windows-support/`](./windows-support/)
+**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail.
 
 ---
 
 ## Quick Start
 
-    style A fill:#ff6b6b
-    style E fill:#51cf66
-    style F fill:#845ef7
+```bash
+# Clone repository
+git clone https://github.com/toolate28/kenl.git ~/.kenl
+
+# Bootstrap environment
+cd ~/.kenl && ./scripts/bootstrap.sh
+
+# Explore modules (pick your context)
+cd modules/KENL2-gaming    # For gaming setup
+cd modules/KENL3-dev       # For development
+cd modules/KENL0-system    # For system operations
 ```
 
-**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail of your system.
+**Then read the module README for your use case** (see table below).
 
 ---
 
 ## The KENL Builds Ecosystem
 
-KENL is a modular system of **11 specialized layers** that work together seamlessly on Bazzite:
+KENL is **11 specialized modules** that work together on Bazzite:
 
 ```mermaid
 graph TB
@@ -143,20 +152,20 @@ graph TB
 
 ### Quick Guide
 
-| KENL Builds | Purpose | You'll use this when... |
-|------|---------|-------------------------|
-| ⚙️ **KENL0** | System operations | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
-| ⚛️ **KENL1** | Framework core | Everything (automatic ATOM trail logging) |
-| 🎮 **KENL2** | Gaming | Playing games, optimizing Proton, sharing configs |
-| 💻 **KENL3** | Development | Coding, containers, building projects |
-| 📊 **KENL4** | Monitoring | Checking FPS, temps, system health |
-| 🎨 **KENL5** | Theming | Switching contexts, customizing shell prompts |
-| 🌐 **KENL6** | Social gaming | Sharing Play Cards with friends |
-| 🎓 **KENL7** | Learning | Git, rpm-ostree, GPG tutorials |
-| 🔐 **KENL8** | Security | Encrypting files, managing GPG keys |
-| 📚 **KENL9** | Library management | Shared Steam libraries (dual-boot), save sync |
-| 💾 **KENL10** | Backups | Creating snapshots, restoring configs |
-| 📺 **KENL11** | Media server | Automated torrenting, Radarr/Sonarr, Jellyfin |
+| KENL Builds   |  Purpose           | You'll use this when...                              |
+|---------------|--------------------|------------------------------------------------------|
+| ⚙️ **KENL0**  | System operations  | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
+| ⚛️ **KENL1**  | Framework core     | Everything (automatic ATOM trail logging)            |
+| 🎮 **KENL2**  | Gaming             | Playing games, optimizing Proton, sharing configs    |
+| 💻 **KENL3**  | Development        | Coding, containers, building projects                |
+| 📊 **KENL4**  | Monitoring         | Checking FPS, temps, system health                   |
+| 🎨 **KENL5**  | Theming            | Switching contexts, customizing shell prompts        |
+| 🌐 **KENL6**  | Social gaming      | Sharing Play Cards with friends                      |
+| 🎓 **KENL7**  | Learning           | Git, rpm-ostree, GPG tutorials                       |
+| 🔐 **KENL8**  | Security           | Encrypting files, managing GPG keys                  |
+| 📚 **KENL9**  | Library management | Shared Steam libraries (dual-boot), save sync        |
+| 💾 **KENL10** | Backups            | Creating snapshots, restoring configs                |
+| 📺 **KENL11** | Media server       | Automated torrenting, Radarr/Sonarr, Jellyfin        |
 
 ---
 
@@ -210,41 +219,32 @@ sequenceDiagram
 
 ## What's Different About KENL Builds?
 
-### 1. 🔍 Everything is Traceable
+### 🔍 Everything is Traceable
 
-Every operation creates an **ATOM trail** entry:
+Every operation creates an ATOM trail entry with full context:
 
 ```bash
-ATOM-GAMING-20251110-001: Researched Halo Infinite compatibility (ProtonDB Gold)
+ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
 ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
 ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
-ATOM-BACKUP-20251110-004: Snapshot before launch
 ```
 
-**Why it matters**: When something breaks, you know *exactly* what changed and when.
+When something breaks, you know *exactly* what changed.
 
-### 2. 📋 Play Cards = Shareable Gaming Configs
+### 📋 Play Cards = Shareable Gaming Configs
 
-Instead of "my launch options", you get:
+Document game configurations as YAML:
 
 ```yaml
 game: Halo Infinite
-verified: 2025-11-10
-hardware:
-  gpu: NVIDIA RTX 3080
-  cpu: AMD Ryzen 7 5800X3D
-configuration:
-  proton: GE-Proton 9-18
-  launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
-  dxvk_version: 2.3
-performance:
-  fps_1440p_ultra: 118
-  frametime_99th: 12ms
+proton: GE-Proton 9-18
+launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
+fps_1440p_ultra: 118
 ```
 
-Share with friends. They get *identical* performance. No guesswork.
+Share with friends. They get identical performance.
 
-### 3. ⚡ 7-Minute Crash Recovery
+### ⚡ 7-Minute Crash Recovery
 
 System crashes during firmware update? KENL Builds reconstructs:
 - What you were doing (updating BIOS)
@@ -257,9 +257,9 @@ System crashes during firmware update? KENL Builds reconstructs:
 
 [See validation study →](./KENL Builds1-framework/docs/VALIDATION_COMPLETE.md)
 
-### 4. 🎨 Context Switching
+### 🎨 Context Switching
 
-Different shell themes for different tasks:
+Visual shell themes prevent mistakes:
 
 ```bash
 # Gaming context
@@ -271,15 +271,6 @@ Different shell themes for different tasks:
 # System operations (elevated)
 ⚙️ KENL Builds0 bazza@bazzite:~$
 ```
-
-Visual reminder of what you're doing. Prevents mistakes like running `sudo rm -rf` in the wrong directory.
-
-### 5. 🔐 Security Built-In
-
-- GPG encryption for shared configs
-- Secret detection in pre-commit hooks
-- Secure vault integration (Bitwarden/1Password)
-- All sensitive operations logged to ATOM trail
 
 ---
 
@@ -382,11 +373,8 @@ share-playcard halo-infinite.yaml friend@matrix.org
 
 ---
 
-### For Developers
+## Repository Structure
 
-```bash
-# Switch to dev context
-kenl-switch 3
 ```
 
 **What changes:**
@@ -400,40 +388,20 @@ Loaded:
 + Container networking helpers
 + Development environment templates
 kenl/
-├── windows-support/              # 🆘 Windows 10 EOL & Surface Pro 4 support
-│   ├── README.md                 # Overview and quick links
-│   └── surface-pro-4/            # Surface Pro 4 documentation
-│       ├── START_HERE.md         # 📄 One-page guide for end users
-│       ├── QUICK_START_GUIDE.md  # 🔧 IT support troubleshooting
-│       ├── CLAUDE.md             # 🤖 Current system investigation
-│       ├── DOMAIN_CONTROLLER_TROUBLESHOOTING.md  # Complete DC guide
-│       └── WINDOWS_10_EOL_ISSUES.md  # Migration planning
-├── atom-sage-framework/          # Intent-driven operations framework
-│   ├── README.md                 # Framework documentation
-│   ├── install.sh                # Zero-dependency installer
-│   ├── docs/                     # Guides and validation studies
-│   ├── examples/                 # Runnable demonstrations
-│   ├── analytics/                # Advanced analysis tools
-│   └── forks/                    # Specialized applications
-│       ├── ATOM-SEC/             # AI security & red-teaming
-│       ├── ATOM-GOV/             # MCP governance
-│       └── ATOM-EOL/             # Windows 10 EOL migration
-├── mcp-governance/               # ARCREF artifacts
-│   ├── ARCREF_TEMPLATE.yaml      # Template for new artifacts
-│   └── ARCREF-ATOM-SAGE-001.yaml # Example: ATOM+SAGE launch
-├── 02-Decisions/                 # ADR documents
-│   ├── ADR_TEMPLATE.md           # Template for new decisions
-│   └── ADR-001-ATOM-SAGE-LAUNCH.md # Example: ATOM+SAGE decision
-├── scripts/                      # Automation and tooling
-│   ├── bootstrap.sh              # Development environment setup
-│   ├── add-owi-metadata.sh       # Documentation metadata
-│   └── owi-report.sh             # Documentation index generation
-├── .github/                      # GitHub automation
-│   ├── workflows/                # CI/CD pipelines
-│   ├── ISSUE_TEMPLATE/           # Issue templates
-│   └── PULL_REQUEST_TEMPLATE/    # PR templates (including Windows support)
+├── modules/                      # All KENL modules (0-12)
+│   ├── KENL0-system/             # System operations
+│   ├── KENL1-framework/          # ATOM+SAGE+OWI core
+│   ├── KENL2-gaming/             # Gaming configs & Play Cards
+│   ├── KENL3-dev/                # Development environments
+│   └── ... (KENL4-12)
+├── governance/                   # ARCREF + ADR documents
+│   ├── mcp-governance/           # ARCREF artifacts
+│   └── 02-Decisions/             # ADR documents
+├── windows-support/              # Windows 10 EOL & Surface Pro 4
+│   ├── surface-pro-4/            # Troubleshooting guides
+│   └── alternatives/             # Linux migration options
+├── scripts/                      # Bootstrap & automation
 ├── CONTRIBUTING.md               # Contribution guidelines
-├── SECURITY.md                   # Security policy
 └── README.md                     # This file
 ```
 
@@ -470,12 +438,12 @@ kenl-monitor start
 ```
 
 **What changes:**
-| Metric | Before | After |
-|--------|--------|-------|
-| CPU usage | Unknown | Real-time graph |
-| RAM usage | Unknown | Per-container breakdown |
-| Disk I/O | Unknown | Read/write rates |
-| Network | Unknown | Upload/download per container |
+| Metric    | Before  | After                         |
+|-----------|---------|-------------------------------|
+| CPU usage | Unknown | Real-time graph               |
+| RAM usage | Unknown | Per-container breakdown       |
+| Disk I/O  | Unknown | Read/write rates              |
+| Network   | Unknown | Upload/download per container |
 
 **Why:** KENL Builds4 monitoring tracks which containers consume resources, helps optimize.
 
@@ -560,17 +528,14 @@ stateDiagram-v2
 
 ---
 
-## Architecture Deep Dive
+## Documentation
 
 ### How KENL Buildss Communicate
 
-```mermaid
-flowchart TD
-    subgraph User["👤 User Actions"]
-        A[Play game]
-        B[Write code]
-        C[Update system]
-    end
+### Gaming
+- [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
+- [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
+- [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
 
     subgraph KENL1["⚛️ KENL Builds1-framework (ATOM Trail)"]
         D[Log intent]
@@ -596,9 +561,10 @@ flowchart TD
     B -->|KENL3| D
     C -->|KENL0| D
 
-    D --> E
-    E --> F
-    F --> G
+### Windows Support
+- [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
+- [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
+- [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
 
     G --> H
     G -.->|Gaming| I
@@ -720,91 +686,35 @@ sequenceDiagram
 
 ---
 
-## Benefits for Bazzite
+## Benefits for Bazzite Users  / New Linux Users / The Easily-excited hobbyist
 
-### 🎮 Gaming Enhancements
-
-| Without KENL Builds | With KENL Builds |
-|--------------|-----------|
-| Trial-and-error Proton configs | ProtonDB research → automatic config |
-| Forgotten what worked | Play Cards document exact setup |
-| Can't help friends | Encrypted sharing, instant setup |
-| Lost configs after reinstall | KENL Builds10 snapshots restore everything |
-| No performance history | KENL Builds4 tracks FPS/frametime over time |
-
-### 💻 Development Workflow
-
-| Without KENL Builds | With KENL Builds |
-|--------------|-----------|
-| Manual distrobox creation | Templates with automatic config |
-| Lost work after crashes | ATOM trail restores context |
-| No resource monitoring | KENL Builds4 tracks container CPU/RAM |
-| Inconsistent environments | Play Card-style "Dev Cards" |
-
-### 🔧 System Operations
-
-| Without KENL Builds | With KENL Builds |
-|--------------|-----------|
-| `rpm-ostree upgrade` → hope | Automatic rollback on failure |
-| Firmware updates = risky | USB recovery drive + snapshot |
-| Forgot last rebase version | ATOM trail shows full history |
-| Manual ujust commands | Chainable quick-actions |
-
-### 🔐 Security & Privacy
-
-| Without KENL Builds | With KENL Builds |
-|--------------|-----------|
-| Configs shared in plaintext | GPG encryption built-in |
-| Secrets in git repos | Pre-commit secret detection |
-| No audit trail | Every operation logged |
-| Manual key management | KENL Builds8 vault integration |
-
----
-
-## Installation
-
-### Prerequisites
-
-- **OS**: Bazzite (Fedora Atomic-based)
-- **Shell**: Bash 4.0+
-- **Optional**: GPG for encryption, Matrix/Discord for social features
-
-### Install
-
-```bash
-# Clone repository
-git clone https://github.com/toolate28/kenl.git ~/.kenl
-
-# Run bootstrap
-cd ~/.kenl
-./scripts/bootstrap.sh
-
-# Add to shell profile
-echo 'source ~/.kenl/KENL5-facades/kenl-init.sh' >> ~/.bashrc
-
-# Reload shell
-exec bash
-
-# Verify installation
-kenl-version
-```
-
-### First Steps
-
-```bash
-# Switch to gaming context
-kenl-switch 2
-
-# Or development context
-kenl-switch 3
-
-# Or system operations context
-kenl-switch 0
-
-# View ATOM trail
-atom-analytics --summary
-```
-
+|-----------------------------------------------------------------------------|       
+|## 🎮 Gaming Enhancements                                                   
+|-----------------------------------------------------------------------------|
+| Trial-and-error Proton configs | ProtonDB research → automatic config       |
+| Forgotten what worked          | Play Cards document exact setup            |
+| Can't help friends             | Encrypted sharing, instant setup           |
+| Lost configs after reinstall   | KENL Builds10 snapshots restore everything |
+| No performance history         | KENL Builds4 tracks FPS/frametime over time|
+|## 💻 Development
+|-----------------------------------------------------------------------------|
+| Manual distrobox creation      | Templates with automatic config            |
+| Lost work after crashes        | ATOM trail restores context                |
+| No resource monitoring         | KENL Builds4 tracks container CPU/RAM      |
+| Inconsistent environments      | Play Card-style "Dev Cards"                |
+|## 🔧 System Operations
+|-----------------------------------------------------------------------------|
+| `rpm-ostree upgrade` → hope    | Automatic rollback on failure              |
+| Firmware updates = risky       | USB recovery drive + snapshot              |
+| Forgot last rebase version     | ATOM trail shows full history              |
+| Manual ujust commands          | Chainable quick-actions                    |
+|## 🔐 Security & Privacy
+|-----------------------------------------------------------------------------|
+| Configs shared in plaintext    | GPG encryption built-in                    |
+| Secrets in git repos           | Pre-commit secret detection                |
+| No audit trail                 | Every operation logged                     |
+| Manual key management          | KENL Builds8 vault integration             |
+|-----------------------------------------------------------------------------|
 ---
 
 ## Learn More
@@ -860,27 +770,22 @@ atom-analytics --summary
 ### Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
-- Code style guidelines
+
+- Code style guidelines & formatting standards
 - Commit message format (Conventional Commits)
-- PR checklist
+- Pre-commit hooks and testing
 - ARCREF + ADR requirements for architectural changes
 
-### Security
+---
 
-Report vulnerabilities privately per [SECURITY.md](./SECURITY.md).
-### Windows 10 EOL Migration Support
+## Support & Community
 
-**Target**: 240M+ PCs affected by Windows 10 end-of-life (October 14, 2025)
-
-This repository provides practical support for:
-- **Surface Pro 4** and similar Windows 10 devices
-- **Domain controller connectivity** troubleshooting
-- **Migration planning** (ESU, Linux, new hardware)
-- **Security hardening** for post-EOL systems
-
-**Documentation**: [`windows-support/`](./windows-support/)
-
-**Migration path**: Windows 10 → Testing/Validation → Bazzite-DX (Linux gaming)
+| Resource                  | Link                                                                  |
+|---------------------------|-----------------------------------------------------------------------|
+| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)             |
+| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)   |
+| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                       |
+| **Windows Support**       | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
 
 ---
 
@@ -888,13 +793,13 @@ This repository provides practical support for:
 
 MIT License - see [LICENSE](./LICENSE) for details.
 
-**KENL is fully open source.** Fork it, modify it, share it.
+KENL is fully open source. Fork it, modify it, share it.
 
 ---
 
 ## Why "KENL Builds"?
 
-**K**nowledge **E**nhanced **N**avigation **L**ayer
+**Knowledge Enhanced Navigation Layer**
 
 Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
 
@@ -929,4 +834,5 @@ It's also a play on "kernel" - KENL Builds sits between you and your system, mak
 
 ---
 
-Made with intent by the Bazza-DX community 🎮💻🔐
+**Status**: Production Ready | **Version**: 1.0.0 | **Platform**: Bazzite (Fedora Atomic)
+**Last Updated**: 2025-11-10 | **Made with intent** by the Bazza-DX community 🎮💻🔐
