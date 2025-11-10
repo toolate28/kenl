@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-019
 owi-version: 1.0.0
 ---
 
-# KENL: Gaming & Development Framework for Bazzite-DX
+# The KENL Build Project
 
 **Transform your Bazzite system into a self-documenting gaming and development platform**
 
@@ -24,12 +24,12 @@ owi-version: 1.0.0
 
 **240 million PCs losing security updates. Is yours one of them?**
 
-| You Need | Go Here |
-|----------|---------|
-| **End User Guide** | [START HERE →](./windows-support/surface-pro-4/START_HERE.md) |
-| **IT Support** | [Quick Start Guide →](./windows-support/surface-pro-4/QUICK_START_GUIDE.md) |
+| You Need               | Go Here                                                                        |
+|------------------------|-------------------------------------------------------------------------------|
+| **End User Guide**     | [START HERE →](./windows-support/surface-pro-4/START_HERE.md)                 |
+| **IT Support**         | [Quick Start Guide →](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)   |
 | **Linux Alternatives** | [Best 3 OS to Convert →](./windows-support/alternatives/BEST_3_TO_CONVERT.md) |
-| **Surface Pro 4 Help** | [Complete Support Docs →](./windows-support/surface-pro-4/) |
+| **Surface Pro 4 Help** | [Complete Support Docs →](./windows-support/surface-pro-4/)                   |
 
 ---
 
@@ -65,7 +65,7 @@ graph LR
     style D fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
     style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
     style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
-```
+    ```
 
 **Result:** Documented → Reproducible → Shareable → Rollback-safe
 
@@ -129,8 +129,8 @@ gsettings set org.gnome.desktop.background picture-uri \
 
 KENL is **12 specialized modules** that work together on Bazzite-DX:
 
-```mermaid
-graph TB
+    ```mermaid
+    graph TB
     subgraph Core["🔧 Core Operations"]
         KENL0[⚙️ KENL0-system<br/>rpm-ostree & System Ops]
         KENL1[⚛️ KENL1-framework<br/>ATOM+SAGE+OWI]
@@ -200,20 +200,20 @@ graph TB
 
 ## 📋 KENL Module Quick Reference
 
-| Module | Purpose | Use When... | Docs |
-|--------|---------|-------------|------|
-| ⚙️ **KENL0** | System operations | Updating Bazzite, rebasing, firmware updates | [→](./modules/KENL0-system/) |
-| ⚛️ **KENL1** | Framework core | Everything (automatic ATOM logging) | [→](./modules/KENL1-framework/) |
-| 🎮 **KENL2** | Gaming | Playing games, creating Play Cards | [→](./modules/KENL2-gaming/) |
-| 💻 **KENL3** | Development | Coding, distrobox, Claude Code | [→](./modules/KENL3-dev/) |
-| 📊 **KENL4** | Monitoring | Tracking FPS, temps, performance | [→](./modules/KENL4-monitoring/) |
-| 🎨 **KENL5** | Theming | Switching contexts, wallpapers | [→](./modules/KENL5-facades/) |
-| 🌐 **KENL6** | Social | Sharing Play Cards with friends | [→](./modules/KENL6-social/) |
-| 🎓 **KENL7** | Learning | Git, rpm-ostree, GPG tutorials | [→](./modules/KENL7-learning/) |
-| 🔐 **KENL8** | Security | GPG encryption, secret management | [→](./modules/KENL8-security/) |
-| 📚 **KENL9** | Library mgmt | Shared Steam libraries, save sync | [→](./modules/KENL9-library/) |
-| 💾 **KENL10** | Backups | Snapshots, config restoration | [→](./modules/KENL10-backup/) |
-| 📺 **KENL11** | Media server | Torrents, Radarr/Sonarr, Jellyfin | [→](./modules/KENL11-media/) |
+| Module         | Purpose          | Use When...                                   | Docs                           |
+|----------------|------------------|-----------------------------------------------|--------------------------------|
+| ⚙️ **KENL0**  | System operations | Updating Bazzite, rebasing, firmware updates | [→](./modules/KENL0-system/)    |
+| ⚛️ **KENL1**  | Framework core    | Everything (automatic ATOM logging)          | [→](./modules/KENL1-framework/) |
+| 🎮 **KENL2**  | Gaming            | Playing games, creating Play Cards           | [→](./modules/KENL2-gaming/)    |
+| 💻 **KENL3**  | Development       | Coding, distrobox, Claude Code               | [→](./modules/KENL3-dev/)       |
+| 📊 **KENL4**  | Monitoring        | Tracking FPS, temps, performance             | [→](./modules/KENL4-monitoring/)|
+| 🎨 **KENL5**  | Theming           | Switching contexts, wallpapers               | [→](./modules/KENL5-facades/)   |
+| 🌐 **KENL6**  | Social            | Sharing Play Cards with friends              | [→](./modules/KENL6-social/)    |
+| 🎓 **KENL7**  | Learning          | Git, rpm-ostree, GPG tutorials               | [→](./modules/KENL7-learning/)  |
+| 🔐 **KENL8**  | Security          | GPG encryption, secret management            | [→](./modules/KENL8-security/)  |
+| 📚 **KENL9**  | Library mgmt      | Shared Steam libraries, save sync            | [→](./modules/KENL9-library/)   |
+| 💾 **KENL10** | Backups           | Snapshots, config restoration                | [→](./modules/KENL10-backup/)   |
+| 📺 **KENL11** | Media server      | Torrents, Radarr/Sonarr, Jellyfin            | [→](./modules/KENL11-media/)    |
 
 ---
 
@@ -646,42 +646,42 @@ os-upgrade-safe
 
 ---
 
-## 💡 Benefits for Different Users
+## 💡 Somethihg for Everyone
 
 ### For Gamers
-| Without KENL | With KENL |
-|-------------|-----------|
-| Trial-and-error Proton configs | ProtonDB research → automatic config |
-| Forgotten settings after reinstall | Play Cards restore exact setup |
-| Can't help friends reproduce setup | Encrypted sharing, instant setup |
-| No performance history | FPS/frametime tracked over time |
-| Update breaks game, no idea why | ATOM trail shows exactly what changed |
+| Without KENL                       | With KENL                             |
+|------------------------------------|-------------------------------------- |
+| Trial-and-error Proton configs     | ProtonDB research → automatic config  |
+| Forgotten settings after reinstall | Play Cards restore exact setup        |
+| Can't help friends reproduce setup | Encrypted sharing, instant setup      |
+| No performance history             | FPS/frametime tracked over time       |
+| Update breaks game, no idea why    | ATOM trail shows exactly what changed |
 
 ### For Developers
-| Without KENL | With KENL |
-|-------------|-----------|
-| Manual distrobox creation | Templates with automatic config |
-| Lost work after crashes | ATOM trail restores context |
+| Without KENL                       | With KENL                         |
+|------------------------------------|-----------------------------------|
+| Manual distrobox creation          | Templates with automatic config   |
+| Lost work after crashes            | ATOM trail restores context       |
 | System pollution from pip installs | Isolated containers, clean system |
-| No resource monitoring | CPU/RAM tracked per container |
-| Inconsistent dev environments | Play Card-style "Dev Cards" |
+| No resource monitoring             | CPU/RAM tracked per container     |
+| Inconsistent dev environments      | Play Card-style "Dev Cards"       |
 
 ### For System Admins
-| Without KENL | With KENL |
-|-------------|-----------|
+| Without KENL                | With KENL                     | 
+|-----------------------------|-------------------------------|
 | `rpm-ostree upgrade` → hope | Automatic rollback on failure |
-| Firmware updates = risky | USB recovery + snapshots |
-| Forgot last rebase version | ATOM trail shows full history |
-| Manual ujust commands | Chainable quick-actions |
-| No audit trail | Every operation logged |
+| Firmware updates = risky    | USB recovery + snapshots      |
+| Forgot last rebase version  | ATOM trail shows full history |
+| Manual ujust commands       | Chainable quick-actions       |
+| No audit trail              | Every operation logged        |
 
 ### For Privacy-Conscious Users
-| Without KENL | With KENL |
-|-------------|-----------|
-| Configs shared in plaintext | GPG encryption built-in |
-| Secrets in git repos | Pre-commit secret detection |
-| No audit trail | Every operation logged |
-| Manual key management | KENL8 vault integration |
+| Without KENL                | With KENL                   |
+|-----------------------------|-----------------------------|
+| Configs shared in plaintext | GPG encryption built-in     |
+| Secrets in git repos        | Pre-commit secret detection |
+| No audit trail              | Every operation logged      |
+| Manual key management       | KENL8 vault integration     |
 
 ---
 
@@ -708,12 +708,12 @@ We welcome contributions! Please see **[CONTRIBUTING.md](./CONTRIBUTING.md)** fo
 ## 🆘 Support & Community
 
 | Resource | Link |
-|----------|------|
-| **Report Issues** | [GitHub Issues](https://github.com/toolate28/kenl/issues) |
-| **Discussions** | [GitHub Discussions](https://github.com/toolate28/kenl/discussions) |
-| **Security Issues** | [SECURITY.md](./SECURITY.md) - Report privately |
-| **Windows Support** | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
-| **Bazzite Community** | [Universal Blue Discord](https://discord.gg/f8MUghG5PB) |
+|-----------------------|------------------------------------------------------------------------------------|
+| **Report Issues**     | [GitHub Issues](https://github.com/toolate28/kenl/issues)                          |
+| **Discussions**       | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)                |
+| **Security Issues**   | [SECURITY.md](./SECURITY.md) - Report privately                                    |
+| **Windows Support**   | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
+| **Bazzite Community** | [Universal Blue Discord](https://discord.gg/f8MUghG5PB)                            |
 
 ---
 
@@ -754,17 +754,17 @@ See **[bazza-dx-one-pager.md](./modules/KENL2-gaming/guides/bazza-dx-one-pager.m
 
 ## 📊 Project Status
 
-| Metric | Status |
-|--------|--------|
-| **Version** | 1.0.0 |
-| **Status** | Production Ready |
-| **Platform** | Bazzite-DX (Fedora Atomic) |
-| **Play Cards** | 15+ (5 games, 5 machines, 1 example) |
-| **Wallpapers** | 20+ HD dark themes |
-| **KENL Modules** | 12 (KENL0-11) |
-| **Documentation** | Comprehensive (500+ pages) |
-| **License** | MIT |
-| **Last Updated** | 2025-11-10 |
+| Metric            | Status                               |
+|-------------------|--------------------------------------|
+| **Version**       | 1.0.0                                |
+| **Status**        | Production Ready                     |
+| **Platform**      | Bazzite-DX (Fedora Atomic)           |
+| **Play Cards**    | 15+ (5 games, 5 machines, 1 example) |
+| **Wallpapers**    | 20+ HD dark themes                   |
+| **KENL Modules**  | 12 (KENL0-11)                        |
+| **Documentation** | Comprehensive (500+ pages)           |
+| **License**       | MIT                                  |
+| **Last Updated**  | 2025-11-10                           |
 
 ---
 
