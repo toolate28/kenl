@@ -162,27 +162,7 @@ graph TB
     cd modules/KENL3-dev       # For development
     cd modules/KENL0-system    # For system operations
     ```
-
-### Quick Guide -> Detailed Docs (Agent- and User-facing) in module directories ###
-
-| KENL Builds    |  Purpose           | You'll use this when...                              |  Documentation
-|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ⚙️ **KENL0**  | System operations  | Updating BIOS, rebasing Bazzite, managing rpm-ostree | [modules/KENL0-system/](./modules/KENL0-system/)        |
-| ⚛️ **KENL1**  | Framework core     | Everything (automatic ATOM trail logging)            | [modules/KENL1-framework/](./modules/KENL1-framework/)   |
-| 🎮 **KENL2**  | Gaming             | Playing games, optimizing Proton, sharing configs    | [modules/KENL2-gaming/](./modules/KENL2-gaming/)         |
-| 💻 **KENL3**  | Development        | Coding, containers, building projects                | [modules/KENL3-dev/](./modules/KENL3-dev/)               |
-| 📊 **KENL4**  | Monitoring         | Checking FPS, temps, system health                   | [modules/KENL4-monitoring/](./modules/KENL4-monitoring/) |
-| 🎨 **KENL5**  | Theming            | Switching contexts, customizing shell prompts        | [modules/KENL5-facades/](./modules/KENL5-facades/)       |
-| 🌐 **KENL6**  | Social gaming      | Sharing Play Cards with friends                      | [modules/KENL6-social/](./modules/KENL6-social/)         |
-| 🎓 **KENL7**  | Learning           | Git, rpm-ostree, GPG tutorials                       | [modules/KENL7-learning/](./modules/KENL7-learning/)     |
-| 🔐 **KENL8**  | Security           | Encrypting files, managing GPG keys                  | [modules/KENL8-security/](./modules/KENL8-security/)     |
-| 📚 **KENL9**  | Library management | Shared Steam libraries (dual-boot), save sync        | [modules/KENL9-library/](./modules/KENL9-library/)       |
-| 💾 **KENL10** | Backups            | Creating snapshots, restoring configs                | [modules/KENL10-backup/](./modules/KENL10-backup/)       |
-| 📺 **KENL11** | Media server       | Automated torrenting, Radarr/Sonarr, Jellyfin        | [modules/KENL11-media/](./modules/KENL11-media/)         |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|
-
----
-
+    
 ## What's Different About KENL Builds?
 
 ### 🔍 Everything is Traceable
@@ -222,17 +202,6 @@ System crashes during firmware update? KENL Builds reconstructs:
 **KENL**: 7 minutes, 100% context restored
 
 [See validation study →](./KENL Builds1-framework/docs/VALIDATION_COMPLETE.md)
-
-### 🎨 Context Switching
-
-Visual shell themes to help prevent mistakes:
-
-    ```bash
-    🎮 KENL2 user@bazzite:~$    # Gaming context
-    💻 KENL3 user@bazzite:~$    # Dev context
-    ⚙️ KENL0 user@bazzite:~$    # System ops (elevated)
-    ```
----
 
 ## Real-World Scenarios
 
