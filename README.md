@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-015
 owi-version: 1.0.0
 ---
 
-# KENL Builds
+# The KENL Build Proect
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
@@ -16,8 +16,6 @@ owi-version: 1.0.0
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
 
 > KENL transforms your Bazzite system into a self-documenting gaming and development platform with automatic crash recovery, shareable configurations, and complete audit trails.
-
----
 
 ## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
 
@@ -29,15 +27,33 @@ owi-version: 1.0.0
 | **IT Support**            | [Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)                       |
 | **Request Help**          | [Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)           |
 | **Windows Alternatives**  | [Linux Options for Windows 10 EOL](./windows-support/alternatives/README.md)                    |
-| **All Documentation**     | [windows-support/](./windows-support/)                                                           |
+| **All Documentation**     | [windows-support/](./windows-support/)                                                          |
 
 ---
 
-## Why KENL Builds?
+## Why KENL?
 
-**Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed.
+**Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed. 
 
-**Solution**: KENL Builds captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, KENL Builds knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
+    ```
+    kenl/
+    ├── modules/                      # All KENL modules (0-12)
+    │   ├── KENL0-system/             # System operations
+    │   ├── KENL1-framework/          # ATOM+SAGE+OWI core
+    │   ├── KENL2-gaming/             # Gaming configs & Play Cards
+    │   ├── KENL3-dev/                # Development environments
+    │   └── ... (KENL4-12)
+    ├── governance/                   # ARCREF + ADR documents
+    │   ├── mcp-governance/           # ARCREF artifacts
+    │   └── 02-Decisions/             # ADR documents
+    ├── windows-support/              # Windows 10 EOL & Surface Pro 4
+    │   ├── surface-pro-4/            # Troubleshooting guides
+    │   └── alternatives/             # Linux migration options
+    ├── scripts/                      # Bootstrap & automation
+    ├── CONTRIBUTING.md               # Contribution guidelines
+    └── README.md                     # This file
+    ```
+**Solution**: KENL captures *why* you did things, not just *what*. When something breaks, recovery is automatic.
 
 ```mermaid
 graph LR
@@ -56,26 +72,7 @@ graph LR
     style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
 ```
 
-**Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail.
-
----
-
-## Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/toolate28/kenl.git ~/.kenl
-
-# Bootstrap environment
-cd ~/.kenl && ./scripts/bootstrap.sh
-
-# Explore modules (pick your context)
-cd modules/KENL2-gaming    # For gaming setup
-cd modules/KENL3-dev       # For development
-cd modules/KENL0-system    # For system operations
-```
-
-**Then read the module README for your use case** (see table below).
+**Result**: 85% faster crash recovery, shareable gaming configs, complete audit trail.
 
 ---
 
@@ -149,71 +146,40 @@ graph TB
     style KENL Builds10 fill:#e7dcc8,stroke:#8b6d47
     style KENL Builds11 fill:#ffc9c9,stroke:#ff6b6b
 ```
-
-### Quick Guide
-
-| KENL Builds   |  Purpose           | You'll use this when...                              |
-|---------------|--------------------|------------------------------------------------------|
-| ⚙️ **KENL0**  | System operations  | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
-| ⚛️ **KENL1**  | Framework core     | Everything (automatic ATOM trail logging)            |
-| 🎮 **KENL2**  | Gaming             | Playing games, optimizing Proton, sharing configs    |
-| 💻 **KENL3**  | Development        | Coding, containers, building projects                |
-| 📊 **KENL4**  | Monitoring         | Checking FPS, temps, system health                   |
-| 🎨 **KENL5**  | Theming            | Switching contexts, customizing shell prompts        |
-| 🌐 **KENL6**  | Social gaming      | Sharing Play Cards with friends                      |
-| 🎓 **KENL7**  | Learning           | Git, rpm-ostree, GPG tutorials                       |
-| 🔐 **KENL8**  | Security           | Encrypting files, managing GPG keys                  |
-| 📚 **KENL9**  | Library management | Shared Steam libraries (dual-boot), save sync        |
-| 💾 **KENL10** | Backups            | Creating snapshots, restoring configs                |
-| 📺 **KENL11** | Media server       | Automated torrenting, Radarr/Sonarr, Jellyfin        |
-
 ---
 
-## How It Works: Real User Journey
+## Quick Start
 
-### Scenario: Setting Up Halo Infinite
+    ```bash
+    # Clone repository
+    git clone https://github.com/toolate28/kenl.git ~/.kenl
 
-**Traditional approach** (30-60 minutes of trial and error):
-1. Search ProtonDB → try Proton 8.0 → doesn't work
-2. Switch to Proton Experimental → crashes
-3. Google "Halo Infinite Linux" → find Reddit post
-4. Try 5 different launch options
-5. Finally works with GE-Proton 9-18
-6. Forget what you did, can't help your friend
+    # Bootstrap environment
+    cd ~/.kenl && ./scripts/bootstrap.sh
 
-**KENL approach** (7 minutes, fully documented):
+    # Explore modules (pick your context)
+    cd modules/KENL2-gaming    # For gaming setup
+    cd modules/KENL3-dev       # For development
+    cd modules/KENL0-system    # For system operations
+    ```
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant KENL Builds2 as 🎮 KENL Builds2-gaming
-    participant ProtonDB
-    participant KENL Builds8 as 🔐 KENL Builds8-security
-    participant KENL Builds10 as 💾 KENL Builds10-backup
+### Quick Guide -> Detailed Docs (Agent- and User-facing) in module directories ###
 
-    User->>KENL2: "Setup Halo Infinite"
-    KENL Builds2->>ProtonDB: Research compatibility
-    ProtonDB-->>KENL2: Gold rating, GE-Proton 9-18
-    KENL Builds2->>KENL2: Configure Proton + DXVK
-    KENL Builds2->>User: Test game
-    User->>KENL2: ✅ Works! 118 FPS
-    KENL Builds2->>KENL2: Create Play Card
-    KENL Builds2->>KENL10: Snapshot config
-    KENL Builds10-->>User: ✅ Saved to ATOM trail
-
-    Note over User,KENL10: Friend wants same setup
-
-    User->>KENL8: Encrypt Play Card
-    KENL Builds8->>KENL2: Share via Matrix
-    KENL Builds2-->>User: Friend downloads & applies instantly
-```
-
-**The difference**:
-- ✅ Every step documented automatically
-- ✅ Exact configuration saved as "Play Card"
-- ✅ Encrypted sharing with friends
-- ✅ Automatic backup before changes
-- ✅ If system crashes, restore in 7 minutes
+| KENL Builds    |  Purpose           | You'll use this when...                              |  Documentation
+|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ⚙️ **KENL0**  | System operations  | Updating BIOS, rebasing Bazzite, managing rpm-ostree | [modules/KENL0-system/](./modules/KENL0-system/)        |
+| ⚛️ **KENL1**  | Framework core     | Everything (automatic ATOM trail logging)            | [modules/KENL1-framework/](./modules/KENL1-framework/)   |
+| 🎮 **KENL2**  | Gaming             | Playing games, optimizing Proton, sharing configs    | [modules/KENL2-gaming/](./modules/KENL2-gaming/)         |
+| 💻 **KENL3**  | Development        | Coding, containers, building projects                | [modules/KENL3-dev/](./modules/KENL3-dev/)               |
+| 📊 **KENL4**  | Monitoring         | Checking FPS, temps, system health                   | [modules/KENL4-monitoring/](./modules/KENL4-monitoring/) |
+| 🎨 **KENL5**  | Theming            | Switching contexts, customizing shell prompts        | [modules/KENL5-facades/](./modules/KENL5-facades/)       |
+| 🌐 **KENL6**  | Social gaming      | Sharing Play Cards with friends                      | [modules/KENL6-social/](./modules/KENL6-social/)         |
+| 🎓 **KENL7**  | Learning           | Git, rpm-ostree, GPG tutorials                       | [modules/KENL7-learning/](./modules/KENL7-learning/)     |
+| 🔐 **KENL8**  | Security           | Encrypting files, managing GPG keys                  | [modules/KENL8-security/](./modules/KENL8-security/)     |
+| 📚 **KENL9**  | Library management | Shared Steam libraries (dual-boot), save sync        | [modules/KENL9-library/](./modules/KENL9-library/)       |
+| 💾 **KENL10** | Backups            | Creating snapshots, restoring configs                | [modules/KENL10-backup/](./modules/KENL10-backup/)       |
+| 📺 **KENL11** | Media server       | Automated torrenting, Radarr/Sonarr, Jellyfin        | [modules/KENL11-media/](./modules/KENL11-media/)         |
+|------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ---
 
@@ -223,28 +189,28 @@ sequenceDiagram
 
 Every operation creates an ATOM trail entry with full context:
 
-```bash
-ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
-ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
-ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
-```
+    ```bash
+    ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
+    ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
+    ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
+    ```
 
-When something breaks, you know *exactly* what changed.
+      > When something breaks, you know *exactly* what changed.
 
 ### 📋 Play Cards = Shareable Gaming Configs
 
 Document game configurations as YAML:
 
-```yaml
-game: Halo Infinite
-proton: GE-Proton 9-18
-launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
-fps_1440p_ultra: 118
-```
+    ```yaml
+    game: Halo Infinite
+    proton: GE-Proton 9-18
+    launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
+    fps_1440p_ultra: 118
+    ```
 
 Share with friends. They get identical performance.
 
-### ⚡ 7-Minute Crash Recovery
+### ⚡ Rapid Crash Recovery
 
 System crashes during firmware update? KENL Builds reconstructs:
 - What you were doing (updating BIOS)
@@ -259,151 +225,24 @@ System crashes during firmware update? KENL Builds reconstructs:
 
 ### 🎨 Context Switching
 
-Visual shell themes prevent mistakes:
+Visual shell themes to help prevent mistakes:
 
-```bash
-# Gaming context
-🎮 KENL Builds2 bazza@bazzite:~$
-
-# Development context
-💻 KENL Builds3 bazza@bazzite:~$
-
-# System operations (elevated)
-⚙️ KENL Builds0 bazza@bazzite:~$
-```
-
+    ```bash
+    🎮 KENL2 user@bazzite:~$    # Gaming context
+    💻 KENL3 user@bazzite:~$    # Dev context
+    ⚙️ KENL0 user@bazzite:~$    # System ops (elevated)
+    ```
 ---
 
 ## Real-World Scenarios
 
-KENL includes terminal "storyboards" showing complex operations:
+Walkthrough "storyboards" for complex operations
 
-### 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
-High-risk operation with comprehensive safety:
-- Hardware detection & compatibility check
-- Automatic USB recovery drive creation
-- KENL Builds10 snapshot before firmware flash
-- Post-update verification
-
-### 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
-Research-driven dual-boot setup:
-- wimboot vs Tiny11 comparison
-- TPM 2.0 / Secureboot validation
-- Automatic partition planning
-- Official ISO download from Microsoft
-
-### 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
-Both scenarios covered:
-- Linux-first → Add Windows
-- Windows-first → Add Linux
-- GRUB bootloader management
-- Shared data partition for file exchange
-
-### 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
-Safe system upgrades:
-- Release comparison (kernel, drivers, Proton)
-- Automatic rollback on failure
-- Post-reboot verification
-- Performance impact analysis (+5.3% FPS!)
-
-### 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
-Complete gaming stack:
-- ProtonDB compatibility research
-- Proton GE vs Steam default comparison
-- Full stack documentation (Proton→DXVK→Driver)
-- Play Card creation & encrypted sharing
-
----
-
-## Quick Start
-
-### For Gamers
-
-```bash
-# Switch to gaming context
-kenl-switch 2
-```
-
-**What changes:**
-```diff
-- bazza@bazzite:~$                    # Default shell
-+ 🎮 KENL Builds2 bazza@bazzite:~$           # Gaming context
-
-Loaded:
-+ Proton optimization aliases
-+ Steam compatibility functions
-+ Play Card management commands
-+ ProtonDB research tools
-```
-
-**Why:** Activates gaming-specific tools and creates ATOM trail entries for game configs.
-
-```bash
-# Setup a game (automatic research + config)
-setup-game "Halo Infinite"
-```
-
-**What changes:**
-```mermaid
-graph LR
-    A[No config] -->|Research ProtonDB| B[Gold rating found]
-    B -->|Download GE-Proton| C[9-18 installed]
-    C -->|Apply settings| D[Play Card created]
-    D -->|Snapshot| E[ATOM-PLAYCARD-xxx]
-
-  **ATOM-SEC**: AI security testing with forensic audit trails
-  **ATOM-GOV**: MCP governance with policy-as-code
-  **ATOM-EOL**: Windows 10 EOL migration framework
-
-**Why:** Automates the trial-and-error process, documents working config in Play Card.
-
-```bash
-# Share your config with a friend
-share-playcard halo-infinite.yaml friend@matrix.org
-```
-
-**What changes:**
-| Before | After |
-|--------|-------|
-| Local Play Card only | Encrypted `.gpg` file created |
-| No sharing capability | Sent via Matrix DM |
-| Friend must recreate config | Friend applies instantly |
-
-**Why:** GPG encryption ensures only intended recipient can use config, ATOM trail logs sharing event.
-
----
-
-## Repository Structure
-
-```
-
-**What changes:**
-```diff
-- bazza@bazzite:~$                    # Default shell
-+ 💻 KENL Builds3 bazza@bazzite:~$           # Development context
-
-Loaded:
-+ Distrobox management commands
-+ Git workflow aliases (gst, gco, gp)
-+ Container networking helpers
-+ Development environment templates
-kenl/
-├── modules/                      # All KENL modules (0-12)
-│   ├── KENL0-system/             # System operations
-│   ├── KENL1-framework/          # ATOM+SAGE+OWI core
-│   ├── KENL2-gaming/             # Gaming configs & Play Cards
-│   ├── KENL3-dev/                # Development environments
-│   └── ... (KENL4-12)
-├── governance/                   # ARCREF + ADR documents
-│   ├── mcp-governance/           # ARCREF artifacts
-│   └── 02-Decisions/             # ADR documents
-├── windows-support/              # Windows 10 EOL & Surface Pro 4
-│   ├── surface-pro-4/            # Troubleshooting guides
-│   └── alternatives/             # Linux migration options
-├── scripts/                      # Bootstrap & automation
-├── CONTRIBUTING.md               # Contribution guidelines
-└── README.md                     # This file
-```
+  - 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
+        - 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
+            - 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
+                - 🔧 [RWS-01: BIOS/TPM Firmware Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)
+                    - 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
 
 **Why:** Isolates dev tools from gaming/system context, prevents command conflicts.
 
@@ -530,12 +369,15 @@ stateDiagram-v2
 
 ## Documentation
 
-### How KENL Buildss Communicate
+### Core Framework
+  - [ATOM+SAGE Framework](./modules/KENL1-framework/README.md) - Intent-driven operations
+  - [Getting Started Guide](./modules/KENL1-framework/docs/GETTING_STARTED.md)
+  - [Validation Study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
 
 ### Gaming
-- [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
-- [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
-- [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
+  - [Gaming Guide](./modules/KENL2-gaming/README.md) - Play Cards & Proton optimization
+  - [Bazza-DX One-Pager](./modules/KENL2-gaming/guides/bazza-dx-one-pager.md)
+  - [Gaming Configuration](./modules/KENL2-gaming/guides/gaming-config-framework.md)
 
     subgraph KENL1["⚛️ KENL Builds1-framework (ATOM Trail)"]
         D[Log intent]
@@ -562,9 +404,9 @@ stateDiagram-v2
     C -->|KENL0| D
 
 ### Windows Support
-- [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
-- [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
-- [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
+  - [Windows Alternatives Guide](./windows-support/alternatives/README.md) - Linux options for Windows 10 EOL
+  - [Surface Pro 4 Support](./windows-support/surface-pro-4/START_HERE.md)
+  - [Best 3 OS to Convert](./windows-support/alternatives/BEST_3_TO_CONVERT.md)
 
     G --> H
     G -.->|Gaming| I
@@ -716,49 +558,11 @@ sequenceDiagram
 | Manual key management          | KENL Builds8 vault integration             |
 |-----------------------------------------------------------------------------|
 ---
-
-## Learn More
-
-### 📚 Documentation
-
-- **[KENL0 - System Operations](./KENL Builds0-system/README.md)**: rpm-ostree, ujust, firmware updates
-- **[KENL1 - Framework Core](./KENL Builds1-framework/README.md)**: ATOM+SAGE+OWI methodology
-- **[KENL2 - Gaming](./KENL Builds2-gaming/README.md)**: Play Cards, Proton optimization
-- **[KENL3 - Development](./KENL Builds3-dev/README.md)**: Distrobox environments
-- **[KENL4 - Monitoring](./KENL Builds4-monitoring/README.md)**: Performance metrics
-- **[KENL5 - Facades](./KENL Builds5-facades/README.md)**: Visual theming, context switching
-- **[KENL6 - Social](./KENL Builds6-social/README.md)**: Sharing Play Cards
-- **[KENL7 - Learning](./KENL Builds7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
-- **[KENL8 - Security](./KENL Builds8-security/README.md)**: Encryption, GPG, vaults
-- **[KENL9 - Library](./KENL Builds9-library/README.md)**: Multi-OS game libraries, save sync
-- **[KENL10 - Backup](./KENL Builds10-backup/README.md)**: Intelligent snapshots
-- **[KENL11 - Media](./KENL Builds11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
-
-### 🧪 Real World Scenarios
-
-- **[RWS-01: BIOS/TPM Update](./case-studies/RWS-01-BIOS-TPM-UPDATE.md)**
-- **[RWS-02: Windows 11 (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)**
-- **[RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)**
-- **[RWS-04: Bazzite Rebase](./case-studies/RWS-04-RPMOSTREE-REBASE.md)**
-- **[RWS-05: Halo Infinite](./case-studies/RWS-05-HALO-INFINITE.md)**
-
 ### 🏗️ Architecture & Methodology
 
 - **[OWI Framework Overview](./OWI_FRAMEWORK_OVERVIEW.md)**: Gaming/Configuring/Building-With-Intent
 - **[CLAUDE.md](./CLAUDE.md)**: Guidance for Claude Code instances
 - **[ADR Template](./02-Decisions/ADR_TEMPLATE.md)**: Architectural decisions
-### Windows 10 EOL / Surface Pro 4 Support
-- **Need Help?**: [Open Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) - Just paste screenshots!
-- **Documentation**: [windows-support/](./windows-support/) - Complete guides and troubleshooting
-- **Quick Fixes**: [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) - Human-friendly guide
-
-### General Support
-- **Issues**: [GitHub Issues](https://github.com/toolate28/kenl/issues) for bugs and feature requests
-- **Discussions**: [GitHub Discussions](https://github.com/toolate28/kenl/discussions) for questions
-- **Pull Requests**: Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md)
-- **Security**: Report vulnerabilities per [SECURITY.md](./SECURITY.md)
-
----
 
 ## Community & Support
 
@@ -767,72 +571,24 @@ sequenceDiagram
 - **Matrix**: `#kenl:matrix.org` (coming soon)
 - **Discord**: Bazzite Discord - #kenl channel (coming soon)
 
-### Contributing
+### Contributing: We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
-
-- Code style guidelines & formatting standards
-- Commit message format (Conventional Commits)
-- Pre-commit hooks and testing
-- ARCREF + ADR requirements for architectural changes
+    - Code style guidelines & formatting standards
+    - Commit message format (Conventional Commits)
+     - Pre-commit hooks and testing
+    - ARCREF + ADR requirements for architectural changes
 
 ---
 
 ## Support & Community
 
-| Resource                  | Link                                                                  |
-|---------------------------|-----------------------------------------------------------------------|
-| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)             |
-| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)   |
-| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                       |
+| Resource                  | Link                                                                               |
+|---------------------------|------------------------------------------------------------------------------------|
+| **Report Issues**         | [GitHub Issues](https://github.com/toolate28/kenl/issues)                          |
+| **Discussions**           | [GitHub Discussions](https://github.com/toolate28/kenl/discussions)                |
+| **Security Issues**       | [SECURITY.md](./SECURITY.md) - Report privately                                    |
 | **Windows Support**       | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
-
----
-
-## License
-
-MIT License - see [LICENSE](./LICENSE) for details.
-
-KENL is fully open source. Fork it, modify it, share it.
-
----
-
-## Why "KENL Builds"?
-
-**Knowledge Enhanced Navigation Layer**
-
-Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
-
-It's also a play on "kernel" - KENL Builds sits between you and your system, making complex operations simple and safe.
-### Windows Support (Start Here If You Need Help!)
-| Resource | Link |
-|----------|------|
-| **🆘 Need Help?** | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
-| **📄 End User Guide** | [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) |
-| **🔧 IT Support Guide** | [QUICK_START_GUIDE.md](./windows-support/surface-pro-4/QUICK_START_GUIDE.md) |
-| **📚 All Windows Docs** | [windows-support/](./windows-support/) |
-| **Domain Controller Issues** | [DOMAIN_CONTROLLER_TROUBLESHOOTING.md](./windows-support/surface-pro-4/DOMAIN_CONTROLLER_TROUBLESHOOTING.md) |
-| **Windows 10 EOL Planning** | [WINDOWS_10_EOL_ISSUES.md](./windows-support/surface-pro-4/WINDOWS_10_EOL_ISSUES.md) |
-
-### Developer Resources
-| Resource | Link |
-|----------|------|
-| **ATOM+SAGE Framework** | [./atom-sage-framework/](./atom-sage-framework/) |
-| **Getting Started** | [./atom-sage-framework/docs/GETTING_STARTED.md](./atom-sage-framework/docs/GETTING_STARTED.md) |
-| **Validation Study** | [./atom-sage-framework/docs/VALIDATION_COMPLETE.md](./atom-sage-framework/docs/VALIDATION_COMPLETE.md) |
-| **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| **Governance Templates** | ARCREF: [mcp-governance/](./mcp-governance/) / ADR: [02-Decisions/](./02-Decisions/) |
-| **Security Policy** | [SECURITY.md](./SECURITY.md) |
-| **Issue Tracking** | [GitHub Issues](https://github.com/toolate28/kenl/issues) |
-
----
-
-**Version**: 1.0.0
-**Platform**: Bazzite (Fedora Atomic)
-**Status**: Production Ready
-**Last Updated**: 2025-11-10
-
----
+|----------------------------------------------------------------------------------------------------------------|
 
 **Status**: Production Ready | **Version**: 1.0.0 | **Platform**: Bazzite (Fedora Atomic)
 **Last Updated**: 2025-11-10 | **Made with intent** by the Bazza-DX community 🎮💻🔐
