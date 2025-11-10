@@ -84,20 +84,83 @@ source ~/.bashrc
 ```bash
 # Switch to gaming context
 ./switch-kenl.sh gaming
-# or
-./switch-kenl.sh 2
+```
 
-# Restart shell, you'll see:
+**What changes:**
+```diff
+Before:
+⚛️  KENL1 user@bazzite:~$
+
+After:
 🎮  KENL2 user@bazzite:~$
 
+Environment:
++ KENL_CONTEXT=KENL2-gaming
++ KENL_ICON=🎮
++ KENL_COLOR=RED
++ PS1='🎮  KENL2 \u@\h:\w\$ '
+
+Loaded:
++ Gaming aliases (steam-logs, proton-list)
++ Play Card functions (create-playcard, apply-playcard)
++ ProtonDB integration
++ Performance tracking commands
+```
+
+**Visual comparison:**
+| Context | Before (KENL1) | After (KENL2) |
+|---------|----------------|---------------|
+| **Icon** | ⚛️ | 🎮 |
+| **Color** | Purple | Red |
+| **Label** | KENL1 | KENL2 |
+| **Focus** | Framework | Gaming |
+
+**Why:** Visual prompt prevents accidents like running gaming commands in dev context or system commands in gaming context.
+
+---
+
+```bash
 # Switch to dev context
 ./switch-kenl.sh dev
-💻  KENL3 user@bazzite:~$
-
-# Switch back to framework
-./switch-kenl.sh framework
-⚛️  KENL1 user@bazzite:~$
 ```
+
+**What changes:**
+```mermaid
+stateDiagram-v2
+    [*] --> KENL2_Gaming
+    KENL2_Gaming --> UnloadGaming: Unload gaming aliases
+    UnloadGaming --> LoadDev: Load dev environment
+    LoadDev --> KENL3_Dev
+    KENL3_Dev --> [*]
+
+    note right of UnloadGaming
+        - Remove steam-logs
+        - Remove proton-list
+        - Remove playcard functions
+    end note
+
+    note right of LoadDev
+        + Add distrobox shortcuts
+        + Add git aliases (gst, gco, gp)
+        + Add container helpers
+    end note
+```
+
+**Prompt transformation:**
+```
+🎮  KENL2 user@bazzite:~/games$    →    💻  KENL3 user@bazzite:~/code$
+   (Red, gaming focus)                    (Blue, development focus)
+```
+
+**Environment differences:**
+| Variable | KENL2 (Gaming) | KENL3 (Dev) |
+|----------|----------------|-------------|
+| `KENL_CONTEXT` | KENL2-gaming | KENL3-dev |
+| `KENL_ICON` | 🎮 | 💻 |
+| `KENL_COLOR` | RED | BLUE |
+| `PATH` | + Steam tools | + Dev tools |
+
+**Why:** Different contexts load different tools. Dev context has git helpers, gaming context has Steam helpers.
 
 ### Checking Current Context
 
