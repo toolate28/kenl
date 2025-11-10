@@ -1,0 +1,32 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🎨 KENL5: FACADES - Visual Identity & Context Switch   ║
+╠═══════════════════════════════════════════════════════════╣
+║   🔄 CONTEXT SWITCHING     📋 VIEW CHEATSHEETS           ║
+║   cd ~/kenl/KENL5-facades  ./show-cheatsheet.sh 0        ║
+║   ./switch-kenl.sh 0       ./show-cheatsheet.sh 2        ║
+║   ./switch-kenl.sh 2       ./show-cheatsheet.sh 3        ║
+║   ./switch-kenl.sh 3       (etc.)                        ║
+║   ./switch-kenl.sh list                                  ║
+║   ./switch-kenl.sh current Available contexts:           ║
+║                            0=system  2=gaming            ║
+║   🎨 AVAILABLE CONTEXTS    3=dev     4=monitoring        ║
+║   0  - KENL0 System        5=facades 6=social            ║
+║   1  - KENL1 Framework     7=learning 8=security         ║
+║   2  - KENL2 Gaming        9=library 10=backup           ║
+║   3  - KENL3 Development   11=media                      ║
+║   4  - KENL4 Monitoring                                  ║
+║   5  - KENL5 Facades       📝 PROMPTS                    ║
+║   6  - KENL6 Social        prompts/kenl0-system.sh       ║
+║   7  - KENL7 Learning      prompts/kenl2-gaming.sh       ║
+║   8  - KENL8 Security      prompts/kenl3-dev.sh          ║
+║   9  - KENL9 Library       prompts/kenl4-monitoring.sh   ║
+║   10 - KENL10 Backup       (etc.)                        ║
+║   11 - KENL11 Media                                      ║
+║                            🖌️  CUSTOMIZATION             ║
+║   ✨ WHAT CHANGES          Edit profiles/<kenl>.conf    ║
+║   - Shell prompt theme     Edit themes/<kenl>-theme.sh   ║
+║   - Loaded aliases         Edit terminal-configs/        ║
+║   - Available functions    Edit fonts/                   ║
+║   - Color scheme                                         ║
+║   - Context-specific tools Add cheatsheets/              ║
+╚═══════════════════════════════════════════════════════════╝

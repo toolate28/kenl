@@ -1,0 +1,29 @@
+╔═══════════════════════════════════════════════════════════╗
+║   ⚛️  KENL1: FRAMEWORK - ATOM+SAGE+OWI                   ║
+╠═══════════════════════════════════════════════════════════╣
+║   📊 ATOM TRAIL            🔄 RECOVERY                    ║
+║   atom STATUS "message"    atom-analytics --summary      ║
+║   atom DEPLOY "deploy"     atom-analytics --recovery     ║
+║   atom CONFIG "config"     atom-analytics --since 7d     ║
+║   atom RESEARCH "query"    atom-analytics --search DEP   ║
+║                                                           ║
+║   🎯 CTFWI VALIDATION     📚 DOCUMENTATION               ║
+║   Check flags, what       atom-sage-framework/docs/      ║
+║   intent? - Ensures       GETTING_STARTED.md             ║
+║   operations complete     USER_MANUAL.md                 ║
+║   100%, not 60%           VALIDATION_COMPLETE.md         ║
+║                                                           ║
+║   🔧 COMMON WORKFLOWS                                     ║
+║   cd ~/kenl/KENL1-framework/atom-sage-framework          ║
+║   ./install.sh            # Install framework            ║
+║                                                           ║
+║   atom-analytics --list   # View all operations          ║
+║   atom-analytics --summary > report.txt                  ║
+║                                                           ║
+║   📖 EXAMPLES                                             ║
+║   cd examples/                                            ║
+║   ./basic-workflow.sh     # Basic ATOM operations        ║
+║   ./ctfwi-validation.sh   # CTFWI demonstration          ║
+║   ./recovery-demo.sh      # 7-minute recovery demo       ║
+║   ./multi-context.sh      # Cross-KENL operations        ║
+╚═══════════════════════════════════════════════════════════╝

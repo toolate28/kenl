@@ -1,0 +1,33 @@
+╔═══════════════════════════════════════════════════════════╗
+║   💾 KENL10: BACKUP - Intelligent Snapshots & Sync       ║
+╠═══════════════════════════════════════════════════════════╣
+║   📸 SNAPSHOTS             ☁️  CLOUD BACKENDS            ║
+║   cd ~/kenl/KENL10-backup  cloud-backends/               ║
+║   ./atom-snapshot.sh       ├─ s3-config.sh               ║
+║                            ├─ b2-config.sh               ║
+║   create <name> "desc"     └─ nextcloud-config.sh        ║
+║   list                                                    ║
+║   restore <name>           🔄 SYNC ENGINES               ║
+║   delete <name>            sync-engines/                 ║
+║                            ├─ rsync-backup.sh            ║
+║   🎮 WHAT GETS BACKED UP   ├─ rclone-sync.sh            ║
+║   ✓ ATOM trail (full)      └─ syncthing-setup.sh        ║
+║   ✓ Play Cards                                           ║
+║   ✓ KENL configs           🗜️  DEDUPLICATION             ║
+║   ✓ System state           dedup-store/                  ║
+║   ✓ User configs           Borg, restic integration      ║
+║                                                           ║
+║   📂 DIRECTORY STRUCTURE   🚨 DISASTER RECOVERY          ║
+║   snapshots/               recovery/                     ║
+║   ├─ before-update-...     From ATOM trail:              ║
+║   ├─ before-rebase-...     1. Read last known state      ║
+║   └─ manual-backup-...     2. Identify pending ops       ║
+║                            3. Recovery suggestions       ║
+║   ⚛️ ATOM-AWARE                                           ║
+║   Snapshots include        💾 PROTON DRIVE               ║
+║   complete ATOM context    cloud-backends/proton/        ║
+║   for 100% recovery        Encrypted zero-knowledge      ║
+║                            backup to Proton Drive        ║
+║   🔐 ENCRYPTED BACKUPS                                    ║
+║   Uses KENL8 GPG for cloud backups                       ║
+╚═══════════════════════════════════════════════════════════╝

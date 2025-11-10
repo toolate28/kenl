@@ -1,0 +1,32 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🎓 KENL7: LEARNING - Tutorials & Guides                ║
+╠═══════════════════════════════════════════════════════════╣
+║   📚 CHEATSHEETS           🎓 TUTORIALS                  ║
+║   cd ~/kenl/KENL7-learning tutorials/                    ║
+║   cheatsheets/             ├─ git-basics.md              ║
+║   ├─ git-cheatsheet.md     ├─ rpm-ostree-intro.md       ║
+║   ├─ rpm-ostree-cheat...md ├─ gpg-setup.md              ║
+║   ├─ gpg-cheatsheet.md     ├─ ssh-key-setup.md          ║
+║   ├─ ssh-cheatsheet.md     ├─ distrobox-guide.md        ║
+║   └─ distrobox-cheat...md  ├─ docker-compose.md         ║
+║                            ├─ systemd-basics.md          ║
+║   📖 WALKTHROUGHS          └─ github-workflows.md        ║
+║   walkthroughs/                                          ║
+║   ├─ first-pr.md           🧪 EXAMPLES                   ║
+║   ├─ merge-conflict.md     examples/                     ║
+║   ├─ rebase-guide.md       ├─ play-card-example.yaml    ║
+║   ├─ deploy-workflow.md    ├─ atom-operation.sh         ║
+║   └─ backup-restore.md     ├─ distrobox-setup.sh        ║
+║                            ├─ git-workflow.sh            ║
+║   🔧 TOPICS COVERED        └─ monitoring-setup.sh        ║
+║   • Git workflows (PR, merge conflicts)                  ║
+║   • rpm-ostree (deployments, rollback)                   ║
+║   • GPG (key gen, sign, encrypt)                         ║
+║   • SSH (keys, config, agent)                            ║
+║   • Distrobox (containers, export)                       ║
+║   • Docker Compose (stacks, volumes)                     ║
+║   • Systemd (services, timers)                           ║
+║   • GitHub (workflows, actions)                          ║
+║   • Backups (rsync, KENL10 snapshots)                    ║
+║   • Monitoring (Prometheus, Grafana)                     ║
+╚═══════════════════════════════════════════════════════════╝

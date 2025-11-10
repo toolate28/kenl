@@ -1,0 +1,32 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🌐 KENL6: SOCIAL - Gaming Community & Sharing          ║
+╠═══════════════════════════════════════════════════════════╣
+║   🎴 PLAY CARD SHARING     💬 COMMUNITY                  ║
+║   cd ~/kenl/KENL6-social   Matrix:   #kenl:matrix.org   ║
+║   ./share-playcard.sh      Discord:  #kenl channel      ║
+║                                                           ║
+║   Select Play Card:        🤝 LFG MATCHMAKING            ║
+║   1) halo-infinite.yaml    lfg-matchmaking/              ║
+║   2) elden-ring.yaml       Looking for group by game    ║
+║                                                           ║
+║   Recipient (email/Matrix):   📊 LEADERBOARDS            ║
+║   friend@matrix.org        leaderboards/                 ║
+║                            FPS rankings, completion %    ║
+║   🔐 ENCRYPTION                                           ║
+║   Uses KENL8 GPG keys      👤 PROFILES                   ║
+║   Recipient must have      community-profiles/           ║
+║   your public key          Gaming profiles, stats       ║
+║                                                           ║
+║   🎮 WORKFLOW              📤 EXPORT FORMATS             ║
+║   1. Create Play Card      - Encrypted .gpg (Matrix)    ║
+║      (KENL2)               - JSON (web sharing)          ║
+║   2. Test configuration    - YAML (direct import)        ║
+║   3. Share via KENL6                                     ║
+║   4. Friend imports        📥 IMPORT PLAY CARD           ║
+║      instantly             cd ~/kenl/KENL2-gaming       ║
+║                            ./import-playcard.sh card.gpg ║
+║   🔗 INTEGRATIONS                                         ║
+║   matrix-integration/      # Matrix bot                 ║
+║   discord-integration/     # Discord webhook            ║
+║   playcard-share/          # Web sharing                ║
+╚═══════════════════════════════════════════════════════════╝
