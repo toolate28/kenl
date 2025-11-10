@@ -19,7 +19,7 @@ play_card:
 
   # Compatibility rating
   # Options: platinum, gold, silver, bronze, borked
-  compatibility: gold
+  compatibility: borked  # EA Javelin Anticheat blocks Linux
 
   # Performance metrics
   performance:
@@ -53,15 +53,29 @@ play_card:
 
   # Known issues and workarounds
   known_issues:
+    - issue: "EA Javelin Anticheat blocks Linux - GAME UNPLAYABLE"
+      workaround: "None - EA has not enabled Linux/Steam Deck support"
+      severity: critical
+      status: unfixable
+      error_codes: ["(7)(2)"]
+      notes: |
+        EA transitioned BF2042 to EA Javelin Anticheat in October 2023.
+        This kernel-mode anti-cheat intentionally blocks Linux/Steam Deck.
+        Game launches but kicks players before entering matches.
+        No workaround exists - requires EA to enable Linux support.
+        See: https://www.gamingonlinux.com/2025/04/ea-rebrand-and-refresh-their-anti-cheat-into-ea-javelin-anticheat-still-blocks-linux-steam-deck/
     - issue: "EA App overlay causes crashes on Wayland"
       workaround: "Use X11 session instead of Wayland"
       severity: major
+      status: moot  # Game unplayable anyway
     - issue: "Stuttering in intense firefights"
       workaround: "Enable DXVK_ASYNC=1 and use GE-Proton"
       severity: moderate
+      status: moot  # Game unplayable anyway
     - issue: "Shader compilation causes initial stuttering"
       workaround: "Play first match on low settings, then increase"
       severity: minor
+      status: moot  # Game unplayable anyway
 
   # Testing notes
   testing:
@@ -96,9 +110,21 @@ play_card:
       gpu_load_change
       cpu_load_change
 
+  # Anti-cheat compatibility
+  anti_cheat:
+    system: "EA Javelin Anticheat"
+    linux_support: false
+    status: "Denied"
+    notes: |
+      EA Javelin Anticheat is a proprietary kernel-mode anti-cheat
+      that does not support Linux/Steam Deck. Error codes (7)(2)
+      indicate the anti-cheat is blocking the game from running.
+      Implemented October 2023, replacing EasyAntiCheat.
+
   # Validation
-  validated: true
+  validated: false  # Game cannot be played on Linux
   validation_date: "2025-11-10"
+  broken_since: "2023-10"  # EA Javelin Anticheat rollout
 
   # ATOM trail reference
   atom_tag: ATOM-GWI-20251110-004
@@ -112,34 +138,49 @@ play_card:
     - x11-required
     - ea-app
     - battlefield
+    - broken
+    - anti-cheat-blocked
+    - ea-javelin
+    - unplayable
 
   # Additional notes
   notes: |
-    Battlefield 2042 runs well on Bazzite with GE-Proton 9-2.
-    EA App works but requires X11 session (crashes on Wayland).
+    ⚠️ CRITICAL: Battlefield 2042 is UNPLAYABLE on Linux/Bazzite-DX ⚠️
 
-    Performance is good after shader compilation completes (first match
-    may have stuttering). DXVK_ASYNC helps significantly.
+    As of October 2023, EA replaced EasyAntiCheat with EA Javelin Anticheat,
+    a proprietary kernel-mode anti-cheat that DOES NOT support Linux or
+    Steam Deck. The game will launch via Proton but kicks players before
+    entering matches with error codes (7)(2).
 
-    Multiplayer works flawlessly - no issues with matchmaking, parties,
-    or voice chat. Cross-platform play with Windows/console works.
+    THERE IS NO WORKAROUND. This is intentional blocking by EA.
 
-    Hardware requirements:
+    Historical Context (Pre-October 2023):
+    - Game previously worked with EasyAntiCheat
+    - Performance was good with GE-Proton 9-2
+    - EA App required X11 session (crashed on Wayland)
+    - Multiplayer, matchmaking, and cross-play worked
+
+    Current Status:
+    - Game launches but cannot enter matches
+    - EA Javelin Anticheat error (7)(2) appears
+    - No Linux/Steam Deck support planned by EA
+    - All new EA multiplayer titles will use Javelin Anticheat
+
+    Alternative Battlefield Titles for Linux:
+    - Battlefield 1 (works with Proton)
+    - Battlefield V (may work, check AreWeAntiCheatYet)
+    - Older titles (BF3, BF4) via community servers
+
+    Hardware requirements (if EA ever enables Linux support):
     - Minimum: GTX 1660 Super / RX 5600 XT, 16GB RAM
     - Recommended: RTX 3070 / RX 6700 XT, 16GB RAM
     - High settings require 8GB+ VRAM
 
-    Known limitations:
-    - Requires X11 (Wayland causes EA App crashes)
-    - First match has shader compilation stutter
-    - High CPU/GPU usage (demanding game)
+    References:
+    - EA Javelin Anticheat announcement: https://www.ea.com/security/news/anticheat-progress-report
+    - Linux blocking confirmed: https://www.gamingonlinux.com/2025/04/ea-rebrand-and-refresh-their-anti-cheat-into-ea-javelin-anticheat-still-blocks-linux-steam-deck/
+    - AreWeAntiCheatYet: https://areweanticheatyet.com/?q=battlefield+2042
 
-    Tips for best performance:
-    1. Use X11 session
-    2. Enable DXVK_ASYNC
-    3. Close background apps (game uses 12GB+ RAM)
-    4. Let shaders compile in first match
-    5. Use GE-Proton (better performance than standard Proton)
-
-# ProtonDB Rating: Gold
+# ProtonDB Rating: Borked (EA Javelin Anticheat blocks Linux)
 # Last verified: 2025-11-10
+# Status: UNPLAYABLE on Linux/Steam Deck
