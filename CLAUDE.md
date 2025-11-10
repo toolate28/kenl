@@ -17,16 +17,48 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Core Architecture
 
+### Repository Structure
+
+The repository is organized into three main sections:
+
+```
+kenl/
+├── modules/           # All KENL modules (0-12)
+│   ├── KENL0-system/
+│   ├── KENL1-framework/
+│   ├── KENL2-gaming/
+│   ├── KENL3-dev/
+│   ├── KENL4-monitoring/
+│   ├── KENL5-facades/
+│   ├── KENL6-social/
+│   ├── KENL7-learning/
+│   ├── KENL8-security/
+│   ├── KENL9-library/
+│   ├── KENL10-backup/
+│   ├── KENL11-media/
+│   └── KENL12-resources/
+├── governance/        # Governance artifacts
+│   ├── mcp-governance/
+│   └── 02-Decisions/
+├── scripts/           # Utility scripts
+└── ... (docs, CI, etc.)
+```
+
+**Key Paths:**
+- All KENL modules: `modules/KENL*`
+- Governance artifacts: `governance/`
+- Scripts: `scripts/`
+
 ### Governance Framework
 
 This repository uses a dual governance system:
 
-1. **ARCREF** (Architecture Reference artifacts) - `mcp-governance/ARCREF_TEMPLATE.yaml`
+1. **ARCREF** (Architecture Reference artifacts) - `governance/mcp-governance/ARCREF_TEMPLATE.yaml`
    - Structural format for infrastructure/architecture decisions
    - Required for MCP, cloud, platform, or repo-level changes
    - Includes rollback plans, tests, and traceability
 
-2. **ADR** (Architectural Decision Records) - `02-Decisions/ADR_TEMPLATE.md`
+2. **ADR** (Architectural Decision Records) - `governance/02-Decisions/ADR_TEMPLATE.md`
    - Narrative format for decision documentation
    - Links to associated ARCREF IDs
    - Follows status lifecycle: proposed → accepted → deprecated/superseded
@@ -131,8 +163,8 @@ pytest -q
 - Pre-commit passes: `pre-commit run --all-files`
 
 **For Architectural Changes:**
-1. Create ARCREF artifact in `mcp-governance/` using template
-2. Create ADR in `02-Decisions/` using template
+1. Create ARCREF artifact in `governance/mcp-governance/` using template
+2. Create ADR in `governance/02-Decisions/` using template
 3. Link ARCREF ID in ADR and PR description
 4. Include rollback plan and test verification
 
@@ -187,14 +219,46 @@ This repository is part of a larger ecosystem focused on gaming-with-intent on i
 
 **Target Use Case:** Windows 10 EOL migration (Oct 2025) - providing evidence-based, rollback-safe gaming configurations for 240M+ affected PCs.
 
+## KENL Module Navigation
+
+When working with specific KENL modules, use these paths:
+
+**System & Framework:**
+- `modules/KENL0-system/` - System operations (rpm-ostree, ujust, firmware)
+- `modules/KENL1-framework/` - ATOM+SAGE+OWI core framework
+
+**Gaming & Social:**
+- `modules/KENL2-gaming/` - Gaming configs, Play Cards, Proton optimization
+- `modules/KENL6-social/` - Sharing Play Cards, community features
+- `modules/KENL9-library/` - Game library management
+
+**Development:**
+- `modules/KENL3-dev/` - Distrobox environments, Claude Code setup
+- `modules/KENL4-monitoring/` - Prometheus, Grafana, ATOM analytics
+- `modules/KENL7-learning/` - Cheatsheets, guides, learning resources
+
+**Theming & Security:**
+- `modules/KENL5-facades/` - Visual themes, context switching, banners
+- `modules/KENL8-security/` - GPG, SSH, security tools
+
+**Infrastructure:**
+- `modules/KENL10-backup/` - Backups, snapshots, recovery
+- `modules/KENL11-media/` - Media streaming, Docker compose
+- `modules/KENL12-resources/` - Community downloads, RSS feeds
+
+**Each KENL has:**
+- `README.md` - Module overview and usage
+- Scripts specific to that layer's purpose
+- Configuration files and templates
+
 ## Key Documentation Files
 
 Beyond this scaffold, the repository contains project-specific documentation:
 
-- `bazza-dx-one-pager.md` - Executive summary and project values
-- `project-status-atom-assessment.md` - Current status and priorities
-- `gaming-config-*.md` - Gaming optimization frameworks
-- `claude-configuration-guide.md` - MCP server configuration
+- `modules/KENL2-gaming/guides/bazza-dx-one-pager.md` - Executive summary
+- `modules/KENL3-dev/claude-code-setup/claude-configuration-guide.md` - MCP setup
+- `modules/KENL2-gaming/guides/gaming-config-*.md` - Gaming frameworks
+- `AI-INTEGRATION-GUIDE.md` - AI integration patterns (root level)
 
 When working on gaming configs or MCP integrations, consult these documents for context and established patterns.
 
