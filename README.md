@@ -1,5 +1,5 @@
 ---
-project: KENL - Intent-Driven Operations for Bazzite
+project: modules/KENL - Intent-Driven Operations for Bazzite
 status: production
 version: 1.0.0
 classification: OWI-DOC
@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-015
 owi-version: 1.0.0
 ---
 
-# KENL
+# modules/KENL
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
@@ -19,11 +19,11 @@ owi-version: 1.0.0
 
 ---
 
-## Why KENL?
+## Why modules/KENL?
 
 **Problem**: Modern gaming PCs are complex. Proton versions, DXVK settings, kernel parameters, GPU drivers - hundreds of variables affect performance. When something breaks, you're left guessing what changed.
 
-**Solution**: KENL captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, KENL knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
+**Solution**: modules/KENL captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, modules/KENL knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
 
 ```mermaid
 graph LR
@@ -70,7 +70,7 @@ graph LR
 
 ---
 
-## The KENL Ecosystem
+## The modules/KENL Ecosystem
 
 KENL is a modular system of **11 specialized layers** that work together seamlessly on Bazzite:
 
@@ -106,44 +106,44 @@ graph TB
         KENL10[💾 KENL10-backup<br/>Intelligent Snapshots]
     end
 
-    KENL0 -.->|Manages| KENL1
-    KENL1 -.->|Powers| KENL2
-    KENL1 -.->|Powers| KENL3
-    KENL1 -.->|Powers| KENL11
-    KENL2 -->|Uses| KENL9
-    KENL2 -->|Uses| KENL8
-    KENL2 -->|Uses| KENL6
-    KENL3 -->|Monitored by| KENL4
-    KENL5 -->|Themes| KENL2
-    KENL5 -->|Themes| KENL3
-    KENL5 -->|Themes| KENL9
-    KENL5 -->|Themes| KENL11
-    KENL9 -->|Backed up by| KENL10
-    KENL10 -->|Backs up| KENL2
-    KENL10 -->|Backs up| KENL3
-    KENL10 -->|Backs up| KENL11
-    KENL8 -->|Secures| KENL6
-    KENL8 -->|Secures| KENL9
-    KENL8 -->|Secures| KENL11
-    KENL11 -->|Uses| KENL9
+    modules/KENL0 -.->|Manages| modules/KENL1
+    modules/KENL1 -.->|Powers| modules/KENL2
+    modules/KENL1 -.->|Powers| modules/KENL3
+    modules/KENL1 -.->|Powers| modules/KENL11
+    modules/KENL2 -->|Uses| modules/KENL9
+    modules/KENL2 -->|Uses| modules/KENL8
+    modules/KENL2 -->|Uses| modules/KENL6
+    modules/KENL3 -->|Monitored by| modules/KENL4
+    modules/KENL5 -->|Themes| modules/KENL2
+    modules/KENL5 -->|Themes| modules/KENL3
+    modules/KENL5 -->|Themes| modules/KENL9
+    modules/KENL5 -->|Themes| modules/KENL11
+    modules/KENL9 -->|Backed up by| modules/KENL10
+    modules/KENL10 -->|Backs up| modules/KENL2
+    modules/KENL10 -->|Backs up| modules/KENL3
+    modules/KENL10 -->|Backs up| modules/KENL11
+    modules/KENL8 -->|Secures| modules/KENL6
+    modules/KENL8 -->|Secures| modules/KENL9
+    modules/KENL8 -->|Secures| modules/KENL11
+    modules/KENL11 -->|Uses| modules/KENL9
 
-    style KENL0 fill:#f8f9fa,stroke:#495057
-    style KENL1 fill:#e5dbff,stroke:#7950f2
-    style KENL2 fill:#ffe3e3,stroke:#fa5252
-    style KENL3 fill:#d0ebff,stroke:#228be6
-    style KENL4 fill:#d3f9d8,stroke:#51cf66
-    style KENL5 fill:#fff3bf,stroke:#fab005
-    style KENL6 fill:#ffe8cc,stroke:#fd7e14
-    style KENL7 fill:#b2f2bb,stroke:#2f9e44
-    style KENL8 fill:#f3d9fa,stroke:#da77f2
-    style KENL9 fill:#d0bfff,stroke:#9775fa
-    style KENL10 fill:#e7dcc8,stroke:#8b6d47
-    style KENL11 fill:#ffc9c9,stroke:#ff6b6b
+    style modules/KENL0 fill:#f8f9fa,stroke:#495057
+    style modules/KENL1 fill:#e5dbff,stroke:#7950f2
+    style modules/KENL2 fill:#ffe3e3,stroke:#fa5252
+    style modules/KENL3 fill:#d0ebff,stroke:#228be6
+    style modules/KENL4 fill:#d3f9d8,stroke:#51cf66
+    style modules/KENL5 fill:#fff3bf,stroke:#fab005
+    style modules/KENL6 fill:#ffe8cc,stroke:#fd7e14
+    style modules/KENL7 fill:#b2f2bb,stroke:#2f9e44
+    style modules/KENL8 fill:#f3d9fa,stroke:#da77f2
+    style modules/KENL9 fill:#d0bfff,stroke:#9775fa
+    style modules/KENL10 fill:#e7dcc8,stroke:#8b6d47
+    style modules/KENL11 fill:#ffc9c9,stroke:#ff6b6b
 ```
 
 ### Quick Guide
 
-| KENL | Purpose | You'll use this when... |
+| modules/KENL | Purpose | You'll use this when... |
 |------|---------|-------------------------|
 | ⚙️ **KENL0** | System operations | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
 | ⚛️ **KENL1** | Framework core | Everything (automatic ATOM trail logging) |
@@ -177,26 +177,26 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant User
-    participant KENL2 as 🎮 KENL2-gaming
+    participant modules/KENL2 as 🎮 modules/KENL2-gaming
     participant ProtonDB
-    participant KENL8 as 🔐 KENL8-security
-    participant KENL10 as 💾 KENL10-backup
+    participant modules/KENL8 as 🔐 modules/KENL8-security
+    participant modules/KENL10 as 💾 modules/KENL10-backup
 
     User->>KENL2: "Setup Halo Infinite"
-    KENL2->>ProtonDB: Research compatibility
+    modules/KENL2->>ProtonDB: Research compatibility
     ProtonDB-->>KENL2: Gold rating, GE-Proton 9-18
-    KENL2->>KENL2: Configure Proton + DXVK
-    KENL2->>User: Test game
+    modules/KENL2->>KENL2: Configure Proton + DXVK
+    modules/KENL2->>User: Test game
     User->>KENL2: ✅ Works! 118 FPS
-    KENL2->>KENL2: Create Play Card
-    KENL2->>KENL10: Snapshot config
-    KENL10-->>User: ✅ Saved to ATOM trail
+    modules/KENL2->>KENL2: Create Play Card
+    modules/KENL2->>KENL10: Snapshot config
+    modules/KENL10-->>User: ✅ Saved to ATOM trail
 
     Note over User,KENL10: Friend wants same setup
 
     User->>KENL8: Encrypt Play Card
-    KENL8->>KENL2: Share via Matrix
-    KENL2-->>User: Friend downloads & applies instantly
+    modules/KENL8->>KENL2: Share via Matrix
+    modules/KENL2-->>User: Friend downloads & applies instantly
 ```
 
 **The difference**:
@@ -208,7 +208,7 @@ sequenceDiagram
 
 ---
 
-## What's Different About KENL?
+## What's Different About modules/KENL?
 
 ### 1. 🔍 Everything is Traceable
 
@@ -246,7 +246,7 @@ Share with friends. They get *identical* performance. No guesswork.
 
 ### 3. ⚡ 7-Minute Crash Recovery
 
-System crashes during firmware update? KENL reconstructs:
+System crashes during firmware update? modules/KENL reconstructs:
 - What you were doing (updating BIOS)
 - Why you were doing it (security patch)
 - What to do next (verify TPM settings)
@@ -255,7 +255,7 @@ System crashes during firmware update? KENL reconstructs:
 **Traditional**: 30-60 minutes of "what was I doing?"
 **KENL**: 7 minutes, 100% context restored
 
-[See validation study →](./KENL1-framework/docs/VALIDATION_COMPLETE.md)
+[See validation study →](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md)
 
 ### 4. 🎨 Context Switching
 
@@ -263,13 +263,13 @@ Different shell themes for different tasks:
 
 ```bash
 # Gaming context
-🎮 KENL2 bazza@bazzite:~$
+🎮 modules/KENL2 bazza@bazzite:~$
 
 # Development context
-💻 KENL3 bazza@bazzite:~$
+💻 modules/KENL3 bazza@bazzite:~$
 
 # System operations (elevated)
-⚙️ KENL0 bazza@bazzite:~$
+⚙️ modules/KENL0 bazza@bazzite:~$
 ```
 
 Visual reminder of what you're doing. Prevents mistakes like running `sudo rm -rf` in the wrong directory.
@@ -291,7 +291,7 @@ KENL includes terminal "storyboards" showing complex operations:
 High-risk operation with comprehensive safety:
 - Hardware detection & compatibility check
 - Automatic USB recovery drive creation
-- KENL10 snapshot before firmware flash
+- modules/KENL10 snapshot before firmware flash
 - Post-update verification
 
 ### 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
@@ -336,7 +336,7 @@ kenl-switch 2
 **What changes:**
 ```diff
 - bazza@bazzite:~$                    # Default shell
-+ 🎮 KENL2 bazza@bazzite:~$           # Gaming context
++ 🎮 modules/KENL2 bazza@bazzite:~$           # Gaming context
 
 Loaded:
 + Proton optimization aliases
@@ -392,7 +392,7 @@ kenl-switch 3
 **What changes:**
 ```diff
 - bazza@bazzite:~$                    # Default shell
-+ 💻 KENL3 bazza@bazzite:~$           # Development context
++ 💻 modules/KENL3 bazza@bazzite:~$           # Development context
 
 Loaded:
 + Distrobox management commands
@@ -448,16 +448,16 @@ create-devbox python-ml
 ```mermaid
 sequenceDiagram
     participant User
-    participant KENL3
+    participant modules/KENL3
     participant Distrobox
     participant Container
 
     User->>KENL3: create-devbox python-ml
-    KENL3->>Distrobox: Create Ubuntu 24.04 container
+    modules/KENL3->>Distrobox: Create Ubuntu 24.04 container
     Distrobox->>Container: Install Python 3.12
     Container->>Container: Install ML libraries (numpy, pandas, torch)
     Container->>KENL3: ✅ Ready
-    KENL3->>User: Container "python-ml" ready
+    modules/KENL3->>User: Container "python-ml" ready
 
     Note over User,Container: ATOM trail: ATOM-DEV-20251110-xxx
 ```
@@ -477,7 +477,7 @@ kenl-monitor start
 | Disk I/O | Unknown | Read/write rates |
 | Network | Unknown | Upload/download per container |
 
-**Why:** KENL4 monitoring tracks which containers consume resources, helps optimize.
+**Why:** modules/KENL4 monitoring tracks which containers consume resources, helps optimize.
 
 ---
 
@@ -491,7 +491,7 @@ kenl-switch 0
 **What changes:**
 ```diff
 - bazza@bazzite:~$                    # Default shell (user)
-+ ⚙️ KENL0 bazza@bazzite:~$           # System context (elevated)
++ ⚙️ modules/KENL0 bazza@bazzite:~$           # System context (elevated)
 
 Loaded:
 + rpm-ostree shortcuts (os-status, os-update, os-rollback)
@@ -500,7 +500,7 @@ Loaded:
 + Chainable system operations (rebase-clean, update-verify)
 
 Environment:
-+ KENL_PRIVILEGED=1                   # Enables sudo-required commands
++ modules/KENL_PRIVILEGED=1                   # Enables sudo-required commands
 + ATOM_SYSTEM_OPS=1                   # All ops logged to system ATOM trail
 ```
 
@@ -536,7 +536,7 @@ rebase-safe bazzite-41-latest
 **What changes:**
 ```mermaid
 stateDiagram-v2
-    [*] --> Snapshot: KENL10 creates backup
+    [*] --> Snapshot: modules/KENL10 creates backup
     Snapshot --> Download: Fetch new deployment
     Download --> Reboot: Apply changes
     Reboot --> Verify: Boot into new system
@@ -562,7 +562,7 @@ stateDiagram-v2
 
 ## Architecture Deep Dive
 
-### How KENLs Communicate
+### How modules/KENLs Communicate
 
 ```mermaid
 flowchart TD
@@ -572,7 +572,7 @@ flowchart TD
         C[Update system]
     end
 
-    subgraph KENL1["⚛️ KENL1-framework (ATOM Trail)"]
+    subgraph KENL1["⚛️ modules/KENL1-framework (ATOM Trail)"]
         D[Log intent]
         E[Validate with CTFWI]
         F[Execute operation]
@@ -610,12 +610,12 @@ flowchart TD
     M --> N
     N -.-> D
 
-    style KENL1 fill:#e5dbff,stroke:#7950f2
+    style modules/KENL1 fill:#e5dbff,stroke:#7950f2
     style Storage fill:#d3f9d8,stroke:#51cf66
     style Recovery fill:#ffe3e3,stroke:#fa5252
 ```
 
-### KENL Dependency Graph
+### modules/KENL Dependency Graph
 
 ```mermaid
 graph TB
@@ -687,11 +687,11 @@ sequenceDiagram
     autonumber
 
     participant U as 👤 User
-    participant K2 as 🎮 KENL2
-    participant K1 as ⚛️ KENL1
-    participant K8 as 🔐 KENL8
-    participant K10 as 💾 KENL10
-    participant K4 as 📊 KENL4
+    participant K2 as 🎮 modules/KENL2
+    participant K1 as ⚛️ modules/KENL1
+    participant K8 as 🔐 modules/KENL8
+    participant K10 as 💾 modules/KENL10
+    participant K4 as 📊 modules/KENL4
 
     U->>K2: "Setup Elden Ring"
     K2->>K1: Log intent (ATOM-GAMING-xxx)
@@ -724,26 +724,26 @@ sequenceDiagram
 
 ### 🎮 Gaming Enhancements
 
-| Without KENL | With KENL |
+| Without modules/KENL | With modules/KENL |
 |--------------|-----------|
 | Trial-and-error Proton configs | ProtonDB research → automatic config |
 | Forgotten what worked | Play Cards document exact setup |
 | Can't help friends | Encrypted sharing, instant setup |
-| Lost configs after reinstall | KENL10 snapshots restore everything |
-| No performance history | KENL4 tracks FPS/frametime over time |
+| Lost configs after reinstall | modules/KENL10 snapshots restore everything |
+| No performance history | modules/KENL4 tracks FPS/frametime over time |
 
 ### 💻 Development Workflow
 
-| Without KENL | With KENL |
+| Without modules/KENL | With modules/KENL |
 |--------------|-----------|
 | Manual distrobox creation | Templates with automatic config |
 | Lost work after crashes | ATOM trail restores context |
-| No resource monitoring | KENL4 tracks container CPU/RAM |
+| No resource monitoring | modules/KENL4 tracks container CPU/RAM |
 | Inconsistent environments | Play Card-style "Dev Cards" |
 
 ### 🔧 System Operations
 
-| Without KENL | With KENL |
+| Without modules/KENL | With modules/KENL |
 |--------------|-----------|
 | `rpm-ostree upgrade` → hope | Automatic rollback on failure |
 | Firmware updates = risky | USB recovery drive + snapshot |
@@ -752,12 +752,12 @@ sequenceDiagram
 
 ### 🔐 Security & Privacy
 
-| Without KENL | With KENL |
+| Without modules/KENL | With modules/KENL |
 |--------------|-----------|
 | Configs shared in plaintext | GPG encryption built-in |
 | Secrets in git repos | Pre-commit secret detection |
 | No audit trail | Every operation logged |
-| Manual key management | KENL8 vault integration |
+| Manual key management | modules/KENL8 vault integration |
 
 ---
 
@@ -811,18 +811,18 @@ atom-analytics --summary
 
 ### 📚 Documentation
 
-- **[KENL0 - System Operations](./KENL0-system/README.md)**: rpm-ostree, ujust, firmware updates
-- **[KENL1 - Framework Core](./KENL1-framework/README.md)**: ATOM+SAGE+OWI methodology
-- **[KENL2 - Gaming](./KENL2-gaming/README.md)**: Play Cards, Proton optimization
-- **[KENL3 - Development](./KENL3-dev/README.md)**: Distrobox environments
-- **[KENL4 - Monitoring](./KENL4-monitoring/README.md)**: Performance metrics
-- **[KENL5 - Facades](./KENL5-facades/README.md)**: Visual theming, context switching
-- **[KENL6 - Social](./KENL6-social/README.md)**: Sharing Play Cards
-- **[KENL7 - Learning](./KENL7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
-- **[KENL8 - Security](./KENL8-security/README.md)**: Encryption, GPG, vaults
-- **[KENL9 - Library](./KENL9-library/README.md)**: Multi-OS game libraries, save sync
-- **[KENL10 - Backup](./KENL10-backup/README.md)**: Intelligent snapshots
-- **[KENL11 - Media](./KENL11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
+- **[KENL0 - System Operations](./modules/KENL0-system/README.md)**: rpm-ostree, ujust, firmware updates
+- **[KENL1 - Framework Core](./modules/KENL1-framework/README.md)**: ATOM+SAGE+OWI methodology
+- **[KENL2 - Gaming](./modules/KENL2-gaming/README.md)**: Play Cards, Proton optimization
+- **[KENL3 - Development](./modules/KENL3-dev/README.md)**: Distrobox environments
+- **[KENL4 - Monitoring](./modules/KENL4-monitoring/README.md)**: Performance metrics
+- **[KENL5 - Facades](./modules/KENL5-facades/README.md)**: Visual theming, context switching
+- **[KENL6 - Social](./modules/KENL6-social/README.md)**: Sharing Play Cards
+- **[KENL7 - Learning](./modules/KENL7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
+- **[KENL8 - Security](./modules/KENL8-security/README.md)**: Encryption, GPG, vaults
+- **[KENL9 - Library](./modules/KENL9-library/README.md)**: Multi-OS game libraries, save sync
+- **[KENL10 - Backup](./modules/KENL10-backup/README.md)**: Intelligent snapshots
+- **[KENL11 - Media](./modules/KENL11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
 
 ### 🧪 Real World Scenarios
 
@@ -892,13 +892,13 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 ---
 
-## Why "KENL"?
+## Why "modules/KENL"?
 
 **K**nowledge **E**nhanced **N**avigation **L**ayer
 
 Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
 
-It's also a play on "kernel" - KENL sits between you and your system, making complex operations simple and safe.
+It's also a play on "kernel" - modules/KENL sits between you and your system, making complex operations simple and safe.
 ### Windows Support (Start Here If You Need Help!)
 | Resource | Link |
 |----------|------|

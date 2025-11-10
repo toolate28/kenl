@@ -1,0 +1,24 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🎨 KENL5: FACADES - Visual Identity & Context Switch   ║
+╠═══════════════════════════════════════════════════════════╣
+║   🔄 CONTEXT SWITCHING     📋 VIEW CHEATSHEETS           ║
+║   cd ~/kenl/KENL5-facades  ./show-cheatsheet.sh <0-11>   ║
+║   ./switch-kenl.sh <0-11>                                ║
+║   ./switch-kenl.sh list    Available contexts:           ║
+║                            0=system  1=framework         ║
+║                            2=gaming  3=dev               ║
+║   🎨 AVAILABLE CONTEXTS    4=monitoring 5=facades        ║
+║   0-11: system, framework, 6=social  7=learning          ║
+║   gaming, dev, monitoring, 8=security 9=library          ║
+║   facades, social, learn,  10=backup 11=media            ║
+║   security, library,                                     ║
+║   backup, media            📝 PROMPTS                    ║
+║                            prompts/kenl*-*.sh            ║
+║   ✨ WHAT CHANGES                                         ║
+║   - Shell prompt theme     🖌️  CUSTOMIZATION             ║
+║   - Loaded aliases         profiles/kenl*.conf           ║
+║   - Available functions    themes/kenl*-theme.sh         ║
+║   - Color scheme           terminal-configs/kenl*/       ║
+║   - Context-specific tools fonts/                        ║
+║                            cheatsheets/kenl*-*.txt       ║
+╚═══════════════════════════════════════════════════════════╝

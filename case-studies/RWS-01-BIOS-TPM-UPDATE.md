@@ -1,7 +1,7 @@
 # RWS-01: BIOS/TPM/Secureboot Update
 
 ```
-⚙️  KENL0 user@bazzite:~$ atom SYSTEM "Update BIOS firmware, TPM, and Secureboot keys - CTFWI: Verify hardware compatibility and create recovery plan"
+⚙️  modules/KENL0 user@bazzite:~$ atom SYSTEM "Update BIOS firmware, TPM, and Secureboot keys - CTFWI: Verify hardware compatibility and create recovery plan"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: System Firmware Update Workflow
@@ -48,7 +48,7 @@ Recovery Plan: Creating USB recovery media + ATOM snapshot
      # Will re-enable after update
 
 4/6 Creating recovery points...
-  📸 Creating KENL10 snapshot: "before-firmware-update"
+  📸 Creating modules/KENL10 snapshot: "before-firmware-update"
 
   ✅ Captured: ATOM trail (234 entries)
   ✅ Captured: System state (rpm-ostree)
@@ -200,7 +200,7 @@ Next steps:
 
 ATOM Trail: ~/.config/atom-sage/trail/ATOM-SYSTEM-20251109-024.log
 
-⚙️  KENL0 user@bazzite:~$
+⚙️  modules/KENL0 user@bazzite:~$
 ```
 
 ## Key Features Demonstrated:

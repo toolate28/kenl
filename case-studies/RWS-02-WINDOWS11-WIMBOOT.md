@@ -1,7 +1,7 @@
 # RWS-02: Windows 11 Installation via Ventoy wimboot
 
 ```
-⚙️  KENL0 user@bazzite:~$ atom RESEARCH "Install Windows 11 using Ventoy wimboot instead of Tiny11 ISO"
+⚙️  modules/KENL0 user@bazzite:~$ atom RESEARCH "Install Windows 11 using Ventoy wimboot instead of Tiny11 ISO"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Research Mode - Windows 11 wimboot
@@ -77,7 +77,7 @@ Alternative: Tiny11 ISO (debloated, but unofficial)
 
 Research complete! Proceed with wimboot installation? [Y/n]: Y
 
-⚙️  KENL0 user@bazzite:~$ atom SYSTEM "Install Windows 11 via Ventoy wimboot - CTFWI: Create dual-boot partition layout and backup"
+⚙️  modules/KENL0 user@bazzite:~$ atom SYSTEM "Install Windows 11 via Ventoy wimboot - CTFWI: Create dual-boot partition layout and backup"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Windows 11 Dual-Boot Installation
@@ -120,7 +120,7 @@ Risk Level: 🟡 MEDIUM - Partitioning can break boot
   ⚠️  EFI partition will be shared (contains both bootloaders)
   ✅ Windows will be added to GRUB menu (via os-prober)
 
-3/8 Creating KENL10 snapshot before partitioning...
+3/8 Creating modules/KENL10 snapshot before partitioning...
 
   📸 Snapshot: "before-windows-install"
 
@@ -155,7 +155,7 @@ Risk Level: 🟡 MEDIUM - Partitioning can break boot
 5/8 Creating Windows 11 installation partitions...
 
   ⚠️  This will modify disk: /dev/nvme0n1
-  ⚠️  Backup created: ATOM snapshot + KENL10
+  ⚠️  Backup created: ATOM snapshot + modules/KENL10
 
   Type 'CREATE' to create Windows partitions: CREATE
 
@@ -288,7 +288,7 @@ Ready to reboot to Ventoy USB? [Y/n]: Y
 
 Rebooting in 10 seconds...
 
-⚙️  KENL0 user@bazzite:~$
+⚙️  modules/KENL0 user@bazzite:~$
 
 [System reboots → Ventoy menu appears]
 
@@ -329,7 +329,7 @@ Speed: 45 MB/s | ETA: 00:48
 
 [After Windows install, user reboots back to Bazzite]
 
-⚙️  KENL0 user@bazzite:~$ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+⚙️  modules/KENL0 user@bazzite:~$ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 Generating grub configuration file ...
 Found theme: /boot/grub2/themes/breeze/theme.txt
@@ -338,7 +338,7 @@ Found initrd image: /boot/initramfs-6.11.3-200.fc40.x86_64.img
 Found Windows 11 on /dev/nvme0n1p5                           ← ✅ Detected!
 done
 
-⚙️  KENL0 user@bazzite:~$ atom STATUS "Windows 11 dual-boot installation complete"
+⚙️  modules/KENL0 user@bazzite:~$ atom STATUS "Windows 11 dual-boot installation complete"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Installation Complete
@@ -372,7 +372,7 @@ Snapshot available: Restore if needed
 
 ════════════════════════════════════════════════════════════
 
-⚙️  KENL0 user@bazzite:~$
+⚙️  modules/KENL0 user@bazzite:~$
 ```
 
 ## Key Features Demonstrated:

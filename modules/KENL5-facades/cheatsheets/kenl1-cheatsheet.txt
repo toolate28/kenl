@@ -1,0 +1,27 @@
+╔═══════════════════════════════════════════════════════════╗
+║   ⚛️  KENL1: FRAMEWORK - ATOM+SAGE+OWI                   ║
+╠═══════════════════════════════════════════════════════════╣
+║   📊 ATOM TRAIL            🔄 RECOVERY                    ║
+║   atom <TYPE> "message"    atom-analytics --summary      ║
+║   Types: STATUS, DEPLOY,   atom-analytics --recovery     ║
+║   CONFIG, RESEARCH, SAGE   atom-analytics --since <time> ║
+║                            atom-analytics --search <term>║
+║                                                           ║
+║   🎯 CTFWI VALIDATION     📚 DOCUMENTATION               ║
+║   Check flags, what       atom-sage-framework/docs/      ║
+║   intent? - Ensures       GETTING_STARTED.md             ║
+║   operations complete     USER_MANUAL.md                 ║
+║   100%, not 60%           VALIDATION_COMPLETE.md         ║
+║                                                           ║
+║   🔧 COMMON WORKFLOWS                                     ║
+║   cd ~/kenl/KENL1-framework/atom-sage-framework          ║
+║   ./install.sh            # Install framework            ║
+║                                                           ║
+║   atom-analytics --list   # View all operations          ║
+║   atom-analytics --summary > report.txt                  ║
+║                                                           ║
+║   📖 EXAMPLES                                             ║
+║   cd examples/ && ls *.sh                                ║
+║   basic-workflow, ctfwi-validation, recovery-demo,       ║
+║   multi-context - Interactive demonstrations             ║
+╚═══════════════════════════════════════════════════════════╝

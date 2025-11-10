@@ -1,0 +1,25 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🎓 KENL7: LEARNING - Tutorials & Guides                ║
+╠═══════════════════════════════════════════════════════════╣
+║   🔧 TOPICS COVERED                                       ║
+║   Git • rpm-ostree • GPG • SSH • Distrobox               ║
+║   Docker Compose • Systemd • GitHub workflows            ║
+║   Backups • Monitoring • System admin basics             ║
+║                                                           ║
+║   📂 DIRECTORY STRUCTURE                                  ║
+║   cd ~/kenl/KENL7-learning                               ║
+║                                                           ║
+║   📚 cheatsheets/*.md      Quick reference cards         ║
+║   🎓 tutorials/*.md        Step-by-step guides           ║
+║   📖 walkthroughs/*.md     Real-world scenarios          ║
+║   🧪 examples/*.{sh,yaml}  Working code samples          ║
+║                                                           ║
+║   🚀 QUICK START                                          ║
+║   ls cheatsheets/          # See all quick refs          ║
+║   less cheatsheets/git-cheatsheet.md                     ║
+║   less tutorials/git-basics.md                           ║
+║                                                           ║
+║   💡 Everything beginner-friendly, assumes zero prior    ║
+║      knowledge. Start with tutorials, reference cheat-   ║
+║      sheets, practice with examples.                     ║
+╚═══════════════════════════════════════════════════════════╝

@@ -1,7 +1,7 @@
 # RWS-04: rpm-ostree Rebase to Latest Release
 
 ```
-⚙️  KENL0 user@bazzite:~$ atom RESEARCH "Show me latest Bazzite releases I can rebase to"
+⚙️  modules/KENL0 user@bazzite:~$ atom RESEARCH "Show me latest Bazzite releases I can rebase to"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Bazzite Release Research
@@ -84,7 +84,7 @@ Reason: Latest gaming features + NVIDIA optimizations
 
 Proceed with rebase? [Y/n]: Y
 
-⚙️  KENL0 user@bazzite:~$ atom SYSTEM "Rebase to Bazzite 41 NVIDIA - CTFWI: Verify compatibility and create rollback point"
+⚙️  modules/KENL0 user@bazzite:~$ atom SYSTEM "Rebase to Bazzite 41 NVIDIA - CTFWI: Verify compatibility and create rollback point"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Bazzite Rebase Workflow
@@ -113,8 +113,8 @@ Type: Major version upgrade (F40 → F41)
 2/7 Checking layered packages compatibility...
 
   Layered packages (installed via rpm-ostree install):
-  • gnupg2 (GPG for KENL8)
-  • distrobox (containers for KENL3)
+  • gnupg2 (GPG for modules/KENL8)
+  • distrobox (containers for modules/KENL3)
 
   Testing against F41 repository...
   ✅ gnupg2: Available in F41 (v2.4.6)
@@ -144,7 +144,7 @@ Type: Major version upgrade (F40 → F41)
 
 5/7 Creating rollback points...
 
-  📸 KENL10 Snapshot: "before-f41-rebase"
+  📸 modules/KENL10 Snapshot: "before-f41-rebase"
   ✅ Captured: ATOM trail (341 entries)
   ✅ Captured: Play Cards (8 cards)
   ✅ Captured: System state
@@ -225,7 +225,7 @@ Logging to ATOM trail...
 
 Rebooting in 10 seconds... (Ctrl+C to cancel)
 
-⚙️  KENL0 user@bazzite:~$
+⚙️  modules/KENL0 user@bazzite:~$
 
 [System reboots → GRUB shows both deployments]
 
@@ -244,7 +244,7 @@ Rebooting in 10 seconds... (Ctrl+C to cancel)
 
 [Login screen → User logs in]
 
-⚙️  KENL0 user@bazzite:~$ rpm-ostree status
+⚙️  modules/KENL0 user@bazzite:~$ rpm-ostree status
 
 State: idle
 Deployments:
@@ -256,11 +256,11 @@ Deployments:
   Version: 40.20241103.0 (2024-11-03)
   Commit: a3f9b2c1d8e...
 
-⚙️  KENL0 user@bazzite:~$ uname -r
+⚙️  modules/KENL0 user@bazzite:~$ uname -r
 
 6.12.1-200.fc41.x86_64                           ← New kernel!
 
-⚙️  KENL0 user@bazzite:~$ nvidia-smi
+⚙️  modules/KENL0 user@bazzite:~$ nvidia-smi
 
 +-------------------------------------------------------------------------+
 | NVIDIA-SMI 570.86.10    Driver Version: 570.86.10    CUDA Version: 12.7|
@@ -274,7 +274,7 @@ Deployments:
 
 ✅ NVIDIA driver loaded successfully!             ← Working!
 
-⚙️  KENL0 user@bazzite:~$ atom VERIFY "Bazzite 41 post-boot verification"
+⚙️  modules/KENL0 user@bazzite:~$ atom VERIFY "Bazzite 41 post-boot verification"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Post-Rebase Verification
@@ -343,19 +343,19 @@ ATOM Trail: Complete rebase history logged
 
 ════════════════════════════════════════════════════════════
 
-⚙️  KENL0 user@bazzite:~$ # Let's test HDR gaming!
+⚙️  modules/KENL0 user@bazzite:~$ # Let's test HDR gaming!
 
-⚙️  KENL0 user@bazzite:~$ gamescope --hdr-enabled --fullscreen -- steam steam://rungameid/1091500
+⚙️  modules/KENL0 user@bazzite:~$ gamescope --hdr-enabled --fullscreen -- steam steam://rungameid/1091500
 
 [Cyberpunk 2077 launches with HDR enabled]
 
 🎮 HDR working! Colors are 🔥
 
-⚙️  KENL0 user@bazzite:~$ atom STATUS "Bazzite 41 rebase complete and verified - HDR gaming working!"
+⚙️  modules/KENL0 user@bazzite:~$ atom STATUS "Bazzite 41 rebase complete and verified - HDR gaming working!"
 
 ✅ ATOM-STATUS-20251109-031
 
-⚙️  KENL0 user@bazzite:~$
+⚙️  modules/KENL0 user@bazzite:~$
 ```
 
 ## Key Features Demonstrated:
@@ -371,7 +371,7 @@ ATOM Trail: Complete rebase history logged
 
 ## Safety Features:
 
-- KENL10 snapshot before rebase
+- modules/KENL10 snapshot before rebase
 - rpm-ostree keeps previous deployment
 - GRUB allows easy rollback selection
 - Comprehensive post-boot testing
