@@ -1,5 +1,5 @@
 ---
-project: KENL - Intent-Driven Operations for Bazzite
+project: modules/KENL - Intent-Driven Operations for Bazzite
 status: production
 version: 1.0.0
 classification: OWI-DOC
@@ -7,7 +7,7 @@ atom: ATOM-DOC-20251110-020
 owi-version: 1.0.0
 ---
 
-# KENL
+# modules/KENL
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
@@ -19,15 +19,15 @@ owi-version: 1.0.0
 
 ---
 
-## 📖 KENL Builders (kĕn'-əl bil'-dərz)
+## 📖 modules/KENL Builders (kĕn'-əl bil'-dərz)
 
 **_noun_** *plural*
 
-1. **Technical Definition**: Practitioners of the KENL methodology who construct intent-driven, self-documenting systems on immutable Linux distributions, primarily for gaming and development workflows.
+1. **Technical Definition**: Practitioners of the modules/KENL methodology who construct intent-driven, self-documenting systems on immutable Linux distributions, primarily for gaming and development workflows.
 
 2. **Colloquial Usage**: "Those weird people who can recover from a system crash in 7 minutes while everyone else is Googling error messages."
 
-3. **Etymology**: Derived from "kernel builder" after removing the expectation of actual kernel compilation. KENL Builders prefer their kernels pre-compiled and their systems immutable, thank you very much.
+3. **Etymology**: Derived from "kernel builder" after removing the expectation of actual kernel compilation. modules/KENL Builders prefer their kernels pre-compiled and their systems immutable, thank you very much.
 
 4. **Distinguishing Traits**:
    - Compulsively document *why* they did things, not just *what*
@@ -36,17 +36,17 @@ owi-version: 1.0.0
    - Can debate rpm-ostree vs traditional package management for hours
    - Secretly judge your FPS if you're not using GE-Proton
 
-5. **In a Sentence**: "Ever since Jake became a KENL Builder, he spends more time sharing gaming configs than actually gaming."
+5. **In a Sentence**: "Ever since Jake became a modules/KENL Builder, he spends more time sharing gaming configs than actually gaming."
 
 6. **Related Terms**: *kernel kiddie* (pejorative), *ATOM cultist* (affectionate), *that Linux gaming person* (exasperated Windows users)
 
 ---
 
-## Why KENL?
+## Why modules/KENL?
 
 **Problem**: Modern gaming PCs are complex. Proton versions, DXVK settings, kernel parameters, GPU drivers - hundreds of variables affect performance. When something breaks, you're left guessing what changed.
 
-**Solution**: KENL captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, KENL knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
+**Solution**: modules/KENL captures *why* you did things, not just *what* you did. When Halo Infinite runs at 118 FPS, modules/KENL knows it's because of Proton GE 9-18 + GameMode + specific launch options. When something breaks, recovery is automatic.
 
 **Result**: 7-minute crash recovery, shareable gaming configs, complete audit trail of your system.
 
@@ -54,7 +54,7 @@ owi-version: 1.0.0
 
 ## 🚀 System Resource Efficiency
 
-### Why Bazzite + KENL = Performance Win
+### Why Bazzite + modules/KENL = Performance Win
 
 **Immutable Foundation** (Fedora Atomic via rpm-ostree):
 - ✅ **Read-only root**: System files never corrupted by accidental changes
@@ -65,7 +65,7 @@ owi-version: 1.0.0
 **ATOM Trail Efficiency**:
 - ✅ **Lightweight logging**: Plain text audit trail (~1KB per operation)
 - ✅ **No overhead**: ATOM entries written async, zero performance impact during gaming
-- ✅ **Smart deduplication**: KENL10 backups use deduplication (Borg/restic), saving 60-80% space
+- ✅ **Smart deduplication**: modules/KENL10 backups use deduplication (Borg/restic), saving 60-80% space
 - ✅ **Containerized development**: Distrobox isolates build dependencies, keeping host clean
 
 **Memory Footprint**:
@@ -76,10 +76,10 @@ Traditional Arch/Ubuntu Gaming Setup:
 ├─ Background processes:     ~300MB RAM
 └─ Total baseline:          ~1.35GB RAM
 
-Bazzite + KENL Setup:
+Bazzite + modules/KENL Setup:
 ├─ System services:          ~380MB RAM  (rpm-ostree efficiency)
 ├─ Desktop environment:      ~520MB RAM  (KDE optimized for gaming)
-├─ KENL framework:           ~15MB RAM   (pure shell + ATOM trail)
+├─ modules/KENL framework:           ~15MB RAM   (pure shell + ATOM trail)
 ├─ Background processes:     ~200MB RAM  (minimal, gaming-optimized)
 └─ Total baseline:          ~1.12GB RAM  (230MB less!)
 
@@ -107,11 +107,11 @@ More RAM for games, VMs, or Chrome tabs!
 - 📊 **Performance regression tracking**: ATOM trail shows when FPS dropped and why
 - 🔐 **Security bonus**: Read-only root resistant to malware modifications
 
-[See detailed benchmarks →](./KENL4-monitoring/README.md#performance-metrics)
+[See detailed benchmarks →](./modules/KENL4-monitoring/README.md#performance-metrics)
 
 ---
 
-## The KENL Ecosystem
+## The modules/KENL Ecosystem
 
 KENL is a modular system of **12 specialized layers**:
 
@@ -161,7 +161,7 @@ graph TB
 
 ### Quick Guide
 
-| KENL | Purpose | You'll use this when... |
+| modules/KENL | Purpose | You'll use this when... |
 |------|---------|-------------------------|
 | ⚙️ **KENL0** | System operations | Updating BIOS, rebasing Bazzite, managing rpm-ostree |
 | ⚛️ **KENL1** | Framework core | Everything (automatic ATOM trail logging) |
@@ -177,11 +177,11 @@ graph TB
 | 📺 **KENL11** | Media server | Automated torrenting, Radarr/Sonarr, Jellyfin |
 | 📚 **KENL12** | Community resources | CSS snippets, Bazzite links, distrobox guides |
 
-[See full architecture diagrams →](./KENL1-framework/README.md#architecture)
+[See full architecture diagrams →](./modules/KENL1-framework/README.md#architecture)
 
 ---
 
-## What's Different About KENL?
+## What's Different About modules/KENL?
 
 ### 1. 🔍 Everything is Traceable
 
@@ -211,7 +211,7 @@ Share with friends. They apply it instantly. It just works.
 
 ### 3. ⚡ 7-Minute Crash Recovery
 
-System exploded? KENL's SAGE recovery reads your ATOM trail and rebuilds your exact configuration in minutes.
+System exploded? modules/KENL's SAGE recovery reads your ATOM trail and rebuilds your exact configuration in minutes.
 
 Traditional recovery: "Let me Google this error for 3 hours..."
 KENL recovery: `atom-analytics --recovery` → done.
@@ -233,7 +233,7 @@ Each context loads relevant aliases, functions, and visual themes.
 - ATOM trail audit for compliance
 - Immutable root = malware-resistant base
 
-[See detailed examples →](./KENL2-gaming/README.md#play-card-workflow)
+[See detailed examples →](./modules/KENL2-gaming/README.md#play-card-workflow)
 
 ---
 
@@ -261,12 +261,12 @@ Complete gaming setup with Play Card creation and sharing
 ### For Gamers
 
 ```bash
-# 1. Install KENL framework
-cd KENL1-framework/atom-sage-framework
+# 1. Install modules/KENL framework
+cd modules/KENL1-framework/atom-sage-framework
 ./install.sh
 
 # 2. Activate gaming module
-cd ../../KENL2-gaming
+cd ../../modules/KENL2-gaming
 ./activate.sh
 
 # 3. Research game compatibility
@@ -279,20 +279,20 @@ cd ../../KENL2-gaming
 ./apply-playcard.sh play-cards/halo-infinite.yaml
 
 # 6. Track performance
-cd ../KENL4-monitoring/play-card-tracking
-./track-session.sh "Halo Infinite" ../../KENL2-gaming/play-cards/halo-infinite.yaml
+cd ../modules/KENL4-monitoring/play-card-tracking
+./track-session.sh "Halo Infinite" ../../modules/KENL2-gaming/play-cards/halo-infinite.yaml
 ```
 
-[Full gaming guide →](./KENL2-gaming/README.md)
+[Full gaming guide →](./modules/KENL2-gaming/README.md)
 
 ### For Developers
 
 ```bash
-# 1. Install KENL framework
-cd KENL1-framework/atom-sage-framework && ./install.sh
+# 1. Install modules/KENL framework
+cd modules/KENL1-framework/atom-sage-framework && ./install.sh
 
 # 2. Setup development environment
-cd ../../KENL3-dev
+cd ../../modules/KENL3-dev
 ./setup-devenv.sh ubuntu my-project
 
 # 3. Enter container
@@ -302,34 +302,34 @@ distrobox enter my-project
 sudo apt install python3 nodejs npm
 
 # 5. Switch to dev context
-cd ../KENL5-facades
+cd ../modules/KENL5-facades
 ./switch-kenl.sh dev
 ```
 
-[Full development guide →](./KENL3-dev/README.md)
+[Full development guide →](./modules/KENL3-dev/README.md)
 
 ### For System Admins
 
 ```bash
-# 1. Install KENL framework
-cd KENL1-framework/atom-sage-framework && ./install.sh
+# 1. Install modules/KENL framework
+cd modules/KENL1-framework/atom-sage-framework && ./install.sh
 
 # 2. Create system snapshot before changes
-cd ../../KENL10-backup
+cd ../../modules/KENL10-backup
 ./atom-snapshot.sh create before-update "Before system update"
 
 # 3. Perform system operations
-cd ../KENL0-system
+cd ../modules/KENL0-system
 ./quick-actions/update-verify.sh
 
 # 4. If something breaks, rollback
 rpm-ostree rollback --reboot
-# OR restore KENL snapshot
-cd ../KENL10-backup
+# OR restore modules/KENL snapshot
+cd ../modules/KENL10-backup
 ./atom-snapshot.sh restore before-update
 ```
 
-[Full system administration guide →](./KENL0-system/README.md)
+[Full system administration guide →](./modules/KENL0-system/README.md)
 
 ---
 
@@ -339,7 +339,7 @@ cd ../KENL10-backup
 
 - **OS**: Bazzite, Bazzite-DX, or any Fedora Atomic variant
 - **Container runtime**: Podman or Docker (pre-installed on Bazzite)
-- **Disk space**: 2GB for KENL + containers, 50GB+ for gaming
+- **Disk space**: 2GB for modules/KENL + containers, 50GB+ for gaming
 
 ### Install
 
@@ -349,21 +349,21 @@ git clone https://github.com/your-org/kenl.git
 cd kenl
 
 # Install core framework
-cd KENL1-framework/atom-sage-framework
+cd modules/KENL1-framework/atom-sage-framework
 ./install.sh
 
 # Activate modules as needed
-cd ../../KENL2-gaming && ./activate.sh        # Gaming
-cd ../KENL3-dev && ./setup-devenv.sh ubuntu   # Development
-cd ../KENL4-monitoring && ./setup-monitoring.sh  # Monitoring
+cd ../../modules/KENL2-gaming && ./activate.sh        # Gaming
+cd ../modules/KENL3-dev && ./setup-devenv.sh ubuntu   # Development
+cd ../modules/KENL4-monitoring && ./setup-monitoring.sh  # Monitoring
 ```
 
 ### First Steps
 
-1. **Read the learning guide**: `cd KENL7-learning && less README.md`
-2. **Check cheatsheets**: `ls KENL5-facades/cheatsheets/`
+1. **Read the learning guide**: `cd modules/KENL7-learning && less README.md`
+2. **Check cheatsheets**: `ls modules/KENL5-facades/cheatsheets/`
 3. **View ATOM trail**: `atom-analytics --summary`
-4. **Create first snapshot**: `cd KENL10-backup && ./atom-snapshot.sh create initial "Initial system state"`
+4. **Create first snapshot**: `cd modules/KENL10-backup && ./atom-snapshot.sh create initial "Initial system state"`
 
 ---
 
@@ -371,19 +371,19 @@ cd ../KENL4-monitoring && ./setup-monitoring.sh  # Monitoring
 
 ### 📚 Documentation
 
-- **[KENL0 - System Operations](./KENL0-system/README.md)**: rpm-ostree, ujust, firmware updates
-- **[KENL1 - Framework Core](./KENL1-framework/README.md)**: ATOM+SAGE+OWI methodology
-- **[KENL2 - Gaming](./KENL2-gaming/README.md)**: Play Cards, Proton optimization
-- **[KENL3 - Development](./KENL3-dev/README.md)**: Distrobox environments
-- **[KENL4 - Monitoring](./KENL4-monitoring/README.md)**: Performance metrics
-- **[KENL5 - Facades](./KENL5-facades/README.md)**: Visual theming, context switching
-- **[KENL6 - Social](./KENL6-social/README.md)**: Sharing Play Cards
-- **[KENL7 - Learning](./KENL7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
-- **[KENL8 - Security](./KENL8-security/README.md)**: Encryption, GPG, vaults
-- **[KENL9 - Library](./KENL9-library/README.md)**: Multi-OS game libraries, save sync
-- **[KENL10 - Backup](./KENL10-backup/README.md)**: Intelligent snapshots
-- **[KENL11 - Media](./KENL11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
-- **[KENL12 - Resources](./KENL12-resources/README.md)**: Community links, CSS snippets
+- **[KENL0 - System Operations](./modules/KENL0-system/README.md)**: rpm-ostree, ujust, firmware updates
+- **[KENL1 - Framework Core](./modules/KENL1-framework/README.md)**: ATOM+SAGE+OWI methodology
+- **[KENL2 - Gaming](./modules/KENL2-gaming/README.md)**: Play Cards, Proton optimization
+- **[KENL3 - Development](./modules/KENL3-dev/README.md)**: Distrobox environments
+- **[KENL4 - Monitoring](./modules/KENL4-monitoring/README.md)**: Performance metrics
+- **[KENL5 - Facades](./modules/KENL5-facades/README.md)**: Visual theming, context switching
+- **[KENL6 - Social](./modules/KENL6-social/README.md)**: Sharing Play Cards
+- **[KENL7 - Learning](./modules/KENL7-learning/README.md)**: Git, rpm-ostree, GPG tutorials
+- **[KENL8 - Security](./modules/KENL8-security/README.md)**: Encryption, GPG, vaults
+- **[KENL9 - Library](./modules/KENL9-library/README.md)**: Multi-OS game libraries, save sync
+- **[KENL10 - Backup](./modules/KENL10-backup/README.md)**: Intelligent snapshots
+- **[KENL11 - Media](./modules/KENL11-media/README.md)**: Seedbox, Radarr/Sonarr, Jellyfin automation
+- **[KENL12 - Resources](./modules/KENL12-resources/README.md)**: Community links, CSS snippets
 
 ### 🧪 Real World Scenarios
 
@@ -397,8 +397,8 @@ cd ../KENL4-monitoring && ./setup-monitoring.sh  # Monitoring
 
 - **[OWI Framework Overview](./OWI_FRAMEWORK_OVERVIEW.md)**: Gaming/Configuring/Building-With-Intent
 - **[CLAUDE.md](./CLAUDE.md)**: Guidance for Claude Code instances
-- **[ADR Template](./02-Decisions/ADR_TEMPLATE.md)**: Architectural decisions
-- **[AI Integration Guide](./AI-INTEGRATION-GUIDE.md)**: Using AI with KENLs
+- **[ADR Template](./governance/02-Decisions/ADR_TEMPLATE.md)**: Architectural decisions
+- **[AI Integration Guide](./AI-INTEGRATION-GUIDE.md)**: Using AI with modules/KENLs
 
 ---
 
@@ -437,7 +437,7 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
 
-It's also a play on "kernel" - KENL sits between you and your system, making complex operations simple and safe.
+It's also a play on "kernel" - modules/KENL sits between you and your system, making complex operations simple and safe.
 
 ---
 
@@ -448,4 +448,4 @@ It's also a play on "kernel" - KENL sits between you and your system, making com
 
 ---
 
-Made with intent by KENL Builders everywhere 🎮💻🔐
+Made with intent by modules/KENL Builders everywhere 🎮💻🔐

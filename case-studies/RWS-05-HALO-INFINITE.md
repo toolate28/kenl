@@ -1,7 +1,7 @@
 # RWS-05: Halo Infinite Gaming Setup
 
 ```
-🎮 KENL2 user@bazzite:~$ atom RESEARCH "What do I need to run Halo Infinite on my PC?"
+🎮 modules/KENL2 user@bazzite:~$ atom RESEARCH "What do I need to run Halo Infinite on my PC?"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Gaming Research - Halo Infinite
@@ -269,7 +269,7 @@ Select [1-4 or 'all']: all
 
 ════════════════════════════════════════════════════════════
 
-🎮 KENL2 user@bazzite:~$ mangohud gamemoderun steam steam://rungameid/1240440
+🎮 modules/KENL2 user@bazzite:~$ mangohud gamemoderun steam steam://rungameid/1240440
 
 [Halo Infinite launches]
 
@@ -320,7 +320,7 @@ Select [1-4 or 'all']: all
 
 [User exits game]
 
-🎮 KENL2 user@bazzite:~$ atom STATUS "Halo Infinite setup complete - 118 FPS average on Ultra"
+🎮 modules/KENL2 user@bazzite:~$ atom STATUS "Halo Infinite setup complete - 118 FPS average on Ultra"
 
 ════════════════════════════════════════════════════════════
   ATOM+SAGE: Gaming Session Complete
@@ -348,10 +348,10 @@ Play Card created:
 Share with friends? [Y/n]: Y
 
 ════════════════════════════════════════════════════════════
-  KENL6: Sharing Play Card
+  modules/KENL6: Sharing Play Card
 ════════════════════════════════════════════════════════════
 
-Encrypting Play Card via KENL8...
+Encrypting Play Card via modules/KENL8...
 ✅ Encrypted: halo-infinite.yaml.gpg
 
 Share via:
@@ -370,9 +370,9 @@ Your clan can now replicate your exact setup! 🎮
 
 ════════════════════════════════════════════════════════════
 
-🎮 KENL2 user@bazzite:~$ # Let's try multiplayer!
+🎮 modules/KENL2 user@bazzite:~$ # Let's try multiplayer!
 
-🎮 KENL2 user@bazzite:~$ mangohud gamemoderun steam steam://rungameid/1240440
+🎮 modules/KENL2 user@bazzite:~$ mangohud gamemoderun steam steam://rungameid/1240440
 
 [Halo Infinite launches → User selects Multiplayer]
 
@@ -404,7 +404,7 @@ Your clan can now replicate your exact setup! 🎮
 
 [After gaming session]
 
-🎮 KENL2 user@bazzite:~$ atom GAMING "Halo Infinite session - 2 hours campaign + 1 hour multiplayer - Flawless"
+🎮 modules/KENL2 user@bazzite:~$ atom GAMING "Halo Infinite session - 2 hours campaign + 1 hour multiplayer - Flawless"
 
 ✅ ATOM-GAMING-20251109-035
 
@@ -419,7 +419,7 @@ Session stats:
 Play Card validated: halo-infinite.yaml
 Rating: 10/10 - Perfect setup! 🏆
 
-🎮 KENL2 user@bazzite:~$
+🎮 modules/KENL2 user@bazzite:~$
 ```
 
 ## Key Features Demonstrated:
@@ -458,5 +458,5 @@ Bazzite (immutable OS)
 - **Hardware-aware** - Targets YOUR specific GPU/CPU
 - **Community knowledge** - ProtonDB integration
 - **Reproducible** - Play Card captures exact setup
-- **Shareable** - Encrypted sharing via KENL6
+- **Shareable** - Encrypted sharing via modules/KENL6
 - **Auditable** - Complete ATOM trail of setup + session

@@ -3,7 +3,7 @@ title: "RWS-03: Dual-Boot Setup (Linux ↔ Windows)"
 date: 2025-11-10
 scenario: Real World Scenario - Terminal Screenshot
 intent: "User wants to dual-boot their PC with Linux and Windows"
-kenl-context: KENL0-system, KENL1-framework
+kenl-context: modules/KENL0-system, modules/KENL1-framework
 hardware: "ASUS ROG STRIX B550-F, 1TB NVMe, RTX 3080"
 atom-tag: ATOM-RWS-20251110-003
 ---
@@ -24,14 +24,14 @@ atom-tag: ATOM-RWS-20251110-003
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│ ⚙️  KENL0 bazza@bazzite-deck:~$                                      │
+│ ⚙️  modules/KENL0 bazza@bazzite-deck:~$                                      │
 └──────────────────────────────────────────────────────────────────────┘
 
 $ # User wants to add Windows 11 to existing Bazzite installation
 $ dual-boot --add windows11
 
 ╔══════════════════════════════════════════════════════════════════════╗
-║ 🔍 KENL1-SAGE: Dual-Boot Planner (Linux → Windows)                  ║
+║ 🔍 modules/KENL1-SAGE: Dual-Boot Planner (Linux → Windows)                  ║
 ╚══════════════════════════════════════════════════════════════════════╝
 
 [CTFWI Pre-Flight Checks]
@@ -74,7 +74,7 @@ Would you like to:
 Choice: 2
 
 ╔══════════════════════════════════════════════════════════════════════╗
-║ 💾 KENL10: Backup Recommended                                       ║
+║ 💾 modules/KENL10: Backup Recommended                                       ║
 ╚══════════════════════════════════════════════════════════════════════╝
 
 Creating ATOM-aware snapshot before disk operations...
@@ -84,16 +84,16 @@ $ kenl10-snapshot create "before-dual-boot-resize" "Pre-Windows dual-boot backup
 [1/6] Capturing ATOM trail context...
   ✅ Captured 147 ATOM entries
 
-[2/6] Capturing KENL configurations...
-  ✅ KENL0-system
-  ✅ KENL1-framework
-  ✅ KENL2-gaming
-  ✅ KENL3-dev
-  ✅ KENL4-monitoring
-  ✅ KENL5-facades
-  ✅ KENL6-social
-  ✅ KENL8-security
-  ✅ KENL10-backup
+[2/6] Capturing modules/KENL configurations...
+  ✅ modules/KENL0-system
+  ✅ modules/KENL1-framework
+  ✅ modules/KENL2-gaming
+  ✅ modules/KENL3-dev
+  ✅ modules/KENL4-monitoring
+  ✅ modules/KENL5-facades
+  ✅ modules/KENL6-social
+  ✅ modules/KENL8-security
+  ✅ modules/KENL10-backup
 
 [3/6] Capturing Play Cards...
   ✅ Captured 23 Play Cards
@@ -130,7 +130,7 @@ $ kenl10-snapshot export before-dual-boot-resize /mnt/backup-drive/
 Exporting snapshot to external drive...
   ✅ ATOM trail: 147 entries (12MB)
   ✅ Play Cards: 23 cards (890KB)
-  ✅ KENL configs: 89 files (45MB)
+  ✅ modules/KENL configs: 89 files (45MB)
   ✅ System state: 1 file (234KB)
 
 ✅ External backup complete: /mnt/backup-drive/before-dual-boot-resize/
@@ -364,7 +364,7 @@ $ # Switches to terminal in Live environment
 liveuser@bazzite-live:~$ dual-boot --add bazzite
 
 ╔══════════════════════════════════════════════════════════════════════╗
-║ 🔍 KENL1-SAGE: Dual-Boot Planner (Windows → Linux)                  ║
+║ 🔍 modules/KENL1-SAGE: Dual-Boot Planner (Windows → Linux)                  ║
 ╚══════════════════════════════════════════════════════════════════════╝
 
 [CTFWI Pre-Flight Checks]
@@ -650,7 +650,7 @@ Welcome to Bazzite!
 
 [KENL0 context auto-activated on first boot]
 
-⚙️  KENL0 bazza@bazzite-deck:~$ dual-boot --verify
+⚙️  modules/KENL0 bazza@bazzite-deck:~$ dual-boot --verify
 
 ╔══════════════════════════════════════════════════════════════════════╗
 ║ ✅ Dual-Boot Verification                                            ║
@@ -735,7 +735,7 @@ ATOM-DUAL-BOOT-20251110-014: Verified dual-boot configuration
 ### Switch Default OS
 
 ```bash
-⚙️  KENL0 bazza@bazzite-deck:~$ dual-boot --set-default windows
+⚙️  modules/KENL0 bazza@bazzite-deck:~$ dual-boot --set-default windows
 
 Changing default boot OS to Windows...
   $ sudo grub2-editenv - set saved_entry="Windows 11"
@@ -750,7 +750,7 @@ Reboot to apply? [y/N]:
 ### Access Windows Files from Bazzite
 
 ```bash
-⚙️  KENL0 bazza@bazzite-deck:~$ dual-boot --mount windows
+⚙️  modules/KENL0 bazza@bazzite-deck:~$ dual-boot --mount windows
 
 Mounting Windows partition read-only...
   $ sudo mkdir -p /mnt/windows
@@ -772,13 +772,13 @@ To copy files:
 ### Share Files Between OSes
 
 ```bash
-⚙️  KENL0 bazza@bazzite-deck:~$ cd /mnt/shared
+⚙️  modules/KENL0 bazza@bazzite-deck:~$ cd /mnt/shared
 
-⚙️  KENL0 bazza@bazzite-deck:/mnt/shared$ ls
+⚙️  modules/KENL0 bazza@bazzite-deck:/mnt/shared$ ls
 game-saves/  screenshots/  documents/
 
 # Copy file to shared partition (accessible from Windows)
-⚙️  KENL0 bazza@bazzite-deck:/mnt/shared$ cp ~/play-card-halo.yaml game-saves/
+⚙️  modules/KENL0 bazza@bazzite-deck:/mnt/shared$ cp ~/play-card-halo.yaml game-saves/
 
 # From Windows, access: D:\game-saves\play-card-halo.yaml
 ```
@@ -877,7 +877,7 @@ Fix:
 ## Summary
 
 **Scenario A (Linux-first → Add Windows)**:
-- Backup with KENL10 (local + external)
+- Backup with modules/KENL10 (local + external)
 - Resize Bazzite partition using GParted Live USB
 - Install Windows to new NTFS partition
 - Restore GRUB bootloader

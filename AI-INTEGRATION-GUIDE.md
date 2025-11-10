@@ -1,14 +1,14 @@
 ---
-title: KENL AI Integration Guide
+title: modules/KENL AI Integration Guide
 version: 1.0.0
 date: 2025-11-10
 classification: OWI-DOC
 atom: ATOM-DOC-20251110-018
 ---
 
-# KENL AI Integration Guide
+# modules/KENL AI Integration Guide
 
-**How AI assistants (Claude, Qwen, Perplexity) enhance each KENL module**
+**How AI assistants (Claude, Qwen, Perplexity) enhance each modules/KENL module**
 
 ---
 
@@ -32,9 +32,9 @@ graph LR
 
 ---
 
-## KENL AI Integration Matrix
+## modules/KENL AI Integration Matrix
 
-| KENL | AI Level | Why | Best AI Model |
+| modules/KENL | AI Level | Why | Best AI Model |
 |------|----------|-----|---------------|
 | **KENL0** System | 🟦 Little Help | System commands are straightforward, AI explains complex operations | **Qwen 2.5 (local)** - Fast, offline |
 | **KENL1** Framework | 🟨 Optional Help | ATOM trail analysis, recovery recommendations | **Claude** - Best reasoning |
@@ -58,9 +58,9 @@ graph LR
 
 ---
 
-## Detailed AI Integration by KENL
+## Detailed AI Integration by modules/KENL
 
-### KENL0: System Operations 🟦 (Little Help)
+### modules/KENL0: System Operations 🟦 (Little Help)
 
 **AI Usage:** 10-20%
 
@@ -73,7 +73,7 @@ graph LR
 
 ```bash
 # You run a command
-⚙️ KENL0 $ rpm-ostree status
+⚙️ modules/KENL0 $ rpm-ostree status
 
 # Output is confusing
 State: idle
@@ -105,11 +105,11 @@ ollama pull qwen2.5:14b
 mv ~/.ollama/models /mnt/claude-ai/models/ollama
 ln -s /mnt/claude-ai/models/ollama ~/.ollama/models
 
-# Use in KENL0
+# Use in modules/KENL0
 echo "alias ai='ollama run qwen2.5:14b'" >> ~/.bashrc
 ```
 
-**AI prompts for KENL0:**
+**AI prompts for modules/KENL0:**
 ```
 "Explain this rpm-ostree error: [paste error]"
 "What's the difference between rpm-ostree upgrade and rebase?"
@@ -119,7 +119,7 @@ echo "alias ai='ollama run qwen2.5:14b'" >> ~/.bashrc
 
 ---
 
-### KENL1: Framework Core 🟨 (Optional Help)
+### modules/KENL1: Framework Core 🟨 (Optional Help)
 
 **AI Usage:** 30-50%
 
@@ -132,7 +132,7 @@ echo "alias ai='ollama run qwen2.5:14b'" >> ~/.bashrc
 
 ```bash
 # System crashed, you have ATOM trail
-⚛️ KENL1 $ atom-analytics --recovery
+⚛️ modules/KENL1 $ atom-analytics --recovery
 
 # AI analyzes trail
 AI (Claude): "Based on your ATOM trail:
@@ -145,7 +145,7 @@ Timeline suggests Proton GE 9-20 incompatible with your
 NVIDIA 570.86.10 driver. Recommend:
 1. Rollback Proton to 9-18
 2. Or update NVIDIA driver to 575.x
-3. Test in KENL2 before marking as resolved"
+3. Test in modules/KENL2 before marking as resolved"
 ```
 
 **Best AI model:** **Claude 3.5 Sonnet** (via API)
@@ -158,7 +158,7 @@ NVIDIA 570.86.10 driver. Recommend:
 # Configure Claude API
 export ANTHROPIC_API_KEY="your-key-here"
 
-# Add to KENL1
+# Add to modules/KENL1
 cat >> ~/.kenl/KENL1-framework/config <<EOF
 [ai]
 provider = anthropic
@@ -167,7 +167,7 @@ max_tokens = 4000
 EOF
 ```
 
-**AI prompts for KENL1:**
+**AI prompts for modules/KENL1:**
 ```
 "Analyze this ATOM trail and suggest recovery: [paste trail]"
 "What was I doing before the crash?"
@@ -177,7 +177,7 @@ EOF
 
 ---
 
-### KENL2: Gaming 🟩 (Maximum Help)
+### modules/KENL2: Gaming 🟩 (Maximum Help)
 
 **AI Usage:** 80-90%
 
@@ -191,7 +191,7 @@ EOF
 
 ```bash
 # You want to play a new game
-🎮 KENL2 $ setup-game "Baldur's Gate 3"
+🎮 modules/KENL2 $ setup-game "Baldur's Gate 3"
 
 # AI takes over (Perplexity + Claude)
 AI Research (Perplexity):
@@ -237,7 +237,7 @@ export PERPLEXITY_API_KEY="your-key-here"
 # Claude for Play Card generation
 export ANTHROPIC_API_KEY="your-key-here"
 
-# Configure KENL2
+# Configure modules/KENL2
 cat >> ~/.kenl/KENL2-gaming/config <<EOF
 [ai]
 research_provider = perplexity
@@ -249,7 +249,7 @@ auto_configure = true
 EOF
 ```
 
-**AI prompts for KENL2:**
+**AI prompts for modules/KENL2:**
 ```
 "Research Elden Ring Linux compatibility"
 "Generate Play Card from my Steam appmanifest"
@@ -266,7 +266,7 @@ EOF
 
 ---
 
-### KENL3: Development 🟩 (Maximum Help)
+### modules/KENL3: Development 🟩 (Maximum Help)
 
 **AI Usage:** 80-90%
 
@@ -280,7 +280,7 @@ EOF
 
 ```bash
 # You need a Python ML environment
-💻 KENL3 $ create-devbox python-ml
+💻 modules/KENL3 $ create-devbox python-ml
 
 # AI generates complete setup (Claude Code)
 AI: "Creating Python ML development environment...
@@ -311,9 +311,9 @@ Container created! Enter with: dbe python-ml"
 
 **Best AI model:** **Claude Code** (this conversation!)
 - **Why:** Best for programming tasks
-- **Integration:** Already running in your KENL3 distrobox
+- **Integration:** Already running in your modules/KENL3 distrobox
 
-**AI prompts for KENL3:**
+**AI prompts for modules/KENL3:**
 ```
 "Write a Python script to analyze ATOM trail JSON"
 "Debug this containerization error: [paste error]"
@@ -324,7 +324,7 @@ Container created! Enter with: dbe python-ml"
 
 ---
 
-### KENL4: Monitoring 🟨 (Optional Help)
+### modules/KENL4: Monitoring 🟨 (Optional Help)
 
 **AI Usage:** 30-50%
 
@@ -337,7 +337,7 @@ Container created! Enter with: dbe python-ml"
 
 ```bash
 # You notice FPS drops
-📊 KENL4 $ kenl-monitor analyze --last 7d
+📊 modules/KENL4 $ kenl-monitor analyze --last 7d
 
 # AI analyzes metrics (Qwen local)
 AI: "Performance anomaly detected:
@@ -364,7 +364,7 @@ Recommendation:
 
 ---
 
-### KENL7: Learning 🟩 (Maximum Help)
+### modules/KENL7: Learning 🟩 (Maximum Help)
 
 **AI Usage:** 80-90%
 
@@ -378,7 +378,7 @@ Recommendation:
 
 ```bash
 # You want to learn Git rebase
-🎓 KENL7 $ learn git-rebase
+🎓 modules/KENL7 $ learn git-rebase
 
 # AI tutors you (Claude + Perplexity)
 AI (Claude): "Let's learn Git rebase interactively!
@@ -420,7 +420,7 @@ Next: Try rebasing your feature branch on updated main!"
 
 ---
 
-### KENL8: Security 🟧 (Recommended - Verify All Suggestions!)
+### modules/KENL8: Security 🟧 (Recommended - Verify All Suggestions!)
 
 **AI Usage:** 60-70%
 
@@ -434,7 +434,7 @@ Next: Try rebasing your feature branch on updated main!"
 
 ```bash
 # You want to setup GPG
-🔐 KENL8 $ setup-gpg
+🔐 modules/KENL8 $ setup-gpg
 
 # AI guides you (Claude) - YOU VERIFY EACH STEP
 AI: "Setting up GPG for commit signing...
@@ -469,7 +469,7 @@ Always verify with official documentation!"
 
 ```bash
 # Setup Proton VPN
-🔐 KENL8 $ setup-proton-vpn
+🔐 modules/KENL8 $ setup-proton-vpn
 
 AI: "Proton VPN setup for privacy-focused torrenting...
 
@@ -495,7 +495,7 @@ Step 4: Test connection
   curl ifconfig.me
   Expected: Proton VPN IP (not your real IP)
 
-Step 5: Integrate with KENL11 (qBittorrent)
+Step 5: Integrate with modules/KENL11 (qBittorrent)
   See: ~/kenl/KENL11-media/vpn/setup-proton.sh
 
 ✅ Proton VPN configured for secure torrenting!"
@@ -505,7 +505,7 @@ Step 5: Integrate with KENL11 (qBittorrent)
 
 ```bash
 # Setup Proton Mail Bridge (for local clients)
-🔐 KENL8 $ setup-proton-mail
+🔐 modules/KENL8 $ setup-proton-mail
 
 AI: "Proton Mail Bridge allows Thunderbird/Mutt to access
 encrypted Proton Mail locally.
@@ -525,7 +525,7 @@ Step 3: Configure Thunderbird
 ✅ Encrypted email locally accessible!"
 
 # Setup Proton Drive
-🔐 KENL8 $ setup-proton-drive
+🔐 modules/KENL8 $ setup-proton-drive
 
 AI: "Proton Drive for encrypted cloud storage...
 
@@ -535,11 +535,11 @@ Step 1: Install Proton Drive client
 
 Step 2: Sync folders
   Recommend syncing:
-    - KENL10 snapshots (encrypted backups)
+    - modules/KENL10 snapshots (encrypted backups)
     - Play Cards (share with friends)
     - Important documents
 
-Step 3: Integrate with KENL10 backup
+Step 3: Integrate with modules/KENL10 backup
   See: ~/kenl/KENL10-backup/cloud-sync/proton-drive.sh
 
 ✅ Encrypted cloud storage configured!"
@@ -558,7 +558,7 @@ Before executing AI suggestions:
 
 ---
 
-### KENL11: Media 🟩 (Maximum Help)
+### modules/KENL11: Media 🟩 (Maximum Help)
 
 **AI Usage:** 80-90%
 
@@ -572,7 +572,7 @@ Before executing AI suggestions:
 
 ```bash
 # Prowlarr indexer failing
-📺 KENL11 $ troubleshoot-indexer "1337x"
+📺 modules/KENL11 $ troubleshoot-indexer "1337x"
 
 # AI debugs (Perplexity + Claude)
 AI (Perplexity): "Researching 1337x recent issues...
@@ -597,7 +597,7 @@ Applying fixes...
 
 **Best AI models:** **Perplexity (research) + Claude (fix)**
 
-**AI prompts for KENL11:**
+**AI prompts for modules/KENL11:**
 ```
 "Why is my indexer failing? Check recent changes"
 "Recommend quality profile for 1080p streaming"
@@ -619,11 +619,11 @@ Applying fixes...
 **Storage:** `/mnt/claude-ai/models/ollama/` (KENL9 partition)
 
 **KENLs using local AI:**
-- KENL0 (system explanations)
-- KENL4 (metric analysis)
-- KENL5 (config generation)
-- KENL9 (storage optimization)
-- KENL10 (backup scheduling)
+- modules/KENL0 (system explanations)
+- modules/KENL4 (metric analysis)
+- modules/KENL5 (config generation)
+- modules/KENL9 (storage optimization)
+- modules/KENL10 (backup scheduling)
 
 **Setup:**
 ```bash
@@ -638,7 +638,7 @@ ollama pull llama3.1:8b
 mv ~/.ollama/models /mnt/claude-ai/models/ollama
 ln -s /mnt/claude-ai/models/ollama ~/.ollama/models
 
-# Use in any KENL
+# Use in any modules/KENL
 ollama run qwen2.5:14b "Explain rpm-ostree"
 ```
 
@@ -662,13 +662,13 @@ ollama run qwen2.5:14b "Explain rpm-ostree"
 - **Perplexity Sonar** (Perplexity API)
 
 **KENLs using cloud AI:**
-- KENL1 (ATOM trail analysis)
-- KENL2 (ProtonDB research)
-- KENL3 (code generation)
-- KENL6 (Play Card descriptions)
-- KENL7 (tutoring)
-- KENL8 (security guidance - verify!)
-- KENL11 (indexer troubleshooting)
+- modules/KENL1 (ATOM trail analysis)
+- modules/KENL2 (ProtonDB research)
+- modules/KENL3 (code generation)
+- modules/KENL6 (Play Card descriptions)
+- modules/KENL7 (tutoring)
+- modules/KENL8 (security guidance - verify!)
+- modules/KENL11 (indexer troubleshooting)
 
 **Setup:**
 ```bash
@@ -682,7 +682,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 export PERPLEXITY_API_KEY="pplx-..."
 EOF
 
-# Use in KENLs
+# Use in modules/KENLs
 claude-api "Analyze this ATOM trail: [...]"
 perplexity-api "Research Elden Ring Linux compatibility"
 ```
@@ -698,7 +698,7 @@ perplexity-api "Research Elden Ring Linux compatibility"
 - ❌ Requires internet
 
 **Privacy notes:**
-- KENL ATOM trail summaries are anonymized before sending
+- modules/KENL ATOM trail summaries are anonymized before sending
 - No personal identifiers sent
 - Can configure to redact sensitive data
 
@@ -748,7 +748,7 @@ def choose_ai(query, kenl_context):
 ollama pull qwen2.5:14b
 ollama pull llama3.1:70b  # Larger model for better quality
 
-# Configure all KENLs to use local
+# Configure all modules/KENLs to use local
 for kenl in ~/.kenl/KENL*/config; do
   echo "ai_provider = ollama" >> $kenl
   echo "ai_model = qwen2.5:14b" >> $kenl
@@ -801,7 +801,7 @@ ai-router --best-quality
 ```
 
 **Cost estimate:**
-- ~$20-50/month (heavy AI usage across all KENLs)
+- ~$20-50/month (heavy AI usage across all modules/KENLs)
 
 ---
 
@@ -894,7 +894,7 @@ ai:
       - api_key
       - password
     local_only_kenls:
-      - KENL8  # Security - never send to cloud
+      - modules/KENL8  # Security - never send to cloud
 ```
 
 ### Per-KENL AI Config
@@ -927,11 +927,11 @@ kenl2_ai:
 
 ### Proton VPN (Privacy-First Torrenting)
 
-**Integration with KENL11-media:**
+**Integration with modules/KENL11-media:**
 
 ```bash
 # Setup Proton VPN for qBittorrent
-📺 KENL11 $ setup-proton-vpn
+📺 modules/KENL11 $ setup-proton-vpn
 
 AI: "Configuring Proton VPN for torrenting...
 
@@ -979,17 +979,17 @@ Step 4: Test kill switch
 
 ### Proton Mail (Encrypted Email)
 
-**Integration with KENL8-security:**
+**Integration with modules/KENL8-security:**
 
 ```bash
 # Setup Proton Mail Bridge
-🔐 KENL8 $ setup-proton-mail
+🔐 modules/KENL8 $ setup-proton-mail
 
 AI: "Proton Mail Bridge for local email clients...
 
 Use cases:
   - Encrypted email with Thunderbird/Mutt
-  - Automated notifications from KENL services
+  - Automated notifications from modules/KENL services
   - Sharing Play Cards via encrypted email
 
 Step 1: Install Bridge
@@ -1009,7 +1009,7 @@ Step 3: Configure Thunderbird
   IMAP: 127.0.0.1:1143 (SSL/TLS, Normal password)
   SMTP: 127.0.0.1:1025 (SSL/TLS, Normal password)
 
-Step 4: Integrate with KENL6 (social sharing)
+Step 4: Integrate with modules/KENL6 (social sharing)
   Share Play Cards via encrypted email:
 
   kenl-switch 6
@@ -1024,11 +1024,11 @@ Step 4: Integrate with KENL6 (social sharing)
 
 ### Proton Drive (Encrypted Cloud Backup)
 
-**Integration with KENL10-backup:**
+**Integration with modules/KENL10-backup:**
 
 ```bash
 # Setup Proton Drive for cloud backups
-💾 KENL10 $ setup-proton-drive
+💾 modules/KENL10 $ setup-proton-drive
 
 AI: "Proton Drive for encrypted cloud backups...
 
@@ -1053,7 +1053,7 @@ Step 2: Configure rclone
 Step 3: Test connection
   rclone ls proton-drive:
 
-Step 4: Integrate with KENL10
+Step 4: Integrate with modules/KENL10
   Automatic snapshots → Proton Drive:
 
   ~/kenl/KENL10-backup/cloud-sync/proton-drive.sh:
@@ -1070,7 +1070,7 @@ Step 4: Integrate with KENL10
 
 ## Summary: AI Usage Recommendations
 
-| KENL | Recommended AI | Privacy Level | Cost/Month |
+| modules/KENL | Recommended AI | Privacy Level | Cost/Month |
 |------|----------------|---------------|------------|
 | **KENL0** | Qwen (local) | 🟢 High | $0 |
 | **KENL1** | Claude | 🟡 Medium | $1-2 |
@@ -1099,7 +1099,7 @@ Step 4: Integrate with KENL10
 4. **Get API keys** (if using cloud AI):
    - Claude: console.anthropic.com
    - Perplexity: perplexity.ai/settings/api
-5. **Configure KENLs** with your AI preferences
+5. **Configure modules/KENLs** with your AI preferences
 6. **Setup Proton services** (VPN for torrenting, Mail for encrypted email, Drive for backups)
 
 ---

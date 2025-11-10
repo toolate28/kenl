@@ -182,7 +182,7 @@ This repository is part of a larger ecosystem focused on gaming-with-intent on i
 - **Base:** Bazzite-DX (Fedora Atomic/rpm-ostree)
 - **Gaming:** Proton/GE-Proton, GameScope, MangoHud
 - **AI:** Claude (10%), Perplexity (30%), Qwen local (60%)
-- **Dev:** KENL distrobox (Ubuntu 24.04 + Claude Code)
+- **Dev:** modules/KENL distrobox (Ubuntu 24.04 + Claude Code)
 - **Cloud:** Cloudflare Workers/D1/KV/R2 (toolated.online)
 
 **Target Use Case:** Windows 10 EOL migration (Oct 2025) - providing evidence-based, rollback-safe gaming configurations for 240M+ affected PCs.
