@@ -17,16 +17,13 @@
 ║   cd ~/kenl/KENL4-monitoring                             ║
 ║   ./setup-monitoring.sh    # Install Prom + Grafana     ║
 ║                                                           ║
-║   systemctl --user start prometheus                      ║
-║   systemctl --user start grafana                         ║
-║   systemctl --user start node_exporter                   ║
+║   systemctl --user start <service>                       ║
+║   Services: prometheus, grafana, node_exporter           ║
 ║                                                           ║
-║   systemctl --user enable prometheus   # Autostart      ║
+║   systemctl --user enable <service>   # Autostart       ║
 ║                                                           ║
 ║   📊 GRAFANA DASHBOARDS                                   ║
-║   grafana/dashboards/                                    ║
-║   ├─ bazzite-system.json      # System metrics          ║
-║   ├─ gaming-performance.json  # FPS, frame time         ║
-║   ├─ atom-trail.json          # ATOM operations         ║
-║   └─ play-cards.json          # Config comparisons      ║
+║   grafana/dashboards/*.json                              ║
+║   bazzite-system, gaming-performance, atom-trail,        ║
+║   play-cards - Pre-configured dashboards                 ║
 ╚═══════════════════════════════════════════════════════════╝

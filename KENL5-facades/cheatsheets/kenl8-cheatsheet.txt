@@ -1,34 +1,26 @@
 ╔═══════════════════════════════════════════════════════════╗
 ║   🔐 KENL8: SECURITY - Encryption & Privacy              ║
 ╠═══════════════════════════════════════════════════════════╣
-║   🔑 GPG OPERATIONS        🔒 VAULT INTEGRATION          ║
-║   cd ~/kenl/KENL8-security vault-integration/            ║
-║   gpg-keyring/             Bitwarden / 1Password         ║
-║   ./encrypt-file.sh encrypt file.txt                     ║
-║   ./encrypt-file.sh decrypt file.txt.gpg                 ║
-║   ./encrypt-file.sh export-key                           ║
-║                            📱 TOTP 2FA                    ║
-║   ✍️  SIGNING               totp-manager/                ║
-║   gpg --sign file.txt      Manage 2FA codes              ║
-║   gpg --verify file.sig                                  ║
-║                            🔐 SECRET ROTATION             ║
-║   🔐 ENCRYPTION (FILES)    secret-rotation/              ║
-║   gpg --encrypt -r email@example.com file.txt            ║
+║   🚀 QUICK ACTIONS (cd ~/kenl/KENL8-security)            ║
+║   ./gpg-keyring/encrypt-file.sh encrypt <file>           ║
+║   ./gpg-keyring/encrypt-file.sh decrypt <file.gpg>       ║
+║   ./gpg-keyring/encrypt-file.sh export-key               ║
+║                                                           ║
+║   🔑 COMMON GPG COMMANDS                                  ║
+║   gpg --encrypt -r <email> file.txt                      ║
 ║   gpg --decrypt file.txt.gpg > file.txt                  ║
-║                            🛡️  AUDIT & COMPLIANCE         ║
-║   🔑 KEY MANAGEMENT        audit-encryption/             ║
-║   gpg --list-keys          Verify encryption standards   ║
-║   gpg --list-secret-keys   Track key usage               ║
-║   gpg --edit-key <email>   Audit access logs             ║
+║   gpg --sign file.txt                                    ║
+║   gpg --verify file.sig                                  ║
+║   gpg --list-keys                                        ║
 ║                                                           ║
-║   📤 EXPORT PUBLIC KEY     🔒 PROTON VPN (KENL11)        ║
-║   gpg --armor --export your@email.com > pubkey.asc       ║
-║                            vpn-routing/                  ║
-║   📥 IMPORT PUBLIC KEY     Proton VPN split tunneling    ║
-║   gpg --import friend-pubkey.asc                         ║
+║   🔐 INTEGRATIONS                                         ║
+║   Used by: KENL6 (Play Cards), KENL10 (Backups),         ║
+║            KENL11 (Proton VPN/Mail)                      ║
 ║                                                           ║
-║   🔐 USED BY               📧 PROTON MAIL BRIDGE         ║
-║   KENL6 - Play Card encryption                           ║
-║   KENL10 - Backup encryption                             ║
-║   KENL11 - Proton VPN config                             ║
+║   📂 ADVANCED FEATURES                                    ║
+║   vault-integration/       Bitwarden, 1Password          ║
+║   totp-manager/            2FA code management           ║
+║   secret-rotation/         Automated key rotation        ║
+║   audit-encryption/        Compliance tracking           ║
+║   vpn-routing/             Proton VPN split tunnel       ║
 ╚═══════════════════════════════════════════════════════════╝

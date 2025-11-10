@@ -5,7 +5,7 @@
 ║   cd ~/kenl/KENL5-facades  ./show-cheatsheet.sh <0-11>   ║
 ║   ./switch-kenl.sh <0-11>                                ║
 ║   ./switch-kenl.sh list    Available contexts:           ║
-║   ./switch-kenl.sh current 0=system  1=framework         ║
+║                            0=system  1=framework         ║
 ║                            2=gaming  3=dev               ║
 ║   🎨 AVAILABLE CONTEXTS    4=monitoring 5=facades        ║
 ║   0-11: system, framework, 6=social  7=learning          ║
