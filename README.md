@@ -33,6 +33,33 @@ graph LR
     D -->|Share| E[🌐 Friend uses same config instantly]
     E -->|Backup| F[💾 Config saved to ATOM trail]
     F -.->|Crash?| B
+## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
+
+**If you're here for Windows support, start here:**
+
+### For End Users (Need Help)
+👉 **[START HERE - Human-Friendly Guide](./windows-support/surface-pro-4/START_HERE.md)**
+- One-page guide in plain English
+- 30-second fix for common network issues
+- Windows 10 end-of-life options explained
+
+### For IT Support (Troubleshooting)
+👉 **[Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)**
+- Copy-paste PowerShell fixes
+- 5-15 minute diagnostics
+- System investigation procedures
+
+### Request Help (Open a PR)
+👉 **[Windows Support Request Template](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)**
+- Just paste screenshots or error messages
+- We'll help troubleshoot and fix your issue
+- See [PR Template Guide](./.github/PULL_REQUEST_TEMPLATE/README.md)
+
+**Complete documentation:** [`windows-support/`](./windows-support/)
+
+---
+
+## Quick Start
 
     style A fill:#ff6b6b
     style E fill:#51cf66
@@ -333,9 +360,9 @@ graph LR
     C -->|Apply settings| D[Play Card created]
     D -->|Snapshot| E[ATOM-PLAYCARD-xxx]
 
-    style A fill:#ffe3e3
-    style E fill:#d3f9d8
-```
+  **ATOM-SEC**: AI security testing with forensic audit trails
+  **ATOM-GOV**: MCP governance with policy-as-code
+  **ATOM-EOL**: Windows 10 EOL migration framework
 
 **Why:** Automates the trial-and-error process, documents working config in Play Card.
 
@@ -372,6 +399,42 @@ Loaded:
 + Git workflow aliases (gst, gco, gp)
 + Container networking helpers
 + Development environment templates
+kenl/
+├── windows-support/              # 🆘 Windows 10 EOL & Surface Pro 4 support
+│   ├── README.md                 # Overview and quick links
+│   └── surface-pro-4/            # Surface Pro 4 documentation
+│       ├── START_HERE.md         # 📄 One-page guide for end users
+│       ├── QUICK_START_GUIDE.md  # 🔧 IT support troubleshooting
+│       ├── CLAUDE.md             # 🤖 Current system investigation
+│       ├── DOMAIN_CONTROLLER_TROUBLESHOOTING.md  # Complete DC guide
+│       └── WINDOWS_10_EOL_ISSUES.md  # Migration planning
+├── atom-sage-framework/          # Intent-driven operations framework
+│   ├── README.md                 # Framework documentation
+│   ├── install.sh                # Zero-dependency installer
+│   ├── docs/                     # Guides and validation studies
+│   ├── examples/                 # Runnable demonstrations
+│   ├── analytics/                # Advanced analysis tools
+│   └── forks/                    # Specialized applications
+│       ├── ATOM-SEC/             # AI security & red-teaming
+│       ├── ATOM-GOV/             # MCP governance
+│       └── ATOM-EOL/             # Windows 10 EOL migration
+├── mcp-governance/               # ARCREF artifacts
+│   ├── ARCREF_TEMPLATE.yaml      # Template for new artifacts
+│   └── ARCREF-ATOM-SAGE-001.yaml # Example: ATOM+SAGE launch
+├── 02-Decisions/                 # ADR documents
+│   ├── ADR_TEMPLATE.md           # Template for new decisions
+│   └── ADR-001-ATOM-SAGE-LAUNCH.md # Example: ATOM+SAGE decision
+├── scripts/                      # Automation and tooling
+│   ├── bootstrap.sh              # Development environment setup
+│   ├── add-owi-metadata.sh       # Documentation metadata
+│   └── owi-report.sh             # Documentation index generation
+├── .github/                      # GitHub automation
+│   ├── workflows/                # CI/CD pipelines
+│   ├── ISSUE_TEMPLATE/           # Issue templates
+│   └── PULL_REQUEST_TEMPLATE/    # PR templates (including Windows support)
+├── CONTRIBUTING.md               # Contribution guidelines
+├── SECURITY.md                   # Security policy
+└── README.md                     # This file
 ```
 
 **Why:** Isolates dev tools from gaming/system context, prevents command conflicts.
@@ -774,6 +837,16 @@ atom-analytics --summary
 - **[OWI Framework Overview](./OWI_FRAMEWORK_OVERVIEW.md)**: Gaming/Configuring/Building-With-Intent
 - **[CLAUDE.md](./CLAUDE.md)**: Guidance for Claude Code instances
 - **[ADR Template](./02-Decisions/ADR_TEMPLATE.md)**: Architectural decisions
+### Windows 10 EOL / Surface Pro 4 Support
+- **Need Help?**: [Open Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) - Just paste screenshots!
+- **Documentation**: [windows-support/](./windows-support/) - Complete guides and troubleshooting
+- **Quick Fixes**: [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) - Human-friendly guide
+
+### General Support
+- **Issues**: [GitHub Issues](https://github.com/toolate28/kenl/issues) for bugs and feature requests
+- **Discussions**: [GitHub Discussions](https://github.com/toolate28/kenl/discussions) for questions
+- **Pull Requests**: Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md)
+- **Security**: Report vulnerabilities per [SECURITY.md](./SECURITY.md)
 
 ---
 
@@ -795,6 +868,19 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
 ### Security
 
 Report vulnerabilities privately per [SECURITY.md](./SECURITY.md).
+### Windows 10 EOL Migration Support
+
+**Target**: 240M+ PCs affected by Windows 10 end-of-life (October 14, 2025)
+
+This repository provides practical support for:
+- **Surface Pro 4** and similar Windows 10 devices
+- **Domain controller connectivity** troubleshooting
+- **Migration planning** (ESU, Linux, new hardware)
+- **Security hardening** for post-EOL systems
+
+**Documentation**: [`windows-support/`](./windows-support/)
+
+**Migration path**: Windows 10 → Testing/Validation → Bazzite-DX (Linux gaming)
 
 ---
 
@@ -813,6 +899,26 @@ MIT License - see [LICENSE](./LICENSE) for details.
 Every operation builds knowledge. Every knowledge entry enhances recovery. Every recovery strengthens the system.
 
 It's also a play on "kernel" - KENL sits between you and your system, making complex operations simple and safe.
+### Windows Support (Start Here If You Need Help!)
+| Resource | Link |
+|----------|------|
+| **🆘 Need Help?** | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
+| **📄 End User Guide** | [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) |
+| **🔧 IT Support Guide** | [QUICK_START_GUIDE.md](./windows-support/surface-pro-4/QUICK_START_GUIDE.md) |
+| **📚 All Windows Docs** | [windows-support/](./windows-support/) |
+| **Domain Controller Issues** | [DOMAIN_CONTROLLER_TROUBLESHOOTING.md](./windows-support/surface-pro-4/DOMAIN_CONTROLLER_TROUBLESHOOTING.md) |
+| **Windows 10 EOL Planning** | [WINDOWS_10_EOL_ISSUES.md](./windows-support/surface-pro-4/WINDOWS_10_EOL_ISSUES.md) |
+
+### Developer Resources
+| Resource | Link |
+|----------|------|
+| **ATOM+SAGE Framework** | [./atom-sage-framework/](./atom-sage-framework/) |
+| **Getting Started** | [./atom-sage-framework/docs/GETTING_STARTED.md](./atom-sage-framework/docs/GETTING_STARTED.md) |
+| **Validation Study** | [./atom-sage-framework/docs/VALIDATION_COMPLETE.md](./atom-sage-framework/docs/VALIDATION_COMPLETE.md) |
+| **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| **Governance Templates** | ARCREF: [mcp-governance/](./mcp-governance/) / ADR: [02-Decisions/](./02-Decisions/) |
+| **Security Policy** | [SECURITY.md](./SECURITY.md) |
+| **Issue Tracking** | [GitHub Issues](https://github.com/toolate28/kenl/issues) |
 
 ---
 

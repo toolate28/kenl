@@ -35,8 +35,8 @@ owi-version: 1.0.0
         └───────────────┘ └────────────┘ └────────────────┘
               │                  │                │
               │                  │                │
-      Windows 10 EOL      System Config    KENL Scaffold
-       Gaming Migration    & Optimization   Distribution
+      Windows 10 EOL /     System Config    KENL Scaffold
+      Gaming-on-Linux      & Optimization   Distribution
 ```
 
 ---
