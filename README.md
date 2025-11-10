@@ -26,6 +26,32 @@ Both are fully open source (MIT licensed) and designed for professional deployme
 
 ---
 
+## 🆘 Need Help with Windows 10 EOL or Surface Pro 4?
+
+**If you're here for Windows support, start here:**
+
+### For End Users (Need Help)
+👉 **[START HERE - Human-Friendly Guide](./windows-support/surface-pro-4/START_HERE.md)**
+- One-page guide in plain English
+- 30-second fix for common network issues
+- Windows 10 end-of-life options explained
+
+### For IT Support (Troubleshooting)
+👉 **[Quick Start Guide](./windows-support/surface-pro-4/QUICK_START_GUIDE.md)**
+- Copy-paste PowerShell fixes
+- 5-15 minute diagnostics
+- System investigation procedures
+
+### Request Help (Open a PR)
+👉 **[Windows Support Request Template](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md)**
+- Just paste screenshots or error messages
+- We'll help troubleshoot and fix your issue
+- See [PR Template Guide](./.github/PULL_REQUEST_TEMPLATE/README.md)
+
+**Complete documentation:** [`windows-support/`](./windows-support/)
+
+---
+
 ## Quick Start
 
 ```bash
@@ -151,6 +177,14 @@ atom-analytics --recovery
 
 ```
 kenl/
+├── windows-support/              # 🆘 Windows 10 EOL & Surface Pro 4 support
+│   ├── README.md                 # Overview and quick links
+│   └── surface-pro-4/            # Surface Pro 4 documentation
+│       ├── START_HERE.md         # 📄 One-page guide for end users
+│       ├── QUICK_START_GUIDE.md  # 🔧 IT support troubleshooting
+│       ├── CLAUDE.md             # 🤖 Current system investigation
+│       ├── DOMAIN_CONTROLLER_TROUBLESHOOTING.md  # Complete DC guide
+│       └── WINDOWS_10_EOL_ISSUES.md  # Migration planning
 ├── atom-sage-framework/          # Intent-driven operations framework
 │   ├── README.md                 # Framework documentation
 │   ├── install.sh                # Zero-dependency installer
@@ -173,7 +207,8 @@ kenl/
 │   └── owi-report.sh             # Documentation index generation
 ├── .github/                      # GitHub automation
 │   ├── workflows/                # CI/CD pipelines
-│   └── ISSUE_TEMPLATE/           # Issue templates
+│   ├── ISSUE_TEMPLATE/           # Issue templates
+│   └── PULL_REQUEST_TEMPLATE/    # PR templates (including Windows support)
 ├── CONTRIBUTING.md               # Contribution guidelines
 ├── SECURITY.md                   # Security policy
 └── README.md                     # This file
@@ -309,6 +344,12 @@ pre-commit run --all-files
 
 ## Community & Support
 
+### Windows 10 EOL / Surface Pro 4 Support
+- **Need Help?**: [Open Windows Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) - Just paste screenshots!
+- **Documentation**: [windows-support/](./windows-support/) - Complete guides and troubleshooting
+- **Quick Fixes**: [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) - Human-friendly guide
+
+### General Support
 - **Issues**: [GitHub Issues](https://github.com/toolate28/kenl/issues) for bugs and feature requests
 - **Discussions**: [GitHub Discussions](https://github.com/toolate28/kenl/discussions) for questions
 - **Pull Requests**: Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md)
@@ -326,7 +367,19 @@ kenl is part of the **Bazza-DX** ecosystem focused on gaming-with-intent on immu
 - **Cloud**: Cloudflare Workers/D1/KV/R2
 - **Methodology**: OWI Framework (Gaming-With-Intent, Configuring-With-Intent, Building-With-Intent)
 
-**Target use case**: Windows 10 EOL migration (Oct 2025) providing evidence-based, rollback-safe gaming configurations.
+### Windows 10 EOL Migration Support
+
+**Target**: 240M+ PCs affected by Windows 10 end-of-life (October 14, 2025)
+
+This repository provides practical support for:
+- **Surface Pro 4** and similar Windows 10 devices
+- **Domain controller connectivity** troubleshooting
+- **Migration planning** (ESU, Linux, new hardware)
+- **Security hardening** for post-EOL systems
+
+**Documentation**: [`windows-support/`](./windows-support/)
+
+**Migration path**: Windows 10 → Testing/Validation → Bazzite-DX (Linux gaming)
 
 ---
 
@@ -348,6 +401,17 @@ Both the scaffold and ATOM+SAGE framework are fully open source.
 
 ## Quick Links
 
+### Windows Support (Start Here If You Need Help!)
+| Resource | Link |
+|----------|------|
+| **🆘 Need Help?** | [Open Support Request](./.github/PULL_REQUEST_TEMPLATE/windows_support_request.md) |
+| **📄 End User Guide** | [START_HERE.md](./windows-support/surface-pro-4/START_HERE.md) |
+| **🔧 IT Support Guide** | [QUICK_START_GUIDE.md](./windows-support/surface-pro-4/QUICK_START_GUIDE.md) |
+| **📚 All Windows Docs** | [windows-support/](./windows-support/) |
+| **Domain Controller Issues** | [DOMAIN_CONTROLLER_TROUBLESHOOTING.md](./windows-support/surface-pro-4/DOMAIN_CONTROLLER_TROUBLESHOOTING.md) |
+| **Windows 10 EOL Planning** | [WINDOWS_10_EOL_ISSUES.md](./windows-support/surface-pro-4/WINDOWS_10_EOL_ISSUES.md) |
+
+### Developer Resources
 | Resource | Link |
 |----------|------|
 | **ATOM+SAGE Framework** | [./atom-sage-framework/](./atom-sage-framework/) |
