@@ -63,13 +63,44 @@ function Test-KenlNetwork {
     foreach ($host in $script:TestHosts) {
         Write-Host "Testing $($host.Name) ($($host.IP))... " -NoNewline
 
-        $ping = Test-Connection -ComputerName $host.IP -Count $pingCount -Quiet -ErrorAction SilentlyContinue
+        try {
+            # Get ping results with proper error handling
+            $pingResults = Test-Connection -ComputerName $host.IP -Count $pingCount -ErrorAction Stop
 
-        if ($ping) {
-            $latency = (Test-Connection -ComputerName $host.IP -Count $pingCount).ResponseTime |
-                       Measure-Object -Average
+            # Extract response times (handle both ResponseTime and ResponseTimeToLive properties)
+            $responseTimes = @()
+            foreach ($result in $pingResults) {
+                if ($result.ResponseTime -ne $null) {
+                    $responseTimes += $result.ResponseTime
+                }
+                elseif ($result.Latency -ne $null) {
+                    $responseTimes += $result.Latency
+                }
+                elseif ($result.PSObject.Properties['ResponseTime']) {
+                    $responseTimes += $result.ResponseTime
+                }
+            }
 
-            $avgMs = [math]::Round($latency.Average, 1)
+            # If no response times, use alternative method
+            if ($responseTimes.Count -eq 0 -or ($responseTimes | Measure-Object -Average).Average -eq 0) {
+                # Fallback to ping.exe for accurate timing
+                $pingOutput = ping -n $pingCount $host.IP 2>$null
+                $timeMatches = $pingOutput | Select-String -Pattern 'time[<=](\d+)ms' -AllMatches
+
+                if ($timeMatches) {
+                    $responseTimes = $timeMatches.Matches | ForEach-Object {
+                        [int]$_.Groups[1].Value
+                    }
+                }
+            }
+
+            if ($responseTimes.Count -gt 0) {
+                $avgMs = [math]::Round(($responseTimes | Measure-Object -Average).Average, 1)
+            }
+            else {
+                Write-Host "FAILED (no data)" -ForegroundColor Red
+                continue
+            }
 
             # Color code by performance
             $color = if ($avgMs -lt 30) { "Green" }
@@ -93,7 +124,7 @@ function Test-KenlNetwork {
                 Delta = $avgMs - $host.ExpectedMs
             }
         }
-        else {
+        catch {
             Write-Host "TIMEOUT" -ForegroundColor Red
         }
     }
