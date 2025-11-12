@@ -3,8 +3,9 @@ project: modules/KENL - Intent-Driven Operations for Bazzite
 status: production
 version: 1.0.0
 classification: OWI-DOC
-atom: ATOM-DOC-20251110-015
+atom: ATOM-DOC-20251112-009
 owi-version: 1.0.0
+last-updated: 2025-11-12
 ---
 
 # modules/KENL
@@ -69,9 +70,11 @@ graph LR
 
 ## The KENL Builder Mentality
 
-**"Anything we can do, you can do better. You can do anything better than we."**
+**"Putting the amazing work of Universal Blue / Bazzite teams into everyone's hands."**
 
 Transform your Bazzite system into a self-documenting gaming and development platform.
+
+KENL doesn't provide better tools - it provides **better access** to the excellent work already done. Through documentation, AI assistance, and shareable configurations, KENL ensures that what the Bazzite community has built is discoverable, understandable, and usable by everyone.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
@@ -400,4 +403,4 @@ Every operation builds knowledge. Every knowledge entry enhances recovery. Every
 ---
 
 **Status**: Production Ready | **Version**: 1.0.0 | **Platform**: Bazzite (Fedora Atomic)
-**Last Updated**: 2025-11-10 | **Made with intent** by the Bazza-DX community 🎮💻🔐
+**Last Updated**: 2025-11-12 | **Made with intent** by the Bazza-DX community 🎮💻🔐
