@@ -1,0 +1,50 @@
+# Windows Partition Scripts - Local Execution Artifacts
+# Only generic templates pushed to repository
+
+# Handover Documents (contain user-specific paths, disk info, UUIDs)
+*.md.local
+HANDOVER-*.md
+*-HANDOVER-*.md
+
+# User-Modified Scripts (personalized disk numbers, drive letters)
+*-MODIFIED.ps1
+*-USER.ps1
+*.ps1.local
+
+# Execution Logs
+*.log
+*.txt
+execution-*.json
+
+# PowerShell Transcripts
+PowerShell_transcript.*.txt
+
+# Archived/Backup Versions
+*.old
+*.bak
+*.backup
+*-v[0-9]*.ps1
+*-20[0-9][0-9][0-9][0-9][0-9][0-9]*.ps1
+
+# Archive Directory (user-specific execution history)
+.archive/
+archive/
+
+# User Configuration
+config.local.ps1
+user-settings.json
+
+# Windows Metadata
+Thumbs.db
+desktop.ini
+
+# Sensitive Data
+*-UUID*.txt
+*-serial*.txt
+disk-info-*.txt
+partition-uuids.txt
+
+# Test Files Created During Script Execution
+KENL-TEST*.txt
+KENL-VERIFY*.txt
+test-write-*.txt
