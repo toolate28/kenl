@@ -6,6 +6,29 @@
 
 ---
 
+## The Story Behind This Setup
+
+**Initial Ask:** "How do I run Battlefield 6 on Linux?"
+
+**AI Research:** Found 8 potential workarounds (GPU passthrough, cloud gaming, etc.)
+
+**AI Recommendation:** **Don't.** Install Windows dual-boot instead.
+
+**Why AI Said "No":**
+- BF6's Javelin anti-cheat requires kernel-level access (impossible in Wine/Proton)
+- GPU passthrough: 40-80 hours setup, 60% failure rate, breaks on updates
+- Dual-boot: 2-4 hours setup, 95% success rate, maintainable
+
+**User Decision:** Followed AI's recommendation → Installed Windows 11
+
+**Result:** You're reading 6,800+ lines of complete infrastructure documentation - partitioning, privacy, automation, workflows - all traceable via ATOM tags.
+
+**The KENL Difference:** When BF6 breaks again (and it will), recovery takes 10 minutes instead of 4 hours - because AI documented not just the "how," but the entire "why."
+
+📖 **Read the full story:** `/home/user/kenl/case-studies/AI_GUIDED_DECISION_MAKING_BF6.md`
+
+---
+
 ## Overview
 
 These scripts implement the **Hybrid Approach (Option C)** from `/home/user/kenl/scripts/1.8TB_EXTERNAL_DRIVE_LAYOUT.md`:
