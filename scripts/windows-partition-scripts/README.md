@@ -253,6 +253,108 @@ mkdir -p /mnt/games-universal/SteamLibrary
 
 ---
 
+## Privacy & Local Execution
+
+### What's in Git vs What Stays Local
+
+**Committed to Repository (Public):**
+- ✅ Generic template scripts (STEP1, STEP2, STEP3)
+- ✅ README documentation
+- ✅ Example configuration (`config.example.ps1`)
+- ✅ ATOM tags and metadata
+
+**Excluded from Git (Private/Local):**
+- ❌ Handover documents (contain usernames, disk serials, UUIDs)
+- ❌ User-modified scripts (`*.ps1.local`, `*-MODIFIED.ps1`)
+- ❌ Execution logs and transcripts
+- ❌ User configuration (`config.local.ps1`)
+- ❌ Archive directory (`.archive/`)
+
+### Setup for Local Execution
+
+**Option 1: Use Default Settings**
+```powershell
+# Scripts work out-of-box with sensible defaults
+.\STEP1-WINDOWS-WIPE-DISK1.ps1
+```
+
+**Option 2: Customize Settings (Recommended)**
+```powershell
+# Copy example config
+Copy-Item config.example.ps1 config.local.ps1
+
+# Edit your settings (disk number, sizes, drive letters)
+notepad config.local.ps1
+
+# Modified scripts will auto-load config.local.ps1
+.\STEP1-WINDOWS-WIPE-DISK1.ps1
+```
+
+### Archive Directory Structure
+
+Create `.archive/` for execution history (gitignored):
+
+```powershell
+# Create archive directories
+mkdir .archive\handover-docs
+mkdir .archive\logs
+mkdir .archive\backups
+
+# Scripts can save here instead of Desktop
+# Edit $HANDOVER_DIR in config.local.ps1:
+# $HANDOVER_DIR = "$PSScriptRoot\.archive\handover-docs"
+```
+
+**Suggested `.archive/` layout:**
+```
+.archive/
+├── handover-docs/          # All HANDOVER-*.md files
+│   ├── HANDOVER-DISK-WIPE-20251112-*.md
+│   ├── HANDOVER-PARTITION-20251112-*.md
+│   └── HANDOVER-VERIFICATION-20251112-*.md
+├── logs/                   # PowerShell transcripts
+│   └── execution-20251112-*.log
+├── backups/                # Old script versions
+│   ├── STEP2-20251111.ps1.old
+│   └── config-20251111.ps1.bak
+└── notes/                  # Personal notes
+    └── disk-layout-decisions.md
+```
+
+### Gitignore Rules
+
+See `.gitignore` for full list. Key patterns:
+
+```gitignore
+# Handover docs (usernames, disk serials)
+HANDOVER-*.md
+
+# User config (disk numbers, preferences)
+*.ps1.local
+config.local.ps1
+
+# Archive directory
+.archive/
+
+# UUIDs and hardware info
+*-UUID*.txt
+partition-uuids.txt
+```
+
+### Sharing Sanitized Results
+
+If you need to share execution results:
+
+```powershell
+# Sanitize handover doc before sharing
+$handover = Get-Content HANDOVER-DISK-WIPE-20251112-*.md
+$handover = $handover -replace "C:\\Users\\.*\\Desktop", "C:\Users\USERNAME\Desktop"
+$handover = $handover -replace "Serial Number:.*", "Serial Number: [REDACTED]"
+$handover | Out-File HANDOVER-SANITIZED.md
+```
+
+---
+
 ## Related Documentation
 
 **Design Specifications:**
