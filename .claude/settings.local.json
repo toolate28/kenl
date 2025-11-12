@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(done)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" log --oneline -20)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" status)",
+      "Bash(dir:*)",
+      "Bash(git log:*)",
+      "WebSearch",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" branch -a)",
+      "Bash(systeminfo:*)",
+      "Bash(findstr:*)",
+      "Bash(wmic:*)",
+      "Bash(echo:*)",
+      "Bash(node --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(test:*)",
+      "Bash(pre-commit --version:*)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" log --oneline -5)",
+      "Bash(cat:*)",
+      "Bash(chmod +x \"C:\\Users\\Matthew Ruhnau\\kenl\\scripts\\STEP2-WSL2-PARTITION-DISK.sh\")",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" fetch origin)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" pull origin main)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" log origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK --oneline -10)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" diff main..origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK --name-only)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" diff main..origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK -- CLAUDE.md)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" show origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK:claude-landing/README.md)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" show origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK:claude-landing/CURRENT-STATE.md)",
+      "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" show origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK:claude-landing/RECENT-WORK.md)",
+      "Bash(powershell -NoProfile -Command \"Import-Module ./modules/KENL0-system/powershell/KENL.psm1 -ErrorAction Stop; Get-Module KENL | Select-Object Name,Version,ExportedCommands | Format-List\")",
+      "Bash(powershell -NoProfile -Command:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
