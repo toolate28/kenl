@@ -11,6 +11,16 @@ owi-version: 1.0.0
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## First Steps (New Claude Instance)
+
+**Before starting any task:**
+1. Read `claude-landing/CURRENT-STATE.md` for current environment snapshot
+2. Read `claude-landing/RECENT-WORK.md` for latest session work
+3. Run `git log --oneline -10` to see recent commits
+4. Check `claude-landing/QUICK-REFERENCE.md` for common paths and commands
+
+**The `claude-landing/` directory contains immediate orientation documents** - always start there when beginning a new session or task.
+
 ## Repository Purpose
 
 **kenl** is a scaffold/template repository providing developer infrastructure and governance frameworks for the Bazza-DX ecosystem. It implements the **ATOM** (atomic audit trail) and **SAGE** (System-Aware Guided Evolution) methodologies for traceable, evidence-based system development on immutable Linux distributions (Bazzite-DX/Fedora Atomic).
@@ -23,8 +33,10 @@ The repository is organized into three main sections:
 
 ```
 kenl/
+├── claude-landing/    # START HERE - Immediate orientation docs
 ├── modules/           # All KENL modules (0-12)
 │   ├── KENL0-system/
+│   │   └── powershell/  # Windows PowerShell modules
 │   ├── KENL1-framework/
 │   ├── KENL2-gaming/
 │   ├── KENL3-dev/
@@ -45,7 +57,9 @@ kenl/
 ```
 
 **Key Paths:**
+- **Orientation:** `claude-landing/` - START HERE for current state
 - All KENL modules: `modules/KENL*`
+- PowerShell modules: `modules/KENL0-system/powershell/`
 - Governance artifacts: `governance/`
 - Scripts: `scripts/`
 
