@@ -1,10 +1,11 @@
 ---
 project: Bazza-DX SAGE Framework
 status: current
-version: 2025-11-06
+version: 2025-11-12
 classification: OWI-DOC
-atom: ATOM-DOC-20251106-019
+atom: ATOM-DOC-20251112-010
 owi-version: 1.0.0
+last-updated: 2025-11-12
 ---
 
 # CLAUDE.md
@@ -24,6 +25,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Purpose
 
 **kenl** is a scaffold/template repository providing developer infrastructure and governance frameworks for the Bazza-DX ecosystem. It implements the **ATOM** (atomic audit trail) and **SAGE** (System-Aware Guided Evolution) methodologies for traceable, evidence-based system development on immutable Linux distributions (Bazzite-DX/Fedora Atomic).
+
+### The KENL Builder Mentality
+
+**"Putting the amazing work of Universal Blue / Bazzite teams into everyone's hands."**
+
+KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Bazzite/Universal Blue community. Through documentation, AI assistance, and shareable configurations, every operation:
+- Captures **intent** (why, not just what) via ATOM trails
+- Provides **rollback instructions** (breaking-change proof)
+- Operates in **user-space only** (cannot taint the immutable OS)
+- Integrates **elegantly** (minimal CPU/GPU overhead, no system daemons)
+
+See `README.md` for complete explanation of the Four Pillars (KENL, ATOM, OWI, SAGE) and Technical Guarantees.
 
 ## Core Architecture
 

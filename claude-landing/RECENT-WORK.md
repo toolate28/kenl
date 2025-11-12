@@ -6,11 +6,21 @@ status: active
 classification: OWI-CTFWI
 owi-fork: CTFWI
 owi-version: 1.0.0
+ctfwi-variant: "Capture The Flag With Intent"
+ctfwi-note: |
+  This document demonstrates CTFWI as "Capture The Flag With Intent" -
+  solving the puzzle of effective AI agent directives through systematic
+  investigation. The "flags" are expectations I've set (in CURRENT-STATE.md,
+  TESTING-RESULTS.md, etc.) that future AI instances should "capture" by
+  validating them against reality. Flags can range from simple (typos,
+  syntax errors) to complex (hidden edge cases, performance assumptions).
 tags:
   - ai-agent-communication
   - directive-patterns
   - claude-code-investigation
   - documentation-improvement
+  - ctf-methodology
+  - flag-validation
 evidence:
   - Cold-start Claude Code experiment
   - Before/after directive comparison
@@ -23,6 +33,97 @@ rollback: N/A (documentation only, non-destructive)
 **Session Date:** 2025-11-12
 **ATOM Tag:** ATOM-DOC-20251112-003
 **Context:** Continuation from previous session (context limit reached)
+
+---
+
+## CTF Flag Capture Protocol
+
+**For AI Instances Resuming This Session:**
+
+This directory (`claude-landing/`) contains **CTF flags** - expectations about the current state that you should **validate against reality** before proceeding.
+
+### What Are "Flags"?
+
+**Flags are documented expectations** (in CURRENT-STATE.md, TESTING-RESULTS.md, HARDWARE.md) that serve as validation checkpoints. They can be:
+
+- **Simple:** Typos, syntax errors, version mismatches
+- **Moderate:** File paths, command outputs, git branch states
+- **Complex:** Performance metrics, network latency, hardware detection
+- **Hidden:** Edge cases, assumption failures, undocumented dependencies
+
+### How to "Capture the Flag"
+
+**On resumption, validate these expectations:**
+
+1. **Platform Check:**
+   - **Flag:** CURRENT-STATE.md says "Platform: Windows 11"
+   - **Capture:** Run `$PSVersionTable` or `uname -a` - confirm Windows
+   - **Intent:** Prevent wrong OS assumptions
+
+2. **Git State:**
+   - **Flag:** CURRENT-STATE.md lists branch and recent commits
+   - **Capture:** Run `git log --oneline -5` - verify matches documented state
+   - **Intent:** Ensure session continuity
+
+3. **Network Baseline:**
+   - **Flag:** TESTING-RESULTS.md claims "6.2ms average latency"
+   - **Capture:** Run `Test-KenlNetwork` - confirm still ~6ms
+   - **Intent:** Detect configuration drift
+
+4. **Module Health:**
+   - **Flag:** TESTING-RESULTS.md says "KENL.Network.psm1 ✅ ACK"
+   - **Capture:** Import module, run test function - confirm no errors
+   - **Intent:** Validate modules still operational
+
+5. **Hardware Detection:**
+   - **Flag:** HARDWARE.md documents "AMD Ryzen 5 5600H"
+   - **Capture:** Check CPU info - verify model matches
+   - **Intent:** Prevent hardware misidentification
+
+### Flag Validation Checklist
+
+**Before starting work, capture these flags:**
+
+```powershell
+# 1. Platform (Windows expected)
+$PSVersionTable
+
+# 2. Git state (branch: main, recent: f3b5009...)
+git log --oneline -5
+
+# 3. Network baseline (expect ~6ms)
+Test-KenlNetwork
+
+# 4. PowerShell modules (should load cleanly)
+Import-Module ./modules/KENL0-system/powershell/KENL.psm1
+Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
+
+# 5. External drive state (expect corrupted 2TB)
+Get-Disk | Where-Object BusType -eq USB
+```
+
+### Reporting Flag Results
+
+**If flags validate:** ✅ Proceed with task
+
+**If flags fail:** 🚩 Report discrepancy:
+- **Expected:** [What the flag documented]
+- **Reality:** [What you found]
+- **Impact:** [Does this affect current task?]
+- **Action:** [Update docs OR investigate root cause]
+
+**Example:**
+
+```
+🚩 FLAG MISMATCH: Network Baseline
+
+Expected: 6.2ms average (per TESTING-RESULTS.md)
+Reality: 45ms average (Test-KenlNetwork output)
+Impact: May indicate Tailscale re-enabled or network config drift
+Action: Investigate before proceeding with gaming tests
+```
+
+---
 
 ## This Session's Focus
 
@@ -482,6 +583,316 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
    - Pre-flight verification
    - Partition commands ready
    - Post-install configuration steps
+
+---
+
+---
+
+## Flags Dropped (Expectations to Validate on Resume)
+
+**For Future AI Instances:** These are the **CTF flags** I've set. Capture them by validating each expectation against reality.
+
+### Platform & Environment Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **PLAT-01** | Platform is Windows 11 (pre-migration) | `$PSVersionTable` | Simple |
+| **PLAT-02** | Current branch is `main` | `git branch --show-current` | Simple |
+| **PLAT-03** | Working directory is clean | `git status` | Simple |
+| **PLAT-04** | Recent commit is `f3b5009` (claude-landing) | `git log --oneline -1` | Moderate |
+
+### Hardware Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **HW-01** | CPU is AMD Ryzen 5 5600H | `Get-WmiObject Win32_Processor \| Select Name` | Moderate |
+| **HW-02** | GPU is AMD Radeon Vega (integrated) | Check device manager / `lspci` | Moderate |
+| **HW-03** | External 2TB drive is corrupted (2 partitions) | `Get-Disk \| Where BusType -eq USB` | Complex |
+| **HW-04** | RAM is 16GB | `Get-WmiObject Win32_ComputerSystem` | Simple |
+
+### Network Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **NET-01** | Average latency is ~6ms (Tailscale disabled) | `Test-KenlNetwork` | Moderate |
+| **NET-02** | Tailscale adapter is disabled | `Get-NetAdapter -Name "Tailscale"` | Simple |
+| **NET-03** | MTU is optimized to 1492 | `netsh interface ipv4 show subinterfaces` | Moderate |
+| **NET-04** | All 5 test hosts return EXCELLENT status | `Test-KenlNetwork` output | Complex |
+
+### Module Health Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **MOD-01** | KENL.psm1 loads without errors | `Import-Module ./modules/.../KENL.psm1` | Simple |
+| **MOD-02** | KENL.Network.psm1 loads without errors | `Import-Module .../KENL.Network.psm1` | Simple |
+| **MOD-03** | Test-KenlNetwork returns valid latency | `Test-KenlNetwork` | Moderate |
+| **MOD-04** | Get-KenlPlatform detects "Windows" | `Get-KenlPlatform` | Simple |
+
+### File Existence Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **FILE-01** | claude-landing/ directory exists | `Test-Path ./claude-landing` | Simple |
+| **FILE-02** | PowerShell modules exist in KENL0 | `ls ./modules/KENL0-system/powershell/` | Simple |
+| **FILE-03** | BF6 Play Card exists | `Test-Path ./modules/KENL2-gaming/play-cards/bf6*` | Simple |
+| **FILE-04** | Network optimization scripts exist | `ls ./modules/KENL2-gaming/configs/network/` | Simple |
+
+### Complexity Levels
+
+- **Simple:** Direct command, obvious pass/fail (typos, missing files)
+- **Moderate:** Parse output, compare values (performance metrics, versions)
+- **Complex:** Multi-step validation, interpretation required (edge cases, assumptions)
+- **Hidden:** Not explicitly documented, requires inference (undocumented dependencies, implicit requirements)
+
+### Validation Strategies (Resource Optimization)
+
+**Flags can be validated in multiple ways - choose based on resource efficiency:**
+
+| Strategy | Method | Example | Resource Cost |
+|----------|--------|---------|---------------|
+| **Direct** | AI runs validation command | `Test-KenlNetwork` | High (network I/O, CPU) |
+| **Log-Based** | AI checks centralized logs | Check `/var/log/kenl/network-baseline.json` | Low (file read) |
+| **User-Confirmed** | Ask user to verify UI property | "Confirm Logdy shows 6ms in network-health widget" | Zero (user does work) |
+| **Cached** | Use recent cached result | Last validation <5min ago, assume valid | Minimal (timestamp check) |
+| **Inferred** | Derive from other flags | If MOD-01 passes, MOD-03 likely valid | Zero (logical inference) |
+
+**Example multi-strategy flag:**
+
+```yaml
+NET-01: Average latency is ~6ms (Tailscale disabled)
+
+Validation Strategies (in order of preference):
+1. Log-Based (cheapest):
+   - Check: ~/.kenl/logs/network-baseline-latest.json
+   - Property: avg_latency_ms
+   - Expected: 5-7ms
+   - Cost: Single file read
+
+2. User-Confirmed (if logs unavailable):
+   - Ask: "Please confirm Logdy interface shows 'Network Health: EXCELLENT (6ms)'"
+   - User responds: yes/no
+   - Cost: Zero (user validates)
+
+3. Direct (fallback):
+   - Run: Test-KenlNetwork
+   - Parse: Output for average latency
+   - Cost: 5 network round-trips, ~10s execution time
+
+Prefer: Log-Based (if logs <5min old), otherwise User-Confirmed
+Only use Direct if user explicitly requests full validation
+```
+
+**Benefits:**
+
+- **Reduces redundant work:** Don't re-test what's already logged
+- **Respects resources:** Network tests, disk I/O, elevated commands
+- **Leverages existing monitoring:** KENL already logs ATOM trails and metrics
+- **User-involved validation:** Offload to user's local UI (Logdy, Grafana, etc.)
+
+**Design Philosophy:**
+
+> **"AI tools enhance the user, not replace them"**
+
+The User-Confirmed strategy is intentional - it keeps humans meaningfully involved:
+
+- **Not automation for automation's sake:** AI doesn't blindly run expensive tests
+- **Collaborative efficiency:** User has the data on screen, AI asks for confirmation
+- **Expertise respected:** User knows their dashboard better than AI parsing logs
+- **Human remains authoritative:** Final validation comes from user observation
+- **Reduces AI overhead:** Zero API calls, zero compute for user-confirmed flags
+
+This is the opposite of "automate humans out of existence" - it's **augmentation:**
+- AI handles tedious validation scripting
+- User provides high-bandwidth visual confirmation
+- Result: Faster validation, lower resource cost, human stays in control
+
+**Example of augmentation in practice:**
+
+```
+❌ Replacement approach (bad):
+AI: Running full network test suite... (10s, 5 network calls, parsing output)
+
+✅ Augmentation approach (good):
+AI: "You have Logdy open - does it show 6ms latency? (yes/no)"
+User: "yes"
+AI: ✅ NET-01 validated, proceeding...
+```
+
+The user gets:
+- Faster validation (instant vs 10s)
+- Stays informed (knows what AI is checking)
+- Maintains control (can say "no, it shows 45ms")
+
+The AI gets:
+- Resource efficiency (zero cost)
+- Human expertise (visual confirmation > log parsing)
+- Collaborative relationship (working with user, not for user)
+
+**Implementation:**
+
+```markdown
+### Network Flags (with validation strategies)
+
+| Flag ID | Expectation | Strategy | Validation | Complexity |
+|---------|-------------|----------|------------|------------|
+| **NET-01** | Latency ~6ms | Log-Based → User | Check `~/.kenl/logs/network-baseline-latest.json` or ask user to confirm Logdy | Moderate |
+| **NET-02** | Tailscale disabled | Direct | `Get-NetAdapter -Name "Tailscale"` (cheap, instant) | Simple |
+| **NET-03** | MTU is 1492 | Log-Based | Check `~/.kenl/logs/network-config.json` | Moderate |
+```
+
+**When AI Should Ask User to Confirm:**
+
+**Good candidates for user-confirmation:**
+- Properties visible in monitoring dashboards (Grafana, Logdy)
+- Long-running or expensive tests (10+ seconds)
+- Tests requiring elevation/privileges
+- Visual confirmation better than parsing (e.g., game FPS counter)
+
+**Example directive:**
+
+```
+⏸️ FLAG VALIDATION: User confirmation requested
+
+NET-01 requires validation. Instead of running expensive Test-KenlNetwork:
+
+Please confirm the following from your Logdy interface:
+- Navigate to: KENL > Network Health
+- Check property: Average Latency
+- Expected value: 5-7ms (EXCELLENT status)
+
+Does Logdy show 6ms ± 1ms? (yes/no)
+```
+
+### How to Use These Flags
+
+**On session resumption:**
+
+1. Run validation commands for all flags
+2. Report results: ✅ (pass), 🚩 (fail), ⚠️ (partial)
+3. If any flags fail: investigate root cause before proceeding
+4. Update this document if flags are outdated or new flags discovered
+
+**Example Report:**
+
+```
+✅ PLAT-01: Windows 11 confirmed
+✅ PLAT-02: Branch is main
+🚩 NET-01: Latency is 45ms (expected 6ms) - Tailscale may be re-enabled
+✅ MOD-01: KENL.psm1 loaded successfully
+⚠️ HW-03: External drive shows 3 partitions (expected 2) - layout changed?
+```
+
+---
+
+## Flag Management Rules (For AI Instances)
+
+**CRITICAL: These rules govern when AI can modify flags and when user approval is required.**
+
+### ✅ AI Can Add Flags WITHOUT User Approval:
+
+**Allowed scenarios:**
+1. **Discovered new testable state** during work (e.g., found new module, detected new hardware)
+2. **Routine validation checkpoints** (e.g., "test script exists", "config file has valid syntax")
+3. **Documentation of work just completed** (e.g., "new Play Card created", "commit pushed")
+
+**Requirements when adding flags:**
+- **MUST notify user** in response message with flag summary
+- Use next available Flag ID in appropriate category
+- Follow existing complexity classification
+- Include validation command
+
+**Notification Format:**
+
+```
+🏴 FLAG ADDED: MOD-05
+
+Added validation flag for newly created KENL.Gaming.psm1 module:
+- Expectation: Module loads without errors
+- Validation: Import-Module ./modules/KENL0-system/powershell/KENL.Gaming.psm1
+- Complexity: Simple
+- Reason: Track module health across sessions
+```
+
+### 🚫 AI MUST Ask User Before:
+
+**Prohibited without approval:**
+1. **Removing existing flags** - May invalidate continuity checks
+2. **Modifying validation commands** for existing flags - Could break validation
+3. **Changing complexity levels** - Affects validation expectations
+4. **Adding "Hidden" complexity flags** - Requires user intent clarification
+
+**How to request approval:**
+
+```
+⚠️ FLAG MODIFICATION REQUEST
+
+I'd like to modify NET-01:
+- Current: "Average latency is ~6ms"
+- Proposed: "Average latency is ~6ms (Windows) or ~8ms (WSL2)"
+- Reason: WSL2 adds 2ms overhead, need platform-specific expectations
+
+Approve? (yes/no)
+```
+
+### 📋 AI MUST Notify User When:
+
+**Automatic notifications required:**
+1. **Any flag fails validation** on session resume
+2. **Adding new flags** (see format above)
+3. **Detecting flag drift** (documented state no longer accurate)
+4. **Finding undocumented flags** (hidden expectations discovered in code/docs)
+
+**Notification Examples:**
+
+```
+🚩 FLAG VALIDATION FAILED: 2 flags need attention
+
+NET-01: Expected 6ms, got 45ms - investigate Tailscale status
+FILE-03: BF6 Play Card not found - file may have been moved
+
+Shall I investigate these mismatches before proceeding? (yes/no)
+```
+
+```
+🏴 NEW FLAGS DISCOVERED: 3 implicit expectations found
+
+Found undocumented expectations in PowerShell modules:
+- MOD-05: KENL.Gaming.psm1 assumes Steam installed
+- MOD-06: KENL.Network.psm1 requires elevation for MTU changes
+- NET-05: Firewall rule for UDP 3074 expected
+
+Add these as explicit flags? (yes/no)
+```
+
+### 🔄 Flag Lifecycle
+
+**Flags have states:**
+
+| State | Meaning | AI Action |
+|-------|---------|-----------|
+| **Active** | Currently valid expectation | Validate on resume |
+| **Deprecated** | No longer relevant (platform migrated, feature removed) | Move to "Deprecated Flags" section |
+| **Failed** | Validation failed, under investigation | Mark with 🚩, notify user |
+| **Pending** | Added but not yet validated | Mark with ⏳, validate next session |
+
+**Example of deprecated flag:**
+
+```markdown
+### Deprecated Flags (Historical Reference)
+
+| Flag ID | Expectation | Deprecated Date | Reason |
+|---------|-------------|-----------------|--------|
+| **PLAT-01** | Platform is Windows 11 | 2025-11-15 | Migrated to Bazzite |
+| **NET-02** | Tailscale adapter disabled | 2025-11-14 | Permanently removed |
+```
+
+### 🎯 Best Practices
+
+1. **Be specific:** "Latency is 6ms" not "Latency is low"
+2. **Be testable:** Always include validation command
+3. **Be reversible:** Document what changed if flag updated
+4. **Be transparent:** Notify user of all flag changes
+5. **Be conservative:** Ask before removing/modifying existing flags
 
 ---
 

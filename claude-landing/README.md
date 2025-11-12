@@ -2,6 +2,22 @@
 
 **Purpose:** Immediate orientation documents for any Claude instance (Claude Code, Claude Desktop, etc.) working on the KENL project.
 
+## CTF Flag System
+
+**These documents contain "flags" - documented expectations about the current state.**
+
+When resuming work, you should **"capture the flags"** by validating each expectation against reality:
+
+- ✅ **Flag validates:** Documented state matches reality → proceed
+- 🚩 **Flag fails:** Mismatch detected → investigate before proceeding
+- ⚠️ **Flag partial:** Some aspects match, some don't → use judgment
+
+**Flags range from simple (typos, file paths) to complex (performance metrics, hidden edge cases).**
+
+**See:** RECENT-WORK.md "CTF Flag Capture Protocol" for detailed validation checklist.
+
+---
+
 ## Quick Start
 
 **First time here?** Read these in order:
