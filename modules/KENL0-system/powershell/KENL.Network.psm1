@@ -216,7 +216,7 @@ function Set-KenlMTU {
         try {
             Set-NetIPInterface -InterfaceIndex $interface.InterfaceIndex -NlMtuBytes $MTU -ErrorAction Stop
 
-            Write-Host "[✓] MTU set successfully" -ForegroundColor Green
+            Write-Host "[OK] MTU set successfully" -ForegroundColor Green
 
             # Log to ATOM trail
             if (Get-Command Write-AtomTrail -ErrorAction SilentlyContinue) {
@@ -261,10 +261,10 @@ function Test-KenlMTU {
 
         try {
             $ping = Test-Connection -ComputerName $TargetHost -BufferSize $payload -Count 1 -DontFragment -ErrorAction Stop
-            Write-Host "[✓] OK" -ForegroundColor Green
+            Write-Host "[OK] OK" -ForegroundColor Green
         }
         catch {
-            Write-Host "[✗] FRAGMENTED" -ForegroundColor Red
+            Write-Host "[X] FRAGMENTED" -ForegroundColor Red
         }
     }
 
@@ -360,10 +360,10 @@ function Optimize-KenlNetwork {
         if ($PSCmdlet.ShouldProcess("TCP $($setting.Key)", "Set to $($setting.Value)")) {
             try {
                 netsh int tcp set global $($setting.Key)=$($setting.Value) | Out-Null
-                Write-Host "  [✓] $($setting.Key) = $($setting.Value)" -ForegroundColor Green
+                Write-Host "  [OK] $($setting.Key) = $($setting.Value)" -ForegroundColor Green
             }
             catch {
-                Write-Host "  [✗] Failed to set $($setting.Key)" -ForegroundColor Red
+                Write-Host "  [X] Failed to set $($setting.Key)" -ForegroundColor Red
             }
         }
     }
@@ -379,14 +379,14 @@ function Optimize-KenlNetwork {
         if ($powerMgmt.AllowComputerToTurnOffDevice -eq $true) {
             if ($PSCmdlet.ShouldProcess($adapter.Name, "Disable power management")) {
                 Set-NetAdapterPowerManagement -Name $adapter.Name -AllowComputerToTurnOffDevice Disabled -ErrorAction SilentlyContinue
-                Write-Host "  [✓] Power management disabled" -ForegroundColor Green
+                Write-Host "  [OK] Power management disabled" -ForegroundColor Green
             }
         }
 
         # Enable RSS (Receive Side Scaling) if available
         try {
             Enable-NetAdapterRss -Name $adapter.Name -ErrorAction SilentlyContinue
-            Write-Host "  [✓] RSS enabled" -ForegroundColor Green
+            Write-Host "  [OK] RSS enabled" -ForegroundColor Green
         }
         catch {
             Write-Host "  [i] RSS not available on this adapter" -ForegroundColor Gray
@@ -424,7 +424,7 @@ function Optimize-KenlNetwork {
                                  -DSCPAction $policy.DSCP `
                                  -ErrorAction Stop | Out-Null
 
-                Write-Host "  [✓] QoS policy created: $($policy.Name)" -ForegroundColor Green
+                Write-Host "  [OK] QoS policy created: $($policy.Name)" -ForegroundColor Green
             }
             catch {
                 Write-Host "  [!] QoS policy failed: $($policy.Name)" -ForegroundColor Yellow
@@ -493,7 +493,7 @@ function Get-KenlNetworkProfile {
 
     if ($qos) {
         $qos | ForEach-Object {
-            Write-Host "  [✓] $($_.Name)" -ForegroundColor Green
+            Write-Host "  [OK] $($_.Name)" -ForegroundColor Green
         }
     }
     else {

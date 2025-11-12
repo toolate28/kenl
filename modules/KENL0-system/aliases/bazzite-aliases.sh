@@ -151,4 +151,24 @@ alias top-disk='df -h'
 # Temperature monitoring
 alias temps='sensors'
 
+# ═══════════════════════════════════════════════════════════
+# KENL2 Gaming & Network Scripts
+# ═══════════════════════════════════════════════════════════
+
+# Network optimization and monitoring
+alias net-optimize='bash ~/kenl/modules/KENL2-gaming/configs/network/optimize-network-gaming.sh'
+alias net-monitor='bash ~/kenl/modules/KENL2-gaming/configs/network/monitor-network-gaming.sh'
+alias net-monitor-quick='bash ~/kenl/modules/KENL2-gaming/configs/network/monitor-network-gaming.sh --quick'
+alias net-connections='bash ~/kenl/modules/KENL2-gaming/configs/network/monitor-connections.sh'
+
+# Play Card management
+alias playcard-create='bash ~/kenl/modules/KENL2-gaming/create-playcard.sh'
+alias playcard-apply='bash ~/kenl/modules/KENL2-gaming/apply-playcard.sh'
+
+# ═══════════════════════════════════════════════════════════
+# KENL4 Monitoring Setup
+# ═══════════════════════════════════════════════════════════
+
+alias monitoring-setup='bash ~/kenl/modules/KENL4-monitoring/setup-monitoring.sh'
+
 echo "✅ Bazzite aliases loaded (KENL0)"

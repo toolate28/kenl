@@ -60,7 +60,7 @@ function Get-KenlPlatform {
         IsLinux = $false
         IsBazzite = $false
         OSVersion = ""
-        Architecture = [System.Environment]::Is64BitOperatingSystem ? "x64" : "x86"
+        Architecture = if ([System.Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
         HasSystemd = $false
         HasRpmOstree = $false
     }
@@ -500,9 +500,9 @@ function Write-KenlMessage {
 
     $prefix = @{
         Info = "[i]"
-        Success = "[✓]"
+        Success = "[OK]"
         Warning = "[!]"
-        Error = "[✗]"
+        Error = "[X]"
         Highlight = "[*]"
         Debug = "[D]"
     }
