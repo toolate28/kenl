@@ -38,30 +38,38 @@ last-updated: 2025-11-12
 
 **Problem**: Gaming PCs are complex. When something breaks, you're left guessing what changed.
 
-**Solution**: KENL captures *why* you did things, not just *what*. When something breaks, recovery is automatic.
+**Real Example**: Battlefield 6 wouldn't even launch on Windows. EA App auth errors, anti-cheat failures, 174ms network latency. After hours of troubleshooting: it works. But *how*? What fixed it? Can you do it again?
+
+**Solution**: KENL captures *why* you did things, not just *what*. When BF6 breaks again (and it will), recovery is automatic because you documented the solution.
 
 ```mermaid
 graph LR
-    A([Start: Play Halo])
-    B{ProtonDB Check}
-    C[Configure Proton GE]
-    D[(Create Play Card)]
-    E([Share Config])
-    F[Backup to ATOM]
+    A([BF6 Won't Launch])
+    B[Research: EA App Issues]
+    C[Fix: Anti-Cheat + Proton]
+    D[Test: Validates Launch]
+    E[(Create Play Card)]
+    F[Network Optimization]
+    G([Share: Others Skip Pain])
+    H[ATOM Backup]
 
-    A -->|Research| B
-    B -->|Gold Rating| C
-    C -->|Document| D
-    D -->|Share| E
-    E -->|Backup| F
-    F -.->|Crash?| B
+    A -->|Investigate| B
+    B -->|ProtonDB| C
+    C -->|Success| D
+    D -->|Document| E
+    E -->|Apply| F
+    F -->|Works| G
+    G -->|Trail| H
+    H -.->|Breaks?| B
 
     style A fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
     style B fill:#ffd43b,stroke:#fab005,stroke-width:2px
     style C fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
-    style D fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
-    style E fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
-    style F fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+    style D fill:#51cf66,stroke:#2b8a3e,stroke-width:2px,color:#fff
+    style E fill:#845ef7,stroke:#5f3dc4,stroke-width:3px,color:#fff
+    style F fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
+    style G fill:#51cf66,stroke:#2b8a3e,stroke-width:3px,color:#fff
+    style H fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
 ```
 
 **Result**: 85% faster crash recovery, shareable gaming configs, complete audit trail.
@@ -248,25 +256,49 @@ graph TB
 Every operation creates an ATOM trail entry with full context:
 
 ```bash
-ATOM-GAMING-20251110-001: Researched Halo Infinite (ProtonDB Gold)
-ATOM-CFG-20251110-002: Configured Proton GE 9-18 + DXVK
-ATOM-PLAYCARD-20251110-003: Created play-card-halo-infinite.yaml
+ATOM-GAMING-20251112-001: BF6 failed to launch - EA App auth error
+ATOM-RESEARCH-20251112-002: ProtonDB reports: Need Proton GE 9-20 + EAC fix
+ATOM-CFG-20251112-003: Applied Proton GE 9-20, PROTON_EAC_RUNTIME=1
+ATOM-TEST-20251112-004: BF6 launches successfully, 118 FPS @ 1080p
+ATOM-NETWORK-20251112-005: Disabled Tailscale VPN (174ms → 6ms latency)
+ATOM-PLAYCARD-20251112-006: Created bf6-amd-ryzen5-5600h-working.yaml
 ```
 
-When something breaks, you know *exactly* what changed.
+When something breaks, you know *exactly* what changed - and what fixed it.
 
 ### 📋 Play Cards = Shareable Gaming Configs
 
 Document game configurations as YAML:
 
 ```yaml
-game: Halo Infinite
-proton: GE-Proton 9-18
-launch_options: "PROTON_ENABLE_NVAPI=1 %command%"
-fps_1440p_ultra: 118
+game: Battlefield 6
+hardware:
+  cpu: AMD Ryzen 5 5600H
+  gpu: AMD Radeon Vega (integrated)
+  ram: 16GB
+proton: GE-Proton 9-20
+launch_options: "PROTON_EAC_RUNTIME=1 %command%"
+compatibility:
+  ea_app: "Requires login workaround (see notes)"
+  anti_cheat: "Easy Anti-Cheat working with PROTON_EAC_RUNTIME"
+network:
+  tailscale_vpn: disabled  # Critical: 174ms → 6ms latency
+  mtu: 1492
+  avg_latency_ms: 6
+performance:
+  resolution: 1920x1080
+  settings: medium
+  fps_avg: 118
+  fps_min: 95
+  playability: excellent
+issues_solved:
+  - "Game wouldn't launch (EA App auth) - Fixed with Proton GE 9-20"
+  - "High latency (174ms) - Fixed by disabling Tailscale VPN"
+  - "Stuttering - Fixed with MTU optimization (1492)"
+atom_trail: ATOM-PLAYCARD-20251112-006
 ```
 
-Share with friends. They get identical performance.
+Share with friends. They **skip the pain you went through** and get identical performance.
 
 ### ⚡ Rapid Crash Recovery
 
@@ -294,7 +326,7 @@ KENL includes complete "storyboards" for complex operations:
 - 🪟 [RWS-02: Windows 11 Installation (wimboot)](./case-studies/RWS-02-WINDOWS11-WIMBOOT.md)
 - 🖥️ [RWS-03: Dual-Boot Setup](./case-studies/RWS-03-DUAL-BOOT.md)
 - 🚀 [RWS-04: Bazzite Rebase (40→41)](./case-studies/RWS-04-RPMOSTREE-REBASE.md)
-- 🎮 [RWS-05: Halo Infinite Setup](./case-studies/RWS-05-HALO-INFINITE.md)
+- 🎮 [RWS-05: Battlefield 6 - Launch Issues to Optimal](./case-studies/RWS-05-BATTLEFIELD-6.md) **← New!**
 - 🖥️ [RWS-06: Complete Dual-Boot Gaming Setup](./case-studies/RWS-06-COMPLETE-DUAL-BOOT-GAMING-SETUP.md)
 
 ---
