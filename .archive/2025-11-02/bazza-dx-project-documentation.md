@@ -132,7 +132,7 @@ For Users:
   • Windows 10 EOL migration toolkit with TAP/TPM automation
 
 For Developers:
-  • KENL dev container (distrobox) with Claude Code integration
+  • modules/KENL dev container (distrobox) with Claude Code integration
   • Justfile task automation replacing scattered scripts
   • MCP servers for Cloudflare, Git, filesystem operations
   • Constitutional governance preventing destructive operations
@@ -159,7 +159,7 @@ Cost:               $0 (within subscriptions)
 
 IMMEDIATE PRIORITIES
 
-  1. CLAUDE.md activation file (unblocks KENL container productivity)
+  1. CLAUDE.md activation file (unblocks modules/KENL container productivity)
   2. Cloudflare D1 database (ATOM audit trail persistence)
   3. Justfile task runner (unified command interface)
   4. Gaming config framework testing (validate Play Card schemas)
@@ -205,7 +205,7 @@ Throughout this documentation:
   ATOM tags         Audit Trail Origin Markers (e.g., ATOM-CFG-20251102-001)
   SAGE              System-Aware Guided Evolution methodology
   Play Cards        Gaming configuration JSON schemas
-  KENL              Kubernetes ENvironment Layer (distrobox container)
+  modules/KENL              Kubernetes ENvironment Layer (distrobox container)
   ujust             Universal Blue's user-friendly task runner
   MCP               Model Context Protocol (AI agent orchestration)
 
@@ -404,7 +404,7 @@ Distrobox-based dev environment (not a custom OS image):
   Host System (Bazzite-DX)
   ├── Base OS (immutable, rpm-ostree)
   ├── Gaming (Steam, Lutris, native)
-  └── KENL Container (distrobox)
+  └── modules/KENL Container (distrobox)
       ├── Ubuntu 24.04 LTS base
       ├── Node.js (via nvm, user-level)
       ├── Claude Code (installed in container)
@@ -417,7 +417,7 @@ Tight integration via distrobox:
   • Share GPU access for AI workloads
   • Isolated dependency management
 
-This is where Claude Code runs. KENL provides reproducible dev environment 
+This is where Claude Code runs. modules/KENL provides reproducible dev environment 
 without modifying the immutable base system.
 
 
@@ -585,14 +585,14 @@ Distrobox:
   • Base: Ubuntu 24.04 LTS (stability + package availability)
   • Integration: Full host filesystem access, GPU passthrough
   
-  Create KENL container:
+  Create modules/KENL container:
     distrobox create --name kenl --image ubuntu:24.04
 
 Node.js (via nvm):
   • Version: 20 LTS
   • Purpose: MCP servers, web tooling, claude-code dependencies
   
-  Installation (inside KENL):
+  Installation (inside modules/KENL):
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     nvm install 20
 
@@ -784,7 +784,7 @@ For Development (KENL Container):
   CPU:              Sufficient for parallel builds (6+ cores recommended)
 
 Rationale:
-  • 16GB RAM: Base OS (3GB) + Gaming (4-8GB) + KENL (2GB) + Qwen (4-6GB)
+  • 16GB RAM: Base OS (3GB) + Gaming (4-8GB) + modules/KENL (2GB) + Qwen (4-6GB)
   • SSD: Mandatory for rpm-ostree performance, container I/O
   • CPU: Modern architecture (2018+) for containerization efficiency
 
@@ -986,7 +986,7 @@ SAGE Methodology Execution:
 
 Priority Upgrades (Budget-Conscious):
   1. SSD (if using HDD): Mandatory, ~$50-80 for 512GB NVMe
-  2. RAM (8GB → 16GB): Enables Qwen + KENL, ~$30-50
+  2. RAM (8GB → 16GB): Enables Qwen + modules/KENL, ~$30-50
   3. GPU (if integrated): Biggest gaming impact, ~$200-400
 
 Mid-Tier Upgrades:

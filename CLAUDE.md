@@ -1,32 +1,91 @@
 ---
 project: Bazza-DX SAGE Framework
 status: current
-version: 2025-11-06
+version: 2025-11-12
 classification: OWI-DOC
-atom: ATOM-DOC-20251106-019
+atom: ATOM-DOC-20251112-010
 owi-version: 1.0.0
+last-updated: 2025-11-12
 ---
 
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## First Steps (New Claude Instance)
+
+**Before starting any task:**
+1. Read `claude-landing/CURRENT-STATE.md` for current environment snapshot
+2. Read `claude-landing/RECENT-WORK.md` for latest session work
+3. Run `git log --oneline -10` to see recent commits
+4. Check `claude-landing/QUICK-REFERENCE.md` for common paths and commands
+
+**The `claude-landing/` directory contains immediate orientation documents** - always start there when beginning a new session or task.
+
 ## Repository Purpose
 
 **kenl** is a scaffold/template repository providing developer infrastructure and governance frameworks for the Bazza-DX ecosystem. It implements the **ATOM** (atomic audit trail) and **SAGE** (System-Aware Guided Evolution) methodologies for traceable, evidence-based system development on immutable Linux distributions (Bazzite-DX/Fedora Atomic).
 
+### The KENL Builder Mentality
+
+**"Putting the amazing work of Universal Blue / Bazzite teams into everyone's hands."**
+
+KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Bazzite/Universal Blue community. Through documentation, AI assistance, and shareable configurations, every operation:
+- Captures **intent** (why, not just what) via ATOM trails
+- Provides **rollback instructions** (breaking-change proof)
+- Operates in **user-space only** (cannot taint the immutable OS)
+- Integrates **elegantly** (minimal CPU/GPU overhead, no system daemons)
+
+See `README.md` for complete explanation of the Four Pillars (KENL, ATOM, OWI, SAGE) and Technical Guarantees.
+
 ## Core Architecture
+
+### Repository Structure
+
+The repository is organized into three main sections:
+
+```
+kenl/
+├── claude-landing/    # START HERE - Immediate orientation docs
+├── modules/           # All KENL modules (0-12)
+│   ├── KENL0-system/
+│   │   └── powershell/  # Windows PowerShell modules
+│   ├── KENL1-framework/
+│   ├── KENL2-gaming/
+│   ├── KENL3-dev/
+│   ├── KENL4-monitoring/
+│   ├── KENL5-facades/
+│   ├── KENL6-social/
+│   ├── KENL7-learning/
+│   ├── KENL8-security/
+│   ├── KENL9-library/
+│   ├── KENL10-backup/
+│   ├── KENL11-media/
+│   └── KENL12-resources/
+├── governance/        # Governance artifacts
+│   ├── mcp-governance/
+│   └── 02-Decisions/
+├── scripts/           # Utility scripts
+└── ... (docs, CI, etc.)
+```
+
+**Key Paths:**
+- **Orientation:** `claude-landing/` - START HERE for current state
+- All KENL modules: `modules/KENL*`
+- PowerShell modules: `modules/KENL0-system/powershell/`
+- Governance artifacts: `governance/`
+- Scripts: `scripts/`
 
 ### Governance Framework
 
 This repository uses a dual governance system:
 
-1. **ARCREF** (Architecture Reference artifacts) - `mcp-governance/ARCREF_TEMPLATE.yaml`
+1. **ARCREF** (Architecture Reference artifacts) - `governance/mcp-governance/ARCREF_TEMPLATE.yaml`
    - Structural format for infrastructure/architecture decisions
    - Required for MCP, cloud, platform, or repo-level changes
    - Includes rollback plans, tests, and traceability
 
-2. **ADR** (Architectural Decision Records) - `02-Decisions/ADR_TEMPLATE.md`
+2. **ADR** (Architectural Decision Records) - `governance/02-Decisions/ADR_TEMPLATE.md`
    - Narrative format for decision documentation
    - Links to associated ARCREF IDs
    - Follows status lifecycle: proposed → accepted → deprecated/superseded
@@ -131,8 +190,8 @@ pytest -q
 - Pre-commit passes: `pre-commit run --all-files`
 
 **For Architectural Changes:**
-1. Create ARCREF artifact in `mcp-governance/` using template
-2. Create ADR in `02-Decisions/` using template
+1. Create ARCREF artifact in `governance/mcp-governance/` using template
+2. Create ADR in `governance/02-Decisions/` using template
 3. Link ARCREF ID in ADR and PR description
 4. Include rollback plan and test verification
 
@@ -182,19 +241,51 @@ This repository is part of a larger ecosystem focused on gaming-with-intent on i
 - **Base:** Bazzite-DX (Fedora Atomic/rpm-ostree)
 - **Gaming:** Proton/GE-Proton, GameScope, MangoHud
 - **AI:** Claude (10%), Perplexity (30%), Qwen local (60%)
-- **Dev:** KENL distrobox (Ubuntu 24.04 + Claude Code)
+- **Dev:** modules/KENL distrobox (Ubuntu 24.04 + Claude Code)
 - **Cloud:** Cloudflare Workers/D1/KV/R2 (toolated.online)
 
 **Target Use Case:** Windows 10 EOL migration (Oct 2025) - providing evidence-based, rollback-safe gaming configurations for 240M+ affected PCs.
+
+## KENL Module Navigation
+
+When working with specific KENL modules, use these paths:
+
+**System & Framework:**
+- `modules/KENL0-system/` - System operations (rpm-ostree, ujust, firmware)
+- `modules/KENL1-framework/` - ATOM+SAGE+OWI core framework
+
+**Gaming & Social:**
+- `modules/KENL2-gaming/` - Gaming configs, Play Cards, Proton optimization
+- `modules/KENL6-social/` - Sharing Play Cards, community features
+- `modules/KENL9-library/` - Game library management
+
+**Development:**
+- `modules/KENL3-dev/` - Distrobox environments, Claude Code setup
+- `modules/KENL4-monitoring/` - Prometheus, Grafana, ATOM analytics
+- `modules/KENL7-learning/` - Cheatsheets, guides, learning resources
+
+**Theming & Security:**
+- `modules/KENL5-facades/` - Visual themes, context switching, banners
+- `modules/KENL8-security/` - GPG, SSH, security tools
+
+**Infrastructure:**
+- `modules/KENL10-backup/` - Backups, snapshots, recovery
+- `modules/KENL11-media/` - Media streaming, Docker compose
+- `modules/KENL12-resources/` - Community downloads, RSS feeds
+
+**Each KENL has:**
+- `README.md` - Module overview and usage
+- Scripts specific to that layer's purpose
+- Configuration files and templates
 
 ## Key Documentation Files
 
 Beyond this scaffold, the repository contains project-specific documentation:
 
-- `bazza-dx-one-pager.md` - Executive summary and project values
-- `project-status-atom-assessment.md` - Current status and priorities
-- `gaming-config-*.md` - Gaming optimization frameworks
-- `claude-configuration-guide.md` - MCP server configuration
+- `modules/KENL2-gaming/guides/bazza-dx-one-pager.md` - Executive summary
+- `modules/KENL3-dev/claude-code-setup/claude-configuration-guide.md` - MCP setup
+- `modules/KENL2-gaming/guides/gaming-config-*.md` - Gaming frameworks
+- `AI-INTEGRATION-GUIDE.md` - AI integration patterns (root level)
 
 When working on gaming configs or MCP integrations, consult these documents for context and established patterns.
 

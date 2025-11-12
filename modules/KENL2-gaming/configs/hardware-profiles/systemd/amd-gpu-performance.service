@@ -1,0 +1,16 @@
+[Unit]
+Description=Set AMD GPU to performance mode for gaming
+Documentation=https://github.com/toolated/kenl
+After=multi-user.target
+ConditionPathExists=/sys/class/drm/card0/device/power_dpm_force_performance_level
+
+[Service]
+Type=oneshot
+# Set GPU performance level to high
+ExecStart=/usr/bin/bash -c 'echo high > /sys/class/drm/card0/device/power_dpm_force_performance_level'
+# Set power profile mode to 3D gaming (profile 1)
+ExecStartPost=/usr/bin/bash -c 'if [ -f /sys/class/drm/card0/device/pp_power_profile_mode ]; then echo 1 > /sys/class/drm/card0/device/pp_power_profile_mode; fi'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

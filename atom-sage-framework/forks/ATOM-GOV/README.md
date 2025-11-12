@@ -122,12 +122,12 @@ cd atom-sage-framework
 atom GOV "Initialize ATOM-GOV configuration"
 
 # Configure MCP proxy
-atom-gov init --config ~/.config/atom-sage/mcp-governance.yaml
+atom-gov init --config ~/.config/atom-sage/governance/mcp-governance.yaml
 ```
 
 ## Configuration
 
-Create `~/.config/atom-sage/mcp-governance.yaml`:
+Create `~/.config/atom-sage/governance/mcp-governance.yaml`:
 
 ```yaml
 atom_gov:
@@ -284,7 +284,7 @@ policy:
 
 ```bash
 # Start ATOM-GOV proxy
-atom-gov start --config ~/.config/atom-sage/mcp-governance.yaml
+atom-gov start --config ~/.config/atom-sage/governance/mcp-governance.yaml
 
 # View audit trail
 atom-gov audit --server cloudflare_mcp --last 24h

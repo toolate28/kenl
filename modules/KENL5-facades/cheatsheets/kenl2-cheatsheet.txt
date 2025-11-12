@@ -1,0 +1,50 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║   🎮 KENL2: GAMING - Play Cards & Proton Optimization                         ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   🔍 RESEARCH                             📋 PLAY CARDS                       ║
+║   ──────────                              ────────────                       ║
+║   research-game.sh "Game"                 create-playcard.sh "Game"          ║
+║   → ProtonDB rating                       → Generate YAML config             ║
+║   → Best Proton version                   → Document settings                ║
+║   → Hardware requirements                 → Add performance metrics          ║
+║   → Common issues                                                            ║
+║                                            apply-playcard.sh game.yaml       ║
+║                                            → Apply config to Steam           ║
+║                                            → Set launch options              ║
+║                                            → Enable GameMode/MangoHud        ║
+║                                                                               ║
+║   🔐 SHARING                              📊 BENCHMARKING                     ║
+║   ─────────                               ──────────────                     ║
+║   share-playcard.sh game.yaml email       compare-configs.sh cfg1 cfg2      ║
+║   → Encrypt with GPG (KENL8)              → A/B test Proton versions         ║
+║   → Send via Matrix/Discord               → FPS comparison                   ║
+║   → Friend applies instantly              → Frame time analysis              ║
+║                                            → Pick best config                ║
+║                                                                               ║
+║   ⚙️  PROTON                              🎯 PERFORMANCE                      ║
+║   ────────                                ────────────                       ║
+║   proton-list         Show versions      gamemode-status    Check GameMode  ║
+║   install-proton-ge   Latest GE          mangohud-config    Edit overlay    ║
+║   proton-logs         Debug output       steam-fps          Show FPS        ║
+║                                                                               ║
+║   🎨 STEAM LIBRARY                        💾 BACKUPS                          ║
+║   ───────────────                         ────────                           ║
+║   steam-library       Show installed     kenl-switch 10                     ║
+║   steam-verify        Check files        snapshot-create "before-update"    ║
+║   steam-cache-clear   Free space         → Backs up Play Cards              ║
+║                                            → ATOM trail included             ║
+║                                                                               ║
+║   💡 WORKFLOW:                                                                ║
+║   1. research-game.sh "Elden Ring"                                           ║
+║   2. [Install via Steam GUI]                                                 ║
+║   3. apply-playcard.sh elden-ring.yaml    (if Play Card exists)             ║
+║   4. [Test game, benchmark]                                                  ║
+║   5. create-playcard.sh "Elden Ring"      (if works well)                   ║
+║   6. share-playcard.sh elden-ring.yaml friend@matrix.org                    ║
+║                                                                               ║
+║   💡 TIP: All Play Cards saved to ~/kenl/KENL2-gaming/play-cards/             ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝

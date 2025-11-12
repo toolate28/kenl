@@ -419,8 +419,8 @@ All files in these locations MUST have OWI metadata:
 ```
 ~/kenl/*.md                    # Root documentation
 ~/kenl/.kenl/*.md              # Hidden project docs
-~/kenl/02-Decisions/*.md       # ADRs
-~/kenl/mcp-governance/*.md     # ARCREF documents
+~/kenl/governance/02-Decisions/*.md       # ADRs
+~/kenl/governance/mcp-governance/*.md     # ARCREF documents
 ~/*.md                         # Home directory guides
 ```
 
