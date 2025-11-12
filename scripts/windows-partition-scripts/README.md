@@ -24,18 +24,38 @@ These scripts implement the **Hybrid Approach (Option C)** from `/home/user/kenl
 ## Prerequisites
 
 - **Administrator privileges** (all scripts require `Run as Administrator`)
+- **Native Windows PowerShell** (NOT WSL2 - see warnings below)
 - **PowerShell 5.1+** (built into Windows 10/11)
 - **1.8TB external drive** connected and recognized as Disk 1
 - **Backup all data** - these scripts will DESTROY all data on the target disk
 
-**⚠️ VERIFY DISK NUMBER BEFORE RUNNING ⚠️**
+**⚠️ CRITICAL SAFETY REQUIREMENTS ⚠️**
 
-Check disk number in PowerShell:
-```powershell
-Get-Disk | Format-Table Number, FriendlyName, Size, PartitionStyle -AutoSize
-```
+1. **VERIFY DISK NUMBER BEFORE RUNNING:**
+   ```powershell
+   Get-Disk | Format-Table Number, FriendlyName, Size, PartitionStyle -AutoSize
+   ```
+   If your external drive is NOT Disk 1, edit `$DISK_NUMBER` in each script or use `config.local.ps1`.
 
-If your external drive is NOT Disk 1, edit the `$DISK_NUMBER` variable in each script.
+2. **❌ NEVER RUN FROM WSL2:**
+   ```
+   ❌ WRONG: Windows → WSL2 → wsl -e ./script.sh
+   ✅ CORRECT: Windows → Native PowerShell → .\script.ps1
+   ```
+   **WHY:** WSL2 cannot safely partition physical disks. Data corruption guaranteed.
+   **SOLUTION:** Use native Windows PowerShell only.
+
+3. **Format ext4 in NATIVE LINUX ONLY:**
+   ```
+   ❌ WRONG: Windows → WSL2 → mkfs.ext4 /dev/sdb2
+   ✅ CORRECT: Reboot → Bazzite-DX → mkfs.ext4 /dev/sdb2
+   ```
+   After Windows partitioning (STEP1-3), reboot to native Linux for ext4 formatting.
+
+**📚 Quick Start Guides:**
+- **Workflow Diagrams:** See `WORKFLOW_DIAGRAM.md` for visual flowcharts
+- **Profile Setup:** See `PROFILES_SETUP.md` for PowerShell/Bash automation
+- **Privacy Guide:** See `USAGE_PRIVACY.md` for gitignore and data safety
 
 ---
 
@@ -355,7 +375,28 @@ $handover | Out-File HANDOVER-SANITIZED.md
 
 ---
 
-## Related Documentation
+## Documentation Files
+
+### In This Directory
+
+| File | Purpose | Key Topics |
+|------|---------|------------|
+| **README.md** (this file) | Main usage guide | Prerequisites, execution steps, troubleshooting |
+| **WORKFLOW_DIAGRAM.md** | Visual flowcharts | Mermaid diagrams for complete workflow |
+| **PROFILES_SETUP.md** | Shell profile configs | PowerShell & Bash automation, WSL2 warnings |
+| **USAGE_PRIVACY.md** | Privacy & safety guide | Gitignore patterns, archive structure, sanitization |
+| **config.example.ps1** | Configuration template | Disk numbers, sizes, drive letters, paths |
+| **.gitignore** | Privacy rules | Blocks personal data from Git commits |
+
+### Scripts
+
+| Script | ATOM Tag | Purpose |
+|--------|----------|---------|
+| **STEP1-WINDOWS-WIPE-DISK1.ps1** | ATOM-CFG-20251112-001 | Safely wipe disk |
+| **STEP2-WINDOWS-PARTITION-DISK1.ps1** | ATOM-CFG-20251112-002 | Create 5 partitions |
+| **STEP3-WINDOWS-MOUNT-CHECK.ps1** | ATOM-CFG-20251112-003 | Verify layout |
+
+### Related Documentation
 
 **Design Specifications:**
 - `/home/user/kenl/scripts/1.8TB_EXTERNAL_DRIVE_LAYOUT.md` - Complete design with all three layout options
