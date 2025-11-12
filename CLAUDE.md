@@ -25,6 +25,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **kenl** is a scaffold/template repository providing developer infrastructure and governance frameworks for the Bazza-DX ecosystem. It implements the **ATOM** (atomic audit trail) and **SAGE** (System-Aware Guided Evolution) methodologies for traceable, evidence-based system development on immutable Linux distributions (Bazzite-DX/Fedora Atomic).
 
+### The KENL Builder Mentality
+
+**"Anything we can do, you can do better. You can do anything better than we."**
+
+This repository follows the KENL Builder Mentality: empowering users with better tools, documentation, and AI assistance than the maintainers used. Every operation:
+- Captures **intent** (why, not just what) via ATOM trails
+- Provides **rollback instructions** (breaking-change proof)
+- Operates in **user-space only** (cannot taint the immutable OS)
+- Integrates **elegantly** (minimal CPU/GPU overhead, no system daemons)
+
+See `README.md` for complete explanation of the Four Pillars (KENL, ATOM, OWI, SAGE) and Technical Guarantees.
+
 ## Core Architecture
 
 ### Repository Structure

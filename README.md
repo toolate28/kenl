@@ -67,6 +67,61 @@ graph LR
 
 ---
 
+## The KENL Builder Mentality
+
+**"Anything we can do, you can do better. You can do anything better than we."**
+
+Transform your Bazzite system into a self-documenting gaming and development platform.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
+[![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
+[![Play Cards: 15+](https://img.shields.io/badge/Play_Cards-15+-purple.svg)]()
+
+### The Four Pillars
+
+**KENL**
+> A distrobox (devcontainer) that houses dedicated tooling for Gaming and Development on Cloud-Native OS.
+
+**ATOM**
+> An AI and Administrator logging system that captures the **Intent** behind each action, allowing Agents and Self-Propelled (no AI help) Users to resume tasking or rollback to any point.
+>
+> *See [`claude-landing/RECENT-WORK.md`](./claude-landing/RECENT-WORK.md) for ATOM operating example (CTFWI pattern documentation)*
+
+**OWI** (*Operating-With-Intent*)
+> A KENL deployment integrating paid- and offline-AI Agents, MCP Servers, and intelligent helpers with the work already done by Universal Blue / Bazzite. Reach your optimal operational state for any task (e.g., Playing X on Y with Z Hardware).
+>
+> Confirmed setups create **Play Cards** (Hardware Profiles + gaming configuration + Compat tools + Intelligent Networking workflows). Play Cards can be redacted, encrypted, and shared.
+>
+> *See [`claude-landing/TESTING-RESULTS.md`](./claude-landing/TESTING-RESULTS.md) for Play Card structure example*
+
+**SAGE** (*System-Aware Guided Evolution*)
+> Documentation system designed to deliver the information you require, when it is required, and in the form best suited to deliver it.
+>
+> *See [`claude-landing/`](./claude-landing/) for SAGE operating example (just-in-time orientation docs)*
+
+### Technical Guarantees
+
+**Elegant Integration**
+- Distrobox containers isolate development tools (zero system-level dependencies)
+- MCP servers communicate via JSON-RPC (no kernel modules, no system daemons)
+- All KENL scripts are pure POSIX shell (no custom interpreters)
+
+**Minimal Overhead**
+- ATOM trail logging: ~0.1ms per operation (append-only file I/O)
+- Play Cards: Static YAML files (read on demand, no background processes)
+- Distrobox: Copy-on-write filesystem (shared binaries, minimal disk usage)
+
+**Breaking-Change Proof**
+- **Immutable Base OS**: Bazzite/Fedora Atomic uses rpm-ostree (system is read-only)
+- **Layered Changes**: System modifications require explicit `rpm-ostree install` (with automatic rollback)
+- **User-Space Only**: KENL operates in `~/.local` and `~/.config` (cannot taint OS)
+- **Atomic Rollback**: Boot to previous system state via GRUB menu (single reboot)
+
+*Every KENL operation includes rollback instructions. You can undo any change.*
+
+---
+
 ## Quick Start
 
 ```bash
@@ -88,7 +143,7 @@ cd modules/KENL0-system    # For system operations
 
 ## The KENL Ecosystem
 
-KENL is **11 specialized modules** that work together on Bazzite:
+KENL is **13 specialized modules** (KENL0-12) that work together on Bazzite:
 
 ```mermaid
 graph TB
@@ -122,6 +177,10 @@ graph TB
         K10[KENL10: Backup]
     end
 
+    subgraph Resources[Resources]
+        K12[KENL12: Resources]
+    end
+
     K0 -.-> K1
     K1 -.-> K2
     K1 -.-> K3
@@ -137,6 +196,8 @@ graph TB
     K10 --> K3
     K8 --> K6
     K11 --> K9
+    K12 --> K2
+    K12 --> K3
 
     style K0 fill:#f8f9fa,stroke:#495057,stroke-width:3px
     style K1 fill:#e5dbff,stroke:#7950f2,stroke-width:4px
@@ -150,6 +211,7 @@ graph TB
     style K9 fill:#d0bfff,stroke:#9775fa,stroke-width:2px
     style K10 fill:#e7dcc8,stroke:#8b6d47,stroke-width:2px
     style K11 fill:#ffc9c9,stroke:#ff6b6b,stroke-width:2px
+    style K12 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
 ```
 
 ---
@@ -170,6 +232,7 @@ graph TB
 | 📚 **KENL9**     | Library management         | [modules/KENL9-library/](./modules/KENL9-library/)    |
 | 💾 **KENL10**    | Backups & snapshots        | [modules/KENL10-backup/](./modules/KENL10-backup/)    |
 | 📺 **KENL11**    | Media server automation    | [modules/KENL11-media/](./modules/KENL11-media/)      |
+| 🗂️ **KENL12**    | Resources & downloads      | [modules/KENL12-resources/](./modules/KENL12-resources/)|
 
 **Pick the module that matches your task, then read its README.**
 
@@ -237,8 +300,16 @@ KENL includes complete "storyboards" for complex operations:
 
 ```
 kenl/
+├── claude-landing/               # START HERE - AI agent orientation docs
+│   ├── CURRENT-STATE.md          # Environment snapshot
+│   ├── RECENT-WORK.md            # Session summaries (CTFWI examples)
+│   ├── HARDWARE.md               # Hardware specs
+│   ├── TESTING-RESULTS.md        # Validation results (Play Card examples)
+│   ├── MIGRATION-PLAN.md         # Platform migration roadmaps
+│   └── QUICK-REFERENCE.md        # Essential commands & paths
 ├── modules/                      # All KENL modules (0-12)
 │   ├── KENL0-system/             # System operations
+│   │   └── powershell/           # Windows PowerShell modules
 │   ├── KENL1-framework/          # ATOM+SAGE+OWI core
 │   ├── KENL2-gaming/             # Gaming configs & Play Cards
 │   ├── KENL3-dev/                # Development environments
@@ -257,6 +328,12 @@ kenl/
 ---
 
 ## Documentation
+
+### Quick Start (New Users or AI Agents)
+- [Claude Landing Zone](./claude-landing/) - **START HERE** for orientation
+- [Current State](./claude-landing/CURRENT-STATE.md) - Environment snapshot
+- [Recent Work](./claude-landing/RECENT-WORK.md) - Latest session summaries
+- [Quick Reference](./claude-landing/QUICK-REFERENCE.md) - Essential commands
 
 ### Core Framework
 - [ATOM+SAGE Framework](./modules/KENL1-framework/README.md) - Intent-driven operations
