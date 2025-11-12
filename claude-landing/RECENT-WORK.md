@@ -6,11 +6,21 @@ status: active
 classification: OWI-CTFWI
 owi-fork: CTFWI
 owi-version: 1.0.0
+ctfwi-variant: "Capture The Flag With Intent"
+ctfwi-note: |
+  This document demonstrates CTFWI as "Capture The Flag With Intent" -
+  solving the puzzle of effective AI agent directives through systematic
+  investigation. The "flags" are expectations I've set (in CURRENT-STATE.md,
+  TESTING-RESULTS.md, etc.) that future AI instances should "capture" by
+  validating them against reality. Flags can range from simple (typos,
+  syntax errors) to complex (hidden edge cases, performance assumptions).
 tags:
   - ai-agent-communication
   - directive-patterns
   - claude-code-investigation
   - documentation-improvement
+  - ctf-methodology
+  - flag-validation
 evidence:
   - Cold-start Claude Code experiment
   - Before/after directive comparison
@@ -23,6 +33,97 @@ rollback: N/A (documentation only, non-destructive)
 **Session Date:** 2025-11-12
 **ATOM Tag:** ATOM-DOC-20251112-003
 **Context:** Continuation from previous session (context limit reached)
+
+---
+
+## CTF Flag Capture Protocol
+
+**For AI Instances Resuming This Session:**
+
+This directory (`claude-landing/`) contains **CTF flags** - expectations about the current state that you should **validate against reality** before proceeding.
+
+### What Are "Flags"?
+
+**Flags are documented expectations** (in CURRENT-STATE.md, TESTING-RESULTS.md, HARDWARE.md) that serve as validation checkpoints. They can be:
+
+- **Simple:** Typos, syntax errors, version mismatches
+- **Moderate:** File paths, command outputs, git branch states
+- **Complex:** Performance metrics, network latency, hardware detection
+- **Hidden:** Edge cases, assumption failures, undocumented dependencies
+
+### How to "Capture the Flag"
+
+**On resumption, validate these expectations:**
+
+1. **Platform Check:**
+   - **Flag:** CURRENT-STATE.md says "Platform: Windows 11"
+   - **Capture:** Run `$PSVersionTable` or `uname -a` - confirm Windows
+   - **Intent:** Prevent wrong OS assumptions
+
+2. **Git State:**
+   - **Flag:** CURRENT-STATE.md lists branch and recent commits
+   - **Capture:** Run `git log --oneline -5` - verify matches documented state
+   - **Intent:** Ensure session continuity
+
+3. **Network Baseline:**
+   - **Flag:** TESTING-RESULTS.md claims "6.2ms average latency"
+   - **Capture:** Run `Test-KenlNetwork` - confirm still ~6ms
+   - **Intent:** Detect configuration drift
+
+4. **Module Health:**
+   - **Flag:** TESTING-RESULTS.md says "KENL.Network.psm1 ✅ ACK"
+   - **Capture:** Import module, run test function - confirm no errors
+   - **Intent:** Validate modules still operational
+
+5. **Hardware Detection:**
+   - **Flag:** HARDWARE.md documents "AMD Ryzen 5 5600H"
+   - **Capture:** Check CPU info - verify model matches
+   - **Intent:** Prevent hardware misidentification
+
+### Flag Validation Checklist
+
+**Before starting work, capture these flags:**
+
+```powershell
+# 1. Platform (Windows expected)
+$PSVersionTable
+
+# 2. Git state (branch: main, recent: f3b5009...)
+git log --oneline -5
+
+# 3. Network baseline (expect ~6ms)
+Test-KenlNetwork
+
+# 4. PowerShell modules (should load cleanly)
+Import-Module ./modules/KENL0-system/powershell/KENL.psm1
+Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
+
+# 5. External drive state (expect corrupted 2TB)
+Get-Disk | Where-Object BusType -eq USB
+```
+
+### Reporting Flag Results
+
+**If flags validate:** ✅ Proceed with task
+
+**If flags fail:** 🚩 Report discrepancy:
+- **Expected:** [What the flag documented]
+- **Reality:** [What you found]
+- **Impact:** [Does this affect current task?]
+- **Action:** [Update docs OR investigate root cause]
+
+**Example:**
+
+```
+🚩 FLAG MISMATCH: Network Baseline
+
+Expected: 6.2ms average (per TESTING-RESULTS.md)
+Reality: 45ms average (Test-KenlNetwork output)
+Impact: May indicate Tailscale re-enabled or network config drift
+Action: Investigate before proceeding with gaming tests
+```
+
+---
 
 ## This Session's Focus
 
@@ -482,6 +583,85 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
    - Pre-flight verification
    - Partition commands ready
    - Post-install configuration steps
+
+---
+
+---
+
+## Flags Dropped (Expectations to Validate on Resume)
+
+**For Future AI Instances:** These are the **CTF flags** I've set. Capture them by validating each expectation against reality.
+
+### Platform & Environment Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **PLAT-01** | Platform is Windows 11 (pre-migration) | `$PSVersionTable` | Simple |
+| **PLAT-02** | Current branch is `main` | `git branch --show-current` | Simple |
+| **PLAT-03** | Working directory is clean | `git status` | Simple |
+| **PLAT-04** | Recent commit is `f3b5009` (claude-landing) | `git log --oneline -1` | Moderate |
+
+### Hardware Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **HW-01** | CPU is AMD Ryzen 5 5600H | `Get-WmiObject Win32_Processor \| Select Name` | Moderate |
+| **HW-02** | GPU is AMD Radeon Vega (integrated) | Check device manager / `lspci` | Moderate |
+| **HW-03** | External 2TB drive is corrupted (2 partitions) | `Get-Disk \| Where BusType -eq USB` | Complex |
+| **HW-04** | RAM is 16GB | `Get-WmiObject Win32_ComputerSystem` | Simple |
+
+### Network Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **NET-01** | Average latency is ~6ms (Tailscale disabled) | `Test-KenlNetwork` | Moderate |
+| **NET-02** | Tailscale adapter is disabled | `Get-NetAdapter -Name "Tailscale"` | Simple |
+| **NET-03** | MTU is optimized to 1492 | `netsh interface ipv4 show subinterfaces` | Moderate |
+| **NET-04** | All 5 test hosts return EXCELLENT status | `Test-KenlNetwork` output | Complex |
+
+### Module Health Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **MOD-01** | KENL.psm1 loads without errors | `Import-Module ./modules/.../KENL.psm1` | Simple |
+| **MOD-02** | KENL.Network.psm1 loads without errors | `Import-Module .../KENL.Network.psm1` | Simple |
+| **MOD-03** | Test-KenlNetwork returns valid latency | `Test-KenlNetwork` | Moderate |
+| **MOD-04** | Get-KenlPlatform detects "Windows" | `Get-KenlPlatform` | Simple |
+
+### File Existence Flags
+
+| Flag ID | Expectation | Validation Command | Complexity |
+|---------|-------------|-------------------|------------|
+| **FILE-01** | claude-landing/ directory exists | `Test-Path ./claude-landing` | Simple |
+| **FILE-02** | PowerShell modules exist in KENL0 | `ls ./modules/KENL0-system/powershell/` | Simple |
+| **FILE-03** | BF6 Play Card exists | `Test-Path ./modules/KENL2-gaming/play-cards/bf6*` | Simple |
+| **FILE-04** | Network optimization scripts exist | `ls ./modules/KENL2-gaming/configs/network/` | Simple |
+
+### Complexity Levels
+
+- **Simple:** Direct command, obvious pass/fail (typos, missing files)
+- **Moderate:** Parse output, compare values (performance metrics, versions)
+- **Complex:** Multi-step validation, interpretation required (edge cases, assumptions)
+- **Hidden:** Not explicitly documented, requires inference (undocumented dependencies, implicit requirements)
+
+### How to Use These Flags
+
+**On session resumption:**
+
+1. Run validation commands for all flags
+2. Report results: ✅ (pass), 🚩 (fail), ⚠️ (partial)
+3. If any flags fail: investigate root cause before proceeding
+4. Update this document if flags are outdated or new flags discovered
+
+**Example Report:**
+
+```
+✅ PLAT-01: Windows 11 confirmed
+✅ PLAT-02: Branch is main
+🚩 NET-01: Latency is 45ms (expected 6ms) - Tailscale may be re-enabled
+✅ MOD-01: KENL.psm1 loaded successfully
+⚠️ HW-03: External drive shows 3 partitions (expected 2) - layout changed?
+```
 
 ---
 

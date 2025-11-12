@@ -10,10 +10,46 @@ atom: ATOM-DOC-20251112-006
 
 ## First Steps (New Claude Instance)
 
+### 1. Read Orientation Docs
 1. **Check current state:** `cat claude-landing/CURRENT-STATE.md`
 2. **Check recent work:** `cat claude-landing/RECENT-WORK.md`
-3. **Check git:** `git log --oneline -10`
-4. **Check platform:** `uname -a` or `$PSVersionTable` (Windows)
+3. **Review CTF protocol:** See RECENT-WORK.md "CTF Flag Capture Protocol" section
+
+### 2. Capture the Flags (Validate Documented Expectations)
+
+**Purpose:** Verify documented state matches reality before proceeding
+
+```powershell
+# Platform (expect Windows 11)
+$PSVersionTable
+
+# Git state (expect branch: main, recent commits match docs)
+git status
+git log --oneline -5
+
+# Network baseline (expect ~6ms)
+Test-KenlNetwork
+
+# PowerShell modules (should load without errors)
+Import-Module ./modules/KENL0-system/powershell/KENL.psm1
+Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
+Get-KenlPlatform
+
+# Hardware (expect AMD Ryzen 5 5600H + Vega)
+# Check CPU: Get-WmiObject Win32_Processor | Select-Object Name
+# External drive (expect corrupted 2TB)
+# Check: Get-Disk | Where-Object BusType -eq USB
+```
+
+### 3. Report Validation Results
+
+**If all flags validate (✅):** Proceed with task
+
+**If any flag fails (🚩):** Report mismatch:
+- Expected: [What docs claim]
+- Reality: [What you found]
+- Impact: [Affects current work?]
+- Action: [Update docs OR investigate]
 
 ## Key Paths
 
