@@ -689,6 +689,45 @@ Only use Direct if user explicitly requests full validation
 - **Leverages existing monitoring:** KENL already logs ATOM trails and metrics
 - **User-involved validation:** Offload to user's local UI (Logdy, Grafana, etc.)
 
+**Design Philosophy:**
+
+> **"AI tools enhance the user, not replace them"**
+
+The User-Confirmed strategy is intentional - it keeps humans meaningfully involved:
+
+- **Not automation for automation's sake:** AI doesn't blindly run expensive tests
+- **Collaborative efficiency:** User has the data on screen, AI asks for confirmation
+- **Expertise respected:** User knows their dashboard better than AI parsing logs
+- **Human remains authoritative:** Final validation comes from user observation
+- **Reduces AI overhead:** Zero API calls, zero compute for user-confirmed flags
+
+This is the opposite of "automate humans out of existence" - it's **augmentation:**
+- AI handles tedious validation scripting
+- User provides high-bandwidth visual confirmation
+- Result: Faster validation, lower resource cost, human stays in control
+
+**Example of augmentation in practice:**
+
+```
+❌ Replacement approach (bad):
+AI: Running full network test suite... (10s, 5 network calls, parsing output)
+
+✅ Augmentation approach (good):
+AI: "You have Logdy open - does it show 6ms latency? (yes/no)"
+User: "yes"
+AI: ✅ NET-01 validated, proceeding...
+```
+
+The user gets:
+- Faster validation (instant vs 10s)
+- Stays informed (knows what AI is checking)
+- Maintains control (can say "no, it shows 45ms")
+
+The AI gets:
+- Resource efficiency (zero cost)
+- Human expertise (visual confirmation > log parsing)
+- Collaborative relationship (working with user, not for user)
+
 **Implementation:**
 
 ```markdown
