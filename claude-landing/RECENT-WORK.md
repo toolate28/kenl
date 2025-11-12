@@ -644,6 +644,86 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
 - **Complex:** Multi-step validation, interpretation required (edge cases, assumptions)
 - **Hidden:** Not explicitly documented, requires inference (undocumented dependencies, implicit requirements)
 
+### Validation Strategies (Resource Optimization)
+
+**Flags can be validated in multiple ways - choose based on resource efficiency:**
+
+| Strategy | Method | Example | Resource Cost |
+|----------|--------|---------|---------------|
+| **Direct** | AI runs validation command | `Test-KenlNetwork` | High (network I/O, CPU) |
+| **Log-Based** | AI checks centralized logs | Check `/var/log/kenl/network-baseline.json` | Low (file read) |
+| **User-Confirmed** | Ask user to verify UI property | "Confirm Logdy shows 6ms in network-health widget" | Zero (user does work) |
+| **Cached** | Use recent cached result | Last validation <5min ago, assume valid | Minimal (timestamp check) |
+| **Inferred** | Derive from other flags | If MOD-01 passes, MOD-03 likely valid | Zero (logical inference) |
+
+**Example multi-strategy flag:**
+
+```yaml
+NET-01: Average latency is ~6ms (Tailscale disabled)
+
+Validation Strategies (in order of preference):
+1. Log-Based (cheapest):
+   - Check: ~/.kenl/logs/network-baseline-latest.json
+   - Property: avg_latency_ms
+   - Expected: 5-7ms
+   - Cost: Single file read
+
+2. User-Confirmed (if logs unavailable):
+   - Ask: "Please confirm Logdy interface shows 'Network Health: EXCELLENT (6ms)'"
+   - User responds: yes/no
+   - Cost: Zero (user validates)
+
+3. Direct (fallback):
+   - Run: Test-KenlNetwork
+   - Parse: Output for average latency
+   - Cost: 5 network round-trips, ~10s execution time
+
+Prefer: Log-Based (if logs <5min old), otherwise User-Confirmed
+Only use Direct if user explicitly requests full validation
+```
+
+**Benefits:**
+
+- **Reduces redundant work:** Don't re-test what's already logged
+- **Respects resources:** Network tests, disk I/O, elevated commands
+- **Leverages existing monitoring:** KENL already logs ATOM trails and metrics
+- **User-involved validation:** Offload to user's local UI (Logdy, Grafana, etc.)
+
+**Implementation:**
+
+```markdown
+### Network Flags (with validation strategies)
+
+| Flag ID | Expectation | Strategy | Validation | Complexity |
+|---------|-------------|----------|------------|------------|
+| **NET-01** | Latency ~6ms | Log-Based → User | Check `~/.kenl/logs/network-baseline-latest.json` or ask user to confirm Logdy | Moderate |
+| **NET-02** | Tailscale disabled | Direct | `Get-NetAdapter -Name "Tailscale"` (cheap, instant) | Simple |
+| **NET-03** | MTU is 1492 | Log-Based | Check `~/.kenl/logs/network-config.json` | Moderate |
+```
+
+**When AI Should Ask User to Confirm:**
+
+**Good candidates for user-confirmation:**
+- Properties visible in monitoring dashboards (Grafana, Logdy)
+- Long-running or expensive tests (10+ seconds)
+- Tests requiring elevation/privileges
+- Visual confirmation better than parsing (e.g., game FPS counter)
+
+**Example directive:**
+
+```
+⏸️ FLAG VALIDATION: User confirmation requested
+
+NET-01 requires validation. Instead of running expensive Test-KenlNetwork:
+
+Please confirm the following from your Logdy interface:
+- Navigate to: KENL > Network Health
+- Check property: Average Latency
+- Expected value: 5-7ms (EXCELLENT status)
+
+Does Logdy show 6ms ± 1ms? (yes/no)
+```
+
 ### How to Use These Flags
 
 **On session resumption:**
