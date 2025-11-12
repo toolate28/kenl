@@ -70,12 +70,12 @@ cd path\to\kenl\scripts\windows-partition-scripts
 ---
 
 ### STEP 2: Create Partitions
-**File:** `STEP2-WINDOWS-PARTITION-DISK1-FIXED.ps1`
+**File:** `STEP2-WINDOWS-PARTITION-DISK1.ps1`
 
 Creates 5 partitions with correct filesystem types.
 
 ```powershell
-.\STEP2-WINDOWS-PARTITION-DISK1-FIXED.ps1
+.\STEP2-WINDOWS-PARTITION-DISK1.ps1
 ```
 
 **What it does:**
@@ -88,10 +88,10 @@ Creates 5 partitions with correct filesystem types.
 - Runs write tests on formatted partitions
 - Creates handover document
 
-**Key fixes from original:**
-- ✅ Partition 4 now formatted as NTFS (for Windows anti-cheat games like BF6)
-- ✅ Partition 5 now formatted as exFAT (for cross-OS file transfer)
-- ✅ Better error handling for "device not ready" issues
+**Key features:**
+- ✅ Partition 4 formatted as NTFS (for Windows anti-cheat games like BF6)
+- ✅ Partition 5 formatted as exFAT (for cross-OS file transfer)
+- ✅ Robust error handling for "device not ready" issues
 - ✅ Proper write testing with delays for filesystem initialization
 
 **Output:** `HANDOVER-PARTITION-YYYYMMDD-HHMMSS.md` on Desktop
