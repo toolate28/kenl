@@ -28,7 +28,11 @@
       "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" show origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK:claude-landing/CURRENT-STATE.md)",
       "Bash(git -C \"C:\\Users\\Matthew Ruhnau\\kenl\" show origin/claude/intent-driven-operations-011CUsR3VDt4o5h9HgGZVrHK:claude-landing/RECENT-WORK.md)",
       "Bash(powershell -NoProfile -Command \"Import-Module ./modules/KENL0-system/powershell/KENL.psm1 -ErrorAction Stop; Get-Module KENL | Select-Object Name,Version,ExportedCommands | Format-List\")",
-      "Bash(powershell -NoProfile -Command:*)"
+      "Bash(powershell -NoProfile -Command:*)",
+      "Bash(powershell -Command \"Get-Disk | Format-List Number,Model,Size,PartitionStyle,BusType\")",
+      "Bash(where:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(tasklist:*)"
     ],
     "deny": [],
     "ask": []
