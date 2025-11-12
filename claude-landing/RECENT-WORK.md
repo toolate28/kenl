@@ -597,9 +597,9 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
 | Flag ID | Expectation | Validation Command | Complexity |
 |---------|-------------|-------------------|------------|
 | **PLAT-01** | Platform is Windows 11 (pre-migration) | `$PSVersionTable` | Simple |
-| **PLAT-02** | Current branch is `main` | `git branch --show-current` | Simple |
+| **PLAT-02** | Current branch is `claude/intent-driven-operations-*` | `git branch --show-current` | Simple |
 | **PLAT-03** | Working directory is clean | `git status` | Simple |
-| **PLAT-04** | Recent commit is `f3b5009` (claude-landing) | `git log --oneline -1` | Moderate |
+| **PLAT-04** | Recent commit is `e809a79` (README streamline) | `git log --oneline -1` | Moderate |
 
 ### Hardware Flags
 
@@ -623,10 +623,11 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
 
 | Flag ID | Expectation | Validation Command | Complexity |
 |---------|-------------|-------------------|------------|
-| **MOD-01** | KENL.psm1 loads without errors | `Import-Module ./modules/.../KENL.psm1` | Simple |
-| **MOD-02** | KENL.Network.psm1 loads without errors | `Import-Module .../KENL.Network.psm1` | Simple |
+| **MOD-01** | KENL.psm1 loads without errors (PS 5.1+ compatible) | `Import-Module ./modules/KENL0-system/powershell/KENL.psm1` | Simple |
+| **MOD-02** | KENL.Network.psm1 loads without errors (PS 5.1+ compatible) | `Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1` | Simple |
 | **MOD-03** | Test-KenlNetwork returns valid latency | `Test-KenlNetwork` | Moderate |
 | **MOD-04** | Get-KenlPlatform detects "Windows" | `Get-KenlPlatform` | Simple |
+| **MOD-05** | Network script aliases loaded | `alias net-monitor` (on Bazzite) | Simple |
 
 ### File Existence Flags
 
