@@ -665,6 +665,118 @@ sdb5: Transfer (50GB, exFAT)          - Quick file exchange
 
 ---
 
+## Flag Management Rules (For AI Instances)
+
+**CRITICAL: These rules govern when AI can modify flags and when user approval is required.**
+
+### ✅ AI Can Add Flags WITHOUT User Approval:
+
+**Allowed scenarios:**
+1. **Discovered new testable state** during work (e.g., found new module, detected new hardware)
+2. **Routine validation checkpoints** (e.g., "test script exists", "config file has valid syntax")
+3. **Documentation of work just completed** (e.g., "new Play Card created", "commit pushed")
+
+**Requirements when adding flags:**
+- **MUST notify user** in response message with flag summary
+- Use next available Flag ID in appropriate category
+- Follow existing complexity classification
+- Include validation command
+
+**Notification Format:**
+
+```
+🏴 FLAG ADDED: MOD-05
+
+Added validation flag for newly created KENL.Gaming.psm1 module:
+- Expectation: Module loads without errors
+- Validation: Import-Module ./modules/KENL0-system/powershell/KENL.Gaming.psm1
+- Complexity: Simple
+- Reason: Track module health across sessions
+```
+
+### 🚫 AI MUST Ask User Before:
+
+**Prohibited without approval:**
+1. **Removing existing flags** - May invalidate continuity checks
+2. **Modifying validation commands** for existing flags - Could break validation
+3. **Changing complexity levels** - Affects validation expectations
+4. **Adding "Hidden" complexity flags** - Requires user intent clarification
+
+**How to request approval:**
+
+```
+⚠️ FLAG MODIFICATION REQUEST
+
+I'd like to modify NET-01:
+- Current: "Average latency is ~6ms"
+- Proposed: "Average latency is ~6ms (Windows) or ~8ms (WSL2)"
+- Reason: WSL2 adds 2ms overhead, need platform-specific expectations
+
+Approve? (yes/no)
+```
+
+### 📋 AI MUST Notify User When:
+
+**Automatic notifications required:**
+1. **Any flag fails validation** on session resume
+2. **Adding new flags** (see format above)
+3. **Detecting flag drift** (documented state no longer accurate)
+4. **Finding undocumented flags** (hidden expectations discovered in code/docs)
+
+**Notification Examples:**
+
+```
+🚩 FLAG VALIDATION FAILED: 2 flags need attention
+
+NET-01: Expected 6ms, got 45ms - investigate Tailscale status
+FILE-03: BF6 Play Card not found - file may have been moved
+
+Shall I investigate these mismatches before proceeding? (yes/no)
+```
+
+```
+🏴 NEW FLAGS DISCOVERED: 3 implicit expectations found
+
+Found undocumented expectations in PowerShell modules:
+- MOD-05: KENL.Gaming.psm1 assumes Steam installed
+- MOD-06: KENL.Network.psm1 requires elevation for MTU changes
+- NET-05: Firewall rule for UDP 3074 expected
+
+Add these as explicit flags? (yes/no)
+```
+
+### 🔄 Flag Lifecycle
+
+**Flags have states:**
+
+| State | Meaning | AI Action |
+|-------|---------|-----------|
+| **Active** | Currently valid expectation | Validate on resume |
+| **Deprecated** | No longer relevant (platform migrated, feature removed) | Move to "Deprecated Flags" section |
+| **Failed** | Validation failed, under investigation | Mark with 🚩, notify user |
+| **Pending** | Added but not yet validated | Mark with ⏳, validate next session |
+
+**Example of deprecated flag:**
+
+```markdown
+### Deprecated Flags (Historical Reference)
+
+| Flag ID | Expectation | Deprecated Date | Reason |
+|---------|-------------|-----------------|--------|
+| **PLAT-01** | Platform is Windows 11 | 2025-11-15 | Migrated to Bazzite |
+| **NET-02** | Tailscale adapter disabled | 2025-11-14 | Permanently removed |
+```
+
+### 🎯 Best Practices
+
+1. **Be specific:** "Latency is 6ms" not "Latency is low"
+2. **Be testable:** Always include validation command
+3. **Be reversible:** Document what changed if flag updated
+4. **Be transparent:** Notify user of all flag changes
+5. **Be conservative:** Ask before removing/modifying existing flags
+
+---
+
 **ATOM:** ATOM-DOC-20251112-003
 **Next Update:** After Bazzite ISO verification
 **Related Documents:** CURRENT-STATE.md, NEXT-STEPS.md (to be created)
