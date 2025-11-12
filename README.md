@@ -16,9 +16,10 @@ owi-version: 1.0.0
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
 [![Play Cards: 15+](https://img.shields.io/badge/Play_Cards-15+-blue.svg)]()
 
-> **KENL** provides shareable gaming configurations, automatic crash recovery, and complete audit trails for Bazzite-DX. Every change is documented, every configuration is reproducible, and everything can be rolled back.
-
----
+> **KENL** A distrobox (devcontainer) that houses dedicated tooling, for Gaming and Development on Cloud-Native OS. 
+> **ATOM** An AI and Administrator logging system that captures the Intent behind each action, allowing Agents and Self-Propelled (no AI help) Users to resume tasking or rollback to any point.
+> **OWI** "Operating-With-Intent" // A KENL deployment, integrating paid- and offline-AI Agents, MCP Servers and intelligent helpers and documentation, with the work already done by Universal Blue / Bazzite to allow your linux gaming machine to                 reach its optimal operational state for the task you have in mind (e.g. Playing X on Y with Z Hardware). Confirmed setups create Play-Cards (Hardware Profiles/gaming configuration/Compat tools/Intelligent Networking for Gaming                     workflows and setting your GPU/HUD/Gamescope/Steam/... (anything you want really) . Play-Cards can be redacted, encrypted and shared.
+> **SAGE** Documentation system thats designed to deliver the information you require, if and when it is required, and in the form best suited to deliver it. 
 
 ## 🆘 Windows 10 End of Support (October 2025)
 
