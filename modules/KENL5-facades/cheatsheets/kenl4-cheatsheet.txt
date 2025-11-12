@@ -1,0 +1,29 @@
+╔═══════════════════════════════════════════════════════════╗
+║   📊 KENL4: MONITORING - Observability & Analytics       ║
+╠═══════════════════════════════════════════════════════════╣
+║   📈 DASHBOARDS            🔍 ATOM ANALYTICS             ║
+║   Prometheus:              atom-analytics --summary      ║
+║     http://localhost:9090  atom-trail-analytics/         ║
+║   Grafana:                 ./atom-to-metrics.sh          ║
+║     http://localhost:3000  queries/                      ║
+║   Logdy:                                                 ║
+║     http://localhost:8080  🎮 PLAY CARD TRACKING         ║
+║                            cd play-card-tracking/        ║
+║   🖥️  NODE EXPORTER        ./track-session.sh "Game"    ║
+║   http://localhost:9100    ./compare.sh card1 card2     ║
+║   /metrics                 ./export-metrics.sh           ║
+║                                                           ║
+║   🚨 SETUP                                                ║
+║   cd ~/kenl/KENL4-monitoring                             ║
+║   ./setup-monitoring.sh    # Install Prom + Grafana     ║
+║                                                           ║
+║   systemctl --user start <service>                       ║
+║   Services: prometheus, grafana, node_exporter           ║
+║                                                           ║
+║   systemctl --user enable <service>   # Autostart       ║
+║                                                           ║
+║   📊 GRAFANA DASHBOARDS                                   ║
+║   grafana/dashboards/*.json                              ║
+║   bazzite-system, gaming-performance, atom-trail,        ║
+║   play-cards - Pre-configured dashboards                 ║
+╚═══════════════════════════════════════════════════════════╝

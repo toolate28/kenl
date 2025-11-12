@@ -1,0 +1,28 @@
+╔═══════════════════════════════════════════════════════════╗
+║   💾 KENL10: BACKUP - Intelligent Snapshots & Sync       ║
+╠═══════════════════════════════════════════════════════════╣
+║   📸 SNAPSHOT OPERATIONS                                  ║
+║   cd ~/kenl/KENL10-backup                                ║
+║   ./atom-snapshot.sh create <name> "description"         ║
+║   ./atom-snapshot.sh list                                ║
+║   ./atom-snapshot.sh restore <name>                      ║
+║   ./atom-snapshot.sh delete <name>                       ║
+║                                                           ║
+║   💡 WHAT GETS BACKED UP                                  ║
+║   ✓ Complete ATOM trail    ✓ KENL configurations        ║
+║   ✓ Play Cards (KENL2)     ✓ User configs (~/.config)   ║
+║   ✓ System state           ✓ Development projects        ║
+║                                                           ║
+║   ⚛️  ATOM-AWARE: Snapshots include full context for     ║
+║      rapid disaster recovery (85% faster)                ║
+║                                                           ║
+║   ☁️  CLOUD SYNC                                          ║
+║   cloud-backends/<provider>-config.sh                    ║
+║   Providers: S3, Backblaze B2, Nextcloud, Proton Drive   ║
+║                                                           ║
+║   🔄 SYNC ENGINES                                         ║
+║   sync-engines/<tool>-backup.sh                          ║
+║   Tools: rsync, rclone, syncthing                        ║
+║                                                           ║
+║   🔐 Encrypted with KENL8 GPG for cloud storage           ║
+╚═══════════════════════════════════════════════════════════╝

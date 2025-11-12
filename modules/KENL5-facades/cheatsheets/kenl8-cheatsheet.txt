@@ -1,0 +1,26 @@
+╔═══════════════════════════════════════════════════════════╗
+║   🔐 KENL8: SECURITY - Encryption & Privacy              ║
+╠═══════════════════════════════════════════════════════════╣
+║   🚀 QUICK ACTIONS (cd ~/kenl/KENL8-security)            ║
+║   ./gpg-keyring/encrypt-file.sh encrypt <file>           ║
+║   ./gpg-keyring/encrypt-file.sh decrypt <file.gpg>       ║
+║   ./gpg-keyring/encrypt-file.sh export-key               ║
+║                                                           ║
+║   🔑 COMMON GPG COMMANDS                                  ║
+║   gpg --encrypt -r <email> file.txt                      ║
+║   gpg --decrypt file.txt.gpg > file.txt                  ║
+║   gpg --sign file.txt                                    ║
+║   gpg --verify file.sig                                  ║
+║   gpg --list-keys                                        ║
+║                                                           ║
+║   🔐 INTEGRATIONS                                         ║
+║   Used by: KENL6 (Play Cards), KENL10 (Backups),         ║
+║            KENL11 (Proton VPN/Mail)                      ║
+║                                                           ║
+║   📂 ADVANCED FEATURES                                    ║
+║   vault-integration/       Bitwarden, 1Password          ║
+║   totp-manager/            2FA code management           ║
+║   secret-rotation/         Automated key rotation        ║
+║   audit-encryption/        Compliance tracking           ║
+║   vpn-routing/             Proton VPN split tunnel       ║
+╚═══════════════════════════════════════════════════════════╝

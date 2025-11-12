@@ -51,7 +51,7 @@ STACK:
   Base:         Bazzite-DX (Fedora Atomic, immutable, rpm-ostree)
   Gaming:       Proton/GE-Proton, GameScope, MangoHud
   AI:           Claude (10%), Perplexity (30%), Qwen local (60%)
-  Dev:          KENL distrobox (Ubuntu 24.04 + Claude Code)
+  Dev:          modules/KENL distrobox (Ubuntu 24.04 + Claude Code)
   Cloud:        Cloudflare Workers/D1/KV/R2 (toolated.online)
 
 OUTCOMES:

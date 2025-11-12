@@ -40,7 +40,7 @@ graph TD
 
 ### Pre-Crash State
 
-**System**: Bazzite Linux (immutable Fedora Atomic) with KENL distrobox development environment
+**System**: Bazzite Linux (immutable Fedora Atomic) with modules/KENL distrobox development environment
 
 **Active Operations** (4 concurrent Claude Code sessions):
 1. **MCP Server Configuration** - Setting up Model Context Protocol servers (Cloudflare, Perplexity, Ollama)

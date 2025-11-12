@@ -115,7 +115,7 @@ Australian-themed gaming/dev ecosystem built on Bazzite-DX (Fedora Atomic). Emph
 - Actionable (no "I can help with that" fluff)
 
 ## Task Priorities
-1. CLAUDE.md activation file (blocking KENL)
+1. CLAUDE.md activation file (blocking modules/KENL)
 2. D1 ATOM database deployment
 3. Justfile creation
 4. Gaming config framework testing
@@ -141,7 +141,7 @@ Australian-themed gaming/dev ecosystem built on Bazzite-DX (Fedora Atomic). Emph
 
 ```json
 {
-  "project": "Bazza-DX KENL Development",
+  "project": "Bazza-DX modules/KENL Development",
   "context": {
     "directories": [
       "~/.config/bazza-dx",
@@ -168,7 +168,7 @@ Australian-themed gaming/dev ecosystem built on Bazzite-DX (Fedora Atomic). Emph
 
 **Setup:**
 ```bash
-# Create KENL project directory
+# Create modules/KENL project directory
 mkdir -p ~/projects/kenl/.claude
 
 # Create config
@@ -206,7 +206,7 @@ export QWEN_ENDPOINT="http://localhost:11434"
 # Project Paths
 export BAZZADX_ROOT="$HOME/projects/bazza-dx"
 export GAMING_CONFIG="$HOME/.config/gaming-intent"
-export KENL_ROOT="$HOME/projects/kenl"
+export modules/KENL_ROOT="$HOME/projects/kenl"
 ```
 
 **Setup:**
@@ -252,7 +252,7 @@ echo "ATOM-TEST-$(cat /tmp/atom_date)-001"
 |------|-------------|-----------------|
 | Claude Desktop | Local development, file operations | `~/.config/Claude/` |
 | Claude.ai | Web research, long sessions | Project settings |
-| Claude Code | KENL container coding | `~/projects/kenl/.claude/` |
+| Claude Code | modules/KENL container coding | `~/projects/kenl/.claude/` |
 | Qwen | Config generation, validation | Ollama service |
 | Perplexity | Documentation research | MCP server |
 

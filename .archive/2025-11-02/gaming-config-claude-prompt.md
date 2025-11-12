@@ -4,7 +4,7 @@
 
 ## Context
 
-You are Claude Code running in a KENL distrobox container on Bazzite-DX. Your task is to implement the Gaming-with-Intent framework locally, creating agent-accessible JSON schemas and foundational configuration patterns for Linux gaming optimization.
+You are Claude Code running in a modules/KENL distrobox container on Bazzite-DX. Your task is to implement the Gaming-with-Intent framework locally, creating agent-accessible JSON schemas and foundational configuration patterns for Linux gaming optimization.
 
 ## Constraints
 
@@ -236,4 +236,4 @@ After completion, report:
 
 **Estimated Token Cost**: 15K Claude + 25K Qwen (free local)
 **Wall Clock Time**: 45-60 minutes
-**Prerequisites**: KENL container active, Qwen instance running
+**Prerequisites**: modules/KENL container active, Qwen instance running
