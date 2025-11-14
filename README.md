@@ -1,4 +1,4 @@
-# modules/KENL
+# KENL
 
 **Intent-Driven Gaming & Development on Bazzite Linux**
 
@@ -8,27 +8,22 @@
 
 > KENL transforms your Bazzite system into a self-documenting gaming and development platform with automatic crash recovery, shareable configurations, and complete audit trails.
 
-Philosophy
+---
 
+## Philosophy
 
-Core Belief:
+**Core Belief:**
 
-    "AI tools should enhance humans, not replace them. Documentation captures intent so humans remain authoritative, even when AI assists."
-    
-KENL/SAIF exists because:
+> "AI tools should enhance humans, not replace them. Documentation captures intent so humans remain authoritative, even when AI assists."
 
-    Knowledge is expensive to acquire Years of expertise shouldn't walk out the door when someone quits.
+**KENL/SAIF exists because:**
 
-    Intent matters more than actions "What" without "why" breaks when assumptions change.
-
-    Transparency builds trust Customers/users deserve to know what AI generated and what humans reviewed.
-
-    Reproducibility scales expertise Proven solutions should be shareable, not rediscovered every time.
-
-    Confidentiality is real Not everything should be public. Multi-tier system protects customer privacy.
-
-    Rollback is essential Changes should be reversible. Safety net enables experimentation.
-
+- **Knowledge is expensive to acquire** - Years of expertise shouldn't walk out the door when someone quits
+- **Intent matters more than actions** - "What" without "why" breaks when assumptions change
+- **Transparency builds trust** - Customers/users deserve to know what AI generated and what humans reviewed
+- **Reproducibility scales expertise** - Proven solutions should be shareable, not rediscovered every time
+- **Confidentiality is real** - Not everything should be public. Multi-tier system protects customer privacy
+- **Rollback is essential** - Changes should be reversible. Safety net enables experimentation
 
 ---
 
@@ -46,7 +41,7 @@ KENL/SAIF exists because:
 
 ## The KENL Builder Mentality
 
-We stand on shoulders, not on toes. KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Respective Dev/Contributor communities.
+We stand on shoulders, not on toes. KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Respective Dev/Contributor communities[^1].
 
 ### Four Pillars
 
@@ -57,11 +52,12 @@ We stand on shoulders, not on toes. KENL doesn't provide better tools - it provi
 | **OWI**   | Operating-With-Intent (AI + MCP integration) | Play Cards: shareable game configs                                 |
 | **SAGE**  | Just-in-time documentation                   | [`claude-landing/`](./claude-landing/) orientation docs            |
 
-    **Elegant Integration:** Distrobox isolation • JSON-RPC MCP • Pure POSIX shell
-    **Minimal Overhead:** ~0.1ms ATOM logging • Static YAML Play Cards • Copy-on-write filesystem
-    **Breaking-Change Proof:** Immutable rpm-ostree base • User-space only (`~/.local`) • Atomic GRUB rollback
+**Technical Guarantees:**
+- **Elegant Integration:** Distrobox isolation • JSON-RPC MCP • Pure POSIX shell
+- **Minimal Overhead:** ~0.1ms ATOM logging • Static YAML Play Cards • Copy-on-write filesystem
+- **Breaking-Change Proof:** Immutable rpm-ostree base • User-space only (`~/.local`) • Atomic GRUB rollback
 
-    *Every KENL operation includes rollback instructions.*
+*Every KENL operation includes rollback instructions.*
 
 ---
 
@@ -73,7 +69,7 @@ git clone https://github.com/toolate28/kenl.git ~/.kenl && cd ~/.kenl && ./scrip
 
 # Pick your entry point
 cd modules/KENL2-gaming    # 🎮 Gaming configs & Play Cards
-cd modules/KENL3-dev       # 💻 Development environments
+cd modules/KENL3-dev       # 💻 Development environments (Ollama/Qwen, MCP guides)
 cd modules/KENL0-system    # ⚙️ System operations
 cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Code)
 ```
@@ -86,11 +82,11 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 | Module | Purpose | Module | Purpose |
 |--------|---------|--------|---------|
-| **KENL0** System | rpm-ostree, firmware | **KENL7** Learning | Guides, cheatsheets |
+| **KENL0** System | rpm-ostree, firmware, PowerShell modules | **KENL7** Learning | Guides, cheatsheets |
 | **KENL1** Framework | ATOM + SAGE core | **KENL8** Security | GPG, SSH, encryption |
 | **KENL2** Gaming | Play Cards, Proton | **KENL9** Library | Game management |
-| **KENL3** Development | Distrobox, Claude Code | **KENL10** Backup | Snapshots, recovery |
-| **KENL4** Monitoring | Prometheus, Grafana | **KENL11** Media | Streaming, Docker |
+| **KENL3** Development | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | **KENL10** Backup | Snapshots, recovery |
+| **KENL4** Monitoring | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | **KENL11** Media | Streaming, Docker |
 | **KENL5** Facades | Visual themes, context | **KENL12** Resources | Downloads, community |
 | **KENL6** Social | Sharing, community | | |
 
@@ -100,13 +96,19 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 ## What You Get
 
-**🔍 Complete Audit Trails:** ATOM tags track every change with *why*, not just *what*. When crashes happen, you know exactly what broke and how to fix it (85% faster recovery - [validation study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md))
+**🔍 Complete Audit Trails:** ATOM tags track every change with *why*, not just *what*. When crashes happen, you know exactly what broke and how to fix it (85% faster recovery[^2])
 
-**📋 Shareable Play Cards:** Document game configs as YAML ([example  config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
+**📋 Shareable Play Cards:** Document game configs as YAML ([example config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
+
+**🎮 Linux Gaming Ready:** 89.7% of Windows games now run on Linux via Proton[^3], with 15,855+ games rated playable on ProtonDB and 21,694+ Deck Verified games.
+
+**🤖 Local AI Integration:** Run Qwen models locally for zero-cost code assistance ([Ollama/Qwen setup guide](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md)). Integrate Claude with KENL tools via MCP ([MCP integration guide](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md)).
+
+**🛡️ Security-First:** [ATOM database architecture](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) prevents malicious Play Cards with schema validation, AI safety scoring, and user approval gates.
 
 **🎨 Visual Context Switching:** Shell themes prevent mistakes (`🎮 KENL2` for gaming, `💻 KENL3` for dev, `⚙️ KENL0` for system ops)
 
-**🪟 Windows 10 EOL Support:** [Migration guides](./windows-support/) for 240M+ PCs affected by Oct 2025 EOL
+**🪟 Windows 10 EOL Support:** [Migration guides](./windows-support/) for 240M+ PCs affected by Oct 14, 2025 end of support[^4]
 
 ---
 
@@ -117,11 +119,71 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 | **New Users** | [claude-landing/](./claude-landing/) | Current state, recent work, quick reference |
 | **AI Agents** | [claude-landing/CURRENT-STATE.md](./claude-landing/CURRENT-STATE.md) | Environment snapshot + CTF flag validation |
 | **Gamers** | [KENL2 Gaming](./modules/KENL2-gaming/) | Play Cards, Proton optimization |
-| **Developers** | [KENL3 Dev](./modules/KENL3-dev/) | Distrobox, Claude Code integration |
+| **Developers** | [KENL3 Dev](./modules/KENL3-dev/) | Distrobox, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) |
 | **Windows Users** | [windows-support/](./windows-support/) | EOL migration, Surface Pro 4 help |
 | **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | Code style, ARCREF + ADR requirements |
 
-**Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot,  troubleshooting)
+**Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot, troubleshooting)
+
+**Standards & Guidelines:**
+- [Visual Elements Standard](./VISUAL-ELEMENTS-STANDARD.md) - Professional presentation guidelines
+- [Security Policy](./SECURITY.md) - Vulnerability reporting and disclosure
+- [Code of Conduct](./CODE_OF_CONDUCT.md) - Community participation guidelines
+- [Acknowledgments](./ACKNOWLEDGMENTS.md) - Third-party attribution and credits
+
+---
+
+## Key Features
+
+### PowerShell Modules (Windows/Linux/macOS)
+
+Cross-platform PowerShell modules for KENL operations:
+
+```powershell
+# Install KENL PowerShell modules
+.\modules\KENL0-system\powershell\Install-KENL.ps1
+
+# Test network latency
+Import-Module KENL.Network
+Test-KenlNetwork
+
+# Platform detection
+Import-Module KENL
+Get-KenlPlatform
+```
+
+**PSGallery-ready** with module manifests (.psd1) for publication. See [PowerShell README](./modules/KENL0-system/powershell/README.md).
+
+### ATOM Trail Database
+
+Security-first audit trail system with:
+- **Prevention Layer:** Schema validation, AI safety scoring, user approval
+- **Execution Layer:** Sandboxed operations (Flatpak/Distrobox)
+- **Audit Layer:** Cryptographic integrity (blockchain-style hashing)
+
+See [ATOM Database Architecture](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) for complete design.
+
+### Local AI (Ollama + Qwen)
+
+Run AI models locally for 60% of KENL's token strategy (Claude 10%, Perplexity 30%, Qwen 60%):
+
+- Zero API costs
+- 100% privacy (code never leaves your machine)
+- Offline capability
+- Integration with VS Code (Continue.dev) and Claude Desktop (MCP)
+
+See [Ollama/Qwen Setup Guide](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md).
+
+### Model Context Protocol (MCP)
+
+Enable Claude to interact with KENL tools directly:
+
+- Custom KENL MCP server (rpm-ostree, ujust, ATOM trails)
+- Cloudflare integration (Workers, KV, D1, R2)
+- GitHub operations (issues, PRs, code search)
+- Ollama delegation (offload simple tasks to local AI)
+
+See [MCP Integration Guide](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md).
 
 ---
 
@@ -132,6 +194,20 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 **Need help?** [GitHub Issues](https://github.com/toolate28/kenl/issues) • [Discussions](https://github.com/toolate28/kenl/discussions) • [Security](./SECURITY.md) (private reporting)
 
 **License:** MIT - Fork it, modify it, share it. See [LICENSE](./LICENSE)
+
+**Acknowledgments:** This project stands on the shoulders of giants. See [ACKNOWLEDGMENTS.md](./ACKNOWLEDGMENTS.md) for complete attribution of third-party projects and contributors.
+
+---
+
+## References & Citations
+
+[^1]: See [ACKNOWLEDGMENTS.md](./ACKNOWLEDGMENTS.md) for comprehensive attribution of Bazzite, Universal Blue, Valve Proton, and all third-party projects that make KENL possible.
+
+[^2]: Based on internal validation study comparing recovery time with vs. without ATOM trail documentation. See [modules/KENL1-framework/docs/VALIDATION_COMPLETE.md](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md) for methodology.
+
+[^3]: [Boiling Steam ProtonDB Analysis (2025)](https://boilingsteam.com/) - Community-verified compatibility data showing 89.7% of Windows titles launch on Linux, with 15,855+ games rated playable by at least two ProtonDB reports.
+
+[^4]: [Microsoft Windows 10 Support Lifecycle](https://support.microsoft.com/en-us/windows/making-the-transition-to-a-new-era-of-computing-235e9399-a563-40f8-be4f-fbe109be74c8) - Windows 10 reaches end of support on October 14, 2025. Enterprise studies show ~240M devices still running Windows 10 as of mid-2025 (ControlUp endpoint telemetry).
 
 ---
 
