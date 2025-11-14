@@ -59,6 +59,31 @@ We stand on shoulders, not on toes. KENL doesn't provide better tools - it provi
 
 *Every KENL operation includes rollback instructions.*
 
+#### Architecture Overview
+
+```mermaid
+graph TD
+    User[👤 User] --> KENL[KENL Modules]
+
+    KENL --> ATOM[🏷️ ATOM Trails]
+    KENL --> OWI[🤖 OWI AI Integration]
+    KENL --> SAGE[📚 SAGE Documentation]
+
+    ATOM --> DB[(SQLite + Cloudflare D1)]
+    OWI --> Claude[Claude via MCP]
+    OWI --> Qwen[Qwen Local AI]
+    SAGE --> Docs[Just-in-Time Docs]
+
+    KENL --> Bazzite[🎮 Bazzite Immutable Base]
+    Bazzite --> Fedora[Fedora Atomic + rpm-ostree]
+
+    style KENL fill:#5865F2,color:#fff
+    style ATOM fill:#57F287,color:#000
+    style OWI fill:#FEE75C,color:#000
+    style SAGE fill:#00AFF4,color:#fff
+    style Bazzite fill:#ED4245,color:#fff
+```
+
 ---
 
 ## Quick Start
@@ -78,7 +103,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 ## Modules
 
-**13 specialized layers** (KENL0-12) that work together:
+**14 specialized layers** (KENL0-13) that work together:
 
 | Module | Purpose | Module | Purpose |
 |--------|---------|--------|---------|
@@ -88,9 +113,56 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 | **KENL3** Development | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | **KENL10** Backup | Snapshots, recovery |
 | **KENL4** Monitoring | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | **KENL11** Media | Streaming, Docker |
 | **KENL5** Facades | Visual themes, context | **KENL12** Resources | Downloads, community |
-| **KENL6** Social | Sharing, community | | |
+| **KENL6** Social | Sharing, community | **KENL13** IWI | Intent-With-Insight |
 
 **Each module has its own README** - navigate to `modules/KENLX-<name>/` and start there.
+
+#### Module Stack
+
+```mermaid
+graph TB
+    subgraph Gaming["🎮 Gaming Stack"]
+        KENL2[KENL2 Gaming]
+        KENL6[KENL6 Social]
+        KENL9[KENL9 Library]
+    end
+
+    subgraph Development["💻 Development Stack"]
+        KENL3[KENL3 Development]
+        KENL7[KENL7 Learning]
+        KENL8[KENL8 Security]
+    end
+
+    subgraph Operations["⚙️ Operations Stack"]
+        KENL4[KENL4 Monitoring]
+        KENL10[KENL10 Backup]
+        KENL11[KENL11 Media]
+    end
+
+    subgraph Resources["📦 Resources Stack"]
+        KENL5[KENL5 Facades]
+        KENL12[KENL12 Resources]
+        KENL13[KENL13 IWI]
+    end
+
+    subgraph Core["🔧 Core Framework"]
+        KENL0[KENL0 System]
+        KENL1[KENL1 Framework]
+    end
+
+    Gaming --> Core
+    Development --> Core
+    Operations --> Core
+    Resources --> Core
+
+    Core --> Immutable[Bazzite Immutable OS]
+
+    style Core fill:#5865F2,color:#fff
+    style Gaming fill:#ED4245,color:#fff
+    style Development fill:#00AFF4,color:#fff
+    style Operations fill:#57F287,color:#000
+    style Resources fill:#FEE75C,color:#000
+```
 
 ---
 
@@ -98,7 +170,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 **🔍 Complete Audit Trails:** ATOM tags track every change with *why*, not just *what*. When crashes happen, you know exactly what broke and how to fix it (85% faster recovery[^2])
 
-**📋 Shareable Play Cards:** Document game configs as YAML ([example config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
+**📋 Shareable Play Cards:** Document game configs as YAML ([example config](./modules/KENL2-gaming/play-cards/games/battlefield-2042.yaml)). Share with friends - they skip your troubleshooting pain entirely.
 
 **🎮 Linux Gaming Ready:** 89.7% of Windows games now run on Linux via Proton[^3], with 15,855+ games rated playable on ProtonDB and 21,694+ Deck Verified games.
 
@@ -108,7 +180,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 **🎨 Visual Context Switching:** Shell themes prevent mistakes (`🎮 KENL2` for gaming, `💻 KENL3` for dev, `⚙️ KENL0` for system ops)
 
-**🪟 Windows 10 EOL Support:** [Migration guides](./windows-support/) for 240M+ PCs affected by Oct 14, 2025 end of support[^4]
+**🪟 Windows 10 EOL Support:** [Migration guides](./modules/KENL0-system/windows-support/) for 240M+ PCs affected by Oct 14, 2025 end of support[^4]
 
 ---
 
@@ -120,7 +192,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 | **AI Agents** | [claude-landing/CURRENT-STATE.md](./claude-landing/CURRENT-STATE.md) | Environment snapshot + CTF flag validation |
 | **Gamers** | [KENL2 Gaming](./modules/KENL2-gaming/) | Play Cards, Proton optimization |
 | **Developers** | [KENL3 Dev](./modules/KENL3-dev/) | Distrobox, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) |
-| **Windows Users** | [windows-support/](./windows-support/) | EOL migration, Surface Pro 4 help |
+| **Windows Users** | [KENL0 Windows Support](./modules/KENL0-system/windows-support/) | EOL migration, dual-boot, Surface Pro 4 |
 | **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | Code style, ARCREF + ADR requirements |
 
 **Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot, troubleshooting)
@@ -160,6 +232,33 @@ Security-first audit trail system with:
 - **Prevention Layer:** Schema validation, AI safety scoring, user approval
 - **Execution Layer:** Sandboxed operations (Flatpak/Distrobox)
 - **Audit Layer:** Cryptographic integrity (blockchain-style hashing)
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant KENL
+    participant Validator
+    participant Qwen
+    participant Sandbox
+    participant DB
+
+    User->>KENL: Apply Play Card
+    KENL->>Validator: Validate schema
+    Validator->>Validator: Check patterns (rm -rf, sudo, etc)
+
+    alt Validation Failed
+        Validator-->>User: ❌ Rejected: Dangerous pattern detected
+    else Validation Passed
+        Validator->>Qwen: Compute safety score
+        Qwen-->>Validator: Score: 0.85 (GOOD)
+        Validator->>User: ⚠️ Preview changes + safety score
+        User->>KENL: Approve
+        KENL->>Sandbox: Execute in Flatpak/Distrobox
+        Sandbox-->>KENL: ✅ Success (exit code 0)
+        KENL->>DB: Log ATOM trail with hash
+        DB-->>User: ✅ ATOM-PLAYCARD-20251114-001
+    end
+```
 
 See [ATOM Database Architecture](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) for complete design.
 
@@ -203,7 +302,7 @@ See [MCP Integration Guide](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md)
 
 [^1]: See [ACKNOWLEDGMENTS.md](./ACKNOWLEDGMENTS.md) for comprehensive attribution of Bazzite, Universal Blue, Valve Proton, and all third-party projects that make KENL possible.
 
-[^2]: Based on internal validation study comparing recovery time with vs. without ATOM trail documentation. See [modules/KENL1-framework/docs/VALIDATION_COMPLETE.md](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md) for methodology.
+[^2]: Based on internal testing comparing recovery time with vs. without ATOM trail documentation. Formal validation study planned for future release.
 
 [^3]: [Boiling Steam ProtonDB Analysis (2025)](https://boilingsteam.com/) - Community-verified compatibility data showing 89.7% of Windows titles launch on Linux, with 15,855+ games rated playable by at least two ProtonDB reports.
 
