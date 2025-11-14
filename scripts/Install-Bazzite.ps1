@@ -69,11 +69,11 @@ $downloadScript = @"
 # Header
 Clear-Host
 Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
-Write-Host '║  Bazzite $Variant $Edition ISO Download' -ForegroundColor Cyan -NoNewline
-Write-Host (' ' * (58 - ('Bazzite ' + '$Variant' + ' ' + '$Edition' + ' ISO Download').Length)) -NoNewline
+Write-Host "║  Bazzite $Variant $Edition ISO Download" -ForegroundColor Cyan -NoNewline
+Write-Host (" " * (58 - ("Bazzite " + "$Variant" + " " + "$Edition" + " ISO Download").Length)) -NoNewline
 Write-Host '║' -ForegroundColor Cyan
-Write-Host '║  ATOM-CFG-20251112-010' -NoNewline
-Write-Host (' ' * 39) -NoNewline
+Write-Host "║  ATOM-CFG-20251115-001" -NoNewline
+Write-Host (" " * 39) -NoNewline
 Write-Host '║' -ForegroundColor Cyan
 Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
 Write-Host ''
@@ -105,11 +105,11 @@ try {
 
     Write-Host ''
     Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Green
-    Write-Host '║  ✓ Download Complete!' -NoNewline
-    Write-Host (' ' * 43) -NoNewline
+    Write-Host "║  ✓ Download Complete!" -NoNewline
+    Write-Host (" " * 43) -NoNewline
     Write-Host '║' -ForegroundColor Green
-    Write-Host '║  Time: {0}m {1}s' -f `$minutes, `$seconds -NoNewline
-    Write-Host (' ' * (56 - (6 + `$minutes.ToString().Length + `$seconds.ToString().Length))) -NoNewline
+    Write-Host ("║  Time: {0}m {1}s" -f `$minutes, `$seconds) -NoNewline
+    Write-Host (" " * (56 - (6 + `$minutes.ToString().Length + `$seconds.ToString().Length))) -NoNewline
     Write-Host '║' -ForegroundColor Green
     Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Green
     Write-Host ''
@@ -128,8 +128,8 @@ try {
 } catch {
     Write-Host ''
     Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Red
-    Write-Host '║  ❌ Download Failed' -NoNewline
-    Write-Host (' ' * 44) -NoNewline
+    Write-Host "║  ❌ Download Failed" -NoNewline
+    Write-Host (" " * 44) -NoNewline
     Write-Host '║' -ForegroundColor Red
     Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Red
     Write-Host ''
@@ -140,8 +140,8 @@ try {
     "FAILED:`$_" | Out-File -FilePath '$statusFile'
 }
 
-Write-Host ''
-Write-Host 'Press Enter to close this window...' -ForegroundColor DarkGray
+Write-Host ""
+Write-Host "Press Enter to close this window..." -ForegroundColor DarkGray
 `$null = Read-Host
 "@
 
