@@ -1,6 +1,6 @@
-## Re: New to Claude - What's it good at vs ChatGPT/Perplexity?
+## Re: New to Claude - CLAUDE vs. ChatGPT vs. Perplexity?
 
-Welcome! Here's a quick breakdown from someone who uses all three:
+Welcome! Here's a breakdown from someone who uses all three (often together):
 
 **Claude's Strengths:**
 - **Deep reasoning & analysis** - Excels at complex problem-solving, code architecture, refactoring
@@ -73,4 +73,124 @@ Hope this helps! 🎉
 
 ---
 
+---
+
+## 🔗 Synergistic Use Patterns (Using Multiple AIs Together)
+
+**Don't limit yourself to one AI!** They work great in combination:
+
+### **Pattern 1: Research → Build**
+```
+Perplexity: "Research best practices for React state management 2024"
+  ↓ (Get current info + citations)
+Claude: "Based on these sources, refactor my app to use Zustand"
+  ↓ (Deep implementation with long context)
+Result: Current best practices + high-quality refactor
+```
+
+### **Pattern 2: Brainstorm → Refine → Implement**
+```
+ChatGPT: "Brainstorm 10 features for my SaaS app" (fast, creative)
+  ↓ (Pick top 3)
+Claude: "Design architecture for these 3 features" (deep reasoning)
+  ↓ (Get detailed plan)
+Claude: "Implement feature #1 with tests" (code quality)
+```
+
+### **Pattern 3: Quick Draft → Deep Review**
+```
+ChatGPT: "Write a quick API endpoint for user auth" (fast prototype)
+  ↓ (Get working code in 30 seconds)
+Claude: "Review this code for security issues and refactor" (thorough analysis)
+  ↓ (Get production-ready version)
+Result: Speed + Quality
+```
+
+### **Pattern 4: Web Research → Analysis → Documentation**
+```
+Perplexity: "Find recent changes to OpenAI API" (current info)
+  ↓ (Get changelog + migration guides)
+ChatGPT: "Summarize breaking changes" (quick summary)
+  ↓ (Get bullet points)
+Claude: "Create migration plan for our codebase" (deep analysis)
+  ↓ (Get step-by-step plan with code examples)
+```
+
+---
+
+## 🔄 Chaining Directives (Passing Work Between AIs)
+
+**Pro technique:** Use clear handoff instructions when switching AIs.
+
+### **From Perplexity to Claude:**
+```
+Perplexity query: "Research FastAPI async best practices 2024"
+
+Then copy Perplexity's response and tell Claude:
+"Based on this research [paste], refactor my FastAPI app to follow these patterns.
+Focus on: async database connections, background tasks, and error handling."
+```
+
+### **From ChatGPT to Claude:**
+```
+ChatGPT: "Generate 5 SQL query variations for this use case"
+
+Then tell Claude:
+"ChatGPT generated these 5 SQL queries [paste].
+Analyze each for performance, security (SQL injection), and maintainability.
+Recommend the best one with explanation."
+```
+
+### **From Claude back to ChatGPT:**
+```
+Claude: [Generates detailed architecture document]
+
+Then tell ChatGPT:
+"Claude designed this architecture [paste].
+Create a quick implementation checklist with time estimates for each component."
+(ChatGPT is faster for simple task breakdowns)
+```
+
+### **Chaining for SAIF Workflows:**
+```
+1. Perplexity: "Find best vim plugins for Python development 2024"
+2. Claude: "Review these plugins, create a .vimrc with ATOM trail documentation"
+3. Result: Current recommendations + intent-documented config
+
+Your .vimrc now has comments like:
+# ATOM-CFG-20251114-001: Added coc.nvim
+# Intent: Modern LSP support for Python (Perplexity research 2024-11-14)
+# Source: https://github.com/neoclide/coc.nvim
+# Alternatives considered: vim-lsp (less Python-specific)
+```
+
+---
+
+## 💡 When to Use Each AI (Updated with Chaining)
+
+**Start with Perplexity if:**
+- Need current information (post-2023)
+- Need citations/sources
+- Research phase of project
+
+**Start with ChatGPT if:**
+- Need quick results (speed priority)
+- Brainstorming ideas
+- Simple tasks (summaries, lists)
+
+**Start with Claude if:**
+- Complex problem requiring deep reasoning
+- Working with large codebases
+- Need high code quality
+- Documentation/refactoring
+
+**Chain them if:**
+- Complex project (research → design → implement)
+- Want speed + quality (ChatGPT draft → Claude refine)
+- Need current info + deep analysis (Perplexity → Claude)
+
+---
+
 **Edit:** Since you're new, check out r/ClaudeAI for tips. Also, Claude Desktop app (free) is worth downloading - better than web interface IMO. Projects feature is desktop-only right now.
+
+**Pro workflow:** Keep all 3 AIs open in browser tabs. Start with Perplexity for research, ChatGPT for quick tasks, Claude for deep work. Copy/paste between them as needed. Your productivity will 10x.
