@@ -47,11 +47,14 @@ if (Test-Path $LockFile) {
         if ($prevOwner -ne $ownerId -and $timeSince.TotalMinutes -lt $CooldownMinutes) {
             Write-Host "Parallel work lock held by $prevOwner (ATOM $($prevLock.atomTag) in $($prevLock.atomFile))" -ForegroundColor Yellow
             Write-Host "Pausing for $CooldownMinutes minute(s) to review the ATOM log and confirm there is no conflict..." -ForegroundColor Yellow
-            Write-Host "Review the latest entries by running:`nGet-Content '$($latestLog.FullName)' -Tail $ReviewLines`" -ForegroundColor Cyan
+            Write-Host @'
+Review the latest entries by running:
+Get-Content ''$($latestLog.FullName)'' -Tail $ReviewLines
+'@ -ForegroundColor Cyan
             Start-Sleep -Seconds ($CooldownMinutes * 60)
         }
     } catch {
-        Write-Warning "Failed to read existing lock file: $_. Removing stale lock..."
+        Write-Warning ('Failed to read existing lock file: {0}. Removing stale lock...' -f $_)
         Remove-Item -Path $LockFile -Force -ErrorAction SilentlyContinue
     }
 }
