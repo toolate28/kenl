@@ -191,23 +191,23 @@ if ($waitForCompletion -eq "y") {
 
                 switch -Wildcard ($status) {
                     "RUNNING*" {
-                        Write-Host "⚡ Download in progress... ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Yellow
+                        Write-Host "[*] Download in progress... ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Yellow
                     }
                     "SUCCESS*" {
-                        Write-Host "✓ Download complete! ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Green
+                        Write-Host "[OK] Download complete! ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Green
                         Write-Host ""
                         Write-Host "ISO file: $outputPath" -ForegroundColor Cyan
                         break
                     }
                     "FAILED:*" {
                         $error = $status -replace "FAILED:", ""
-                        Write-Host "❌ Download failed: $error" -ForegroundColor Red
+                        Write-Host "[ERROR] Download failed: $error" -ForegroundColor Red
                         break
                     }
                 }
             }
         } else {
-            Write-Host "⚠️  Status file not yet created..." -ForegroundColor Yellow
+            Write-Host "[WAIT] Status file not yet created..." -ForegroundColor Yellow
         }
     }
 }
