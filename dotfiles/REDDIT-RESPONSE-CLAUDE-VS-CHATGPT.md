@@ -193,4 +193,8 @@ Your .vimrc now has comments like:
 
 **Edit:** Since you're new, check out r/ClaudeAI for tips. Also, Claude Desktop app (free) is worth downloading - better than web interface IMO. Projects feature is desktop-only right now.
 
-**Pro workflow:** Keep all 3 AIs open in browser tabs. Start with Perplexity for research, ChatGPT for quick tasks, Claude for deep work. Copy/paste between them as needed. Your productivity will 10x.
+**Pro workflow (for modern machines):** Keep all 3 AIs open in browser tabs. Start with Perplexity for research, ChatGPT for quick tasks, Claude for deep work. Copy/paste between them as needed. Your productivity will 10x.
+
+*Note: Idle AI chat tabs use minimal resources (~100-300MB RAM total). Computation happens server-side, not on your machine. If you have an older computer (<4GB RAM), use sequentially instead: Research with Perplexity → close → Design with Claude → close → etc.*
+
+**Pro workflow (resource-conscious):** Bookmark all three AIs. Open only what you need for the current task phase. Sequential use (Perplexity → Claude → ChatGPT) avoids tab overhead while still getting benefits of multi-AI approach. Claude Desktop app uses less RAM than browser tabs.
