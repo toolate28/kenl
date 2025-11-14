@@ -12,6 +12,11 @@ description: Intent-driven dotfiles management with ATOM trails and pattern lear
 # SAIF for Dotfiles
 **System-Aware Intent Framework for Software Developers**
 
+**SAIF** is the umbrella framework combining:
+- **ATOM** (intent logging)
+- **SAGE** (pattern recognition)
+- **OWI** (AI transparency)
+
 ## What Problem Does This Solve?
 
 **Traditional dotfiles approach:**

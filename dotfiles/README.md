@@ -21,7 +21,13 @@ Capture intent, not just actions. Preserve expertise. Respect confidentiality.
 
 ## What is SAIF?
 
-SAIF (pronounced "safe") is a **documentation and knowledge management system** for organizations doing complex, custom work where:
+**SAIF** (System-Aware Intent Framework, pronounced "safe") is the **umbrella framework** that unifies three core methodologies:
+
+- **ATOM** - Atomic audit trails (intent logging with "why", not just "what")
+- **SAGE** - System-Aware Guided Evolution (pattern recognition and automation)
+- **OWI** - Optimized-With-Intent (AI transparency and human authority)
+
+**Together, SAIF provides** a **documentation and knowledge management system** for organizations doing complex, custom work where:
 
 - **Expertise is valuable** (years of learning shouldn't walk out the door)
 - **Intent matters** ("why" is as important as "what")
@@ -418,11 +424,13 @@ MIT License - Share freely, attribution appreciated
 
 ## Acknowledgments
 
-**SAIF builds upon:**
-- **KENL** - Modular architecture (toolate28)
+**SAIF** (System-Aware Intent Framework) unifies:
 - **ATOM** - Intent-capturing audit trails (toolate28)
 - **SAGE** - Pattern recognition methodology (toolate28)
 - **OWI** - AI transparency standard (toolate28)
+
+**Built on:**
+- **KENL** - Modular architecture (toolate28)
 
 **Inspired by:** Dotfiles community, Infrastructure as Code, Evidence-Based practices
 

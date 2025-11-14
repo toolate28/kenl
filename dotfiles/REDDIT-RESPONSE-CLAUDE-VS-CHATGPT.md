@@ -55,9 +55,10 @@ Welcome! Here's a breakdown from someone who uses all three (often together):
    - Claude can hold MUCH more context than GPT-4
 
 3. **Use SAIF workflow** (if managing dotfiles/configs)
-   - SAIF = System-Aware Intent Framework
-   - Claude helps you document WHY configs changed (not just WHAT)
-   - Creates "ATOM trails" - intent logs for every change
+   - SAIF = System-Aware Intent Framework (umbrella for ATOM/SAGE/OWI)
+   - **ATOM** trails = intent logs ("why" you changed configs, not just "what")
+   - **SAGE** = pattern recognition (learns your workflow, suggests automation)
+   - **OWI** = AI transparency (document what AI generated vs human reviewed)
    - Example: "Why did I add this .vimrc line 6 months ago?" → ATOM trail answers
    - More info: https://github.com/toolate28/kenl/tree/main/dotfiles
 
