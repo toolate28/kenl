@@ -170,7 +170,7 @@ graph TB
 
 **🔍 Complete Audit Trails:** ATOM tags track every change with *why*, not just *what*. When crashes happen, you know exactly what broke and how to fix it (85% faster recovery[^2])
 
-**📋 Shareable Play Cards:** Document game configs as YAML ([example config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
+**📋 Shareable Play Cards:** Document game configs as YAML ([example config](./modules/KENL2-gaming/play-cards/games/battlefield-2042.yaml)). Share with friends - they skip your troubleshooting pain entirely.
 
 **🎮 Linux Gaming Ready:** 89.7% of Windows games now run on Linux via Proton[^3], with 15,855+ games rated playable on ProtonDB and 21,694+ Deck Verified games.
 
@@ -302,7 +302,7 @@ See [MCP Integration Guide](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md)
 
 [^1]: See [ACKNOWLEDGMENTS.md](./ACKNOWLEDGMENTS.md) for comprehensive attribution of Bazzite, Universal Blue, Valve Proton, and all third-party projects that make KENL possible.
 
-[^2]: Based on internal validation study comparing recovery time with vs. without ATOM trail documentation. See [modules/KENL1-framework/docs/VALIDATION_COMPLETE.md](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md) for methodology.
+[^2]: Based on internal testing comparing recovery time with vs. without ATOM trail documentation. Formal validation study planned for future release.
 
 [^3]: [Boiling Steam ProtonDB Analysis (2025)](https://boilingsteam.com/) - Community-verified compatibility data showing 89.7% of Windows titles launch on Linux, with 15,855+ games rated playable by at least two ProtonDB reports.
 
