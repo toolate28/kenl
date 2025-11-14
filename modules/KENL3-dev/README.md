@@ -506,9 +506,9 @@ distrobox create \
 
 ## Navigation
 
-- **← [Root README](../README.md)**: Overview of all modules/KENL modules
-- **→ [KENL1: Framework](../modules/KENL1-framework/README.md)**: Core ATOM/SAGE framework
-- **→ [KENL4: Monitoring](../modules/KENL4-monitoring/README.md)**: Dashboard development
+- **← [Root README](../../README.md)**: Overview of all modules/KENL modules
+- **→ [KENL1: Framework](../KENL1-framework/README.md)**: Core ATOM/SAGE framework
+- **→ [KENL4: Monitoring](../KENL4-monitoring/README.md)**: Dashboard development
 - **→ [AI Integration Guide](../AI-INTEGRATION-GUIDE.md)**: Complete AI setup guide
 
 ---

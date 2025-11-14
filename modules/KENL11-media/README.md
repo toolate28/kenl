@@ -922,17 +922,17 @@ firefox http://localhost:81           # Nginx Proxy Manager
 
 ## License
 
-MIT License - See [../LICENSE](../LICENSE)
+MIT License - See [../LICENSE](../../LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL0: System](../modules/KENL0-system/README.md)** - Podman setup
-- **→ [KENL8: Security](../modules/KENL8-security/README.md)** - VPN encryption
-- **→ [KENL9: Library](../modules/KENL9-library/README.md)** - Shared media storage
-- **→ [KENL10: Backup](../modules/KENL10-backup/README.md)** - Config backups
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL0: System](../KENL0-system/README.md)** - Podman setup
+- **→ [KENL8: Security](../KENL8-security/README.md)** - VPN encryption
+- **→ [KENL9: Library](../KENL9-library/README.md)** - Shared media storage
+- **→ [KENL10: Backup](../KENL10-backup/README.md)** - Config backups
 
 ---
 

@@ -107,7 +107,7 @@ gitGraph
 **Tutorials:**
 - [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow) (Official)
 - [Conventional Commits](https://www.conventionalcommits.org/) (Standard)
-- modules/KENL example: [`CONTRIBUTING.md`](../CONTRIBUTING.md)
+- modules/KENL example: [`CONTRIBUTING.md`](../../CONTRIBUTING.md)
 
 ---
 
@@ -933,22 +933,22 @@ KENL7-learning/
 
 Found a better tutorial? Have a Bazzite-specific tip? Contributions welcome!
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## License
 
-MIT License - See [../LICENSE](../LICENSE)
+MIT License - See [../LICENSE](../../LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL0: System](../modules/KENL0-system/README.md)** - rpm-ostree operations
-- **→ [KENL2: Gaming](../modules/KENL2-gaming/README.md)** - Gaming configs
-- **→ [KENL8: Security](../modules/KENL8-security/README.md)** - GPG, encryption
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL0: System](../KENL0-system/README.md)** - rpm-ostree operations
+- **→ [KENL2: Gaming](../KENL2-gaming/README.md)** - Gaming configs
+- **→ [KENL8: Security](../KENL8-security/README.md)** - GPG, encryption
 
 ---
 

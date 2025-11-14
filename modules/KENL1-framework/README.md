@@ -276,10 +276,10 @@ MIT License - See [LICENSE](./LICENSE)
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL2: Gaming](../modules/KENL2-gaming/README.md)** - Gaming-With-Intent module
-- **→ [KENL3: Development](../modules/KENL3-dev/README.md)** - Development environment module
-- **→ [KENL4: Monitoring](../modules/KENL4-monitoring/README.md)** - Observability module
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL2: Gaming](../KENL2-gaming/README.md)** - Gaming-With-Intent module
+- **→ [KENL3: Development](../KENL3-dev/README.md)** - Development environment module
+- **→ [KENL4: Monitoring](../KENL4-monitoring/README.md)** - Observability module
 
 ---
 

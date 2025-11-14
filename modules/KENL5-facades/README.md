@@ -605,17 +605,17 @@ atom STATUS "Session complete - 4 hours, 60 FPS stable"
 
 ## License
 
-MIT License - See [../modules/KENL1-framework/LICENSE](../modules/KENL1-framework/LICENSE)
+MIT License - See [../modules/KENL1-framework/LICENSE](../KENL1-framework/LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL1: Framework](../modules/KENL1-framework/README.md)** - Core ATOM+SAGE+OWI
-- **→ [KENL2: Gaming](../modules/KENL2-gaming/README.md)** - Bazzite Gaming
-- **→ [KENL3: Development](../modules/KENL3-dev/README.md)** - Bazzite-DX Development
-- **→ [KENL4: Monitoring](../modules/KENL4-monitoring/README.md)** - Observability
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL1: Framework](../KENL1-framework/README.md)** - Core ATOM+SAGE+OWI
+- **→ [KENL2: Gaming](../KENL2-gaming/README.md)** - Bazzite Gaming
+- **→ [KENL3: Development](../KENL3-dev/README.md)** - Bazzite-DX Development
+- **→ [KENL4: Monitoring](../KENL4-monitoring/README.md)** - Observability
 
 ---
 

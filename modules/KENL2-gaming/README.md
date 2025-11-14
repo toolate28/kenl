@@ -543,16 +543,16 @@ Friend applies:
 
 ## License
 
-MIT License - See [../LICENSE](../LICENSE)
+MIT License - See [../LICENSE](../../LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL1: Framework](../modules/KENL1-framework/README.md)** - ATOM+SAGE+OWI core
-- **→ [KENL6: Social](../modules/KENL6-social/README.md)** - Share Play Cards
-- **→ [KENL8: Security](../modules/KENL8-security/README.md)** - Encryption
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL1: Framework](../KENL1-framework/README.md)** - ATOM+SAGE+OWI core
+- **→ [KENL6: Social](../KENL6-social/README.md)** - Share Play Cards
+- **→ [KENL8: Security](../KENL8-security/README.md)** - Encryption
 
 ---
 
