@@ -107,13 +107,13 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 | Module | Purpose | Module | Purpose |
 |--------|---------|--------|---------|
-| **KENL0** System | rpm-ostree, firmware, PowerShell modules | **KENL7** Learning | Guides, cheatsheets |
-| **KENL1** Framework | ATOM + SAGE core | **KENL8** Security | GPG, SSH, encryption |
-| **KENL2** Gaming | Play Cards, Proton | **KENL9** Library | Game management |
-| **KENL3** Development | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | **KENL10** Backup | Snapshots, recovery |
-| **KENL4** Monitoring | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | **KENL11** Media | Streaming, Docker |
-| **KENL5** Facades | Visual themes, context | **KENL12** Resources | Downloads, community |
-| **KENL6** Social | Sharing, community | **KENL13** IWI | Intent-With-Insight |
+| [**KENL0** System](./modules/KENL0-system/) | rpm-ostree, firmware, PowerShell modules | [**KENL7** Learning](./modules/KENL7-learning/) | Guides, cheatsheets |
+| [**KENL1** Framework](./modules/KENL1-framework/) | ATOM + SAGE core | [**KENL8** Security](./modules/KENL8-security/) | GPG, SSH, encryption |
+| [**KENL2** Gaming](./modules/KENL2-gaming/) | Play Cards, Proton | [**KENL9** Library](./modules/KENL9-library/) | Game management |
+| [**KENL3** Development](./modules/KENL3-dev/) | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | [**KENL10** Backup](./modules/KENL10-backup/) | Snapshots, recovery |
+| [**KENL4** Monitoring](./modules/KENL4-monitoring/) | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | [**KENL11** Media](./modules/KENL11-media/) | Streaming, Docker |
+| [**KENL5** Facades](./modules/KENL5-facades/) | Visual themes, context | [**KENL12** Resources](./modules/KENL12-resources/) | Downloads, community |
+| [**KENL6** Social](./modules/KENL6-social/) | Sharing, community | [**KENL13** IWI](./modules/KENL13-iwi/) | Intent-With-Insight |
 
 **Each module has its own README** - navigate to `modules/KENLX-<name>/` and start there.
 
