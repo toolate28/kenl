@@ -91,12 +91,12 @@ Write-Host ''
 try {
     `$startTime = Get-Date
 
-    aria2c -x16 -s16 \`
-        --dir='$OutputDir' \`
-        --out='$isoFile' \`
-        --console-log-level=info \`
-        --summary-interval=5 \`
-        --download-result=full \`
+    aria2c -x16 -s16 ``
+        --dir='$OutputDir' ``
+        --out='$isoFile' ``
+        --console-log-level=info ``
+        --summary-interval=5 ``
+        --download-result=full ``
         '$isoUrl'
 
     `$duration = (Get-Date) - `$startTime
