@@ -34,38 +34,34 @@ KENL/SAIF exists because:
 
 ## The Problem KENL Solves
 
-**Battlefield 6 wouldn't launch.** EA App auth errors, anti-cheat failures, 174ms network latency. After hours of troubleshooting: *it works*. But how? What fixed it? Can you reproduce it?
+**HALO wouldn't launch.** EA App auth errors, anti-cheat failures, 174ms network latency. After hours of troubleshooting: *it works*. But how? What fixed it? Can you reproduce it?
 
-**KENL captures the *why* behind every fix**, not just the *what*. When BF6 breaks again (and it will), recovery takes minutes instead of hours - because you already documented the solution.
+**KENL captures the *why* behind every fix**, not just the *what*. If it breaks again, recovery takes minutes instead of hours - because you already documented the solution.
 
-**Real example:** `ATOM-GAMING-001: BF6 won't launch → ATOM-RESEARCH-002: ProtonDB suggests GE-Proton 9-20 → ATOM-CFG-003: Applied fix → ATOM-PLAYCARD-006: Created shareable config`
+**Real example:** `ATOM-GAMING-001: HALO won't launch → ATOM-RESEARCH-002: ProtonDB suggests GE-Proton 9-20 → ATOM-CFG-003: Applied fix → ATOM-PLAYCARD-006: Created shareable config`
 
-**Result:** Next time BF6 breaks, recovery takes <10 minutes instead of hours. Share the Play Card - others skip your pain entirely.
+**Result:** Next time HALO breaks, recovery takes <10 minutes instead of hours. Share the Play Card - others skip your pain entirely.
 
 ---
 
 ## The KENL Builder Mentality
 
-**"Putting the amazing work of Universal Blue / Bazzite teams into everyone's hands."**
-
-KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Bazzite community.
+We stand on shoulders, not on toes. KENL doesn't provide better tools - it provides **better access** to the excellent work already done by the Respective Dev/Contributor communities.
 
 ### Four Pillars
 
-| Pillar | Purpose | Example |
-|--------|---------|---------|
-| **KENL** | Distrobox tooling for Gaming + Development | Isolated dev containers, no system deps |
-| **ATOM** | Intent logging (the *why*, not just *what*) | [`claude-landing/RECENT-WORK.md`](./claude-landing/RECENT-WORK.md) |
-| **OWI** | Operating-With-Intent (AI + MCP integration) | Play Cards: shareable game configs |
-| **SAGE** | Just-in-time documentation | [`claude-landing/`](./claude-landing/) orientation docs |
+| Pillar    | Purpose                                      | Example                                                            |
+|-----------|----------------------------------------------|--------------------------------------------------------------------|
+| **KENL**  | Distrobox tooling for Gaming + Development   | Isolated dev containers, no system deps                            |
+| **ATOM**  | Intent logging (the *why*, not just *what*)  | [`claude-landing/RECENT-WORK.md`](./claude-landing/RECENT-WORK.md) |
+| **OWI**   | Operating-With-Intent (AI + MCP integration) | Play Cards: shareable game configs                                 |
+| **SAGE**  | Just-in-time documentation                   | [`claude-landing/`](./claude-landing/) orientation docs            |
 
-### Technical Guarantees
+    **Elegant Integration:** Distrobox isolation • JSON-RPC MCP • Pure POSIX shell
+    **Minimal Overhead:** ~0.1ms ATOM logging • Static YAML Play Cards • Copy-on-write filesystem
+    **Breaking-Change Proof:** Immutable rpm-ostree base • User-space only (`~/.local`) • Atomic GRUB rollback
 
-**Elegant Integration:** Distrobox isolation • JSON-RPC MCP • Pure POSIX shell
-**Minimal Overhead:** ~0.1ms ATOM logging • Static YAML Play Cards • Copy-on-write filesystem
-**Breaking-Change Proof:** Immutable rpm-ostree base • User-space only (`~/.local`) • Atomic GRUB rollback
-
-*Every KENL operation includes rollback instructions.*
+    *Every KENL operation includes rollback instructions.*
 
 ---
 
@@ -106,7 +102,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 **🔍 Complete Audit Trails:** ATOM tags track every change with *why*, not just *what*. When crashes happen, you know exactly what broke and how to fix it (85% faster recovery - [validation study](./modules/KENL1-framework/docs/VALIDATION_COMPLETE.md))
 
-**📋 Shareable Play Cards:** Document game configs as YAML ([example BF6 config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
+**📋 Shareable Play Cards:** Document game configs as YAML ([example  config](./modules/KENL2-gaming/play-cards/battlefield-6-amd-ryzen5-5600h-vega.yaml)). Share with friends - they skip your troubleshooting pain entirely.
 
 **🎨 Visual Context Switching:** Shell themes prevent mistakes (`🎮 KENL2` for gaming, `💻 KENL3` for dev, `⚙️ KENL0` for system ops)
 
@@ -125,7 +121,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 | **Windows Users** | [windows-support/](./windows-support/) | EOL migration, Surface Pro 4 help |
 | **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | Code style, ARCREF + ADR requirements |
 
-**Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot, BF6 troubleshooting)
+**Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot,  troubleshooting)
 
 ---
 
