@@ -1,0 +1,350 @@
+---
+project: KENL Dotfiles System
+version: 1.0.0
+classification: CWI-MODULE
+atom: ATOM-CFG-20251114-001
+description: SAGE pattern recognition configuration for intent-driven dotfiles
+---
+
+# SAGE Dotfiles Configuration
+# Monitors dotfile usage patterns and provides intelligent suggestions
+
+system:
+  name: "KENL Dotfiles"
+  version: "1.0.0"
+  platform: "linux"  # Auto-detected: linux|windows|wsl2
+  immutable_base: true
+  user_space_only: true
+
+# Pattern Recognition - What to watch
+pattern_recognition:
+  enabled: true
+  watch_patterns:
+    # Shell configs
+    - pattern: "**/.bashrc"
+      category: "shell"
+      learning_weight: 0.9
+    - pattern: "**/.bash_profile"
+      category: "shell"
+      learning_weight: 0.8
+    - pattern: "**/.bash_aliases"
+      category: "shell"
+      learning_weight: 0.9
+    - pattern: "**/.zshrc"
+      category: "shell"
+      learning_weight: 0.9
+
+    # Git configs
+    - pattern: "**/.gitconfig"
+      category: "dev"
+      learning_weight: 0.95
+    - pattern: "**/.gitignore_global"
+      category: "dev"
+      learning_weight: 0.7
+
+    # Editor configs
+    - pattern: "**/.vimrc"
+      category: "dev"
+      learning_weight: 0.85
+    - pattern: "**/.config/nvim/**"
+      category: "dev"
+      learning_weight: 0.85
+
+    # Gaming configs
+    - pattern: "**/MangoHud.conf"
+      category: "gaming"
+      learning_weight: 1.0
+    - pattern: "**/gamescope*.conf"
+      category: "gaming"
+      learning_weight: 0.9
+
+    # Terminal multiplexers
+    - pattern: "**/.tmux.conf"
+      category: "dev"
+      learning_weight: 0.8
+
+    # Security configs
+    - pattern: "**/.gnupg/gpg.conf"
+      category: "security"
+      learning_weight: 0.95
+    - pattern: "**/.ssh/config"
+      category: "security"
+      learning_weight: 0.95
+
+  # Learned patterns (auto-populated by SAGE)
+  learned_patterns:
+    - name: "gaming-session-prep"
+      trigger:
+        - "Launch Steam"
+        - "Launch Lutris"
+        - "Launch Heroic"
+      confidence: 0.95
+      actions:
+        - type: "network"
+          action: "disable_tailscale_vpn"
+          reason: "Reduces latency 174ms → 6ms"
+          atom_ref: "ATOM-NETWORK-20251112-005"
+        - type: "cpu"
+          action: "set_governor_performance"
+          reason: "Maximize FPS"
+          atom_ref: "ATOM-CFG-20251114-002"
+        - type: "overlay"
+          action: "enable_mangohud"
+          reason: "Monitor FPS and temps"
+          atom_ref: "ATOM-GAMING-20251114-003"
+      frequency: 47  # Times observed
+      last_seen: "2025-11-14T10:30:00Z"
+
+    - name: "dev-session-prep"
+      trigger:
+        - "Launch VSCode"
+        - "Launch distrobox dev"
+        - "cd ~/projects"
+      confidence: 0.87
+      actions:
+        - type: "network"
+          action: "enable_tailscale_vpn"
+          reason: "Secure remote access"
+          atom_ref: "ATOM-NETWORK-20251114-004"
+        - type: "cpu"
+          action: "set_governor_powersave"
+          reason: "Reduce heat during long sessions"
+          atom_ref: "ATOM-CFG-20251114-005"
+        - type: "distrobox"
+          action: "enter_dev_container"
+          reason: "Isolated development environment"
+          atom_ref: "ATOM-DEV-20251114-006"
+      frequency: 32
+      last_seen: "2025-11-14T09:15:00Z"
+
+    - name: "streaming-session-prep"
+      trigger:
+        - "Launch OBS Studio"
+        - "Open streaming config"
+      confidence: 0.72
+      actions:
+        - type: "overlay"
+          action: "disable_mangohud_fps_display"
+          reason: "Cleaner stream appearance"
+          atom_ref: "ATOM-CFG-20251114-002"
+        - type: "audio"
+          action: "switch_to_streaming_audio_profile"
+          reason: "Better microphone quality"
+          atom_ref: "ATOM-AUDIO-20251114-007"
+      frequency: 12
+      last_seen: "2025-11-13T18:45:00Z"
+
+# ATOM Trail Integration
+atom_trail:
+  enabled: true
+  log_file: ".atom-trail.log"
+  track_all_changes: true
+  include_intent: true
+  format: "ATOM-{TYPE}-{YYYYMMDD}-{NNN}: {ACTION} (intent: {INTENT})"
+
+  # What to track
+  track_events:
+    - "profile_apply"
+    - "config_edit"
+    - "symlink_create"
+    - "backup_create"
+    - "rollback_execute"
+    - "sage_suggestion_apply"
+    - "pattern_learned"
+
+# OWI Metadata
+owi_metadata:
+  enabled: true
+  require_for_profiles: true
+  template: |
+    ---
+    profile: {PROFILE_NAME}
+    classification: CWI-PLAYBOOK
+    atom: ATOM-CFG-{YYYYMMDD}-{NNN}
+    owi-version: 1.0.0
+    hardware:
+      cpu: {CPU_MODEL}
+      gpu: {GPU_MODEL}
+      ram: {RAM_SIZE}
+    benchmarks:
+      {BENCHMARK_DATA}
+    ai_involvement:
+      generated_by: {AI_MODEL}
+      human_review: {BOOL}
+      modifications: {DESCRIPTION}
+    rollback_plan: |
+      ./rollback.sh {ATOM_TAG}
+    ---
+
+# Profiles Configuration
+profiles:
+  default: "minimal"
+  available:
+    - name: "minimal"
+      description: "Minimal baseline configuration"
+      kenl_layers: ["kenl0-system"]
+      atom_ref: "ATOM-CFG-20251114-010"
+
+    - name: "gaming-focused"
+      description: "Gaming-optimized setup (MangoHud, GameScope, network)"
+      kenl_layers: ["kenl0-system", "kenl2-gaming", "kenl5-facades"]
+      atom_ref: "ATOM-CFG-20251114-011"
+
+    - name: "dev-focused"
+      description: "Development-optimized setup (git, vim, tmux, distrobox)"
+      kenl_layers: ["kenl0-system", "kenl3-dev", "kenl5-facades"]
+      atom_ref: "ATOM-CFG-20251114-012"
+
+    - name: "full-stack"
+      description: "Complete KENL dotfiles (all layers)"
+      kenl_layers: ["kenl0-system", "kenl2-gaming", "kenl3-dev", "kenl4-monitoring", "kenl5-facades", "kenl8-security"]
+      atom_ref: "ATOM-CFG-20251114-013"
+
+    - name: "amd-ryzen5-5600h-vega"
+      description: "Hardware-specific optimizations for AMD Ryzen 5 5600H + Vega"
+      kenl_layers: ["kenl0-system", "kenl2-gaming", "kenl3-dev", "kenl5-facades"]
+      hardware_specific: true
+      benchmarks:
+        bf6_fps: 118
+        network_latency: "6.2ms"
+      atom_ref: "ATOM-CFG-20251114-014"
+
+# Rollback Configuration
+rollback:
+  enabled: true
+  auto_backup_before_changes: true
+  backup_directory: "backups"
+  backup_retention_days: 30
+  git_integration: true
+
+  # Rollback strategies
+  strategies:
+    - name: "git_commit"
+      description: "Rollback via git reset to specific commit"
+      priority: 1
+    - name: "atom_tag"
+      description: "Rollback to specific ATOM trail entry"
+      priority: 2
+    - name: "timestamped_backup"
+      description: "Restore from timestamped backup tarball"
+      priority: 3
+
+# Guard Rails (Safety Mechanisms)
+guard_rails:
+  immutable_system:
+    prevent_system_writes: true
+    enforce_user_space: true  # Only ~/.config, ~/.local
+    require_rollback_plan: true
+
+  destructive_operations:
+    require_confirmation: true
+    confirmation_methods: ["interactive", "flag"]
+    log_to_atom_trail: true
+
+  pre_flight_checks:
+    - name: "backup_exists"
+      action: "Create backup before applying changes"
+    - name: "valid_profile"
+      action: "Verify profile has OWI metadata"
+    - name: "platform_compatible"
+      action: "Check profile matches current platform"
+
+# Integration Points
+integrations:
+  git:
+    enabled: true
+    auto_commit_after_profile_apply: true
+    commit_message_template: "feat: apply {PROFILE_NAME} profile\n\n{ATOM_TAG}"
+
+  kenl_modules:
+    kenl0_system: true   # Shell aliases, environment
+    kenl2_gaming: true   # MangoHud, GameScope configs
+    kenl3_dev: true      # Git, vim, tmux
+    kenl4_monitoring: true  # Grafana, Prometheus
+    kenl5_facades: true  # Prompts, themes
+    kenl8_security: true # GPG, SSH
+
+  cloudflare_workers:
+    enabled: false  # Future: Sync ATOM trail to cloud
+    endpoint: "https://atom-registry.toolated.workers.dev"
+
+# Suggestions Engine
+suggestions:
+  enabled: true
+  confidence_threshold: 0.75  # Only suggest patterns with >75% confidence
+  auto_apply: false  # Always ask user before applying
+  notification_method: "interactive"  # interactive|log|none
+
+  suggestion_types:
+    - "alias_creation"      # "Create alias for frequent command?"
+    - "profile_switch"      # "Switch to gaming profile?"
+    - "config_optimization" # "Increase network buffer for lower latency?"
+    - "pattern_automation"  # "Automate this sequence?"
+
+# Logging
+logging:
+  enabled: true
+  log_file: "$HOME/.local/share/kenl/sage-dotfiles.log"
+  log_level: "info"  # debug|info|warn|error
+  rotation:
+    enabled: true
+    max_size_mb: 10
+    keep_files: 5
+
+# Analytics (Privacy-respecting, local-only)
+analytics:
+  enabled: true
+  storage: "$HOME/.local/share/kenl/dotfiles-analytics.db"
+  collect:
+    - "profile_usage_frequency"
+    - "pattern_trigger_count"
+    - "sage_suggestion_acceptance_rate"
+    - "rollback_frequency"
+
+  privacy:
+    local_only: true  # Never sent to cloud
+    anonymize: true   # Remove usernames, paths
+    opt_out_available: true
+
+# Performance
+performance:
+  atom_logging_overhead_target: "0.1ms"
+  pattern_analysis_frequency: "hourly"
+  suggestion_check_frequency: "on_command"
+
+# Directories
+directories:
+  dotfiles_root: "$HOME/.dotfiles"
+  kenl_root: "$HOME/.kenl"
+  config_dir: "$HOME/.config"
+  local_dir: "$HOME/.local"
+  backup_dir: "$HOME/.dotfiles/backups"
+  profiles_dir: "$HOME/.dotfiles/profiles"
+
+# Tags (for organization)
+tags:
+  - dotfiles
+  - sage
+  - atom
+  - owi
+  - kenl
+  - pattern-recognition
+  - intent-driven
+  - reproducible
+
+---
+
+# SAGE Dotfiles System Status
+# This section auto-updated by SAGE
+
+status:
+  initialized: true
+  last_pattern_analysis: "2025-11-14T10:30:00Z"
+  total_patterns_learned: 3
+  total_suggestions_made: 7
+  suggestion_acceptance_rate: 0.71
+  current_profile: "amd-ryzen5-5600h-vega"
+  last_profile_change: "2025-11-14T09:00:00Z"
+  atom_trail_entries: 42
+  backups_created: 8
+  rollbacks_executed: 2
