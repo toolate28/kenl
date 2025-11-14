@@ -786,17 +786,17 @@ list-libraries.sh                       # Show all libraries
 
 ## License
 
-MIT License - See [../LICENSE](../LICENSE)
+MIT License - See [../LICENSE](../../LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL0: System](../modules/KENL0-system/README.md)** - Partitioning, privileged ops
-- **→ [KENL2: Gaming](../modules/KENL2-gaming/README.md)** - Play Cards
-- **→ [KENL8: Security](../modules/KENL8-security/README.md)** - Save encryption
-- **→ [KENL10: Backup](../modules/KENL10-backup/README.md)** - Library snapshots
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL0: System](../KENL0-system/README.md)** - Partitioning, privileged ops
+- **→ [KENL2: Gaming](../KENL2-gaming/README.md)** - Play Cards
+- **→ [KENL8: Security](../KENL8-security/README.md)** - Save encryption
+- **→ [KENL10: Backup](../KENL10-backup/README.md)** - Library snapshots
 
 ---
 

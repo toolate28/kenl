@@ -450,9 +450,9 @@ Found a useful resource? Add it!
 
 ## Navigation
 
-- **← [Root README](../README.md)**: Overview of all modules/KENL modules
-- **→ [KENL5: Facades](../modules/KENL5-facades/README.md)**: Visual theming
-- **→ [KENL7: Learning](../modules/KENL7-learning/README.md)**: Tutorials
+- **← [Root README](../../README.md)**: Overview of all modules/KENL modules
+- **→ [KENL5: Facades](../KENL5-facades/README.md)**: Visual theming
+- **→ [KENL7: Learning](../KENL7-learning/README.md)**: Tutorials
 
 ---
 

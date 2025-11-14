@@ -465,7 +465,7 @@ frametime
 
 ## AI Integration Levels
 
-(See also: [AI-INTEGRATION-GUIDE.md](../AI-INTEGRATION-GUIDE.md))
+(See also: [AI-INTEGRATION-GUIDE.md](../../AI-INTEGRATION-GUIDE.md))
 
 ### modules/KENL4 AI Usage: 🟧 Recommended
 
@@ -632,10 +632,10 @@ atom STATUS "Test operation for monitoring"
 
 ## Navigation
 
-- **← [Root README](../README.md)**: Overview of all modules/KENL modules
-- **→ [KENL1: Framework](../modules/KENL1-framework/README.md)**: ATOM trail source
-- **→ [KENL2: Gaming](../modules/KENL2-gaming/README.md)**: Play Card performance
-- **→ [KENL3: Dev](../modules/KENL3-dev/README.md)**: Development dashboards
+- **← [Root README](../../README.md)**: Overview of all modules/KENL modules
+- **→ [KENL1: Framework](../KENL1-framework/README.md)**: ATOM trail source
+- **→ [KENL2: Gaming](../KENL2-gaming/README.md)**: Play Card performance
+- **→ [KENL3: Dev](../KENL3-dev/README.md)**: Development dashboards
 
 ---
 

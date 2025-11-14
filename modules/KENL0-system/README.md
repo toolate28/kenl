@@ -582,15 +582,15 @@ full-update        # Function available
 
 ## License
 
-MIT License - See [../modules/KENL1-framework/LICENSE](../modules/KENL1-framework/LICENSE)
+MIT License - See [../modules/KENL1-framework/LICENSE](../KENL1-framework/LICENSE)
 
 ---
 
 ## Navigation
 
-- **← [Root README](../README.md)** - Overview of all modules/KENL modules
-- **→ [KENL1: Framework](../modules/KENL1-framework/README.md)** - Core ATOM+SAGE+OWI
-- **→ [KENL5: Facades](../modules/KENL5-facades/README.md)** - Context switching
+- **← [Root README](../../README.md)** - Overview of all modules/KENL modules
+- **→ [KENL1: Framework](../KENL1-framework/README.md)** - Core ATOM+SAGE+OWI
+- **→ [KENL5: Facades](../KENL5-facades/README.md)** - Context switching
 
 ---
 
