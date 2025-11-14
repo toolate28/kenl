@@ -1,0 +1,82 @@
+name: Validate Documentation and Scripts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-links:
+    name: Validate Markdown Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install markdown-link-check
+        run: pip install markdown-link-check
+
+      - name: Run KENL link validator
+        run: |
+          if [ -x ./scripts/validate-links.sh ]; then
+            bash ./scripts/validate-links.sh
+          else
+            echo "⚠️  scripts/validate-links.sh not found or not executable"
+            exit 1
+          fi
+
+  shellcheck:
+    name: ShellCheck (Bash Scripts)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './scripts'
+          severity: style
+
+  powershell-analysis:
+    name: PSScriptAnalyzer (PowerShell)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force -ErrorAction Stop
+
+      - name: Run PSScriptAnalyzer on scripts/
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path ./scripts -Recurse -Severity Warning
+          if ($results) {
+            $results | Format-Table -AutoSize
+            Write-Host "::error::PSScriptAnalyzer found $($results.Count) issues"
+            exit 1
+          } else {
+            Write-Host "✓ No PSScriptAnalyzer issues found"
+          }
+
+      - name: Run PSScriptAnalyzer on modules/
+        shell: pwsh
+        run: |
+          if (Test-Path ./modules) {
+            $results = Invoke-ScriptAnalyzer -Path ./modules -Recurse -Severity Warning
+            if ($results) {
+              $results | Format-Table -AutoSize
+              Write-Host "::warning::PSScriptAnalyzer found $($results.Count) issues in modules/"
+            } else {
+              Write-Host "✓ No PSScriptAnalyzer issues found in modules/"
+            }
+          }
