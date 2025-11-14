@@ -78,7 +78,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 
 ## Modules
 
-**13 specialized layers** (KENL0-12) that work together:
+**14 specialized layers** (KENL0-13) that work together:
 
 | Module | Purpose | Module | Purpose |
 |--------|---------|--------|---------|
@@ -88,7 +88,7 @@ cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Co
 | **KENL3** Development | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | **KENL10** Backup | Snapshots, recovery |
 | **KENL4** Monitoring | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | **KENL11** Media | Streaming, Docker |
 | **KENL5** Facades | Visual themes, context | **KENL12** Resources | Downloads, community |
-| **KENL6** Social | Sharing, community | | |
+| **KENL6** Social | Sharing, community | **KENL13** IWI | Intent-With-Insight |
 
 **Each module has its own README** - navigate to `modules/KENLX-<name>/` and start there.
 
