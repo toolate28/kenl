@@ -240,12 +240,13 @@
 
 ## Individual Contributors
 
-### Matthew Ruhnau (@toolate28)
+### toolate28 (Creator & Maintainer)
 
 **Creator and maintainer of KENL.**
 
 - **Contributions**: ATOM/SAGE/OWI framework design, PowerShell modules, Play Card format, documentation
 - **Hardware**: AMD Ryzen 5 5600H + Vega system (reference platform for KENL2 gaming configs)
+- **GitHub**: [@toolate28](https://github.com/toolate28)
 
 ### Claude Code (AI Assistant)
 
@@ -299,7 +300,7 @@ KENL is released under the **MIT License**. All third-party components listed ab
 If you contribute to KENL, your name/handle will be added here. See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 **Current contributors:**
-- Matthew Ruhnau (@toolate28) - Creator, maintainer
+- toolate28 - Creator, maintainer
 - Claude Code (Anthropic) - AI-assisted development and documentation
 
 ---
