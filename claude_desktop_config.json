@@ -1,5 +1,13 @@
 {
   "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\Matthew Ruhnau\\kenl", "C:\\Users\\Matthew Ruhnau\\AppData\\Local\\KENL", "C:\\Users\\Matthew Ruhnau\\Documents\\PowerShell"]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "C:\\Users\\Matthew Ruhnau\\kenl"]
+    },
     "cloudflare": {
       "command": "npx",
       "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
@@ -7,14 +15,6 @@
         "CLOUDFLARE_API_TOKEN": "YOUR_API_TOKEN_HERE",
         "CLOUDFLARE_ACCOUNT_ID": "3ddeb355f4954bb1ee4f9486b2908e7e"
       }
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/YOUR_USERNAME/.config/bazza-dx", "/home/YOUR_USERNAME/.config/gaming-intent", "/home/YOUR_USERNAME/projects"]
-    },
-    "git": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/home/YOUR_USERNAME/projects/bazza-dx"]
     }
   },
   "globalShortcut": "CommandOrControl+Shift+Space"

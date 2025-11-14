@@ -141,8 +141,8 @@ try {
 }
 
 Write-Host ''
-Write-Host 'Press any key to close this window...' -ForegroundColor DarkGray
-`$null = `$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+Write-Host 'Press Enter to close this window...' -ForegroundColor DarkGray
+`$null = Read-Host
 "@
 
 # Save to temp file
