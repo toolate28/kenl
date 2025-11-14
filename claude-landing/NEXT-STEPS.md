@@ -38,17 +38,17 @@ status: active
 **Status:** ⏳ In Progress
 
 **Current State:**
-- Script created: `scripts/DOWNLOAD-BAZZITE-ISO.ps1`
+- Script: `scripts/Install-Bazzite.ps1` (version-agnostic, parameterized)
 - Target: Ventoy USB (28GB, ready)
 - Variant: Bazzite KDE stable
 
 **Actions:**
 ```powershell
-# 1. Review download script modifications
-git diff scripts/DOWNLOAD-BAZZITE-ISO.ps1
+# 1. Review download script
+Get-Help .\scripts\Install-Bazzite.ps1 -Full
 
 # 2. Run ISO download (if not already running)
-.\scripts\DOWNLOAD-BAZZITE-ISO.ps1 -Variant kde -Edition stable
+.\scripts\Install-Bazzite.ps1 -Variant kde -Edition stable
 
 # 3. Verify SHA256 hash after download
 $IsoPath = "F:\bazzite-kde-stable.iso"

@@ -1,11 +1,22 @@
 #Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-    Download Bazzite KDE ISO in separate terminal window
+    Download and verify Bazzite ISO for installation
 .DESCRIPTION
-    Launches aria2c download in new PowerShell window with live progress monitoring
+    Downloads Bazzite ISO (KDE/GNOME/Deck variants) with aria2c in separate window,
+    verifies SHA256 hash, and provides installation guidance. Part of KENL Bazzite
+    migration workflow.
+.PARAMETER Variant
+    Bazzite variant: kde, gnome, or deck (default: kde)
+.PARAMETER Edition
+    Release edition: stable or unstable (default: stable)
+.PARAMETER OutputDir
+    Download destination directory (default: $env:USERPROFILE\Downloads)
+.EXAMPLE
+    .\Install-Bazzite.ps1 -Variant kde -Edition stable
 .NOTES
-    ATOM Tag: ATOM-CFG-20251112-010
+    ATOM Tag: ATOM-CFG-20251115-001
+    Version: 2.0.0
     Opens separate window - main CLI stays responsive
 #>
 

@@ -97,15 +97,24 @@ powershell -NoProfile -Command "Import-Module .\modules\KENL0-system\powershell\
 ```
 **Output:** Latency, adapter status, Tailscale state
 
-#### `Download-BazziteISO`
-**Purpose:** Download latest Bazzite KDE ISO with aria2c
-**Location:** `scripts/BAZZITE_ISO_DOWNLOAD.md` (instructions)
+#### `Install-Bazzite`
+**Purpose:** Download and verify Bazzite ISO (KDE/GNOME/Deck variants)
+**Location:** `scripts/Install-Bazzite.ps1`
+**Reference:** `scripts/BAZZITE_ISO_DOWNLOAD.md` (documentation)
 **Recommended Command:**
 ```powershell
 # Install aria2c first if needed
 choco install aria2 -y
 
-# Download ISO
+# Download Bazzite KDE stable (default)
+.\scripts\Install-Bazzite.ps1
+
+# Or specify variant
+.\scripts\Install-Bazzite.ps1 -Variant kde -Edition stable
+```
+
+**Legacy Manual Command:**
+```powershell
 aria2c -x16 -s16 `
   --dir="C:\Users\$env:USERNAME\Downloads" `
   --out="bazzite-deck-gnome-stable.iso" `

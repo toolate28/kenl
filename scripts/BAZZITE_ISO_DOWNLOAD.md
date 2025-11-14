@@ -1,21 +1,54 @@
 ---
 project: Bazza-DX SAGE Framework
 status: active
-version: 2025-11-07
+version: 2025-11-15
 classification: OWI-DOC
-atom: ATOM-CFG-20251107-024
+atom: ATOM-DOC-20251115-005
 owi-version: 1.0.0
 ---
 
-# Bazzite ISO Download & Verification (PowerShell)
+# Bazzite ISO Download & Verification
 
-**Purpose:** Automated Bazzite ISO download with hash verification and signature checking
+**Purpose:** Reference documentation for Bazzite ISO download with hash verification
 
-**ATOM Tag:** `ATOM-CFG-20251107-024`
+**ATOM Tag:** `ATOM-DOC-20251115-005`
+
+**Primary Script:** `scripts/Install-Bazzite.ps1` (PowerShell, version-agnostic)
 
 ---
 
-## Quick Download Command
+## Recommended Method (Using Install-Bazzite.ps1)
+
+```powershell
+# Download Bazzite KDE stable (default)
+.\scripts\Install-Bazzite.ps1
+
+# Download specific variant
+.\scripts\Install-Bazzite.ps1 -Variant kde -Edition stable
+.\scripts\Install-Bazzite.ps1 -Variant gnome -Edition unstable
+.\scripts\Install-Bazzite.ps1 -Variant deck -Edition stable
+
+# Custom output directory
+.\scripts\Install-Bazzite.ps1 -OutputDir "D:\ISOs"
+```
+
+**Features:**
+- ✅ Version-agnostic (uses stable/unstable tags, not hardcoded versions)
+- ✅ Variant selection (KDE, GNOME, Deck)
+- ✅ Separate download window (keeps CLI responsive)
+- ✅ aria2c multi-connection download (16 connections)
+- ✅ SHA256 verification built-in
+- ✅ ATOM trail logging
+
+**Prerequisites:**
+```powershell
+# Install aria2c
+choco install aria2 -y
+```
+
+---
+
+## Manual Download Command (Reference)
 
 ```powershell
 # Bazzite 43.20251102 ISO Download with aria2c

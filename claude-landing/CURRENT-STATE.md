@@ -28,11 +28,13 @@ status: active
 ## Git Status
 
 **Branch:** `main`
-- Up to date with `origin/main`
+- Ahead of `origin/main` by 1 commit
 - Working directory has modifications:
-  - M `scripts/DOWNLOAD-BAZZITE-ISO.ps1` (new script for ISO download)
-  - D `tests/.placeholder` (cleanup)
-  - D `windows-support/desktop.ini` (cleanup)
+  - R `scripts/Download-Bazzite-ISO.ps1` → `scripts/Install-Bazzite.ps1` (renamed, follows PowerShell convention)
+  - D `scripts/DOWNLOAD-BAZZITE-ISO.bat` (removed, superseded by Install-Bazzite.ps1)
+  - M `scripts/Install-Bazzite.ps1` (updated header, ATOM tag)
+  - M `scripts/BAZZITE_ISO_DOWNLOAD.md` (updated to reference new script)
+  - M `claude-landing/*.md` (documentation consistency updates)
 
 **Recent Commits:**
 ```
