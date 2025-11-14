@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+# Prevent duplicate runs for the same workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: read
@@ -15,31 +20,35 @@ jobs:
   pre-commit:
     name: pre-commit
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
-      - uses: pre-commit/action@v3.4.0
+      - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files
 
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
-      - uses: github/codeql-action/init@v4
+      - uses: github/codeql-action/init@v3
         with:
           languages: 'javascript,python'
-      - uses: github/codeql-action/analyze@v4
+      - uses: github/codeql-action/analyze@v3
 
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
       - name: Install deps
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
