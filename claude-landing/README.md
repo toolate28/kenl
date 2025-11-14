@@ -32,6 +32,7 @@ When resuming work, you should **"capture the flags"** by validating each expect
 
 - **TESTING-RESULTS.md** - Recent validation results (network, modules, games)
 - **MIGRATION-PLAN.md** - Windows → Bazzite migration roadmap
+- **OBSIDIAN-QUICK-START.md** - Local Obsidian vault setup for SAGE methodology
 
 ## Update Frequency
 
@@ -49,5 +50,5 @@ All documents in this directory use ATOM tags for traceability:
 
 ---
 
-*Last Updated: 2025-11-12*
-*ATOM: ATOM-DOC-20251112-001*
+*Last Updated: 2025-11-15*
+*ATOM: ATOM-DOC-20251115-004*
