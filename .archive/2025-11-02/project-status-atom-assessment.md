@@ -21,7 +21,7 @@
 - **Claude Code Prompt:** Token-optimized implementation guide
 - **GitHub Workflow:** CI/CD with ATOM trail auditing
 - **Perplexity Research:** 6-query audit framework
-- **Status:** Ready for KENL container deployment
+- **Status:** Ready for modules/KENL container deployment
 
 ### 2. ATOM Tag System ✅
 - **Format:** `ATOM-{TYPE}-{YYYYMMDD}-{COUNTER}`
@@ -40,7 +40,7 @@
 ## Incomplete Work (Prioritized)
 
 ### High Priority
-1. **CLAUDE.md Activation File** (Blocks KENL container productivity)
+1. **CLAUDE.md Activation File** (Blocks modules/KENL container productivity)
    - System preparation guide for Claude Code instances
    - MCP server configuration (Cloudflare, Perplexity, Ollama)
    - ATOM tag generation helpers
@@ -62,7 +62,7 @@
    - Create buckets: `sage-evidence`, `system-logs`, `gaming-configs`
 
 5. **Zero Trust Tunnel Config** (Secure local dev access)
-   - `kenl.toolated.online` → KENL container
+   - `kenl.toolated.online` → modules/KENL container
    - Access policies for API endpoints
 
 ### Low Priority
@@ -190,7 +190,7 @@ async def safe_mcp_invoke(tool_name, params):
 
 ## Claude Activation Requirements
 
-### For KENL Container
+### For modules/KENL Container
 1. **Create:** `~/.config/bazza-dx/CLAUDE.md`
    - Project context (Bazzite-DX, SAGE, Gaming-with-Intent)
    - ATOM tag usage guide
@@ -278,7 +278,7 @@ async def safe_mcp_invoke(tool_name, params):
 2. **Deploy D1 ATOM database** (15 min via MCP tools)
 3. **Enable R2** (5 min manual, Dashboard)
 4. **Implement ATOM wrapper** (45 min, guard rails)
-5. **Test Gaming Config Framework** (1 hour, KENL container)
+5. **Test Gaming Config Framework** (1 hour, modules/KENL container)
 
 ---
 
@@ -310,6 +310,6 @@ async def safe_mcp_invoke(tool_name, params):
 
 ---
 
-**Assessment:** Project Bazza-DX has strong architectural foundations and clear implementation paths. Primary blocker is CLAUDE.md activation file for KENL container productivity. Recommend prioritizing Claude bootstrapping over new feature development.
+**Assessment:** Project Bazza-DX has strong architectural foundations and clear implementation paths. Primary blocker is CLAUDE.md activation file for modules/KENL container productivity. Recommend prioritizing Claude bootstrapping over new feature development.
 
 **Recommendation:** Next session should focus on operational deployment (CLAUDE.md, D1, R2) rather than additional planning/research.

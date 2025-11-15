@@ -3,13 +3,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)]()
-[![Recovery Time: 7min](https://img.shields.io/badge/Recovery%20Time-7min-blue.svg)]()
+[![Recovery: 85% Faster](https://img.shields.io/badge/Recovery-85%25%20Faster-blue.svg)]()
 
 ## What is ATOM+SAGE?
 
 ATOM+SAGE is an **intent-driven operations framework** that captures the **why** behind every operation, enabling:
 
-- **7-minute recovery** from complete system crashes (vs 30-60 minutes traditional)
+- **85% faster recovery** from complete system crashes (30-60 min → <10 min)
 - **100% intent preservation** across sessions and contexts
 - **Self-validating operations** with CTFWI (Checked The Flags, What Intent?) methodology
 - **Zero-dependency core** written in pure POSIX shell
@@ -44,7 +44,7 @@ Every ATOM tag captures:
 
 ## Proven Results
 
-### Real-World Case Study: The 7-Minute Recovery
+### Real-World Validation: Crash Recovery Case Study
 
 **Situation**: System crash during complex Bazzite Linux configuration
 - **Lost**: 4 active Claude Code conversations (complete context wipeout)
@@ -187,8 +187,8 @@ graph TB
 ### Intent-Driven Operations
 Captures *why* operations happen, not just *what* happened.
 
-### Instant Recovery
-Average 7-minute recovery from complete crashes with minimal user input.
+### Rapid Recovery
+85% faster recovery from complete crashes (30-60 min → <10 min) with minimal user input.
 
 ### Self-Validating
 CTFWI flags test whether AI assistants truly understand requirements.

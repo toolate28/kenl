@@ -1,0 +1,12 @@
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' file-sort modification
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' original true
+zstyle :compinstall filename '/mnt/c/Users/Matthew Ruhnau/kenl/atom-sage-framework/y'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall

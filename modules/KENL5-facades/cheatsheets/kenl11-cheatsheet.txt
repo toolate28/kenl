@@ -1,0 +1,58 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║   📺 KENL11: MEDIA - Seedbox & Media Server                                   ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   🔒 VPN SETUP                           📥 MEDIA STACK                       ║
+║   ──────────                             ────────────                        ║
+║   ./vpn/setup-tailscale.sh               ./docker-compose/deploy-all.sh      ║
+║   → Mesh VPN (zero-config)               → Deploy entire media server        ║
+║   → Access from anywhere                 → All services in one command       ║
+║                                                                               ║
+║   ./vpn/setup-commercial-vpn.sh          podman ps                           ║
+║   → Mullvad/NordVPN/ProtonVPN            → List running containers           ║
+║   → Kill switch enabled                  podman logs <service>               ║
+║   → DNS leak protection                  → View service logs                 ║
+║                                                                               ║
+║   🛡️ PRIVACY TESTING                     🎬 WEB INTERFACES                   ║
+║   ─────────────────                      ───────────────                     ║
+║   ./vpn/test-killswitch.sh               Jellyfin:    http://localhost:8096  ║
+║   → Test VPN kill switch                 Overseerr:   http://localhost:5055  ║
+║   → Ensure IP never leaks                Radarr:      http://localhost:7878  ║
+║                                           Sonarr:      http://localhost:8989  ║
+║   ./privacy/test-dns-leak.sh             Lidarr:      http://localhost:8686  ║
+║   → Check DNS leak protection            Prowlarr:    http://localhost:9696  ║
+║   → Verify VPN DNS usage                 qBittorrent: http://localhost:8080  ║
+║                                           NPM:         http://localhost:81    ║
+║                                           Tautulli:    http://localhost:8181  ║
+║                                                                               ║
+║   📦 SERVICES                            ⚙️  MANAGEMENT                       ║
+║   ──────────                             ────────────                        ║
+║   Prowlarr:    Indexer manager           ./scripts/storage-monitor.sh        ║
+║   FlareSolverr: Cloudflare bypass        → Monitor disk usage                ║
+║   Radarr:      Movies automation         → Storage recommendations          ║
+║   Sonarr:      TV shows automation                                           ║
+║   Lidarr:      Music automation          podman-compose restart <service>    ║
+║   qBittorrent: Torrent client (VPN)      → Restart specific service          ║
+║   Jellyfin:    Media streaming                                               ║
+║   Overseerr:   Request interface         podman-compose down                 ║
+║   Tautulli:    Jellyfin stats            → Stop all services                 ║
+║   NPM:         Reverse proxy             podman-compose up -d                ║
+║                                           → Start all services                ║
+║                                                                               ║
+║   🔞 ADULT CONTENT (18+)                 💾 INTEGRATION                       ║
+║   ──────────────────────                 ─────────────                       ║
+║   ./scripts/unlock-adult-content.sh      kenl-switch 8                       ║
+║   → Enable Whisparr + Stash              → Encrypt VPN credentials           ║
+║   → Adult indexers                                                            ║
+║   → Separate library                     kenl-switch 10                      ║
+║                                           → Backup media configs              ║
+║   ./scripts/lock-adult-content.sh                                            ║
+║   → Disable adult services               kenl-switch 9                       ║
+║                                           → Use shared NTFS for media        ║
+║                                                                               ║
+║   💡 WORKFLOW: Request in Overseerr → Auto-download → Auto-organize → Watch!  ║
+║        All traffic encrypted via VPN, complete automation                    ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝

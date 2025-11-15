@@ -1,0 +1,23 @@
+id: "ARCREF::<DOMAIN>::<AREA>::<NNNN>"
+title: "<Short human-readable title>"
+status: "proposed | accepted | deprecated | superseded"
+summary: |
+  Short summary of the decision and intent (WHY, not only WHAT).
+author:
+  name: "<Author Name>"
+  contact: "<GH username or email>"
+date: "YYYY-MM-DD"
+scope:
+  - "<mcp|cloud|platform|repo>"
+implications:
+  - "<List of implications (security, performance, atomicity)>"
+rollback_plan: |
+  Steps and references to return to prior state.
+tests: |
+  Automated tests or manual checks to verify the change.
+references:
+  - "<link to PR/issue/ADR>"
+tags:
+  - "<TAG::SUB::...>"
+notes: |
+  Free-form notes.
