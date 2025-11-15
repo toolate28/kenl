@@ -28,9 +28,7 @@ jobs:
           extra_args: --all-files
 
   codeql:
-    name: CodeQL
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5.3.2
       - uses: github/codeql-action/init@v3.0.1
@@ -45,9 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5.3.2
       - name: Set up Python
-        uses: actions/setup-python@v5.3.2
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.12'
           cache: 'pip'
       - name: Install deps
         run: |

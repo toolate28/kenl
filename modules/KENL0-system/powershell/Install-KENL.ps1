@@ -212,7 +212,7 @@ foreach ($module in $modules) {
             $installedModules += $moduleName
         }
         catch {
-            Write-Warning "  [✗] Failed to install $moduleName: $_"
+            Write-Warning "  [✗] Failed to install $moduleName`: $_"
             $failedModules += $moduleName
         }
     }
