@@ -1,22 +1,53 @@
-```markdown
+---
+name: Pull Request
+about: Standard PR template with ATOM traceability
+---
+
 ## Summary
+<!-- Describe what this PR changes and why -->
 
-<!-- Describe the change at a high level -->
+## Related Issues
+- Fixes: #<!-- issue number -->
+- Related: #<!-- issue number -->
 
-## How to test
-
-<!-- Steps to reproduce / test the change -->
+## Type of Change
+- [ ] Bug fix (non-breaking change fixing an issue)
+- [ ] New feature (non-breaking change adding functionality)
+- [ ] Breaking change (fix or feature causing existing functionality to break)
+- [ ] Documentation update
+- [ ] Chore/tooling (CI, scripts, dependencies)
+- [ ] Gaming configuration (Play Card, launch options)
+- [ ] Partition script (disk management, STEP1-3)
+- [ ] MCP integration (AI agent configuration)
 
 ## Checklist
-- [ ] My branch follows the branch naming guidelines
-- [ ] I used Conventional Commits in this PR
-- [ ] All tests and pre-commit hooks pass locally
-- [ ] I included necessary documentation updates
+- [ ] I have read [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [ ] I ran local validations (`scripts/validate-links.sh`, linters)
+- [ ] I added/updated documentation where needed
+- [ ] Tests pass locally (if applicable)
+- [ ] Commit messages follow Conventional Commits
 
-## Governance
-- ARCREF (if infra/architecture change): `ARCREF::<DOMAIN>::<AREA>::<NNNN>` (add file under `mcp-governance/`)
-- ADR (if making architectural decisions): reference `02-Decisions/`
-
-## Release notes
-<!-- Short entry for changelog (Unreleased) -->
+## ATOM Metadata (Audit Trail)
+```yaml
+actor: @<github-username>
+atom-trail:
+  created_at: <YYYY-MM-DD HH:MM:SS>
+  intent: <brief intent statement>
+  atom-tag: ATOM-<TYPE>-<YYYYMMDD>-<NNN>
+related-atoms:
+  - ATOM-XXX-YYYYMMDD-NNN
 ```
+
+## SAGE Notes (Optional)
+- **Why this change:**
+- **Alternatives considered:**
+- **Rollback plan:**
+- **Evidence/validation:**
+
+## Testing
+- [ ] Manual testing performed
+- [ ] Automated tests added/updated
+- [ ] Tested on: <!-- OS, environment -->
+
+## Notes for Reviewers
+<!-- Anything reviewers should pay special attention to -->
