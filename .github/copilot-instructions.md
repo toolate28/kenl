@@ -154,7 +154,7 @@ ATOM-CFG-20251112-042
 
 **CRITICAL:** All significant changes must be tagged with ATOM identifiers for audit trail.
 
-**Format:** `ATOM-{TYPE}-{YYYYMMDD}-{COUNTER}`
+**Format:** `ATOM-{TYPE}-{YYYYMMDD}-{NNN}`
 
 **Types:**
 - `ATOM-MCP-*` - MCP tool invocations
