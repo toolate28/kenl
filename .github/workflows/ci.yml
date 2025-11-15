@@ -22,18 +22,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    ddddddddddwwwwddddddddddddddddddddddddaaaaawwwwwwwwrepo: https://github.com/pre-commit/pre-commit-hooks
+    repo: https://github.com/pre-commit/pre-commit-hooks
     rev: <valid-tag-or-commit-sha>  # replace with a tag from https://github.com/pre-commit/pre-commit-hooks/tags or a pinned commit SHA
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
 
-  codeql:wdddddddddddddddddddddddddddddwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-    name: CodeQL
+  codeql:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@v4
         with:
           languages: 'python'
       - uses: github/codeql-action/analyze@v3
@@ -44,9 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.12'
           cache: 'pip'
       - name: Install deps
         run: |
