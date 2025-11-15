@@ -22,22 +22,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --all-files
+    ddddddddddwwwwddddddddddddddddddddddddaaaaawwwwwwwwrepo: https://github.com/pre-commit/pre-commit-hooks
+    rev: <valid-tag-or-commit-sha>  # replace with a tag from https://github.com/pre-commit/pre-commit-hooks/tags or a pinned commit SHA
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
 
-  codeql:
+  codeql:wdddddddddddddddddddddddddddddwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
     name: CodeQL
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
       - uses: github/codeql-action/init@v3
         with:
-          languages: 'javascript,python'
+          languages: 'python'
       - uses: github/codeql-action/analyze@v3
-
   tests:
     name: Run tests
     runs-on: ubuntu-latest
