@@ -1,11 +1,22 @@
 #Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-    Download Bazzite KDE ISO in separate terminal window
+    Download and verify Bazzite ISO for installation
 .DESCRIPTION
-    Launches aria2c download in new PowerShell window with live progress monitoring
+    Downloads Bazzite ISO (KDE/GNOME/Deck variants) with aria2c in separate window,
+    verifies SHA256 hash, and provides installation guidance. Part of KENL Bazzite
+    migration workflow.
+.PARAMETER Variant
+    Bazzite variant: kde, gnome, or deck (default: kde)
+.PARAMETER Edition
+    Release edition: stable or unstable (default: stable)
+.PARAMETER OutputDir
+    Download destination directory (default: $env:USERPROFILE\Downloads)
+.EXAMPLE
+    .\Install-Bazzite.ps1 -Variant kde -Edition stable
 .NOTES
-    ATOM Tag: ATOM-CFG-20251112-010
+    ATOM Tag: ATOM-CFG-20251115-001
+    Version: 2.0.0
     Opens separate window - main CLI stays responsive
 #>
 
@@ -58,11 +69,11 @@ $downloadScript = @"
 # Header
 Clear-Host
 Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Cyan
-Write-Host '║  Bazzite $Variant $Edition ISO Download' -ForegroundColor Cyan -NoNewline
-Write-Host (' ' * (58 - ('Bazzite ' + '$Variant' + ' ' + '$Edition' + ' ISO Download').Length)) -NoNewline
+Write-Host "║  Bazzite $Variant $Edition ISO Download" -ForegroundColor Cyan -NoNewline
+Write-Host (" " * (58 - ("Bazzite " + "$Variant" + " " + "$Edition" + " ISO Download").Length)) -NoNewline
 Write-Host '║' -ForegroundColor Cyan
-Write-Host '║  ATOM-CFG-20251112-010' -NoNewline
-Write-Host (' ' * 39) -NoNewline
+Write-Host "║  ATOM-CFG-20251115-001" -NoNewline
+Write-Host (" " * 39) -NoNewline
 Write-Host '║' -ForegroundColor Cyan
 Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Cyan
 Write-Host ''
@@ -80,12 +91,12 @@ Write-Host ''
 try {
     `$startTime = Get-Date
 
-    aria2c -x16 -s16 \`
-        --dir='$OutputDir' \`
-        --out='$isoFile' \`
-        --console-log-level=info \`
-        --summary-interval=5 \`
-        --download-result=full \`
+    aria2c -x16 -s16 ``
+        --dir='$OutputDir' ``
+        --out='$isoFile' ``
+        --console-log-level=info ``
+        --summary-interval=5 ``
+        --download-result=full ``
         '$isoUrl'
 
     `$duration = (Get-Date) - `$startTime
@@ -94,11 +105,11 @@ try {
 
     Write-Host ''
     Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Green
-    Write-Host '║  ✓ Download Complete!' -NoNewline
-    Write-Host (' ' * 43) -NoNewline
+    Write-Host "║  ✓ Download Complete!" -NoNewline
+    Write-Host (" " * 43) -NoNewline
     Write-Host '║' -ForegroundColor Green
-    Write-Host '║  Time: {0}m {1}s' -f `$minutes, `$seconds -NoNewline
-    Write-Host (' ' * (56 - (6 + `$minutes.ToString().Length + `$seconds.ToString().Length))) -NoNewline
+    Write-Host ("║  Time: {0}m {1}s" -f `$minutes, `$seconds) -NoNewline
+    Write-Host (" " * (56 - (6 + `$minutes.ToString().Length + `$seconds.ToString().Length))) -NoNewline
     Write-Host '║' -ForegroundColor Green
     Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Green
     Write-Host ''
@@ -117,8 +128,8 @@ try {
 } catch {
     Write-Host ''
     Write-Host '╔══════════════════════════════════════════════════════════════╗' -ForegroundColor Red
-    Write-Host '║  ❌ Download Failed' -NoNewline
-    Write-Host (' ' * 44) -NoNewline
+    Write-Host "║  ❌ Download Failed" -NoNewline
+    Write-Host (" " * 44) -NoNewline
     Write-Host '║' -ForegroundColor Red
     Write-Host '╚══════════════════════════════════════════════════════════════╝' -ForegroundColor Red
     Write-Host ''
@@ -129,9 +140,9 @@ try {
     "FAILED:`$_" | Out-File -FilePath '$statusFile'
 }
 
-Write-Host ''
-Write-Host 'Press any key to close this window...' -ForegroundColor DarkGray
-`$null = `$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+Write-Host ""
+Write-Host "Press Enter to close this window..." -ForegroundColor DarkGray
+`$null = Read-Host
 "@
 
 # Save to temp file
@@ -180,23 +191,23 @@ if ($waitForCompletion -eq "y") {
 
                 switch -Wildcard ($status) {
                     "RUNNING*" {
-                        Write-Host "⚡ Download in progress... ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Yellow
+                        Write-Host "[*] Download in progress... ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Yellow
                     }
                     "SUCCESS*" {
-                        Write-Host "✓ Download complete! ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Green
+                        Write-Host "[OK] Download complete! ($(Get-Date -Format 'HH:mm:ss'))" -ForegroundColor Green
                         Write-Host ""
                         Write-Host "ISO file: $outputPath" -ForegroundColor Cyan
                         break
                     }
                     "FAILED:*" {
                         $error = $status -replace "FAILED:", ""
-                        Write-Host "❌ Download failed: $error" -ForegroundColor Red
+                        Write-Host "[ERROR] Download failed: $error" -ForegroundColor Red
                         break
                     }
                 }
             }
         } else {
-            Write-Host "⚠️  Status file not yet created..." -ForegroundColor Yellow
+            Write-Host "[WAIT] Status file not yet created..." -ForegroundColor Yellow
         }
     }
 }
