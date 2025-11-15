@@ -10,7 +10,7 @@ atom: ATOM-RESEARCH-20251112-001
 **Budget:** 110 AUD research credits available
 **Context:** KENL repository - Bazza-DX SAGE Framework
 
-**START HERE:** Read `claude-landing/README.md` for full orientation
+**START HERE:** Read `claude-landing/CLAUDE-CLI-INIT.md` for full orientation
 
 ## Priority Research Tasks
 
