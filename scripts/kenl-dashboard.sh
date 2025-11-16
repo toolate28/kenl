@@ -139,9 +139,9 @@ get_recent_atom_trails() {
         xargs ls -t 2>/dev/null | \
         head -3 | \
         while read -r file; do
-            local atom_tag=$(grep -m1 "^atom:" "$file" | cut -d' ' -f2)
-            local rel_path="${file#$REPO_ROOT/}"
-            local mod_time=$(stat -c %y "$file" 2>/dev/null || stat -f "%Sm" "$file" 2>/dev/null || echo "unknown")
+            atom_tag=$(grep -m1 "^atom:" "$file" | cut -d' ' -f2)
+            rel_path="${file#$REPO_ROOT/}"
+            mod_time=$(stat -c %y "$file" 2>/dev/null || stat -f "%Sm" "$file" 2>/dev/null || echo "unknown")
             echo "${atom_tag:-UNKNOWN}|${rel_path}|${mod_time%.*}"
         done
 }
