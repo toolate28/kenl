@@ -195,13 +195,12 @@ Each instance sees:
 
 **File:** `.claude/commands/dashboard.md`
 
+> **Note:** The slash command mechanism (`/dashboard`) and the `.claude/commands/dashboard.md` hook are a **proposed integration pattern** for future Claude Code enhancements. This is **not a standard feature** of Claude Code as of June 2024. See ADR and ARCREF for implementation status.
+
 ```markdown
 Run the KENL live dashboard:
 
 ./scripts/kenl-dashboard.sh
-```
-
-**Usage:** User types `/dashboard` anytime
 
 ---
 
