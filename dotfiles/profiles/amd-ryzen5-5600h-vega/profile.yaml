@@ -1,0 +1,316 @@
+---
+profile: amd-ryzen5-5600h-vega
+framework: SAIF  # System-Aware Intent Framework
+classification: CWI-PLAYBOOK
+atom: ATOM-CFG-20251114-014
+owi-version: 1.0.0
+saif-version: 1.0.0
+last-updated: 2025-11-14
+description: |
+  Hardware-optimized SAIF dotfiles profile for AMD Ryzen 5 5600H + Radeon Vega Graphics.
+  Includes gaming optimizations, development tools, and system tuning specific to this hardware.
+
+# Hardware Specifications
+hardware:
+  cpu:
+    model: "AMD Ryzen 5 5600H"
+    cores: 6
+    threads: 12
+    base_clock: "3.3 GHz"
+    boost_clock: "4.2 GHz"
+    architecture: "Zen 3"
+  gpu:
+    model: "AMD Radeon Vega Graphics"
+    compute_units: 7
+    type: "integrated"
+    memory: "shared"
+  ram:
+    size: "16GB"
+    type: "DDR4"
+  storage:
+    os_drive:
+      type: "NVMe"
+      size: "512GB"
+      model: "KINGSTON OM8SEP4512N-A0"
+    data_drive:
+      type: "HDD"
+      size: "2TB"
+      model: "Seagate FireCuda"
+
+# Platform Information
+platform:
+  os: "Bazzite-DX"
+  base: "Fedora Atomic 43"
+  desktop: "KDE Plasma 6.3+"
+  immutable: true
+
+# KENL Layers Included
+kenl_layers:
+  - kenl0-system    # Shell environment, aliases
+  - kenl2-gaming    # Gaming optimizations (MangoHud, GameScope)
+  - kenl3-dev       # Development tools (git, vim, tmux)
+  - kenl5-facades   # Visual themes, shell prompts
+
+# Benchmarks (Evidence-based validation)
+benchmarks:
+  gaming:
+    battlefield_6:
+      fps: 118
+      resolution: "1920x1080"
+      settings: "medium"
+      proton_version: "GE-Proton 9-20"
+      additional_flags: "PROTON_EAC_RUNTIME=1"
+      atom_ref: "ATOM-GAMING-20251112-001"
+
+  network:
+    baseline_latency: "6.2ms"
+    test_hosts: 5
+    all_excellent: true
+    tailscale_disabled: true
+    mtu_optimized: 1492
+    atom_ref: "ATOM-NETWORK-20251112-005"
+
+  system:
+    cpu_governor: "performance"  # For gaming sessions
+    thermal_max: "85°C"
+    power_profile: "balanced"
+
+# Optimizations Applied
+optimizations:
+  gaming:
+    - name: "MangoHud FPS Overlay"
+      enabled: true
+      config: "kenl2-gaming/.config/MangoHud/MangoHud.conf"
+      description: "Real-time FPS, GPU/CPU temps, frame timing"
+
+    - name: "GameScope Session"
+      enabled: true
+      config: "kenl2-gaming/.config/gamescope/gamescope.conf"
+      description: "Optimized compositor for gaming"
+
+    - name: "Network Latency Optimization"
+      enabled: true
+      description: "Tailscale VPN disabled during gaming (174ms → 6ms)"
+      atom_ref: "ATOM-NETWORK-20251112-005"
+
+    - name: "MTU Optimization"
+      enabled: true
+      value: 1492
+      description: "Optimized for gaming workloads"
+
+  development:
+    - name: "Git GPG Signing"
+      enabled: true
+      config: "kenl3-dev/.gitconfig"
+      description: "Automatic commit signing for security"
+
+    - name: "Vim Plugins"
+      enabled: true
+      config: "kenl3-dev/.vimrc"
+      plugins:
+        - "vim-fugitive (git integration)"
+        - "vim-airline (status bar)"
+        - "nerdtree (file explorer)"
+
+    - name: "Tmux Configuration"
+      enabled: true
+      config: "kenl3-dev/.tmux.conf"
+      description: "Enhanced multiplexer with vim bindings"
+
+  visual:
+    - name: "Shell Prompt Customization"
+      enabled: true
+      config: "kenl5-facades/.bash_prompt"
+      description: "KENL layer indicator (🎮 KENL2 vs 💻 KENL3)"
+
+    - name: "Terminal Colors"
+      enabled: true
+      theme: "Dracula"
+      config: "kenl5-facades/.dircolors"
+
+# Known Issues & Workarounds
+known_issues:
+  - issue: "EA App authentication failure in Proton"
+    game: "Battlefield 6"
+    workaround: "Use PROTON_EAC_RUNTIME=1 environment variable"
+    status: "resolved"
+    atom_ref: "ATOM-GAMING-20251112-001"
+
+  - issue: "High network latency with Tailscale VPN"
+    affected: "All multiplayer games"
+    workaround: "Disable Tailscale adapter before gaming sessions"
+    latency_improvement: "174ms → 6ms"
+    status: "resolved"
+    atom_ref: "ATOM-NETWORK-20251112-005"
+
+  - issue: "Vega iGPU thermal throttling"
+    affected: "Extended gaming sessions (>2 hours)"
+    workaround: "Monitor temps with MangoHud, take breaks at 85°C"
+    status: "ongoing"
+
+# AI Involvement (OWI Transparency)
+ai_involvement:
+  generated_by: "Claude Sonnet 4.5"
+  generation_date: "2025-11-14"
+  human_review: true
+  human_modifications:
+    - "Adjusted MangoHud FPS overlay position for better visibility"
+    - "Added custom vim keybindings for personal workflow"
+    - "Modified shell prompt colors to match KDE theme"
+  regeneration_prompt: |
+    Create hardware-optimized SAIF dotfiles profile for AMD Ryzen 5 5600H + Vega iGPU,
+    targeting gaming (Battlefield 6) and development workflows. Include ATOM trails,
+    benchmarks, and OWI metadata.
+
+# Installation Instructions
+installation:
+  steps:
+    - step: 1
+      action: "Clone KENL repository"
+      command: "git clone https://github.com/toolate28/kenl.git ~/.kenl"
+
+    - step: 2
+      action: "Navigate to dotfiles"
+      command: "cd ~/.kenl/dotfiles"
+
+    - step: 3
+      action: "Bootstrap with this profile"
+      command: "./bootstrap.sh --profile amd-ryzen5-5600h-vega --backup-existing"
+
+    - step: 4
+      action: "Verify installation"
+      command: "./verify-dotfiles.sh"
+
+    - step: 5
+      action: "Test gaming setup"
+      command: "mangohud gamescope -f -W 1920 -H 1080 -- steam"
+
+  prerequisites:
+    - "Bazzite-DX or compatible Fedora Atomic distribution"
+    - "AMD Ryzen 5 5600H + Vega Graphics (or similar AMD APU)"
+    - "Git installed"
+    - "Bash shell"
+
+# Rollback Plan
+rollback_plan:
+  method: "ATOM trail + git versioning"
+  commands:
+    - "View ATOM trail: cat ~/.kenl/dotfiles/.atom-trail.log"
+    - "Rollback to previous state: ./rollback.sh ATOM-CFG-20251114-014"
+    - "Or rollback via git: git log --oneline && git reset --hard <commit>"
+    - "Or restore from backup: ./rollback.sh --from-backup backups/dotfiles-backup-*.tar.gz"
+  safety:
+    - "All changes are user-space only (~/.config, ~/.local)"
+    - "System OS unaffected (immutable rpm-ostree)"
+    - "Automatic backup created before bootstrap"
+
+# Testing Checklist
+testing_checklist:
+  - name: "Shell Environment"
+    tests:
+      - "Open new terminal - verify custom prompt appears"
+      - "Run 'alias' - verify KENL aliases present"
+      - "Check environment variables - verify KENL_ROOT set"
+
+  - name: "Gaming Setup"
+    tests:
+      - "Launch Steam with MangoHud - verify FPS overlay"
+      - "Test network latency - should be ~6ms (Test-KenlNetwork)"
+      - "Launch BF6 - verify no EA App auth errors"
+
+  - name: "Development Tools"
+    tests:
+      - "Run 'git config --list' - verify GPG signing enabled"
+      - "Open vim - verify plugins loaded (NERDTree, Fugitive)"
+      - "Launch tmux - verify custom keybindings work"
+
+  - name: "Visual Customization"
+    tests:
+      - "Verify shell prompt shows KENL layer indicator"
+      - "Check terminal colors match Dracula theme"
+      - "Test context switching (gaming vs dev prompts)"
+
+# Usage Examples
+usage_examples:
+  - name: "Gaming Session"
+    commands:
+      - "# KENL layer 2 automatically applies gaming optimizations"
+      - "kenl-gaming  # Alias: disables Tailscale, sets performance governor"
+      - "mangohud gamescope -f -W 1920 -H 1080 -- %command%"
+      - "# MangoHud overlay shows: FPS, temps, frame times"
+
+  - name: "Development Session"
+    commands:
+      - "# KENL layer 3 automatically applies dev optimizations"
+      - "kenl-dev  # Alias: enables Tailscale, sets powersave governor"
+      - "distrobox enter dev  # Isolated Ubuntu 24.04 environment"
+      - "code .  # VSCode with KENL extensions"
+
+  - name: "Sharing This Config"
+    commands:
+      - "cd ~/.kenl/dotfiles"
+      - "./export-profile.sh amd-ryzen5-5600h-vega --format tarball"
+      - "# Share: profiles/amd-ryzen5-5600h-vega.tar.gz"
+      - "# Others import: ./import-profile.sh amd-ryzen5-5600h-vega.tar.gz"
+
+# Community Contributions
+community:
+  contributions_welcome: true
+  attribution: "Created by Matthew Ruhnau (toolate28)"
+  license: "MIT"
+  share_feedback: "https://github.com/toolate28/kenl/issues"
+  similar_hardware:
+    - "AMD Ryzen 5 4600H + Vega 6"
+    - "AMD Ryzen 7 5800H + Vega 8"
+    - "AMD Ryzen 5 5500U + Vega 7"
+
+# Tags (for searchability)
+tags:
+  - amd-ryzen
+  - amd-vega
+  - gaming
+  - development
+  - battlefield-6
+  - bazzite-dx
+  - fedora-atomic
+  - immutable-os
+  - saif
+  - atom
+  - sage
+  - owi
+
+# Related ATOM Trails
+atom_trail_references:
+  - ATOM-GAMING-20251112-001  # BF6 EA App auth fix
+  - ATOM-NETWORK-20251112-005  # Tailscale latency discovery
+  - ATOM-CFG-20251114-002      # MangoHud configuration
+  - ATOM-CFG-20251114-014      # This profile creation
+
+# Version History
+version_history:
+  - version: "1.0.0"
+    date: "2025-11-14"
+    changes:
+      - "Initial hardware-optimized profile creation"
+      - "Integrated BF6 gaming benchmarks"
+      - "Added network latency optimizations"
+      - "Included development tool configs"
+    atom_ref: "ATOM-CFG-20251114-014"
+
+---
+
+# Profile Summary
+
+This SAIF (System-Aware Intent Framework) profile provides a complete, tested, hardware-optimized dotfiles configuration for AMD Ryzen 5 5600H + Vega systems running Bazzite-DX.
+
+**Key Features:**
+- ✅ Gaming optimized (118 FPS in BF6 @ 1080p)
+- ✅ Network tuned (6.2ms latency)
+- ✅ Development ready (git, vim, tmux)
+- ✅ ATOM trail tracked (complete change history)
+- ✅ OWI compliant (transparent AI involvement)
+- ✅ Rollback safe (user-space only, git versioned)
+
+**Installation:** One command → `./bootstrap.sh --profile amd-ryzen5-5600h-vega`
+
+**Recovery:** If anything breaks → `./rollback.sh ATOM-CFG-20251114-014`

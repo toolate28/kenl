@@ -1,0 +1,46 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+
+# Secrets / local config
+.env
+
+# Temporary files
+*.tmp
+*.bak
+*~
+PR_DESCRIPTION.md
+
+# Build artifacts
+*.patch
+dist/
+build/
+
+# Documentation artifacts
+*.pdf
+!atom-sage-framework/docs/*.pdf
+
+# Logs and temporary text
+*-log.txt
+dev-env-setup-log.txt
+
+# ASCII art / logos
+*-logos.txt
+kenl-logos.txt

@@ -1,0 +1,207 @@
+# Machine Play Card - NVIDIA RTX Gaming PC
+# Mid-high end gaming desktop with NVIDIA RTX GPU
+
+machine_profile:
+  # Unique identifier
+  id: NVIDIA-RTX-3070-GAMING-001
+
+  # Basic information
+  name: "NVIDIA RTX Gaming PC"
+  type: "Desktop - Gaming"
+  form_factor: "ATX Tower"
+  target_price: "$1200-1500 USD"
+
+  # Hardware specifications
+  hardware:
+    cpu:
+      model: "AMD Ryzen 5 5600X"
+      cores: 6
+      threads: 12
+      base_clock: "3.7 GHz"
+      boost_clock: "4.6 GHz"
+      tdp: "65W"
+
+    gpu:
+      vendor: "NVIDIA"
+      model: "GeForce RTX 3070"
+      vram: "8GB GDDR6"
+      memory_bus: "256-bit"
+      tdp: "220W"
+      driver: "nvidia-550.54.14"
+      driver_type: "proprietary"
+
+    ram:
+      capacity: "32GB"
+      type: "DDR4"
+      speed: "3600MHz"
+      configuration: "2x16GB dual channel"
+
+    storage:
+      primary:
+        type: "NVMe SSD"
+        capacity: "1TB"
+        model: "Samsung 980 Pro"
+        mount: "/"
+      secondary:
+        type: "SATA SSD"
+        capacity: "2TB"
+        model: "Crucial MX500"
+        mount: "/mnt/games"
+
+    motherboard:
+      model: "MSI B550 Gaming Plus"
+      chipset: "AMD B550"
+      form_factor: "ATX"
+
+    psu:
+      wattage: "750W"
+      rating: "80+ Gold"
+      modular: true
+
+    cooling:
+      cpu_cooler: "Noctua NH-U12S"
+      case_fans: "3x 120mm intake, 2x 120mm exhaust"
+
+    case:
+      model: "Fractal Design Meshify C"
+      airflow: "excellent"
+
+  # Operating system
+  system:
+    os: "Bazzite 40"
+    kernel: "6.7.5-200.fc40.x86_64"
+    desktop: "KDE Plasma 6.0"
+    compositor: "Wayland (with X11 fallback)"
+    display_server: "Wayland"
+
+  # Gaming performance
+  performance:
+    target_resolution: "1440p"
+    target_fps: "60-144"
+    typical_settings: "High-Ultra"
+    ray_tracing: "Capable (1080p)"
+    vr_ready: true
+
+  # Tested games and FPS (1440p)
+  game_performance:
+    - game: "Cyberpunk 2077"
+      settings: "High"
+      fps: 68
+      notes: "RT OFF, DLSS Quality"
+    - game: "Elden Ring"
+      settings: "Maximum"
+      fps: 60
+      notes: "Locked 60 FPS"
+    - game: "Baldur's Gate 3"
+      settings: "Ultra"
+      fps: 72
+      notes: "No issues"
+    - game: "Hogwarts Legacy"
+      settings: "High"
+      fps: 65
+      notes: "RT OFF"
+    - game: "Battlefield 2042"
+      settings: "High"
+      fps: 85
+      notes: "128 player mode"
+
+  # Thermals and power
+  thermal_profile:
+    cpu_idle: "35-40°C"
+    cpu_gaming: "60-70°C"
+    cpu_stress: "75-80°C"
+    gpu_idle: "30-35°C"
+    gpu_gaming: "65-72°C"
+    gpu_stress: "75-78°C"
+    system_power_gaming: "350-400W"
+    noise_level: "Quiet (under load: 35-40 dB)"
+
+  # Bazzite-specific configuration
+  bazzite_config:
+    nvidia_driver: "akmod-nvidia (auto-installed)"
+    secure_boot: "Disabled (for NVIDIA drivers)"
+    kernel_params: "nvidia-drm.modeset=1"
+    gamescope: true
+    wayland_nvidia: true
+    xorg_fallback: true
+
+  # Known issues and workarounds
+  known_issues:
+    - issue: "Wayland cursor lag with some games"
+      workaround: "Use X11 session for affected games"
+      severity: minor
+    - issue: "Suspend/resume occasionally fails"
+      workaround: "Reboot instead of suspend"
+      severity: moderate
+
+  # Upgrade paths
+  upgrade_recommendations:
+    immediate:
+      - component: "None"
+        reason: "Well-balanced system"
+    future:
+      - component: "GPU"
+        recommendation: "RTX 4070 / RX 7800 XT"
+        reason: "Better 1440p RT performance"
+        estimated_cost: "$500-600"
+      - component: "CPU"
+        recommendation: "Ryzen 7 5800X3D"
+        reason: "More CPU headroom for 1% lows"
+        estimated_cost: "$250-300"
+
+  # Linux compatibility
+  linux_compatibility:
+    overall: "Excellent"
+    nvidia_driver: "Requires proprietary driver (auto-installed on Bazzite)"
+    suspend_resume: "Good (occasional issues)"
+    power_management: "Good"
+    hardware_video_decode: "Excellent (NVDEC/NVENC)"
+    notes: |
+      NVIDIA proprietary drivers work well on Bazzite (installed automatically).
+      Wayland support is good but X11 is recommended for maximum compatibility.
+
+      No hardware compatibility issues. All components work out of the box.
+
+  # Validation
+  validated: true
+  validation_date: "2025-11-10"
+  atom_tag: ATOM-MACHINE-20251110-001
+
+  # Tags
+  tags:
+    - nvidia
+    - desktop
+    - gaming
+    - 1440p
+    - ray-tracing
+    - amd-cpu
+    - mid-high-end
+
+  # Additional notes
+  notes: |
+    Excellent mid-high end gaming PC that handles 1440p gaming with ease.
+    RTX 3070 provides great performance and ray tracing capabilities.
+
+    Bazzite works perfectly with NVIDIA drivers (auto-installed on first boot).
+    Recommend using X11 for maximum game compatibility, though Wayland works
+    for most titles.
+
+    Build cost breakdown (~$1300 USD):
+    - CPU: $200 (Ryzen 5 5600X)
+    - GPU: $500 (RTX 3070 - used market)
+    - RAM: $80 (32GB DDR4)
+    - Storage: $150 (1TB NVMe + 2TB SATA)
+    - Motherboard: $140
+    - PSU: $100
+    - Cooling: $60
+    - Case: $80
+
+    Perfect for:
+    - 1440p gaming at 60-144 FPS
+    - Content creation (video editing, streaming)
+    - Software development
+    - VR gaming (Quest 2, Index, etc.)
+
+    This is the "sweet spot" gaming PC for Bazzite in 2025.
+
+# Last verified: 2025-11-10

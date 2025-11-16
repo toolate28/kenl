@@ -1,0 +1,47 @@
+# [TYPE]: Brief description (max 50 chars)
+#
+# ATOM-TAG: ATOM-[TYPE]-[YYYYMMDD]-[NNN]
+#
+# WHY:
+# Explain the reasoning behind this change
+# - What problem does it solve?
+# - What was the decision-making process?
+#
+# IMPACTS:
+# - What this affects
+# - Dependencies changed
+# - Performance implications
+#
+# ROLLBACK:
+# How to undo this change if needed
+# Commands or steps to revert safely
+#
+# EVIDENCE:
+# - Logs: path/to/evidence.log
+# - Benchmarks: path/to/results.json
+# - Documentation: link/to/docs
+#
+# ============================================================================
+# Types: feat, fix, chore, docs, ci, refactor, test
+# ATOM Types: MCP, SAGE, CFG, DEPLOY, TASK, RESEARCH, STATUS
+#
+# Example:
+# feat: Add KDE gaming profile with compositor disable
+#
+# ATOM-TAG: ATOM-CFG-20251105-009
+#
+# WHY:
+# Compositor causes frame drops in high-refresh gaming scenarios.
+# Disabling improves frame times by 15% (see benchmarks).
+#
+# IMPACTS:
+# - KDE gaming profile only (does not affect desktop profile)
+# - Compositor auto-restores when switching profiles
+#
+# ROLLBACK:
+# rm ~/.config/gaming-intent/profiles/high-performance.json
+#
+# EVIDENCE:
+# - Benchmarks: ~/.config/gaming-intent/evidence/compositor-benchmark.log
+# - MangoHud data: ~/.local/share/MangoHud/logs/*.log
+# ============================================================================

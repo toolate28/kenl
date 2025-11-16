@@ -1,0 +1,118 @@
+# Example Play Card - Baldur's Gate 3
+# This is a template showing the complete Play Card format
+# Copy and modify for your own game configurations
+
+play_card:
+  # Unique identifier for this configuration
+  id: BG3-PROTON-GE-8.25-001
+
+  # Basic game information
+  game: "Baldur's Gate 3"
+  store: Steam  # or GOG, Epic, etc.
+  app_id: "1086940"  # Steam App ID
+
+  # Proton configuration
+  proton_version: "GE-Proton 8.25"
+  proton_path: "~/.steam/steam/compatibilitytools.d/GE-Proton8-25"
+
+  # Launch options
+  launch_options: "PROTON_USE_WINED3D=1 %command%"
+
+  # Compatibility rating
+  # Options: platinum, gold, silver, bronze, borked
+  compatibility: gold
+
+  # Performance metrics
+  performance:
+    target_fps: 60
+    actual_fps: 62  # Average FPS achieved
+    resolution: "1920x1080"
+    settings: ultra
+    vram_usage: "4.2GB"
+    ram_usage: "8.1GB"
+    cpu_usage: "45%"
+    gpu_usage: "78%"
+
+  # Hardware configuration (REDACTED when sharing publicly)
+  validated_hardware:
+    - name: "NVIDIA GTX 1060"
+      vram: "6GB"
+      driver: "nvidia-545.29.06"
+    - name: "AMD RX 580"
+      vram: "8GB"
+      driver: "mesa 23.3.0"
+
+  # System configuration (REDACTED when sharing publicly)
+  system:
+    os: "Bazzite 39"
+    kernel: "6.6.3-200.fc39.x86_64"
+    desktop: "KDE Plasma 5.27"
+    compositor: "Wayland"
+
+  # Known issues and workarounds
+  known_issues:
+    - issue: "Occasional stuttering in Act 3"
+      workaround: "Enable PROTON_USE_WINED3D=1"
+      severity: minor
+
+  # Testing notes
+  testing:
+    date_tested: "2025-11-06"
+    playtime_tested: "15 hours"
+    test_scenarios:
+      - "Character creation"
+      - "Combat (multiple enemies)"
+      - "Cutscenes"
+      - "Loading times"
+      - "Long play sessions (4+ hours)"
+
+  # GameScope configuration (optional)
+  gamescope:
+    enabled: true
+    width: 1920
+    height: 1080
+    refresh_rate: 60
+    fullscreen: true
+    additional_flags: "-F fsr"
+
+  # MangoHud configuration (optional)
+  mangohud:
+    enabled: true
+    config: |
+      fps
+      frametime
+      cpu_temp
+      gpu_temp
+      ram
+      vram
+
+  # Validation
+  validated: true
+  validation_date: "2025-11-06"
+
+  # ATOM trail reference
+  atom_tag: ATOM-GWI-20251106-055
+
+  # Tags for searching
+  tags:
+    - rpg
+    - turn-based
+    - multiplayer
+    - story-rich
+    - proton-ge
+    - wayland-compatible
+
+  # Additional notes
+  notes: |
+    Excellent compatibility with GE-Proton 8.25. Game runs better than
+    on Windows with lower CPU usage and more stable frame times.
+
+    Multiplayer works flawlessly. Save/load times are fast on SSD.
+
+    Recommend ultra settings for GTX 1060 6GB and above.
+
+# When sharing this Play Card:
+# 1. Run: ./tools/redact-playcard.sh play-card-example.yaml --output bg3-public.yaml
+# 2. Review bg3-public.yaml (sensitive info removed)
+# 3. Encrypt: gpg --encrypt --sign -r your@email.com bg3-public.yaml
+# 4. Share: ./tools/send-playcard.sh --playcard bg3-public.yaml --recipient friend@email.com --encrypt

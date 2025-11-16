@@ -1,0 +1,51 @@
+# KENL0 System Operations Sudoers Configuration
+# Place in /etc/sudoers.d/kenl0-system (requires root)
+# Allows specific KENL0 operations without password prompt
+#
+# Installation:
+#   sudo visudo -c -f /path/to/this/file  # Validate syntax
+#   sudo cp kenl0-system /etc/sudoers.d/
+#   sudo chmod 0440 /etc/sudoers.d/kenl0-system
+#
+# SECURITY NOTE: This grants specific privileges. Review carefully!
+
+# User/group that can execute KENL0 operations
+# Replace %wheel with your user or group
+Defaults:%wheel !requiretty
+
+# rpm-ostree operations (read-only safe commands)
+%wheel ALL=(root) NOPASSWD: /usr/bin/rpm-ostree status
+%wheel ALL=(root) NOPASSWD: /usr/bin/rpm-ostree db diff
+%wheel ALL=(root) NOPASSWD: /usr/bin/rpm-ostree upgrade --check
+
+# rpm-ostree operations (requires confirmation in script)
+# These are wrapped by system-atom.sh with CTFWI validation
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree upgrade
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree rebase *
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree install *
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree uninstall *
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree rollback
+%wheel ALL=(root) PASSWD: /usr/bin/rpm-ostree cleanup *
+
+# System management
+%wheel ALL=(root) PASSWD: /usr/bin/systemctl reboot
+%wheel ALL=(root) PASSWD: /usr/bin/systemctl poweroff
+%wheel ALL=(root) NOPASSWD: /usr/bin/systemctl status *
+%wheel ALL=(root) NOPASSWD: /usr/bin/systemctl list-units
+
+# Flatpak (user-space, typically doesn't need sudo, but included for completeness)
+%wheel ALL=(root) NOPASSWD: /usr/bin/flatpak list
+%wheel ALL=(root) NOPASSWD: /usr/bin/flatpak info *
+%wheel ALL=(root) PASSWD: /usr/bin/flatpak update
+%wheel ALL=(root) PASSWD: /usr/bin/flatpak install *
+%wheel ALL=(root) PASSWD: /usr/bin/flatpak uninstall *
+
+# Distrobox (user-space)
+%wheel ALL=(root) NOPASSWD: /usr/bin/distrobox list
+%wheel ALL=(root) NOPASSWD: /usr/bin/distrobox enter *
+
+# Journal logs (read-only)
+%wheel ALL=(root) NOPASSWD: /usr/bin/journalctl *
+
+# DO NOT ALLOW: Generic sudo, shell access, or dangerous commands
+# If you need more privileges, add specific commands above

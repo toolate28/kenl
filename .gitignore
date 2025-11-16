@@ -21,6 +21,7 @@ Thumbs.db
 
 # Secrets / local config
 .env
+.private/
 
 # Temporary files
 *.tmp

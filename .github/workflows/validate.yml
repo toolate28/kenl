@@ -19,18 +19,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install markdown-link-check
-        run: pip install markdown-link-check
-
-      - name: Run KENL link validator
-        run: |
-          if [ -x ./scripts/validate-links.sh ]; then
-            bash ./scripts/validate-links.sh
-          else
-            echo "⚠️  scripts/validate-links.sh not found or not executable"
-            exit 1
-          fi
-
+      - name: Check Markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v3
+        with:
+          use-quiet-mode: 'yes'
+          folder-path: '.'
+          file-path: ''
   shellcheck:
     name: ShellCheck (Bash Scripts)
     runs-on: ubuntu-latest
