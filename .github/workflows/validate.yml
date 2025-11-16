@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up bash dependencies
-        run: |
-          sudo apt-get update && sudo apt-get install -y shellcheck
       - name: Run repository link validator
         run: |
           bash ./scripts/validate-links.sh
