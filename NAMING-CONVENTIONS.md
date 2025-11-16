@@ -587,76 +587,15 @@ jobs:
 
 ### Logdy Server Integration
 
-**Requirement:** Local and remote ATOM trail directories MUST be linked so Logdy parses both to the same web interface.
-
-**Directory Structure:**
-
-```
-~/.kenl/logs/                    # Local ATOM trail logs
-  ├── atom-trails/               # ATOM trail entries
-  │   ├── 2025-11-16/
-  │   │   ├── ATOM-DOC-20251116-007.json
-  │   │   ├── ATOM-FEAT-20251116-010.json
-  │   │   └── ATOM-FIX-20251116-012.json
-  │   └── 2025-11-15/
-  │       └── ATOM-DOC-20251115-003.json
-  └── network-health/            # Network metrics (from Test-KenlNetwork)
-      └── 2025-11-16-baseline.json
-```
-
-**Logdy Configuration:**
+**Link local/remote ATOM trails to Logdy:**
 
 ```bash
-# ~/.config/logdy/config.yaml
-sources:
-  - name: "KENL ATOM Trails"
-    path: "/home/user/.kenl/logs/atom-trails/**/*.json"
-    format: "json"
-    watch: true
-
-  - name: "KENL Network Health"
-    path: "/home/user/.kenl/logs/network-health/**/*.json"
-    format: "json"
-    watch: true
-
-  - name: "Remote ATOM Trails"
-    path: "/mnt/remote-kenl/.kenl/logs/atom-trails/**/*.json"
-    format: "json"
-    watch: true
+kenl-logdy-link remote-host:/home/user/.kenl/logs
 ```
 
-**Link Remote Logs (via SSH mount or symlink):**
+**Expected:** `SAIF-LOGDY-LINK-20251116-001` (CTFWI flag drop)
 
-```bash
-# Option 1: SSHFS mount (if remote system accessible)
-sshfs remote-host:/home/user/.kenl/logs /mnt/remote-kenl/.kenl/logs
-
-# Option 2: Symlink (if logs are synced via rsync/git)
-ln -s ~/kenl/.kenl/logs/remote ~/.kenl/logs/remote
-
-# Option 3: Shared network mount
-mount -t nfs remote-host:/home/user/.kenl/logs /mnt/remote-kenl/.kenl/logs
-```
-
-**ATOM Trail Log Format (JSON):**
-
-```json
-{
-  "timestamp": "2025-11-16T14:32:05Z",
-  "atom_tag": "ATOM-DOC-20251116-007",
-  "type": "DOC",
-  "file": "NAMING-CONVENTIONS.md",
-  "intent": "Standardize naming across branches, files, directories",
-  "agent": "claude",
-  "session": "claude/add-performance-dashboard-01EXPguiGyWCByxLMp5ujVRV",
-  "commit": "a230720"
-}
-```
-
-**Benefits:**
-- Logdy watches file directories (no HTTP sync needed)
-- Local + remote logs in single Logdy UI
-- Real-time tail on ATOM trail changes
+**Result:** Local + remote ATOM trails visible in Logdy web interface
 - Queryable via Logdy filters (by agent, type, date)
 - Offline-capable (logs are files, not API calls)
 
