@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # KENL Link Validator
+# ATOM-CI-20251116-001: Fix ShellCheck errors and harden CI validation
 # Catches broken internal links before they hit production
 # Usage: ./scripts/validate-links.sh [--fix]
 
@@ -17,10 +18,14 @@ ERRORS=0
 WARNINGS=0
 FIX_MODE=false
 
-# Allow --fix flag for future use; currently unused but referenced to silence shellcheck
+# Accept --fix for future enhancements; currently not implemented but referenced to silence shellcheck
 [[ "${1:-}" == "--fix" ]] && FIX_MODE=true
-: "${FIX_MODE}"  # explicit no-op reference to avoid SC2034 for now
 
+# TODO: Implement --fix functionality (KENL ATOM-CFG-YYYYMMDD-NNN)
+if [ "$FIX_MODE" = true ]; then
+    echo -e "${YELLOW}Note: --fix mode is not yet implemented.${NC}"
+    # Optionally exit here, or continue as normal
+fi
 echo "🔍 KENL Link Validator"
 echo "====================="
 echo
@@ -74,12 +79,11 @@ check_link() {
         echo "   Expected: $target"
         ((ERRORS++))
 
-        # Suggest fixes for common patterns
+        # Suggest fixes for common patterns like KENL123 -> modules/KENL123-*
         if [[ "$link" =~ KENL[0-9]+ ]]; then
             local module
             module=$(echo "$link" | grep -oP 'KENL[0-9]+')
 
-            # use array globbing safely to avoid using -d with globs or parsing ls
             shopt -s nullglob
             local matches
             matches=(modules/"${module}"-*)
@@ -88,7 +92,7 @@ check_link() {
             if (( ${#matches[@]} > 0 )); then
                 local actual
                 actual="${matches[0]}"
-                echo -e "   ${YELLOW}💡 Did you mean: ./$actual/${NC}"
+                echo -e "   ${YELLOW}💡 Did you mean: ./${actual}/${NC}"
             fi
         fi
         echo
@@ -101,19 +105,14 @@ check_link() {
 check_footnotes() {
     local file="$1"
 
-    # Extract footnote references [^1], [^2], etc.
     local refs
     refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u || true)
 
-    # Extract footnote definitions
     local defs
     defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u || true)
 
-    # Check if all references have definitions
     while IFS= read -r ref; do
-        if [[ -z "$ref" ]]; then
-            continue
-        fi
+        [[ -z "$ref" ]] && continue
         if ! echo "$defs" | grep -q "^$ref$"; then
             echo -e "${RED}❌ MISSING FOOTNOTE${NC} in $file"
             echo "   Reference: $ref has no definition"
@@ -121,11 +120,8 @@ check_footnotes() {
         fi
     done <<< "$refs"
 
-    # Check if all definitions are used
     while IFS= read -r def; do
-        if [[ -z "$def" ]]; then
-            continue
-        fi
+        [[ -z "$def" ]] && continue
         if ! echo "$refs" | grep -q "^$def$"; then
             echo -e "${YELLOW}⚠️  UNUSED FOOTNOTE${NC} in $file"
             echo "   Definition: $def is never referenced"
@@ -139,7 +135,7 @@ check_old_patterns() {
     local file="$1"
 
     # Pattern 1: Direct KENL links (should be modules/KENL)
-    if grep -qP '\]\(\./KENL[0-9]' "$file" 2>/dev/null; then
+    if grep -qP '\]\(\.\/KENL[0-9]' "$file" 2>/dev/null; then
         echo -e "${YELLOW}⚠️  OLD PATH PATTERN${NC} in $file"
         echo "   Found: ](./KENL*"
         echo "   Should be: ](./modules/KENL*"
@@ -147,7 +143,7 @@ check_old_patterns() {
     fi
 
     # Pattern 2: Windows-style backslashes
-    if grep -qP '\]\([^)]*[\\]' "$file" 2>/dev/null; then
+    if grep -qP '\]\([^)]*\\' "$file" 2>/dev/null; then
         echo -e "${RED}❌ WINDOWS PATH${NC} in $file"
         echo "   Found: Backslashes in markdown link"
         echo "   Should use: Forward slashes"
@@ -159,26 +155,19 @@ check_old_patterns() {
 echo "📝 Checking markdown files for broken links..."
 echo
 
-# Find all markdown files (excluding .git, node_modules)
 while IFS= read -r file; do
-    # Extract markdown links: [text](./path/to/file)
     while IFS= read -r line_info; do
         line_num=$(echo "$line_info" | cut -d: -f1)
         line_content=$(echo "$line_info" | cut -d: -f2-)
 
-        # Extract all links from this line
         while IFS= read -r link; do
             [[ -z "$link" ]] && continue
-            check_link "$file" "$link" "$line_num"
+            check_link "$file" "$link" "$line_num" || true
         done < <(echo "$line_content" | grep -oP '\]\(\K[^)]+' || true)
     done < <(grep -nP '\]\([^)]*\)' "$file" || true)
 
-    # Check footnotes
     check_footnotes "$file"
-
-    # Check for old patterns
     check_old_patterns "$file"
-
 done < <(find . -name "*.md" -type f \
     ! -path "./.git/*" \
     ! -path "./node_modules/*" \
