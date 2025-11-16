@@ -10,9 +10,11 @@ audience: Human writers creating directives for AI agents
 
 **Meta-Purpose:** This document explains HOW to write content that AI agents (Claude, Copilot, Qwen) parse and execute reliably.
 
-**For Humans:** When you write guides for AI agents, these patterns increase directive adherence by 40-60%.
+**For Humans:** These patterns come from analyzing what worked vs. failed in THIS repository's AI collaboration (Claude, Copilot, 200+ commits over 6 days).
 
 **For AI Agents:** This is meta-documentation explaining what makes YOUR directives work better.
+
+**Evidence Base:** Real examples from KENL repository commits and git history.
 
 ---
 
@@ -470,49 +472,58 @@ This is critical.
 
 ---
 
-## Real-World Application: Markdown Tables Guide
+## Real-World Application: Markdown Tables in KENL Repo
 
-**Before (agent-hostile):**
+**Problem Observed:** GitHub Copilot + Claude both created tables with inconsistent spacing across multiple commits (Nov 10-16, 2025).
+
+**Evidence:** `scripts/windows-partition-scripts/README.md` line 406-457 had 4 tables with misaligned pipes.
+
+**Before (actual code from .github/copilot-instructions.md, lines 199-212, Nov 14):**
 
 ```markdown
-## Tables
+#### Markdown Tables
 
-When creating markdown tables, it's important to maintain consistent
-alignment. You should measure the longest string in each column and
-align the separators accordingly. This helps readability.
+**Column Alignment:**
+- Measure the longest string in each column
+- Align ALL column separators (`|`) to match that width
+- Use spaces (not tabs) for padding
+- Keep separator lines (`---`) the same width as column content
+
+**Example:**
+[single example table]
 ```
 
-**After (agent-friendly):**
+**After (revised Nov 16, commit 3c4fbec):**
 
 ```markdown
-## Markdown Tables
+#### Markdown Tables
 
-**⚠️ CRITICAL:** Follow these rules EXACTLY.
+**⚠️ CRITICAL:** Table formatting is the #1 persistent issue across AI agents.
 
-**YOU MUST:**
-1. Measure longest string in each column
-2. Align ALL pipes to that width
-3. Use spaces ONLY (no tabs)
+**Primary Rule:** **Longest string sets the column width. Period.**
+
+**Pattern #1 (Order-Agnostic Tables):**
+1. Put the row with the longest entry FIRST
+2. All subsequent rows pad to match row 1
+3. Never scan all rows - row 1 is your template
 
 ❌ **WRONG:**
-| A | B |
-|---|---|
+[shows actual broken table from repo]
 
 ✅ **CORRECT:**
-| A | B |
-|---|---|
+[shows fixed version]
 
-**Validation:**
-- [ ] Pipes align vertically
-- [ ] Separators match width
+**Detailed Guide:** See `claude-landing/MARKDOWN-TABLE-FORMATTING.md`
 ```
 
-**Why the second version works better:**
-1. **⚠️ CRITICAL** signals high priority
-2. **YOU MUST** is imperative, not advisory
-3. Numbered list, not prose
-4. ❌/✅ examples show contrast
-5. Checklist provides validation steps
+**What changed:**
+1. **⚠️ CRITICAL** added (visual anchor)
+2. **Primary Rule** front-loaded (not buried in bullets)
+3. **Pattern #1** gives algorithmic approach (longest-first strategy)
+4. ❌/✅ **contrast** using REAL repo examples
+5. **Reference to canonical guide** (single source of truth)
+
+**Observable impact:** Session Nov 16 - tables created after this revision followed pattern correctly.
 
 ---
 
