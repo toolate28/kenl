@@ -1,0 +1,57 @@
+# KENL Repository Code Owners
+# 
+# This file defines individuals or teams responsible for code in this repository.
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own.
+#
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# ATOM-CFG-20251116-003: Add CODEOWNERS for automated review assignment
+
+# Default owner for everything in the repo
+* @toolate28
+
+# Module-specific ownership
+/modules/KENL0-system/ @toolate28
+/modules/KENL1-framework/ @toolate28
+/modules/KENL2-gaming/ @toolate28
+/modules/KENL3-dev/ @toolate28
+/modules/KENL4-monitoring/ @toolate28
+/modules/KENL5-facades/ @toolate28
+/modules/KENL6-social/ @toolate28
+/modules/KENL7-learning/ @toolate28
+/modules/KENL8-security/ @toolate28
+/modules/KENL9-library/ @toolate28
+/modules/KENL10-backup/ @toolate28
+/modules/KENL11-media/ @toolate28
+/modules/KENL12-resources/ @toolate28
+/modules/KENL13-iwi/ @toolate28
+
+# Governance documents require special review
+/governance/ @toolate28
+/governance/mcp-governance/ @toolate28
+/governance/02-Decisions/ @toolate28
+
+# GitHub configuration and workflows
+/.github/ @toolate28
+/.github/workflows/ @toolate28
+/.github/CODEOWNERS @toolate28
+
+# Security-sensitive files
+/SECURITY.md @toolate28
+/modules/KENL8-security/ @toolate28
+/.pre-commit-config.yaml @toolate28
+
+# Documentation
+*.md @toolate28
+/docs/ @toolate28
+/claude-landing/ @toolate28
+
+# Scripts require review
+/scripts/ @toolate28
+*.sh @toolate28
+*.ps1 @toolate28
+
+# Case studies and methodology
+/case-studies/ @toolate28
+/dotfiles/SAIF*.md @toolate28
