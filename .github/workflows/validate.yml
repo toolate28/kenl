@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 
+# ATOM-CI-20251116-001: Fix CI validation failures and harden link checking
 jobs:
   validate-links:
     name: Validate Markdown Links
