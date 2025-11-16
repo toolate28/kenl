@@ -186,9 +186,22 @@ draw_bar() {
     local max=${2:-100}
     local width=${3:-40}
 
-    local filled=$(( value * width / max ))
-    local empty=$(( width - filled ))
+    local filled
+    local empty
 
+    if (( max <= 0 )); then
+        filled=0
+        empty=$width
+    else
+        filled=$(( value * width / max ))
+        # Clamp filled to [0, width]
+        if (( filled < 0 )); then
+            filled=0
+        elif (( filled > width )); then
+            filled=$width
+        fi
+        empty=$(( width - filled ))
+    fi
     printf "["
     printf "%${filled}s" | tr ' ' "$BAR_FULL"
     printf "%${empty}s" | tr ' ' "$BAR_EMPTY"
