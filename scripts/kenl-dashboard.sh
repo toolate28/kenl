@@ -327,7 +327,12 @@ JSON
     echo ""
 
     echo -e "  Total Docs:      ${CYAN}$total_docs${RESET}"
-    echo -e "  ATOM Tagged:     ${CYAN}$atom_docs${RESET} (${GREEN}$(( atom_docs * 100 / total_docs ))%${RESET})"
+    if [[ "$total_docs" -gt 0 ]]; then
+        atom_tagged_pct=$(( atom_docs * 100 / total_docs ))
+        echo -e "  ATOM Tagged:     ${CYAN}$atom_docs${RESET} (${GREEN}${atom_tagged_pct}%${RESET})"
+    else
+        echo -e "  ATOM Tagged:     ${CYAN}$atom_docs${RESET} (${YELLOW}N/A${RESET})"
+    fi
     echo -e "  Modules:         ${CYAN}$modules${RESET}"
     echo -e "  Play Cards:      ${CYAN}$play_cards${RESET}"
     echo ""
