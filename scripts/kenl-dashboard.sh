@@ -222,10 +222,25 @@ render_dashboard() {
     mapfile -t recent_atoms < <(get_recent_atom_trails)
     mapfile -t recent_commits < <(get_last_commits 3)
 
-    # Calculate scores (from previous analysis)
-    local doc_score=100
-    local reusability=82
-    local clicks_to_confidence=1.8
+    # Calculate scores dynamically (simple heuristics; see comments)
+    # Documentation score: percent of atom_docs to total_docs (0-100)
+    local doc_score=0
+    if [[ "$total_docs" -gt 0 ]]; then
+        doc_score=$(( (atom_docs * 100) / total_docs ))
+    fi
+    # Reusability: percent of modules to total_docs (0-100)
+    local reusability=0
+    if [[ "$total_docs" -gt 0 ]]; then
+        reusability=$(( (modules * 100) / total_docs ))
+    fi
+    # Clicks to confidence: estimate as inverse of play_cards (more play cards = fewer clicks)
+    local clicks_to_confidence=0
+    if [[ "$play_cards" -gt 0 ]]; then
+        clicks_to_confidence=$(awk "BEGIN {printf \"%.1f\", 5/$play_cards}")
+    else
+        clicks_to_confidence=5
+    fi
+    # NOTE: These are simple heuristics; refine as needed for real metrics.
 
     # ========================================================================
     # RENDER OUTPUT
