@@ -17,7 +17,9 @@ ERRORS=0
 WARNINGS=0
 FIX_MODE=false
 
+# Allow --fix flag for future use; currently unused but referenced to silence shellcheck
 [[ "${1:-}" == "--fix" ]] && FIX_MODE=true
+: "${FIX_MODE}"  # explicit no-op reference to avoid SC2034 for now
 
 echo "🔍 KENL Link Validator"
 echo "====================="
@@ -52,7 +54,8 @@ check_link() {
 
     # If relative link, resolve from file's directory
     if [[ "$target" != /* ]]; then
-        local file_dir=$(dirname "$file")
+        local file_dir
+        file_dir=$(dirname "$file")
         target="$file_dir/$target"
     fi
 
@@ -73,9 +76,18 @@ check_link() {
 
         # Suggest fixes for common patterns
         if [[ "$link" =~ KENL[0-9]+ ]]; then
-            local module=$(echo "$link" | grep -oP 'KENL[0-9]+')
-            if [[ -d "modules/${module}-"* ]]; then
-                local actual=$(ls -d modules/${module}-* 2>/dev/null | head -1)
+            local module
+            module=$(echo "$link" | grep -oP 'KENL[0-9]+')
+
+            # use array globbing safely to avoid using -d with globs or parsing ls
+            shopt -s nullglob
+            local matches
+            matches=(modules/"${module}"-*)
+            shopt -u nullglob
+
+            if (( ${#matches[@]} > 0 )); then
+                local actual
+                actual="${matches[0]}"
                 echo -e "   ${YELLOW}💡 Did you mean: ./$actual/${NC}"
             fi
         fi
@@ -90,13 +102,18 @@ check_footnotes() {
     local file="$1"
 
     # Extract footnote references [^1], [^2], etc.
-    local refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u)
+    local refs
+    refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u || true)
 
     # Extract footnote definitions
-    local defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u)
+    local defs
+    defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u || true)
 
     # Check if all references have definitions
     while IFS= read -r ref; do
+        if [[ -z "$ref" ]]; then
+            continue
+        fi
         if ! echo "$defs" | grep -q "^$ref$"; then
             echo -e "${RED}❌ MISSING FOOTNOTE${NC} in $file"
             echo "   Reference: $ref has no definition"
@@ -106,6 +123,9 @@ check_footnotes() {
 
     # Check if all definitions are used
     while IFS= read -r def; do
+        if [[ -z "$def" ]]; then
+            continue
+        fi
         if ! echo "$refs" | grep -q "^$def$"; then
             echo -e "${YELLOW}⚠️  UNUSED FOOTNOTE${NC} in $file"
             echo "   Definition: $def is never referenced"
@@ -119,7 +139,7 @@ check_old_patterns() {
     local file="$1"
 
     # Pattern 1: Direct KENL links (should be modules/KENL)
-    if grep -qP '\]\(\.\/KENL[0-9]' "$file" 2>/dev/null; then
+    if grep -qP '\]\(\./KENL[0-9]' "$file" 2>/dev/null; then
         echo -e "${YELLOW}⚠️  OLD PATH PATTERN${NC} in $file"
         echo "   Found: ](./KENL*"
         echo "   Should be: ](./modules/KENL*"
@@ -127,7 +147,7 @@ check_old_patterns() {
     fi
 
     # Pattern 2: Windows-style backslashes
-    if grep -qP '\]\([^)]*\\' "$file" 2>/dev/null; then
+    if grep -qP '\]\([^)]*[\\]' "$file" 2>/dev/null; then
         echo -e "${RED}❌ WINDOWS PATH${NC} in $file"
         echo "   Found: Backslashes in markdown link"
         echo "   Should use: Forward slashes"
@@ -151,7 +171,7 @@ while IFS= read -r file; do
             [[ -z "$link" ]] && continue
             check_link "$file" "$link" "$line_num"
         done < <(echo "$line_content" | grep -oP '\]\(\K[^)]+' || true)
-    done < <(grep -n '](.*' "$file" | cat)
+    done < <(grep -nP '\]\([^)]*\)' "$file" || true)
 
     # Check footnotes
     check_footnotes "$file"
