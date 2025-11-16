@@ -388,7 +388,7 @@ ATOM-FEAT-20251116-010  # Missing type prefix
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ "$BRANCH" =~ ^(feat|fix|docs|chore|refactor|test|ci)/ATOM-[A-Z]+-[0-9]{8}-[0-9]{3}-.+ ]]; then
+if [[ "$BRANCH" =~ ^(feat|fix|docs|chore|refactor|test|ci)/ATOM-[A-Z]+-[0-9]{8}-[0-9]{3}-[a-z0-9-]+$ ]]; then
     echo "✅ Valid branch name: $BRANCH"
     exit 0
 elif [[ "$BRANCH" =~ ^(claude|copilot)/ ]]; then
@@ -587,13 +587,14 @@ jobs:
 
 ### Logdy Server Integration
 
-**Link local/remote ATOM trails to Logdy:**
+> **Note:** The `kenl-logdy-link` command is not yet implemented. Manual setup is required to link ATOM trails to Logdy.
 
-```bash
-kenl-logdy-link remote-host:/home/user/.kenl/logs
-```
+**Manual Setup Steps:**
+1. Ensure your ATOM trail logs are located at `~/.kenl/logs` (local) and accessible from the remote host.
+2. On the Logdy server, configure the log source to include both local and remote log directories.
+3. Use Logdy's web interface to add and filter log sources as needed.
 
-**Expected:** `SAIF-LOGDY-LINK-20251116-001` (CTFWI flag drop)
+**Expected:** Manual linking of log directories enables Logdy to display both local and remote ATOM trails.
 
 **Result:** Local + remote ATOM trails visible in Logdy web interface
 - Queryable via Logdy filters (by agent, type, date)
