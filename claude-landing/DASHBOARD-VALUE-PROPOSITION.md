@@ -179,16 +179,13 @@ Each instance sees:
 
 ### 1. Session Start Hook (Recommended)
 
-**File:** `.claude/hooks/session-start.sh`
+**Note:** The `.claude/hooks/session-start.sh` hook is **not** a built-in feature of Claude Code. You must manually create this directory and script to enable automatic dashboard display on session start.
 
-```bash
-#!/bin/bash
-# Auto-display dashboard on session start
-./scripts/kenl-dashboard.sh
-```
+**Setup Instructions:**
 
-**Result:** Every Claude Code session starts with full context
-
+1. Create the hooks directory if it does not exist:
+   ```bash
+   mkdir -p ~/.claude/hooks
 ---
 
 ### 2. Slash Command
