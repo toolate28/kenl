@@ -248,7 +248,7 @@ render_dashboard() {
   },
   "git": {
     "branch": "$git_branch",
-    "recent_commits": [$(printf '"%s",' "${recent_commits[@]}" | sed 's/,$//'))]
+    "recent_commits": $(printf '%s\n' "${recent_commits[@]}" | jq -R . | jq -s .),
   },
   "repository": {
     "total_docs": $total_docs,
