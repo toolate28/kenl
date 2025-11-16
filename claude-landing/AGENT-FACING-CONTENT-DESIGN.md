@@ -535,6 +535,36 @@ SAIF-{ACTION}-{YYYYMMDD}-{NNN}
 
 **Purpose:** Flag drop signals successful completion and creates audit trail (links to ATOM system).
 
+### Command vs Flag Semantics
+
+**Commands are imperative** (describe the operation):
+- Example: `kenl-add-session-hook dashboard`
+- Answers: "What should I do?"
+- Structure: `{verb}-{object} {parameters}`
+- Focus: **Action to perform**
+
+**Flags are declarative** (describe the resulting state):
+- Example: `SAIF-HOOK-DASHBOARD-20251116-001`
+- Answers: "What now exists?"
+- Structure: `SAIF-{RESULT}-{DATE}-{SEQ}`
+- Focus: **State after completion**
+
+**Why flags omit operation verbs:**
+- ❌ `SAIF-ADD-HOOK-DASHBOARD-*` (verbose, encodes implementation)
+- ✅ `SAIF-HOOK-DASHBOARD-*` (concise, describes state)
+
+**Parameter encoding decision tree:**
+
+```
+IF parameter is unique identifier (feature name, command name):
+  → Include in flag: kenl-add-session-hook dashboard → SAIF-HOOK-DASHBOARD-*
+
+IF parameter is runtime value (host, path, dynamic input):
+  → Omit from flag: kenl-logdy-link remote-host:/path → SAIF-LOGDY-LINK-*
+```
+
+**Rationale:** Flags identify **what exists**, not **how it was created**. Include parameters that are part of the artifact's identity (useful for audit trail), omit parameters that are runtime inputs.
+
 ---
 
 ## Activation Patterns Summary
