@@ -1,0 +1,15 @@
+{
+  "name": "kenl-logging",
+  "version": "1.0.0",
+  "description": "Centralized Logging Worker for ATOM trails",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:prod": "wrangler deploy --env production"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "wrangler": "^3.91.0"
+  }
+}

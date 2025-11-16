@@ -1,0 +1,222 @@
+# Cloudflare Worker Deployment Workflow
+# ATOM: ATOM-CI-20251116-001
+# Automatically deploys workers to Cloudflare on push to main/develop
+
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'cloudflare-infrastructure/**'
+      - '.github/workflows/cloudflare-deploy.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cloudflare-infrastructure/**'
+  workflow_dispatch:  # Manual trigger
+
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+jobs:
+  validate:
+    name: Validate Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'cloudflare-infrastructure/workers/*/package.json'
+
+      - name: Validate wrangler.toml files
+        run: |
+          chmod +x cloudflare-infrastructure/scripts/validate-config.sh
+          cloudflare-infrastructure/scripts/validate-config.sh cloudflare-infrastructure/workers/api-atom/wrangler.toml
+          cloudflare-infrastructure/scripts/validate-config.sh cloudflare-infrastructure/workers/logging/wrangler.toml
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (api-atom)
+        working-directory: cloudflare-infrastructure/workers/api-atom
+        run: npm ci
+
+      - name: Run tests (api-atom)
+        working-directory: cloudflare-infrastructure/workers/api-atom
+        run: npm test
+
+      - name: Install dependencies (logging)
+        working-directory: cloudflare-infrastructure/workers/logging
+        run: npm ci
+
+      - name: Run tests (logging)
+        working-directory: cloudflare-infrastructure/workers/logging
+        run: npm test
+
+      - name: Log test result to ATOM
+        if: always()
+        run: |
+          ATOM_TAG="ATOM-CI-TEST-$(date +%Y%m%d)-${{ github.run_number }}"
+          echo "::notice::$ATOM_TAG - GitHub Actions tests ${{ job.status }}"
+          echo "$ATOM_TAG: Tests ${{ job.status }} (commit: ${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
+
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    environment:
+      name: development
+      url: https://api-dev.toolated.online
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy api-atom (dev)
+        working-directory: cloudflare-infrastructure/workers/api-atom
+        run: wrangler deploy --env dev
+
+      - name: Deploy logging (dev)
+        working-directory: cloudflare-infrastructure/workers/logging
+        run: wrangler deploy --env dev
+
+      - name: Verify deployment
+        run: |
+          sleep 5
+          curl -f https://api-dev.toolated.online/api/atom/stats || exit 1
+
+      - name: Log deployment to ATOM
+        if: always()
+        run: |
+          ATOM_TAG="ATOM-CI-DEPLOY-DEV-$(date +%Y%m%d)-${{ github.run_number }}"
+          EXIT_CODE=${{ job.status == 'success' && 0 || 1 }}
+          echo "::notice::$ATOM_TAG - Deployed to dev environment"
+
+  deploy-prod:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://api.toolated.online
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy api-atom (production)
+        working-directory: cloudflare-infrastructure/workers/api-atom
+        run: wrangler deploy --env production
+
+      - name: Deploy logging (production)
+        working-directory: cloudflare-infrastructure/workers/logging
+        run: wrangler deploy --env production
+
+      - name: Verify deployment
+        run: |
+          sleep 10
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.toolated.online/api/atom/stats)
+          if [ $STATUS -eq 200 ]; then
+            echo "✅ Deployment verified (HTTP $STATUS)"
+          else
+            echo "❌ Deployment verification failed (HTTP $STATUS)"
+            exit 1
+          fi
+
+      - name: Log deployment to ATOM (via API)
+        if: always()
+        run: |
+          ATOM_TAG="ATOM-CI-DEPLOY-PROD-$(date +%Y%m%d)-${{ github.run_number }}"
+          EXIT_CODE=${{ job.status == 'success' && 0 || 1 }}
+          curl -X POST https://api.toolated.online/api/log \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"tag\": \"$ATOM_TAG\",
+              \"type\": \"DEPLOY\",
+              \"description\": \"Deployed workers to production via GitHub Actions (commit: ${{ github.sha }})\",
+              \"user\": \"${{ github.actor }}\",
+              \"hostname\": \"github-actions\",
+              \"command\": \"wrangler deploy --env production\",
+              \"exit_code\": $EXIT_CODE,
+              \"hash\": \"${{ github.sha }}\"
+            }" || echo "Failed to log to ATOM API (non-blocking)"
+
+      - name: Create deployment summary
+        run: |
+          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: Production" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**URL**: https://api.toolated.online" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Workers deployed**:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ api-atom" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ logging" >> $GITHUB_STEP_SUMMARY
+
+  rollback:
+    name: Rollback on Failure
+    runs-on: ubuntu-latest
+    needs: deploy-prod
+    if: failure()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Rollback api-atom
+        working-directory: cloudflare-infrastructure/workers/api-atom
+        run: wrangler rollback || echo "Rollback failed (may not have previous version)"
+
+      - name: Rollback logging
+        working-directory: cloudflare-infrastructure/workers/logging
+        run: wrangler rollback || echo "Rollback failed (may not have previous version)"
+
+      - name: Log rollback to ATOM
+        run: |
+          ATOM_TAG="ATOM-CI-ROLLBACK-$(date +%Y%m%d)-${{ github.run_number }}"
+          curl -X POST https://api.toolated.online/api/log \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"tag\": \"$ATOM_TAG\",
+              \"type\": \"ROLLBACK\",
+              \"description\": \"Rolled back deployment due to failure\",
+              \"user\": \"${{ github.actor }}\",
+              \"hostname\": \"github-actions\",
+              \"command\": \"wrangler rollback\",
+              \"exit_code\": 0
+            }" || echo "Failed to log rollback (non-blocking)"
+
+      - name: Notify failure
+        run: |
+          echo "## ❌ Deployment Failed - Rolled Back" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Failed by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Review logs and retry deployment." >> $GITHUB_STEP_SUMMARY
