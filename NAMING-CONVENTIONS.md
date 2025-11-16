@@ -587,57 +587,95 @@ jobs:
 
 ### Logdy Server Integration
 
-**Requirement:** ATOM trails from remote sessions MUST be sent to Logdy server for centralized monitoring.
+**Requirement:** Local and remote ATOM trail directories MUST be linked so Logdy parses both to the same web interface.
 
-**Implementation (Local Claude Code):**
+**Directory Structure:**
+
+```
+~/.kenl/logs/                    # Local ATOM trail logs
+  ├── atom-trails/               # ATOM trail entries
+  │   ├── 2025-11-16/
+  │   │   ├── ATOM-DOC-20251116-007.json
+  │   │   ├── ATOM-FEAT-20251116-010.json
+  │   │   └── ATOM-FIX-20251116-012.json
+  │   └── 2025-11-15/
+  │       └── ATOM-DOC-20251115-003.json
+  └── network-health/            # Network metrics (from Test-KenlNetwork)
+      └── 2025-11-16-baseline.json
+```
+
+**Logdy Configuration:**
 
 ```bash
-# When local Claude Code starts, sync remote ATOM trails to Logdy
-# Location: ~/.claude/hooks/session-start-logdy-sync.sh
+# ~/.config/logdy/config.yaml
+sources:
+  - name: "KENL ATOM Trails"
+    path: "/home/user/.kenl/logs/atom-trails/**/*.json"
+    format: "json"
+    watch: true
 
-#!/bin/bash
-# Sync remote ATOM trails to Logdy server
+  - name: "KENL Network Health"
+    path: "/home/user/.kenl/logs/network-health/**/*.json"
+    format: "json"
+    watch: true
 
-LOGDY_URL="${LOGDY_URL:-http://localhost:8080/api/logs}"
-KENL_ROOT="${KENL_ROOT:-$HOME/kenl}"
+  - name: "Remote ATOM Trails"
+    path: "/mnt/remote-kenl/.kenl/logs/atom-trails/**/*.json"
+    format: "json"
+    watch: true
+```
 
-# Find ATOM trails modified in last 24 hours
-find "$KENL_ROOT" -name "*.md" -mtime -1 -exec grep -l "^atom:" {} \; | \
-while read -r file; do
-    ATOM_TAG=$(grep -m1 "^atom:" "$file" | cut -d' ' -f2)
-    FILE_PATH="${file#$KENL_ROOT/}"
-    MOD_TIME=$(stat -c %Y "$file" 2>/dev/null || stat -f %m "$file")
+**Link Remote Logs (via SSH mount or symlink):**
 
-    # Send to Logdy
-    curl -s -X POST "$LOGDY_URL" \
-         -H "Content-Type: application/json" \
-         -d "{
-           \"timestamp\": $MOD_TIME,
-           \"level\": \"info\",
-           \"atom_tag\": \"$ATOM_TAG\",
-           \"file\": \"$FILE_PATH\",
-           \"source\": \"kenl-atom-sync\"
-         }"
-done
+```bash
+# Option 1: SSHFS mount (if remote system accessible)
+sshfs remote-host:/home/user/.kenl/logs /mnt/remote-kenl/.kenl/logs
+
+# Option 2: Symlink (if logs are synced via rsync/git)
+ln -s ~/kenl/.kenl/logs/remote ~/.kenl/logs/remote
+
+# Option 3: Shared network mount
+mount -t nfs remote-host:/home/user/.kenl/logs /mnt/remote-kenl/.kenl/logs
+```
+
+**ATOM Trail Log Format (JSON):**
+
+```json
+{
+  "timestamp": "2025-11-16T14:32:05Z",
+  "atom_tag": "ATOM-DOC-20251116-007",
+  "type": "DOC",
+  "file": "NAMING-CONVENTIONS.md",
+  "intent": "Standardize naming across branches, files, directories",
+  "agent": "claude",
+  "session": "claude/add-performance-dashboard-01EXPguiGyWCByxLMp5ujVRV",
+  "commit": "a230720"
+}
 ```
 
 **Benefits:**
-- Centralized ATOM trail visibility across sessions
-- Real-time monitoring of AI agent activity
-- Historical audit trail queryable via Logdy UI
-- Network health + ATOM trails in single dashboard
+- Logdy watches file directories (no HTTP sync needed)
+- Local + remote logs in single Logdy UI
+- Real-time tail on ATOM trail changes
+- Queryable via Logdy filters (by agent, type, date)
+- Offline-capable (logs are files, not API calls)
 
-**Dashboard View (Logdy):**
+**Logdy Web Interface View:**
 
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║  LOGDY - KENL ATOM Trail Monitor                          ║
 ╟───────────────────────────────────────────────────────────╢
-║  Recent ATOM Trails (Last 24h)                            ║
+║  Filter: [All Sources ▼] [Last 24h ▼] [All Types ▼]      ║
 ╟───────────────────────────────────────────────────────────╢
-║  14:32:05  ATOM-DOC-20251116-007  NAMING-CONVENTIONS.md   ║
-║  14:15:20  ATOM-DOC-20251116-004  MARKDOWN-TABLE-FORM...  ║
-║  14:02:18  ATOM-FEAT-20251116-010 kenl-dashboard.sh       ║
+║  ● 14:32:05  ATOM-DOC-20251116-007  (local/claude)        ║
+║    NAMING-CONVENTIONS.md - Standardize naming             ║
+║                                                            ║
+║  ● 14:15:20  ATOM-DOC-20251116-004  (local/claude)        ║
+║    MARKDOWN-TABLE-FORMATTING.md - Table formatting        ║
+║                                                            ║
+║  ● 14:02:18  ATOM-FEAT-20251116-010 (remote/claude)       ║
+║    kenl-dashboard.sh - Live dashboard implementation      ║
 ╚═══════════════════════════════════════════════════════════╝
 ```
 
