@@ -453,6 +453,90 @@ This is critical.
 
 ---
 
+## Pattern #11: Command-Flag Handover (SAIF/CTFWI)
+
+### ✅ WHAT WORKS
+
+**Efficient task handover pattern:**
+
+```markdown
+**Link local/remote ATOM trails to Logdy:**
+
+\`\`\`bash
+kenl-logdy-link remote-host:/home/user/.kenl/logs
+\`\`\`
+
+**Expected:** \`SAIF-LOGDY-LINK-20251116-001\` (CTFWI flag drop)
+
+**Result:** Local + remote ATOM trails visible in Logdy web interface
+```
+
+**Why it works:**
+- Command is actionable (user can copy-paste and run)
+- Expected flag shows success state (SAIF = System Action Intent Flag)
+- CTFWI (Capture The Flag With Intent) methodology wraps multiple features in one command
+- No verbose implementation details that distract from the task
+
+### ❌ WHAT DOESN'T WORK
+
+**Verbose location + implementation details:**
+
+```markdown
+**When local Claude Code starts, sync remote ATOM trails to Logdy**
+
+Location: \`~/.claude/hooks/session-start-logdy-sync.sh\`
+
+\`\`\`bash
+#!/bin/bash
+# [50 lines of implementation code]
+# Directory structure explanations
+# Multiple configuration options
+# JSON format specifications
+\`\`\`
+```
+
+**Why it fails:**
+- User has to read through implementation to understand the task
+- Location + code suggests manual file creation (inefficient)
+- Verbose details obscure the simple intent: "link these directories"
+- No clear completion signal
+
+**Fix:** Use command→flag pattern. Implementation is hidden behind command:
+
+```markdown
+Run: \`kenl-logdy-link remote-host:/path\`
+Expected: \`SAIF-LOGDY-LINK-*\` (CTFWI flag drop)
+```
+
+### When to Apply This Pattern
+
+**✅ USE for:**
+- Task handovers (agent → agent, agent → user)
+- Operations that wrap multiple KENL features
+- Repeatable commands with predictable outcomes
+- Integration setup tasks
+
+**❌ DON'T USE for:**
+- Educational code examples (teaching how to modify)
+- Troubleshooting sections (showing diagnostic code)
+- Customization guides (extending functionality)
+- Low-level implementation documentation
+
+### SAIF Flag Format
+
+```
+SAIF-{ACTION}-{YYYYMMDD}-{NNN}
+```
+
+**Examples:**
+- `SAIF-LOGDY-LINK-20251116-001` - Logdy directory link
+- `SAIF-HOOK-DASHBOARD-20251116-001` - Session start hook added
+- `SAIF-CMD-STATUS-20251116-001` - Slash command created
+
+**Purpose:** Flag drop signals successful completion and creates audit trail (links to ATOM system).
+
+---
+
 ## Activation Patterns Summary
 
 **What Makes Content "Agent-Facing":**
@@ -469,6 +553,7 @@ This is critical.
 | **Hierarchy** | Scannable headers | Buried in paragraphs |
 | **Typography** | **BOLD**, CAPS, emoji | Plain text |
 | **Voice** | Imperative (DO THIS) | Advisory (you could) |
+| **Handover** | Command→SAIF flag | Location + full code |
 
 ---
 
@@ -570,6 +655,7 @@ see-also:
 - [ ] Are checklists used for action items?
 - [ ] Is success state observable?
 - [ ] Does typography signal priority?
+- [ ] Do task handovers use command→SAIF flag pattern (not verbose location+code)?
 
 ---
 
@@ -639,10 +725,10 @@ Make sure your code is clean and well-formatted.
 ATOM-DOC-20251116-005: Agent-facing content design meta-guide
 Intent: Document formatting patterns that increase directive adherence
 Problem: Agents miss directives written like documentation
-Solution: Visual anchors, direct address, contrast examples, metadata
-Impact: 40-60% improvement in directive adherence (estimated)
-Validation: Apply these patterns to existing docs, measure adherence
-Next: Audit claude-landing/ for agent-hostile patterns, rewrite
+Solution: 11 activation patterns (visual anchors, SAIF handover, contrast examples, metadata, etc.)
+Impact: Observable in KENL repo (table formatting improved same-session after applying patterns)
+Validation: Apply these patterns to existing docs, measure adherence via git history
+Next: Pattern #11 (SAIF handover) applied to NAMING-CONVENTIONS.md and README-DASHBOARD.md
 ```
 
 ---
