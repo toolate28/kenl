@@ -19,8 +19,12 @@ FIX_MODE=false
 
 # Accept --fix for future enhancements; currently not implemented but referenced to silence shellcheck
 [[ "${1:-}" == "--fix" ]] && FIX_MODE=true
-: "${FIX_MODE}" # no-op to avoid SC2034
 
+# TODO: Implement --fix functionality (KENL ATOM-CFG-YYYYMMDD-NNN)
+if [ "$FIX_MODE" = true ]; then
+    echo -e "${YELLOW}Note: --fix mode is not yet implemented.${NC}"
+    # Optionally exit here, or continue as normal
+fi
 echo "🔍 KENL Link Validator"
 echo "====================="
 echo
