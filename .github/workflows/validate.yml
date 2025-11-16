@@ -49,7 +49,7 @@ jobs:
         run: |
           $settings = 'PSScriptAnalyzerSettings.psd1'
           $exclude = @('vendor','node_modules','.git')
-          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings $settings
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings $settings -ExcludePath $exclude
           if ($results.Count -gt 0) {
             $results | Format-Table -AutoSize
             # Treat only Error severity as failing CI; emit warnings otherwise
