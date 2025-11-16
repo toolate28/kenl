@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup PowerShell
         if: matrix.runner == 'ubuntu-latest'
-        uses: actions/setup-powershell@v1
+        uses: actions/setup-powershell@main
       - name: Install PSScriptAnalyzer
         shell: pwsh
         run: |
