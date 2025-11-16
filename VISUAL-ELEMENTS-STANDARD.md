@@ -127,6 +127,29 @@ game: "Halo MCC"
 
 ---
 
+### Markdown Tables
+
+**⚠️ CRITICAL:** See `claude-landing/MARKDOWN-TABLE-FORMATTING.md` for complete formatting rules.
+
+**Quick Reference:**
+- **Primary Rule:** Longest string sets column width
+- **Order-agnostic tables:** Put longest row first
+- **Use spaces only** (no tabs)
+- **Align pipes vertically**
+
+**Example:**
+```markdown
+| Service   | Status |
+|-----------|--------|
+| Tailscale | UP     |
+| Logdy     | DOWN   |
+| Ollama    | UP     |
+```
+
+**Why:** "Tailscale" (9 chars) is longest → Sets column 1 width to 9
+
+---
+
 ## Emoji Usage
 
 ### Standard Emoji Set

@@ -198,18 +198,36 @@ ATOM-CFG-20251112-042
 
 #### Markdown Tables
 
-**Column Alignment:**
-- Measure the longest string in each column
-- Align ALL column separators (`|`) to match that width
-- Use spaces (not tabs) for padding
-- Keep separator lines (`---`) the same width as column content
+**⚠️ CRITICAL:** Table formatting is the #1 persistent issue across AI agents. Follow these rules EXACTLY.
 
-**Example:**
+**Primary Rule:** **Longest string sets the column width. Period.**
+
+**Pattern #1 (Order-Agnostic Tables):**
+1. Put the row with the longest entry FIRST
+2. All subsequent rows pad to match row 1
+3. Never scan all rows - row 1 is your template
+
+**Pattern #2 (Sequential/Chronological Tables):**
+1. Pre-determine max widths per column
+2. Stick to those widths for ALL rows
+3. Use ellipsis if content exceeds width
+
+**Example (Pattern #1):**
 ```markdown
-| Column Header              | Another Column                    |
-|----------------------------|-----------------------------------|
-| Short text                 | Longer text determines width      |
+| Module | Purpose                                |
+|--------|----------------------------------------|
+| KENL2  | Gaming with Play Cards and Proton      |
+| KENL1  | Framework                              |
+| KENL0  | System                                 |
 ```
+
+**Why:** "Gaming with Play Cards and Proton" is longest → Sets width for column 2
+
+**Detailed Guide:** See `claude-landing/MARKDOWN-TABLE-FORMATTING.md` for:
+- Anti-patterns to avoid
+- Self-validation checklist
+- Real examples from this repo
+- Pre-commit validation rules
 
 ### Shell Script Standards
 
