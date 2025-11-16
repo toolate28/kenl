@@ -2,7 +2,7 @@
   RuleSettings = @{
     # Security and high-risk rules are errors
     PSAvoidUsingPlainTextForPassword = @{ Severity = 'Error' }
-    PSUseShouldProcessForStateChangingFunctions = @{ Severity = 'Error' }
+    PSUseShouldProcessForStateChangingCommands = @{ Severity = 'Error' }
 
     # Style/maintainability as warnings
     PSAvoidGlobalVars = @{ Severity = 'Warning' }
