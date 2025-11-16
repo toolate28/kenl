@@ -13,15 +13,15 @@ atom: ATOM-RESEARCH-20251112-002
 
 ## Budget Allocation
 
-| Task | Estimated Cost | Status | Actual Cost | ATOM Reference |
-|------|---------------|--------|-------------|----------------|
-| Task 1: Anti-Cheat Gaming on Linux | 20-30 AUD | Not Started | - | - |
-| Task 2: MCP Server Ecosystem | 15-25 AUD | Not Started | - | - |
-| Task 3: Immutable Gaming Optimization | 20-30 AUD | Not Started | - | - |
-| Task 4: Windows 10 EOL Migration | 15-20 AUD | Not Started | - | - |
-| Task 5: PSGallery Publishing | 10-15 AUD | Not Started | - | - |
-| **Subtotal** | **80-120 AUD** | - | **0 AUD** | - |
-| **Reserved (Overflow)** | **10 AUD** | - | - | - |
+| Task                                   | Estimated Cost | Status      | Actual Cost | ATOM Reference |
+|----------------------------------------|----------------|-------------|-------------|----------------|
+| Task 1: Anti-Cheat Gaming on Linux     | 20-30 AUD      | Not Started | -           | -              |
+| Task 2: MCP Server Ecosystem           | 15-25 AUD      | Not Started | -           | -              |
+| Task 3: Immutable Gaming Optimization  | 20-30 AUD      | Not Started | -           | -              |
+| Task 4: Windows 10 EOL Migration       | 15-20 AUD      | Not Started | -           | -              |
+| Task 5: PSGallery Publishing           | 10-15 AUD      | Not Started | -           | -              |
+| **Subtotal**                           | **80-120 AUD** | -           | **0 AUD**   | -              |
+| **Reserved (Overflow)**                | **10 AUD**     | -           | -           | -              |
 
 ## Completed Tasks
 
@@ -31,7 +31,7 @@ None yet.
 
 | Date | Task | Amount (AUD) | Time (hours) | ATOM Reference | Notes |
 |------|------|--------------|--------------|----------------|-------|
-| - | - | - | - | - | - |
+| -    | -    | -            | -            | -              | -     |
 
 ## Budget Summary
 
