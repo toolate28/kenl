@@ -319,7 +319,7 @@ for each column:
 
 ---
 
-### ❌ BAD: Found in scripts/windows-partition-scripts/README.md
+### ❌ BAD: Inconsistent column widths
 
 ```markdown
 | File | Purpose | Key Topics |
