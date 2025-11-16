@@ -39,7 +39,7 @@ User: [Starts session]
 
 🖥️  LIVE SYSTEM STATUS
   Platform:      Linux
-  Local IP:      192.168.1.100
+  Local IP:      10.0.x.x
   Git Branch:    claude/add-performance-dashboard-*
 
 ⚙️  SERVICES
