@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # KENL Link Validator
+# ATOM-CI-20251116-001: Fix ShellCheck errors and harden CI validation
 # Catches broken internal links before they hit production
 # Usage: ./scripts/validate-links.sh [--fix]
 
