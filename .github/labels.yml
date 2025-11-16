@@ -1,0 +1,120 @@
+# KENL Repository Labels
+# Organized by: Priority, Type, Domain, Status, Special
+
+# Priority
+- name: "priority: critical"
+  color: "d73a4a"
+  description: "Blocking issue - breaks core functionality"
+
+- name: "priority: high"
+  color: "ff6b6b"
+  description: "Important but not blocking"
+
+- name: "priority: medium"
+  color: "fbca04"
+  description: "Normal priority"
+
+- name: "priority: low"
+  color: "0e8a16"
+  description: "Nice to have"
+
+# Type
+- name: "type: bug"
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: "type: feature"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "type: documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: "type: chore"
+  color: "fef2c0"
+  description: "Maintenance, tooling, dependencies"
+
+- name: "type: security"
+  color: "ee0701"
+  description: "Security vulnerability or concern"
+
+# Domain-Specific (KENL)
+- name: "domain: gaming"
+  color: "8b5cf6"
+  description: "Gaming configs, Play Cards, launch options"
+
+- name: "domain: partition-scripts"
+  color: "ec4899"
+  description: "Disk partitioning, STEP1-STEP3 scripts"
+
+- name: "domain: mcp-integration"
+  color: "3b82f6"
+  description: "Model Context Protocol, AI agents"
+
+- name: "domain: claude-code"
+  color: "06b6d4"
+  description: "Claude Code CLI, session management"
+
+- name: "domain: bazzite"
+  color: "10b981"
+  description: "Bazzite-DX Linux, immutable system"
+
+- name: "domain: windows"
+  color: "0ea5e9"
+  description: "Windows-specific (dual-boot, PowerShell)"
+
+# ATOM/SAGE Framework
+- name: "atom: traceability"
+  color: "f59e0b"
+  description: "ATOM tag audit trail"
+
+- name: "sage: methodology"
+  color: "eab308"
+  description: "SAGE framework, evidence-based"
+
+- name: "owi: governance"
+  color: "dc2626"
+  description: "OWI framework, governance artifacts"
+
+# Status
+- name: "status: needs-triage"
+  color: "fbca04"
+  description: "Awaiting initial review"
+
+- name: "status: accepted"
+  color: "0e8a16"
+  description: "Approved for implementation"
+
+- name: "status: blocked"
+  color: "d73a4a"
+  description: "Blocked by external dependency"
+
+- name: "status: in-progress"
+  color: "1d76db"
+  description: "Currently being worked on"
+
+- name: "status: needs-review"
+  color: "fbca04"
+  description: "PR ready for review"
+
+# Special
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention needed"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "This issue/PR already exists"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "invalid"
+  color: "e4e669"
+  description: "This doesn't seem right"
