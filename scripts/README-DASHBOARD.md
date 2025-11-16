@@ -54,41 +54,25 @@ atom: ATOM-DOC-20251116-003
 
 ### 1. Session Start Hook (Recommended)
 
-Create `.claude/hooks/session-start.sh`:
-
 ```bash
-#!/bin/bash
-# Auto-display dashboard when Claude Code starts
-
-echo "🚀 KENL Session Starting..."
-echo ""
-
-./scripts/kenl-dashboard.sh
-
-echo ""
-echo "Ready to work! Type your request or /help for commands."
+kenl-add-session-hook dashboard
 ```
 
-Make it executable:
-```bash
-chmod +x .claude/hooks/session-start.sh
-```
+**Expected:** `SAIF-HOOK-DASHBOARD-20251116-001` (CTFWI flag drop)
 
-**Result:** Dashboard shows automatically on every session start.
+**Result:** Dashboard shows automatically on every session start
 
 ---
 
 ### 2. Slash Command
 
-Create `.claude/commands/status.md`:
-
-```markdown
-Show the KENL live dashboard:
-
-./scripts/kenl-dashboard.sh
+```bash
+kenl-add-slash-command status dashboard
 ```
 
-**Usage:** Type `/status` anytime to refresh dashboard.
+**Expected:** `SAIF-CMD-STATUS-20251116-001` (CTFWI flag drop)
+
+**Usage:** Type `/status` anytime to refresh dashboard
 
 ---
 
