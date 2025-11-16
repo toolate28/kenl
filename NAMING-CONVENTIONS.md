@@ -388,7 +388,7 @@ ATOM-FEAT-20251116-010  # Missing type prefix
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ "$BRANCH" =~ ^(feat|fix|docs|chore|refactor|test|ci)/ATOM-[A-Z]+-[0-9]{8}-[0-9]{3}-.+ ]]; then
+if [[ "$BRANCH" =~ ^(feat|fix|docs|chore|refactor|test|ci)/ATOM-[A-Z]+-[0-9]{8}-[0-9]{3}-[a-z0-9-]+$ ]]; then
     echo "✅ Valid branch name: $BRANCH"
     exit 0
 elif [[ "$BRANCH" =~ ^(claude|copilot)/ ]]; then

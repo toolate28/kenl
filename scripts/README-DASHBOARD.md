@@ -54,14 +54,17 @@ atom: ATOM-DOC-20251116-003
 
 ### 1. Session Start Hook (Recommended)
 
+To show the dashboard automatically on every session start, create a shell hook file in your user-space environment:
+
 ```bash
-kenl-add-session-hook dashboard
-```
-
-**Expected:** `SAIF-HOOK-DASHBOARD-20251116-001` (CTFWI flag drop)
-
-**Result:** Dashboard shows automatically on every session start
-
+# Create a session start hook for KENL dashboard
+mkdir -p ~/.kenl/hooks
+cat <<'EOF' > ~/.kenl/hooks/session-dashboard.sh
+#!/usr/bin/env bash
+# ATOM-HOOK-20251116-001
+./scripts/kenl-dashboard.sh
+EOF
+chmod +x ~/.kenl/hooks/session-dashboard.sh
 ---
 
 ### 2. Slash Command
