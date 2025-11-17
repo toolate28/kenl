@@ -186,8 +186,8 @@ draw_bar() {
     local max=${2:-100}
     local width=${3:-40}
 
-    local filled=$(( value * width / max ))
-    local empty=$(( width - filled ))
+    local filled
+    local empty
 
     if (( max <= 0 )); then
         filled=0
