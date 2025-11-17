@@ -1,10 +1,18 @@
 ---
 name: Gaming Configuration Issue
 about: Report issues with game configs, Play Cards, or launch options
-title: "[GAME]: Brief description"
+title: "🎮 [GAMING] ATOM-GWI-YYYYMMDD-NNN: "
 labels: "domain: gaming, status: needs-triage"
 assignees: ""
 ---
+
+<!--
+TITLE FORMAT: 🎮 [GAMING] ATOM-GWI-YYYYMMDD-NNN: {Game Name} - {Issue}
+Example: 🎮 [GAMING] ATOM-GWI-20251116-023: Red Dead Redemption 2 - Proton fails to launch
+
+Replace YYYYMMDD with today's date and NNN with a sequential number.
+See NAMING-CONVENTIONS.md for details.
+-->
 
 ## Game Information
 - **Game Name:**

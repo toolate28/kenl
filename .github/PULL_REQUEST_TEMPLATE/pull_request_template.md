@@ -14,6 +14,32 @@ Choose the appropriate template for your PR:
 
 # Pull Request
 
+## PR Title Format
+
+**Please use this format for your PR title:**
+```
+{emoji} {type}: {ATOM-TAG} - {Description}
+```
+
+**Examples:**
+- ✨ feat: ATOM-FEAT-20251116-010 - Add live KENL dashboard
+- 🐛 fix: ATOM-FIX-20251116-012 - Fix broken documentation links
+- 📚 docs: ATOM-DOC-20251116-004 - Add markdown table formatting guide
+
+**Emoji Legend:**
+| Emoji | Type | Purpose |
+|-------|------|---------|
+| ✨ | feat | New features |
+| 🐛 | fix | Bug fixes |
+| 📚 | docs | Documentation |
+| 🔧 | chore | Maintenance/tooling |
+| 🎮 | gaming | Gaming configuration |
+| 🤖 | mcp | MCP/AI integration |
+
+**ATOM Tag:** See [NAMING-CONVENTIONS.md](../../NAMING-CONVENTIONS.md) for format details.
+
+---
+
 ## Type of Change
 
 - [ ] Documentation fix (typo, formatting, clarity)

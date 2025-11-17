@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # KENL Link Validator
+# ATOM-CI-20251116-001: Fix ShellCheck errors and harden CI validation
 # Catches broken internal links before they hit production
 # Usage: ./scripts/validate-links.sh [--fix]
 
@@ -17,8 +18,14 @@ ERRORS=0
 WARNINGS=0
 FIX_MODE=false
 
+# Accept --fix for future enhancements; currently not implemented but referenced to silence shellcheck
 [[ "${1:-}" == "--fix" ]] && FIX_MODE=true
 
+# TODO: Implement --fix functionality (KENL ATOM-CFG-YYYYMMDD-NNN)
+if [ "$FIX_MODE" = true ]; then
+    echo -e "${YELLOW}Note: --fix mode is not yet implemented.${NC}"
+    # Optionally exit here, or continue as normal
+fi
 echo "🔍 KENL Link Validator"
 echo "====================="
 echo
@@ -52,7 +59,8 @@ check_link() {
 
     # If relative link, resolve from file's directory
     if [[ "$target" != /* ]]; then
-        local file_dir=$(dirname "$file")
+        local file_dir
+        file_dir=$(dirname "$file")
         target="$file_dir/$target"
     fi
 
@@ -71,12 +79,20 @@ check_link() {
         echo "   Expected: $target"
         ((ERRORS++))
 
-        # Suggest fixes for common patterns
+        # Suggest fixes for common patterns like KENL123 -> modules/KENL123-*
         if [[ "$link" =~ KENL[0-9]+ ]]; then
-            local module=$(echo "$link" | grep -oP 'KENL[0-9]+')
-            if [[ -d "modules/${module}-"* ]]; then
-                local actual=$(ls -d modules/${module}-* 2>/dev/null | head -1)
-                echo -e "   ${YELLOW}💡 Did you mean: ./$actual/${NC}"
+            local module
+            module=$(echo "$link" | grep -oP 'KENL[0-9]+')
+
+            shopt -s nullglob
+            local matches
+            matches=(modules/"${module}"-*)
+            shopt -u nullglob
+
+            if (( ${#matches[@]} > 0 )); then
+                local actual
+                actual="${matches[0]}"
+                echo -e "   ${YELLOW}💡 Did you mean: ./${actual}/${NC}"
             fi
         fi
         echo
@@ -89,14 +105,14 @@ check_link() {
 check_footnotes() {
     local file="$1"
 
-    # Extract footnote references [^1], [^2], etc.
-    local refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u)
+    local refs
+    refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u || true)
 
-    # Extract footnote definitions
-    local defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u)
+    local defs
+    defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u || true)
 
-    # Check if all references have definitions
     while IFS= read -r ref; do
+        [[ -z "$ref" ]] && continue
         if ! echo "$defs" | grep -q "^$ref$"; then
             echo -e "${RED}❌ MISSING FOOTNOTE${NC} in $file"
             echo "   Reference: $ref has no definition"
@@ -104,8 +120,8 @@ check_footnotes() {
         fi
     done <<< "$refs"
 
-    # Check if all definitions are used
     while IFS= read -r def; do
+        [[ -z "$def" ]] && continue
         if ! echo "$refs" | grep -q "^$def$"; then
             echo -e "${YELLOW}⚠️  UNUSED FOOTNOTE${NC} in $file"
             echo "   Definition: $def is never referenced"
@@ -139,26 +155,19 @@ check_old_patterns() {
 echo "📝 Checking markdown files for broken links..."
 echo
 
-# Find all markdown files (excluding .git, node_modules)
 while IFS= read -r file; do
-    # Extract markdown links: [text](./path/to/file)
     while IFS= read -r line_info; do
         line_num=$(echo "$line_info" | cut -d: -f1)
         line_content=$(echo "$line_info" | cut -d: -f2-)
 
-        # Extract all links from this line
         while IFS= read -r link; do
             [[ -z "$link" ]] && continue
-            check_link "$file" "$link" "$line_num"
+            check_link "$file" "$link" "$line_num" || true
         done < <(echo "$line_content" | grep -oP '\]\(\K[^)]+' || true)
-    done < <(grep -n '](.*' "$file" | cat)
+    done < <(grep -nP '\]\([^)]*\)' "$file" || true)
 
-    # Check footnotes
     check_footnotes "$file"
-
-    # Check for old patterns
     check_old_patterns "$file"
-
 done < <(find . -name "*.md" -type f \
     ! -path "./.git/*" \
     ! -path "./node_modules/*" \
