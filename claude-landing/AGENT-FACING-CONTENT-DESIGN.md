@@ -462,11 +462,11 @@ This is critical.
 ```markdown
 **Link local/remote ATOM trails to Logdy:**
 
-\`\`\`bash
+```bash
 kenl-logdy-link remote-host:/home/user/.kenl/logs
-\`\`\`
+```
 
-**Expected:** \`SAIF-LOGDY-LINK-20251116-001\` (CTFWI flag drop)
+**Expected:** `SAIF-LOGDY-LINK-20251116-001` (CTFWI flag drop)
 
 **Result:** Local + remote ATOM trails visible in Logdy web interface
 ```
