@@ -583,17 +583,346 @@ jobs:
 
 ---
 
+## Visual Clarity Enhancements
+
+### Purpose
+
+**Goal:** Make branch, PR, and issue names instantly scannable for humans and AI agents.
+
+**Key Principles:**
+1. **Type prefix** - Immediate context (feat/fix/docs)
+2. **ATOM tag** - Unique identifier + traceability
+3. **Descriptive slug** - Human-readable summary
+4. **Emoji support** (optional) - Visual categorization
+
+---
+
+### Branch Name Visual Patterns
+
+#### Standard Pattern (Current)
+
+```
+{type}/{ATOM-TYPE-YYYYMMDD-NNN}-{kebab-case-slug}
+```
+
+**Examples:**
+```
+feat/ATOM-FEAT-20251116-010-live-dashboard
+fix/ATOM-FIX-20251116-012-broken-links
+docs/ATOM-DOC-20251116-004-table-guide
+```
+
+**Visual Hierarchy:**
+1. **Type** (`feat/`) - Immediate category recognition
+2. **ATOM tag** (`ATOM-FEAT-20251116-010`) - Unique identifier
+3. **Slug** (`live-dashboard`) - Human summary
+
+---
+
+#### Enhanced Pattern (Optional, for GitHub UI)
+
+**With emoji prefixes for PR titles:**
+
+```
+{emoji} {type}: {ATOM-TAG} - {Short Description}
+```
+
+**Examples:**
+```
+✨ feat: ATOM-FEAT-20251116-010 - Add live KENL dashboard
+🐛 fix: ATOM-FIX-20251116-012 - Fix broken documentation links
+📚 docs: ATOM-DOC-20251116-004 - Add markdown table formatting guide
+🔧 chore: ATOM-CHORE-20251116-015 - Update pre-commit hooks
+♻️ refactor: ATOM-REFACTOR-20251116-020 - Restructure module system
+✅ test: ATOM-TEST-20251116-025 - Add network diagnostics tests
+🚀 ci: ATOM-CI-20251116-030 - Update GitHub Actions workflows
+```
+
+**Emoji Legend:**
+| Emoji | Type      | Purpose             |
+|-------|-------=---|---------------------|
+| ✨   | feat      | New features         |
+| 🐛   | fix       | Bug fixes            |
+| 📚   | docs      | Documentation        |
+| 🔧   | chore     | Maintenance/tooling  |
+| ♻️   | refactor  | Code restructuring   |
+| ✅   | test      | Test additions       |
+| 🚀   | ci        | CI/CD changes        |
+| 🎮   | gaming    | Gaming configuration |
+| 💾   | partition | Disk management      |
+| 🤖   | mcp       | MCP/AI integration   |
+| 🔒   | security  | Security fixes       |
+
+---
+
+### PR Title Format
+
+**Standard Format:**
+```
+{type}: {ATOM-TAG} - {Description}
+```
+
+**Examples:**
+```
+feat: ATOM-FEAT-20251116-010 - Add live KENL dashboard with real-time metrics
+fix: ATOM-FIX-20251116-012 - Fix broken links in documentation
+docs: ATOM-DOC-20251116-004 - Add comprehensive markdown table formatting guide
+```
+
+**Enhanced Format (with emoji):**
+```
+{emoji} {type}: {ATOM-TAG} - {Description}
+```
+
+**Examples:**
+```
+✨ feat: ATOM-FEAT-20251116-010 - Add live KENL dashboard with real-time metrics
+🐛 fix: ATOM-FIX-20251116-012 - Fix broken links in documentation
+📚 docs: ATOM-DOC-20251116-004 - Add comprehensive markdown table formatting guide
+```
+
+**Benefits:**
+- **GitHub UI:** Emoji provides instant visual categorization in PR lists
+- **Searchability:** ATOM tag enables precise filtering
+- **Traceability:** Links directly to audit trail
+- **Clarity:** Type prefix + description provides complete context
+
+---
+
+### Issue Title Format
+
+**Standard Format:**
+```
+[{TYPE}] {ATOM-TAG}: {Issue Description}
+```
+
+**Examples:**
+```
+[BUG] ATOM-FIX-20251116-020: Dashboard shows incorrect IP address
+[FEATURE] ATOM-FEAT-20251116-021: Add support for custom metrics
+[DOCS] ATOM-DOC-20251116-022: Document security best practices
+```
+
+**Enhanced Format (with emoji and labels):**
+```
+{emoji} [{TYPE}] {ATOM-TAG}: {Issue Description}
+```
+
+**Examples:**
+```
+🐛 [BUG] ATOM-FIX-20251116-020: Dashboard shows incorrect IP address
+✨ [FEATURE] ATOM-FEAT-20251116-021: Add support for custom metrics
+📚 [DOCS] ATOM-DOC-20251116-022: Document security best practices
+🎮 [GAMING] ATOM-GWI-20251116-023: Add Red Dead Redemption 2 Play Card
+```
+
+**Issue Label Mapping:**
+| Label           | ATOM Type | Emoji |
+|-----------------|-----------|-------|
+| `bug`           | ATOM-FIX  | 🐛    |
+| `enhancement`   | ATOM-FEAT | ✨    |
+| `documentation` | ATOM-DOC  | 📚    |
+| `gaming`        | ATOM-GWI  | 🎮    |
+| `security`      | ATOM-SEC  | 🔒    |
+| `performance`   | ATOM-PERF | ⚡    |                                                                                             |
+
+---
+
+### Visual Scanning Examples
+
+#### GitHub PR List View (Enhanced)
+
+```
+✨ feat: ATOM-FEAT-20251116-010 - Add live KENL dashboard
+   #55 opened 2 hours ago by copilot[bot]
+
+🐛 fix: ATOM-FIX-20251116-012 - Fix broken documentation links
+   #54 opened 5 hours ago by toolate28
+
+📚 docs: ATOM-DOC-20251116-004 - Add markdown table formatting guide
+   #53 opened 1 day ago by claude[bot]
+
+🎮 gaming: ATOM-GWI-20251116-015 - Add Cyberpunk 2077 Play Card
+   #52 opened 2 days ago by toolate28
+```
+
+**Benefits:**
+1. **Instant Recognition:** Emoji provides visual category
+2. **Filtering:** ATOM tag enables precise search
+3. **Context:** Type + description = complete understanding
+4. **Consistency:** All PRs follow same pattern
+
+---
+
+#### GitHub Issue List View (Enhanced)
+
+```
+🐛 [BUG] ATOM-FIX-20251116-020: Dashboard shows incorrect IP
+   #42 opened 3 hours ago by user1 • 2 comments
+
+✨ [FEATURE] ATOM-FEAT-20251116-021: Add custom metrics support
+   #41 opened 1 day ago by user2 • 5 comments
+
+📚 [DOCS] ATOM-DOC-20251116-022: Document security best practices
+   #40 opened 2 days ago by user3 • 1 comment
+
+🎮 [GAMING] ATOM-GWI-20251116-023: Add RDR2 Play Card
+   #39 opened 3 days ago by user4 • 8 comments
+```
+
+---
+
+### Command Line Visual Examples
+
+#### Git Branch List (Enhanced)
+
+```bash
+$ git branch -a
+* copilot/sub-pr-55
+  feat/ATOM-FEAT-20251116-010-live-dashboard
+  fix/ATOM-FIX-20251116-012-broken-links
+  docs/ATOM-DOC-20251116-004-table-guide
+  main
+```
+
+**Instant Recognition:**
+- `feat/` = New feature work
+- `fix/` = Bug fix branch
+- `docs/` = Documentation work
+- ATOM tag = Unique identifier for tracing
+
+---
+
+#### Git Log (Enhanced)
+
+```bash
+$ git log --oneline -5
+5c47054 fix: address critical PR review comments in dashboard and docs
+46b60b4 Initial plan
+d29a4c7 Merge branch 'main' into claude/add-performance-dashboard
+ea29a8b refactor: apply SAIF handover pattern to dashboard integration
+c872d6f refactor: apply SAIF handover pattern to Logdy integration
+```
+
+**Clarity:**
+- Type prefix (`fix:`, `refactor:`) = Immediate context
+- Description = Human-readable summary
+- ATOM tags in commit body = Full traceability
+
+---
+
+### Implementation Guidelines
+
+#### For Repository Maintainers
+
+1. **Update PR Templates:**
+   ```markdown
+   ## Title Format
+   {emoji} {type}: {ATOM-TAG} - {Description}
+   
+   Examples:
+   - ✨ feat: ATOM-FEAT-20251116-010 - Add live dashboard
+   - 🐛 fix: ATOM-FIX-20251116-012 - Fix broken links
+   ```
+
+2. **Update Issue Templates:**
+   ```markdown
+   ## Title Format
+   {emoji} [{TYPE}] {ATOM-TAG}: {Issue Description}
+   
+   Examples:
+   - 🐛 [BUG] ATOM-FIX-20251116-020: Dashboard incorrect IP
+   - ✨ [FEATURE] ATOM-FEAT-20251116-021: Custom metrics
+   ```
+
+3. **Add to CONTRIBUTING.md:**
+   - Link to this naming conventions guide
+   - Provide emoji legend
+   - Show examples
+
+4. **GitHub Labels:**
+   - Create labels matching emoji categories
+   - Auto-apply based on type prefix
+   - Enable filtering by visual markers
+
+---
+
+#### For Contributors
+
+**Quick Reference Card:**
+
+```
+BRANCH: {type}/{ATOM-TAG}-{slug}
+PR:     {emoji} {type}: {ATOM-TAG} - {Description}
+ISSUE:  {emoji} [{TYPE}] {ATOM-TAG}: {Description}
+
+Emoji Legend:
+✨ feat   🐛 fix    📚 docs   🔧 chore
+♻️ refactor ✅ test  🚀 ci    🎮 gaming
+🤖 mcp    🔒 security 💾 partition
+
+ATOM Format: ATOM-{TYPE}-YYYYMMDD-NNN
+```
+
+**Save to:** `~/.kenl/quick-ref.txt`
+
+---
+
+### Migration Path
+
+#### Phase 1: Documentation (Current)
+- ✅ Document naming conventions
+- ✅ Provide examples
+- ✅ Add validation rules
+
+#### Phase 2: Tooling (Next)
+- [ ] Update PR template with emoji guide
+- [ ] Update issue templates
+- [ ] Add branch validation to pre-commit
+- [ ] Create GitHub Actions for auto-labeling
+
+#### Phase 3: Adoption (Future)
+- [ ] All new PRs use enhanced format
+- [ ] All new issues use enhanced format
+- [ ] All new branches follow convention
+- [ ] Legacy branches grandfathered
+
+---
+
+### Benefits Summary
+
+**For Humans:**
+- ✅ Instant visual recognition (emoji)
+- ✅ Clear categorization (type prefix)
+- ✅ Traceability (ATOM tag)
+- ✅ Context (description)
+
+**For AI Agents:**
+- ✅ Structured format (parseable)
+- ✅ Unique identifiers (ATOM tag)
+- ✅ Type classification (type prefix)
+- ✅ Semantic meaning (description)
+
+**For Repository:**
+- ✅ Consistent naming
+- ✅ Better searchability
+- ✅ Improved organization
+- ✅ Audit trail integration
+
+---
+
 ## Integration with Monitoring Systems
 
 ### Logdy Server Integration
 
-**Link local/remote ATOM trails to Logdy:**
+> **Note:** The `kenl-logdy-link` command is not yet implemented. Manual setup is required to link ATOM trails to Logdy.
 
-```bash
-kenl-logdy-link remote-host:/home/user/.kenl/logs
-```
+**Manual Setup Steps:**
+1. Ensure your ATOM trail logs are located at `~/.kenl/logs` (local) and accessible from the remote host.
+2. On the Logdy server, configure the log source to include both local and remote log directories.
+3. Use Logdy's web interface to add and filter log sources as needed.
 
-**Expected:** `SAIF-LOGDY-LINK-20251116-001` (CTFWI flag drop)
+**Expected:** Manual linking of log directories enables Logdy to display both local and remote ATOM trails.
 
 **Result:** Local + remote ATOM trails visible in Logdy web interface
 - Queryable via Logdy filters (by agent, type, date)
@@ -605,14 +934,14 @@ kenl-logdy-link remote-host:/home/user/.kenl/logs
 ╔═══════════════════════════════════════════════════════════╗
 ║  LOGDY - KENL ATOM Trail Monitor                          ║
 ╟───────────────────────────────────────────────────────────╢
-║  Filter: [All Sources ▼] [Last 24h ▼] [All Types ▼]      ║
+║  Filter: [All Sources ▼] [Last 24h ▼] [All Types ▼]       ║
 ╟───────────────────────────────────────────────────────────╢
 ║  ● 14:32:05  ATOM-DOC-20251116-007  (local/claude)        ║
 ║    NAMING-CONVENTIONS.md - Standardize naming             ║
-║                                                            ║
+║                                                           ║
 ║  ● 14:15:20  ATOM-DOC-20251116-004  (local/claude)        ║
 ║    MARKDOWN-TABLE-FORMATTING.md - Table formatting        ║
-║                                                            ║
+║                                                           ║
 ║  ● 14:02:18  ATOM-FEAT-20251116-010 (remote/claude)       ║
 ║    kenl-dashboard.sh - Live dashboard implementation      ║
 ╚═══════════════════════════════════════════════════════════╝

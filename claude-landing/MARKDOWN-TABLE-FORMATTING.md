@@ -319,7 +319,9 @@ for each column:
 
 ---
 
-### ❌ BAD: Found in scripts/windows-partition-scripts/README.md
+### ❌ BAD: Real Example from Repository
+
+**Source:** `scripts/windows-partition-scripts/README.md` (verified present in codebase)
 
 ```markdown
 | File | Purpose | Key Topics |
