@@ -81,7 +81,7 @@ $startArgs = @(
 $processInfo = Start-Process -FilePath $logdyBinary `
     -ArgumentList $startArgs `
     -RedirectStandardOutput $logFile `
-    -RedirectStandardError $logFile `
+    -RedirectStandardError (Join-Path (Split-Path $logFile) "logdy-error.log") `
     -WindowStyle Hidden `
     -PassThru
 

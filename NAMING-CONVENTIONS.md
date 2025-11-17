@@ -639,19 +639,19 @@ docs/ATOM-DOC-20251116-004-table-guide
 ```
 
 **Emoji Legend:**
-| Emoji | Type | Purpose |
-|-------|------|---------|
-| ✨ | feat | New features |
-| 🐛 | fix | Bug fixes |
-| 📚 | docs | Documentation |
-| 🔧 | chore | Maintenance/tooling |
-| ♻️ | refactor | Code restructuring |
-| ✅ | test | Test additions |
-| 🚀 | ci | CI/CD changes |
-| 🎮 | gaming | Gaming configuration |
-| 💾 | partition | Disk management |
-| 🤖 | mcp | MCP/AI integration |
-| 🔒 | security | Security fixes |
+| Emoji | Type      | Purpose             |
+|-------|-------=---|---------------------|
+| ✨   | feat      | New features         |
+| 🐛   | fix       | Bug fixes            |
+| 📚   | docs      | Documentation        |
+| 🔧   | chore     | Maintenance/tooling  |
+| ♻️   | refactor  | Code restructuring   |
+| ✅   | test      | Test additions       |
+| 🚀   | ci        | CI/CD changes        |
+| 🎮   | gaming    | Gaming configuration |
+| 💾   | partition | Disk management      |
+| 🤖   | mcp       | MCP/AI integration   |
+| 🔒   | security  | Security fixes       |
 
 ---
 
@@ -717,14 +717,14 @@ docs: ATOM-DOC-20251116-004 - Add comprehensive markdown table formatting guide
 ```
 
 **Issue Label Mapping:**
-| Label | ATOM Type | Emoji |
-|-------|-----------|-------|
-| `bug` | ATOM-FIX | 🐛 |
-| `enhancement` | ATOM-FEAT | ✨ |
-| `documentation` | ATOM-DOC | 📚 |
-| `gaming` | ATOM-GWI | 🎮 |
-| `security` | ATOM-SEC | 🔒 |
-| `performance` | ATOM-PERF | ⚡ |
+| Label           | ATOM Type | Emoji |
+|-----------------|-----------|-------|
+| `bug`           | ATOM-FIX  | 🐛    |
+| `enhancement`   | ATOM-FEAT | ✨    |
+| `documentation` | ATOM-DOC  | 📚    |
+| `gaming`        | ATOM-GWI  | 🎮    |
+| `security`      | ATOM-SEC  | 🔒    |
+| `performance`   | ATOM-PERF | ⚡    |                                                                                             |
 
 ---
 
@@ -934,14 +934,14 @@ ATOM Format: ATOM-{TYPE}-YYYYMMDD-NNN
 ╔═══════════════════════════════════════════════════════════╗
 ║  LOGDY - KENL ATOM Trail Monitor                          ║
 ╟───────────────────────────────────────────────────────────╢
-║  Filter: [All Sources ▼] [Last 24h ▼] [All Types ▼]      ║
+║  Filter: [All Sources ▼] [Last 24h ▼] [All Types ▼]       ║
 ╟───────────────────────────────────────────────────────────╢
 ║  ● 14:32:05  ATOM-DOC-20251116-007  (local/claude)        ║
 ║    NAMING-CONVENTIONS.md - Standardize naming             ║
-║                                                            ║
+║                                                           ║
 ║  ● 14:15:20  ATOM-DOC-20251116-004  (local/claude)        ║
 ║    MARKDOWN-TABLE-FORMATTING.md - Table formatting        ║
-║                                                            ║
+║                                                           ║
 ║  ● 14:02:18  ATOM-FEAT-20251116-010 (remote/claude)       ║
 ║    kenl-dashboard.sh - Live dashboard implementation      ║
 ╚═══════════════════════════════════════════════════════════╝
