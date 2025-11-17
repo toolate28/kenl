@@ -462,11 +462,11 @@ This is critical.
 ```markdown
 **Link local/remote ATOM trails to Logdy:**
 
-\`\`\`bash
+```bash
 kenl-logdy-link remote-host:/home/user/.kenl/logs
-\`\`\`
+```
 
-**Expected:** \`SAIF-LOGDY-LINK-20251116-001\` (CTFWI flag drop)
+**Expected:** `SAIF-LOGDY-LINK-20251116-001` (CTFWI flag drop)
 
 **Result:** Local + remote ATOM trails visible in Logdy web interface
 ```
@@ -571,19 +571,19 @@ IF parameter is runtime value (host, path, dynamic input):
 
 **What Makes Content "Agent-Facing":**
 
-| Element | Agent-Friendly | Agent-Hostile |
-|---------|----------------|---------------|
-| **Audience** | "YOU MUST" | "AI agents should" |
-| **Structure** | Checklists, if-then | Paragraphs of prose |
-| **Examples** | ❌ WRONG ✅ RIGHT | Explained in text |
-| **Conditions** | IF X THEN Y | "Consider X in some cases" |
-| **Metadata** | `classification: AGENT-DIRECTIVE` | Generic frontmatter |
-| **Validation** | Testable criteria | Subjective ("good", "clean") |
-| **Location** | Single canonical source | Scattered across docs |
-| **Hierarchy** | Scannable headers | Buried in paragraphs |
-| **Typography** | **BOLD**, CAPS, emoji | Plain text |
-| **Voice** | Imperative (DO THIS) | Advisory (you could) |
-| **Handover** | Command→SAIF flag | Location + full code |
+| Element        | Agent-Friendly                    | Agent-Hostile                |
+|----------------|-----------------------------------|------------------------------|
+| **Audience**   | "YOU MUST"                        | "AI agents should"           |
+| **Structure**  | Checklists, if-then               | Paragraphs of prose          |
+| **Examples**   | ❌ WRONG ✅ RIGHT                | Explained in text            |
+| **Conditions** | IF X THEN Y                       | "Consider X in some cases"   |
+| **Metadata**   | `classification: AGENT-DIRECTIVE` | Generic frontmatter          |
+| **Validation** | Testable criteria                 | Subjective ("good", "clean") |
+| **Location**   | Single canonical source           | Scattered across docs        |
+| **Hierarchy**  | Scannable headers                 | Buried in paragraphs         |
+| **Typography** | **BOLD**, CAPS, emoji             | Plain text                   |
+| **Voice**      | Imperative (DO THIS)              | Advisory (you could)         |
+| **Handover**   | Command→SAIF flag                 | Location + full code         |
 
 ---
 

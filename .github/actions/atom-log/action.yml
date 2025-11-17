@@ -1,0 +1,28 @@
+name: 'ATOM Trail Logger'
+description: 'Log GitHub Actions events to ATOM trail'
+author: 'KENL Framework'
+
+inputs:
+  event_type:
+    description: 'ATOM event type (CI, DEPLOY, TEST, etc.)'
+    required: true
+  message:
+    description: 'Log message'
+    required: true
+
+outputs:
+  atom_tag:
+    description: 'Generated ATOM tag'
+    value: ${{ steps.generate.outputs.atom_tag }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Generate ATOM Tag
+      id: generate
+      shell: bash
+      run: |
+        ATOM_TAG="ATOM-${{ inputs.event_type }}-$(date +%Y%m%d)-${{ github.run_number }}"
+        echo "atom_tag=${ATOM_TAG}" >> $GITHUB_OUTPUT
+        echo "Generated: ${ATOM_TAG}"
+        echo "**ATOM:** ${ATOM_TAG} - ${{ inputs.message }}" >> $GITHUB_STEP_SUMMARY

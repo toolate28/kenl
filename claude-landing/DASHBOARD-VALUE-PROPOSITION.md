@@ -177,27 +177,44 @@ Each instance sees:
 
 ## Integration Points
 
-### 1. Session Start Hook (Recommended)
+### 1. Session Start Hook (Proposed Pattern)
 
-**Note:** The `.claude/hooks/session-start.sh` hook is **not** a built-in feature of Claude Code. You must manually create this directory and script to enable automatic dashboard display on session start.
+> **Note:** The `.claude/hooks/session-start.sh` hook is **not** a built-in feature of Claude Code. You must manually create this directory and script to enable automatic dashboard display on session start.
 
 **Setup Instructions:**
 
 1. Create the hooks directory if it does not exist:
    ```bash
    mkdir -p ~/.claude/hooks
+   ```
+2. Create the session start hook script:
+   ```bash
+   cat > ~/.claude/hooks/session-start.sh <<'EOF'
+   #!/bin/bash
+   # Auto-display dashboard on session start
+   ./scripts/kenl-dashboard.sh
+   EOF
+   chmod +x ~/.claude/hooks/session-start.sh
+   ```
+3. Configure your Claude Code environment (or launcher) to execute this script at session start. (Refer to your environment's documentation for hook integration.)
+
+**Result:** Every Claude Code session starts with full context, provided the hook is properly configured.
+
 ---
 
-### 2. Slash Command
+### 2. Slash Command (Proposed Pattern)
 
-**File:** `.claude/commands/dashboard.md`
+> **Note:** The slash command mechanism (`/dashboard`) and the `.claude/commands/dashboard.md` hook are a **proposed integration pattern** for future Claude Code enhancements. This is **not a standard feature** of Claude Code as of November 2024. See ADR and ARCREF for implementation status.
 
-> **Note:** The slash command mechanism (`/dashboard`) and the `.claude/commands/dashboard.md` hook are a **proposed integration pattern** for future Claude Code enhancements. This is **not a standard feature** of Claude Code as of June 2024. See ADR and ARCREF for implementation status.
+**Proposed File:** `.claude/commands/dashboard.md`
 
 ```markdown
 Run the KENL live dashboard:
 
 ./scripts/kenl-dashboard.sh
+```
+
+**Usage (Proposed):** User types `/dashboard` anytime
 
 ---
 
