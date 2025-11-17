@@ -273,7 +273,7 @@ render_dashboard() {
     if [[ "$play_cards" -gt 0 ]]; then
         clicks_to_confidence=$(awk "BEGIN {printf \"%.1f\", 5/$play_cards}")
     else
-        clicks_to_confidence=5.0
+        clicks_to_confidence=5
     fi
 
     # ========================================================================

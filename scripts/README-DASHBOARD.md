@@ -76,17 +76,7 @@ chmod +x ~/.kenl/hooks/session-dashboard.sh
 ```bash
 rm ~/.kenl/hooks/session-dashboard.sh
 ```
-To show the dashboard automatically on every session start, create a shell hook file in your user-space environment:
 
-```bash
-# Create a session start hook for KENL dashboard
-mkdir -p ~/.kenl/hooks
-cat <<'EOF' > ~/.kenl/hooks/session-dashboard.sh
-#!/usr/bin/env bash
-# ATOM-HOOK-20251116-001
-./scripts/kenl-dashboard.sh
-EOF
-chmod +x ~/.kenl/hooks/session-dashboard.sh
 ---
 
 ### 2. Slash Command (Planned Feature)
