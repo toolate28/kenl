@@ -577,8 +577,9 @@ pre-commit run --all-files
 # Validate shell scripts
 find . -name "*.sh" -type f -exec shellcheck --severity=style {} \;
 
-# Check YAML files
-find . -name "*.yaml" -o -name "*.yml" | xargs -I {} sh -c 'python3 -m yaml validate {}'
+# Check YAML files (already handled by pre-commit 'check-yaml' hook)
+# Run pre-commit to validate YAML files:
+pre-commit run check-yaml --all-files
 
 # Validate JSON files
 find . -name "*.json" -type f -exec python3 -m json.tool {} \; > /dev/null
