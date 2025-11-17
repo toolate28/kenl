@@ -1,0 +1,67 @@
+# Example workflow demonstrating ATOM logging
+# Rename to .yml to enable
+#
+# ATOM-CI-20251116-001: Example ATOM logging workflow
+# Intent: Demonstrate ATOM action usage in CI/CD pipelines
+
+name: ATOM Logging Example
+
+on:
+  workflow_dispatch:  # Manual trigger only (this is an example)
+
+jobs:
+  example-with-atom:
+    name: Example Job with ATOM Logging
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v5
+      
+      - name: Log workflow start
+        uses: ./.github/actions/atom-log
+        with:
+          event_type: CI
+          message: "Started example workflow for ${{ github.ref }}"
+      
+      - name: Run example task
+        run: |
+          echo "Running example task..."
+          sleep 2
+          echo "Task completed"
+      
+      - name: Log task completion
+        uses: ./.github/actions/atom-log
+        with:
+          event_type: CI
+          message: "Example task completed successfully"
+      
+      - name: Conditional logging on failure
+        if: failure()
+        uses: ./.github/actions/atom-log
+        with:
+          event_type: CI
+          message: "Workflow failed - check logs for details"
+
+# How to use this pattern in your workflows:
+#
+# 1. Add ATOM logging at workflow start
+# 2. Log significant steps or milestones
+# 3. Log completion (success/failure)
+# 4. Check $GITHUB_STEP_SUMMARY for ATOM tags
+#
+# Example integration in ci.yml:
+#
+# jobs:
+#   test:
+#     steps:
+#       - uses: actions/checkout@v5
+#       - uses: ./.github/actions/atom-log
+#         with:
+#           event_type: CI
+#           message: "Running tests for commit ${{ github.sha }}"
+#       - run: pytest
+#       - uses: ./.github/actions/atom-log
+#         if: success()
+#         with:
+#           event_type: TEST
+#           message: "All tests passed"
