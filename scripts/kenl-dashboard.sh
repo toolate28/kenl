@@ -70,6 +70,14 @@ get_local_ip() {
 }
 
 get_public_ip() {
+    # NOTE: This function makes external network calls to determine public IP.
+    # Privacy consideration: Queries https://api.ipify.org or https://ifconfig.me
+    # Set KENL_SKIP_PUBLIC_IP=1 to disable this feature
+    if [[ "${KENL_SKIP_PUBLIC_IP:-0}" == "1" ]]; then
+        echo "disabled"
+        return
+    fi
+    
     # Try multiple services (fast timeout)
     curl -s --max-time 2 https://api.ipify.org 2>/dev/null || \
     curl -s --max-time 2 https://ifconfig.me 2>/dev/null || \
@@ -169,8 +177,19 @@ get_disk_usage() {
 }
 
 get_repo_stats() {
-    local total_docs=$(find "$REPO_ROOT" -name "*.md" -type f 2>/dev/null | wc -l)
-    local atom_docs=$(grep -r "^atom:" "$REPO_ROOT" --include="*.md" 2>/dev/null | wc -l)
+    # Cache markdown file list to avoid redundant traversal
+    local md_files
+    mapfile -t md_files < <(find "$REPO_ROOT" -name "*.md" -type f 2>/dev/null)
+    local total_docs="${#md_files[@]}"
+    
+    # Count number of markdown files containing at least one ATOM tag
+    local atom_docs=0
+    for file in "${md_files[@]}"; do
+        if grep -q "^atom:" "$file" 2>/dev/null; then
+            atom_docs=$((atom_docs + 1))
+        fi
+    done
+    
     local modules=$(find "$REPO_ROOT/modules" -maxdepth 1 -type d -name "KENL*" 2>/dev/null | wc -l)
     local play_cards=$(find "$REPO_ROOT" -path "*/play-cards/*.yaml" -type f 2>/dev/null | wc -l)
 
@@ -185,9 +204,23 @@ draw_bar() {
     local value=$1
     local max=${2:-100}
     local width=${3:-40}
+    
+    local filled
+    local empty
 
-    local filled=$(( value * width / max ))
-    local empty=$(( width - filled ))
+    if (( max <= 0 )); then
+        filled=0
+        empty=$width
+    else
+        filled=$(( value * width / max ))
+        # Clamp filled to [0, width]
+        if (( filled < 0 )); then
+            filled=0
+        elif (( filled > width )); then
+            filled=$width
+        fi
+        empty=$(( width - filled ))
+    fi
 
     printf "["
     printf "%${filled}s" | tr ' ' "$BAR_FULL"
@@ -222,10 +255,26 @@ render_dashboard() {
     mapfile -t recent_atoms < <(get_recent_atom_trails)
     mapfile -t recent_commits < <(get_last_commits 3)
 
-    # Calculate scores (from previous analysis)
-    local doc_score=100
-    local reusability=82
-    local clicks_to_confidence=1.8
+    # Calculate scores dynamically
+    # Documentation score: percent of atom_docs to total_docs (0-100)
+    local doc_score=0
+    if [[ "$total_docs" -gt 0 ]]; then
+        doc_score=$(( (atom_docs * 100) / total_docs ))
+    fi
+    
+    # Reusability: percent of modules to total_docs (0-100)
+    local reusability=0
+    if [[ "$total_docs" -gt 0 ]]; then
+        reusability=$(( (modules * 100) / total_docs ))
+    fi
+    
+    # Clicks to confidence: estimate as inverse of play_cards (more play cards = fewer clicks)
+    local clicks_to_confidence=0
+    if [[ "$play_cards" -gt 0 ]]; then
+        clicks_to_confidence=$(awk "BEGIN {printf \"%.1f\", 5/$play_cards}")
+    else
+        clicks_to_confidence=5
+    fi
 
     # ========================================================================
     # RENDER OUTPUT
@@ -248,7 +297,7 @@ render_dashboard() {
   },
   "git": {
     "branch": "$git_branch",
-    "recent_commits": $(printf '%s\n' "${recent_commits[@]}" | jq -R . | jq -s .),
+    "recent_commits": $(printf '%s\n' "${recent_commits[@]}" | jq -R . | jq -s .)
   },
   "repository": {
     "total_docs": $total_docs,
@@ -328,7 +377,7 @@ JSON
 
     echo -e "  Total Docs:      ${CYAN}$total_docs${RESET}"
     if [[ "$total_docs" -gt 0 ]]; then
-        atom_tagged_pct=$(( atom_docs * 100 / total_docs ))
+        local atom_tagged_pct=$(( atom_docs * 100 / total_docs ))
         echo -e "  ATOM Tagged:     ${CYAN}$atom_docs${RESET} (${GREEN}${atom_tagged_pct}%${RESET})"
     else
         echo -e "  ATOM Tagged:     ${CYAN}$atom_docs${RESET} (${YELLOW}N/A${RESET})"

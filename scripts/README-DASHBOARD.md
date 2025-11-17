@@ -52,7 +52,7 @@ atom: ATOM-DOC-20251116-003
 
 ## Integration Options
 
-### 1. Session Start Hook (Recommended)
+### 1. Session Start Hook (Manual Setup)
 
 To show the dashboard automatically on every session start, create a shell hook file in your user-space environment:
 
@@ -65,17 +65,34 @@ cat <<'EOF' > ~/.kenl/hooks/session-dashboard.sh
 ./scripts/kenl-dashboard.sh
 EOF
 chmod +x ~/.kenl/hooks/session-dashboard.sh
----
+```
 
-### 2. Slash Command
+**Expected:** `SAIF-HOOK-DASHBOARD-20251116-001` (CTFWI flag drop)
+
+**Result:** Dashboard shows automatically on every session start (when sourced by your shell or session manager)
+
+**Rollback:** Remove the hook file:
 
 ```bash
+rm ~/.kenl/hooks/session-dashboard.sh
+```
+
+---
+
+### 2. Slash Command (Planned Feature)
+
+> **Note:** The slash command integration is not yet implemented.
+> This section describes a planned feature for future releases.
+
+**Planned Usage:**
+```bash
+# Future command (not yet available)
 kenl-add-slash-command status dashboard
 ```
 
 **Expected:** `SAIF-CMD-STATUS-20251116-001` (CTFWI flag drop)
 
-**Usage:** Type `/status` anytime to refresh dashboard
+**Planned:** Once implemented, typing `/status` will refresh the dashboard
 
 ---
 
@@ -277,8 +294,19 @@ bash scripts/kenl-dashboard.sh
 
 ### Q: Does this send data anywhere?
 
-**A:** No. The only external network call is `get_public_ip()` which queries `https://api.ipify.org`.
-All other data is local. You can disable public IP lookup by commenting out the function call.
+**A:** The only external network calls are made by `get_public_ip()` which queries `https://api.ipify.org` or `https://ifconfig.me` to determine your public IP address.
+
+**Privacy consideration:** This external call may reveal your public IP to these services. All other data is collected locally.
+
+**To disable public IP lookup:**
+```bash
+# Set environment variable before running
+export KENL_SKIP_PUBLIC_IP=1
+./scripts/kenl-dashboard.sh
+
+# Or add to your shell profile (~/.bashrc, ~/.zshrc)
+echo 'export KENL_SKIP_PUBLIC_IP=1' >> ~/.bashrc
+```
 
 ---
 
