@@ -569,10 +569,7 @@ function Get-KenlInfo {
     Write-Host "Available Modules:" -ForegroundColor Cyan
 
     # Dynamically discover available modules in the KENL PowerShell directory
-    $moduleDir = Split-Path $PSScriptRoot -Parent | Join-Path -ChildPath "KENL0-system\powershell"
-    if (-not (Test-Path $moduleDir)) {
-        $moduleDir = $PSScriptRoot
-    }
+    $moduleDir = $PSScriptRoot
 
     $moduleFiles = Get-ChildItem -Path $moduleDir -Filter "*.psd1" -ErrorAction SilentlyContinue
 
