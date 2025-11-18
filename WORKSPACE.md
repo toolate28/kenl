@@ -71,20 +71,20 @@ type: dashboard
 
 ## 🎯 High-Impact Projects (Prioritized)
 
-### Priority #1: ATOM MCP Server ⭐⭐⭐⭐⭐
+### Priority #1: ATOM MCP Server [*****]
 **Status:** Ready to begin
 **Timeline:** 2-3 weeks
 **Viability:** VERY HIGH
 **Next:** Create `mcp-servers/atom-trail-mcp/` directory, scaffold code
 **Reference:** [[claude-landing/HIGH-IMPACT-PROJECTS-ASSESSMENT#Project 1]]
 
-### Priority #2: ATOM Database ⭐⭐⭐⭐⭐
+### Priority #2: ATOM Database [*****]
 **Status:** Design complete, ready to implement
 **Timeline:** 3-4 weeks
 **Viability:** HIGH
 **Reference:** [[claude-landing/HIGH-IMPACT-PROJECTS-ASSESSMENT#Project 4]]
 
-### Priority #3: GitHub Action ⭐⭐⭐⭐
+### Priority #3: GitHub Action [****]
 **Status:** Ready to implement
 **Timeline:** 1 week
 **Viability:** VERY HIGH
@@ -226,7 +226,7 @@ find . -name "*VALIDATION*.md" -o -name "*SESSION*.md"
 
 ### Find High-Priority Work
 ```bash
-grep -r "⭐⭐⭐⭐⭐" --include="*.md" .
+grep -r "\*\*\*\*\*" --include="*.md" .
 ```
 
 ### Check Commit Velocity

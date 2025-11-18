@@ -182,7 +182,7 @@ SORT file.ctime DESC
 ```dataview
 TABLE status, priority
 FROM "docs"
-WHERE contains(file.content, "⭐⭐⭐⭐⭐")
+WHERE contains(file.content, "*****")
 ```
 ````
 
