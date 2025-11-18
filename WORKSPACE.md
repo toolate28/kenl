@@ -9,7 +9,7 @@ type: dashboard
 # KENL Workspace - Main Dashboard
 
 **Last Updated:** 2025-11-18
-**Current Branch:** `claude/gather-metastudies-reviews-013ZK94S6fNFsdjD7D3GVQs8`
+**Current Branch:** `claude/gather-meta-studies-reviews-013ZK94S6fNFsdjD7D3GVQs8`
 **Next Session:** [[docs/OBSIDIAN-WORKSPACE-SETUP]] for cross-platform access
 
 ---

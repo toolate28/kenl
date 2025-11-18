@@ -595,15 +595,15 @@ Cost saved: $168K-196K/year
 
 ## Comparison Matrix
 
-| Project | Viability | Impact | Time | Alignment | Priority |
-|---------|-----------|--------|------|-----------|----------|
-| **1. ATOM MCP Server** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 2-3 weeks | ✅✅✅ | **#1** |
-| **2. GitHub Action** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 1 week | ✅✅✅ | **#3** |
-| **3. VS Code Extension** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 3-4 weeks | ✅✅✅ | #4 |
-| **4. ATOM Database** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 3-4 weeks | ✅✅✅ | **#2** |
-| **5. SAIF Navigator** | ⭐⭐⭐ | ⭐⭐⭐⭐ | 4-6 weeks | ✅✅ | #5 |
-| **6. Play Card Platform** | ⭐⭐⭐⭐ | ⭐⭐⭐ | 2-3 weeks | ✅✅ | #6 |
-| **7. AI Handoff Toolkit** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 3 weeks | ✅✅✅ | **#2** |
+| Project                      | Viability   | Impact      | Time       | Alignment | Priority |
+|------------------------------|-------------|-------------|------------|-----------|----------|
+| **1. ATOM MCP Server**       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 2-3 weeks  | ✅✅✅    | **#1**   |
+| **2. GitHub Action**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | 1 week     | ✅✅✅    | **#3**   |
+| **3. VS Code Extension**     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 3-4 weeks  | ✅✅✅    | #4       |
+| **4. ATOM Database**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 3-4 weeks  | ✅✅✅    | **#2**   |
+| **5. SAIF Navigator**        | ⭐⭐⭐     | ⭐⭐⭐⭐   | 4-6 weeks  | ✅✅      | #5       |
+| **6. Play Card Platform**    | ⭐⭐⭐⭐   | ⭐⭐⭐     | 2-3 weeks  | ✅✅      | #6       |
+| **7. AI Handoff Toolkit**    | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 3 weeks    | ✅✅✅    | **#2**   |
 
 ---
 
@@ -666,15 +666,15 @@ Design with governance → Validate intent → Prevent problems → Monitor alig
 
 **How Each Project Embodies Day-Zero Design:**
 
-| Project | Prevents What? | How? |
-|---------|----------------|------|
-| **ATOM MCP Server** | AI fragmentation, context loss | Intent preservation designed into protocol |
-| **GitHub Action** | Undocumented intent, future confusion | Validation BEFORE merge, not after questions |
-| **VS Code Extension** | "Why was this done?" questions | Context available instantly, not reconstructed |
-| **ATOM Database** | Alignment drift, silent failures | Continuous monitoring, not reactive investigation |
-| **SAIF Navigator** | User frustration, wrong paths | Intent-driven guidance, not trial-and-error |
-| **Play Card Platform** | Trial-and-error gaming setup | Validated configs upfront, not troubleshooting |
-| **AI Handoff Toolkit** | Context loss between AIs | Alignment preserved by design, not re-established |
+| Project                   | Prevents What?                       | How?                                                |
+|---------------------------|--------------------------------------|-----------------------------------------------------|
+| **ATOM MCP Server**       | AI fragmentation, context loss       | Intent preservation designed into protocol          |
+| **GitHub Action**         | Undocumented intent, future confusion| Validation BEFORE merge, not after questions        |
+| **VS Code Extension**     | "Why was this done?" questions       | Context available instantly, not reconstructed      |
+| **ATOM Database**         | Alignment drift, silent failures     | Continuous monitoring, not reactive investigation   |
+| **SAIF Navigator**        | User frustration, wrong paths        | Intent-driven guidance, not trial-and-error         |
+| **Play Card Platform**    | Trial-and-error gaming setup         | Validated configs upfront, not troubleshooting      |
+| **AI Handoff Toolkit**    | Context loss between AIs             | Alignment preserved by design, not re-established   |
 
 **The Pattern:**
 
