@@ -295,11 +295,11 @@ git log --grep="ATOM-CFG-042" --format="%B"
 
 ## COMPARISON TABLE
 
-| Concept | What It Sees | What It Misses | Use Case |
-|---------|--------------|----------------|----------|
-| **Hindsight** | WHAT happened | WHY it happened | Post-mortem (reactive) |
-| **Foresight** | WHAT might happen | IF aligned with intent | Planning (proactive) |
-| **Aligned-Sight** | WHAT + WHY + IF aligned | Nothing (complete) | Continuous adaptation |
+| Concept               | What It Sees                | What It Misses         | Use Case                  |
+|-----------------------|-----------------------------|------------------------|---------------------------|
+| **Hindsight**         | WHAT happened               | WHY it happened        | Post-mortem (reactive)    |
+| **Foresight**         | WHAT might happen           | IF aligned with intent | Planning (proactive)      |
+| **Aligned-Sight**     | WHAT + WHY + IF aligned     | Nothing (complete)     | Continuous adaptation     |
 
 **ATOM/SAIF provides:** Aligned-Sight as infrastructure.
 

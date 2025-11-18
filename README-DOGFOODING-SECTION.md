@@ -50,13 +50,13 @@ graph TD
 
 **Observable patterns:**
 
-| What You'll See | What It Actually Is | Why It Matters |
-|-----------------|---------------------|----------------|
-| Typos in commit messages | Testing if ATOM trail parsing is typo-resistant | Real-world input is messy |
-| Rapid file renames | Testing if git history preserves intent across moves | Refactoring happens constantly |
-| Duplicate content | Testing if validation catches redundancy | Content drift is common |
-| "Silly mistakes" | Deliberate experiments with failure modes | Framework must handle human error |
-| Contradictory docs | Testing which AI instances catch inconsistencies | Multi-author collaboration is hard |
+| What You'll See          | What It Actually Is                                      | Why It Matters                       |
+|--------------------------|----------------------------------------------------------|--------------------------------------|
+| Typos in commit messages | Testing if ATOM trail parsing is typo-resistant          | Real-world input is messy            |
+| Rapid file renames       | Testing if git history preserves intent across moves     | Refactoring happens constantly       |
+| Duplicate content        | Testing if validation catches redundancy                 | Content drift is common              |
+| "Silly mistakes"         | Deliberate experiments with failure modes                | Framework must handle human error    |
+| Contradictory docs       | Testing which AI instances catch inconsistencies         | Multi-author collaboration is hard   |
 
 **This is intentional chaos.**
 
