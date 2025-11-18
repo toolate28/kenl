@@ -1,13 +1,141 @@
 ---
 project: KENL Cloudflare Infrastructure
-atom: ATOM-INFRA-20251116-001
+atom: ATOM-README-20251116-002
 classification: OWI-STANDARD
 status: production-ready
+platform: Windows, Linux, macOS
 ---
 
 # KENL Cloudflare Infrastructure
 
-**Modular, composable Cloudflare services for KENL with SAIF workflow automation**
+**Modular, cross-platform Cloudflare deployment for KENL with SAIF workflows**
+
+> 🌍 **Platform Support**: Windows 10/11, Linux (any distro), macOS 12+
+
+---
+
+## 🚀 Quick Start (Choose Your Clone Method)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     CLONE OPTIONS (Pick One)                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Option A: Full KENL Repository (Recommended)                          │
+│  ┌───────────────────────────────────────────────────────────┐         │
+│  │ git clone https://github.com/toolate28/kenl.git           │         │
+│  │ cd kenl/cloudflare-infrastructure                         │         │
+│  └───────────────────────────────────────────────────────────┘         │
+│  ✅ Get: Everything (all KENL modules + Cloudflare)                    │
+│  ✅ Size: ~50MB                                                        │
+│  ✅ Use case: Full KENL ecosystem                                      │
+│                                                                         │
+│  ─────────────────────────────────────────────────────────────         │
+│                                                                         │
+│  Option B: Sparse Clone (Cloudflare Only)                             │
+│  ┌───────────────────────────────────────────────────────────┐         │
+│  │ git clone --depth 1 --filter=blob:none \                 │         │
+│  │   --sparse https://github.com/toolate28/kenl.git         │         │
+│  │ cd kenl                                                    │         │
+│  │ git sparse-checkout set cloudflare-infrastructure         │         │
+│  └───────────────────────────────────────────────────────────┘         │
+│  ✅ Get: Just cloudflare-infrastructure/ directory                     │
+│  ✅ Size: ~5MB                                                         │
+│  ✅ Use case: Standalone Cloudflare deployment                         │
+│                                                                         │
+│  ─────────────────────────────────────────────────────────────         │
+│                                                                         │
+│  Option C: Submodule (Integrate into Your Project)                    │
+│  ┌───────────────────────────────────────────────────────────┐         │
+│  │ cd your-project/                                           │         │
+│  │ git submodule add \                                        │         │
+│  │   https://github.com/toolate28/kenl.git kenl             │         │
+│  │ git submodule update --init --depth 1 \                   │         │
+│  │   --sparse kenl/cloudflare-infrastructure                 │         │
+│  └───────────────────────────────────────────────────────────┘         │
+│  ✅ Get: Cloudflare infrastructure as submodule                        │
+│  ✅ Size: ~5MB                                                         │
+│  ✅ Use case: Add to existing project, track KENL updates             │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**🔗 Immutable Design**: All scripts use relative paths. Works with ANY clone method. No broken links.
+
+---
+
+## 🖥️ Platform-Specific Setup
+
+<details>
+<summary><b>Windows (PowerShell)</b></summary>
+
+```powershell
+# Install Node.js (for Wrangler)
+winget install OpenJS.NodeJS
+
+# Install Wrangler CLI
+npm install -g wrangler
+
+# Clone (choose Option A, B, or C above)
+git clone https://github.com/toolate28/kenl.git
+cd kenl\cloudflare-infrastructure
+
+# Authenticate
+wrangler login
+
+# Deploy
+.\workflows\SAIF-CLOUDFLARE-SETUP.md
+```
+</details>
+
+<details>
+<summary><b>Linux (Bash)</b></summary>
+
+```bash
+# Install Node.js (Ubuntu/Debian)
+sudo apt update && sudo apt install -y nodejs npm
+
+# OR (Fedora/RHEL)
+sudo dnf install -y nodejs npm
+
+# Install Wrangler CLI
+npm install -g wrangler
+
+# Clone (choose Option A, B, or C above)
+git clone https://github.com/toolate28/kenl.git
+cd kenl/cloudflare-infrastructure
+
+# Authenticate
+wrangler login
+
+# Deploy
+./workflows/SAIF-CLOUDFLARE-SETUP.md
+```
+</details>
+
+<details>
+<summary><b>macOS (Zsh/Bash)</b></summary>
+
+```bash
+# Install Node.js (via Homebrew)
+brew install node
+
+# Install Wrangler CLI
+npm install -g wrangler
+
+# Clone (choose Option A, B, or C above)
+git clone https://github.com/toolate28/kenl.git
+cd kenl/cloudflare-infrastructure
+
+# Authenticate
+wrangler login
+
+# Deploy
+./workflows/SAIF-CLOUDFLARE-SETUP.md
+```
+</details>
+
+---
 
 ## Architecture Principles
 
@@ -196,14 +324,42 @@ wrangler dev
 wrangler d1 execute kenl-atom-trails --local --file=../../schemas/atom_trails.sql
 ```
 
+## 🚨 Immutability Guarantee
+
+### Works Standalone - No Breaking Links
+All scripts use **relative paths only**:
+
+```bash
+# ✅ Works in ANY clone method (A, B, or C)
+./scripts/create-d1-database.sh kenl-atom-trails
+./scripts/apply-schema.sh kenl-atom-trails schemas/atom_trails.sql
+./scripts/deploy-worker.sh api-atom --production
+```
+
+All documentation links are relative:
+```markdown
+# ✅ Always works
+[Architecture](docs/ARCHITECTURE.md)
+[Deployment Guide](docs/DEPLOYMENT.md)
+[Setup Workflow](workflows/SAIF-CLOUDFLARE-SETUP.md)
+```
+
+**If you extract just `cloudflare-infrastructure/`**:
+- ✅ All scripts work
+- ✅ All documentation accessible
+- ✅ All workflows functional
+- ✅ Workers deploy independently
+
+---
+
 ## ATOM Trail
 
 ```
-ATOM-INFRA-20251116-001: Created modular Cloudflare infrastructure foundation
-Intent: Enable KENL web services with *.toolated.online domains
-Architecture: Small, composable scripts following KENL modularity principles
-Validation: Follows existing ATOM database design, extends with D1/Workers/R2
-Next: Implement individual schemas, workers, and SAIF workflows
+ATOM-README-20251116-002: Updated README with cross-platform clone options
+Intent: Enable standalone module usage on Windows/Linux/Mac with immutable links
+Architecture: Visual clone chart + platform-specific setup guides
+Validation: All relative paths ensure no broken dependencies
+Previous: ATOM-INFRA-20251116-001
 ```
 
 ## License
