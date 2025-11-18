@@ -1,91 +1,16 @@
-# Linux Quick Start
+# Linux - Redirected
 
-**KENL Cloudflare Infrastructure for Linux (Any Distro)**
+**This file has been consolidated.**
 
-## One-Command Clone
-
-```bash
-# Full repository (recommended)
-git clone https://github.com/toolate28/kenl.git
-cd kenl/cloudflare-infrastructure
-
-# OR: Sparse clone (Cloudflare only, ~5MB)
-git clone --depth 1 --filter=blob:none --sparse https://github.com/toolate28/kenl.git
-cd kenl
-git sparse-checkout set cloudflare-infrastructure
-cd cloudflare-infrastructure
-```
-
-## Setup (5 minutes)
-
-### Ubuntu/Debian
-
-```bash
-# 1. Install Node.js
-sudo apt update && sudo apt install -y nodejs npm
-
-# 2. Install Wrangler CLI
-npm install -g wrangler
-
-# 3. Authenticate with Cloudflare
-wrangler login
-
-# 4. Verify
-wrangler whoami
-```
-
-### Fedora/RHEL/Bazzite
-
-```bash
-# 1. Install Node.js
-sudo dnf install -y nodejs npm
-
-# 2. Install Wrangler CLI
-npm install -g wrangler
-
-# 3. Authenticate with Cloudflare
-wrangler login
-
-# 4. Verify
-wrangler whoami
-```
-
-### Arch Linux
-
-```bash
-# 1. Install Node.js
-sudo pacman -S nodejs npm
-
-# 2. Install Wrangler CLI
-npm install -g wrangler
-
-# 3. Authenticate with Cloudflare
-wrangler login
-
-# 4. Verify
-wrangler whoami
-```
-
-## Deploy (50 minutes)
-
-```bash
-# Follow step-by-step guide
-./workflows/SAIF-CLOUDFLARE-SETUP.md
-```
-
-## Quick Commands
-
-```bash
-# Create D1 database
-./scripts/create-d1-database.sh kenl-atom-trails
-
-# Deploy worker
-./scripts/deploy-worker.sh api-atom --production
-
-# Sync ATOM database
-./scripts/sync-atom-to-d1.sh
-```
+👉 **Go to**: [START-HERE.md](START-HERE.md) and choose "Linux"
 
 ---
 
-**Next**: See [README.md](README.md) for full documentation
+**What happened?**
+- All platform quick starts merged into START-HERE.md
+- Zero duplication
+- Right info at the right time
+
+**Or jump directly to**:
+- Have Cloudflare account? → [SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md](workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md)
+- No account yet? → [SAIF-CLOUDFLARE-SETUP.md](workflows/SAIF-CLOUDFLARE-SETUP.md)

@@ -37,7 +37,7 @@ node --version | grep -E "v(18|19|20|21)" || echo "⚠️  Node.js 18+ recommend
 
 ---
 
-## Step 1: Authenticate & Validate (2 minutes)
+## Step 1: Authenticate & Validate
 
 ### Intent
 Establish authenticated connection to Cloudflare account and capture Account ID.
@@ -97,7 +97,7 @@ echo "ATOM-CF-AUTH-$(date +%Y%m%d)-001: Authenticated with Cloudflare account" >
 
 ---
 
-## Step 2: Create D1 Database (5 minutes)
+## Step 2: Create D1 Database
 
 ### Intent
 Create primary D1 database for ATOM trails with automatic ID capture.
@@ -154,7 +154,7 @@ echo "ATOM-CF-D1-$(date +%Y%m%d)-001: Created D1 database kenl-atom-trails" >> ~
 
 ---
 
-## Step 3: Apply Database Schemas (3 minutes)
+## Step 3: Apply Database Schemas
 
 ### Intent
 Apply all 4 table schemas to D1 database with verification.
@@ -227,7 +227,7 @@ echo "ATOM-CF-SCHEMA-$(date +%Y%m%d)-001: Applied 4 database schemas" >> ~/.kenl
 
 ---
 
-## Step 4: Create KV Namespaces (5 minutes)
+## Step 4: Create KV Namespaces
 
 ### Intent
 Create 3 KV namespaces for sessions, caching, and rate limiting with ID capture.
@@ -301,7 +301,7 @@ echo "ATOM-CF-KV-$(date +%Y%m%d)-001: Created 3 KV namespaces" >> ~/.kenl/atom-t
 
 ---
 
-## Step 5: Update Worker Configurations (3 minutes)
+## Step 5: Update Worker Configurations
 
 ### Intent
 Replace placeholder values in wrangler.toml files with actual resource IDs.
@@ -367,7 +367,7 @@ echo "ATOM-CF-CONFIG-$(date +%Y%m%d)-001: Updated worker configurations" >> ~/.k
 
 ---
 
-## Step 6: Deploy Workers to Production (5 minutes)
+## Step 6: Deploy Workers to Production
 
 ### Intent
 Deploy both workers to production with testing and verification.
@@ -455,7 +455,7 @@ curl -X POST "$LOGGING_URL/api/log" \
 
 ---
 
-## Step 7: Final Verification (2 minutes)
+## Step 7: Final Verification
 
 ### Intent
 Comprehensive validation of entire deployment.
@@ -608,7 +608,7 @@ Cloudflare Resources Created:
 ├── Worker: kenl-api-atom (4 endpoints)
 └── Worker: kenl-logging (1 endpoint)
 
-Total Deployment Time: ~25 minutes
+Total Deployment Time: TBD (not yet verified)
 Infrastructure Cost: $0/month (Free tier)
 ```
 
