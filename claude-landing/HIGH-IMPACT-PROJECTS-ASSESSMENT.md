@@ -18,7 +18,7 @@ authority: strategic-planning
 
 ---
 
-## Project 1: ATOM Trail MCP Server ⭐⭐⭐⭐⭐
+## Project 1: ATOM Trail MCP Server [*****]
 
 ### The Proposal
 
@@ -188,7 +188,7 @@ npm install -g @kenl/atom-trail-mcp
 
 ---
 
-## Project 2: ATOM Trail GitHub Action ⭐⭐⭐⭐
+## Project 2: ATOM Trail GitHub Action [****]
 
 ### The Proposal
 
@@ -259,7 +259,7 @@ jobs:
 
 ---
 
-## Project 3: VS Code ATOM Trail Viewer Extension ⭐⭐⭐⭐
+## Project 3: VS Code ATOM Trail Viewer Extension [****]
 
 ### The Proposal
 
@@ -320,7 +320,7 @@ Context in 3 seconds, not 10 minutes
 
 ---
 
-## Project 4: ATOM Database (KENL4) ⭐⭐⭐⭐⭐
+## Project 4: ATOM Database (KENL4) [*****]
 
 ### The Proposal
 
@@ -397,7 +397,7 @@ ORDER BY frequency DESC;
 
 ---
 
-## Project 5: SAIF Navigator (Intent-Driven Docs) ⭐⭐⭐⭐
+## Project 5: SAIF Navigator (Intent-Driven Docs) [****]
 
 ### The Proposal
 
@@ -467,7 +467,7 @@ SAIF Navigator: "Here's your 3-step pathway based on your GPU and games"
 
 ---
 
-## Project 6: Play Card Sharing Platform ⭐⭐⭐
+## Project 6: Play Card Sharing Platform [***]
 
 ### The Proposal
 
@@ -532,7 +532,7 @@ Time: 3 minutes
 
 ---
 
-## Project 7: Cross-Platform AI Handoff Toolkit ⭐⭐⭐⭐⭐
+## Project 7: Cross-Platform AI Handoff Toolkit [*****]
 
 ### The Proposal
 
@@ -595,15 +595,15 @@ Cost saved: $168K-196K/year
 
 ## Comparison Matrix
 
-| Project                      | Viability   | Impact      | Time       | Alignment | Priority |
-|------------------------------|-------------|-------------|------------|-----------|----------|
-| **1. ATOM MCP Server**       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 2-3 weeks  | ✅✅✅    | **#1**   |
-| **2. GitHub Action**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | 1 week     | ✅✅✅    | **#3**   |
-| **3. VS Code Extension**     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 3-4 weeks  | ✅✅✅    | #4       |
-| **4. ATOM Database**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 3-4 weeks  | ✅✅✅    | **#2**   |
-| **5. SAIF Navigator**        | ⭐⭐⭐     | ⭐⭐⭐⭐   | 4-6 weeks  | ✅✅      | #5       |
-| **6. Play Card Platform**    | ⭐⭐⭐⭐   | ⭐⭐⭐     | 2-3 weeks  | ✅✅      | #6       |
-| **7. AI Handoff Toolkit**    | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 3 weeks    | ✅✅✅    | **#2**   |
+| Project                      | Viability | Impact    | Time       | Alignment | Priority |
+|------------------------------|-----------|-----------|------------|-----------|----------|
+| **1. ATOM MCP Server**       | *****     | *****     | 2-3 weeks  | [Y][Y][Y] | **#1**   |
+| **2. GitHub Action**         | *****     | ****      | 1 week     | [Y][Y][Y] | **#3**   |
+| **3. VS Code Extension**     | ****      | ****      | 3-4 weeks  | [Y][Y][Y] | #4       |
+| **4. ATOM Database**         | *****     | *****     | 3-4 weeks  | [Y][Y][Y] | **#2**   |
+| **5. SAIF Navigator**        | ***       | ****      | 4-6 weeks  | [Y][Y]    | #5       |
+| **6. Play Card Platform**    | ****      | ***       | 2-3 weeks  | [Y][Y]    | #6       |
+| **7. AI Handoff Toolkit**    | ****      | *****     | 3 weeks    | [Y][Y][Y] | **#2**   |
 
 ---
 
