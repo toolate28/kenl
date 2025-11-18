@@ -471,6 +471,147 @@ cat claude-landing/QUICK-REFERENCE.md # Common commands
 4. **For governance:** Check `governance/` templates
 5. **For security:** Follow `SECURITY.md` procedures
 
+## Task Assignment Guidelines for Copilot Coding Agent
+
+### Appropriate Tasks
+
+**Good Tasks for Copilot:**
+- Bug fixes with clear reproduction steps
+- Adding unit tests for existing code
+- Documentation updates and improvements
+- Refactoring with well-defined scope
+- Adding new features with clear specifications
+- Shell script creation following ATOM/SAGE patterns
+- PowerShell module development
+- Configuration file updates (YAML, JSON)
+
+**Tasks Requiring Human Review:**
+- Security-critical changes (authentication, encryption)
+- Changes affecting CI/CD pipelines (require ARCREF + ADR)
+- Major architectural decisions
+- Changes to governance templates (ARCREF_TEMPLATE.yaml, ADR_TEMPLATE.md)
+- Modifications to `.github/copilot-instructions.md`
+
+**Issue Formatting for Best Results:**
+
+```markdown
+## Problem
+Clear description of what needs to be fixed or added
+
+## Acceptance Criteria
+- [ ] Specific, testable requirement 1
+- [ ] Specific, testable requirement 2
+- [ ] Tests added/updated
+- [ ] Documentation updated
+
+## Context
+- Affected files: `path/to/file.sh`
+- Related ATOM tag: ATOM-TYPE-YYYYMMDD-NNN
+- Testing approach: Manual verification / pytest / shellcheck
+```
+
+### Review Process for Copilot PRs
+
+1. **Automated Checks:** Verify CI passes (pre-commit, CodeQL, tests)
+2. **Code Review:** Review for correctness, style, and security
+3. **ATOM Compliance:** Ensure ATOM tags are present and correct
+4. **Governance:** Verify ARCREF + ADR for architectural changes
+5. **Testing:** Manually test changes if automated coverage insufficient
+6. **Documentation:** Verify docs are updated appropriately
+
+### Custom Agents (Optional)
+
+Create specialized agent profiles in `.github/agents/` for recurring tasks:
+
+**Example: `.github/agents/documentation-expert.md`**
+```markdown
+# Documentation Expert Agent
+
+Focus on maintaining high-quality documentation following KENL standards.
+
+## Responsibilities
+- Update markdown documentation with proper formatting
+- Ensure Mermaid diagrams follow visual standards
+- Validate table formatting (longest-string-first rule)
+- Add ATOM-DOC tags to all documentation changes
+- Update frontmatter dates and metadata
+
+## Standards
+- Follow VISUAL-ELEMENTS-STANDARD.md for colors and emojis
+- Use claude-landing/ for AI-agent-specific docs
+- Maintain consistency across all module READMEs
+```
+
+**Example: `.github/agents/shell-script-expert.md`**
+```markdown
+# Shell Script Development Agent
+
+Specialized in creating POSIX-compliant shell scripts for KENL.
+
+## Responsibilities
+- Write bash scripts following KENL shell standards
+- Ensure shellcheck compliance (--severity=style)
+- Add ATOM tags and OWI metadata
+- Include error handling and rollback instructions
+- Generate appropriate SAIF flags
+
+## Standards
+- Use `#!/usr/bin/env bash` shebang
+- Include `set -euo pipefail`
+- Follow color scheme from VISUAL-ELEMENTS-STANDARD.md
+- Test on both Bazzite-DX and Windows 11 (if applicable)
+```
+
+## Automation Commands for Copilot
+
+These commands enable Copilot to autonomously validate changes:
+
+### Validation Commands
+
+```bash
+# Run all pre-commit hooks (if pre-commit installed)
+pip install --user pre-commit
+pre-commit install
+pre-commit run --all-files
+
+# Validate shell scripts
+find . -name "*.sh" -type f -exec shellcheck --severity=style {} \;
+
+# Check YAML files (already handled by pre-commit 'check-yaml' hook)
+# Run pre-commit to validate YAML files:
+pre-commit run check-yaml --all-files
+
+# Validate JSON files
+find . -name "*.json" -type f -exec python3 -m json.tool {} \; > /dev/null
+```
+
+### Testing Commands
+
+```bash
+# Run Python tests (if available)
+pytest -q
+
+# Test PowerShell modules (Windows/Linux)
+pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.psm1; Get-KenlPlatform"
+pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Test-KenlNetwork"
+
+# Validate Play Cards (if ATOM framework installed)
+./atom-sage-framework/tools/validate-playcard.sh <path-to-playcard.yaml>
+```
+
+### Build Commands
+
+```bash
+# Generate distribution scaffold
+./make_kenl_scaffold_zip.sh
+
+# Bootstrap development environment
+./scripts/bootstrap.sh
+
+# Generate documentation artifacts
+./atom-sage-framework/generate-pdf.sh
+```
+
 ## Summary
 
 When working on KENL:
@@ -482,3 +623,10 @@ When working on KENL:
 6. **Always** run pre-commit checks before pushing
 7. **Always** follow Conventional Commits format
 8. **Always** document the *why*, not just the *what*
+
+**For Copilot Coding Agent Specifically:**
+- Review task assignments carefully for scope and clarity
+- Run validation commands before submitting PRs
+- Follow existing patterns and conventions strictly
+- Request human review for security or architectural changes
+- Document all assumptions and decisions in commit messages
