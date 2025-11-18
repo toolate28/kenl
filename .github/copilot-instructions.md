@@ -594,8 +594,8 @@ pytest -q
 pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.psm1; Get-KenlPlatform"
 pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Test-KenlNetwork"
 
-# Validate Play Cards (if ATOM framework installed)
-./atom-sage-framework/tools/validate-playcard.sh <path-to-playcard.yaml>
+# Play Card validation tooling is not yet available in this repository.
+# (Validation script will be provided in a future release.)
 ```
 
 ### Build Commands
