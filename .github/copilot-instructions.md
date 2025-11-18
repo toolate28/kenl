@@ -577,8 +577,9 @@ pre-commit run --all-files
 # Validate shell scripts
 find . -name "*.sh" -type f -exec shellcheck --severity=style {} \;
 
-# Check YAML files
-find . -name "*.yaml" -o -name "*.yml" | xargs -I {} sh -c 'python3 -m yaml validate {}'
+# Check YAML files (already handled by pre-commit 'check-yaml' hook)
+# Run pre-commit to validate YAML files:
+pre-commit run check-yaml --all-files
 
 # Validate JSON files
 find . -name "*.json" -type f -exec python3 -m json.tool {} \; > /dev/null
@@ -594,8 +595,8 @@ pytest -q
 pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.psm1; Get-KenlPlatform"
 pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Test-KenlNetwork"
 
-# Play Card validation tooling is not yet available in this repository.
-# (Validation script will be provided in a future release.)
+# Validate Play Cards (if ATOM framework installed)
+./atom-sage-framework/tools/validate-playcard.sh <path-to-playcard.yaml>
 ```
 
 ### Build Commands
@@ -608,7 +609,7 @@ pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
 ./scripts/bootstrap.sh
 
 # Generate documentation artifacts
-# (Documentation PDF generation script not yet available)
+./atom-sage-framework/generate-pdf.sh
 ```
 
 ## Summary
