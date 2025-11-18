@@ -56,6 +56,14 @@ network-*-backup.txt
 atom_trail.log
 integrity_checks.log
 
+# Logdy runtime files (generated, not source)
+.kenl/.atom-trail-git-history
+.kenl/.atom-trail-system-events
+.kenl/.atom-trail-network
+.kenl/.atom-trail-applications
+logs/logdy.log
+logs/logdy-error.log
+
 # CTF markers and encoded data
 .atom_session_*_encoded
 .network_validation_cache
