@@ -38,7 +38,7 @@ param(
     [Parameter(Mandatory=$true)]
     [ValidateSet("CONFIG", "NETWORK", "MONITORING", "STATUS", "PWSH", "DOC",
                  "RESEARCH", "DEPLOY", "TASK", "MCP", "SAGE", "FIX", "TEST",
-                 "ASSESS", "CI", "CFG")]
+                 "ASSESS", "CI")]
     [string]$Type,
 
     [Parameter(Mandatory=$true)]
