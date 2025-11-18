@@ -31,9 +31,14 @@ command -v wrangler >/dev/null || echo "❌ Install: npm install -g wrangler"
 
 # Check Node.js version
 node --version | grep -E "v(18|19|20|21)" || echo "⚠️  Node.js 18+ recommended"
+
+# Start deployment timer (optional but recommended for verification)
+source .deployment-timer.sh
 ```
 
 **Prerequisites Met?** Continue to Step 1.
+
+> 💡 **First Deployment?** The timer will capture actual times to verify our estimates. See `.assumptions.md` after completion.
 
 ---
 
@@ -94,6 +99,11 @@ echo "ATOM-CF-AUTH-$(date +%Y%m%d)-001: Authenticated with Cloudflare account" >
 ```
 
 **Step 1 Complete?** ✅ Account ID saved in `.env.deployment`
+
+```bash
+# Mark step complete (if using timer)
+step_complete
+```
 
 ---
 
