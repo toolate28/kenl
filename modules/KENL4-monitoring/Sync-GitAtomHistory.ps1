@@ -77,7 +77,7 @@ foreach ($line in $gitLog) {
         $timestamp = [DateTime]::Parse($date).ToString('yyyy-MM-ddTHH:mm:ss')
 
         # Create entry with git context
-        $message = "Git commit: $subject ($($ hash.Substring(0,7))) [Git]"
+        $message = "Git commit: $subject ($($hash.Substring(0,7))) [Git]"
         $entry = "$timestamp | $atomTag | $message"
 
         $atomEntries += $entry
