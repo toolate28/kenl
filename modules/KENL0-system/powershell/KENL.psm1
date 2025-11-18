@@ -568,16 +568,29 @@ function Get-KenlInfo {
     Write-Host ""
     Write-Host "Available Modules:" -ForegroundColor Cyan
 
-    $modules = @("KENL.Gaming", "KENL.Network", "KENL.System")
-    foreach ($module in $modules) {
-        $loaded = Get-Module $module -ErrorAction SilentlyContinue
-        Write-Host "  $module" -NoNewline
-        if ($loaded) {
-            Write-Host " [Loaded]" -ForegroundColor Green
+    # Dynamically discover available modules in the KENL PowerShell directory
+    $moduleDir = Split-Path $PSScriptRoot -Parent | Join-Path -ChildPath "KENL0-system\powershell"
+    if (-not (Test-Path $moduleDir)) {
+        $moduleDir = $PSScriptRoot
+    }
+
+    $moduleFiles = Get-ChildItem -Path $moduleDir -Filter "*.psd1" -ErrorAction SilentlyContinue
+
+    if ($moduleFiles) {
+        foreach ($file in $moduleFiles) {
+            $moduleName = $file.BaseName
+            $loaded = Get-Module $moduleName -ErrorAction SilentlyContinue
+            Write-Host "  $moduleName" -NoNewline
+            if ($loaded) {
+                Write-Host " [Loaded]" -ForegroundColor Green
+            }
+            else {
+                Write-Host " [Available]" -ForegroundColor Gray
+            }
         }
-        else {
-            Write-Host " [Available]" -ForegroundColor Gray
-        }
+    }
+    else {
+        Write-Host "  No modules found in: $moduleDir" -ForegroundColor Yellow
     }
 
     Write-Host ""
