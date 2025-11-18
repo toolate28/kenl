@@ -608,7 +608,7 @@ pwsh -Command "Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
 ./scripts/bootstrap.sh
 
 # Generate documentation artifacts
-./atom-sage-framework/generate-pdf.sh
+# (Documentation PDF generation script not yet available)
 ```
 
 ## Summary
