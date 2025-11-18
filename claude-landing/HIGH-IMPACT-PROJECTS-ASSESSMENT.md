@@ -91,12 +91,12 @@ With ATOM MCP Server:
 - Any AI writes to shared ATOM trail
 - 7-minute recovery instead of 45-60 minutes (Operation Phoenix proven)
 - Alignment drift detection prevents silent failures
-- Cross-platform AI handoff enabled (The Relay Race proven)
+- Cross-platform AI collaboration enabled (The Baton Pass proven)
 ```
 
 **Evidence This Works:**
 - ✅ Operation Phoenix: 7-min recovery (VALIDATED)
-- ✅ The Relay Race: 5.3x efficiency cross-platform (VALIDATED)
+- ✅ The Baton Pass: 5.3x efficiency cross-platform collaboration (VALIDATED)
 - ✅ 288 commits/30 days using ATOM trails (DOGFOODED)
 
 **Alignment with Values:**
@@ -515,7 +515,7 @@ Time: 3 minutes
 ### The Proposal
 
 **What It Is:**
-Package "The Relay Race" pattern as reusable toolkit:
+Package "The Baton Pass" collaboration pattern as reusable toolkit:
 - CLI tool: `ai-handoff create`, `ai-handoff resume`
 - Works with: Claude, ChatGPT, Copilot, Continue.dev, Cursor
 - Format: Standardized context file (JSON)
@@ -524,7 +524,7 @@ Package "The Relay Race" pattern as reusable toolkit:
 ### Viability Assessment
 
 **Technical Complexity:** MEDIUM ✅
-- Core pattern already proven (The Relay Race: 5.3x efficiency)
+- Core pattern already proven (The Baton Pass: 5.3x efficiency)
 - Just needs packaging as standalone tool
 - MCP server integration (Project 1) would enhance this
 
@@ -534,9 +534,9 @@ Package "The Relay Race" pattern as reusable toolkit:
 - Week 3: Documentation + examples
 
 **Evidence:**
-- ✅ The Relay Race: GitHub Copilot → Claude Code (92.5% code reuse)
+- ✅ The Baton Pass: GitHub Copilot → Claude Code (92.5% code reuse)
 - ✅ 5.3x efficiency gain (45 min vs 240 min estimated)
-- ✅ Pattern works across platforms (VALIDATED)
+- ✅ Collaborative pattern works across platforms (VALIDATED)
 
 ### Profound Impact
 
@@ -563,7 +563,7 @@ Cost saved: $168K-196K/year
 
 ### Next Steps
 
-1. Extract handoff pattern from The Relay Race session
+1. Extract collaboration pattern from The Baton Pass session
 2. Standardize context format (JSON schema)
 3. Build CLI tool
 4. Write integrations for major AI platforms
@@ -642,7 +642,7 @@ Cost saved: $168K-196K/year
 ```
 1. Encounter real problem (Windows 10 EOL, AI fragmentation)
 2. Build solution for self (dogfooding)
-3. Validate through use (Operation Phoenix, The Relay Race)
+3. Validate through use (Operation Phoenix, The Baton Pass)
 4. Package learnings for others
 5. Evidence precedes marketing
 ```
@@ -650,7 +650,7 @@ Cost saved: $168K-196K/year
 **Why This Matters:**
 
 Every project above is **reverse-engineered from actual need**:
-- ATOM MCP Server → We needed cross-AI handoff (The Relay Race)
+- ATOM MCP Server → We needed cross-AI collaboration (The Baton Pass)
 - GitHub Action → We needed intent documentation enforcement (288 commits)
 - ATOM Database → We needed searchable context (Operation Phoenix recovery)
 - AI Handoff Toolkit → We needed 5.3x efficiency gains (proven)
@@ -720,7 +720,7 @@ More Trust
 - [ ] Claude can write ATOM trail via MCP
 - [ ] Alignment check function works
 - [ ] Published to npm
-- [ ] 3+ developers using it
+- [ ] 3+ developers collaborating across AI platforms with it
 
 **For GitHub Action:**
 - [ ] Action runs on test PR
@@ -753,7 +753,7 @@ More Trust
 
 **Evidence It Will Work:**
 - ✅ Operation Phoenix: ATOM trails enabled 7-min recovery
-- ✅ The Relay Race: ATOM trails enabled 5.3x efficiency
+- ✅ The Baton Pass: ATOM trails enabled 5.3x efficiency through AI collaboration
 - ✅ 288 commits dogfooding: Pattern works at scale
 - ✅ MCP protocol stable: Anthropic commitment
 

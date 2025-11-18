@@ -23,7 +23,7 @@ authority: canonical
 **Full Form:** System-Aware Intent Framework
 **What It Is:** The unified framework = ATOM + SAGE + OWI
 **Purpose:** Intent-driven operations with AI transparency and human authority
-**Status:** Production-ready, validated through Operation Phoenix and The Relay Race
+**Status:** Production-ready, validated through Operation Phoenix and The Baton Pass
 
 ### ATOM - Atomic Trail of Operations Metadata
 **Full Form:** Atomic Trail of Operations Metadata
@@ -147,7 +147,7 @@ The repository intentionally contains:
 **Levels:**
 1. **Observe:** "I can see what the system does"
 2. **Verify:** "I can check the claims against git history"
-3. **Experience:** "I used it and it worked for me" (Operation Phoenix, The Relay Race)
+3. **Experience:** "I used it and it worked for me" (Operation Phoenix, The Baton Pass)
 4. **Integrate:** "I trust it enough to build on it"
 
 **Core Principle:**
@@ -171,10 +171,11 @@ The repository intentionally contains:
 **Meta-Validation Moment:**
 Crash happened DURING ATOM framework development. Recovery proved methodology by using it to recover its own interrupted implementation.
 
-### The Relay Race
+### The Baton Pass (Cross-Platform AI Collaboration)
 **Date:** 2025-11-16
-**Event:** Cross-platform AI handoff (GitHub Copilot → Claude Code)
+**Event:** Collaborative AI handoff (GitHub Copilot → Claude Code)
 **Context:** Network diagnostics work started in VS Code, continued in Claude Code
+**Metaphor:** Like international relay teams passing the baton to help each other reach the finish line together
 **Handoff:** ATOM trail enabled seamless context transfer
 **Metrics:**
 - Context acquisition: 3 minutes (vs 20 min cold start)
@@ -183,6 +184,9 @@ Crash happened DURING ATOM framework development. Recovery proved methodology by
 
 **Pattern Validated:**
 ATOM trails enable AI-to-AI collaboration across platforms and providers.
+
+**Collaborative Spirit:**
+Not "which AI is better?" but "how can different AIs work together to amplify human capability?"
 
 ---
 
@@ -254,7 +258,7 @@ After updating terminology, verify:
 
 **Evidence:**
 - [VALIDATION_COMPLETE.md](../atom-sage-framework/docs/VALIDATION_COMPLETE.md) - Operation Phoenix forensics
-- [SESSION-2025-11-16-NETWORK-LOGDY.md](./SESSION-2025-11-16-NETWORK-LOGDY.md) - The Relay Race documentation
+- [SESSION-2025-11-16-NETWORK-LOGDY.md](./SESSION-2025-11-16-NETWORK-LOGDY.md) - The Baton Pass documentation
 - [dotfiles/SAIF-FRAMEWORK.md](../dotfiles/SAIF-FRAMEWORK.md) - SAIF prototype (v1.0)
 
 **Repository Context:**
@@ -325,7 +329,7 @@ KENL/SAIF: "Don't trust us, verify it worked"
 **1. AI Fragmentation Cost**
 - **Industry Problem:** Teams use 5+ AI tools, can't share context
 - **Evidence:** $280K/year wasted on duplicate AI work (from industry estimates)
-- **KENL Solution:** ATOM trails enable cross-platform AI handoff (The Relay Race: 5.3x efficiency)
+- **KENL Solution:** ATOM trails enable cross-platform AI collaboration (The Baton Pass: 5.3x efficiency)
 
 **2. Incident Response Handoffs**
 - **Industry Problem:** Shift changes require 45-60 min context transfer
