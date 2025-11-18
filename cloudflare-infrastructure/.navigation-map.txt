@@ -1,0 +1,42 @@
+KENL Cloudflare Infrastructure - Navigation Map
+================================================
+
+Entry Point (Pick ONE):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. START-HERE.md           ← 🎯 RECOMMENDED (Decision tree)
+2. README.md               ← Technical overview (optional)
+3. MODULE-COMPLETENESS.md  ← Status dashboard (optional)
+
+User Flow:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+START-HERE.md
+    ↓ Pick platform (Windows/Linux/macOS)
+    ↓ Install deps (2 min)
+    ↓ Choose path:
+    │
+    ├─→ Have Cloudflare account?
+    │   └─→ workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md (25 min)
+    │
+    └─→ No account?
+        └─→ workflows/SAIF-CLOUDFLARE-SETUP.md (50 min)
+
+Reference (Only if needed):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- docs/ARCHITECTURE.md       (System design deep dive)
+- docs/DEPLOYMENT.md         (Manual deployment steps)
+- docs/DOMAIN-ROUTING.md     (DNS configuration)
+- VISUAL-OVERVIEW.txt        (ASCII diagrams)
+
+Deprecated (Redirected):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- QUICKSTART-WINDOWS.md  → Redirects to START-HERE.md
+- QUICKSTART-LINUX.md    → Redirects to START-HERE.md
+- QUICKSTART-MACOS.md    → Redirects to START-HERE.md
+
+Zero Duplication Guarantee:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Clone commands:    Only in README.md
+- Platform setup:    Only in START-HERE.md
+- Deployment steps:  Only in SAIF workflows
+- Architecture docs: Only in docs/
+- No info repeated across files
