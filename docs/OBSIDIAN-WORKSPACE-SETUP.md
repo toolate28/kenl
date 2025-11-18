@@ -465,8 +465,7 @@ WHERE contains(file.name, "VALIDATION")
 
 ### Mermaid Diagrams (Native Support)
 
-```markdown
-# Obsidian renders Mermaid natively
+Obsidian renders Mermaid natively. Example:
 
 ```mermaid
 graph TD
@@ -474,7 +473,6 @@ graph TD
     B --> C[OWI Methodology]
     C --> D[Aligned-Sight]
     D --> E[Trust Bootstrapping]
-```
 ```
 
 ---

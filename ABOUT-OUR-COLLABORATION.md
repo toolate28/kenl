@@ -285,14 +285,14 @@ The system's first real-world test was recovering from a crash that interrupted 
 
 ### Industry vs KENL/SAIF
 
-| **Industry Approach** | **KENL/SAIF Approach** |
-|-----------------------|------------------------|
-| "AI will replace jobs" | "AI+Human = 10x amplification" |
-| Raise funding → Build → Hope | Encounter problem → Build → Validate → Share |
-| "Trust us, this will work" | "Don't trust us, verify it worked" |
-| Control AI output | Verify AI reasoning (transparency) |
-| Hide failures | Document failures as learning |
-| Marketing precedes evidence | Evidence precedes marketing |
+| **Industry Approach**                 | **KENL/SAIF Approach**                     |
+|---------------------------------------|--------------------------------------------|
+| "AI will replace jobs"                | "AI+Human = 10x amplification"             |
+| Raise funding → Build → Hope          | Encounter problem → Build → Validate → Share |
+| "Trust us, this will work"            | "Don't trust us, verify it worked"         |
+| Control AI output                     | Verify AI reasoning (transparency)         |
+| Hide failures                         | Document failures as learning              |
+| Marketing precedes evidence           | Evidence precedes marketing                |
 
 **The difference:**
 
