@@ -1,0 +1,24 @@
+# ATOM Trail Query API Worker
+# ATOM: ATOM-CONFIG-20251116-001
+
+name = "kenl-api-atom"
+main = "src/index.ts"
+compatibility_date = "2025-11-16"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "kenl-atom-trails"
+database_id = "<your-database-id>"  # Run: ./scripts/create-d1-database.sh kenl-atom-trails
+
+# KV namespace for sessions
+kv_namespaces = [
+  { binding = "SESSIONS", id = "<your-kv-id>" }  # Run: ./scripts/create-kv-namespace.sh sessions
+]
+
+# Routes
+[env.production]
+route = { pattern = "api.toolated.online/api/atom/*", zone_name = "toolated.online" }
+
+[env.dev]
+route = { pattern = "api-dev.toolated.online/api/atom/*", zone_name = "toolated.online" }
