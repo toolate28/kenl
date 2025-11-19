@@ -55,9 +55,14 @@ Write-Host "Config: $configPath" -ForegroundColor Gray
 Write-Host "Port: $Port" -ForegroundColor Gray
 Write-Host ""
 
-# Start logdy in background
+# Define log paths
+$atomLog = "$env:USERPROFILE\.kenl\atom_trail.log"
+$claudeLog = "$env:USERPROFILE\.kenl\claude-logs"
+$kenlLog = "$env:USERPROFILE\kenl\logs"
+
+# Start logdy in background (follow command for tailing files)
 $process = Start-Process -FilePath "logdy" `
-    -ArgumentList "serve --config `"$configPath`"" `
+    -ArgumentList "follow `"$atomLog`" `"$claudeLog`" `"$kenlLog`" --port $Port --ui-ip 0.0.0.0" `
     -PassThru `
     -WindowStyle Hidden
 
