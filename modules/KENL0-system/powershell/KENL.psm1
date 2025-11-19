@@ -817,7 +817,7 @@ function Invoke-Kenl {
             switch ($Action) {
                 "banner" { New-KenlBanner -Title ($Arguments -join " ") }
                 "status" { Write-KenlStatus -Message ($Arguments -join " ") -Type ($Arguments[0] ?? "Info") }
-                "prompt" { Set-KenlPrompt -Style ($Arguments[0] ?? "Minimal") }
+                "prompt" { Set-KenlPrompt -Style (if ($Arguments.Count -gt 0) { $Arguments[0] } else { "Minimal" }) }
                 "colors" { Show-KenlColorPalette }
                 default {
                     Write-KenlMessage "Unknown theming action: $Action" -Type Error
