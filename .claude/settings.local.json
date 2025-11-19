@@ -10,7 +10,10 @@
       "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\Users\\Matthew Ruhnau\\kenl\\scripts\\start-logdy.ps1\")",
       "Bash(pwsh:*)",
       "Bash(git fetch:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
