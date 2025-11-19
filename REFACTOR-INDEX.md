@@ -40,31 +40,13 @@ status: active
 - Validation commands
 - Estimated effort: 20-25 hours
 
-**Use this** for executing the original documentation-focused plan.
+**Use this** for executing the documentation refactoring plan (Phases 1-7).
+
+**This PR focuses on documentation refactoring only.** GitHub activation features (Pages, Discussions, Branch Protection) will be addressed in a separate PR.
 
 ---
 
-### 3. [GITHUB-ACTIVATION-INTEGRATION.md](GITHUB-ACTIVATION-INTEGRATION.md)
-**Purpose:** Integrated 10-phase plan combining documentation refactoring with GitHub 100% activation
-
-**Key Sections:**
-- Phase integration matrix (docs + GitHub features)
-- Enhanced deliverables per phase
-- GitHub Pages setup
-- ATOM GitHub Action implementation
-- Branch protection and governance
-- Estimated effort: 35-40 hours
-
-**Use this** for the comprehensive approach that includes GitHub feature activation.
-
-**Why 10 phases vs 7?** Adds:
-- Phase 8: GitHub Pages deployment
-- Phase 9: Discussions + Projects setup
-- Phase 10: Branch protection + governance
-
----
-
-### 4. [SAIF-BUSINESS-VALUE-PROPOSITION.md](SAIF-BUSINESS-VALUE-PROPOSITION.md)
+### 3. [SAIF-BUSINESS-VALUE-PROPOSITION.md](SAIF-BUSINESS-VALUE-PROPOSITION.md)
 **Purpose:** Business case demonstrating SAIF's value to GitHub, Cloudflare, Bazzite, and enterprise customers
 
 **Key Sections:**
@@ -98,52 +80,45 @@ status: active
 
 ---
 
-## 🎯 Quick Decision Matrix
+## 🎯 This PR Scope: Documentation Refactoring Only
 
-### "Which plan should I use?"
+**Decision Made:** Separate PR approach (Option B)
 
-**Scenario 1: Documentation refactoring only**
-→ Use: [CLAUDE-TASK-DELEGATION.md](CLAUDE-TASK-DELEGATION.md)
+**This PR includes:**
+→ Documentation refactoring (Phases 1-7)
 → Effort: 20-25 hours
-→ Phases: 1-7
-→ Outcome: SAIF-compliant docs, no GitHub activation
+→ Outcome: SAIF-compliant docs structure, complete registry, link validation, versioning, Copilot contexts, KENL13 foundation
 
-**Scenario 2: Complete GitHub activation**
-→ Use: [GITHUB-ACTIVATION-INTEGRATION.md](GITHUB-ACTIVATION-INTEGRATION.md)
-→ Effort: 35-40 hours
-→ Phases: 1-10
-→ Outcome: SAIF-compliant docs + GitHub Pages + Discussions + Branch protection
+**Separate PR (future):**
+→ GitHub activation features (Phases 8-10)
+→ Includes: GitHub Pages, Discussions, Projects, Branch Protection
+→ Will be created after documentation refactoring is complete
 
-**Scenario 3: High-value phases only**
-→ Use: [GITHUB-ACTIVATION-INTEGRATION.md](GITHUB-ACTIVATION-INTEGRATION.md) - Phases 1, 2, 4, 8
-→ Effort: 15-18 hours
-→ Outcome: Registry complete, links validated, Copilot contexts, GitHub Pages
-
-**Scenario 4: Demonstrate SAIF to partners**
+**For SAIF business value demonstration:**
 → Use: [SAIF-BUSINESS-VALUE-PROPOSITION.md](SAIF-BUSINESS-VALUE-PROPOSITION.md)
-→ Effort: 2 hours (review + present)
-→ Outcome: Partner interest, potential pilots
+→ Ready for partner discussions independently
 
 ---
 
-## 📊 Phase Comparison
+## 📊 Documentation Refactoring Phases (This PR)
 
-| Phase | Original Plan | Integrated Plan | Effort | Priority |
-|-------|---------------|-----------------|--------|----------|
-| 1 | Registry Update | Registry + CODEOWNERS | 5-7h | CRITICAL |
-| 2 | Link Validation | Links + Pages Prep | 3-4h | HIGH |
-| 3 | Case Study Versioning | Versioning + Community | 3-4h | HIGH |
-| 4 | Copilot Contexts | Contexts + Chat Contexts | 5-6h | HIGH |
-| 5 | Root Reorganization | Reorganization + Pages | 3-4h | MEDIUM |
-| 6 | Automated Validation | Validation + ATOM Action | 4-5h | MEDIUM |
-| 7 | KENL13 Module | KENL13 + MCP | 4-5h | LOW |
-| 8 | — | **GitHub Pages** | 4-5h | MEDIUM (new) |
-| 9 | — | **Discussions + Projects** | 1-2h | LOW (new) |
-| 10 | — | **Branch Protection** | 1h | LOW (new) |
+| Phase | Description | Effort | Priority |
+|-------|-------------|--------|----------|
+| 1 | Document Registry Update (67 files) + CODEOWNERS | 5-7h | CRITICAL |
+| 2 | Link Validation Workflow | 3-4h | HIGH |
+| 3 | Case Study Versioning + Community Guides | 3-4h | HIGH |
+| 4 | Copilot Module Contexts (12 new) | 5-6h | HIGH |
+| 5 | Root Reorganization (clean structure) | 3-4h | MEDIUM |
+| 6 | Automated Validation (ATOM/SAIF) | 4-5h | MEDIUM |
+| 7 | KENL13 Module Structure + MCP Scaffolding | 4-5h | LOW |
 
-**Total Original:** 20-25 hours (Phases 1-7)
-**Total Integrated:** 35-40 hours (Phases 1-10)
-**Difference:** +15 hours for complete GitHub activation
+**Total Effort:** 20-25 hours
+
+**GitHub Activation Features (Separate Future PR):**
+- Phase 8: GitHub Pages deployment
+- Phase 9: Discussions + Projects setup
+- Phase 10: Branch protection + governance
+- Additional effort: ~10-12 hours
 
 ---
 
@@ -237,7 +212,7 @@ status: active
 
 ---
 
-## 📈 Success Metrics
+## 📈 Success Metrics (This PR)
 
 ### Documentation Health
 - Registry coverage: 24% → 100%
@@ -245,43 +220,46 @@ status: active
 - Root-level files: 28 → 7-8
 - Module contexts: 2/14 → 14/14
 
-### GitHub Activation
-- Feature utilization: 60% → 100%
-- GitHub Pages: Not deployed → Live
-- Discussions: Disabled → Active
-- Branch protection: None → Configured
+### Agent Optimization
+- Copilot contexts: 2 → 14 modules
+- Chat contexts: 0 → 4 files
+- Navigation hubs: Created and functional
 
-### SAIF Demonstration
-- Time to execute: 170 min → 15 min (91% reduction)
-- Success rate: 60% → 98%
-- Audit trail: None → Complete ATOM trail
-- Knowledge retention: Manual → Automatic Play Cards
+### Automation
+- ATOM tag validation: Implemented
+- SAIF flag validation: Implemented
+- Link checking: Automated workflow
+
+### Future PR: GitHub Activation
+- Feature utilization: 60% → 100%
+- GitHub Pages: Will be deployed
+- Discussions: Will be enabled
+- Branch protection: Will be configured
 
 ---
 
-## 🚀 Next Actions
+## 🚀 Next Actions (This PR)
 
 ### Immediate (Today)
 1. [ ] Review this index
-2. [ ] Choose execution strategy (A, B, C, or D)
-3. [ ] Decide on delegation (Claude Desktop/CLI or manual)
-4. [ ] Begin Phase 1 (Registry + CODEOWNERS)
+2. [ ] Decide on delegation (Claude Desktop/CLI or manual)
+3. [ ] Begin Phase 1 (Registry + CODEOWNERS)
 
-### Short-term (This Week)
-5. [ ] Complete Phases 1-2 (Foundation + Quality)
-6. [ ] Review Phase 3-4 progress (Community + AI)
-7. [ ] Test link validation workflow
+### Short-term (Week 1)
+4. [ ] Complete Phases 1-2 (Foundation + Link Validation)
+5. [ ] Review Phase 3-4 progress (Versioning + Copilot)
+6. [ ] Test link validation workflow
 
-### Medium-term (Next Week)
-8. [ ] Complete Phases 5-7 (Organization + Automation + KENL13)
-9. [ ] Deploy GitHub Pages (Phase 8)
-10. [ ] Enable Discussions (Phase 9)
+### Medium-term (Week 2)
+7. [ ] Complete Phases 5-7 (Organization + Automation + KENL13)
+8. [ ] Validate all changes
+9. [ ] Finalize PR for review
 
 ### Long-term (Week 3+)
-11. [ ] Branch protection (Phase 10)
+10. [ ] Merge documentation refactoring PR
+11. [ ] Create separate PR for GitHub activation features
 12. [ ] Share SAIF business value with partners
-13. [ ] Launch community engagement
-14. [ ] Measure success metrics
+13. [ ] Measure success metrics
 
 ---
 
@@ -305,29 +283,30 @@ status: active
 
 ## 💬 Questions & Support
 
-### "I'm confused about which plan to use"
-→ See [Quick Decision Matrix](#-quick-decision-matrix) above
+### "What's included in this PR?"
+→ Documentation refactoring only (Phases 1-7)
+→ GitHub activation features in separate future PR
 
 ### "How long will this take?"
-→ See [Phase Comparison](#-phase-comparison) table
-→ Original: 20-25 hours | Integrated: 35-40 hours | MVP: 15-18 hours
+→ See [Phase table](#-documentation-refactoring-phases-this-pr) above
+→ Total: 20-25 hours | MVP (Phases 1-4): ~15 hours
 
 ### "Can I execute phases in a different order?"
-→ Yes! See [Strategy C: High-Value First](#strategy-c-high-value-first)
+→ Yes! See [Strategy B: High-Value First](#strategy-b-high-value-first)
 → Only Phase 1 must come first (registry foundation)
 
-### "What if I only want documentation refactoring?"
-→ Use [CLAUDE-TASK-DELEGATION.md](CLAUDE-TASK-DELEGATION.md) (Phases 1-7 only)
+### "What about GitHub Pages and Discussions?"
+→ Those are GitHub activation features (Phases 8-10)
+→ Will be in a separate PR after this one merges
 
 ### "How do I demonstrate SAIF to partners?"
 → Use [SAIF-BUSINESS-VALUE-PROPOSITION.md](SAIF-BUSINESS-VALUE-PROPOSITION.md)
-→ Focus on the demo scenario (pages 12-15)
+→ Focus on the demo scenario and business impact sections
 
-### "Can I split this into multiple PRs?"
+### "Can I split phases 1-7 into multiple PRs?"
 → Yes! Suggested split:
-  - PR 1: Phases 1-4 (Foundation + AI)
-  - PR 2: Phases 5-7 (Organization + Automation)
-  - PR 3: Phases 8-10 (GitHub Activation)
+  - PR 1a: Phases 1-4 (Foundation + AI contexts)
+  - PR 1b: Phases 5-7 (Organization + Automation)
 
 ---
 
@@ -347,14 +326,13 @@ status: active
 
 ---
 
-## 🎯 Success Checklist
+## 🎯 Success Checklist (This PR)
 
-Use this checklist to track overall progress:
+Use this checklist to track documentation refactoring progress:
 
 ### Planning Complete ✅
 - [x] Analysis document
 - [x] Task delegation plan
-- [x] GitHub activation integration
 - [x] SAIF business value proposition
 - [x] Navigation infrastructure
 - [x] Master index (this document)
@@ -364,10 +342,10 @@ Use this checklist to track overall progress:
 - [ ] CODEOWNERS file
 - [ ] Ownership metadata
 
-### Phase 2: Quality
+### Phase 2: Link Validation
 - [ ] Link validation workflow
 - [ ] Link health report
-- [ ] GitHub Pages structure
+- [ ] Broken links fixed
 
 ### Phase 3: Community
 - [ ] Case study versioning
@@ -387,27 +365,17 @@ Use this checklist to track overall progress:
 ### Phase 6: Automation
 - [ ] ATOM tag validation
 - [ ] SAIF flag validation
-- [ ] ATOM GitHub Action
+- [ ] Pre-commit hooks
 
 ### Phase 7: Module Foundation
 - [ ] KENL13 structure
 - [ ] MCP scaffolding
 - [ ] Phase scripts
 
-### Phase 8: GitHub Pages
-- [ ] Pages enabled
-- [ ] MkDocs configured
-- [ ] Site deployed
-
-### Phase 9: Community Tools
-- [ ] Discussions enabled
-- [ ] Projects created
-- [ ] Initial content
-
-### Phase 10: Governance
-- [ ] Branch protection
-- [ ] ARCREF + ADR
-- [ ] Final review
+### Future PR: GitHub Activation
+- [ ] GitHub Pages (separate PR)
+- [ ] Discussions + Projects (separate PR)
+- [ ] Branch protection (separate PR)
 
 ---
 
