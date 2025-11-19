@@ -1,0 +1,24 @@
+# Centralized Logging Worker
+# ATOM: ATOM-CONFIG-20251116-002
+
+name = "kenl-logging"
+main = "src/index.ts"
+compatibility_date = "2025-11-16"
+
+# Analytics Engine binding
+analytics_engine_datasets = [
+  { binding = "ANALYTICS" }
+]
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "kenl-atom-trails"
+database_id = "<your-database-id>"
+
+# Routes
+[env.production]
+route = { pattern = "api.toolated.online/api/log", zone_name = "toolated.online" }
+
+[env.dev]
+route = { pattern = "api-dev.toolated.online/api/log", zone_name = "toolated.online" }
