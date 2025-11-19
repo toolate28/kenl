@@ -23,6 +23,14 @@ $script:TestHosts = @(
     @{ IP = "172.64.36.1";     Name = "Cloudflare";     ExpectedMs = 50 }
 )
 
+$script:GamingHosts = @(
+    @{ IP = "159.153.71.17";   Name = "EA Online";      ExpectedMs = 35 }
+    @{ IP = "104.74.42.104";   Name = "Steam CDN";      ExpectedMs = 30 }
+    @{ IP = "104.68.26.184";   Name = "Battlefield";    ExpectedMs = 35 }
+)
+
+$script:AllTestHosts = $script:TestHosts + $script:GamingHosts
+
 $script:OptimalMTU = 1492  # From your MTU discovery test
 
 #endregion
@@ -43,14 +51,19 @@ function Test-KenlNetwork {
     .PARAMETER Detailed
         Test with 10 pings per host (accurate)
 
+    .PARAMETER IncludeGaming
+        Include EA/Steam/Battlefield servers in test
+
     .EXAMPLE
         Test-KenlNetwork
         Test-KenlNetwork -Detailed
+        Test-KenlNetwork -IncludeGaming
     #>
     [CmdletBinding()]
     param(
         [switch]$Quick,
-        [switch]$Detailed
+        [switch]$Detailed,
+        [switch]$IncludeGaming
     )
 
     Write-Host "`n╔═══════════════════════════════════════════╗" -ForegroundColor Cyan
@@ -60,7 +73,15 @@ function Test-KenlNetwork {
     $pingCount = if ($Detailed) { 10 } elseif ($Quick) { 1 } else { 3 }
     $results = @()
 
-    foreach ($host in $script:TestHosts) {
+    # Select which hosts to test
+    $hostsToTest = if ($IncludeGaming) {
+        Write-Host "Including Gaming Servers (EA/Steam/Battlefield)`n" -ForegroundColor Yellow
+        $script:AllTestHosts
+    } else {
+        $script:TestHosts
+    }
+
+    foreach ($host in $hostsToTest) {
         Write-Host "Testing $($host.Name) ($($host.IP))... " -NoNewline
 
         try {
@@ -134,6 +155,15 @@ function Test-KenlNetwork {
         $avgLatency = ($results.LatencyMs | Measure-Object -Average).Average
         Write-Host "`nAverage Latency: " -NoNewline
         Write-Host "$([math]::Round($avgLatency, 1))ms" -ForegroundColor Cyan
+
+        Write-Host "`nNext steps:" -ForegroundColor Cyan
+        if ($IncludeGaming) {
+            Write-Host "  Optimize routing: .\modules\KENL0-system\powershell\Optimize-MultiInterfaceRouting.ps1 -GamingOptimized" -ForegroundColor Gray
+        } else {
+            Write-Host "  Test gaming servers: Test-KenlNetwork -IncludeGaming" -ForegroundColor Gray
+        }
+        Write-Host "  Monitor continuously: while (`$true) { Test-KenlNetwork; Start-Sleep 30 }" -ForegroundColor Gray
+        Write-Host "  Send to logdy: Test-KenlNetwork -IncludeGaming | ConvertTo-Json | logdy stdin" -ForegroundColor Gray
     }
 
     return $results
@@ -342,7 +372,7 @@ function Optimize-KenlNetwork {
     $bdp = [math]::Round($bandwidthBytesPerSec * $latencySec)
     $bdpKB = [math]::Round($bdp / 1024, 2)
 
-    Write-Host "BDP (Bandwidth-Delay Product): $bdp bytes ($bdpKB KB)" -ForegroundColor Cyan
+    Write-Host "BDP: $bdp bytes" -ForegroundColor Cyan
     Write-Host ""
 
     # 1. TCP Window Scaling
@@ -456,7 +486,7 @@ function Optimize-KenlNetwork {
 function Get-KenlNetworkProfile {
     <#
     .SYNOPSIS
-        Shows current network configuration
+        Gets current network configuration with infrastructure detection
 
     .EXAMPLE
         Get-KenlNetworkProfile
@@ -464,44 +494,89 @@ function Get-KenlNetworkProfile {
     [CmdletBinding()]
     param()
 
-    Write-Host "`n╔═══════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "║    Network Profile                        ║" -ForegroundColor Cyan
-    Write-Host "╚═══════════════════════════════════════════╝`n" -ForegroundColor Cyan
+    $profile = [PSCustomObject]@{
+        adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | ForEach-Object {
+            $mtu = (Get-NetIPInterface -InterfaceIndex $_.InterfaceIndex | Select-Object -First 1).NlMtu
+            @{
+                name = $_.Name
+                speed_mbps = [math]::Round($_.Speed / 1MB)
+                mtu = $mtu
+                type = $_.PhysicalMediaType
+                mac = $_.MacAddress
+            }
+        }
 
-    # TCP Settings
-    Write-Host "TCP Configuration:" -ForegroundColor Yellow
-    $tcpGlobal = netsh int tcp show global
+        tcp_settings = @{
+            auto_tuning = (netsh int tcp show global | Select-String "Auto-Tuning Level").ToString().Split(":")[1].Trim()
+            congestion_provider = (netsh int tcp show global | Select-String "Congestion Provider").ToString().Split(":")[1].Trim()
+            ecn_capability = (netsh int tcp show global | Select-String "ECN Capability").ToString().Split(":")[1].Trim()
+        }
 
-    $tcpGlobal | Select-String "Auto-Tuning Level|Congestion Provider|ECN Capability" | ForEach-Object {
-        Write-Host "  $_"
-    }
+        qos_policies = Get-NetQosPolicy -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "KENL-*" } | ForEach-Object {
+            @{
+                name = $_.Name
+                app_path = $_.AppPathName
+                priority = $_.PriorityValue8021Action
+            }
+        }
 
-    # Adapters
-    Write-Host "`nNetwork Adapters:" -ForegroundColor Yellow
-    Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | ForEach-Object {
-        Write-Host "  $($_.Name)" -ForegroundColor Green
-        Write-Host "    Status: $($_.Status)"
-        Write-Host "    Speed:  $($_.LinkSpeed)"
-
-        $mtu = (Get-NetIPInterface -InterfaceIndex $_.InterfaceIndex | Select-Object -First 1).NlMtu
-        Write-Host "    MTU:    $mtu" -ForegroundColor $(if ($mtu -eq $script:OptimalMTU) { "Green" } else { "Yellow" })
-    }
-
-    # QoS Policies
-    Write-Host "`nQoS Policies:" -ForegroundColor Yellow
-    $qos = Get-NetQosPolicy -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "KENL-*" }
-
-    if ($qos) {
-        $qos | ForEach-Object {
-            Write-Host "  [OK] $($_.Name)" -ForegroundColor Green
+        infrastructure = @{
+            routers = @()
+            switches = @()
+            devices = @()
         }
     }
-    else {
-        Write-Host "  [!] No KENL QoS policies found" -ForegroundColor Yellow
-        Write-Host "      Run Optimize-KenlNetwork to create" -ForegroundColor Gray
+
+    # Detect local network infrastructure via ARP
+    try {
+        $arpTable = arp -a | Where-Object { $_ -match "\d+\.\d+\.\d+\.\d+" } | ForEach-Object {
+            $parts = $_ -split "\s+"
+            if ($parts.Count -ge 3) {
+                @{
+                    ip = $parts[0]
+                    mac = $parts[1]
+                    type = $parts[2]
+                }
+            }
+        }
+
+        # Categorize devices (basic heuristics)
+        foreach ($entry in $arpTable) {
+            $mac = $entry.mac.ToUpper()
+            if ($mac -match "^[0-9A-F]{2}[:-][0-9A-F]{2}[:-][0-9A-F]{2}[:-][0-9A-F]{2}[:-][0-9A-F]{2}[:-][0-9A-F]{2}$") {
+                # Check for router MAC patterns (common router vendors)
+                if ($mac -match "^(00:0C:29|00:50:56|00:1C:14|00:15:5D|08:00:27)") {
+                    $profile.infrastructure.routers += $entry
+                }
+                # Check for switch MAC patterns
+                elseif ($mac -match "^(00:1B:21|00:1C:73|00:1D:A1|00:1E:58|00:1F:29)") {
+                    $profile.infrastructure.switches += $entry
+                }
+                else {
+                    $profile.infrastructure.devices += $entry
+                }
+            }
+        }
+    } catch {
+        Write-KenlMessage "Could not detect local network infrastructure: $($_.Exception.Message)" -Type Warning
     }
 
-    Write-Host ""
+    # UPnP device discovery (if available)
+    try {
+        $upnpDevices = Get-PnpDevice | Where-Object { $_.Class -eq "Net" -and $_.Name -match "(Router|Gateway|Switch)" }
+        foreach ($device in $upnpDevices) {
+            $profile.infrastructure.routers += @{
+                name = $device.Name
+                manufacturer = $device.Manufacturer
+                upnp = $true
+            }
+        }
+    } catch {
+        # UPnP not available
+    }
+
+    Write-KenlMessage "Network profile detected with infrastructure" -Type Success
+    return $profile
 }
 
 #endregion
@@ -517,6 +592,190 @@ New-Alias -Name test-mtu -Value Test-KenlMTU -Force
 
 #endregion
 
+#region Mirror Testing (Reflector-style)
+
+function Find-KenlFastestMirrors {
+    <#
+    .SYNOPSIS
+        Find fastest mirrors/servers (similar to Arch Linux reflector)
+
+    .DESCRIPTION
+        Tests latency to various package managers, CDNs, and gaming servers
+        to find the fastest mirrors for your location.
+
+    .PARAMETER Type
+        Type of mirrors to test: PackageManager, CDN, Gaming, DNS, All
+
+    .PARAMETER Count
+        Number of fastest mirrors to return (default: 5)
+
+    .PARAMETER OutputFormat
+        Output format: Table, Json, MirrorList
+
+    .EXAMPLE
+        Find-KenlFastestMirrors -Type Gaming -Count 3
+        Find-KenlFastestMirrors -Type DNS -OutputFormat Json
+        Find-KenlFastestMirrors -Type All | Out-File mirrors.txt
+
+    .NOTES
+        Usage: Find-KenlFastestMirrors -Type Gaming
+        Pipe to logdy: Find-KenlFastestMirrors -Type All | ConvertTo-Json | logdy
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("PackageManager", "CDN", "Gaming", "DNS", "All")]
+        [string]$Type = "All",
+
+        [Parameter(Mandatory=$false)]
+        [int]$Count = 5,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("Table", "Json", "MirrorList")]
+        [string]$OutputFormat = "Table"
+    )
+
+    Write-Host "`n╔═══════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "║    KENL Mirror Speed Test                ║" -ForegroundColor Cyan
+    Write-Host "╚═══════════════════════════════════════════╝`n" -ForegroundColor Cyan
+
+    # Define mirror lists
+    $packageMirrors = @(
+        @{ URL = "packages.microsoft.com"; Name = "Microsoft"; Type = "PackageManager" }
+        @{ URL = "registry.npmjs.org"; Name = "NPM"; Type = "PackageManager" }
+        @{ URL = "pypi.org"; Name = "PyPI"; Type = "PackageManager" }
+        @{ URL = "repo.anaconda.com"; Name = "Conda"; Type = "PackageManager" }
+        @{ URL = "github.com"; Name = "GitHub"; Type = "PackageManager" }
+    )
+
+    $cdnMirrors = @(
+        @{ URL = "cloudflare.com"; Name = "Cloudflare"; Type = "CDN" }
+        @{ URL = "fastly.com"; Name = "Fastly"; Type = "CDN" }
+        @{ URL = "akamai.com"; Name = "Akamai"; Type = "CDN" }
+        @{ URL = "aws.amazon.com"; Name = "AWS CloudFront"; Type = "CDN" }
+    )
+
+    $gamingMirrors = @(
+        @{ URL = "steamcommunity.com"; Name = "Steam"; Type = "Gaming" }
+        @{ URL = "easo.ea.com"; Name = "EA Online"; Type = "Gaming" }
+        @{ URL = "battlefield.com"; Name = "Battlefield"; Type = "Gaming" }
+        @{ URL = "epicgames.com"; Name = "Epic Games"; Type = "Gaming" }
+    )
+
+    $dnsMirrors = @(
+        @{ URL = "8.8.8.8"; Name = "Google DNS"; Type = "DNS" }
+        @{ URL = "1.1.1.1"; Name = "Cloudflare DNS"; Type = "DNS" }
+        @{ URL = "9.9.9.9"; Name = "Quad9 DNS"; Type = "DNS" }
+        @{ URL = "208.67.222.222"; Name = "OpenDNS"; Type = "DNS" }
+    )
+
+    # Select mirrors to test
+    $mirrorsToTest = switch ($Type) {
+        "PackageManager" { $packageMirrors }
+        "CDN" { $cdnMirrors }
+        "Gaming" { $gamingMirrors }
+        "DNS" { $dnsMirrors }
+        "All" { $packageMirrors + $cdnMirrors + $gamingMirrors + $dnsMirrors }
+    }
+
+    Write-Host "Testing $($mirrorsToTest.Count) mirrors ($Type)...`n" -ForegroundColor Yellow
+
+    $results = @()
+
+    foreach ($mirror in $mirrorsToTest) {
+        Write-Host "Testing $($mirror.Name)... " -NoNewline
+
+        # Resolve to IP if not already an IP
+        $target = $mirror.URL
+        if ($target -notmatch '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$') {
+            try {
+                $resolved = Resolve-DnsName $target -Type A -ErrorAction Stop | Select-Object -First 1
+                $target = $resolved.IPAddress
+            }
+            catch {
+                Write-Host "FAILED (DNS)" -ForegroundColor Red
+                continue
+            }
+        }
+
+        # Test latency
+        try {
+            $pingResults = Test-Connection -ComputerName $target -Count 3 -ErrorAction Stop
+
+            $responseTimes = @()
+            foreach ($result in $pingResults) {
+                if ($result.ResponseTime -ne $null -and $result.ResponseTime -gt 0) {
+                    $responseTimes += $result.ResponseTime
+                }
+                elseif ($result.Latency -ne $null -and $result.Latency -gt 0) {
+                    $responseTimes += $result.Latency
+                }
+            }
+
+            if ($responseTimes.Count -gt 0) {
+                $avgLatency = [math]::Round(($responseTimes | Measure-Object -Average).Average, 2)
+                Write-Host "$avgLatency ms" -ForegroundColor Green
+
+                $results += [PSCustomObject]@{
+                    Name = $mirror.Name
+                    Type = $mirror.Type
+                    URL = $mirror.URL
+                    IP = $target
+                    LatencyMs = $avgLatency
+                    Status = if ($avgLatency -lt 20) { "EXCELLENT" }
+                             elseif ($avgLatency -lt 50) { "GOOD" }
+                             elseif ($avgLatency -lt 100) { "FAIR" }
+                             else { "SLOW" }
+                }
+            }
+            else {
+                Write-Host "FAILED (no response)" -ForegroundColor Red
+            }
+        }
+        catch {
+            Write-Host "FAILED" -ForegroundColor Red
+        }
+    }
+
+    # Sort by latency and take top N
+    $fastest = $results | Sort-Object -Property LatencyMs | Select-Object -First $Count
+
+    Write-Host "`n╔═══════════════════════════════════════════╗" -ForegroundColor Green
+    Write-Host "║    Top $Count Fastest Mirrors                  ║" -ForegroundColor Green
+    Write-Host "╚═══════════════════════════════════════════╝`n" -ForegroundColor Green
+
+    # Output in selected format
+    switch ($OutputFormat) {
+        "Table" {
+            $fastest | Format-Table Name, Type, LatencyMs, Status, URL -AutoSize
+        }
+        "Json" {
+            $fastest | ConvertTo-Json -Depth 3
+        }
+        "MirrorList" {
+            $fastest | ForEach-Object {
+                "# $($_.Name) - $($_.LatencyMs)ms"
+                $_.URL
+                ""
+            }
+        }
+    }
+
+    Write-Host "`nUsage Tips:" -ForegroundColor Cyan
+    Write-Host "  Save to file: Find-KenlFastestMirrors -Type Gaming | Out-File fastest-mirrors.txt" -ForegroundColor Gray
+    Write-Host "  Send to logdy: Find-KenlFastestMirrors -Type All -OutputFormat Json | logdy stdin" -ForegroundColor Gray
+    Write-Host "  Compare types: Find-KenlFastestMirrors -Type PackageManager -Count 10" -ForegroundColor Gray
+
+    # Log to ATOM trail
+    if (Get-Command Write-AtomTrail -ErrorAction SilentlyContinue) {
+        Write-AtomTrail -Type NETWORK -Action "Mirror speed test completed: found $($fastest.Count) fastest mirrors for type $Type"
+    }
+
+    return $fastest
+}
+
+#endregion
+
 #region Export
 
 Export-ModuleMember -Function @(
@@ -525,14 +784,16 @@ Export-ModuleMember -Function @(
     'Set-KenlMTU',
     'Test-KenlMTU',
     'Optimize-KenlNetwork',
-    'Get-KenlNetworkProfile'
+    'Get-KenlNetworkProfile',
+    'Find-KenlFastestMirrors'
 ) -Alias @(
     'knet-test',
     'knet-opt',
     'knet-info',
     'mtu',
     'set-mtu',
-    'test-mtu'
+    'test-mtu',
+    'knet-mirrors'
 )
 
 #endregion

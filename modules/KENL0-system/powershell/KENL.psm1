@@ -99,10 +99,10 @@ function Get-KenlPlatform {
         }
 
         # Check for systemd
-        $platform.HasSystemd = (Get-Command systemctl -ErrorAction SilentlyContinue) -ne $null
+        $platform.HasSystemd = $null -ne (Get-Command systemctl -ErrorAction SilentlyContinue)
 
         # Check for rpm-ostree
-        $platform.HasRpmOstree = (Get-Command rpm-ostree -ErrorAction SilentlyContinue) -ne $null
+        $platform.HasRpmOstree = $null -ne (Get-Command rpm-ostree -ErrorAction SilentlyContinue)
     }
 
     return $platform
@@ -568,7 +568,7 @@ function Get-KenlInfo {
     Write-Host ""
     Write-Host "Available Modules:" -ForegroundColor Cyan
 
-    $modules = @("KENL.Gaming", "KENL.Network", "KENL.System")
+    $modules = @("KENL.Gaming", "KENL.Network", "KENL.System", "KENL.Dashboard", "KENL.Theming")
     foreach ($module in $modules) {
         $loaded = Get-Module $module -ErrorAction SilentlyContinue
         Write-Host "  $module" -NoNewline
@@ -654,10 +654,178 @@ function Initialize-Kenl {
     Write-KenlMessage "Initialization complete!" -Type Success
     Write-Host ""
     Write-Host "Next steps:" -ForegroundColor Cyan
-    Write-Host "  1. Import modules: Import-Module KENL.Gaming, KENL.Network, KENL.System"
+    Write-Host "  1. Import modules: Import-Module KENL.Gaming, KENL.Network, KENL.System, KENL.Dashboard, KENL.Theming"
     Write-Host "  2. View info: Get-KenlInfo"
     Write-Host "  3. Check documentation in modules/KENL*-*/README.md"
     Write-Host ""
+}
+
+#endregion
+
+#region Unified Interface
+
+<#
+.SYNOPSIS
+    Unified KENL command interface (like ujust)
+
+.DESCRIPTION
+    Provides a single entry point for all KENL operations.
+    Similar to universal-blue's ujust command structure.
+
+.PARAMETER Module
+    KENL module (network, gaming, system)
+
+.PARAMETER Action
+    Action to perform
+
+.PARAMETER Arguments
+    Additional arguments
+
+.EXAMPLE
+    Invoke-Kenl network test
+    Invoke-Kenl gaming playcard "Halo Infinite"
+    Invoke-Kenl system info
+
+.NOTES
+    Alias: kenl
+#>
+function Invoke-Kenl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateSet("network", "gaming", "system", "config", "atom", "dashboard", "theming")]
+        [string]$Module,
+
+        [Parameter(Mandatory, Position = 1)]
+        [string]$Action,
+
+        [Parameter(ValueFromRemainingArguments)]
+        [string[]]$Arguments
+    )
+
+    # Ensure modules are loaded
+    $moduleName = "KENL.$Module"
+    if ($Module -notin @("config", "atom")) {
+        $moduleName = "KENL.$Module"
+        if (-not (Get-Module $moduleName -ErrorAction SilentlyContinue)) {
+            try {
+                Import-Module $moduleName -ErrorAction Stop
+            } catch {
+                Write-KenlMessage "Failed to load module $moduleName" -Type Error
+                return
+            }
+        }
+    }
+
+    # Dispatch based on module and action
+    switch ($Module) {
+        "network" {
+            switch ($Action) {
+                "test" {
+                    $params = @{}
+                    if ($Arguments -contains "-gaming") { $params.IncludeGaming = $true }
+                    if ($Arguments -contains "-detailed") { $params.Detailed = $true }
+                    Test-KenlNetwork @params
+                }
+                "optimize" {
+                    $bandwidth = 100
+                    $latency = 40
+                    if ($Arguments.Count -ge 1) { $bandwidth = [int]$Arguments[0] }
+                    if ($Arguments.Count -ge 2) { $latency = [int]$Arguments[1] }
+                    Optimize-KenlNetwork -BandwidthMbps $bandwidth -LatencyMs $latency -ApplyMTU
+                }
+                "mtu" {
+                    switch ($Arguments[0]) {
+                        "set" { Set-KenlMTU -MTU ([int]$Arguments[1]) }
+                        "test" { Test-KenlMTU }
+                        "get" { Get-KenlMTU }
+                        default { Get-KenlMTU }
+                    }
+                }
+                "info" { Get-KenlNetworkProfile }
+                "mirrors" {
+                    $type = "All"
+                    if ($Arguments.Count -gt 0) { $type = $Arguments[0] }
+                    Find-KenlFastestMirrors -Type $type
+                }
+                default {
+                    Write-KenlMessage "Unknown network action: $Action" -Type Error
+                    Write-KenlMessage "Available: test, optimize, mtu, info, mirrors" -Type Info
+                }
+            }
+        }
+
+        "gaming" {
+            switch ($Action) {
+                "playcard" {
+                    if ($Arguments.Count -eq 0) {
+                        Get-KenlPlayCard
+                    } else {
+                        New-KenlPlayCard -GameName $Arguments[0]
+                    }
+                }
+                "hardware" {
+                    switch ($Arguments[0]) {
+                        "profile" { Get-KenlHardwareProfile }
+                        "test" { Test-KenlHardware }
+                        default { Get-KenlHardwareProfile }
+                    }
+                }
+                "optimize" { Optimize-KenlGaming }
+                "status" { Get-KenlGamingStatus }
+                default {
+                    Write-KenlMessage "Unknown gaming action: $Action" -Type Error
+                    Write-KenlMessage "Available: playcard, hardware, optimize, status" -Type Info
+                }
+            }
+        }
+
+        "system" {
+            switch ($Action) {
+                "info" { Get-KenlSystemInfo }
+                "cpu" { Get-KenlCPU }
+                "gpu" { Get-KenlGPU }
+                "memory" { Get-KenlMemory }
+                "health" { Test-KenlSystemHealth }
+                "uptime" { Get-KenlSystemUptime }
+                default {
+                    Write-KenlMessage "Unknown system action: $Action" -Type Error
+                    Write-KenlMessage "Available: info, cpu, gpu, memory, health, uptime" -Type Info
+                }
+            }
+        }
+
+        "config" {
+            switch ($Action) {
+                "get" { Get-KenlConfig }
+                "set" {
+                    if ($Arguments.Count -lt 2) {
+                        Write-KenlMessage "Usage: kenl config set <key> <value>" -Type Error
+                        return
+                    }
+                    # Simplified config setting
+                    Write-KenlMessage "Config setting not fully implemented" -Type Warning
+                }
+                default {
+                    Write-KenlMessage "Unknown config action: $Action" -Type Error
+                    Write-KenlMessage "Available: get, set" -Type Info
+                }
+            }
+        }
+
+        "theming" {
+            switch ($Action) {
+                "banner" { New-KenlBanner -Title ($Arguments -join " ") }
+                "status" { Write-KenlStatus -Message ($Arguments -join " ") -Type ($Arguments[0] ?? "Info") }
+                "prompt" { Set-KenlPrompt -Style ($Arguments[0] ?? "Minimal") }
+                "colors" { Show-KenlColorPalette }
+                default {
+                    Write-KenlMessage "Unknown theming action: $Action" -Type Error
+                    Write-KenlMessage "Available: banner, status, prompt, colors" -Type Info
+                }
+            }
+        }
+    }
 }
 
 #endregion
