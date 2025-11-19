@@ -73,9 +73,10 @@ Write-Host "  Log File: $logFile" -ForegroundColor Gray
 
 $startArgs = @(
     "follow"
-    $atomTrailExpanded
+    "`"$atomTrailExpanded`""
     "--port", $Port
     "--ui-ip", "0.0.0.0"
+    "--config", "$HOME/.config/logdy/config.json"
 )
 
 $processInfo = Start-Process -FilePath $logdyBinary `

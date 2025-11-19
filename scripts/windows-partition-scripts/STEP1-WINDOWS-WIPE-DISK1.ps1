@@ -15,7 +15,7 @@
 #>
 
 # Configuration
-$DISK_NUMBER = 1
+$DISK_NUMBER = 2
 $DISK_SIZE_MIN = 1700GB  # Minimum 1.7TB to match 1.8TB drive
 $HANDOVER_DIR = "$env:USERPROFILE\Desktop"
 $TIMESTAMP = Get-Date -Format "yyyyMMdd-HHmmss"
