@@ -102,15 +102,15 @@ status: active
 
 ## 📊 Documentation Refactoring Phases (This PR)
 
-| Phase | Description | Effort | Priority |
-|-------|-------------|--------|----------|
-| 1 | Document Registry Update (67 files) + CODEOWNERS | 5-7h | CRITICAL |
-| 2 | Link Validation Workflow | 3-4h | HIGH |
-| 3 | Case Study Versioning + Community Guides | 3-4h | HIGH |
-| 4 | Copilot Module Contexts (12 new) | 5-6h | HIGH |
-| 5 | Root Reorganization (clean structure) | 3-4h | MEDIUM |
-| 6 | Automated Validation (ATOM/SAIF) | 4-5h | MEDIUM |
-| 7 | KENL13 Module Structure + MCP Scaffolding | 4-5h | LOW |
+| Phase | Description                                    | Effort | Priority |
+|-------|-----------------------------------------------|--------|----------|
+| 1     | Document Registry Update (67 files) + CODEOWNERS | 5-7h   | CRITICAL |
+| 2     | Link Validation Workflow                       | 3-4h   | HIGH     |
+| 3     | Case Study Versioning + Community Guides       | 3-4h   | HIGH     |
+| 4     | Copilot Module Contexts (12 new)               | 5-6h   | HIGH     |
+| 5     | Root Reorganization (clean structure)          | 3-4h   | MEDIUM   |
+| 6     | Automated Validation (ATOM/SAIF)               | 4-5h   | MEDIUM   |
+| 7     | KENL13 Module Structure + MCP Scaffolding      | 4-5h   | LOW      |
 
 **Total Effort:** 20-25 hours
 
