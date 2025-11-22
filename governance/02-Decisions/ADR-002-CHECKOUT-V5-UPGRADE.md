@@ -33,12 +33,12 @@ The `actions/checkout` action, which is used 13 times across 4 workflow files in
 - Status: Functional but will be deprecated as GitHub migrates runners
 
 **Affected Workflows**:
-- `.github/workflows/ci.yml` - 4 checkout steps (pre-commit, CodeQL, tests)
+- `.github/workflows/ci.yml` - 3 checkout steps (pre-commit, CodeQL, tests)
 - `.github/workflows/cloudflare-deploy.yml` - 5 checkout steps (validate, staging, production, revert, analytics)
 - `.github/workflows/release.yml` - 1 checkout step (semantic release)
 - `.github/workflows/validate.yml` - 3 checkout steps (YAML, secrets, shell)
 
-Total: **13 checkout action invocations** across the repository's CI/CD pipeline.
+Total: **12 checkout action invocations** across the repository's CI/CD pipeline.
 
 ### Why This Matters
 
@@ -76,11 +76,11 @@ This ADR, combined with `ARCREF-CI-CHECKOUT-002.yaml`, fulfills the governance r
 
 | File | Instances | Lines |
 |------|-----------|-------|
-| `.github/workflows/ci.yml` | 4 | 25, 33, 44, (one more) |
+| `.github/workflows/ci.yml` | 3 | 25, 33, 44 |
 | `.github/workflows/cloudflare-deploy.yml` | 5 | 29, 50, 90, 125, 187 |
 | `.github/workflows/release.yml` | 1 | 23 |
 | `.github/workflows/validate.yml` | 3 | 15, 24, 37 |
-| **Total** | **13** | across 4 files |
+| **Total** | **12** | across 4 files |
 
 ### What's NOT Changing
 
@@ -147,7 +147,7 @@ This ADR, combined with `ARCREF-CI-CHECKOUT-002.yaml`, fulfills the governance r
 
 **Immediate**:
 - ✅ Full compatibility with Node.js 24 runners
-- ✅ Consistency across all 13 checkout action usages
+- ✅ Consistency across all 12 checkout action usages
 - ✅ Future-proofed against Node.js 20 deprecation
 - ✅ Zero configuration changes required
 - ✅ No performance impact
@@ -367,7 +367,7 @@ This ADR provides the **decision context and rationale**. The ARCREF provides th
 1. ✅ **Proactive Migration**: Aligns with GitHub's Node.js 24 timeline
 2. ✅ **Zero Risk**: Backward-compatible upgrade with easy rollback
 3. ✅ **Best Practice**: Staying current with GitHub's ecosystem
-4. ✅ **Consistency**: Single version across all 13 usages
+4. ✅ **Consistency**: Single version across all 12 usages
 5. ✅ **Future-Proof**: Avoids forced migration later
 
 **Next Steps**:
