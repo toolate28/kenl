@@ -244,6 +244,7 @@ ls -lt governance/02-Decisions/ADR-*.md | head -10
 - [ARCREF Template](mcp-governance/ARCREF_TEMPLATE.yaml)
 
 ### Standards
+**Note:** The following standards links will work after Phase 5 of the documentation refactor (see DOCUMENTATION-REFACTOR-ANALYSIS.md). Until then, these files are in the repository root.
 - [OWI Metadata Standard](../docs/standards/OWI_METADATA_STANDARD.md)
 - [Naming Conventions](../docs/standards/NAMING-CONVENTIONS.md)
 
