@@ -22,7 +22,8 @@ Welcome, Copilot! This directory contains context-specific instructions for work
 1. **Read main instructions:** [../.github/copilot-instructions.md](../copilot-instructions.md)
 2. **Find module context:** [modules/](#module-specific-context) (this directory)
 3. **Check custom agents:** [../agents/](../agents/) (specialized experts)
-4. **Review standards:** [../../docs/standards/](../../docs/standards/)
+4. **Review standards:** [../../standards/](../../standards/)  
+   _Note: Standards files are currently in the root directory. They will be moved to `docs/standards/` in Phase 5 of the refactoring plan._
 
 ---
 
