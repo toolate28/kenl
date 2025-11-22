@@ -41,7 +41,7 @@ Related:
 - [AI Integration Guide](../AI-INTEGRATION-GUIDE.md) - Using AI tools effectively
 
 #### 🧠 **Understand the Framework**
-→ Start here: [OWI Framework Overview](frameworks/OWI_FRAMEWORK_OVERVIEW.md)
+→ Start here: [OWI Framework Overview](../OWI_FRAMEWORK_OVERVIEW.md)
 - Operating-With-Intent philosophy
 - ATOM audit trail system
 - SAGE methodology
