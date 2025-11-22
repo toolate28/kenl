@@ -177,9 +177,9 @@ graph TB
     CWI --> MCP
     BWI --> AI
 
-    style ATOM fill:#9cf,stroke:#333,stroke-width:2px
-    style SAGE fill:#fc9,stroke:#333,stroke-width:2px
-    style RECOVERY fill:#9f6,stroke:#333,stroke-width:3px
+    style ATOM fill:#4da6ff,stroke:#333,stroke-width:2px,color:#000
+    style SAGE fill:#ff9933,stroke:#333,stroke-width:2px,color:#000
+    style RECOVERY fill:#66cc66,stroke:#333,stroke-width:3px,color:#000
 ```
 
 ## Key Features
