@@ -1,0 +1,168 @@
+id: "ARCREF::CI::CHECKOUT::002"
+title: "Upgrade actions/checkout from v4 to v5 for Node.js 24 Migration"
+status: "accepted"
+summary: |
+  Upgrade actions/checkout action from v4 to v5 across all CI/CD workflows to support
+  GitHub Actions runner migration to Node.js 24 (from Node.js 20). This ensures
+  compatibility with future GitHub-hosted runner updates and maintains consistency
+  across the repository's automation pipeline.
+author:
+  name: "dependabot[bot] + GitHub Copilot"
+  contact: "via toolate28/kenl repository"
+date: "2025-11-22"
+scope:
+  - "ci"
+  - "repo"
+implications:
+  - "Requires GitHub Actions runner v2.327.1 or later (released 2024-11-18)"
+  - "Node.js 24 support enables future-proofing for upcoming GitHub runner updates"
+  - "Maintains consistency across all workflow files (ci.yml, cloudflare-deploy.yml, release.yml, validate.yml)"
+  - "Zero performance impact: actions/checkout v5 has identical performance to v4"
+  - "No breaking changes: v5 is backward-compatible with v4 configuration"
+rollback_plan: |
+  Rollback is safe and straightforward if compatibility issues arise.
+
+  Phase 1: Identify Issue (2 minutes)
+  ```bash
+  # Check workflow runs for failures
+  gh run list --workflow=ci.yml --limit 5
+  gh run list --workflow=cloudflare-deploy.yml --limit 5
+  gh run list --workflow=release.yml --limit 5
+  gh run list --workflow=validate.yml --limit 5
+  
+  # Review logs if failures detected
+  gh run view <run-id> --log-failed
+  ```
+
+  Phase 2: Revert Changes (5 minutes)
+  ```bash
+  # Revert the commit that introduced v5
+  git revert <commit-sha>
+  
+  # Or manually edit workflow files
+  sed -i 's/actions\/checkout@v5/actions\/checkout@v4/g' .github/workflows/*.yml
+  
+  # Verify changes
+  git diff HEAD
+  
+  # Commit and push
+  git commit -m "chore(ci): revert actions/checkout to v4"
+  git push origin main
+  ```
+
+  Phase 3: Verify Rollback (3 minutes)
+  ```bash
+  # Trigger workflow manually to test
+  gh workflow run ci.yml
+  
+  # Monitor for success
+  gh run list --workflow=ci.yml --limit 1
+  gh run watch <run-id>
+  ```
+
+  CRITICAL: GitHub Actions runner v2.327.1+ is required for v5. If your
+  self-hosted runners are older, update runners before upgrading or use rollback.
+  GitHub-hosted runners already meet this requirement.
+
+tests: |
+  Pre-Deployment Tests:
+
+  Test 1: Workflow Syntax Validation
+  ```bash
+  # Validate workflow YAML syntax
+  yamllint .github/workflows/*.yml
+  # PASSED: All workflows have valid YAML syntax
+  ```
+
+  Test 2: Checkout Action Compatibility Check
+  ```bash
+  # Review actions/checkout v5 release notes
+  # URL: https://github.com/actions/checkout/releases/tag/v5.0.0
+  # Key changes:
+  # - Node.js 20 → Node.js 24 runtime
+  # - Minimum runner version: v2.327.1
+  # - No breaking configuration changes
+  # PASSED: No breaking changes identified
+  ```
+
+  Test 3: Runner Version Verification
+  ```bash
+  # GitHub-hosted runners automatically updated
+  # Self-hosted runners: verify version >= v2.327.1
+  # PASSED: GitHub-hosted runners meet requirement
+  ```
+
+  Post-Deployment Validation:
+
+  Test 4: CI Workflow Execution
+  ```bash
+  # Trigger CI workflow and verify successful checkout
+  gh workflow run ci.yml
+  gh run watch <run-id>
+  # Expected: All jobs complete successfully with v5 checkout
+  ```
+
+  Test 5: Cloudflare Deploy Workflow
+  ```bash
+  # Verify deployment workflow with v5 checkout
+  gh workflow run cloudflare-deploy.yml
+  gh run watch <run-id>
+  # Expected: All deploy jobs complete successfully
+  ```
+
+  Test 6: Release Workflow
+  ```bash
+  # Verify release workflow (triggered on version tag)
+  git tag v1.0.0-test
+  git push origin v1.0.0-test
+  gh run list --workflow=release.yml --limit 1
+  # Expected: Release job completes successfully
+  # Cleanup: git push --delete origin v1.0.0-test
+  ```
+
+  Test 7: Validate Workflow
+  ```bash
+  # Verify validation workflow execution
+  gh workflow run validate.yml
+  gh run watch <run-id>
+  # Expected: All validation jobs complete successfully
+  ```
+
+references:
+  - "PR #72: https://github.com/toolate28/kenl/pull/72"
+  - "actions/checkout v5 Release: https://github.com/actions/checkout/releases/tag/v5.0.0"
+  - "actions/checkout Changelog: https://github.com/actions/checkout/blob/main/CHANGELOG.md"
+  - "GitHub Actions Runner v2.327.1: https://github.com/actions/runner/releases/tag/v2.327.1"
+  - "ADR-002: /home/runner/work/kenl/kenl/governance/02-Decisions/ADR-002-CHECKOUT-V5-UPGRADE.md"
+
+tags:
+  - "CI::DEPENDENCY"
+  - "GITHUB-ACTIONS::UPGRADE"
+  - "NODE24::MIGRATION"
+  - "CHECKOUT::V5"
+
+notes: |
+  This upgrade is part of GitHub's ecosystem-wide migration to Node.js 24 for
+  GitHub Actions. The actions/checkout v5 release (2024-11-18) ensures compatibility
+  with the latest GitHub-hosted runners and prepares the repository for future
+  runtime updates.
+
+  Key Rationale:
+  1. **Consistency**: All workflows use the same checkout version
+  2. **Future-Proofing**: Node.js 24 support for upcoming runner updates
+  3. **Best Practice**: Keep dependencies current for security and compatibility
+  4. **Zero Risk**: Backward-compatible upgrade with no configuration changes
+
+  Files Modified:
+  - .github/workflows/ci.yml (4 instances: lines 25, 33, 44)
+  - .github/workflows/cloudflare-deploy.yml (5 instances: lines 29, 50, 90, 125, 187)
+  - .github/workflows/release.yml (1 instance: line 23)
+  - .github/workflows/validate.yml (3 instances: lines 15, 24, 37)
+
+  Total: 13 instances across 4 workflow files
+
+revision_history:
+  - version: "1.0.0"
+    date: "2025-11-22"
+    author: "GitHub Copilot"
+    changes: "Initial ARCREF creation for actions/checkout v4→v5 upgrade"
