@@ -18,23 +18,23 @@ This directory contains real-world scenarios (RWS) documenting actual system con
 
 ### RWS Series - Real-World Scenarios
 
-| ID | Title | Date | Status | ATOM Tag |
-|----|-------|------|--------|----------|
-| [RWS-01](RWS-01-BIOS-TPM-UPDATE.md) | BIOS & TPM Update | 2025-11 | Active | ATOM-RWS-20251101-001 |
-| [RWS-02](RWS-02-WINDOWS11-WIMBOOT.md) | Windows 11 WIMBoot | 2025-11 | Active | ATOM-RWS-20251102-001 |
-| [RWS-03](RWS-03-DUAL-BOOT.md) | Dual-Boot Setup | 2025-11 | Active | ATOM-RWS-20251103-001 |
-| [RWS-04](RWS-04-RPMOSTREE-REBASE.md) | rpm-ostree Rebase | 2025-11 | Active | ATOM-RWS-20251104-001 |
-| [RWS-05](RWS-05-HALO-INFINITE.md) | Halo Infinite Optimization | 2025-11 | Active | ATOM-RWS-20251105-001 |
-| [RWS-06](RWS-06-COMPLETE-DUAL-BOOT-GAMING-SETUP.md) | Complete Dual-Boot Gaming | 2025-11 | Active | ATOM-RWS-20251106-001 |
+| ID                                         | Title                   | Date    | Status | ATOM Tag               |
+|---------------------------------------------|-------------------------|---------|--------|------------------------|
+| [RWS-06](RWS-06-COMPLETE-DUAL-BOOT-GAMING-SETUP.md) | Complete Dual-Boot Gaming | 2025-11 | Active | ATOM-RWS-20251106-001  |
+| [RWS-05](RWS-05-HALO-INFINITE.md)           | Halo Infinite Optimization | 2025-11 | Active | ATOM-RWS-20251105-001  |
+| [RWS-04](RWS-04-RPMOSTREE-REBASE.md)        | rpm-ostree Rebase         | 2025-11 | Active | ATOM-RWS-20251104-001  |
+| [RWS-03](RWS-03-DUAL-BOOT.md)               | Dual-Boot Setup           | 2025-11 | Active | ATOM-RWS-20251103-001  |
+| [RWS-02](RWS-02-WINDOWS11-WIMBOOT.md)       | Windows 11 WIMBoot        | 2025-11 | Active | ATOM-RWS-20251102-001  |
+| [RWS-01](RWS-01-BIOS-TPM-UPDATE.md)         | BIOS & TPM Update         | 2025-11 | Active | ATOM-RWS-20251101-001  |
 
 ### Other Case Studies
 
-| File | Title | Focus Area |
-|------|-------|------------|
-| [AI_GUIDED_DECISION_MAKING_BF6.md](AI_GUIDED_DECISION_MAKING_BF6.md) | AI-Guided Decision Making | Battlefield 6 analysis |
-| [BF6_LINUX_LAUNCH_OPTIONS.md](BF6_LINUX_LAUNCH_OPTIONS.md) | BF6 Linux Launch Options | Game optimization |
-| [CLOUDFLARE_INTEGRATION.md](CLOUDFLARE_INTEGRATION.md) | Cloudflare Integration | Cloud services |
-| [COMMUNITY_LAUNCH_STRATEGY.md](COMMUNITY_LAUNCH_STRATEGY.md) | Community Launch Strategy | Community building |
+| File                                               | Title                     | Focus Area              |
+|----------------------------------------------------|--------------------------|-------------------------|
+| [COMMUNITY_LAUNCH_STRATEGY.md](COMMUNITY_LAUNCH_STRATEGY.md)         | Community Launch Strategy   | Community building      |
+| [CLOUDFLARE_INTEGRATION.md](CLOUDFLARE_INTEGRATION.md)               | Cloudflare Integration      | Cloud services          |
+| [BF6_LINUX_LAUNCH_OPTIONS.md](BF6_LINUX_LAUNCH_OPTIONS.md)            | BF6 Linux Launch Options    | Game optimization       |
+| [AI_GUIDED_DECISION_MAKING_BF6.md](AI_GUIDED_DECISION_MAKING_BF6.md)  | AI-Guided Decision Making   | Battlefield 6 analysis  |
 | [GITHUB_COPILOT_INTEGRATION.md](GITHUB_COPILOT_INTEGRATION.md) | GitHub Copilot Integration | AI development |
 
 ---
