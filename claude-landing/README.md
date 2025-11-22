@@ -50,27 +50,5 @@ All documents in this directory use ATOM tags for traceability:
 
 ---
 
-## 🗂️ Directory Organization
-
-```
-claude-landing/
-├── README.md (this file)      ← Start here
-├── CURRENT-STATE.md            ← System snapshot
-├── QUICK-REFERENCE.md          ← Commands/paths
-├── RECENT-WORK.md              ← Session history
-├── NEXT-STEPS.md               ← Actionable tasks
-├── HARDWARE.md                 ← Hardware specs
-├── TERMINOLOGY.md              ← KENL vocabulary
-│
-├── orientation/                ← Orientation guides
-├── standards/                  ← Agent-specific standards
-├── sessions/                   ← Session archives
-└── guides/                     ← Technical guides
-```
-
-**For detailed navigation, see [Enhanced Navigation Guide](../DOCUMENTATION-REFACTOR-ANALYSIS.md#agent-facing-directory-optimization)**
-
----
-
-*Last Updated: 2025-11-18*
-*ATOM: ATOM-DOC-20251118-012*
+*Last Updated: 2025-11-15*
+*ATOM: ATOM-DOC-20251115-004*
