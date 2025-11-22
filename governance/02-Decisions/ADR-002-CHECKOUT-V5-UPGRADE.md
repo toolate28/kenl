@@ -23,7 +23,7 @@ owi-version: 1.0.0
 
 GitHub Actions is migrating the runtime environment for all hosted runners from Node.js 20 to Node.js 24. As part of this ecosystem-wide transition, GitHub Actions maintainers have released updated versions of core actions to support the new runtime.
 
-The `actions/checkout` action, which is used 13 times across 4 workflow files in the kenl repository, released v5.0.0 on November 18, 2024, introducing Node.js 24 support.
+The `actions/checkout` action, which is used 12 times across 4 workflow files in the kenl repository, released v5.0.0 on November 18, 2024, introducing Node.js 24 support.
 
 ### Current State
 
@@ -188,7 +188,7 @@ This ADR, combined with `ARCREF-CI-CHECKOUT-002.yaml`, fulfills the governance r
 **Status**: ✅ COMPLETE
 
 **Changes Applied**:
-- All 13 `actions/checkout@v4` instances updated to `@v5`
+- All 12 `actions/checkout@v4` instances updated to `@v5`
 - No configuration parameters modified
 - Commit message follows Conventional Commits format
 
