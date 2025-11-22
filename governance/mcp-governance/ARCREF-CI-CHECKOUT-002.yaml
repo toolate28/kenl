@@ -154,12 +154,12 @@ notes: |
   4. **Zero Risk**: Backward-compatible upgrade with no configuration changes
 
   Files Modified:
-  - .github/workflows/ci.yml (4 instances: lines 25, 33, 44)
+  - .github/workflows/ci.yml (3 instances: lines 25, 33, 44)
   - .github/workflows/cloudflare-deploy.yml (5 instances: lines 29, 50, 90, 125, 187)
   - .github/workflows/release.yml (1 instance: line 23)
   - .github/workflows/validate.yml (3 instances: lines 15, 24, 37)
 
-  Total: 13 instances across 4 workflow files
+  Total: 12 instances across 4 workflow files
 
 revision_history:
   - version: "1.0.0"
