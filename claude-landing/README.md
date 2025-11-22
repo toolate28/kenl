@@ -50,5 +50,7 @@ All documents in this directory use ATOM tags for traceability:
 
 ---
 
-*Last Updated: 2025-11-15*
-*ATOM: ATOM-DOC-20251115-004*
+*Last Updated: 2025-11-18*
+*ATOM: ATOM-DOC-20251118-005*
+
+> **Note:** This document was reverted to the 2025-11-15 version on 2025-11-18 to undo erroneous changes. Previous ATOM tag: ATOM-DOC-20251115-004.
