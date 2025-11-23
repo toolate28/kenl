@@ -1,237 +1,185 @@
 ---
-title: KENL Project - Current State
-date: 2025-11-12
-atom: ATOM-DOC-20251112-002
-status: active
+title: KENL Repository Status
+updated: 2025-11-23
+branch: claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3
+classification: STATUS-UPDATE
 ---
 
-# Current State Snapshot
+# Current Repository Status
 
-**Last Updated:** 2025-11-16
-**ATOM Tag:** ATOM-DOC-20251116-004
+**Last Updated:** 2025-11-23 11:15 UTC
+**Branch:** `claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3`
+**Commits Ahead of Main:** 5
 
-## Platform & Environment
+---
 
-**Current Platform:** Linux (Bazzite/Fedora Atomic) - Development Environment
-- **User:** user
-- **Working Directory:** `/home/user/kenl`
-- **Shell:** bash (native Linux)
-- **Node.js:** Available
-- **Git:** Available
+## Recent Work Summary
 
-**Context:** Repository restructuring analysis and strategic planning session
+### Session Focus: BF6 Gaming → Dual-Boot Infrastructure
+**Started:** 2025-11-06 (AI-guided decision: Linux gaming → Windows dual-boot)
+**Status:** Complete infrastructure, ready for merge
 
-## Git Status
+---
 
-**Branch:** `claude/review-repo-structure-018bXC3J5HBfVoEtnzmbTYqq`
-- Feature branch for repository restructuring proposal
-- Working directory has untracked files:
-  - `EXECUTIVE-SUMMARY.md` (new, 6 pages)
-  - `IMPLEMENTATION-ROADMAP.md` (new, 30+ pages)
-  - `REPOSITORY-RESTRUCTURING-PROPOSAL.md` (new, 40+ pages)
-- Modified files:
-  - `claude-landing/RECENT-WORK.md` (updated with 2025-11-16 session)
+## Commits on Feature Branch (Latest 5)
 
-**Recent Commits:**
 ```
-d01c461 - Merge pull request #39 (research-credit-tracking)
-f21cb57 - Merge branch 'main' into claude/research-credit-tracking
-99e40f7 - feat: add proactive link validation and AI maintenance guide
-0dae62f - Merge pull request #38 (research-credit-tracking)
-f2ecbfc - docs: add module links and SAGE Obsidian walkthrough
-8f0cb22 - docs: fix broken links in README
-9b974a8 - docs: add Mermaid diagrams and fix windows-support links
-d4d98f1 - docs: fix module count - 14 modules (KENL0-13), not 13
+1deebf7 feat: add GitHub automation and KENL-specific research prompt
+ac14b41 feat: long-task pattern with separate terminal windows
+9d75341 feat: add Claude Code CLI configuration and formatting guides
+6af4a35 docs: add AI-guided decision making case study demonstrating KENL value
+354de50 docs: add workflow diagrams, profile automation, and WSL2 safety warnings
 ```
 
-**Ignored Files:**
-- `.claude/` - Local Claude Code session files (gitignored)
-- `.private/` - Private research and analysis (gitignored)
+---
 
-**Recent Work:**
-- ✅ Link validation and AI maintenance guide (PR #39)
-- ✅ Module links and SAGE Obsidian walkthrough added
-- ✅ Documentation consistency improvements (Mermaid diagrams, broken link fixes)
-- ✅ Module count corrected: 14 modules (KENL0-13)
+## What's New (Ready for Main)
 
-## Hardware Configuration
+### 1. GitHub Automation (ATOM-CFG-20251112-011)
+**Added:**
+- `.github/PULL_REQUEST_TEMPLATE.md` - ATOM + SAGE metadata capture
+- `.github/workflows/validate.yml` - CI validation (links, ShellCheck, PSScriptAnalyzer)
+- `.github/labels.yml` - 30+ labels (priority, type, domain-specific)
+- `.github/ISSUE_TEMPLATE/gaming-config.md` - Game bug reporting
+- `.github/ISSUE_TEMPLATE/partition-script.md` - Disk script issues
 
-**Primary System:**
-- **CPU:** AMD Ryzen 5 5600H (6C/12T, 3.3-4.2 GHz, Zen 3)
-- **GPU:** AMD Radeon Vega Graphics (integrated, 7 CUs)
-- **RAM:** 16GB
-- **Display:** 1920x1080
+**Impact:** Automated validation prevents regressions, standardized issue/PR format
 
-**Storage:**
-- **Disk 0 (Internal):** 512GB KINGSTON OM8SEP4512N-A0 NVMe
-  - C: 406GB NTFS (Windows 11 system)
-  - D: 104GB NTFS (Data partition)
+### 2. Long-Task Pattern (ATOM-PATTERN-20251112-001)
+**Added:**
+- `claude-landing/LONG-TASK-PATTERN.md` - Cross-platform design (PowerShell, tmux, screen)
+- `scripts/Download-Bazzite-ISO.ps1` - Production implementation
 
-- **Disk 1 (External):** 2TB Seagate FireCuda HDD
-  - **Status:** ⚠️ CORRUPTED - Needs repartitioning
-  - **Current:** 2 partitions (1.33TB + 500GB unknown)
-  - **Target:** 5-partition hybrid layout (see MIGRATION-PLAN.md)
+**Impact:** Long tasks (downloads, partitions) run in separate windows, main CLI stays responsive
 
-- **Disk 4 (USB):** 28GB Ventoy bootable USB
-  - F: 28GB exFAT (Ventoy ISO storage)
-  - G: 33MB FAT (VTOYEFI partition)
-  - **Status:** ✅ Ready for Bazzite ISO
+### 3. Claude Code CLI Configuration (ATOM-CFG-20251112-009)
+**Added:**
+- `claude-landing/CLI-FORMATTING-STANDARDS.md` - Industry + bleeding-edge terminal UX
+- `claude-landing/KENL-COMMANDS.md` - Command registry for partition scripts
+- `claude-landing/CLAUDE-CLI-INIT.md` - Session initialization workflow
+- `claude-landing/CLI-OUTPUT-GUIDE.md` - Clean output templates
 
-**Network:**
-- **Adapter:** Ethernet (active)
-- **Baseline Latency:** 5.9-6.2ms average (Tailscale disabled)
-- **VPN Status:** Tailscale service stopped (was causing 174ms latency)
-- **Optimal MTU:** 1492 bytes
+**Impact:** Consistent CLI experience, better visual feedback, reduced noise
 
-## Project Status
+### 4. AI Decision-Making Case Study (ATOM-CASE-20251112-001)
+**Added:**
+- `case-studies/AI_GUIDED_DECISION_MAKING_BF6.md` - 2,100+ lines documenting the journey from "How to run BF6 on Linux?" to dual-boot Windows setup
 
-**Repository Health:** ✅ Excellent
-- All 14 KENL modules present (KENL0-13)
-- Governance artifacts complete (ARCREF + ADR templates)
-- ATOM/SAGE/OWI framework intact
-- PowerShell modules tested and validated
-- Documentation consistency: AI maintenance guide, link validation active
-- SAGE Obsidian walkthrough available
-- **NEW:** Comprehensive restructuring analysis complete
+**Impact:** Demonstrates KENL's value: AI situation-specific risk awareness + complete ATOM traceability
 
-**Development Phase:** Strategic Planning - Repository Restructuring
-- ✅ Complete repository analysis (all 14 modules)
-- ✅ Priority projects identified (5 standalone candidates)
-- ✅ Dependency analysis and architecture mapping
-- ✅ 10-week implementation roadmap created
-- ✅ Risk assessment completed
-- ⏳ Awaiting user review and decision
-- 🔜 Phase 1 infrastructure setup (if approved)
+### 5. Workflow Diagrams & Profiles (ATOM-CFG-20251112-005/006)
+**Added:**
+- `scripts/windows-partition-scripts/WORKFLOW_DIAGRAM.md` - 10 Mermaid flowcharts
+- `scripts/windows-partition-scripts/PROFILES_SETUP.md` - PowerShell/Bash automation
+- WSL2 safety blocks in profile functions
 
-**Module Maturity Assessment:**
-- ✅ Production-Ready: 10/14 modules (71%)
-  - KENL0, KENL1, KENL2, KENL3, KENL5, KENL7, KENL9, KENL11, KENL12, KENL13
-- ⏳ Beta: 4/14 modules (29%)
-  - KENL4 (Monitoring), KENL6 (Social), KENL8 (Security), KENL10 (Backup)
+**Impact:** Visual workflow guides, automated helpers, prevents WSL2 data corruption
 
-**Standalone Project Readiness:**
-- ✅ ATOM+SAGE Framework - Ready (2-4 hours extraction)
-- ✅ Play Cards - Ready (8-12 hours extraction)
-- ✅ Media Stack - Ready (12-16 hours extraction)
-- ⚠️ PowerShell Modules - Needs fixes (16-24 hours)
-- ✅ IWI Framework - Ready (8-12 hours extraction)
+### 6. Research Agent Prompt (ATOM-RESEARCH-20251112-001)
+**Added:**
+- `.claude/RESEARCH_PROMPT.md` - Comprehensive prompt for 110 AUD research credits
+- 5 priority tasks: Anti-cheat, MCP ecosystem, immutable gaming, Win10 EOL, PSGallery
 
-## Configuration Status
-
-**Initialized:**
-- ✅ Git repository cloned and up to date
-- ✅ SAGE manifest (`.sage-manifest.yaml`)
-- ✅ Pre-commit config (`.pre-commit-config.yaml`)
-- ✅ Commit message template (`.gitmessage`)
-- ✅ Node.js environment for MCP
-
-**Pending (After Bazzite Install):**
-- ❌ `~/.config/bazza-dx/` - Bazzite-specific configs
-- ❌ Pre-commit hooks installation (`./scripts/bootstrap.sh`)
-- ❌ Claude Desktop MCP configuration
-- ❌ ATOM trail logging initialization
-- ❌ External drive mount configuration
-
-## Testing Baseline
-
-**Network Performance:**
-- Average Latency: 6.2ms (EXCELLENT)
-- Test Hosts: 5/5 passing
-- Tailscale Impact: 174ms → 6ms after disable
-- PowerShell Test-KenlNetwork: ✅ Validated
-
-**Gaming Baseline:**
-- Planned: BF6 session with network monitoring
-- Location: `~/.kenl/playcards/bf6-windows-baseline-*.json`
-- Purpose: Before/after Bazzite comparison
-
-## Next Phase
-
-**Immediate:** Repository Restructuring Decision Point
-1. **User reviews proposal documents:**
-   - EXECUTIVE-SUMMARY.md (6 pages - quick read)
-   - REPOSITORY-RESTRUCTURING-PROPOSAL.md (full analysis)
-   - IMPLEMENTATION-ROADMAP.md (execution plan)
-
-2. **Decision required:**
-   - Option A: Full restructuring (5 projects, 10 weeks) - RECOMMENDED
-   - Option B: Incremental (ATOM Framework first, then evaluate)
-   - Option C: Status quo (no restructuring)
-
-3. **If approved (Option A or B):**
-   - Set up infrastructure (npm org, PyPI, docs site)
-   - Create `kenl-standards` repository
-   - Begin extraction per roadmap
-
-**Alternative Path:** Bazzite Installation (if Option C chosen)
-- Download Bazzite KDE ISO
-- Verify SHA256 hash
-- Install to internal NVMe
-- Continue with original migration plan
-
-See proposal documents for detailed analysis and recommendations.
-
-## Critical Context
-
-**Migration Goal:** Windows 10 EOL → Bazzite-DX (gaming + development)
-
-**Key Constraints:**
-- Immutable OS (rpm-ostree) - All changes must be rollback-safe
-- Dual-boot capable (Windows 11 + Bazzite)
-- Shared gaming library on external drive (NTFS cross-compatibility)
-- ATOM-tagged audit trail for all system changes
-
-**Token Strategy (AI Integration):**
-- Qwen local (60%) - Primary AI, offline
-- Perplexity (30%) - Research and documentation
-- Claude (10%) - Complex reasoning and code review
-
-## References
-
-- **EXECUTIVE-SUMMARY.md** - Restructuring proposal quick guide (NEW)
-- **REPOSITORY-RESTRUCTURING-PROPOSAL.md** - Full restructuring analysis (NEW)
-- **IMPLEMENTATION-ROADMAP.md** - 10-week execution plan (NEW)
-- **CLAUDE.md** - Primary project instructions
-- **MIGRATION-PLAN.md** - Detailed migration roadmap
-- **HARDWARE.md** - Complete hardware specifications
-- **TESTING-RESULTS.md** - Validation test results
-- **case-studies/RWS-06-COMPLETE-DUAL-BOOT-GAMING-SETUP.md** - Installation reference
+**Impact:** Clear guidance for funded research, SAGE framework enforcement
 
 ---
 
-## What Changed Today (2025-11-16)
+## Private Files (Gitignored)
 
-**Session Type:** Strategic planning and repository analysis
-
-**Key Outputs:**
-- 3 comprehensive proposal documents (~80 pages total)
-- 5 priority standalone projects identified
-- 10-week implementation roadmap
-- Dependency architecture diagrams
-- Risk assessment and mitigation strategies
-
-**Major Insights:**
-- Repository is more mature than expected (10/14 production-ready)
-- ATOM Framework already standalone-ready (2-4 hour extraction)
-- Clean module separation enables straightforward restructuring
-- Package manager distribution strategy enables interoperability
-- Monolithic structure limiting discoverability and contribution
-
-**Perspective Shift:**
-- Before: "Bazzite-specific gaming platform"
-- After: "Ecosystem of intent-driven tools with broad appeal"
-
-**Decision Point:**
-- Awaiting user review of restructuring proposal
-- Three options: Full restructuring (A), Incremental (B), Status quo (C)
-- Recommendation: Option A (full restructuring)
-
-**Next Session:**
-- Review user decision
-- Begin Phase 1 infrastructure (if approved)
-- Or continue Bazzite installation (if not approved)
+**Location:** `.private/claude-config/`
+- CLI configuration copies (for personal use)
+- `AI-SECURITY-MONITORING.md` - Defense against AI hacking techniques
+- User-specific settings and credentials
 
 ---
 
-*ATOM: ATOM-DOC-20251116-004*
-*Next Update: After user reviews restructuring proposal and makes decision*
+## Repository Statistics
+
+**Documentation:** ~15,000+ lines added
+**Scripts:** 3 PowerShell automation scripts (partition, download)
+**Diagrams:** 10 Mermaid flowcharts
+**Case Studies:** 1 comprehensive (BF6 decision-making)
+**ATOM Tags:** 12 (CFG-001 through 011, PATTERN-001, CASE-001, RESEARCH-001)
+
+---
+
+## Current Branch Structure
+
+```
+main (remote)
+  └─ claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3 (current)
+       ├─ 5 commits ahead
+       ├─ Ready to merge
+       └─ No conflicts expected
+```
+
+---
+
+## Next Actions
+
+### Immediate (User Decision Required)
+1. **Merge feature branch to main** - All work complete, ready for merge
+2. **Run ISO download** - `.\scripts\Download-Bazzite-ISO.ps1 -Variant kde`
+3. **Partition disk** - Execute STEP1-STEP3 scripts
+
+### Deferred to Research Agent (110 AUD Budget)
+1. Anti-cheat Linux compatibility survey (Nov 2024)
+2. MCP server ecosystem catalog
+3. Immutable system gaming best practices
+4. Windows 10 EOL migration evidence
+5. PSGallery module publishing automation
+
+---
+
+## Environment Status
+
+**Platform:** Windows 11 (pre-migration)
+**Working Directory:** `C:\Users\Matthew Ruhnau\kenl`
+**Shell:** Git Bash (PowerShell available)
+**External Drive:** 2TB (needs partitioning)
+**Disk Space:** ⚠️ Low (free up space before ISO download)
+
+---
+
+## Outstanding Issues
+
+1. **Disk space low** - `ENOSPC` errors in Claude Code CLI
+   - Clear `%TEMP%` and `C:\Windows\Temp`
+   - Free up space before downloading 3.1GB ISO
+
+2. **Hung PowerShell command** - Killed in CLI session
+   - No impact on current work
+   - Long tasks now run in separate windows (pattern implemented)
+
+---
+
+## Documentation Index
+
+**Orientation:**
+- `claude-landing/CLAUDE-CLI-INIT.md` - Start here for new sessions
+- `claude-landing/KENL-COMMANDS.md` - Available commands
+- `CLAUDE.md` - Repository instructions and ATOM patterns
+
+**Workflows:**
+- `scripts/windows-partition-scripts/WORKFLOW_DIAGRAM.md` - Visual guides
+- `scripts/windows-partition-scripts/README.md` - Partition script usage
+- `scripts/windows-partition-scripts/PROFILES_SETUP.md` - Shell automation
+
+**Case Studies:**
+- `case-studies/AI_GUIDED_DECISION_MAKING_BF6.md` - AI decision framework
+- `case-studies/BF6_LINUX_LAUNCH_OPTIONS.md` - Why BF6 doesn't work on Linux
+
+**Design Patterns:**
+- `claude-landing/LONG-TASK-PATTERN.md` - Separate terminal windows
+- `claude-landing/CLI-FORMATTING-STANDARDS.md` - Terminal UX best practices
+
+**Research:**
+- `.claude/RESEARCH_PROMPT.md` - Funded research tasks (110 AUD)
+
+---
+
+**Status:** ✅ All work committed and pushed. Feature branch ready for merge.
+
+---
+
+Last Updated: 2025-11-12 11:15 UTC

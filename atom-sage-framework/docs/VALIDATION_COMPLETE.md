@@ -29,9 +29,9 @@ graph TD
     F -->|Meta-Validation| G[Framework Validates Itself]
     G -->|Continue| B
 
-    style C fill:#f96,stroke:#333,stroke-width:4px
-    style F fill:#9f6,stroke:#333,stroke-width:4px
-    style G fill:#69f,stroke:#333,stroke-width:4px
+    style C fill:#ff6666,stroke:#333,stroke-width:4px,color:#000
+    style F fill:#66cc66,stroke:#333,stroke-width:4px,color:#000
+    style G fill:#4da6ff,stroke:#333,stroke-width:4px,color:#000
 ```
 
 ---
