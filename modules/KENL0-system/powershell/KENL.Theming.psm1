@@ -183,7 +183,7 @@ function Write-KenlBanner {
     Write-Host $titleLine -ForegroundColor $Color
 
     # Separator
-    $sep = $box.TLeft + ($box.Horizontal * ($width - 2)) + $box.TRight
+    $sep = $box.TopLeft + ($box.Horizontal * ($width - 2)) + $box.TopRight
     Write-Host $sep -ForegroundColor $Color
 
     # Content
