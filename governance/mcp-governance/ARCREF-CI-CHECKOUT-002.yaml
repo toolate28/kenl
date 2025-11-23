@@ -133,7 +133,7 @@ references:
   - "actions/checkout v5 Release: https://github.com/actions/checkout/releases/tag/v5.0.0"
   - "actions/checkout Changelog: https://github.com/actions/checkout/blob/main/CHANGELOG.md"
   - "GitHub Actions Runner v2.327.1: https://github.com/actions/runner/releases/tag/v2.327.1"
-  - "ADR-002: /home/runner/work/kenl/kenl/governance/02-Decisions/ADR-002-CHECKOUT-V5-UPGRADE.md"
+  - "ADR-002: governance/02-Decisions/ADR-002-CHECKOUT-V5-UPGRADE.md"
 
 tags:
   - "CI::DEPENDENCY"

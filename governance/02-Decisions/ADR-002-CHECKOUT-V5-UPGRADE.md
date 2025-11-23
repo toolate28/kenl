@@ -74,13 +74,13 @@ This ADR, combined with `ARCREF-CI-CHECKOUT-002.yaml`, fulfills the governance r
 
 ### Files Modified
 
-| File | Instances | Lines |
-|------|-----------|-------|
-| `.github/workflows/ci.yml` | 3 | 25, 33, 44 |
-| `.github/workflows/cloudflare-deploy.yml` | 5 | 29, 50, 90, 125, 187 |
-| `.github/workflows/release.yml` | 1 | 23 |
-| `.github/workflows/validate.yml` | 3 | 15, 24, 37 |
-| **Total** | **12** | across 4 files |
+| File                                       | Instances | Lines                   |
+|--------------------------------------------|-----------|-------------------------|
+| `.github/workflows/ci.yml`                 | 3         | 25, 33, 44              |
+| `.github/workflows/cloudflare-deploy.yml`  | 5         | 29, 50, 90, 125, 187    |
+| `.github/workflows/release.yml`            | 1         | 23                      |
+| `.github/workflows/validate.yml`           | 3         | 15, 24, 37              |
+| **Total**                                  | **12**    | across 4 files          |
 
 ### What's NOT Changing
 
@@ -256,12 +256,12 @@ git push origin main
 
 ### Success Metrics
 
-| Metric | Target | Measurement Method |
-|--------|--------|-------------------|
-| Workflow success rate | 100% | GitHub Actions dashboard |
-| Checkout step failures | 0 | Workflow run logs |
-| Execution time delta | < ±10 seconds | Workflow run timestamps |
-| Rollback required | No | Manual observation |
+| Metric                  | Target          | Measurement Method           |
+|------------------------|-----------------|-----------------------------|
+| Workflow success rate   | 100%            | GitHub Actions dashboard     |
+| Checkout step failures  | 0               | Workflow run logs            |
+| Execution time delta    | < ±10 seconds   | Workflow run timestamps      |
+| Rollback required       | No              | Manual observation           |
 
 ### Reporting
 
@@ -313,7 +313,7 @@ git push origin main
 
 **Associated ARCREF**: `ARCREF::CI::CHECKOUT::002`
 
-**Location**: `/home/runner/work/kenl/kenl/governance/mcp-governance/ARCREF-CI-CHECKOUT-002.yaml`
+**Location**: `/home/user/kenl/governance/mcp-governance/ARCREF-CI-CHECKOUT-002.yaml`
 
 **Key artifacts in ARCREF**:
 - Detailed rollback plan with commands
@@ -335,7 +335,7 @@ This ADR provides the **decision context and rationale**. The ARCREF provides th
 - **Node.js 24 Release**: https://nodejs.org/en/blog/release/v24.0.0
 
 ### Internal Documentation
-- **ARCREF**: `/home/runner/work/kenl/kenl/governance/mcp-governance/ARCREF-CI-CHECKOUT-002.yaml`
+- **ARCREF**: `governance/mcp-governance/ARCREF-CI-CHECKOUT-002.yaml`
 - **CONTRIBUTING.md**: Lines 27-28 (governance requirements)
 - **Copilot Instructions**: `.github/copilot-instructions.md` (critical files section)
 
@@ -353,9 +353,9 @@ This ADR provides the **decision context and rationale**. The ARCREF provides th
 
 ## Revision History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0.0 | 2025-11-22 | GitHub Copilot | Initial ADR creation for actions/checkout v4→v5 upgrade |
+| Version | Date       | Author         | Changes                                                      |
+|---------|------------|----------------|--------------------------------------------------------------|
+| 1.0.0   | 2025-11-22 | GitHub Copilot | Initial ADR creation for actions/checkout v4→v5 upgrade      |
 
 ---
 
