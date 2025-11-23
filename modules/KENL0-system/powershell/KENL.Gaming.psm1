@@ -741,28 +741,28 @@ function Get-KenlPriorityHosts {
 
 #region Export
 
-# Export-ModuleMember -Function @(
-#     'New-KenlPlayCard',
-#     'Get-KenlPlayCard',
-#     'Edit-KenlPlayCard',
-#     'Export-KenlPlayCard',
-#     'Get-KenlHardwareProfile',
-#     'Test-KenlHardware',
-#     'Export-KenlHardwareProfile',
-#     'Optimize-KenlGaming',
-#     'Get-KenlGamingStatus',
-#     'Find-KenlInstalledGames',
-#     'Get-KenlLaunchOptions',
-#     'Get-KenlPriorityHosts'
-# ) -Alias @(
-#     'kcard-new',
-#     'kcard-get',
-#     'kcard-edit',
-#     'khw-profile',
-#     'khw-test',
-#     'kgame-opt',
-#     'kgame-status'
-# )
+Export-ModuleMember -Function @(
+    'New-KenlPlayCard',
+    'Get-KenlPlayCard',
+    'Edit-KenlPlayCard',
+    'Export-KenlPlayCard',
+    'Get-KenlHardwareProfile',
+    'Test-KenlHardware',
+    'Export-KenlHardwareProfile',
+    'Optimize-KenlGaming',
+    'Get-KenlGamingStatus',
+    'Find-KenlInstalledGames',
+    'Get-KenlLaunchOptions',
+    'Get-KenlPriorityHosts'
+) -Alias @(
+    'kcard-new',
+    'kcard-get',
+    'kcard-edit',
+    'khw-profile',
+    'khw-test',
+    'kgame-opt',
+    'kgame-status'
+)
 
 #endregion
 
