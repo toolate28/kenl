@@ -35,7 +35,7 @@ owi-version: 1.0.0
         └───────────────┘ └────────────┘ └────────────────┘
               │                  │                │
               │                  │                │
-      Windows 10 EOL /     System Config    KENL Scaffold
+      Windows 10 EOL /     System Config    modules/KENL Scaffold
       Gaming-on-Linux      & Optimization   Distribution
 ```
 
@@ -371,7 +371,7 @@ AI-informed architectural decisions with evidence:
 ```yaml
 ---
 project: Building-With-Intent
-decision: KENL Scaffold Architecture
+decision: modules/KENL Scaffold Architecture
 status: accepted
 version: 2025-11-05
 classification: BWI-ARCREF
@@ -382,7 +382,7 @@ human-decision: toolate28
 alternatives-considered: 3
 ---
 
-# ARCREF-BWI-001: KENL Scaffold Architecture
+# ARCREF-BWI-001: modules/KENL Scaffold Architecture
 
 ## Decision
 Use dual governance (ARCREF + ADR) for infrastructure decisions.

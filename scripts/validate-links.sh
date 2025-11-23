@@ -1,0 +1,190 @@
+#!/usr/bin/env bash
+# KENL Link Validator
+# ATOM-CI-20251116-001: Fix ShellCheck errors and harden CI validation
+# Catches broken internal links before they hit production
+# Usage: ./scripts/validate-links.sh [--fix]
+
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+ERRORS=0
+WARNINGS=0
+FIX_MODE=false
+
+# Accept --fix for future enhancements; currently not implemented but referenced to silence shellcheck
+[[ "${1:-}" == "--fix" ]] && FIX_MODE=true
+
+# TODO: Implement --fix functionality (KENL ATOM-CFG-YYYYMMDD-NNN)
+if [ "$FIX_MODE" = true ]; then
+    echo -e "${YELLOW}Note: --fix mode is not yet implemented.${NC}"
+    # Optionally exit here, or continue as normal
+fi
+echo "🔍 KENL Link Validator"
+echo "====================="
+echo
+
+# Function to check if a file/directory exists
+check_link() {
+    local file="$1"
+    local link="$2"
+    local line="$3"
+
+    # Check if it's a full URL (skip external links)
+    if [[ "$link" =~ ^https?:// ]]; then
+        return 0
+    fi
+
+    # Skip template placeholders like {URL}, {{var}}, etc.
+    if [[ "$link" =~ ^\{.*\}$ ]]; then
+        return 0
+    fi
+
+    # Skip anchor links (internal page references)
+    if [[ "$link" =~ ^# ]]; then
+        return 0
+    fi
+
+    # Convert markdown link to filesystem path
+    local target="$link"
+
+    # Strip anchor (# fragment) if present - we only check if file exists
+    target="${target%%#*}"
+
+    # If relative link, resolve from file's directory
+    if [[ "$target" != /* ]]; then
+        local file_dir
+        file_dir=$(dirname "$file")
+        target="$file_dir/$target"
+    fi
+
+    # Remove trailing /
+    target="${target%/}"
+
+    # Try to resolve the path (handle ../ and ./)
+    if command -v realpath &>/dev/null; then
+        target=$(realpath -m "$target" 2>/dev/null || echo "$target")
+    fi
+
+    # Check if target exists
+    if [[ ! -e "$target" ]]; then
+        echo -e "${RED}❌ BROKEN LINK${NC} in $file:$line"
+        echo "   Link: $link"
+        echo "   Expected: $target"
+        ((ERRORS++))
+
+        # Suggest fixes for common patterns like KENL123 -> modules/KENL123-*
+        if [[ "$link" =~ KENL[0-9]+ ]]; then
+            local module
+            module=$(echo "$link" | grep -oP 'KENL[0-9]+')
+
+            shopt -s nullglob
+            local matches
+            matches=(modules/"${module}"-*)
+            shopt -u nullglob
+
+            if (( ${#matches[@]} > 0 )); then
+                local actual
+                actual="${matches[0]}"
+                echo -e "   ${YELLOW}💡 Did you mean: ./${actual}/${NC}"
+            fi
+        fi
+        echo
+        return 1
+    fi
+    return 0
+}
+
+# Function to validate footnote references
+check_footnotes() {
+    local file="$1"
+
+    local refs
+    refs=$(grep -oP '\[\^[0-9]+\]' "$file" 2>/dev/null | sort -u || true)
+
+    local defs
+    defs=$(grep -oP '^\[\^[0-9]+\]:' "$file" 2>/dev/null | sed 's/:$//' | sort -u || true)
+
+    while IFS= read -r ref; do
+        [[ -z "$ref" ]] && continue
+        if ! echo "$defs" | grep -q "^$ref$"; then
+            echo -e "${RED}❌ MISSING FOOTNOTE${NC} in $file"
+            echo "   Reference: $ref has no definition"
+            ((ERRORS++))
+        fi
+    done <<< "$refs"
+
+    while IFS= read -r def; do
+        [[ -z "$def" ]] && continue
+        if ! echo "$refs" | grep -q "^$def$"; then
+            echo -e "${YELLOW}⚠️  UNUSED FOOTNOTE${NC} in $file"
+            echo "   Definition: $def is never referenced"
+            ((WARNINGS++))
+        fi
+    done <<< "$defs"
+}
+
+# Function to check for old path patterns
+check_old_patterns() {
+    local file="$1"
+
+    # Pattern 1: Direct KENL links (should be modules/KENL)
+    if grep -qP '\]\(\.\/KENL[0-9]' "$file" 2>/dev/null; then
+        echo -e "${YELLOW}⚠️  OLD PATH PATTERN${NC} in $file"
+        echo "   Found: ](./KENL*"
+        echo "   Should be: ](./modules/KENL*"
+        ((WARNINGS++))
+    fi
+
+    # Pattern 2: Windows-style backslashes
+    if grep -qP '\]\([^)]*\\' "$file" 2>/dev/null; then
+        echo -e "${RED}❌ WINDOWS PATH${NC} in $file"
+        echo "   Found: Backslashes in markdown link"
+        echo "   Should use: Forward slashes"
+        ((ERRORS++))
+    fi
+}
+
+# Main validation loop
+echo "📝 Checking markdown files for broken links..."
+echo
+
+while IFS= read -r file; do
+    while IFS= read -r line_info; do
+        line_num=$(echo "$line_info" | cut -d: -f1)
+        line_content=$(echo "$line_info" | cut -d: -f2-)
+
+        while IFS= read -r link; do
+            [[ -z "$link" ]] && continue
+            check_link "$file" "$link" "$line_num" || true
+        done < <(echo "$line_content" | grep -oP '\]\(\K[^)]+' || true)
+    done < <(grep -nP '\]\([^)]*\)' "$file" || true)
+
+    check_footnotes "$file"
+    check_old_patterns "$file"
+done < <(find . -name "*.md" -type f \
+    ! -path "./.git/*" \
+    ! -path "./node_modules/*" \
+    ! -path "./vendor/*")
+
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+if [[ $ERRORS -eq 0 ]] && [[ $WARNINGS -eq 0 ]]; then
+    echo -e "${GREEN}✅ All links valid!${NC}"
+    exit 0
+elif [[ $ERRORS -eq 0 ]]; then
+    echo -e "${YELLOW}⚠️  $WARNINGS warnings (non-critical)${NC}"
+    exit 0
+else
+    echo -e "${RED}❌ $ERRORS errors, $WARNINGS warnings${NC}"
+    echo
+    echo "Fix broken links and run again:"
+    echo "  ./scripts/validate-links.sh"
+    exit 1
+fi

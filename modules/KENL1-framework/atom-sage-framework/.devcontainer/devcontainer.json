@@ -1,0 +1,78 @@
+{
+  "name": "ATOM+SAGE Development Container",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true,
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": true,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11",
+      "installTools": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-mermaid",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
+      }
+    }
+  },
+
+  "mounts": [
+    "source=${localEnv:HOME}/.config/atom-sage,target=/home/vscode/.config/atom-sage,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.config/gaming-intent,target=/home/vscode/.config/gaming-intent,type=bind,consistency=cached"
+  ],
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "remoteUser": "vscode",
+
+  "workspaceFolder": "/workspaces/atom-sage-framework",
+
+  "forwardPorts": [8080, 8081],
+
+  "portsAttributes": {
+    "8080": {
+      "label": "Docs Server",
+      "onAutoForward": "notify"
+    },
+    "8081": {
+      "label": "Logdy Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "containerEnv": {
+    "ATOM_DEBUG": "0",
+    "TERM": "xterm-256color"
+  }
+}

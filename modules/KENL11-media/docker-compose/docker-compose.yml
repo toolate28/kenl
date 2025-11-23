@@ -1,0 +1,217 @@
+version: '3.9'
+
+# KENL11 Media Stack - Complete Automation
+# Deploy with: podman-compose up -d
+# Or: ./deploy-all.sh
+
+networks:
+  kenl-media:
+    driver: bridge
+
+volumes:
+  prowlarr-config:
+  radarr-config:
+  sonarr-config:
+  lidarr-config:
+  qbittorrent-config:
+  jellyfin-config:
+  overseerr-config:
+  tautulli-config:
+  npm-data:
+  npm-letsencrypt:
+
+services:
+  # ═══════════════════════════════════════════════════════════════
+  # INDEXER MANAGEMENT
+  # ═══════════════════════════════════════════════════════════════
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - prowlarr-config:/config
+    ports:
+      - 9696:9696
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - TZ=America/New_York
+    ports:
+      - 8191:8191
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  # ═══════════════════════════════════════════════════════════════
+  # MEDIA AUTOMATION (*arr stack)
+  # ═══════════════════════════════════════════════════════════════
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - radarr-config:/config
+      - /mnt/media:/media
+      - /mnt/downloads:/downloads
+    ports:
+      - 7878:7878
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - sonarr-config:/config
+      - /mnt/media:/media
+      - /mnt/downloads:/downloads
+    ports:
+      - 8989:8989
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - lidarr-config:/config
+      - /mnt/media:/media
+      - /mnt/downloads:/downloads
+    ports:
+      - 8686:8686
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  # ═══════════════════════════════════════════════════════════════
+  # TORRENT CLIENT (VPN-wrapped)
+  # ═══════════════════════════════════════════════════════════════
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - WEBUI_PORT=8080
+    volumes:
+      - qbittorrent-config:/config
+      - /mnt/downloads:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    networks:
+      - kenl-media
+    restart: unless-stopped
+    # Note: For VPN wrapping, see docker-compose.vpn.yml
+
+  # ═══════════════════════════════════════════════════════════════
+  # MEDIA SERVER
+  # ═══════════════════════════════════════════════════════════════
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - jellyfin-config:/config
+      - /mnt/media:/media:ro
+    ports:
+      - 8096:8096
+      - 8920:8920  # HTTPS
+      - 7359:7359/udp  # Auto-discovery
+      - 1900:1900/udp  # DLNA
+    devices:
+      - /dev/dri:/dev/dri  # Hardware transcoding (Intel/AMD)
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  # ═══════════════════════════════════════════════════════════════
+  # REQUEST MANAGER
+  # ═══════════════════════════════════════════════════════════════
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - overseerr-config:/config
+    ports:
+      - 5055:5055
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  # ═══════════════════════════════════════════════════════════════
+  # STATS & MONITORING
+  # ═══════════════════════════════════════════════════════════════
+
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - tautulli-config:/config
+    ports:
+      - 8181:8181
+    networks:
+      - kenl-media
+    restart: unless-stopped
+
+  # ═══════════════════════════════════════════════════════════════
+  # REVERSE PROXY
+  # ═══════════════════════════════════════════════════════════════
+
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - npm-data:/data
+      - npm-letsencrypt:/etc/letsencrypt
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    networks:
+      - kenl-media
+    restart: unless-stopped

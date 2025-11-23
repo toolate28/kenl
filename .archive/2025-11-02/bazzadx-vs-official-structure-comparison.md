@@ -51,11 +51,11 @@ bazzite-dx/
     ├── gaming-config-*.md
     └── project-status-*.md
 
-# KENL Container (Proposed)
+# modules/KENL Container (Proposed)
 ~/projects/kenl/             # Distrobox dev environment
 ├── Containerfile            # ⚠️ MISSING - Ubuntu 24.04 + Node.js + Claude Code
 ├── setup.sh                 # ⚠️ MISSING - Container init script
-└── README.md                # ⚠️ MISSING - KENL documentation
+└── README.md                # ⚠️ MISSING - modules/KENL documentation
 ```
 
 ## Critical Gaps
@@ -110,7 +110,7 @@ claude-activate:
 
 **Developer Focus:**
 - Official: bazzite-dx adds dev tools to gaming base
-- Yours: KENL container, Claude Code integration, gaming optimization
+- Yours: modules/KENL container, Claude Code integration, gaming optimization
 
 **Reproducibility:**
 - Official: image-versions.yaml with pinned digests
@@ -164,7 +164,7 @@ claude-activate:
 - Personal gaming profiles
 - ATOM tag infrastructure (project-specific)
 - Claude/MCP integration patterns
-- KENL container configuration
+- modules/KENL container configuration
 
 ### Contribution Process (Universal Blue)
 
@@ -198,7 +198,7 @@ bazza-dx/                        # Main repository
 │   ├── browser-intent/          # Floorp CSS, configs
 │   └── claude-activation/       # CLAUDE.md, MCP setup
 ├── containers/
-│   ├── kenl/                    # KENL Containerfile
+│   ├── kenl/                    # modules/KENL Containerfile
 │   │   ├── Containerfile
 │   │   ├── setup.sh
 │   │   └── README.md
@@ -235,7 +235,7 @@ just kenl-build
 - **bazza-dx/** (your repo): User configs, SAGE, Gaming-with-Intent
 - **Upstream contributions**: Submit ujust commands, docs to ublue-os/bazzite-dx
 
-### 3. Create KENL Container Properly
+### 3. Create modules/KENL Container Properly
 Follow distrobox patterns, not custom OS images:
 ```dockerfile
 # containers/kenl/Containerfile
@@ -316,4 +316,4 @@ Propose ATOM pattern for Universal Blue governance:
 
 **Bottom Line:** Your Bazza-DX is complementary, not competitive, to official bazzite-dx. You're building user-space productivity layer that works on stock Bazzite. This is ideal for rapid iteration and eventual upstream contribution extraction.
 
-**Next Action:** Create Justfile and KENL Containerfile using official patterns as templates.
+**Next Action:** Create Justfile and modules/KENL Containerfile using official patterns as templates.

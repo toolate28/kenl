@@ -1,0 +1,135 @@
+# SAGE Manifest - System-Aware Guided Evolution
+# ATOM-SAGE-20251105-003
+
+version: "1.0"
+learning_enabled: true
+immutable_base: true
+
+pattern_recognition:
+  - watch: "**/*.just"
+    learn: "automation_patterns"
+    store: "knowledge/patterns/just-recipes.log"
+
+  - watch: "**/Containerfile"
+    learn: "container_patterns"
+    store: "knowledge/patterns/containerfiles.log"
+
+  - watch: "**/*.md"
+    learn: "documentation_patterns"
+    store: "knowledge/patterns/doc-headers.log"
+
+  - watch: "**/*.yaml"
+    learn: "configuration_patterns"
+    store: "knowledge/patterns/yaml-structures.log"
+
+integrations:
+  git:
+    auto_tag_decisions: true
+    atom_tag_commits: true
+    commit_template: ".gitmessage"
+
+  atom_trail:
+    enabled: true
+    log_file: "~/.config/bazza-dx/atom_trail.log"
+    counter_file: "~/.config/bazza-dx/atom_counter"
+
+  cloudflare:
+    endpoint: "https://atom-registry.toolated.workers.dev"
+    public_read: true
+    private_write: true
+
+directories:
+  modules:
+    gaming:
+      purpose: "Gaming optimization modules and Play Cards"
+      ref_tag: "[GAMING::OPTIMIZATION::ROOT]"
+    ai-local:
+      purpose: "Local AI instance management (Qwen, Ollama)"
+      ref_tag: "[AI::LOCAL::ROOT]"
+    win10-exodus:
+      purpose: "Windows 10 EOL migration toolkit"
+      ref_tag: "[MIGRATION::WIN10::ROOT]"
+
+  knowledge:
+    decisions:
+      purpose: "Architectural decision records (ADR + ARCREF)"
+      ref_tag: "[KNOWLEDGE::ADR::ROOT]"
+    patterns:
+      purpose: "Reusable configuration patterns and learned behaviors"
+      ref_tag: "[KNOWLEDGE::PATTERNS::ROOT]"
+    visuals:
+      purpose: "Generated diagrams, charts, system visualizations"
+      ref_tag: "[KNOWLEDGE::VISUALS::ROOT]"
+
+  automation:
+    ujust:
+      purpose: "Just recipes for task automation"
+      ref_tag: "[AUTOMATION::JUST::ROOT]"
+    systemd:
+      purpose: "Service definitions for persistent workflows"
+      ref_tag: "[AUTOMATION::SYSTEMD::ROOT]"
+
+  branding:
+    assets:
+      purpose: "Visual identity assets (logos, themes)"
+      ref_tag: "[BRAND::ASSETS::ROOT]"
+
+  community:
+    needs:
+      purpose: "Community requirement tracking and feature requests"
+      ref_tag: "[COMMUNITY::NEEDS::ROOT]"
+    contributions:
+      purpose: "Incoming pattern submissions and PRs"
+      ref_tag: "[COMMUNITY::CONTRIB::ROOT]"
+
+guard_rails:
+  immutable_system:
+    prevent_usr_writes: true
+    require_rollback_plan: true
+    atom_tag_mandatory: true
+
+  resource_limits:
+    max_token_budget: 200000
+    warn_at_percentage: 60
+
+  destructive_operations:
+    require_confirmation: true
+    log_to_atom_trail: true
+
+  constitutional_principles:
+    - "Resource constraints enforced"
+    - "Human authority for destructive ops"
+    - "Complete transparency via ATOM tags"
+    - "Rollback safety guaranteed"
+    - "Expert override available"
+
+token_optimization:
+  target_split:
+    qwen: 60
+    perplexity: 30
+    claude: 10
+
+  routing_rules:
+    - pattern: "config generation"
+      tool: "qwen"
+    - pattern: "research query"
+      tool: "perplexity"
+    - pattern: "complex reasoning"
+      tool: "claude"
+    - pattern: "architecture design"
+      tool: "claude"
+
+evidence_collection:
+  enabled: true
+  types:
+    - logs
+    - benchmarks
+    - screenshots
+    - metrics
+  storage: "~/.config/gaming-intent/evidence"
+
+rollback_safety:
+  deployment_tracking: true
+  atom_link_deployments: true
+  test_verification_required: true
+  documentation_mandatory: true

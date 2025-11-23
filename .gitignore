@@ -1,4 +1,4 @@
-# Node
+7# Node
 node_modules/
 npm-debug.log
 yarn-error.log
@@ -21,6 +21,7 @@ Thumbs.db
 
 # Secrets / local config
 .env
+.private/
 
 # Temporary files
 *.tmp
@@ -55,6 +56,14 @@ network-*-backup.txt
 atom_trail.log
 integrity_checks.log
 
+# Logdy runtime files (generated, not source)
+.kenl/.atom-trail-git-history
+.kenl/.atom-trail-system-events
+.kenl/.atom-trail-network
+.kenl/.atom-trail-applications
+logs/logdy.log
+logs/logdy-error.log
+
 # CTF markers and encoded data
 .atom_session_*_encoded
 .network_validation_cache
@@ -69,3 +78,6 @@ REBASE_POST_MORTEM.md
 PROTON_WINE_ASSESSMENT.md
 # Private user configurations
 .private/
+# Local AI / Claude settings and locks
+modules/.claude/
+scripts/parallel-work.lock

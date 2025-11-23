@@ -22,7 +22,7 @@ about: Standard PR template with ATOM traceability
 
 ## Checklist
 - [ ] I have read [CONTRIBUTING.md](../CONTRIBUTING.md)
-- [ ] I ran local validations (`scripts/validate-links.sh`, linters)
+- [ ] I ran local validations (linters)
 - [ ] I added/updated documentation where needed
 - [ ] Tests pass locally (if applicable)
 - [ ] Commit messages follow Conventional Commits
