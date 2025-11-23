@@ -63,9 +63,9 @@ graph LR
     F -->|Crash| G[Automatic Analysis]
     G -->|7 min| H[Complete Recovery]
 
-    style A fill:#fcc,stroke:#333
-    style E fill:#cfc,stroke:#333
-    style H fill:#9f6,stroke:#333,stroke-width:3px
+    style A fill:#ff6666,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#66cc66,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#66cc66,stroke:#333,stroke-width:3px,color:#000
 ```
 
 ### The Meta-Validation Story
@@ -398,8 +398,8 @@ graph LR
     F --> G[User Confirms]
     G --> H[AI Executes]
 
-    style D fill:#fcc
-    style H fill:#9f6
+    style D fill:#ff6666,color:#000
+    style H fill:#66cc66,color:#000
 ```
 
 #### Basic CTFWI Usage
@@ -563,9 +563,9 @@ graph TB
     I --> J[Decrypt Content]
     J --> K[Import Play Card]
 
-    style C fill:#9cf
-    style I fill:#fc9
-    style K fill:#9f6
+    style C fill:#4da6ff,color:#000
+    style I fill:#ff9933,color:#000
+    style K fill:#66cc66,color:#000
 ```
 
 ### Prerequisites
