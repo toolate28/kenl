@@ -1,0 +1,9 @@
+{
+  "SP4Mode": false,
+  "LogPath": "C:\\Users\\iamto\\AppData\\Local\\Temp\\BattleMedic",
+  "VerboseLogging": false,
+  "DefaultPriority": "P2",
+  "WinREIntegration": false,
+  "AutoBackup": true,
+  "MaxLogFiles": 30
+}
