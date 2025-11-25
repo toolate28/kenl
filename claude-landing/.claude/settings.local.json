@@ -1,16 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)",
-      "Bash(git mv:*)",
-      "Bash(git rm:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git restore:*)",
-      "Bash(powershell:*)",
-      "Bash(for file in STEP*.ps1 parallel-work-guard.ps1)",
-      "Bash(do:*)",
-      "Bash(done)"
+      "Bash(pwsh:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
