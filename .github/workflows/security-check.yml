@@ -1,0 +1,171 @@
+name: Security Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Sundays at midnight
+    - cron: '0 0 * * 0'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  npm-audit:
+    name: npm Audit (JavaScript/TypeScript)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Find npm projects
+        id: find-npm
+        run: |
+          npm_dirs=""
+          for pkg in $(find . -name "package.json" -not -path "./node_modules/*" -not -path "*/node_modules/*"); do
+            dir=$(dirname "$pkg")
+            npm_dirs="$npm_dirs $dir"
+          done
+          echo "npm_dirs=$npm_dirs" >> "$GITHUB_OUTPUT"
+          if [ -z "$npm_dirs" ]; then
+            echo "has_npm=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_npm=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run npm audit
+        if: steps.find-npm.outputs.has_npm == 'true'
+        run: |
+          echo "🔍 Running npm audit on all projects..."
+          has_vulnerabilities=false
+
+          for dir in ${{ steps.find-npm.outputs.npm_dirs }}; do
+            echo ""
+            echo "📁 Auditing: $dir"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            cd "$dir"
+
+            # Install dependencies first
+            if [ -f package-lock.json ]; then
+              npm ci 2>/dev/null || npm install
+            else
+              npm install
+            fi
+
+            # Run audit
+            npm audit --audit-level=high || {
+              echo "⚠️  Vulnerabilities found in $dir"
+              has_vulnerabilities=true
+            }
+
+            cd - > /dev/null
+          done
+
+          if [ "$has_vulnerabilities" = true ]; then
+            echo ""
+            echo "⚠️  Security vulnerabilities detected. Run 'npm audit fix' to address."
+            # Non-blocking for now - TODO: make blocking once dependencies are updated
+          else
+            echo ""
+            echo "✅ No high/critical vulnerabilities found"
+          fi
+
+      - name: No npm projects
+        if: steps.find-npm.outputs.has_npm == 'false'
+        run: echo "ℹ️  No npm projects found"
+
+  python-safety:
+    name: Safety (Python Dependencies)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Safety
+        run: pip install safety
+
+      - name: Check for requirements files
+        id: check-reqs
+        run: |
+          reqs=$(find . -name "requirements*.txt" -not -path "./node_modules/*" -not -path "./vendor/*" | head -10)
+          if [ -n "$reqs" ]; then
+            echo "has_reqs=true" >> "$GITHUB_OUTPUT"
+            echo "reqs=$reqs" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_reqs=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Safety check
+        if: steps.check-reqs.outputs.has_reqs == 'true'
+        run: |
+          echo "🔍 Scanning Python dependencies for vulnerabilities..."
+          for req_file in ${{ steps.check-reqs.outputs.reqs }}; do
+            echo ""
+            echo "📄 Checking: $req_file"
+            safety check -r "$req_file" --output text || {
+              echo "⚠️  Vulnerabilities found in $req_file"
+              # Non-blocking - TODO: make blocking once dependencies are updated
+            }
+          done
+          echo ""
+          echo "✅ Safety scan complete"
+
+      - name: Scan installed packages
+        run: |
+          echo "🔍 Scanning current Python environment..."
+          pip freeze > /tmp/current-reqs.txt
+          safety check -r /tmp/current-reqs.txt --output text || true
+
+      - name: No requirements files
+        if: steps.check-reqs.outputs.has_reqs == 'false'
+        run: echo "ℹ️  No requirements.txt files found"
+
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: python, javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:python,javascript"
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD, CC0-1.0, Unlicense

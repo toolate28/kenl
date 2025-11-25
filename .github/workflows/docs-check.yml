@@ -1,0 +1,247 @@
+name: Documentation Checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'docs/**'
+      - '.github/workflows/docs-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'docs/**'
+      - '.github/workflows/docs-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  broken-links:
+    name: Broken Links Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Run repository link validator
+        run: |
+          echo "🔍 Checking for broken internal links..."
+          bash ./scripts/validate-links.sh
+
+  markdown-spellcheck:
+    name: Markdown Spellcheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install cspell
+        run: npm install -g cspell
+
+      - name: Create cspell config
+        run: |
+          # Create a project-specific dictionary with KENL terminology
+          cat > /tmp/cspell.json << 'EOF'
+          {
+            "version": "0.2",
+            "language": "en",
+            "words": [
+              "KENL",
+              "ATOM",
+              "SAGE",
+              "SAIF",
+              "ARCREF",
+              "Bazzite",
+              "Distrobox",
+              "distrobox",
+              "OWI",
+              "proton",
+              "Proton",
+              "gamescope",
+              "GameScope",
+              "mangohud",
+              "MangoHud",
+              "ostree",
+              "rpm-ostree",
+              "flatpak",
+              "Flatpak",
+              "wayland",
+              "Wayland",
+              "xwayland",
+              "XWayland",
+              "systemd",
+              "podman",
+              "toolbox",
+              "fedora",
+              "Fedora",
+              "bluefin",
+              "ublue",
+              "akmods",
+              "kmods",
+              "nvidia",
+              "NVIDIA",
+              "radeon",
+              "amdgpu",
+              "vulkan",
+              "dxvk",
+              "DXVK",
+              "vkd3d",
+              "cloudflare",
+              "Cloudflare",
+              "wrangler",
+              "pwsh",
+              "PowerShell",
+              "PSScriptAnalyzer",
+              "shellcheck",
+              "shfmt",
+              "bashate",
+              "pytest",
+              "mypy",
+              "flake8",
+              "eslint",
+              "prettier",
+              "commitlint",
+              "markdownlint",
+              "cspell",
+              "yamllint",
+              "tsconfig",
+              "ADRs",
+              "YYYYMMDD",
+              "composefs",
+              "bootc",
+              "kinoite",
+              "silverblue",
+              "sway",
+              "hyprland",
+              "deckify",
+              "steamdeck",
+              "handheld",
+              "lutris",
+              "heroic",
+              "gamemode",
+              "corectrl",
+              "piper",
+              "libratbag",
+              "waybar",
+              "wofi",
+              "dunst",
+              "mako",
+              "grimshot",
+              "grim",
+              "slurp",
+              "wlsunset",
+              "kanshi",
+              "pipewire",
+              "wireplumber",
+              "pavucontrol"
+            ],
+            "ignorePaths": [
+              "node_modules/**",
+              "vendor/**",
+              ".git/**",
+              "*.json",
+              "*.yaml",
+              "*.yml",
+              "*.lock",
+              "CHANGELOG.md"
+            ],
+            "ignoreRegExpList": [
+              "ATOM-\\w+-\\d{8}-\\d+",
+              "ARCREF::[\\w:]+::\\d+",
+              "v\\d+\\.\\d+\\.\\d+",
+              "\\[\\^\\d+\\]",
+              "https?://[^\\s)]+",
+              "`[^`]+`"
+            ]
+          }
+          EOF
+
+      - name: Run spellcheck
+        run: |
+          echo "🔍 Running markdown spellcheck..."
+          cspell --config /tmp/cspell.json "**/*.md" \
+            --no-progress \
+            --no-summary \
+            --show-suggestions || {
+              echo ""
+              echo "⚠️  Spelling issues found (non-blocking)"
+              echo "Add project-specific terms to the cspell.json words list"
+              # TODO: Make blocking once dictionary is complete
+            }
+          echo ""
+          echo "✅ Spellcheck complete"
+
+  docs-structure:
+    name: Documentation Structure Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check required documentation
+        run: |
+          echo "🔍 Checking documentation structure..."
+          required_files=(
+            "README.md"
+            "CONTRIBUTING.md"
+            "SECURITY.md"
+            "LICENSE"
+            "CODE_OF_CONDUCT.md"
+          )
+
+          missing=()
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              missing+=("$file")
+            fi
+          done
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "❌ Missing required documentation:"
+            for file in "${missing[@]}"; do
+              echo "   - $file"
+            done
+            exit 1
+          fi
+          echo "✅ All required documentation present"
+
+      - name: Check README sections
+        run: |
+          echo "🔍 Checking README.md sections..."
+          readme_content=$(cat README.md)
+
+          sections=(
+            "# KENL"
+            "Installation\|Setup\|Getting Started"
+            "Usage\|Quick Start"
+            "Contributing\|Contribution"
+            "License"
+          )
+
+          missing=()
+          for section in "${sections[@]}"; do
+            if ! echo "$readme_content" | grep -qiE "$section"; then
+              missing+=("$section")
+            fi
+          done
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "⚠️  README.md may be missing sections:"
+            for section in "${missing[@]}"; do
+              echo "   - $section"
+            done
+            # Non-blocking
+          else
+            echo "✅ README.md has expected sections"
+          fi

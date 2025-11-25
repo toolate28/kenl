@@ -1,0 +1,168 @@
+name: Python Linting and Testing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.py'
+      - 'requirements*.txt'
+      - 'pyproject.toml'
+      - 'setup.py'
+      - 'setup.cfg'
+      - '.github/workflows/python-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.py'
+      - 'requirements*.txt'
+      - 'pyproject.toml'
+      - 'setup.py'
+      - 'setup.cfg'
+      - '.github/workflows/python-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  black:
+    name: Black (Formatting)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Black
+        run: pip install black
+
+      - name: Run Black check
+        run: |
+          echo "🔍 Checking Python formatting with Black..."
+          black --check --diff . || {
+            echo "❌ Formatting issues found. Run 'black .' to fix."
+            exit 1
+          }
+          echo "✅ Black check passed"
+
+  flake8:
+    name: flake8 (Linting)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install flake8
+        run: pip install flake8 flake8-bugbear flake8-comprehensions
+
+      - name: Run flake8
+        run: |
+          echo "🔍 Running flake8 linting..."
+          # Create a basic flake8 config if not present
+          if [ ! -f .flake8 ] && [ ! -f setup.cfg ] && [ ! -f pyproject.toml ]; then
+            echo "[flake8]" > /tmp/.flake8
+            echo "max-line-length = 120" >> /tmp/.flake8
+            echo "extend-ignore = E203,W503" >> /tmp/.flake8
+            echo "exclude = .git,__pycache__,build,dist,venv,node_modules,vendor" >> /tmp/.flake8
+            flake8 --config=/tmp/.flake8 . || exit 1
+          else
+            flake8 . || exit 1
+          fi
+          echo "✅ flake8 check passed"
+
+  mypy:
+    name: mypy (Type Checking)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install mypy
+        run: pip install mypy
+
+      - name: Install project dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+      - name: Run mypy
+        run: |
+          echo "🔍 Running mypy type checks..."
+          # Find Python files and run mypy
+          python_files=$(find . -name "*.py" -type f \
+            ! -path "./.git/*" \
+            ! -path "./venv/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            ! -path "./__pycache__/*" | head -50)
+          if [ -n "$python_files" ]; then
+            # Run mypy with lenient settings for repos without type hints
+            mypy --ignore-missing-imports --no-error-summary $python_files || {
+              echo "⚠️  mypy found type issues (non-blocking for now)"
+              # TODO: Make this blocking once type hints are added
+              exit 0
+            }
+          else
+            echo "No Python files found to check"
+          fi
+          echo "✅ mypy check passed"
+
+  pytest:
+    name: pytest (Testing with Coverage)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-cov
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+      - name: Run pytest with coverage
+        run: |
+          echo "🔍 Running pytest with coverage..."
+          if [ -d tests ] || [ -f pytest.ini ] || [ -f pyproject.toml ]; then
+            pytest -q --cov=. --cov-report=term-missing --cov-report=xml || {
+              # Allow failure if no tests exist yet
+              if [ $? -eq 5 ]; then
+                echo "⚠️  No tests collected - skipping"
+                exit 0
+              fi
+              exit 1
+            }
+            echo "✅ pytest passed"
+          else
+            echo "⚠️  No test directory or pytest configuration found - skipping"
+          fi
+
+      - name: Upload coverage report
+        if: success() && hashFiles('coverage.xml') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 7

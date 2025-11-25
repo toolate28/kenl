@@ -1,0 +1,73 @@
+name: Justfile Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Justfile'
+      - 'justfile'
+      - '**/.justfile'
+      - '.github/workflows/justfile-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Justfile'
+      - 'justfile'
+      - '**/.justfile'
+      - '.github/workflows/justfile-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  justfile-syntax:
+    name: Justfile Syntax Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install just
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to ~/.local/bin
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate Justfile syntax
+        run: |
+          echo "🔍 Validating Justfile syntax..."
+          justfiles=$(find . -type f \( -name "Justfile" -o -name "justfile" -o -name ".justfile" \) \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*")
+
+          if [ -z "$justfiles" ]; then
+            echo "ℹ️  No Justfiles found in repository"
+            exit 0
+          fi
+
+          has_errors=false
+          for justfile in $justfiles; do
+            echo "Checking: $justfile"
+            if ~/.local/bin/just --justfile "$justfile" --summary > /dev/null 2>&1; then
+              echo "  ✅ Valid"
+              # Show available recipes
+              echo "  Available recipes:"
+              ~/.local/bin/just --justfile "$justfile" --list 2>/dev/null | sed 's/^/    /'
+            else
+              echo "  ❌ Invalid syntax"
+              ~/.local/bin/just --justfile "$justfile" --summary 2>&1 | sed 's/^/    /'
+              has_errors=true
+            fi
+          done
+
+          if [ "$has_errors" = true ]; then
+            echo ""
+            echo "❌ Justfile validation failed"
+            exit 1
+          fi
+          echo ""
+          echo "✅ All Justfiles are valid"

@@ -1,0 +1,335 @@
+name: KENL-Specific Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  atom-trail-check:
+    name: ATOM Audit Trail Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for ATOM tags in commits
+        run: |
+          echo "🔍 Checking for ATOM audit trail tags in commits..."
+          echo ""
+
+          # Get commits in this PR
+          commits=$(git log --format="%H %s" origin/${{ github.base_ref }}..${{ github.head_ref }} 2>/dev/null || true)
+
+          if [ -z "$commits" ]; then
+            echo "ℹ️  No new commits found in this PR"
+            exit 0
+          fi
+
+          total_commits=0
+          commits_with_atom=0
+          commits_without_atom=()
+
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            sha=$(echo "$line" | cut -d' ' -f1)
+            message=$(echo "$line" | cut -d' ' -f2-)
+            total_commits=$((total_commits + 1))
+
+            # Check if commit message contains ATOM tag
+            if echo "$message" | grep -qE 'ATOM-[A-Z]+-[0-9]{8}-[0-9]+'; then
+              commits_with_atom=$((commits_with_atom + 1))
+              echo "✅ ${sha:0:7}: $message"
+            else
+              commits_without_atom+=("${sha:0:7}: $message")
+              echo "⚠️  ${sha:0:7}: $message (no ATOM tag)"
+            fi
+          done <<< "$commits"
+
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Summary: $commits_with_atom/$total_commits commits have ATOM tags"
+
+          if [ ${#commits_without_atom[@]} -gt 0 ]; then
+            echo ""
+            echo "ℹ️  Commits without ATOM tags should include:"
+            echo "   ATOM-<TYPE>-YYYYMMDD-NNN"
+            echo ""
+            echo "   Types: MCP, SAGE, CFG, DEPLOY, TASK, RESEARCH, STATUS, DOC"
+            echo ""
+            echo "   Example commit message:"
+            echo "   feat: add new logging feature"
+            echo ""
+            echo "   ATOM-CFG-20251125-001"
+            # Non-blocking - informational only
+          fi
+
+  adr-enforcement:
+    name: ADR Enforcement Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for architectural changes
+        id: check-arch
+        run: |
+          echo "🔍 Checking for architectural changes..."
+
+          # Patterns that indicate architectural changes
+          arch_patterns=(
+            ".github/workflows/"
+            "governance/"
+            "cloudflare-infrastructure/"
+            "modules/KENL0"
+            "modules/KENL1"
+            "PSScriptAnalyzerSettings.psd1"
+            ".pre-commit-config.yaml"
+          )
+
+          # Get changed files
+          changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || true)
+
+          if [ -z "$changed_files" ]; then
+            echo "ℹ️  No changed files detected"
+            echo "requires_adr=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          arch_changes=()
+          for pattern in "${arch_patterns[@]}"; do
+            matches=$(echo "$changed_files" | grep "^$pattern" || true)
+            if [ -n "$matches" ]; then
+              while IFS= read -r file; do
+                arch_changes+=("$file")
+              done <<< "$matches"
+            fi
+          done
+
+          if [ ${#arch_changes[@]} -gt 0 ]; then
+            echo "requires_adr=true" >> "$GITHUB_OUTPUT"
+            echo "arch_files=${arch_changes[*]}" >> "$GITHUB_OUTPUT"
+            echo ""
+            echo "⚠️  Architectural changes detected:"
+            for file in "${arch_changes[@]}"; do
+              echo "   - $file"
+            done
+          else
+            echo "requires_adr=false" >> "$GITHUB_OUTPUT"
+            echo "✅ No architectural changes detected"
+          fi
+
+      - name: Check for ADR and ARCREF
+        if: steps.check-arch.outputs.requires_adr == 'true'
+        run: |
+          echo ""
+          echo "🔍 Checking for ADR and ARCREF artifacts..."
+
+          changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || true)
+
+          # Check for ADR
+          has_adr=$(echo "$changed_files" | grep -E "^governance/02-Decisions/ADR-" || true)
+
+          # Check for ARCREF
+          has_arcref=$(echo "$changed_files" | grep -E "^governance/mcp-governance/ARCREF-" || true)
+
+          missing=()
+          if [ -z "$has_adr" ]; then
+            missing+=("ADR (governance/02-Decisions/ADR-*.md)")
+          fi
+          if [ -z "$has_arcref" ]; then
+            missing+=("ARCREF (governance/mcp-governance/ARCREF-*.yaml)")
+          fi
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo ""
+            echo "⚠️  Architectural changes require governance artifacts:"
+            for item in "${missing[@]}"; do
+              echo "   - $item"
+            done
+            echo ""
+            echo "ℹ️  Templates available at:"
+            echo "   - governance/02-Decisions/ADR_TEMPLATE.md"
+            echo "   - governance/mcp-governance/ARCREF_TEMPLATE.yaml"
+            echo ""
+            echo "See CONTRIBUTING.md for details."
+            # Non-blocking - informational only
+          else
+            echo "✅ Governance artifacts present"
+            echo "   ADR: $has_adr"
+            echo "   ARCREF: $has_arcref"
+          fi
+
+  playcard-validation:
+    name: Play Card YAML Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate Play Card structure
+        run: |
+          echo "🔍 Validating Play Card YAML files..."
+
+          # Create JSON schema for Play Cards
+          cat > /tmp/playcard-schema.json << 'EOF'
+          {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "required": ["play_card"],
+            "properties": {
+              "play_card": {
+                "type": "object",
+                "required": ["id", "game"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[A-Z0-9-]+$"
+                  },
+                  "game": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "store": {
+                    "type": "string"
+                  },
+                  "app_id": {
+                    "type": ["string", "integer"]
+                  },
+                  "proton_version": {
+                    "type": "string"
+                  },
+                  "compatibility": {
+                    "type": "string",
+                    "enum": ["platinum", "gold", "silver", "bronze", "borked", "N/A"]
+                  },
+                  "performance": {
+                    "type": "object"
+                  },
+                  "validated": {
+                    "type": "boolean"
+                  },
+                  "atom_tag": {
+                    "type": "string",
+                    "pattern": "^ATOM-[A-Z]+-[0-9]{8}-[0-9]+$"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+          EOF
+
+          # Create validation script
+          cat > /tmp/validate_playcard.py << 'PYTHON'
+          import sys
+          import yaml
+          import json
+          from jsonschema import validate, ValidationError
+          from pathlib import Path
+
+          def validate_playcard(file_path, schema):
+              try:
+                  with open(file_path, 'r') as f:
+                      data = yaml.safe_load(f)
+
+                  if data is None:
+                      print(f"  ⚠️  Empty file: {file_path}")
+                      return True  # Empty is OK
+
+                  if 'play_card' not in data:
+                      # Not a play card file
+                      return True
+
+                  validate(instance=data, schema=schema)
+                  print(f"  ✅ {file_path}")
+                  return True
+              except yaml.YAMLError as e:
+                  print(f"  ❌ YAML error in {file_path}: {e}")
+                  return False
+              except ValidationError as e:
+                  print(f"  ❌ Schema validation failed for {file_path}")
+                  print(f"     {e.message}")
+                  return False
+
+          def main():
+              with open('/tmp/playcard-schema.json', 'r') as f:
+                  schema = json.load(f)
+
+              play_cards_dir = Path('modules/KENL2-gaming/play-cards')
+              if not play_cards_dir.exists():
+                  print("ℹ️  No play-cards directory found")
+                  return 0
+
+              yaml_files = list(play_cards_dir.rglob('*.yaml')) + list(play_cards_dir.rglob('*.yml'))
+
+              if not yaml_files:
+                  print("ℹ️  No Play Card YAML files found")
+                  return 0
+
+              print(f"Found {len(yaml_files)} Play Card files to validate")
+              print("")
+
+              errors = 0
+              for yaml_file in yaml_files:
+                  if not validate_playcard(yaml_file, schema):
+                      errors += 1
+
+              print("")
+              if errors > 0:
+                  print(f"❌ {errors} Play Card(s) failed validation")
+                  return 1
+              print("✅ All Play Cards validated successfully")
+              return 0
+
+          if __name__ == "__main__":
+              sys.exit(main())
+          PYTHON
+
+          python3 /tmp/validate_playcard.py
+
+  atom-action-test:
+    name: ATOM Trail Logger Action Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Test ATOM Trail Logger Action
+        uses: ./.github/actions/atom-log
+        with:
+          event_type: 'TEST'
+          message: 'KENL workflow validation test'
+
+      - name: Verify ATOM action output
+        run: |
+          echo "✅ ATOM Trail Logger action executed successfully"
+          echo "Generated tag should appear in job summary"

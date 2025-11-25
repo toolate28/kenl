@@ -50,8 +50,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.14'
-33          # cache: 'pip' disabled until Phase 0.5 (Test Infrastructure)
+          python-version: '3.12'
+          # cache: 'pip' disabled until Phase 0.5 (Test Infrastructure)
           # Will be re-enabled when requirements.txt is added
       - name: Install deps
         run: |
