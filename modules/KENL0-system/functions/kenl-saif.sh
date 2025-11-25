@@ -256,7 +256,11 @@ status: handover
 
 ## Completed Actions
 
-$(for item in "${completed[@]}"; do echo "- ✅ $item"; done)
+$(if [[ ${#completed[@]} -gt 0 && -n "${completed[0]}" ]]; then
+    for item in "${completed[@]}"; do echo "- ✅ $item"; done
+else
+    echo "No completed actions"
+fi)
 
 ---
 
