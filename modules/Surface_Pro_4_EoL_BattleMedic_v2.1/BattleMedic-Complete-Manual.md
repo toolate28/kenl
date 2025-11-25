@@ -18,7 +18,7 @@ status: production
 Complete these steps to initialize your Battle Medic deployment:
 
 - [ ] **Environment Preparation**
-  - [ ] Verify PowerShell version (`**$PSVersionTable.PSVersion**`)
+  - [ ] Verify PowerShell version (`$PSVersionTable.PSVersion`)
   - [ ] Check administrative privileges
   - [ ] Document target systems (Windows versions, hardware models)
   - [ ] Create backup storage location
