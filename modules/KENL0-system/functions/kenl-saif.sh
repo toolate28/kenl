@@ -366,7 +366,13 @@ get_saif_trail() {
         entries=$(cat "$SAIF_LOG_PATH")
     fi
 
-    if [[ -n "$action_filter" ]] && command -v jq &> /dev/null; then
+    # Check if jq is available
+    if ! command -v jq &> /dev/null; then
+        echo "[]"
+        return 1
+    fi
+
+    if [[ -n "$action_filter" ]]; then
         echo "$entries" | jq -s "[.[] | select(.action == \"$action_filter\")]"
     else
         echo "$entries" | jq -s '.'
