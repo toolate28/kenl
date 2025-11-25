@@ -15,6 +15,7 @@ Elegant PowerShell translation of KENL bash functionality with the same governan
 - **Policy-Driven**: YAML-based configuration (same format as Linux)
 - **Cross-Platform Aware**: Detects Windows/WSL2/Linux and adapts
 - **Audit Trail**: Every action logged to ATOM trail
+- **SAIF Guided**: Every operation includes next-step guidance
 - **PowerShell Native**: Follows PowerShell best practices (Verb-Noun, pipeline support, proper error handling)
 
 ---
@@ -31,11 +32,13 @@ cd kenl\modules\KENL0-system\powershell
 ```powershell
 Import-Module KENL
 Import-Module KENL.Network
+Import-Module KENL.SAIF  # NEW: SAIF guided operations
 ```
 
 ### Initialize
 ```powershell
 Initialize-Kenl
+Initialize-SAIF  # Initialize SAIF system
 ```
 
 ### Test Network
@@ -74,6 +77,65 @@ Network optimization, MTU management, latency testing
 - `Get-KenlNetworkProfile` - Show current network config
 
 **Aliases**: `knet-test`, `knet-opt`, `knet-info`, `mtu`, `set-mtu`, `test-mtu`
+
+### KENL.SAIF (NEW)
+System-Aware Intent Flagging for guided user journeys
+
+**Key Functions**:
+- `New-SAIFFlag` - Generate SAIF flags with next-step guidance
+- `Write-SAIFResult` - Display formatted execution results
+- `New-CTFWIHandover` - Create handover documents
+- `Get-SAIFTrail` - Query SAIF trail entries
+- `Show-SAIFTrail` - Display formatted SAIF trail
+- `Initialize-SAIF` - Initialize SAIF system
+
+**Aliases**: `saif`, `saif-show`, `saif-handover`
+
+---
+
+## SAIF Integration (NEW)
+
+SAIF ensures users always know what to do next after every operation:
+
+```powershell
+# Generate a SAIF flag with guidance
+$result = New-SAIFFlag -Action 'CONFIG' -Subject 'MTU' `
+    -Description 'MTU set to 1492' `
+    -NextSteps @('Verify with: ping 8.8.8.8', 'Check logs at: ~/.kenl/logs/') `
+    -RollbackCommand 'Set-KenlMTU -MTU 1500'
+
+# Display the result with next-step guidance
+Write-SAIFResult -SAIFResult $result -ShowDetails
+
+# Output:
+# ╔════════════════════════════════════════════════════════════╗
+# ║  SAIF Execution Result                                     ║
+# ╚════════════════════════════════════════════════════════════╝
+#
+#   ✅ MTU set to 1492
+#
+#   SAIF Flag: SAIF-CONFIG-20251125-001
+#
+#   📋 Next Steps:
+#      → Verify with: ping 8.8.8.8
+#      → Check logs at: ~/.kenl/logs/
+#
+#   📁 Log: ~/.kenl/logs/network.log
+#   ↩️  Rollback: Set-KenlMTU -MTU 1500
+```
+
+### CTFWI Handover Documents
+
+Create handover documents for transitions between phases:
+
+```powershell
+New-CTFWIHandover -Title "Disk Preparation Complete" -Phase "Step 2" `
+    -CompletedActions @("Disk wiped", "GPT created", "Partitions formatted") `
+    -NextActions @("Boot Bazzite Live USB", "Run installation") `
+    -CriticalNotes @("Do not interrupt partitioning", "Keep USB inserted")
+
+# Creates: ~/Desktop/HANDOVER-Disk-Preparation-Complete-20251125-123456.md
+```
 
 ---
 
@@ -218,7 +280,11 @@ Optimize-KenlNetwork -BandwidthMbps $policy.network.bandwidth_mbps `
 ```
 powershell/
 ├── KENL.psm1                    # Core module (platform, ATOM, config)
+├── KENL.psd1                    # Core module manifest
 ├── KENL.Network.psm1            # Network optimization
+├── KENL.Network.psd1            # Network module manifest
+├── KENL.SAIF.psm1               # SAIF guided operations (NEW)
+├── KENL.SAIF.psd1               # SAIF module manifest (NEW)
 ├── Install-KENL.ps1             # Installer
 ├── COMMAND-STRUCTURE.md         # Complete command reference
 └── README.md                    # This file
