@@ -57,7 +57,7 @@ kenl_info "🔍 Checking dependencies..."
 
 MISSING=()
 
-if ! command -v steam &> /dev/null && ! flatpak list 2>/dev/null | grep -q Steam; then
+if ! command -v steam &> /dev/null && ! flatpak list --app 2>/dev/null | grep -q com.valvesoftware.Steam; then
     kenl_warn "Steam not found (should be pre-installed on Bazzite)"
     MISSING+=("steam")
 fi
