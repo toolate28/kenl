@@ -368,8 +368,9 @@ get_saif_trail() {
 
     # Check if jq is available
     if ! command -v jq &> /dev/null; then
-        echo "[]"
-        return 1
+        # Return raw entries without JSON formatting when jq is not available
+        echo "$entries"
+        return 0
     fi
 
     if [[ -n "$action_filter" ]]; then

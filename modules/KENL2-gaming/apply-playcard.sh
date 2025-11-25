@@ -17,13 +17,12 @@ KENL0_FUNCTIONS="${SCRIPT_DIR}/../KENL0-system/functions"
 if [[ -f "$KENL0_FUNCTIONS/kenl-core.sh" ]]; then
     source "$KENL0_FUNCTIONS/kenl-core.sh"
 else
-    # Fallback: source basic functions from kenl-fallback.sh
-    if [[ -f "$KENL0_FUNCTIONS/kenl-fallback.sh" ]]; then
-        source "$KENL0_FUNCTIONS/kenl-fallback.sh"
-    else
-        echo "[✗] Fallback functions not found: $KENL0_FUNCTIONS/kenl-fallback.sh" >&2
-        exit 1
-    fi
+    # Fallback basic functions if core not available
+    kenl_info() { echo "[ℹ] $*"; }
+    kenl_success() { echo "[✓] $*"; }
+    kenl_warn() { echo "[⚠] $*" >&2; }
+    kenl_error() { echo "[✗] $*" >&2; }
+    kenl_header() { echo "=== $1 ==="; }
 fi
 
 # shellcheck source=/dev/null
