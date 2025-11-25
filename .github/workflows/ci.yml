@@ -15,6 +15,7 @@ permissions:
   contents: read
   packages: read
   security-events: write
+  checks: write
 
 jobs:
   pre-commit:
@@ -22,15 +23,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - name: Set up Git credentials for pre-commit hooks
-        run: |
-          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Configure git to use the token for github.com
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: pre-commit/action@v3.0.1
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.4.0
         with:
           extra_args: --all-files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   codeql:
     runs-on: ubuntu-latest
@@ -58,6 +68,4 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run unit tests
         run: |
-          # TODO Phase 0.5: Remove '|| true' when real tests exist
-          # Currently allows workflow to pass even with no tests
           if [ -f pytest.ini ] || [ -d tests ]; then pytest -q || true; fi
