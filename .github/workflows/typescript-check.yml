@@ -55,7 +55,7 @@ jobs:
           ts_dirs=""
           for pkg in $(find . -name "package.json" -not -path "./node_modules/*" -not -path "*/node_modules/*"); do
             dir=$(dirname "$pkg")
-            if find "$dir" -maxdepth 3 -name "*.ts" -o -name "*.tsx" 2>/dev/null | grep -q .; then
+            if find "$dir" -maxdepth 3 \( -name "*.ts" -o -name "*.tsx" \) 2>/dev/null | grep -q .; then
               ts_dirs="$ts_dirs $dir"
             fi
           done
