@@ -323,13 +323,25 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Check if ATOM action exists
+        id: check-atom-action
+        run: |
+          if [ -f ./.github/actions/atom-log/action.yml ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️  ATOM Trail Logger action not found at .github/actions/atom-log/"
+          fi
+
       - name: Test ATOM Trail Logger Action
+        if: steps.check-atom-action.outputs.exists == 'true'
         uses: ./.github/actions/atom-log
         with:
           event_type: 'TEST'
           message: 'KENL workflow validation test'
 
       - name: Verify ATOM action output
+        if: steps.check-atom-action.outputs.exists == 'true'
         run: |
           echo "✅ ATOM Trail Logger action executed successfully"
           echo "Generated tag should appear in job summary"

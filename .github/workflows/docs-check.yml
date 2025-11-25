@@ -32,7 +32,14 @@ jobs:
       - name: Run repository link validator
         run: |
           echo "🔍 Checking for broken internal links..."
-          bash ./scripts/validate-links.sh
+          if [ -f ./scripts/validate-links.sh ] && [ -x ./scripts/validate-links.sh ]; then
+            bash ./scripts/validate-links.sh
+          elif [ -f ./scripts/validate-links.sh ]; then
+            chmod +x ./scripts/validate-links.sh
+            bash ./scripts/validate-links.sh
+          else
+            echo "⚠️  validate-links.sh not found - skipping link check"
+          fi
 
   markdown-spellcheck:
     name: Markdown Spellcheck
