@@ -128,7 +128,11 @@ kenl_header() {
 #
 kenl_divider() {
     local width="${1:-60}"
-    echo -e "${C_GRAY}$(printf '─%.0s' $(seq 1 "$width"))${C_NC}"
+    local divider=""
+    for ((i=0; i<width; i++)); do
+        divider+="─"
+    done
+    echo -e "${C_GRAY}${divider}${C_NC}"
 }
 
 # ═══════════════════════════════════════════════════════════
