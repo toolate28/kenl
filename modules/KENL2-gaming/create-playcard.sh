@@ -4,13 +4,35 @@
 #
 # Usage: ./create-playcard.sh "Game Name"
 #
+# Version: 2.0.0
+# ATOM: ATOM-GAMING-20251125-002
 
 set -euo pipefail
 
+# Source core libraries
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+KENL0_FUNCTIONS="${SCRIPT_DIR}/../KENL0-system/functions"
+
+# shellcheck source=/dev/null
+if [[ -f "$KENL0_FUNCTIONS/kenl-core.sh" ]]; then
+    source "$KENL0_FUNCTIONS/kenl-core.sh"
+else
+    kenl_info() { echo "[ℹ] $*"; }
+    kenl_success() { echo "[✓] $*"; }
+    kenl_warn() { echo "[⚠] $*" >&2; }
+    kenl_error() { echo "[✗] $*" >&2; }
+    kenl_header() { echo "=== $1 ==="; }
+fi
+
+# shellcheck source=/dev/null
+if [[ -f "$KENL0_FUNCTIONS/kenl-saif.sh" ]]; then
+    source "$KENL0_FUNCTIONS/kenl-saif.sh"
+fi
+
 GAME_NAME="${1:-}"
 
-if [ -z "$GAME_NAME" ]; then
-    echo "Usage: $0 \"Game Name\""
+if [[ -z "$GAME_NAME" ]]; then
+    kenl_error "Usage: $0 \"Game Name\""
     echo ""
     echo "Example: $0 \"Halo Infinite\""
     exit 1
@@ -20,13 +42,14 @@ fi
 GAME_SLUG=$(echo "$GAME_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd '[:alnum:]-')
 PLAYCARD_FILE="play-cards/${GAME_SLUG}.yaml"
 
-if [ -f "$PLAYCARD_FILE" ]; then
-    echo "❌ Play Card already exists: $PLAYCARD_FILE"
+if [[ -f "$PLAYCARD_FILE" ]]; then
+    kenl_error "Play Card already exists: $PLAYCARD_FILE"
     echo "   Use a different name or edit the existing card"
     exit 1
 fi
 
-echo "📝 Creating Play Card: $GAME_NAME"
+kenl_header "Create Play Card"
+kenl_info "Creating Play Card: $GAME_NAME"
 echo ""
 
 # Gather information
@@ -94,14 +117,24 @@ references:
   - protondb: "https://www.protondb.com/search?q=${GAME_NAME// /+}"
 EOF
 
-echo "✅ Play Card created: $PLAYCARD_FILE"
-echo ""
-echo "Next steps:"
-echo "  1. Edit $PLAYCARD_FILE with accurate information"
-echo "  2. Test the game and update performance metrics"
-echo "  3. Apply the Play Card: ./apply-playcard.sh $PLAYCARD_FILE"
-echo "  4. Validate: ./play-cards/validate-playcard.sh $PLAYCARD_FILE"
-echo "  5. Share: ./share-playcard.sh $PLAYCARD_FILE"
+# Generate SAIF result if available
+if command -v new_saif_flag &> /dev/null; then
+    flag=$(new_saif_flag "GAMING" "CREATE-PLAYCARD" "Created Play Card for $GAME_NAME" "Success")
+    write_saif_result "$flag" "Success" "Play Card created: $PLAYCARD_FILE" \
+        "Edit the file: \$EDITOR $PLAYCARD_FILE" \
+        "Test and update performance metrics" \
+        "Apply: ./apply-playcard.sh $PLAYCARD_FILE" \
+        "$PLAYCARD_FILE"
+else
+    kenl_success "Play Card created: $PLAYCARD_FILE"
+    echo ""
+    echo "📋 Next Steps:"
+    echo "   1. Edit $PLAYCARD_FILE with accurate information"
+    echo "   2. Test the game and update performance metrics"
+    echo "   3. Apply: ./apply-playcard.sh $PLAYCARD_FILE"
+    echo "   4. Validate: ./play-cards/validate-playcard.sh $PLAYCARD_FILE"
+    echo "   5. Share: ./share-playcard.sh $PLAYCARD_FILE"
+fi
 
 # Log with ATOM if available
 if command -v atom &> /dev/null; then
