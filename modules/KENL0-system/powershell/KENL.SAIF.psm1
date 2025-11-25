@@ -511,7 +511,7 @@ function Get-SAIFTrail {
 
     if ($Since) {
         $entries = $entries | Where-Object {
-            [datetime]::Parse($_.timestamp) -ge $Since
+            [datetime]::ParseExact($_.timestamp, "o", [System.Globalization.CultureInfo]::InvariantCulture) -ge $Since
         }
     }
 
