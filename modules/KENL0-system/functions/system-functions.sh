@@ -270,7 +270,9 @@ update-gaming() {
     # Update Proton-GE
     kenl_info "1/3: Updating Proton-GE..."
     if command -v ujust &> /dev/null; then
-        ujust install-proton-ge || ((errors++))
+        if ! ujust install-proton-ge; then
+            ((errors++))
+        fi
     else
         kenl_warn "ujust not found, skipping Proton-GE update"
     fi
@@ -278,7 +280,9 @@ update-gaming() {
 
     # Update Steam
     kenl_info "2/3: Updating Steam..."
-    flatpak update -y com.valvesoftware.Steam 2>/dev/null || ((errors++))
+    if ! flatpak update -y com.valvesoftware.Steam 2>/dev/null; then
+        ((errors++))
+    fi
     echo ""
 
     # Update gaming-related flatpaks

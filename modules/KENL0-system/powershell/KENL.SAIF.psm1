@@ -211,7 +211,15 @@ function New-SAIFFlag {
         LogPath         = $LogPath
         RollbackCommand = $RollbackCommand
         VerifyCommand   = $VerifyCommand
-        Platform        = if ($IsWindows -or $env:OS -eq "Windows_NT") { "Windows" } elseif ($IsLinux) { "Linux" } elseif ($IsMacOS) { "macOS" } else { "Unknown" }
+        Platform        = if ($PSVersionTable.PSEdition -eq 'Desktop' -or $env:OS -eq "Windows_NT") {
+            "Windows"
+        } elseif ($IsLinux) {
+            "Linux"
+        } elseif ($IsMacOS) {
+            "macOS"
+        } else {
+            "Unknown"
+        }
     }
 
     # Log to SAIF trail

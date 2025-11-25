@@ -115,11 +115,19 @@ kenl_debug() {
 kenl_header() {
     local title="$1"
     local width="${2:-60}"
+    local border_top=""
+    local border_bottom=""
+    local i
+
+    for ((i=0; i<width; i++)); do
+        border_top+="═"
+        border_bottom+="═"
+    done
 
     echo ""
-    echo -e "${C_CYAN}╔$(printf '═%.0s' $(seq 1 "$width"))╗${C_NC}"
+    echo -e "${C_CYAN}╔${border_top}╗${C_NC}"
     printf "${C_CYAN}║${C_NC}  %-$((width - 2))s${C_CYAN}║${C_NC}\n" "$title"
-    echo -e "${C_CYAN}╚$(printf '═%.0s' $(seq 1 "$width"))╝${C_NC}"
+    echo -e "${C_CYAN}╚${border_bottom}╝${C_NC}"
     echo ""
 }
 
@@ -129,6 +137,8 @@ kenl_header() {
 kenl_divider() {
     local width="${1:-60}"
     local divider=""
+    local i
+
     for ((i=0; i<width; i++)); do
         divider+="─"
     done
