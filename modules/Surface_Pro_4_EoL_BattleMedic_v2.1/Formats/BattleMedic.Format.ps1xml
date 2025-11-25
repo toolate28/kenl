@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>BattleMedic.DiagnosticResult</Name>
+      <ViewSelectedBy>
+        <TypeName>BattleMedic.DiagnosticResult</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader><Width>10</Width></TableColumnHeader>
+          <TableColumnHeader><Width>20</Width></TableColumnHeader>
+          <TableColumnHeader><Width>50</Width></TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem><PropertyName>Priority</PropertyName></TableColumnItem>
+              <TableColumnItem><PropertyName>Timestamp</PropertyName></TableColumnItem>
+              <TableColumnItem><PropertyName>Issues</PropertyName></TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

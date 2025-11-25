@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>BattleMedic.DiagnosticResult</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Priority</Name>
+        <ReferencedMemberName>SystemPriority</ReferencedMemberName>
+      </AliasProperty>
+    </Members>
+  </Type>
+</Types>
