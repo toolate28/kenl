@@ -20,9 +20,9 @@ priority: P0
 ## 🎯 Quick Navigation
 
 ### Critical Path (Start Here)
-- [[01_WOFSYS_EMERGENCY_PROTOCOL]] - **START HERE** for immediate recovery
+- [[01_DECISION_TREE]] - **START HERE** - Find your recovery path
 - [[02_REQUIREMENTS_CHECKLIST]] - Pre-flight verification
-- [[03_STEP_BY_STEP_RECOVERY]] - Detailed recovery workflow
+- [[03_STEP_BY_STEP_RECOVERY]] - Detailed recovery workflow (Path A)
 
 ### Supporting Documentation
 - [[04_TROUBLESHOOTING]] - If recovery fails or issues arise
@@ -85,27 +85,24 @@ BattleMedic v2.1 provides:
 
 ---
 
-## 🚀 Quick Start (5-Minute Overview)
+## 🚀 Quick Start (Choose Your Path)
 
-### If You Can Boot to Windows
-1. Navigate to [[02_REQUIREMENTS_CHECKLIST]]
-2. Run `Test-BattleMedicRequirements.ps1`
-3. Import BattleMedic module
-4. Execute `Repair-WOFDriver -Force`
-5. Verify with [[05_VERIFICATION_TESTS]]
+### Answer These Questions:
 
-### If System Won't Boot
-1. Boot to **Windows Recovery Environment** (WinRE)
-2. Access Command Prompt
-3. Navigate to BattleMedic location
-4. Run offline recovery commands
-5. See [[01_WOFSYS_EMERGENCY_PROTOCOL#Offline Recovery]]
+**Can your Surface Pro 4 boot to Windows desktop?**
+- ✅ YES → [[PATH_A_NORMAL_BOOT|Path A: Normal Boot (20-30 min)]]
+- ❌ NO → Continue ↓
 
-### If You're Unsure
-1. Read [[01_WOFSYS_EMERGENCY_PROTOCOL]] - detailed decision tree
-2. Assess your situation (can boot? safe mode? WinRE?)
-3. Follow the appropriate recovery path
-4. Document everything in [[06_RECOVERY_LOG_TEMPLATE]]
+**Can it boot to Safe Mode? (Press F8 during startup)**
+- ✅ YES → [[PATH_B_SAFE_MODE|Path B: Safe Mode (30-45 min)]]
+- ❌ NO → Continue ↓
+
+**Can you access Recovery Environment? (F11 or force shutdown 3x)**
+- ✅ YES → [[PATH_C_WINRE_OFFLINE|Path C: WinRE Offline (45-60 min)]]
+- ❌ NO → [[PATH_D_RECOVERY_MEDIA|Path D: Recovery Media (2-3 hours)]]
+
+### Not Sure?
+Start here: [[01_DECISION_TREE|Decision Tree - Find Your Path]]
 
 ---
 
@@ -113,10 +110,14 @@ BattleMedic v2.1 provides:
 
 ```
 Obsidian_Vault/
-├── 00_HOME.md                          (This file)
-├── 01_WOFSYS_EMERGENCY_PROTOCOL.md     (Emergency recovery workflow)
+├── 00_HOME.md                          (This file - Start here)
+├── 01_DECISION_TREE.md                 (Find your recovery path)
+├── PATH_A_NORMAL_BOOT.md               (Recovery when Windows boots)
+├── PATH_B_SAFE_MODE.md                 (Recovery via Safe Mode)
+├── PATH_C_WINRE_OFFLINE.md             (Offline WinRE recovery)
+├── PATH_D_RECOVERY_MEDIA.md            (External USB recovery)
 ├── 02_REQUIREMENTS_CHECKLIST.md        (Pre-flight verification)
-├── 03_STEP_BY_STEP_RECOVERY.md         (Detailed implementation)
+├── 03_STEP_BY_STEP_RECOVERY.md         (Detailed Path A walkthrough)
 ├── 04_TROUBLESHOOTING.md               (Error handling guide)
 ├── 05_VERIFICATION_TESTS.md            (Post-recovery validation)
 ├── 06_RECOVERY_LOG_TEMPLATE.md         (Session documentation)
@@ -213,7 +214,7 @@ _Use this section for quick notes during recovery:_
 
 ---
 
-**Next Step**: Navigate to [[01_WOFSYS_EMERGENCY_PROTOCOL]] to begin recovery
+**Next Step**: Navigate to [[01_DECISION_TREE]] to find your recovery path
 
 ---
 
