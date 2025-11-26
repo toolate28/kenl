@@ -234,6 +234,7 @@ graph TB
 ## Documentation
 
 **🧭 Full Navigation Hub:** [DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md)
+**📋 Document Index:** [DOCUMENT-INDEX.md](./DOCUMENT-INDEX.md) - 1-line review of all root documents
 
 ### Quick Links by Audience
 
@@ -251,6 +252,7 @@ graph TB
 | Category | Location | Purpose |
 |----------|----------|---------|
 | **Pathways** | [claude-landing/DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md) | Navigation hub |
+| **Document Index** | [DOCUMENT-INDEX.md](./DOCUMENT-INDEX.md) | Root doc review |
 | **Traceability** | [ATOM-REGISTER.md](./ATOM-REGISTER.md) | ATOM tag tracking |
 | **Case Studies** | [case-studies/](./case-studies/) | Real-world scenarios |
 | **Governance** | [governance/](./governance/) | ARCREF + ADR decisions |

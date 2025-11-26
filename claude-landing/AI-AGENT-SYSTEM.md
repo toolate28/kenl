@@ -368,9 +368,196 @@ THEN:
 
 ---
 
+## 🔄 Freshness Loop Protocol
+
+### Document Versioning
+
+**Every document MUST have in frontmatter:**
+
+```yaml
+---
+title: Document Title
+atom: ATOM-{TYPE}-YYYYMMDD-NNN
+version: X.Y.Z  # Semantic versioning
+created: YYYY-MM-DD
+updated: YYYY-MM-DD  # On every edit
+status: draft | production | deprecated | archived
+hash: sha256-first-8-chars  # For integrity verification
+---
+```
+
+### Freshness Validation Loop
+
+```mermaid
+graph TD
+    A[Start Session] --> B{Check Document Age}
+    B --> |> 30 days| C[Flag for Review]
+    B --> |<= 30 days| D[Continue]
+    C --> E{Content Still Valid?}
+    E --> |Yes| F[Update 'updated' date]
+    E --> |No| G[Revise Content]
+    G --> H[Increment Version]
+    H --> I[Update Hash]
+    F --> D
+    I --> D
+    D --> J[Proceed with Session]
+
+    style C fill:#ffd43b,color:#000
+    style G fill:#ff6b6b,color:#fff
+```
+
+### Automatic Hash Verification
+
+**Generate hash for versioned files:**
+
+```bash
+# Generate hash for a document (use the script for consistency)
+./scripts/verify-doc-hashes.sh generate document.md
+
+# Verify all hashes
+./scripts/verify-doc-hashes.sh
+
+# Update all hashes
+./scripts/verify-doc-hashes.sh update
+```
+
+**Hash should be updated:**
+- On every content change
+- As part of commit process
+- Verified on session start
+
+---
+
+## 🎯 Visual Context Mapping
+
+### System State Visualization
+
+**Link to Obsidian graph view:**
+- Primary vault: `~/.kenl` opened as Obsidian vault
+- Graph view shows document relationships
+- Backlinks reveal cross-references
+
+### Dynamic Display Integration
+
+**PowerShell banner shows current context:**
+
+```powershell
+# Current context displayed on shell start
+Show-KenlBanner
+# Shows: Platform, Module, Playcard, ATOM trail, SAIF flags
+```
+
+**Mermaid diagrams for system state:**
+- Located in `DOCUMENTATION-PATHWAYS.md`
+- Shows pathway relationships
+- Updated when structure changes
+
+### Context Indicators
+
+| Indicator | Location | Purpose |
+|-----------|----------|---------|
+| 🎮 KENL2 | Shell prompt | Gaming context active |
+| 💻 KENL3 | Shell prompt | Dev context active |
+| ⚙️ KENL0 | Shell prompt | System context active |
+| 📊 Dashboard | Obsidian | Current state overview |
+
+---
+
+## 🛑 Graceful Shutdown Protocol
+
+### Normal Session End
+
+```
+1. Complete current atomic operation
+2. Drop SAIF-COMPLETE flag
+3. Update context files:
+   - CURRENT-STATE.md (final state)
+   - RECENT-WORK.md (session summary)
+   - NEXT-STEPS.md (remaining work)
+4. Commit via report_progress
+5. Log: ATOM-SESSION-END-YYYYMMDD-NNN
+```
+
+### Interrupted Session Recovery
+
+```
+IF: Session timeout / disconnection / error
+THEN:
+1. On next session start, check for:
+   - Uncommitted changes (git status)
+   - Incomplete operations (partial edits)
+   - Missing SAIF-COMPLETE flag
+2. Recovery actions:
+   - Commit or stash partial work
+   - Update CURRENT-STATE.md with interruption note
+   - Create ATOM-RECOVER-YYYYMMDD-NNN
+3. Resume from documented state
+```
+
+### Error States
+
+| Error | Detection | Recovery |
+|-------|-----------|----------|
+| Timeout | No activity > threshold | Auto-save context |
+| Conflict | Merge errors | Flag for human review |
+| Loop detected | Iteration counter | Break and report |
+| Missing file | File not found | Check DOCUMENT-INDEX.md |
+
+---
+
+## 🔁 Circular Reference Protection
+
+### Loop Detection
+
+**Maximum iteration counters:**
+
+| Operation | Max Iterations | Action on Exceed |
+|-----------|---------------|------------------|
+| Link following | 10 | Stop, report circular ref |
+| Document updates | 5 per session | Warn, require confirmation |
+| Cross-references | 20 | Flag for review |
+| Pathway navigation | 15 | Stop, log warning |
+
+### Detection Algorithm
+
+```
+visited = set()
+def follow_reference(doc):
+    if doc in visited:
+        log("CIRCULAR_REF: " + doc)
+        return ERROR
+    visited.add(doc)
+    # Continue processing
+```
+
+### Recovery from Circular References
+
+```
+IF: Circular reference detected
+THEN:
+1. Log: ATOM-CIRCULAR-REF-YYYYMMDD-NNN
+2. Stop current operation
+3. Report in NEXT-STEPS.md:
+   - Which documents form the loop
+   - Suggested break point
+4. Flag for human review
+5. DO NOT attempt auto-fix
+```
+
+### Prevention
+
+- Use `DOCUMENT-INDEX.md` as single source of truth
+- Validate links before adding
+- Run `./scripts/validate-links.sh` on each commit
+- Prefer hierarchical over circular structures
+
+---
+
 **ATOM:** ATOM-AI-20251126-001
 **SAIF:** SAIF-SYSTEM-DESIGN-20251126-001
+**Version:** 2.0.0
 **Created:** 2025-11-26
+**Updated:** 2025-11-26
 
 ---
 
