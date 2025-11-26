@@ -18,7 +18,7 @@ ModuleVersion = '1.0.0'
 CompatiblePSEditions = @('Desktop', 'Core')
 
 # ID used to uniquely identify this module
-GUID = 'c9f5e7d4-0a1b-5f3c-b8f6-5e9c0h4g3d1f'
+GUID = 'c9f5e7d4-0a1b-5f3c-b8f6-5e9c0a4d3d1f'
 
 # Author of this module
 Author = 'toolate28'

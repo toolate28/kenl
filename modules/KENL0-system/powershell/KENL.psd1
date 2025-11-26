@@ -71,16 +71,16 @@ PowerShellVersion = '5.1'
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
     'Get-KenlPlatform',
+    'Test-KenlPlatform',
     'Write-AtomTrail',
+    'Get-AtomTrail',
     'Get-KenlConfig',
     'Set-KenlConfig',
-    'New-AtomTag',
-    'Get-KenlPath',
-    'Test-KenlPrerequisites',
-    'Initialize-KenlEnvironment',
-    'Get-AtomTrail',
-    'Export-AtomTrail',
-    'Import-KenlModule'
+    'Invoke-KenlCommand',
+    'Test-KenlElevated',
+    'Write-KenlMessage',
+    'Get-KenlInfo',
+    'Initialize-Kenl'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -88,9 +88,9 @@ CmdletsToExport = @()
 
 # Variables to export from this module
 VariablesToExport = @(
-    'KenlPlatform',
+    'KenlModuleRoot',
     'KenlConfigPath',
-    'KenlLogsPath',
+    'AtomTrailPath',
     'KenlVersion'
 )
 

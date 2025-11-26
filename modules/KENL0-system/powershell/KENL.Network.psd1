@@ -51,7 +51,8 @@ PowerShellVersion = '5.1'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @('KENL')
+# Note: KENL module is recommended but not required for basic network functions
+# RequiredModules = @('KENL')
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
@@ -71,11 +72,11 @@ RequiredModules = @('KENL')
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
     'Test-KenlNetwork',
-    'Optimize-KenlNetwork',
-    'Get-KenlNetworkConfig',
+    'Get-KenlMTU',
     'Set-KenlMTU',
-    'Test-KenlBandwidth',
-    'Get-KenlNetworkStatus'
+    'Test-KenlMTU',
+    'Optimize-KenlNetwork',
+    'Get-KenlNetworkProfile'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -83,19 +84,18 @@ CmdletsToExport = @()
 
 # Variables to export from this module
 VariablesToExport = @(
-    'KenlNetworkBaseline',
-    'KenlOptimalMTU',
-    'KenlTestHosts'
+    'TestHosts',
+    'OptimalMTU'
 )
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @(
-    'Test-Network',
-    'Optimize-Network',
-    'Test-Latency',
-    'Get-MTU',
-    'Set-MTU',
-    'Get-NetworkStatus'
+    'knet-test',
+    'knet-opt',
+    'knet-info',
+    'mtu',
+    'set-mtu',
+    'test-mtu'
 )
 
 # DSC resources to export from this module

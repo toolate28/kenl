@@ -102,10 +102,11 @@ Write-Host "Install location: " -NoNewline
 Write-Host $installPath -ForegroundColor Green
 Write-Host ""
 
-# Modules to install
+# Modules to install (includes both .psm1 and .psd1 files)
 $modules = @(
-    @{ Name = "KENL"; File = "KENL.psm1" },
-    @{ Name = "KENL.Network"; File = "KENL.Network.psm1" }
+    @{ Name = "KENL"; Files = @("KENL.psm1", "KENL.psd1") },
+    @{ Name = "KENL.Network"; Files = @("KENL.Network.psm1", "KENL.Network.psd1") },
+    @{ Name = "KENL.SAIF"; Files = @("KENL.SAIF.psm1", "KENL.SAIF.psd1") }
 )
 
 $scriptPath = $PSScriptRoot
@@ -117,7 +118,7 @@ $needsInstall = $false
 
 foreach ($module in $modules) {
     $moduleName = $module.Name
-    $moduleFile = $module.File
+    $moduleFile = $module.Files[0]  # Primary .psm1 file
     $sourcePath = Join-Path $scriptPath $moduleFile
     $targetPath = Join-Path $installPath $moduleName
     $targetFile = Join-Path $targetPath "$moduleName.psm1"
@@ -179,8 +180,9 @@ $failedModules = @()
 
 foreach ($module in $modules) {
     $moduleName = $module.Name
-    $moduleFile = $module.File
-    $sourcePath = Join-Path $scriptPath $moduleFile
+    $moduleFiles = $module.Files
+    $primaryFile = $moduleFiles[0]  # Primary .psm1 file
+    $sourcePath = Join-Path $scriptPath $primaryFile
     $targetPath = Join-Path $installPath $moduleName
     $targetFile = Join-Path $targetPath "$moduleName.psm1"
 
@@ -204,15 +206,29 @@ foreach ($module in $modules) {
         New-Item -Path $targetPath -ItemType Directory -Force | Out-Null
     }
 
-    # Copy module file
-    if ($PSCmdlet.ShouldProcess($targetFile, "Install module")) {
-        try {
-            Copy-Item -Path $sourcePath -Destination $targetFile -Force -ErrorAction Stop
-            Write-Host "  [✓] Installed: $targetFile" -ForegroundColor Green
-            $installedModules += $moduleName
+    # Copy all module files (.psm1 and .psd1)
+    if ($PSCmdlet.ShouldProcess($targetPath, "Install module files")) {
+        $allSucceeded = $true
+        foreach ($file in $moduleFiles) {
+            $src = Join-Path $scriptPath $file
+            $dst = Join-Path $targetPath $file
+            try {
+                if (Test-Path $src) {
+                    Copy-Item -Path $src -Destination $dst -Force -ErrorAction Stop
+                    Write-Host "  [✓] Installed: $file" -ForegroundColor Green
+                } else {
+                    Write-Warning "  [!] Source file not found: $file"
+                }
+            }
+            catch {
+                Write-Warning "  [✗] Failed to install ${file}: $_"
+                $allSucceeded = $false
+            }
         }
-        catch {
-            Write-Warning "  [✗] Failed to install $moduleName`: $_"
+
+        if ($allSucceeded) {
+            $installedModules += $moduleName
+        } else {
             $failedModules += $moduleName
         }
     }
@@ -243,9 +259,11 @@ Write-Host ""
 Write-Host "1. Import modules:" -ForegroundColor Yellow
 Write-Host "   Import-Module KENL"
 Write-Host "   Import-Module KENL.Network"
+Write-Host "   Import-Module KENL.SAIF"
 Write-Host ""
 Write-Host "2. Initialize framework:" -ForegroundColor Yellow
 Write-Host "   Initialize-Kenl"
+Write-Host "   Initialize-SAIF"
 Write-Host ""
 Write-Host "3. Test network:" -ForegroundColor Yellow
 Write-Host "   Test-KenlNetwork"
