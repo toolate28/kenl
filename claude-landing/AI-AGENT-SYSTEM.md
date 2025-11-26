@@ -101,11 +101,11 @@ THEN:
 | Action Type | ATOM Format | Example |
 |-------------|-------------|---------|
 | Research | `ATOM-RESEARCH-YYYYMMDD-NNN` | `ATOM-RESEARCH-20251126-001` |
-| Configuration | `ATOM-CFG-YYYYMMDD-NNN` | `ATOM-CFG-20251126-001` |
-| Documentation | `ATOM-DOC-YYYYMMDD-NNN` | `ATOM-DOC-20251126-001` |
-| Decision | `ATOM-DECISION-YYYYMMDD-NNN` | `ATOM-DECISION-20251126-001` |
-| Problem | `ATOM-PROBLEM-YYYYMMDD-NNN` | `ATOM-PROBLEM-20251126-001` |
-| Solution | `ATOM-SOLUTION-YYYYMMDD-NNN` | `ATOM-SOLUTION-20251126-001` |
+| Configuration | `ATOM-CFG-YYYYMMDD-NNN` | `ATOM-CFG-20251126-002` |
+| Documentation | `ATOM-DOC-YYYYMMDD-NNN` | `ATOM-DOC-20251126-003` |
+| Decision | `ATOM-DECISION-YYYYMMDD-NNN` | `ATOM-DECISION-20251126-004` |
+| Problem | `ATOM-PROBLEM-YYYYMMDD-NNN` | `ATOM-PROBLEM-20251126-005` |
+| Solution | `ATOM-SOLUTION-YYYYMMDD-NNN` | `ATOM-SOLUTION-20251126-006` |
 
 ### SAIF Checkpoint Protocol
 
@@ -116,8 +116,8 @@ SAIF-{ACTION}-{YYYYMMDD}-{NNN}
 
 Examples:
 - SAIF-VALIDATE-20251126-001: Pre-work validation complete
-- SAIF-CHECKPOINT-20251126-001: Mid-task checkpoint
-- SAIF-COMPLETE-20251126-001: Task completion verified
+- SAIF-CHECKPOINT-20251126-002: Mid-task checkpoint
+- SAIF-COMPLETE-20251126-003: Task completion verified
 - SAIF-HANDOVER-20251126-001: Context prepared for next session
 ```
 
