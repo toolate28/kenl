@@ -28,6 +28,13 @@
     Prerequisite   : PowerShell 5.1+
     Version        : 1.0.0
     ATOM           : ATOM-PROFILE-20251126-001
+
+    Rollback Instructions:
+    1. Restore from backup: Copy-Item "$PROFILE.backup.YYYYMMDDHHMMSS" $PROFILE -Force
+       (Replace YYYYMMDDHHMMSS with your actual backup timestamp)
+    2. Or manually remove KENL section: Edit $PROFILE and delete lines between
+       "# === KENL PROFILE INTEGRATION ===" and "# === END KENL PROFILE INTEGRATION ==="
+    3. Reload profile: . $PROFILE
 #>
 
 [CmdletBinding()]

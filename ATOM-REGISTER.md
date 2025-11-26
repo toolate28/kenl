@@ -56,7 +56,9 @@ ATOM-{TYPE}-{YYYYMMDD}-{NNN}
 |-----|-------------|---------------|--------|
 | ATOM-DOC-20251126-001 | GETTING-STARTED.md - Obsidian vault initialization | `/GETTING-STARTED.md` | Active |
 | ATOM-DOC-20251126-002 | ATOM Register creation | `/ATOM-REGISTER.md` | Active |
+| ATOM-DOC-20251126-003 | README.md restructure with pathway system | `/README.md` | Active |
 | ATOM-PROFILE-20251126-001 | PowerShell profile installation script | `/scripts/Install-KenlProfile.ps1` | Active |
+| ATOM-STATUS-20251126-001 | CURRENT-STATE.md update - Documentation restructure status | `claude-landing/CURRENT-STATE.md` | Active |
 
 #### 2025-11-25 (SAIF Module)
 
