@@ -42,7 +42,7 @@ This module provides:
 - Comprehensive diagnostic and logging framework
 - User-friendly recovery wizards for all skill levels
 
-Designed for both IT professionals managing aging hardware fleets and 
+Designed for both IT professionals managing aging hardware fleets and
 end users needing reliable self-service recovery tools.
 '@
 
@@ -100,32 +100,32 @@ FunctionsToExport = @(
     'Get-SP4Status',
     'Test-SystemPriority',
     'Get-BattleMedicDiagnostic',
-    
+
     # Recovery Operations
     'Start-BattleMedicRecovery',
     'Repair-WOFDriver',
     'Repair-SystemFiles',
     'Start-EmergencyCleanup',
     'Reset-WindowsUpdate',
-    
+
     # SP4 Specific
     'Repair-SP4ScreenFlicker',
     'Repair-SP4TypeCover',
     'Repair-SP4Sleep',
     'Reset-SP4GPUDriver',
     'Start-SP4ThermalMitigation',
-    
+
     # WinRE Integration
     'Install-BattleMedicToWinRE',
     'Start-WinRERecovery',
     'Get-WinREStatus',
-    
+
     # Logging and Reporting
     'Get-BattleMedicLog',
     'Export-BattleMedicReport',
     'New-RecoveryCheckpoint',
     'Get-RecoveryHistory',
-    
+
     # User Interface
     'Show-RecoveryMenu',
     'Start-GuidedRecovery',

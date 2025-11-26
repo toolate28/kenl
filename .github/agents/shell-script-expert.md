@@ -98,7 +98,7 @@ check_dependencies() {
             missing+=("$cmd")
         fi
     done
-    
+
     if [ ${#missing[@]} -gt 0 ]; then
         echo -e "${YELLOW}⚠️  Missing dependencies: ${missing[*]}${RESET}" >&2
         echo "Install with: flatpak install ... or distrobox ..." >&2

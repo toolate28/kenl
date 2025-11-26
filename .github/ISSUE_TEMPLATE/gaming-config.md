@@ -41,9 +41,9 @@ See NAMING-CONVENTIONS.md for details.
 <!-- What actually happens? -->
 
 ## Steps to Reproduce
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Logs / Screenshots
 ```

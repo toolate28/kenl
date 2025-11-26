@@ -2,7 +2,7 @@
 
 Status: scaffold & governance added — PR recommended to finalize.
 
-kenl is the repository for [project name / short description].  
+kenl is the repository for [project name / short description].
 This repository now includes a full modern developer and governance scaffold: CI, security scanning, pre-commit, ARCREF/ADR governance templates, and issue/PR templates.
 
 Quick links

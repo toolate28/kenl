@@ -37,7 +37,7 @@ Start-BattleMedicRecovery -Mode Automated -Priority P1
 ## 🔍 Diagnostic Commands
 ```powershell
 Test-BattleMedicEnvironment    # Verify setup
-Get-SystemHealthReport         # Full health report  
+Get-SystemHealthReport         # Full health report
 Test-SystemPriority           # Get priority level
 Get-SP4Status                 # SP4 hardware check
 Get-BattleMedicLog -Latest 10 # Recent activities
@@ -92,7 +92,7 @@ Install-Module BattleMedic -Scope CurrentUser
 # Version check
 Get-BattleMedicVersion
 
-# Compatibility test  
+# Compatibility test
 Test-BattleMedicEnvironment
 
 # Unload module
@@ -120,7 +120,7 @@ Remove-Module BattleMedic
 ## 📝 Essential Aliases
 ```powershell
 bmr      # Start-BattleMedicRecovery
-bmdiag   # Get-BattleMedicDiagnostic  
+bmdiag   # Get-BattleMedicDiagnostic
 bmlog    # Get-BattleMedicLog
 sp4fix   # Start-SP4Recovery
 woffix   # Repair-WOFDriver

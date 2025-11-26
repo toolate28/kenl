@@ -40,7 +40,7 @@ compatibility:
   proton: "GE-Proton9-20"
   launch_options: "PROTON_USE_WINED3D=1 %command%"
   anti_cheat: "EAC - Working"
-  
+
 issues:
   - "Occasional stuttering in multiplayer"
   - "Intro videos crash (skip with launch option)"

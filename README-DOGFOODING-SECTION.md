@@ -199,4 +199,3 @@ Messy repository with ATOM trails = "I can see the whole process, including fail
 **We're not hiding the mess. We're documenting WHY it becomes organized.**
 
 ---
-

@@ -76,17 +76,17 @@
 │ FOREWORD: SHE'LL BE RIGHT                                                   │
 └─────────────────────────────────────────────────────────────────────────────┘
 
-Linux gaming documentation has become a maze of prerequisite guides, circular 
-references, and outdated information. Users face 5+ prerequisite guides before 
-accomplishing a single task. The "just works" promise actually means "just read 
+Linux gaming documentation has become a maze of prerequisite guides, circular
+references, and outdated information. Users face 5+ prerequisite guides before
+accomplishing a single task. The "just works" promise actually means "just read
 these 47 wiki articles first."
 
-Bazza-DX exists because the Windows 10 EOL migration (240 million devices) 
-demands better. Not more documentation—smarter documentation. Not another 
+Bazza-DX exists because the Windows 10 EOL migration (240 million devices)
+demands better. Not more documentation—smarter documentation. Not another
 distribution—a configuration layer that works on stock Bazzite.
 
-This project embodies a simple truth: The best documentation teaches you the 
-system while you accomplish your task. The best configuration preserves your 
+This project embodies a simple truth: The best documentation teaches you the
+system while you accomplish your task. The best configuration preserves your
 choices with audit trails. The best tooling gets out of your way.
 
 She'll be right, mate. Let's make it so.
@@ -98,14 +98,14 @@ She'll be right, mate. Let's make it so.
 
 WHAT IS BAZZA-DX?
 
-An Australian-optimized configuration layer for Bazzite-DX (Fedora Atomic) that 
+An Australian-optimized configuration layer for Bazzite-DX (Fedora Atomic) that
 transforms Linux gaming from complex to comprehensible. Built on three pillars:
 
   1. Gaming-with-Intent Framework
-     Machine-readable gaming configs (Play Cards) + SAGE methodology for 
+     Machine-readable gaming configs (Play Cards) + SAGE methodology for
      evidence-based optimization. Configuration as knowledge, not guesswork.
 
-  2. MCP-Orchestrated Infrastructure  
+  2. MCP-Orchestrated Infrastructure
      AI agents (Claude, Perplexity, local Qwen) coordinate through Model Context
      Protocol, each handling appropriate complexity levels with ATOM audit trails.
 
@@ -183,16 +183,16 @@ Community:
 
 WHY THIS MATTERS
 
-The Linux gaming ecosystem's documentation complexity is a barrier to the 
-Windows 10 EOL migration wave. Bazza-DX demonstrates that AI-augmented 
-configuration management can bridge this gap without creating yet another 
+The Linux gaming ecosystem's documentation complexity is a barrier to the
+Windows 10 EOL migration wave. Bazza-DX demonstrates that AI-augmented
+configuration management can bridge this gap without creating yet another
 distribution to maintain.
 
-By working on stock Bazzite-DX, contributions flow upstream naturally. By 
-using ATOM audit trails, community attribution is preserved. By implementing 
+By working on stock Bazzite-DX, contributions flow upstream naturally. By
+using ATOM audit trails, community attribution is preserved. By implementing
 SAGE methodology, improvements compound through evidence-based iteration.
 
-This isn't about replacing existing tools—it's about making them discoverable, 
+This isn't about replacing existing tools—it's about making them discoverable,
 understandable, and safe to use.
 
 
@@ -213,7 +213,7 @@ Commands are shown in monospace:  rpm-ostree status
 File paths use tildes for home:   ~/.config/bazza-dx/
 Code blocks are syntax highlighted where relevant.
 
-All recommendations follow immutability principles—never modify the base 
+All recommendations follow immutability principles—never modify the base
 Bazzite system. User-space only.
 
 
@@ -257,7 +257,7 @@ Users copy commands from forums without understanding:
   • How to roll back if something breaks
   • When to revisit as drivers/games update
 
-Result: Systems accumulate cargo-cult configurations. No audit trail. No 
+Result: Systems accumulate cargo-cult configurations. No audit trail. No
 learning. Just hope it keeps working.
 
 
@@ -268,7 +268,7 @@ Current AI assistants provide generic advice:
   • "Enable FSR" (without verifying GPU compatibility)
   • "Adjust GameScope settings" (without explaining trade-offs)
 
-No memory of your hardware. No understanding of your specific issues. No 
+No memory of your hardware. No understanding of your specific issues. No
 integration with your actual system state.
 
 
@@ -298,8 +298,8 @@ JSON schemas capturing complete gaming setups:
       "resolution": "1920x1080",
       "graphics_preset": "high"
     },
-    "rationale": "GE-Proton 8-32 fixes lighting issues. WINED3D improves 
-                  frame times on AMD Radeon. High preset maintains 60fps 
+    "rationale": "GE-Proton 8-32 fixes lighting issues. WINED3D improves
+                  frame times on AMD Radeon. High preset maintains 60fps
                   with Ryzen 5600H + Radeon Graphics.",
     "evidence": {
       "benchmarks": ["avg_fps: 62", "1%_low: 58"],
@@ -307,8 +307,8 @@ JSON schemas capturing complete gaming setups:
     }
   }
 
-Key innovation: The rationale field explains why, not just what. Evidence 
-validates claims. ATOM tag creates audit trail. Machine-readable allows AI 
+Key innovation: The rationale field explains why, not just what. Evidence
+validates claims. ATOM tag creates audit trail. Machine-readable allows AI
 agents to understand your config without natural language parsing.
 
 
@@ -330,7 +330,7 @@ Gaming Profiles: Hardware-Aware Defaults
     }
   }
 
-AI agents can match your hardware to relevant Play Cards. No more generic 
+AI agents can match your hardware to relevant Play Cards. No more generic
 advice—configurations specific to your GPU/CPU combination.
 
 
@@ -393,7 +393,7 @@ Token Efficiency Strategy:
   • Perplexity handles: ProtonDB research, compatibility matrices, changelog tracking
   • Claude handles: SAGE methodology execution, architecture decisions, debugging
 
-Each agent has MCP servers providing system access. Constitutional principles 
+Each agent has MCP servers providing system access. Constitutional principles
 enforce safety constraints. ATOM tags audit every operation across all agents.
 
 
@@ -417,7 +417,7 @@ Tight integration via distrobox:
   • Share GPU access for AI workloads
   • Isolated dependency management
 
-This is where Claude Code runs. modules/KENL provides reproducible dev environment 
+This is where Claude Code runs. modules/KENL provides reproducible dev environment
 without modifying the immutable base system.
 
 
@@ -513,7 +513,7 @@ Proton Compatibility Layer:
   • Proton Experimental      (latest features, potential instability)
   • Proton 9.x              (stable, broad compatibility)
   • GE-Proton               (community builds with additional patches)
-  
+
   Install GE-Proton via ProtonUp-Qt (included in Bazzite):
     protonup-qt
 
@@ -526,7 +526,7 @@ MangoHud (Performance Overlay):
   • Version: 0.7.x
   • Configuration: ~/.config/MangoHud/MangoHud.conf
   • Logging: mangohud --log-duration=60 %command%
-  
+
   Essential metrics: FPS, frame times, GPU/CPU temps, VRAM usage
 
 Mesa Drivers (AMD/Intel):
@@ -549,7 +549,7 @@ Claude (Anthropic):
   • Model: Claude Sonnet 4.5 (latest)
   • Usage: Complex reasoning, architecture, SAGE methodology execution
   • Integration: Claude Code (terminal), Claude Desktop, claude.ai web
-  
+
   Installation (Claude Code):
     curl -fsSL https://claude.ai/install.sh | bash
 
@@ -563,7 +563,7 @@ Ollama + Qwen:
   • Model: Qwen 2.5 7B (quantized for 6GB VRAM)
   • Usage: Config generation, JSON validation, repetitive tasks
   • Cost: Free (local execution)
-  
+
   Installation:
     curl -fsSL https://ollama.com/install.sh | sh
     ollama pull qwen2.5:7b
@@ -572,7 +572,7 @@ MCP Servers (Model Context Protocol):
   • @cloudflare/mcp-server-cloudflare (Workers, D1, R2, KV)
   • @modelcontextprotocol/server-filesystem (local file access)
   • @modelcontextprotocol/server-git (repository operations)
-  
+
   Installation via npx (no global install needed)
 
 
@@ -584,14 +584,14 @@ Distrobox:
   • Purpose: Isolated development container
   • Base: Ubuntu 24.04 LTS (stability + package availability)
   • Integration: Full host filesystem access, GPU passthrough
-  
+
   Create modules/KENL container:
     distrobox create --name kenl --image ubuntu:24.04
 
 Node.js (via nvm):
   • Version: 20 LTS
   • Purpose: MCP servers, web tooling, claude-code dependencies
-  
+
   Installation (inside modules/KENL):
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     nvm install 20
@@ -600,7 +600,7 @@ Python:
   • Version: 3.12
   • Purpose: SAGE automation, AI tooling, data analysis
   • Packages: pandas, matplotlib, psutil, requests
-  
+
   Installation:
     sudo apt install python3.12 python3-pip
     pip install --break-system-packages pandas matplotlib psutil requests
@@ -611,7 +611,7 @@ Development Tools:
   • jq: JSON processing in shell scripts
   • shellcheck: Bash script linting
   • ajv-cli: JSON schema validation
-  
+
   Installation:
     sudo apt install git jq shellcheck
     npm install -g just-install ajv-cli
@@ -656,7 +656,7 @@ Zero Trust:
 Justfile:
   • Purpose: Unified task runner (replaces scattered scripts)
   • Location: ~/projects/bazza-dx/Justfile
-  
+
   Example tasks:
     just atom-gen cfg "gaming profile"
     just gaming-validate
@@ -901,7 +901,7 @@ BTRFS Subvolumes (if using BTRFS):
   @:                / (root)
   @home:            /home
   @var:             /var (containers, logs)
-  
+
   Snapshot strategy:
     - Automatic before rpm-ostree updates (built-in)
     - Manual before major config changes (Timeshift recommended)
@@ -948,7 +948,7 @@ Anti-Cheat:
   EAC:              🟡 Most games supported (Fortnite excluded)
   BattlEye:         🟡 Many games functional (Destiny 2 excluded)
   Vanguard:         ❌ Kernel-level, incompatible (Valorant, LoL)
-  
+
   Check: https://areweanticheatyet.com/
 
 VR Gaming:
@@ -963,7 +963,7 @@ VR Gaming:
 └─────────────────────────────────────────────────────────────────────────────┘
 
 Reference System (Ryzen 5 5600H + Radeon):
-  
+
   Elden Ring:       1080p High @ 55-65 FPS (GE-Proton, optimized)
   Cyberpunk 2077:   1080p Medium @ 45-55 FPS (FSR 2.0 Quality)
   CS2:              1080p High @ 120-150 FPS (competitive settings)
@@ -1117,7 +1117,7 @@ Bazzite-DX (ublue-os/bazzite-dx):
   • ujust gaming-optimize-amd (extracts AMD GPU tuning Play Card logic)
   • ujust gaming-benchmark (SAGE evidence collection wrapper)
   • ujust gaming-rollback (revert to previous gaming config snapshot)
-  
+
   Process:
     1. Polish Play Card functionality in Bazza-DX
     2. Extract reusable patterns as ujust recipes
@@ -1128,7 +1128,7 @@ Universal Blue Docs (universal-blue.org):
   • "Gaming Optimization Methodology" guide (SAGE for gaming)
   • "Configuration Audit Trails" best practices (ATOM system)
   • "AI-Assisted System Management" patterns (MCP integration)
-  
+
   Process:
     1. Write comprehensive guides in Bazza-DX repo
     2. Propose addition to Universal Blue documentation
@@ -1142,7 +1142,7 @@ Fedora SIG Gaming:
   • Propose Play Card schema as standard gaming config format
   • Contribute SAGE methodology to Fedora QA process
   • Gaming hardware compatibility database enhancement
-  
+
   Value Proposition:
     - Reduces support burden (self-documenting configs)
     - Enables evidence-based optimization guidance
@@ -1152,7 +1152,7 @@ ProtonDB Community:
   • Integration: ATOM-tagged configuration reports
   • Enhancement: Structured evidence fields (not just free text)
   • Contribution: Hardware-specific Play Cards for top 100 games
-  
+
   Implementation:
     - Browser extension exports Play Cards to ProtonDB
     - Evidence schema aligns with ProtonDB rating system
@@ -1166,7 +1166,7 @@ Gaming-with-Intent Ecosystem:
   • Distribution-agnostic Play Card standard
   • SAGE methodology reference implementation
   • Cross-distro compatibility (Bazzite, Nobara, SteamOS)
-  
+
   Governance:
     - MIT license (maximum adoption)
     - Lazy consensus model (Universal Blue style)
@@ -1176,7 +1176,7 @@ MCP Gaming Server:
   • Official MCP server: @gaming-with-intent/mcp-server-gaming
   • Capabilities: Play Card CRUD, SAGE execution, evidence logging
   • Integration: Works with any MCP-compatible AI (Claude, others)
-  
+
   Features:
     - Read gaming configs from disk
     - Execute SAGE benchmarking workflows
@@ -1188,7 +1188,7 @@ Windows 10 EOL Migration Toolkit:
   • Bazzite-specific implementation (Play Cards + SAGE)
   • Generic components (distro-agnostic guides)
   • Australian audience as initial target
-  
+
   Components:
     - Pre-migration checklist (hardware compatibility)
     - Automated setup scripts (gaming configs)
@@ -1339,15 +1339,15 @@ Bazza-DX exists at the intersection of three trends:
 2. AI agents enable human-AI symbiosis for technical tasks
 3. Immutable OS architectures make Linux gaming reliable
 
-The gaming documentation problem isn't lack of information—it's information 
-overload. The solution isn't more guides—it's machine-readable configurations 
+The gaming documentation problem isn't lack of information—it's information
+overload. The solution isn't more guides—it's machine-readable configurations
 with embedded rationale.
 
-By building on stock Bazzite-DX, we avoid distribution fragmentation. By using 
-ATOM audit trails, we preserve attribution. By implementing SAGE methodology, 
+By building on stock Bazzite-DX, we avoid distribution fragmentation. By using
+ATOM audit trails, we preserve attribution. By implementing SAGE methodology,
 we enable evidence-based iteration.
 
-This isn't about replacing Bazzite, ProtonDB, or existing tools. It's about 
+This isn't about replacing Bazzite, ProtonDB, or existing tools. It's about
 making them discoverable, understandable, and safe to use.
 
 She'll be right. Let's make it so.

@@ -74,4 +74,3 @@ jobs:
           } else {
             Write-Host "✓ No PSScriptAnalyzer issues found"
           }
-

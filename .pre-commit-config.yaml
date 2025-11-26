@@ -18,7 +18,7 @@ repos:
     hooks:
       - id: detect-secrets
 
-  - repo: https://github.com/koalaman/shellcheck
+  - repo: https://github.com/koalaman/shellcheck-precommit
     rev: v0.10.0
     hooks:
       - id: shellcheck

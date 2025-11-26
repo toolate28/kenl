@@ -1062,4 +1062,3 @@ Intent Framework Implementation Matrix: Transforming System Management into Cons
 - REF taxonomy and matrices translate philosophy into concrete, auditable practice.
 
 If you’d like, this can be exported as a single Markdown file for your vault, with embedded Mermaid charts and all tables ready to publish.
-

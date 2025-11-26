@@ -68,15 +68,15 @@ function Initialize-BattleMedic {
     param(
         [Parameter()]
         [hashtable]$Config = @{},
-        
+
         [Parameter()]
         [switch]$Force
     )
-    
+
     begin {
         Write-Verbose "Initializing Battle Medic Recovery Suite v$($script:BattleMedicVersion)"
     }
-    
+
     process {
         if ($PSCmdlet.ShouldProcess("Battle Medic Configuration", "Initialize")) {
             # Merge provided config with defaults
@@ -86,7 +86,7 @@ function Initialize-BattleMedic {
                     Write-Verbose "Updated configuration: $key = $($Config[$key])"
                 }
             }
-            
+
             # Validate environment
             $validation = Test-BattleMedicEnvironment
             if (-not $validation.IsValid) {
@@ -95,15 +95,15 @@ function Initialize-BattleMedic {
                 }
                 Write-Warning "Environment validation failed but Force flag set - continuing"
             }
-            
+
             # Create recovery checkpoint if auto-backup enabled
             if ($script:BattleMedicConfig.AutoBackup) {
                 Write-Verbose "Creating initialization checkpoint"
                 New-RecoveryCheckpoint -Name "BattleMedic_Init_$(Get-Date -Format 'yyyyMMdd_HHmmss')" -Silent
             }
-            
+
             Write-Information "Battle Medic initialized successfully" -InformationAction Continue
-            
+
             return @{
                 Version = $script:BattleMedicVersion
                 Config = $script:BattleMedicConfig
@@ -128,39 +128,39 @@ function Initialize-BattleMedic {
 function Test-BattleMedicEnvironment {
     [CmdletBinding()]
     param()
-    
+
     $result = [PSCustomObject]@{
         IsValid = $true
         Errors = @()
         Warnings = @()
         SystemInfo = @{}
     }
-    
+
     # Check PowerShell version
     if ($PSVersionTable.PSVersion.Major -lt 5) {
         $result.IsValid = $false
         $result.Errors += "PowerShell 5.1 or higher required (current: $($PSVersionTable.PSVersion))"
     }
-    
+
     # Check administrative privileges
     $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
     if (-not $isAdmin) {
         $result.Warnings += "Not running as Administrator - some features will be unavailable"
     }
     $result.SystemInfo.IsAdmin = $isAdmin
-    
+
     # Check disk space
     $systemDrive = Get-PSDrive -Name ($env:SystemDrive -replace ':','')
     $freeGB = [Math]::Round($systemDrive.Free / 1GB, 2)
     $result.SystemInfo.FreeSpaceGB = $freeGB
-    
+
     if ($freeGB -lt 1) {
         $result.IsValid = $false
         $result.Errors += "Insufficient disk space: ${freeGB}GB free (minimum 1GB required)"
     } elseif ($freeGB -lt 5) {
         $result.Warnings += "Low disk space: ${freeGB}GB free"
     }
-    
+
     # Check WMI/CIM availability
     try {
         $null = Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction Stop
@@ -171,18 +171,18 @@ function Test-BattleMedicEnvironment {
         $result.Errors += "WMI/CIM not available - required for diagnostics"
         $result.SystemInfo.WMIAvailable = $false
     }
-    
+
     # Check battery (for mobile devices)
     $battery = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
     if ($battery) {
         $result.SystemInfo.BatteryPresent = $true
         $result.SystemInfo.BatteryLevel = $battery.EstimatedChargeRemaining
-        
+
         if ($battery.EstimatedChargeRemaining -lt 30 -and $battery.BatteryStatus -eq 1) {
             $result.Warnings += "Low battery: $($battery.EstimatedChargeRemaining)% - connect AC adapter"
         }
     }
-    
+
     # Check if running in WinRE
     if (Test-Path 'X:\Windows\System32') {
         $result.SystemInfo.InWinRE = $true
@@ -192,7 +192,7 @@ function Test-BattleMedicEnvironment {
         $result.SystemInfo.InWinRE = $false
         $result.SystemInfo.WindowsDrive = $env:SystemDrive
     }
-    
+
     return $result
 }
 
@@ -214,7 +214,7 @@ function Show-RecoveryMenu {
         [ValidateSet('Interactive', 'Guided', 'Expert', 'Automated')]
         [string]$Mode = 'Interactive'
     )
-    
+
     # Display header
     Write-Host "`n" -NoNewline
     Write-Host "╔════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
@@ -224,14 +224,14 @@ function Show-RecoveryMenu {
     }
     Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
-    
+
     # Get system status
     $diagnostic = Get-BattleMedicDiagnostic -Quick
-    
+
     # Display system status
     Write-Host "System Status:" -ForegroundColor White
     Write-Host "  Priority Level: " -NoNewline
-    
+
     $priorityColor = switch ($diagnostic.Priority) {
         'P0' { 'Red' }
         'P1' { 'Magenta' }
@@ -240,13 +240,13 @@ function Show-RecoveryMenu {
         default { 'Gray' }
     }
     Write-Host $diagnostic.Priority -ForegroundColor $priorityColor
-    
+
     if ($diagnostic.Issues.Count -gt 0) {
         Write-Host "  Issues Detected: $($diagnostic.Issues.Count)" -ForegroundColor Red
     }
-    
+
     Write-Host ""
-    
+
     switch ($Mode) {
         'Interactive' {
             Show-InteractiveMenu -Diagnostic $diagnostic
@@ -270,7 +270,7 @@ function Show-RecoveryMenu {
 function Find-WindowsPartition {
     [CmdletBinding()]
     param()
-    
+
     $drives = Get-PSDrive -PSProvider FileSystem
     foreach ($drive in $drives) {
         $windowsPath = Join-Path -Path "$($drive.Name):" -ChildPath 'Windows\System32'
@@ -279,7 +279,7 @@ function Find-WindowsPartition {
             return "$($drive.Name):"
         }
     }
-    
+
     Write-Warning "No Windows installation found"
     return $null
 }
@@ -290,25 +290,25 @@ function Show-InteractiveMenu {
         [Parameter(Mandatory)]
         $Diagnostic
     )
-    
+
     do {
         Write-Host "`nSelect Recovery Option:" -ForegroundColor Cyan
         Write-Host "[1] Quick Diagnostic Report" -ForegroundColor White
         Write-Host "[2] Guided Recovery (Recommended)" -ForegroundColor Green
         Write-Host "[3] Expert Mode (All Tools)" -ForegroundColor Yellow
         Write-Host "[4] Automated Recovery" -ForegroundColor Yellow
-        
+
         if ($script:BattleMedicConfig.SP4Mode) {
             Write-Host "[5] Surface Pro 4 Specific Fixes" -ForegroundColor Magenta
         }
-        
+
         Write-Host "[L] View Logs" -ForegroundColor Gray
         Write-Host "[S] Settings" -ForegroundColor Gray
         Write-Host "[X] Exit" -ForegroundColor Gray
         Write-Host ""
-        
+
         $choice = Read-Host "Enter your choice"
-        
+
         switch ($choice.ToUpper()) {
             '1' {
                 Get-SystemHealthReport -Detailed | Format-List
@@ -352,7 +352,7 @@ function Show-ExpertMenu {
         [Parameter(Mandatory)]
         $Diagnostic
     )
-    
+
     Write-Host "`nExpert Recovery Tools:" -ForegroundColor Cyan
     Write-Host "┌─────────────────────────────────────────────────┐" -ForegroundColor Gray
     Write-Host "│ P0 - Critical Issues                           │" -ForegroundColor Gray
@@ -366,7 +366,7 @@ function Show-ExpertMenu {
     Write-Host "│ [4] System File Repair (SFC/DISM)             │" -ForegroundColor Magenta
     Write-Host "│ [5] Reset Windows Update                       │" -ForegroundColor Magenta
     Write-Host "│ [6] Boot Configuration Repair                  │" -ForegroundColor Magenta
-    
+
     if ($script:BattleMedicConfig.SP4Mode) {
         Write-Host "│                                                 │" -ForegroundColor Gray
         Write-Host "│ SP4 Specific                                   │" -ForegroundColor Gray
@@ -375,12 +375,12 @@ function Show-ExpertMenu {
         Write-Host "│ [8] Fix Type Cover Issues                      │" -ForegroundColor Yellow
         Write-Host "│ [9] Reset Intel GPU Driver                     │" -ForegroundColor Yellow
     }
-    
+
     Write-Host "└─────────────────────────────────────────────────┘" -ForegroundColor Gray
     Write-Host ""
-    
+
     $expertChoice = Read-Host "Select tool (1-9) or X to return"
-    
+
     switch ($expertChoice) {
         '1' { Repair-WOFDriver -Verbose }
         '2' { Start-EmergencyCleanup -Verbose }
@@ -392,7 +392,7 @@ function Show-ExpertMenu {
         '8' { if ($script:BattleMedicConfig.SP4Mode) { Repair-SP4TypeCover -Verbose } }
         '9' { if ($script:BattleMedicConfig.SP4Mode) { Reset-SP4GPUDriver -Verbose } }
     }
-    
+
     if ($expertChoice -ne 'X') {
         Read-Host "`nPress Enter to continue"
     }
@@ -414,13 +414,13 @@ New-Alias -Name 'woffix' -Value 'Repair-WOFDriver' -Force
 
 $ExecutionContext.SessionState.Module.OnRemove = {
     Write-Verbose "Unloading Battle Medic Recovery Suite"
-    
+
     # Save current configuration
     if ($script:BattleMedicConfig.AutoBackup) {
         $configPath = Join-Path -Path $script:BattleMedicConfig.LogPath -ChildPath 'LastConfig.json'
         $script:BattleMedicConfig | ConvertTo-Json | Out-File -FilePath $configPath -Force
     }
-    
+
     # Clean up any temporary files
     $tempFiles = Get-ChildItem -Path $env:TEMP -Filter 'BattleMedic_Temp_*' -ErrorAction SilentlyContinue
     if ($tempFiles) {
@@ -433,10 +433,10 @@ $ExecutionContext.SessionState.Module.OnRemove = {
 # Display module load message
 if (-not $script:Silent) {
     Write-Host "Battle Medic Recovery Suite v$($script:BattleMedicVersion) loaded successfully" -ForegroundColor Green
-    
+
     if ($script:BattleMedicConfig.SP4Mode) {
         Write-Host "Surface Pro 4 detected - enhanced features enabled" -ForegroundColor Yellow
     }
-    
+
     Write-Host "Type 'Show-RecoveryMenu' to begin or 'Get-Help about_BattleMedic' for more information" -ForegroundColor Cyan
 }

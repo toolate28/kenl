@@ -108,23 +108,23 @@ if %ERRORLEVEL% EQU 0 (
     set SP4_DETECTED=1
     echo     [✓] Surface Pro 4 detected
     echo     [!] Applying SP4-specific recovery protocols
-    
+
     :: Check for known SP4 hardware issues
     echo     [►] Checking for known hardware defects...
-    
+
     :: Screen flicker detection
     wmic path Win32_VideoController get CurrentRefreshRate 2>nul | findstr "60" >nul
     if %ERRORLEVEL% EQU 0 (
         echo     [!] Standard refresh rate detected - flicker possible
         set "FLICKER_RISK=1"
     )
-    
+
     :: Intel GPU driver check
     wmic path Win32_VideoController get DriverVersion 2>nul | findstr /r "^[0-9]" > "%TEMP%\gpu_version.txt"
     for /f "tokens=*" %%i in (%TEMP%\gpu_version.txt) do (
         echo     [i] GPU Driver: %%i
     )
-    
+
     :: Type Cover detection
     wmic path Win32_PnPEntity where "Name like '%Surface Type Cover%'" get Status 2>nul | findstr "OK" >nul
     if %ERRORLEVEL% EQU 0 (
@@ -165,13 +165,13 @@ for %%d in (C D E F G H) do (
     if exist %%d:\Windows\System32 (
         set WINDRIVE=%%d:
         echo     [✓] Windows installation found at %%d:
-        
+
         :: Check Windows version
         for /f "tokens=4-5 delims=[.] " %%i in ('ver 2^>nul') do (
             set WINVER=%%i.%%j
             echo     [i] Windows version: %%i.%%j
         )
-        
+
         :: Check for UEFI/Legacy boot
         bcdedit | findstr /i "winload.efi" >nul
         if !ERRORLEVEL! EQU 0 (
@@ -181,11 +181,11 @@ for %%d in (C D E F G H) do (
             echo     [i] Legacy BIOS boot mode detected
             set BOOT_MODE=LEGACY
         )
-        
+
         :: Check disk configuration
         echo     [►] Analyzing disk configuration...
         fsutil fsinfo ntfsinfo !WINDRIVE! 2>nul | findstr "Total Sectors" > "%TEMP%\disk_info.txt"
-        
+
         :: Check for BitLocker
         manage-bde -status !WINDRIVE! 2>nul | findstr "Encrypted" >nul
         if !ERRORLEVEL! EQU 0 (
@@ -195,7 +195,7 @@ for %%d in (C D E F G H) do (
             echo     [✓] No BitLocker encryption
             set BITLOCKER=0
         )
-        
+
         goto :ENV_FOUND
     )
 )
@@ -666,26 +666,26 @@ echo.
 if "%THERMAL_STATUS%"=="CRITICAL" (
     echo [!] CRITICAL TEMPERATURE DETECTED
     echo [►] Applying aggressive cooling measures...
-    
+
     :: Disable CPU turbo boost
     echo [1/4] Disabling CPU Turbo Boost...
     powercfg /setacvalueindex scheme_current sub_processor PERFBOOSTMODE 0 >nul 2>&1
     powercfg /setactive scheme_current >nul 2>&1
-    
+
     :: Set power plan to balanced
     echo [2/4] Setting balanced power plan...
     powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
-    
+
     :: Clean temp files
     echo [3/4] Cleaning temporary files...
     del /s /q %WINDRIVE%\Windows\Temp\*.* >nul 2>&1
     del /s /q %WINDRIVE%\Users\*\AppData\Local\Temp\*.* >nul 2>&1
-    
+
     :: Kill high CPU processes
     echo [4/4] Stopping high-CPU services...
     net stop wuauserv >nul 2>&1
     net stop bits >nul 2>&1
-    
+
     echo.
     echo [✓] Thermal mitigation applied
     echo [!] Recommend external cooling and thermal paste replacement
@@ -755,7 +755,7 @@ echo ╚════════════════════════
 echo.
 echo Summary:
 echo ────────────────────────────────────────────────────────
-type "%LOGFILE%" | findstr /i "successful fixed repaired completed" 
+type "%LOGFILE%" | findstr /i "successful fixed repaired completed"
 echo ────────────────────────────────────────────────────────
 echo.
 echo [✓] Recovery operations completed
@@ -834,7 +834,7 @@ if ($battery) {
         Status = $battery.BatteryStatus
         Health = [math]::Round(($battery.DesignCapacity / $battery.FullChargeCapacity) * 100, 2)
     }
-    
+
     if ($results.Hardware.Battery.ChargeRemaining -lt 30) {
         $results.Issues += "Low battery: $($results.Hardware.Battery.ChargeRemaining)%"
         $results.Recommendations += "Connect AC adapter immediately"
@@ -854,7 +854,7 @@ if ($thermalZone) {
         Current = ($tempCelsius | Measure-Object -Average).Average
         Max = ($tempCelsius | Measure-Object -Maximum).Maximum
     }
-    
+
     if ($results.Hardware.Temperature.Max -gt 80) {
         $results.Issues += "Critical temperature: $($results.Hardware.Temperature.Max)°C"
         $results.Recommendations += "Immediate thermal mitigation required"
@@ -885,7 +885,7 @@ if (Test-Path $wofPath) {
         Size = $wofFile.Length
         Corrupted = $wofFile.Length -eq 0
     }
-    
+
     if ($results.System.WOF.Corrupted) {
         $results.Issues += "WOF.SYS corrupted (0 bytes)"
         $results.Recommendations += "Run WOF recovery immediately"
@@ -905,7 +905,7 @@ if ($results.System.CompactOS -and $results.System.WOF.Corrupted) {
 # SP4 Specific Checks
 if ($results.Hardware.IsSP4) {
     Write-Progress -Activity "Diagnostics" -Status "SP4 specific checks..." -PercentComplete 70
-    
+
     # Screen refresh rate
     $displayConfig = Get-WmiObject -Namespace root\wmi -Class WmiMonitorBasicDisplayParams
     if ($displayConfig) {
@@ -914,7 +914,7 @@ if ($results.Hardware.IsSP4) {
             FlickerMitigation = $displayConfig.MaxRefreshRate -eq 59
         }
     }
-    
+
     # Type Cover status
     $typeCover = Get-PnpDevice | Where-Object { $_.FriendlyName -like "*Surface Type Cover*" }
     if ($typeCover) {
@@ -923,7 +923,7 @@ if ($results.Hardware.IsSP4) {
             Status = $typeCover.Status
         }
     }
-    
+
     # Intel GPU driver
     $gpu = Get-WmiObject Win32_VideoController | Where-Object { $_.Name -like "*Intel*" }
     if ($gpu) {
@@ -942,7 +942,7 @@ $updateSearcher = $updateSession.CreateUpdateSearcher()
 try {
     $pendingUpdates = $updateSearcher.Search("IsInstalled=0 and Type='Software'").Updates
     $results.System.PendingUpdates = $pendingUpdates.Count
-    
+
     if ($pendingUpdates.Count -gt 10) {
         $results.Issues += "Many pending updates: $($pendingUpdates.Count)"
         $results.Recommendations += "Update system after fixing critical issues"
@@ -988,7 +988,7 @@ Write-Host $results.Priority -ForegroundColor $priorityColor
 if ($results.Issues.Count -gt 0) {
     Write-Host "`nIssues Detected:" -ForegroundColor Red
     $results.Issues | ForEach-Object { Write-Host "  • $_" -ForegroundColor Red }
-    
+
     Write-Host "`nRecommendations:" -ForegroundColor Cyan
     $results.Recommendations | ForEach-Object { Write-Host "  → $_" -ForegroundColor Cyan }
 }
@@ -1011,7 +1011,7 @@ if ($AutoFix -and $results.Priority -in @("P0-CRITICAL", "P1-HIGH")) {
     $confirm = Read-Host "Apply automatic fixes for detected issues? (Y/N)"
     if ($confirm -eq 'Y') {
         Write-Host "Applying fixes..." -ForegroundColor Green
-        
+
         # Apply fixes based on issues
         foreach ($issue in $results.Issues) {
             switch -Wildcard ($issue) {
@@ -1090,7 +1090,7 @@ pause
 <html>
 <head>
 <title>Battle Medic Recovery Center</title>
-<HTA:APPLICATION 
+<HTA:APPLICATION
     ID="BattleMedicHTA"
     APPLICATIONNAME="Battle Medic Recovery"
     SCROLL="no"
@@ -1192,25 +1192,25 @@ pause
     Dim objShell, objFSO
     Set objShell = CreateObject("WScript.Shell")
     Set objFSO = CreateObject("Scripting.FileSystemObject")
-    
+
     Sub Window_OnLoad
         UpdateStatus
         LogMessage "Battle Medic Recovery Suite initialized"
     End Sub
-    
+
     Sub UpdateStatus
         ' Get system status
         Dim strComputer, objWMIService
         strComputer = "."
         Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
-        
+
         ' Battery
         Dim colBattery, objBattery
         Set colBattery = objWMIService.ExecQuery("Select * from Win32_Battery")
         For Each objBattery in colBattery
             document.getElementById("batteryStatus").innerHTML = objBattery.EstimatedChargeRemaining & "%"
         Next
-        
+
         ' Disk
         Dim colDisks, objDisk
         Set colDisks = objWMIService.ExecQuery("Select * from Win32_LogicalDisk Where DeviceID = 'C:'")
@@ -1219,7 +1219,7 @@ pause
             freeGB = Round(objDisk.FreeSpace / 1073741824, 1)
             document.getElementById("diskStatus").innerHTML = freeGB & " GB"
         Next
-        
+
         ' Model
         Dim colComputer, objComputer
         Set colComputer = objWMIService.ExecQuery("Select * from Win32_ComputerSystem")
@@ -1230,48 +1230,48 @@ pause
             End If
         Next
     End Sub
-    
+
     Sub RunRecovery(strMode)
         LogMessage "Starting " & strMode & " recovery..."
         objShell.Run "cmd /c C:\Recovery\CustomTools\BattleMedic\BattleMedicRE.bat " & strMode, 1, False
     End Sub
-    
+
     Sub LogMessage(strMessage)
         Dim logArea
         Set logArea = document.getElementById("logArea")
         logArea.innerHTML = "[" & Time & "] " & strMessage & vbCrLf & logArea.innerHTML
     End Sub
-    
+
     Sub FixWOF
         LogMessage "Fixing WOF.SYS BSOD..."
         objShell.Run "cmd /c compact /compactos:never && sfc /scannow", 1, True
         LogMessage "WOF fix completed"
     End Sub
-    
+
     Sub FixScreenFlicker
         LogMessage "Applying screen flicker mitigation..."
         objShell.Run "cmd /c reg add ""HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000"" /v DALNonStandardModesBCD1 /t REG_BINARY /d 3200000050000000590000000000000000000000000000000000000000000000 /f", 0, True
         LogMessage "Screen flicker fix applied"
     End Sub
-    
+
     Sub ThermalFix
         LogMessage "Applying thermal management..."
         objShell.Run "powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e", 0, True
         objShell.Run "cmd /c del /s /q C:\Windows\Temp\*.*", 0, True
         LogMessage "Thermal mitigation completed"
     End Sub
-    
+
     Sub EmergencyCleanup
         LogMessage "Running emergency cleanup..."
         objShell.Run "cleanmgr /sagerun:1", 1, False
         LogMessage "Cleanup initiated"
     End Sub
-    
+
     Sub RunDiagnostics
         LogMessage "Running comprehensive diagnostics..."
         objShell.Run "powershell -File C:\Recovery\CustomTools\BattleMedic\BM_QuickCheck.ps1 -Verbose", 1, False
     End Sub
-    
+
     Sub ExportLogs
         Dim strPath
         strPath = "C:\BattleMedic_Export_" & Replace(Date, "/", "") & ".log"
@@ -1284,7 +1284,7 @@ pause
     <div class="container">
         <h1>⚕️ Battle Medic Recovery Center</h1>
         <div class="subtitle">Surface Pro 4 End-of-Life Support System</div>
-        
+
         <div class="status-bar">
             <div class="status-item">
                 <div>Model</div>
@@ -1303,49 +1303,49 @@ pause
                 <div class="status-value" id="tempStatus">--</div>
             </div>
         </div>
-        
+
         <div class="cards">
             <div class="card priority-p0" onclick="FixWOF()">
                 <h3>🔴 Fix WOF.SYS BSOD</h3>
                 <p>Resolves 0xD3 DRIVER_PORTION_MUST_BE_NONPAGED errors by disabling CompactOS and repairing system files.</p>
                 <button>Fix Now</button>
             </div>
-            
+
             <div class="card priority-p0" onclick="EmergencyCleanup()">
                 <h3>🔴 Emergency Cleanup</h3>
                 <p>Recovers critical disk space when system is below 10% free space.</p>
                 <button>Clean Now</button>
             </div>
-            
+
             <div class="card priority-p0" onclick="ThermalFix()">
                 <h3>🔴 Thermal Management</h3>
                 <p>Reduces system temperature through power management and cleanup.</p>
                 <button>Cool Down</button>
             </div>
-            
+
             <div class="card priority-p1" onclick="FixScreenFlicker()">
                 <h3>🟡 Screen Flicker Fix</h3>
                 <p>SP4-specific fix for display flicker issue on affected units.</p>
                 <button>Apply Fix</button>
             </div>
-            
+
             <div class="card priority-p1" onclick="RunRecovery('GUIDED')">
                 <h3>🟡 Guided Recovery</h3>
                 <p>Step-by-step recovery assistant for all skill levels.</p>
                 <button>Start Wizard</button>
             </div>
-            
+
             <div class="card priority-p2" onclick="RunDiagnostics()">
                 <h3>🔵 Run Diagnostics</h3>
                 <p>Comprehensive system analysis without making changes.</p>
                 <button>Analyze</button>
             </div>
         </div>
-        
+
         <div class="log-area" id="logArea">
             Ready for recovery operations...
         </div>
-        
+
         <div style="text-align: center; margin-top: 20px;">
             <button onclick="RunRecovery('EXPERT')">Expert Mode</button>
             <button onclick="RunRecovery('AUTOMATED')">Automated Recovery</button>
