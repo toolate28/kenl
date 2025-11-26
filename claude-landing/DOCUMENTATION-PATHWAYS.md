@@ -4,12 +4,16 @@ atom: ATOM-DOC-20251126-004
 classification: NAVIGATION
 status: production
 created: 2025-11-26
+updated: 2025-11-26
+version: 1.1.0
 purpose: Central navigation hub for all KENL documentation pathways
 ---
 
 # KENL Documentation Pathways
 
 **Purpose:** Navigate directly to exactly what you need. No scrolling required - each pathway leads to specific outcomes.
+
+**📋 Document Index:** [DOCUMENT-INDEX.md](../DOCUMENT-INDEX.md) - Complete root document review with 1-line descriptions
 
 ---
 
@@ -282,5 +286,93 @@ ollama pull qwen2.5:14b
 
 ---
 
+## 🗺️ Visual Context Mapping
+
+### Obsidian Graph View
+
+**Open KENL as an Obsidian vault to see:**
+- Document relationships via backlinks
+- Module dependencies via graph view
+- Tag clouds for ATOM/SAIF tracking
+
+```bash
+# Open vault in Obsidian
+flatpak run md.obsidian.Obsidian ~/.kenl
+# OR on Windows
+obsidian://open?vault=kenl
+```
+
+### Dynamic Shell Context
+
+**PowerShell banner displays:**
+```
+╔══════════════════════════════════════════════════════════════╗
+║  KENL - Intent-Driven Infrastructure                         ║
+╠══════════════════════════════════════════════════════════════╣
+║  Platform:  [Windows|Linux|Bazzite]                          ║
+║  Context:   [KENL0-13|BattleMedic]                           ║
+║  Playcard:  [Active game config or "None"]                   ║
+║  ATOM:      [Latest ATOM tag]                                ║
+║  SAIF:      [Current SAIF checkpoint]                        ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+### Pathway Relationship Diagram
+
+```mermaid
+graph LR
+    subgraph "Core Layer"
+        KENL0[KENL0 System]
+        KENL1[KENL1 Framework]
+    end
+
+    subgraph "User Pathways"
+        Gaming[🎮 Gaming]
+        Dev[💻 Development]
+        Recovery[🔧 Recovery]
+        Migration[🚀 Migration]
+    end
+
+    subgraph "Support"
+        Learning[📖 Learning]
+        Agent[🤖 Agent]
+    end
+
+    Gaming --> KENL0
+    Dev --> KENL0
+    Recovery --> KENL0
+    Migration --> KENL0
+
+    Gaming -.-> Learning
+    Dev -.-> Learning
+    Recovery -.-> Learning
+    Migration -.-> Learning
+
+    Agent --> Learning
+    Agent --> Dev
+
+    style KENL0 fill:#5865F2,color:#fff
+    style KENL1 fill:#5865F2,color:#fff
+```
+
+---
+
+## 🔗 Document Integrity
+
+**Verify all documents:**
+```bash
+# Validate links
+./scripts/validate-links.sh
+
+# Verify document hashes
+./scripts/verify-doc-hashes.sh
+```
+
+**Root document index:** [DOCUMENT-INDEX.md](../DOCUMENT-INDEX.md)
+
+---
+
 **ATOM:** ATOM-DOC-20251126-004
+**Version:** 1.1.0
 **Created:** 2025-11-26
+**Updated:** 2025-11-26
