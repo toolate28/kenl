@@ -90,7 +90,16 @@ function Write-KenlAtomTrail {
     $atomPath = Join-Path $env:KENL_HOME "atom_trail.log"
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $platform = if ($IsWindows -or $env:OS -eq "Windows_NT") { "Windows" } elseif ($IsLinux) { "Linux" } else { "Unknown" }
-    $entry = "[$timestamp] [ATOM-$Type-$(Get-Date -Format 'yyyyMMdd')-001] [$platform] $Action"
+    # Sequence counter for uniqueness
+    $dateTag = Get-Date -Format 'yyyyMMdd'
+    $sequenceFile = Join-Path $env:KENL_HOME "atom_sequence_${dateTag}.txt"
+    if (Test-Path $sequenceFile) {
+        $sequence = ([int](Get-Content $sequenceFile)) + 1
+    } else {
+        $sequence = 1
+    }
+    Set-Content -Path $sequenceFile -Value $sequence
+    $entry = "[$timestamp] [ATOM-$Type-$dateTag-$('{0:D3}' -f $sequence)] [$platform] $Action"
     
     try {
         Add-Content -Path $atomPath -Value $entry -ErrorAction Stop
