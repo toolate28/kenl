@@ -30,12 +30,12 @@ graph TD
     Q --> |Understand the framework| Learn[📖 Learning Pathway]
     Q --> |AI Agent working on repo| Agent[🤖 Agent Pathway]
 
-    Gaming --> G1[modules/KENL2-gaming/README.md]
-    Dev --> D1[modules/KENL3-dev/README.md]
-    Recovery --> R1[modules/Surface_Pro_4_EoL_BattleMedic_v2.1/]
-    Migration --> M1[modules/KENL0-system/windows-support/]
-    Learn --> L1[modules/KENL7-learning/README.md]
-    Agent --> A1[claude-landing/AI-AGENT-SYSTEM.md]
+    Gaming --> G1[KENL2 Gaming]
+    Dev --> D1[KENL3 Development]
+    Recovery --> R1[BattleMedic]
+    Migration --> M1[KENL0 System]
+    Learn --> L1[KENL7 Learning]
+    Agent --> A1[AI Agent System]
 
     style Start fill:#5865F2,color:#fff
     style Gaming fill:#ED4245,color:#fff
