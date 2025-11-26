@@ -1,12 +1,44 @@
 # KENL
 
-**Intent-Driven Gaming & Development on Bazzite Linux**
+**Intent-Driven Gaming & Development with SAIF Process**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
+[![ATOM: ATOM-DOC-20251126-003](https://img.shields.io/badge/ATOM-DOC--20251126--003-yellow.svg)]()
 
-> KENL transforms your Bazzite system into a self-documenting gaming and development platform with automatic crash recovery, shareable configurations, and complete audit trails.
+> **Start Here:** [📚 GETTING-STARTED.md](./GETTING-STARTED.md) - Set up Obsidian, import your first file, and build your personalized KENL environment.
+
+---
+
+## 🚀 Quick Start (30 seconds)
+
+```bash
+# 1. Clone KENL
+git clone https://github.com/toolate28/kenl.git ~/.kenl && cd ~/.kenl
+
+# 2. Open GETTING-STARTED.md in Obsidian (your first vault document)
+# 3. Select your pathway: Gaming | Development | Recovery | Migration
+# 4. Follow the guided checklist
+```
+
+**Then install PowerShell profile for dynamic banners:**
+```powershell
+# Adds Show-KenlBanner, current playcard display, and module navigation
+. ~/.kenl/scripts/Install-KenlProfile.ps1
+```
+
+---
+
+## What is KENL?
+
+KENL transforms your system into a **self-documenting, intent-driven platform** with:
+
+- 🎮 **Shareable game configurations** (Play Cards)
+- 💻 **AI-assisted development** (Claude Code, Ollama/Qwen, MCP)
+- 🔧 **Automated system recovery** (BattleMedic)
+- 📋 **Complete audit trails** (ATOM tags)
+- ↩️ **Rollback safety** (every operation is reversible)
 
 ---
 
@@ -63,41 +95,43 @@ We stand on shoulders, not on toes. KENL doesn't provide better tools - it provi
 
 ```mermaid
 graph TD
-    User[👤 User] --> KENL[KENL Modules]
-
-    KENL --> ATOM[🏷️ ATOM Trails]
-    KENL --> OWI[🤖 OWI AI Integration]
-    KENL --> SAGE[📚 SAGE Documentation]
-
+    User[👤 User] --> Start[📚 GETTING-STARTED.md]
+    Start --> Pathway{Select Pathway}
+    
+    Pathway --> |Gaming| KENL2[🎮 KENL2-gaming]
+    Pathway --> |Development| KENL3[💻 KENL3-dev]
+    Pathway --> |Recovery| BM[🔧 BattleMedic]
+    Pathway --> |Migration| KENL0[⚙️ KENL0-system]
+    
+    KENL2 --> ATOM[🏷️ ATOM Trails]
+    KENL3 --> ATOM
+    BM --> ATOM
+    KENL0 --> ATOM
+    
     ATOM --> DB[(SQLite + Cloudflare D1)]
-    OWI --> Claude[Claude via MCP]
-    OWI --> Qwen[Qwen Local AI]
-    SAGE --> Docs[Just-in-Time Docs]
-
-    KENL --> Bazzite[🎮 Bazzite Immutable Base]
-    Bazzite --> Fedora[Fedora Atomic + rpm-ostree]
-
-    style KENL fill:#5865F2,color:#fff
+    
+    style Start fill:#5865F2,color:#fff
     style ATOM fill:#57F287,color:#000
-    style OWI fill:#FEE75C,color:#000
-    style SAGE fill:#00AFF4,color:#fff
-    style Bazzite fill:#ED4245,color:#fff
+    style KENL2 fill:#ED4245,color:#fff
+    style KENL3 fill:#00AFF4,color:#fff
+    style BM fill:#FEE75C,color:#000
+    style KENL0 fill:#845EF7,color:#fff
 ```
 
 ---
 
-## Quick Start
+## Pathways
 
-```bash
-# Clone and bootstrap
-git clone https://github.com/toolate28/kenl.git ~/.kenl && cd ~/.kenl && ./scripts/bootstrap.sh
+Choose your entry point based on what you want to accomplish:
 
-# Pick your entry point
-cd modules/KENL2-gaming    # 🎮 Gaming configs & Play Cards
-cd modules/KENL3-dev       # 💻 Development environments (Ollama/Qwen, MCP guides)
-cd modules/KENL0-system    # ⚙️ System operations
-cd claude-landing/         # 📍 AI agent orientation (START HERE for Claude Code)
-```
+| Pathway | For | Start With |
+|---------|-----|------------|
+| 🎮 **Gaming** | Linux gaming, Play Cards, Proton | [KENL2-gaming](./modules/KENL2-gaming/) |
+| 💻 **Development** | Claude Code, Ollama, MCP, Distrobox | [KENL3-dev](./modules/KENL3-dev/) |
+| 🔧 **Recovery** | Windows fixes, Surface Pro 4, diagnostics | [BattleMedic](./modules/Surface_Pro_4_EoL_BattleMedic_v2.1/) |
+| 🚀 **Migration** | Windows 10 EOL, dual-boot setup | [KENL0-system](./modules/KENL0-system/) |
+
+**Full guided setup:** [📚 GETTING-STARTED.md](./GETTING-STARTED.md)
 
 ---
 
@@ -188,12 +222,17 @@ graph TB
 
 | Audience | Start Here | Description |
 |----------|------------|-------------|
+| **Everyone** | [📚 GETTING-STARTED.md](./GETTING-STARTED.md) | Obsidian setup, pathway selection |
 | **New Users** | [claude-landing/](./claude-landing/) | Current state, recent work, quick reference |
 | **AI Agents** | [claude-landing/CURRENT-STATE.md](./claude-landing/CURRENT-STATE.md) | Environment snapshot + CTF flag validation |
 | **Gamers** | [KENL2 Gaming](./modules/KENL2-gaming/) | Play Cards, Proton optimization |
 | **Developers** | [KENL3 Dev](./modules/KENL3-dev/) | Distrobox, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) |
 | **Windows Users** | [KENL0 Windows Support](./modules/KENL0-system/windows-support/) | EOL migration, dual-boot, Surface Pro 4 |
 | **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | Code style, ARCREF + ADR requirements |
+
+**Traceability:**
+- [ATOM-REGISTER.md](./ATOM-REGISTER.md) - Complete ATOM tag tracking
+- [governance/](./governance/) - ARCREF artifacts and ADR decisions
 
 **Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot, troubleshooting)
 
@@ -206,6 +245,29 @@ graph TB
 ---
 
 ## Key Features
+
+### PowerShell Profile Integration
+
+Install the KENL profile for dynamic banners and current playcard display:
+
+```powershell
+# Install profile integration
+. ~/.kenl/scripts/Install-KenlProfile.ps1
+
+# After installation, these commands are available:
+Show-KenlBanner          # Display current context, module, playcard
+Get-CurrentPlaycard      # Show current active playcard
+Set-CurrentPlaycard      # Set active playcard
+Show-Playcards           # List all available playcards
+kenl-switch <n>          # Switch to module (0-13, battlemedic)
+kenl-status              # Comprehensive status
+```
+
+**Dynamic banner shows:**
+- Current platform (Windows, WSL2, Linux, Bazzite)
+- Active module context
+- Current playcard (game being configured)
+- Recent ATOM and SAIF entries
 
 ### PowerShell Modules (Windows/Linux/macOS)
 
