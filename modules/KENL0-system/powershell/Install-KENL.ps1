@@ -218,6 +218,7 @@ foreach ($module in $modules) {
                     Write-Host "  [✓] Installed: $file" -ForegroundColor Green
                 } else {
                     Write-Warning "  [!] Source file not found: $file"
+                    $allSucceeded = $false
                 }
             }
             catch {
