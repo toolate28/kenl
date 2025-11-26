@@ -39,12 +39,23 @@ update_hash() {
     local file="$1"
     local new_hash="$2"
 
-    if grep -q "$HASH_PATTERN" "$file"; then
-        # Update existing hash
-        sed -i "s/${HASH_PATTERN}.*/hash: $new_hash/" "$file"
+    # Detect platform for portable sed -i usage
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        if grep -q "$HASH_PATTERN" "$file"; then
+            # Update existing hash (macOS)
+            sed -i '' "s/${HASH_PATTERN}.*/hash: $new_hash/" "$file"
+        else
+            # Add hash after status line in frontmatter (macOS)
+            sed -i '' "/^status:/a hash: $new_hash" "$file"
+        fi
     else
-        # Add hash after status line in frontmatter
-        sed -i "/^status:/a hash: $new_hash" "$file"
+        if grep -q "$HASH_PATTERN" "$file"; then
+            # Update existing hash (Linux/other)
+            sed -i "s/${HASH_PATTERN}.*/hash: $new_hash/" "$file"
+        else
+            # Add hash after status line in frontmatter (Linux/other)
+            sed -i "/^status:/a hash: $new_hash" "$file"
+        fi
     fi
 }
 
