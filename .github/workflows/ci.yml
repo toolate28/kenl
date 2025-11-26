@@ -15,7 +15,6 @@ permissions:
   contents: read
   packages: read
   security-events: write
-  checks: write
 
 jobs:
   pre-commit:
@@ -23,24 +22,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
-
-      - name: Configure git to use the token for github.com
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v5
+      - name: Set up Git credentials for pre-commit hooks
         run: |
-          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
-
-      - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --all-files
+          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Python for pre-commit
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install pre-commit
+        run: |
+          python -m pip install --upgrade pip
+          pip install 'pre-commit==3.4.0'
+      - name: Run pre-commit
+        run: |
+          pre-commit run --all-files
 
   codeql:
     runs-on: ubuntu-latest
@@ -60,7 +58,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: '3.14'
           # cache: 'pip' disabled until Phase 0.5 (Test Infrastructure)
           # Will be re-enabled when requirements.txt is added
       - name: Install deps
@@ -68,4 +66,6 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run unit tests
         run: |
+          # TODO Phase 0.5: Remove '|| true' when real tests exist
+          # Currently allows workflow to pass even with no tests
           if [ -f pytest.ini ] || [ -d tests ]; then pytest -q || true; fi
