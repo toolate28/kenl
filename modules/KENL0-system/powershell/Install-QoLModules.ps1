@@ -42,6 +42,38 @@ if ($Scope -eq "AllUsers") {
     }
 }
 
+# Ensure PSGallery is registered and trusted
+Write-Host "Checking PSGallery repository..." -ForegroundColor Cyan
+$psGallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+
+if (-not $psGallery) {
+    Write-Host "  [!] PSGallery not found. Registering..." -ForegroundColor Yellow
+    try {
+        Register-PSRepository -Default -ErrorAction Stop
+        Write-Host "  [✓] PSGallery registered" -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "  [✗] Failed to register PSGallery: $_"
+        Write-Host "`n  Try running manually:" -ForegroundColor Yellow
+        Write-Host "  Register-PSRepository -Default" -ForegroundColor Gray
+    }
+}
+
+# Set PSGallery as trusted (to avoid prompts)
+$psGallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+if ($psGallery -and $psGallery.InstallationPolicy -ne 'Trusted') {
+    Write-Host "  [i] Setting PSGallery as trusted..." -ForegroundColor Cyan
+    try {
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction Stop
+        Write-Host "  [✓] PSGallery set as trusted" -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "  [!] Could not set PSGallery as trusted: $_"
+    }
+}
+
+Write-Host ""
+
 # Essential modules for admin and QoL
 $modules = @(
     @{
