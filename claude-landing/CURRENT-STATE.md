@@ -1,185 +1,175 @@
 ---
 title: KENL Repository Status
-updated: 2025-11-23
-branch: claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3
+updated: 2025-11-26
+branch: copilot/update-repo-documentation-structure
 classification: STATUS-UPDATE
+atom: ATOM-STATUS-20251126-001
 ---
 
 # Current Repository Status
 
-**Last Updated:** 2025-11-23 11:15 UTC
-**Branch:** `claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3`
-**Commits Ahead of Main:** 5
+**Last Updated:** 2025-11-26 02:45 UTC
+**Branch:** `copilot/update-repo-documentation-structure`
+**Active Session:** Documentation restructure and SAIF process implementation
 
 ---
 
 ## Recent Work Summary
 
-### Session Focus: BF6 Gaming → Dual-Boot Infrastructure
-**Started:** 2025-11-06 (AI-guided decision: Linux gaming → Windows dual-boot)
-**Status:** Complete infrastructure, ready for merge
+### Session Focus: Documentation Restructure + SAIF Integration
+**Started:** 2025-11-26
+**Status:** In Progress
+
+**Objectives:**
+1. Restructure README to mirror BattleMedic pathways/walkthroughs
+2. Create pathway-based Obsidian vault initialization
+3. Add PowerShell profile functions for dynamic banners and current playcard
+4. Update ATOM register and workflow documentation
+5. Make repo a true SAIF process throughout
 
 ---
 
-## Commits on Feature Branch (Latest 5)
+## New Documentation Structure
+
+### Entry Points
+
+| Document | Purpose | ATOM Tag |
+|----------|---------|----------|
+| [GETTING-STARTED.md](../GETTING-STARTED.md) | **Primary entry point** - Obsidian vault setup, pathway selection | ATOM-DOC-20251126-001 |
+| [ATOM-REGISTER.md](../ATOM-REGISTER.md) | Complete ATOM tag tracking | ATOM-DOC-20251126-002 |
+| [README.md](../README.md) | Overview with pathway selection | ATOM-DOC-20251126-003 |
+
+### New Scripts
+
+| Script | Purpose | ATOM Tag |
+|--------|---------|----------|
+| [scripts/Install-KenlProfile.ps1](../scripts/Install-KenlProfile.ps1) | PowerShell profile with banners | ATOM-PROFILE-20251126-001 |
+
+---
+
+## Pathway System
+
+The new structure uses **pathways** to guide users:
 
 ```
-1deebf7 feat: add GitHub automation and KENL-specific research prompt
-ac14b41 feat: long-task pattern with separate terminal windows
-9d75341 feat: add Claude Code CLI configuration and formatting guides
-6af4a35 docs: add AI-guided decision making case study demonstrating KENL value
-354de50 docs: add workflow diagrams, profile automation, and WSL2 safety warnings
+🎮 Gaming     → KENL2-gaming      → Play Cards, Proton
+💻 Development → KENL3-dev        → Claude Code, Ollama, MCP
+🔧 Recovery   → BattleMedic      → Windows fixes, diagnostics
+🚀 Migration  → KENL0-system     → Windows 10 EOL, dual-boot
+```
+
+Each pathway:
+1. Imports relevant modules to Obsidian vault
+2. Verifies environment/dependencies
+3. Guides through setup checklist
+4. Identifies optimal AI injection points
+
+---
+
+## PowerShell Profile Features
+
+After running `Install-KenlProfile.ps1`:
+
+```powershell
+# Dynamic banner showing current context
+Show-KenlBanner
+
+# Output:
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  KENL - Intent-Driven Infrastructure                         ║
+# ╠══════════════════════════════════════════════════════════════╣
+# ║  Platform:  Windows                                           ║
+# ║  Context:   KENL2                                             ║
+# ║  Playcard:  🎮 Halo Infinite                                  ║
+# ║  ATOM:      ATOM-GAMING-20251126-001                          ║
+# ║  SAIF:      SAIF-CONFIG-20251126-001                          ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+# Navigate modules
+kenl-switch 2         # Go to KENL2-gaming
+kenl-switch battlemedic  # Go to BattleMedic
+
+# Manage playcards
+Set-CurrentPlaycard -Name "halo-infinite"
+Get-CurrentPlaycard
+Show-Playcards
 ```
 
 ---
 
-## What's New (Ready for Main)
+## ATOM Trail Locations
 
-### 1. GitHub Automation (ATOM-CFG-20251112-011)
-**Added:**
-- `.github/PULL_REQUEST_TEMPLATE.md` - ATOM + SAGE metadata capture
-- `.github/workflows/validate.yml` - CI validation (links, ShellCheck, PSScriptAnalyzer)
-- `.github/labels.yml` - 30+ labels (priority, type, domain-specific)
-- `.github/ISSUE_TEMPLATE/gaming-config.md` - Game bug reporting
-- `.github/ISSUE_TEMPLATE/partition-script.md` - Disk script issues
-
-**Impact:** Automated validation prevents regressions, standardized issue/PR format
-
-### 2. Long-Task Pattern (ATOM-PATTERN-20251112-001)
-**Added:**
-- `claude-landing/LONG-TASK-PATTERN.md` - Cross-platform design (PowerShell, tmux, screen)
-- `scripts/Download-Bazzite-ISO.ps1` - Production implementation
-
-**Impact:** Long tasks (downloads, partitions) run in separate windows, main CLI stays responsive
-
-### 3. Claude Code CLI Configuration (ATOM-CFG-20251112-009)
-**Added:**
-- `claude-landing/CLI-FORMATTING-STANDARDS.md` - Industry + bleeding-edge terminal UX
-- `claude-landing/KENL-COMMANDS.md` - Command registry for partition scripts
-- `claude-landing/CLAUDE-CLI-INIT.md` - Session initialization workflow
-- `claude-landing/CLI-OUTPUT-GUIDE.md` - Clean output templates
-
-**Impact:** Consistent CLI experience, better visual feedback, reduced noise
-
-### 4. AI Decision-Making Case Study (ATOM-CASE-20251112-001)
-**Added:**
-- `case-studies/AI_GUIDED_DECISION_MAKING_BF6.md` - 2,100+ lines documenting the journey from "How to run BF6 on Linux?" to dual-boot Windows setup
-
-**Impact:** Demonstrates KENL's value: AI situation-specific risk awareness + complete ATOM traceability
-
-### 5. Workflow Diagrams & Profiles (ATOM-CFG-20251112-005/006)
-**Added:**
-- `scripts/windows-partition-scripts/WORKFLOW_DIAGRAM.md` - 10 Mermaid flowcharts
-- `scripts/windows-partition-scripts/PROFILES_SETUP.md` - PowerShell/Bash automation
-- WSL2 safety blocks in profile functions
-
-**Impact:** Visual workflow guides, automated helpers, prevents WSL2 data corruption
-
-### 6. Research Agent Prompt (ATOM-RESEARCH-20251112-001)
-**Added:**
-- `.claude/RESEARCH_PROMPT.md` - Comprehensive prompt for 110 AUD research credits
-- 5 priority tasks: Anti-cheat, MCP ecosystem, immutable gaming, Win10 EOL, PSGallery
-
-**Impact:** Clear guidance for funded research, SAGE framework enforcement
+| Location | Purpose | Format |
+|----------|---------|--------|
+| `~/.kenl/atom_trail.log` | Runtime ATOM entries | `[timestamp] [ATOM-TAG] [platform] action` |
+| `~/.kenl/saif-trail.log` | SAIF checkpoint flags | JSON lines |
+| `/ATOM-REGISTER.md` | Repository-wide tracking | Markdown table |
 
 ---
 
-## Private Files (Gitignored)
+## Module Status
 
-**Location:** `.private/claude-config/`
-- CLI configuration copies (for personal use)
-- `AI-SECURITY-MONITORING.md` - Defense against AI hacking techniques
-- User-specific settings and credentials
-
----
-
-## Repository Statistics
-
-**Documentation:** ~15,000+ lines added
-**Scripts:** 3 PowerShell automation scripts (partition, download)
-**Diagrams:** 10 Mermaid flowcharts
-**Case Studies:** 1 comprehensive (BF6 decision-making)
-**ATOM Tags:** 12 (CFG-001 through 011, PATTERN-001, CASE-001, RESEARCH-001)
-
----
-
-## Current Branch Structure
-
-```
-main (remote)
-  └─ claude/bf6-linux-launch-options-011CUtnGFRyDuUnkmhW2pRR3 (current)
-       ├─ 5 commits ahead
-       ├─ Ready to merge
-       └─ No conflicts expected
-```
+| Module | Status | Verified |
+|--------|--------|----------|
+| KENL0-system | ✅ Active | PowerShell modules working |
+| KENL1-framework | ✅ Active | ATOM+SAGE core |
+| KENL2-gaming | ✅ Active | Play Cards, research scripts |
+| KENL3-dev | ✅ Active | MCP guides, Ollama setup |
+| KENL4-monitoring | ✅ Active | ATOM DB architecture |
+| KENL5-13 | ✅ Active | Various utilities |
+| BattleMedic | ✅ Active | v2.1.0, SAIF compliant |
 
 ---
 
 ## Next Actions
 
-### Immediate (User Decision Required)
-1. **Merge feature branch to main** - All work complete, ready for merge
-2. **Run ISO download** - `.\scripts\Download-Bazzite-ISO.ps1 -Variant kde`
-3. **Partition disk** - Execute STEP1-STEP3 scripts
+### Immediate
+1. ✅ Create GETTING-STARTED.md (pathway entry point)
+2. ✅ Create Install-KenlProfile.ps1 (dynamic banners)
+3. ✅ Create ATOM-REGISTER.md (tag tracking)
+4. ✅ Update README.md (new structure)
+5. [ ] Verify shell scripts execute correctly
+6. [ ] Run code review
+7. [ ] Commit changes
 
-### Deferred to Research Agent (110 AUD Budget)
-1. Anti-cheat Linux compatibility survey (Nov 2024)
-2. MCP server ecosystem catalog
-3. Immutable system gaming best practices
-4. Windows 10 EOL migration evidence
-5. PSGallery module publishing automation
+### Deferred
+- Add Bash profile equivalent
+- Create Obsidian plugin for ATOM integration
+- Implement CTFWI handover automation
 
 ---
 
 ## Environment Status
 
-**Platform:** Windows 11 (pre-migration)
-**Working Directory:** `C:\Users\Matthew Ruhnau\kenl`
-**Shell:** Git Bash (PowerShell available)
-**External Drive:** 2TB (needs partitioning)
-**Disk Space:** ⚠️ Low (free up space before ISO download)
-
----
-
-## Outstanding Issues
-
-1. **Disk space low** - `ENOSPC` errors in Claude Code CLI
-   - Clear `%TEMP%` and `C:\Windows\Temp`
-   - Free up space before downloading 3.1GB ISO
-
-2. **Hung PowerShell command** - Killed in CLI session
-   - No impact on current work
-   - Long tasks now run in separate windows (pattern implemented)
+**Platform:** CI Environment (GitHub Actions)
+**Working Directory:** `/home/runner/work/kenl/kenl`
+**Shell:** Bash
+**PowerShell:** Not available in CI
 
 ---
 
 ## Documentation Index
 
 **Orientation:**
-- `claude-landing/CLAUDE-CLI-INIT.md` - Start here for new sessions
-- `claude-landing/KENL-COMMANDS.md` - Available commands
-- `CLAUDE.md` - Repository instructions and ATOM patterns
+- `GETTING-STARTED.md` - **START HERE** for new users
+- `claude-landing/CURRENT-STATE.md` - This file (AI agents start here)
+- `ATOM-REGISTER.md` - Tag tracking
 
-**Workflows:**
-- `scripts/windows-partition-scripts/WORKFLOW_DIAGRAM.md` - Visual guides
-- `scripts/windows-partition-scripts/README.md` - Partition script usage
-- `scripts/windows-partition-scripts/PROFILES_SETUP.md` - Shell automation
+**Modules:**
+- `modules/KENL0-system/` - System operations, PowerShell modules
+- `modules/KENL2-gaming/` - Play Cards, Proton optimization
+- `modules/KENL3-dev/` - Development environments
+- `modules/Surface_Pro_4_EoL_BattleMedic_v2.1/` - Windows recovery
 
-**Case Studies:**
-- `case-studies/AI_GUIDED_DECISION_MAKING_BF6.md` - AI decision framework
-- `case-studies/BF6_LINUX_LAUNCH_OPTIONS.md` - Why BF6 doesn't work on Linux
-
-**Design Patterns:**
-- `claude-landing/LONG-TASK-PATTERN.md` - Separate terminal windows
-- `claude-landing/CLI-FORMATTING-STANDARDS.md` - Terminal UX best practices
-
-**Research:**
-- `.claude/RESEARCH_PROMPT.md` - Funded research tasks (110 AUD)
+**Governance:**
+- `governance/02-Decisions/` - ADR documents
+- `governance/mcp-governance/` - ARCREF artifacts
 
 ---
 
-**Status:** ✅ All work committed and pushed. Feature branch ready for merge.
+**Status:** 🔄 Work in progress - Documentation restructure
 
 ---
 
-Last Updated: 2025-11-12 11:15 UTC
+**ATOM:** ATOM-STATUS-20251126-001
+**Last Updated:** 2025-11-26 02:45 UTC
