@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome.md",
+                "file": "PATH_D_RECOVERY_MEDIA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Welcome"
+              "title": "PATH_D_RECOVERY_MEDIA"
             }
           }
         ]
@@ -185,7 +185,16 @@
   },
   "active": "30cfed0e8ab5df4e",
   "lastOpenFiles": [
+    "01_DECISION_TREE.md",
+    "PATH_B_SAFE_MODE.md",
+    "Welcome.md",
     "create a link.md",
-    "Welcome.md"
+    "00_HOME.md",
+    "PATH_D_RECOVERY_MEDIA.md",
+    "PATH_C_WINRE_OFFLINE.md",
+    "PATH_A_NORMAL_BOOT.md",
+    "03_STEP_BY_STEP_RECOVERY.md",
+    "02_REQUIREMENTS_CHECKLIST.md",
+    "01_WOFSYS_EMERGENCY_PROTOCOL.md"
   ]
 }
