@@ -64,6 +64,42 @@ $env:KENL_CURRENT_PLAYCARD = ""
 $env:KENL_CURRENT_MODULE = ""
 
 # ============================================
+# Helper Functions
+# ============================================
+
+function Write-KenlAtomTrail {
+    <#
+    .SYNOPSIS
+        Safely writes to ATOM trail, using Write-AtomTrail if available or direct file write
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Type,
+        [Parameter(Mandatory)]
+        [string]$Action
+    )
+    
+    # Try using the module function first
+    if (Get-Command Write-AtomTrail -ErrorAction SilentlyContinue) {
+        Write-AtomTrail -Type $Type -Action $Action
+        return
+    }
+    
+    # Fallback to direct file write
+    $atomPath = Join-Path $env:KENL_HOME "atom_trail.log"
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $platform = if ($IsWindows -or $env:OS -eq "Windows_NT") { "Windows" } elseif ($IsLinux) { "Linux" } else { "Unknown" }
+    $entry = "[$timestamp] [ATOM-$Type-$(Get-Date -Format 'yyyyMMdd')-001] [$platform] $Action"
+    
+    try {
+        Add-Content -Path $atomPath -Value $entry -ErrorAction Stop
+    } catch {
+        Write-Verbose "Could not write to ATOM trail: $_"
+    }
+}
+
+# ============================================
 # Module Loading
 # ============================================
 
@@ -269,10 +305,8 @@ function Set-CurrentPlaycard {
     
     Write-Host "✅ Current playcard set to: $($env:KENL_CURRENT_PLAYCARD)" -ForegroundColor Green
     
-    # Log to ATOM trail
-    if (Get-Command Write-AtomTrail -ErrorAction SilentlyContinue) {
-        Write-AtomTrail -Type GAMING -Action "Set current playcard: $($env:KENL_CURRENT_PLAYCARD)"
-    }
+    # Log to ATOM trail using helper
+    Write-KenlAtomTrail -Type GAMING -Action "Set current playcard: $($env:KENL_CURRENT_PLAYCARD)"
 }
 
 function Show-Playcards {
@@ -510,6 +544,11 @@ Write-Host ""
 $atomPath = Join-Path $KenlHome "atom_trail.log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $entry = "[$timestamp] [ATOM-PROFILE-20251126-001] [Windows] Installed KENL profile integration"
-Add-Content -Path $atomPath -Value $entry -ErrorAction SilentlyContinue
+try {
+    Add-Content -Path $atomPath -Value $entry -ErrorAction Stop
+    Write-Verbose "ATOM trail entry written to: $atomPath"
+} catch {
+    Write-Warning "Could not write to ATOM trail: $_"
+}
 
 Write-Host "ATOM: ATOM-PROFILE-20251126-001" -ForegroundColor Yellow
