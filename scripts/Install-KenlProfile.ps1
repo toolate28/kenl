@@ -552,7 +552,8 @@ Write-Host ""
 # Log installation
 $atomPath = Join-Path $KenlHome "atom_trail.log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$entry = "[$timestamp] [ATOM-PROFILE-20251126-001] [Windows] Installed KENL profile integration"
+$platform = if ($IsWindows -or $env:OS -eq "Windows_NT") { "Windows" } elseif ($IsLinux) { "Linux" } elseif ($IsMacOS) { "macOS" } else { "Unknown" }
+$entry = "[$timestamp] [ATOM-PROFILE-20251126-001] [$platform] Installed KENL profile integration"
 try {
     Add-Content -Path $atomPath -Value $entry -ErrorAction Stop
     Write-Verbose "ATOM trail entry written to: $atomPath"
