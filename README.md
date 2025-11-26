@@ -97,19 +97,19 @@ We stand on shoulders, not on toes. KENL doesn't provide better tools - it provi
 graph TD
     User[👤 User] --> Start[📚 GETTING-STARTED.md]
     Start --> Pathway{Select Pathway}
-    
+
     Pathway --> |Gaming| KENL2[🎮 KENL2-gaming]
     Pathway --> |Development| KENL3[💻 KENL3-dev]
     Pathway --> |Recovery| BM[🔧 BattleMedic]
     Pathway --> |Migration| KENL0[⚙️ KENL0-system]
-    
+
     KENL2 --> ATOM[🏷️ ATOM Trails]
     KENL3 --> ATOM
     BM --> ATOM
     KENL0 --> ATOM
-    
+
     ATOM --> DB[(SQLite + Cloudflare D1)]
-    
+
     style Start fill:#5865F2,color:#fff
     style ATOM fill:#57F287,color:#000
     style KENL2 fill:#ED4245,color:#fff

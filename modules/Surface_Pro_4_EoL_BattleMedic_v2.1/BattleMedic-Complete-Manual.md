@@ -365,8 +365,8 @@ Measure the performance impact of recovery operations:
 $perfTests = @{}
 
 # Measure diagnostic time
-$perfTests['DiagnosticQuick'] = Measure-Command { 
-    Get-BattleMedicDiagnostic -Quick 
+$perfTests['DiagnosticQuick'] = Measure-Command {
+    Get-BattleMedicDiagnostic -Quick
 }
 
 $perfTests['DiagnosticFull'] = Measure-Command {
@@ -416,14 +416,14 @@ After deployment, implement continuous validation to ensure ongoing effectivenes
 # Daily validation job
 $validationJob = {
     Import-Module BattleMedic
-    
+
     $daily = @{
         Date = Get-Date
         Environment = Test-BattleMedicEnvironment
         QuickDiag = Get-BattleMedicDiagnostic -Quick
         ModuleVersion = Get-BattleMedicVersion
     }
-    
+
     # Alert if priority is P0 or P1
     if ($daily.QuickDiag.Priority -in @('P0', 'P1')) {
         # Send alert via your preferred method
@@ -431,7 +431,7 @@ $validationJob = {
             -EventId 1001 -EntryType Warning `
             -Message "System priority $($daily.QuickDiag.Priority) detected"
     }
-    
+
     # Log validation results
     $daily | Export-Clixml -Path "C:\Logs\BattleMedic\Daily_$(Get-Date -Format 'yyyyMMdd').xml"
 }
@@ -452,55 +452,55 @@ Register-ScheduledJob -Name "BattleMedic Daily Validation" `
 ```mermaid
 graph TD
     Start([User Experiences Issue]) --> Detect{System Detection}
-    
+
     Detect --> |PowerShell < 3.0| Incompatible[Show Error:<br/>Upgrade Required]
     Detect --> |PowerShell >= 3.0| Init[Initialize BattleMedic]
-    
+
     Init --> EnvCheck{Environment<br/>Check}
     EnvCheck --> |Failed Critical| FailInit[Initialization Failed:<br/>Address Requirements]
     EnvCheck --> |Passed/Warnings| Menu[Show Recovery Menu]
-    
+
     Menu --> Mode{Select Mode}
     Mode --> |Guided| Guided[Interactive Q&A]
     Mode --> |Automated| Auto[Automatic Recovery]
     Mode --> |Expert| Expert[Direct Tool Access]
-    
+
     Guided --> Questions[Present Diagnostic<br/>Questions]
     Questions --> BuildPlan[Build Recovery Plan]
-    
+
     Auto --> FullDiag[Run Full Diagnostics]
     FullDiag --> AutoPlan[Generate Auto Plan]
-    
+
     Expert --> ToolSelect[Select Specific Tool]
     ToolSelect --> RunTool[Execute Tool]
-    
+
     BuildPlan --> Confirm{User Confirms<br/>Plan?}
     AutoPlan --> Confirm
-    
+
     Confirm --> |No| Menu
     Confirm --> |Yes| Checkpoint[Create Recovery<br/>Checkpoint]
-    
+
     Checkpoint --> Execute[Execute Recovery<br/>Operations]
     RunTool --> Execute
-    
+
     Execute --> Verify[Verify Results]
     Verify --> Success{Success?}
-    
+
     Success --> |Yes| Report[Generate Report]
     Success --> |No| Rollback{Rollback<br/>Available?}
-    
+
     Rollback --> |Yes| RestorePoint[Restore Checkpoint]
     Rollback --> |No| Manual[Manual Intervention<br/>Required]
-    
+
     RestorePoint --> Menu
     Manual --> Support[Contact Support]
-    
+
     Report --> Complete([Recovery Complete])
     FailInit --> End([Exit])
     Incompatible --> End
     Support --> End
     Complete --> End
-    
+
     style Start fill:#e1f5fe
     style Complete fill:#c8e6c9
     style FailInit fill:#ffcdd2
@@ -521,7 +521,7 @@ graph LR
         Updates[Updates]
         Events[Event Log]
     end
-    
+
     subgraph Analysis
         Disk --> DiskCheck{< 5%?}
         Thermal --> TempCheck{> 80°C?}
@@ -530,17 +530,17 @@ graph LR
         Updates --> UpdateCheck{Many Failed?}
         Events --> EventCheck{Many Errors?}
     end
-    
+
     subgraph Priority
         DiskCheck --> |Yes| P0[P0: Critical]
         TempCheck --> |Yes| P0
         WOFCheck --> |Yes| P0
-        
+
         SvcCheck --> |Yes| P1[P1: High]
         UpdateCheck --> |Yes| P1
-        
+
         EventCheck --> |Yes| P2[P2: Medium]
-        
+
         DiskCheck --> |No| CheckNext1[Check Others]
         TempCheck --> |No| CheckNext2[Check Others]
         WOFCheck --> |No| CheckNext3[Check Others]
@@ -548,14 +548,14 @@ graph LR
         UpdateCheck --> |No| CheckNext5[Check Others]
         EventCheck --> |No| P3[P3: Low]
     end
-    
+
     subgraph Output
         P0 --> Immediate[Immediate Action]
         P1 --> Urgent[Urgent Response]
         P2 --> Scheduled[Schedule Repair]
         P3 --> Optional[Optional Optimization]
     end
-    
+
     style P0 fill:#ff5252
     style P1 fill:#ff9800
     style P2 fill:#ffeb3b
@@ -567,39 +567,39 @@ graph LR
 ```mermaid
 stateDiagram-v2
     [*] --> Detection: SP4 Detected
-    
+
     Detection --> Analysis: Load SP4 Profile
-    
+
     Analysis --> ScreenFlicker: Check Display
     Analysis --> TypeCover: Check Peripherals
     Analysis --> Thermal: Check Temperature
     Analysis --> Sleep: Check Power States
-    
+
     ScreenFlicker --> Fix59Hz: Flicker Detected
     ScreenFlicker --> DisplayOK: No Issues
-    
+
     TypeCover --> ResetUSB: Disconnection Issues
     TypeCover --> PeripheralOK: Working Normal
-    
+
     Thermal --> Throttle: Over 70°C
     Thermal --> TempOK: Normal Range
-    
+
     Sleep --> DisableCS: Connected Standby Issues
     Sleep --> PowerOK: Sleep Normal
-    
+
     Fix59Hz --> Verify
     ResetUSB --> Verify
     Throttle --> Verify
     DisableCS --> Verify
-    
+
     DisplayOK --> NextCheck
     PeripheralOK --> NextCheck
     TempOK --> NextCheck
     PowerOK --> NextCheck
-    
+
     NextCheck --> Complete: All Checks Done
     Verify --> Complete: Fixes Applied
-    
+
     Complete --> [*]: SP4 Recovery Complete
 ```
 
@@ -626,18 +626,18 @@ graph TD
         TimeAvail[Time Available]
         Risk[Risk Tolerance]
     end
-    
+
     subgraph Method Selection
         Priority --> MethodCalc{Calculate Best Method}
         UserSkill --> MethodCalc
         TimeAvail --> MethodCalc
         Risk --> MethodCalc
-        
+
         MethodCalc --> Auto[Automated:<br>P0 + Low Skill + Low Time]
         MethodCalc --> Guided[Guided:<br>P1-P2 + Medium Skill + Medium Time]
         MethodCalc --> Expert[Expert:<br>Any + High Skill + High Time]
     end
-    
+
     subgraph Outcomes
         Auto --> FastRisky[Fast but Less Control]
         Guided --> Balanced[Balanced Approach]
@@ -671,31 +671,31 @@ graph TB
         Current[Current Session<br>Variables]
         Memory[In-Memory<br>Cache]
     end
-    
+
     subgraph Persistent State
         Config[Config.json]
         LastState[LastState.json]
         Checkpoints[Recovery<br>Checkpoints]
     end
-    
+
     subgraph System State
         Registry[Registry<br>Keys]
         Services[Service<br>Status]
         Files[File System<br>State]
     end
-    
+
     Current --> Memory
     Memory --> LastState
     LastState --> Config
-    
+
     Config --> Registry
     Registry --> Services
     Services --> Files
-    
+
     Files --> |Read| Verify{State Check}
     Verify --> |Changed| Execute[Run Operation]
     Verify --> |Same| Skip[Skip Operation]
-    
+
     Execute --> Update[Update All States]
     Skip --> Report[Report Skipped]
 ```
@@ -708,10 +708,10 @@ Every recovery operation follows this pattern to ensure it can be safely re-run:
 function Repair-Something {
     [CmdletBinding()]
     param()
-    
+
     # 1. Check current state
     $currentState = Get-CurrentState
-    
+
     # 2. Determine if action needed
     if ($currentState.AlreadyFixed) {
         Write-Verbose "Already in desired state - skipping"
@@ -721,23 +721,23 @@ function Repair-Something {
             State = $currentState
         }
     }
-    
+
     # 3. Create checkpoint before changes
     $checkpoint = New-RecoveryCheckpoint -Name "Pre_Repair_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-    
+
     try {
         # 4. Perform the repair
         $result = Invoke-RepairOperation
-        
+
         # 5. Verify the repair worked
         $newState = Get-CurrentState
         if (-not $newState.AlreadyFixed) {
             throw "Repair failed verification"
         }
-        
+
         # 6. Log success
         Write-Log -Action "Repair-Something" -Result "Success" -Details $result
-        
+
         return @{
             Success = $true
             Skipped = $false
@@ -750,10 +750,10 @@ function Repair-Something {
         if ($checkpoint) {
             Restore-RecoveryCheckpoint -Name $checkpoint.Name
         }
-        
+
         # 8. Log failure
         Write-Log -Action "Repair-Something" -Result "Failure" -Error $_
-        
+
         throw
     }
 }
@@ -823,12 +823,12 @@ graph LR
         Import[Module Import<br>CPU: 5%<br>RAM: 50MB<br>Disk: Low]
         Diag[Quick Diagnostic<br>CPU: 10%<br>RAM: 100MB<br>Disk: Low]
     end
-    
+
     subgraph Medium Operations
         SFC[SFC Scan<br>CPU: 20%<br>RAM: 200MB<br>Disk: Medium]
         Cleanup[Cleanup<br>CPU: 15%<br>RAM: 150MB<br>Disk: High]
     end
-    
+
     subgraph Heavy Operations
         DISM[DISM Repair<br>CPU: 40%<br>RAM: 500MB<br>Disk: High]
         Recovery[Full Recovery<br>CPU: 30%<br>RAM: 300MB<br>Disk: Very High]
@@ -850,50 +850,50 @@ graph TD
         System[System Event]
         Schedule[Scheduled Task]
     end
-    
+
     subgraph Processing Layer
         Auth[Authentication]
         Author[Authorization]
         Validate[Validation]
     end
-    
+
     subgraph Execution Layer
         Execute[Execute Operation]
         Monitor[Monitor Progress]
         Verify[Verify Results]
     end
-    
+
     subgraph Audit Layer
         LogAction[Log Action]
         LogResult[Log Result]
         LogState[Log State Change]
     end
-    
+
     subgraph Storage Layer
         SAIF[SAIF JSON Log]
         Event[Event Log]
         File[File System]
     end
-    
+
     User --> Auth
     System --> Auth
     Schedule --> Auth
-    
+
     Auth --> Author
     Author --> Validate
     Validate --> Execute
-    
+
     Execute --> Monitor
     Monitor --> Verify
-    
+
     Execute --> LogAction
     Monitor --> LogResult
     Verify --> LogState
-    
+
     LogAction --> SAIF
     LogResult --> SAIF
     LogState --> SAIF
-    
+
     SAIF --> File
     SAIF --> Event
 ```

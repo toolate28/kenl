@@ -27,24 +27,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      
+
       - name: Install Ajv JSON Schema Validator
         run: npm install -g ajv-cli
-      
+
       - name: Validate Play Card Schemas
         run: |
           echo "ATOM-VAL-$(date +%Y%m%d)-${{ github.run_number }}" > atom.txt
           ajv validate -s schemas/play-card.schema.json -d "play-cards/*.json"
-      
+
       - name: Validate Profile Schemas
         run: |
           ajv validate -s schemas/gaming-profile.schema.json -d "profiles/*.json"
-      
+
       - name: Check ATOM Tag Format
         run: |
           # Verify all JSON files have valid ATOM IDs
@@ -53,10 +53,10 @@ jobs:
           import re
           import sys
           from pathlib import Path
-          
+
           atom_pattern = re.compile(r'^ATOM-[A-Z]+-\d{8}-\d{3}$')
           errors = []
-          
+
           for json_file in Path('.').glob('**/*.json'):
               if 'schemas' in str(json_file):
                   continue
@@ -70,7 +70,7 @@ jobs:
                           errors.append(f"{json_file}: Missing atom_id field")
               except Exception as e:
                   errors.append(f"{json_file}: {str(e)}")
-          
+
           if errors:
               for error in errors:
                   print(error)
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Lint JSON Files
         run: |
           echo "ATOM-LINT-$(date +%Y%m%d)-${{ github.run_number }}"
@@ -90,7 +90,7 @@ jobs:
             echo "Linting: $file"
             python3 -m json.tool "$file" > /dev/null || exit 1
           done
-      
+
       - name: Check File Naming Convention
         run: |
           # Play cards: lowercase-with-dashes.json
@@ -98,19 +98,19 @@ jobs:
           python3 << 'EOF'
           from pathlib import Path
           import sys
-          
+
           errors = []
-          
+
           # Check play-cards
           for f in Path('play-cards').glob('*.json'):
               if not f.stem.islower() or ' ' in f.stem:
                   errors.append(f"Play card filename must be lowercase-with-dashes: {f}")
-          
+
           # Check profiles
           for f in Path('profiles').glob('*.json'):
               if not f.stem.startswith('profile-'):
                   errors.append(f"Profile must start with 'profile-': {f}")
-          
+
           if errors:
               for error in errors:
                   print(error)
@@ -122,20 +122,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Analyze FPS Targets
         run: |
           echo "ATOM-PERF-$(date +%Y%m%d)-${{ github.run_number }}"
           python3 << 'EOF'
           import json
           from pathlib import Path
-          
+
           for card in Path('play-cards').glob('*.json'):
               with open(card) as f:
                   data = json.load(f)
                   perf = data.get('performance', {})
                   target_fps = perf.get('target_fps')
-                  
+
                   if target_fps:
                       if target_fps < 30:
                           print(f"⚠️  {card.name}: Low FPS target ({target_fps})")
@@ -150,18 +150,18 @@ jobs:
     needs: [validate-schemas, lint-configs]
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Generate Play Card Index
         run: |
           echo "ATOM-DOC-$(date +%Y%m%d)-${{ github.run_number }}"
           python3 << 'EOF'
           import json
           from pathlib import Path
-          
+
           print("# Gaming-with-Intent Play Cards\n")
           print("| Game | Store | Proton | Target FPS | ATOM ID |")
           print("|------|-------|--------|------------|---------|")
-          
+
           for card in sorted(Path('play-cards').glob('*.json')):
               with open(card) as f:
                   data = json.load(f)
@@ -179,7 +179,7 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Record ATOM Trail
         run: |
           ATOM_ID="ATOM-CI-$(date +%Y%m%d)-${{ github.run_number }}"
@@ -187,7 +187,7 @@ jobs:
           echo "Commit: ${{ github.sha }}" >> .atom-trail.log
           echo "Author: ${{ github.actor }}" >> .atom-trail.log
           echo "---" >> .atom-trail.log
-      
+
       - name: Commit ATOM Trail
         run: |
           git config user.name "Gaming-Intent Bot"

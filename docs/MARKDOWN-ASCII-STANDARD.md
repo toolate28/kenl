@@ -1,7 +1,7 @@
 # Markdown ASCII Standard for KENL
 
-**ATOM Tag:** ATOM-DOC-20251118-008  
-**Authority:** documentation-standards  
+**ATOM Tag:** ATOM-DOC-20251118-008
+**Authority:** documentation-standards
 **Status:** Active
 
 ---
@@ -167,6 +167,6 @@ Future enhancement: Add pre-commit hook to detect emojis in table cells.
 
 ---
 
-**Last Updated:** 2025-11-18  
-**Maintained By:** Human+AI collaboration  
+**Last Updated:** 2025-11-18
+**Maintained By:** Human+AI collaboration
 **Related:** `claude-landing/MARKDOWN-TABLE-FORMATTING.md`, `docs/VISUAL-ELEMENTS-STANDARD.md`

@@ -29,7 +29,7 @@ rollback_plan: |
   gh run list --workflow=cloudflare-deploy.yml --limit 5
   gh run list --workflow=release.yml --limit 5
   gh run list --workflow=validate.yml --limit 5
-  
+
   # Review logs if failures detected
   gh run view <run-id> --log-failed
   ```
@@ -38,13 +38,13 @@ rollback_plan: |
   ```bash
   # Revert the commit that introduced v5
   git revert <commit-sha>
-  
+
   # Or manually edit workflow files
   sed -i 's/actions\/checkout@v5/actions\/checkout@v4/g' .github/workflows/*.yml
-  
+
   # Verify changes
   git diff HEAD
-  
+
   # Commit and push
   git commit -m "chore(ci): revert actions/checkout to v4"
   git push origin main
@@ -54,7 +54,7 @@ rollback_plan: |
   ```bash
   # Trigger workflow manually to test
   gh workflow run ci.yml
-  
+
   # Monitor for success
   gh run list --workflow=ci.yml --limit 1
   gh run watch <run-id>

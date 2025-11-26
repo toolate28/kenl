@@ -866,4 +866,3 @@ Universal Blue Architecture[^7]
 [^90]: https://www.facebook.com/catsacab/posts/im-deeply-concerned-about-what-microsoft-is-doing-with-charging-for-security-upd/1101069728905678/
 
 [^91]: https://discuss.privacyguides.net/t/thoughts-on-universal-blue-bluefin-bazzite-aurora/18398
-

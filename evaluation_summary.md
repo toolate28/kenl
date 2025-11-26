@@ -66,26 +66,26 @@ The following were determined to be redundant with existing documentation:
 
 ### 1. PR Template Enhancement
 
-**Initial proposal**: Basic ATOM trail fields  
-**Enhancement**: Added SAGE methodology integration (why, alternatives, rollback, evidence), KENL-specific change types (gaming, partition, MCP), and Conventional Commits guidance link.  
+**Initial proposal**: Basic ATOM trail fields
+**Enhancement**: Added SAGE methodology integration (why, alternatives, rollback, evidence), KENL-specific change types (gaming, partition, MCP), and Conventional Commits guidance link.
 **Rationale**: ATOM provides traceability; SAGE provides decision-making context. Combined approach enables audit trails with reasoning.
 
 ### 2. GitHub Actions Refinement
 
-**Initial proposal**: Python 3.11, basic validation  
-**Enhancement**: Structured step organization, pre-commit integration, CodeQL scanning, best-effort PowerShell analysis.  
+**Initial proposal**: Python 3.11, basic validation
+**Enhancement**: Structured step organization, pre-commit integration, CodeQL scanning, best-effort PowerShell analysis.
 **Rationale**: Repository contains both Python and PowerShell code; comprehensive validation prevents regressions across both ecosystems.
 
 ### 3. Label System Expansion
 
-**Initial proposal**: 15 generic labels  
-**Enhancement**: 30+ labels with domain-specific tags (gaming, partition-scripts, mcp-integration) and methodology markers (atom, sage).  
+**Initial proposal**: 15 generic labels
+**Enhancement**: 30+ labels with domain-specific tags (gaming, partition-scripts, mcp-integration) and methodology markers (atom, sage).
 **Rationale**: KENL's modular architecture requires domain-specific organization; methodology labels support governance tracking.
 
 ### 4. Research Prompt Specification
 
-**Initial proposal**: Generic placeholder (1 page)  
-**Enhancement**: Comprehensive 5-task prompt with per-task budget allocation, SAGE enforcement, quality standards, and structured output templates.  
+**Initial proposal**: Generic placeholder (1 page)
+**Enhancement**: Comprehensive 5-task prompt with per-task budget allocation, SAGE enforcement, quality standards, and structured output templates.
 **Rationale**: Research credit is limited (110 AUD); detailed specifications maximize value and ensure actionable deliverables.
 
 ## Enabled Capabilities

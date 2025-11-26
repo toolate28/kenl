@@ -77,7 +77,7 @@ get_public_ip() {
         echo "disabled"
         return
     fi
-    
+
     # Try multiple services (fast timeout)
     curl -s --max-time 2 https://api.ipify.org 2>/dev/null || \
     curl -s --max-time 2 https://ifconfig.me 2>/dev/null || \
@@ -181,7 +181,7 @@ get_repo_stats() {
     local md_files
     mapfile -t md_files < <(find "$REPO_ROOT" -name "*.md" -type f 2>/dev/null)
     local total_docs="${#md_files[@]}"
-    
+
     # Count number of markdown files containing at least one ATOM tag
     local atom_docs=0
     for file in "${md_files[@]}"; do
@@ -189,7 +189,7 @@ get_repo_stats() {
             atom_docs=$((atom_docs + 1))
         fi
     done
-    
+
     local modules=$(find "$REPO_ROOT/modules" -maxdepth 1 -type d -name "KENL*" 2>/dev/null | wc -l)
     local play_cards=$(find "$REPO_ROOT" -path "*/play-cards/*.yaml" -type f 2>/dev/null | wc -l)
 
@@ -204,7 +204,7 @@ draw_bar() {
     local value=$1
     local max=${2:-100}
     local width=${3:-40}
-    
+
     local filled
     local empty
 
@@ -261,13 +261,13 @@ render_dashboard() {
     if [[ "$total_docs" -gt 0 ]]; then
         doc_score=$(( (atom_docs * 100) / total_docs ))
     fi
-    
+
     # Reusability: percent of modules to total_docs (0-100)
     local reusability=0
     if [[ "$total_docs" -gt 0 ]]; then
         reusability=$(( (modules * 100) / total_docs ))
     fi
-    
+
     # Clicks to confidence: estimate as inverse of play_cards (more play cards = fewer clicks)
     local clicks_to_confidence=0
     if [[ "$play_cards" -gt 0 ]]; then

@@ -86,13 +86,13 @@ function Write-KenlAtomTrail {
         [Parameter(Mandatory)]
         [string]$Action
     )
-    
+
     # Try using the module function first
     if (Get-Command Write-AtomTrail -ErrorAction SilentlyContinue) {
         Write-AtomTrail -Type $Type -Action $Action
         return
     }
-    
+
     # Fallback to direct file write
     $atomPath = Join-Path $env:KENL_HOME "atom_trail.log"
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -107,7 +107,7 @@ function Write-KenlAtomTrail {
     }
     Set-Content -Path $sequenceFile -Value $sequence
     $entry = "[$timestamp] [ATOM-$Type-$dateTag-$('{0:D3}' -f $sequence)] [$platform] $Action"
-    
+
     try {
         Add-Content -Path $atomPath -Value $entry -ErrorAction Stop
     } catch {
@@ -223,12 +223,12 @@ function Show-KenlBanner {
         Write-Host "- Intent-Driven Infrastructure" -NoNewline -ForegroundColor Gray
         Write-Host "                       ║" -ForegroundColor Cyan
         Write-Host "╠══════════════════════════════════════════════════════════════╣" -ForegroundColor Cyan
-        
+
         # Platform
         Write-Host "║  Platform:  " -NoNewline -ForegroundColor Cyan
         Write-Host ("{0,-49}" -f $platform) -NoNewline -ForegroundColor White
         Write-Host "║" -ForegroundColor Cyan
-        
+
         # Module Context
         Write-Host "║  Context:   " -NoNewline -ForegroundColor Cyan
         $contextColor = switch -Regex ($moduleContext) {
@@ -239,22 +239,22 @@ function Show-KenlBanner {
         }
         Write-Host ("{0,-49}" -f $moduleContext) -NoNewline -ForegroundColor $contextColor
         Write-Host "║" -ForegroundColor Cyan
-        
+
         # Current Playcard
         Write-Host "║  Playcard:  " -NoNewline -ForegroundColor Cyan
         Write-Host ("{0,-49}" -f "🎮 $playcard") -NoNewline -ForegroundColor Green
         Write-Host "║" -ForegroundColor Cyan
-        
+
         # Recent ATOM
         Write-Host "║  ATOM:      " -NoNewline -ForegroundColor Cyan
         Write-Host ("{0,-49}" -f $recentAtom) -NoNewline -ForegroundColor Yellow
         Write-Host "║" -ForegroundColor Cyan
-        
+
         # SAIF Flag
         Write-Host "║  SAIF:      " -NoNewline -ForegroundColor Cyan
         Write-Host ("{0,-49}" -f $saifFlag) -NoNewline -ForegroundColor Magenta
         Write-Host "║" -ForegroundColor Cyan
-        
+
         Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
         Write-Host ""
     }
@@ -273,7 +273,7 @@ function Get-CurrentPlaycard {
     param()
 
     $playcardPath = Join-Path $env:KENL_HOME "current-playcard.yaml"
-    
+
     if (Test-Path $playcardPath) {
         Get-Content $playcardPath -Raw
     } else {
@@ -295,13 +295,13 @@ function Set-CurrentPlaycard {
     param(
         [Parameter(ParameterSetName='Path')]
         [string]$Path,
-        
+
         [Parameter(ParameterSetName='Name')]
         [string]$Name
     )
 
     $targetPath = Join-Path $env:KENL_HOME "current-playcard.yaml"
-    
+
     if ($Name) {
         # Validate name doesn't contain path separators or relative path components
         if ($Name -match '[/\\]' -or $Name -match '\.\.') {
@@ -310,22 +310,22 @@ function Set-CurrentPlaycard {
         }
         $Path = Join-Path $env:KENL_HOME "modules\KENL2-gaming\play-cards\games\$Name.yaml"
     }
-    
+
     if (-not $Path -or -not (Test-Path $Path)) {
         Write-Host "Playcard not found: $Path" -ForegroundColor Red
         return
     }
-    
+
     Copy-Item $Path $targetPath -Force
-    
+
     # Extract game name
     $content = Get-Content $Path -Raw
     if ($content -match "game:\s*(.+)") {
         $env:KENL_CURRENT_PLAYCARD = $Matches[1].Trim()
     }
-    
+
     Write-Host "✅ Current playcard set to: $($env:KENL_CURRENT_PLAYCARD)" -ForegroundColor Green
-    
+
     # Log to ATOM trail using helper
     Write-KenlAtomTrail -Type GAMING -Action "Set current playcard: $($env:KENL_CURRENT_PLAYCARD)"
 }
@@ -339,26 +339,26 @@ function Show-Playcards {
     param()
 
     $playcardDir = Join-Path $env:KENL_HOME "modules\KENL2-gaming\play-cards\games"
-    
+
     if (-not (Test-Path $playcardDir)) {
         Write-Host "Playcard directory not found: $playcardDir" -ForegroundColor Yellow
         return
     }
-    
+
     Write-Host ""
     Write-Host "Available Playcards:" -ForegroundColor Cyan
     Write-Host "─" * 50 -ForegroundColor Gray
-    
+
     Get-ChildItem $playcardDir -Filter "*.yaml" | ForEach-Object {
         $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue
         $gameName = if ($content -match "game:\s*(.+)") { $Matches[1].Trim() } else { $_.BaseName }
         $verified = if ($content -match "verified:\s*(.+)") { $Matches[1].Trim() } else { "unknown" }
-        
+
         Write-Host "  🎮 " -NoNewline
         Write-Host $gameName -NoNewline -ForegroundColor White
         Write-Host " (verified: $verified)" -ForegroundColor Gray
     }
-    
+
     Write-Host ""
 }
 
@@ -398,22 +398,22 @@ function kenl-switch {
     }
 
     $targetDir = $moduleMap[$Module]
-    if (-not $targetDir) { 
+    if (-not $targetDir) {
         # Validate module name doesn't contain path separators or relative path components
         if ($Module -match '[/\\]' -or $Module -match '\.\.') {
             Write-Host "Invalid module name. Name cannot contain path separators or relative path components." -ForegroundColor Red
             return
         }
-        $targetDir = $Module 
+        $targetDir = $Module
     }
 
     $fullPath = Join-Path $env:KENL_HOME "modules\$targetDir"
-    
+
     if (Test-Path $fullPath) {
         Set-Location $fullPath
         $env:KENL_CURRENT_MODULE = $targetDir
         Write-Host "📁 Switched to: $targetDir" -ForegroundColor Cyan
-        
+
         # Show module README hint
         if (Test-Path (Join-Path $fullPath "README.md")) {
             Write-Host "   Run: Get-Content README.md | more" -ForegroundColor Gray
@@ -442,11 +442,11 @@ function kenl-status {
     param()
 
     Show-KenlBanner
-    
+
     if (Get-Command Get-KenlInfo -ErrorAction SilentlyContinue) {
         Get-KenlInfo
     }
-    
+
     if (Get-Command Get-BattleMedicVersion -ErrorAction SilentlyContinue) {
         Write-Host ""
         Write-Host "BattleMedic Status:" -ForegroundColor Cyan
@@ -510,21 +510,21 @@ $profileExists = Test-Path $PROFILE
 if ($profileExists) {
     # Check if KENL already installed
     $existingContent = Get-Content $PROFILE -Raw -ErrorAction SilentlyContinue
-    
+
     if ($existingContent -match [regex]::Escape($ProfileMarker)) {
         if (-not $Force) {
             Write-Host "KENL profile integration already installed." -ForegroundColor Yellow
             Write-Host "Use -Force to reinstall." -ForegroundColor Gray
             exit 0
         }
-        
+
         # Remove existing KENL section
         Write-Host "Removing existing KENL integration..." -ForegroundColor Yellow
         $pattern = "(?s)$([regex]::Escape($ProfileMarker)).*?$([regex]::Escape($ProfileEndMarker))"
         $existingContent = $existingContent -replace $pattern, ""
         $existingContent = $existingContent.Trim()
     }
-    
+
     # Backup existing profile
     if (-not $NoBackup) {
         $backupPath = "$PROFILE.backup.$(Get-Date -Format 'yyyyMMddHHmmss')"
