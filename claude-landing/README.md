@@ -78,24 +78,24 @@ When resuming work:
 2. Read CURRENT-STATE.md (validate environment)
 3. Read RECENT-WORK.md (understand context)
 4. Check NEXT-STEPS.md (identify tasks)
-5. Validate CTF flags match reality
+5. Validate CTF (Capture The Flag) expectations match reality
 ```
 
 ### During Work
 
 ```
-1. Log ATOM tags for all decisions
-2. Drop SAIF flags at checkpoints
+1. Log ATOM tags for all decisions (ATOM-{TYPE}-YYYYMMDD-NNN)
+2. Drop SAIF checkpoint flags (SAIF-{ACTION}-YYYYMMDD-NNN)
 3. Commit frequently via report_progress
 ```
 
 ### End of Session
 
 ```
-1. Update CURRENT-STATE.md
-2. Update RECENT-WORK.md
-3. Update NEXT-STEPS.md
-4. Drop SAIF-HANDOVER flag
+1. Update CURRENT-STATE.md with final state
+2. Update RECENT-WORK.md with session summary
+3. Update NEXT-STEPS.md with remaining tasks
+4. Note: SAIF-HANDOVER-YYYYMMDD-NNN in commit message if work continues
 ```
 
 ---
