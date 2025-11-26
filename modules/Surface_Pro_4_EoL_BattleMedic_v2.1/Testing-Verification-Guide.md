@@ -55,7 +55,7 @@ if ($psVersion.Major -ge 3) {
         Version = $psVersion.ToString()
         Required = '3.0'
     }
-    
+
     # Specific version warnings
     if ($psVersion.Major -eq 3) {
         Write-Host "  ⚠ WARNING: PowerShell 3.0 has limited functionality" -ForegroundColor Yellow
@@ -80,9 +80,9 @@ try {
     } else {
         $os = Get-WmiObject Win32_OperatingSystem
     }
-    
+
     Write-Host "  Detected: $($os.Caption) Build $($os.BuildNumber)"
-    
+
     # Check Windows version compatibility
     $supportedBuilds = @{
         '10240' = 'Windows 10 1507'     # Minimum supported
@@ -97,7 +97,7 @@ try {
         '22621' = 'Windows 11 22H2'
         '22631' = 'Windows 11 23H2'
     }
-    
+
     if ([int]$os.BuildNumber -ge 10240) {
         Write-Host "  ✓ PASS - Windows version supported" -ForegroundColor Green
         $results.Critical['OS'] = @{
@@ -105,7 +105,7 @@ try {
             Version = $os.Caption
             Build = $os.BuildNumber
         }
-        
+
         # EOL warning
         if ([int]$os.BuildNumber -lt 19044 -and $os.Caption -like "*Windows 10*") {
             Write-Host "  ⚠ WARNING: This Windows 10 build is near or past EOL" -ForegroundColor Yellow
@@ -133,7 +133,7 @@ Write-Host "`n[TEST 3] .NET Framework" -ForegroundColor Yellow
 try {
     $dotNet = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\" -ErrorAction Stop
     $release = $dotNet.Release
-    
+
     $dotNetVersion = switch ($release) {
         {$_ -ge 533320} { "4.8.1" }
         {$_ -ge 528040} { "4.8" }
@@ -148,9 +148,9 @@ try {
         {$_ -ge 378389} { "4.5" }
         default { "4.0" }
     }
-    
+
     Write-Host "  Detected: .NET Framework $dotNetVersion"
-    
+
     if ($release -ge 378389) {  # 4.5 or later
         Write-Host "  ✓ PASS - .NET Framework meets requirement" -ForegroundColor Green
         $results.Critical['.NET'] = @{
@@ -193,7 +193,7 @@ $wmiService = Get-Service winmgmt -ErrorAction SilentlyContinue
 if ($wmiService -and $wmiService.Status -eq 'Running') {
     Write-Host "  ✓ PASS - WMI service is running" -ForegroundColor Green
     $results.Critical['WMI'] = @{Status = 'Pass'; ServiceStatus = 'Running'}
-    
+
     # Test WMI functionality
     try {
         if (Get-Command Get-CimInstance -ErrorAction SilentlyContinue) {
@@ -220,10 +220,10 @@ if ($systemDrive) {
     $freeGB = [Math]::Round($systemDrive.Free / 1GB, 2)
     $totalGB = [Math]::Round(($systemDrive.Free + $systemDrive.Used) / 1GB, 2)
     $percentFree = [Math]::Round(($systemDrive.Free / ($systemDrive.Free + $systemDrive.Used)) * 100, 1)
-    
+
     Write-Host "  System Drive: $($systemDrive.Name):"
     Write-Host "  Free Space: ${freeGB}GB of ${totalGB}GB ($percentFree% free)"
-    
+
     if ($freeGB -ge 5) {
         Write-Host "  ✓ PASS - Adequate disk space" -ForegroundColor Green
         $results.Critical['Disk'] = @{
@@ -348,16 +348,16 @@ try {
     } else {
         $computer = Get-WmiObject Win32_ComputerSystem
     }
-    
+
     Write-Host "  Manufacturer: $($computer.Manufacturer)"
     Write-Host "  Model: $($computer.Model)"
     Write-Host "  Total RAM: $([Math]::Round($computer.TotalPhysicalMemory / 1GB, 2))GB"
-    
+
     if ($computer.Model -like "*Surface Pro 4*") {
         Write-Host "  ℹ Surface Pro 4 detected - SP4 features will be available" -ForegroundColor Cyan
         $results.Optional['SP4'] = $true
     }
-    
+
     # Battery detection
     $battery = Get-CimInstance Win32_Battery -ErrorAction SilentlyContinue
     if ($battery) {
@@ -377,29 +377,29 @@ Write-Host "=" * 45 -ForegroundColor Gray
 
 if ($results.CanDeploy) {
     Write-Host "`n✓ SYSTEM IS READY FOR BATTLE MEDIC DEPLOYMENT" -ForegroundColor Green
-    
+
     if ($results.Warnings.Count -gt 0) {
         Write-Host "`nWarnings to address:" -ForegroundColor Yellow
         foreach ($warning in $results.Warnings) {
             Write-Host "  ⚠ $warning" -ForegroundColor Yellow
         }
     }
-    
+
     Write-Host "`nNext steps:" -ForegroundColor Cyan
     Write-Host "  1. Install Battle Medic module to: $writablePath" -ForegroundColor White
     Write-Host "  2. Run as Administrator for full functionality" -ForegroundColor White
     Write-Host "  3. Execute Initialize-BattleMedic after import" -ForegroundColor White
-    
+
 } else {
     Write-Host "`n✗ SYSTEM IS NOT READY FOR DEPLOYMENT" -ForegroundColor Red
     Write-Host "`nCritical issues that must be resolved:" -ForegroundColor Red
-    
+
     foreach ($item in $results.Critical.GetEnumerator()) {
         if ($item.Value.Status -eq 'Fail') {
             Write-Host "  ✗ $($item.Key): $($item.Value.Status)" -ForegroundColor Red
         }
     }
-    
+
     Write-Host "`nResolve these issues before attempting deployment." -ForegroundColor Yellow
 }
 
@@ -606,7 +606,7 @@ try {
         SAIFEnabled = $true
         AutoBackup = $true
     } -Force
-    
+
     $testResults.Tests += @{
         Name = "Initialization"
         Result = "Pass"
@@ -627,7 +627,7 @@ try {
 Write-Host "`n[2/6] Comprehensive diagnostics..." -ForegroundColor Yellow
 try {
     $fullDiag = Get-BattleMedicDiagnostic -IncludeHardware
-    
+
     $testResults.Tests += @{
         Name = "FullDiagnostics"
         Result = "Pass"
@@ -650,7 +650,7 @@ Write-Host "`n[3/6] Menu system test..." -ForegroundColor Yellow
 try {
     # Test that menu can be displayed (won't actually show in automated test)
     $menuTest = Get-Command Show-RecoveryMenu -ErrorAction Stop
-    
+
     $testResults.Tests += @{
         Name = "MenuSystem"
         Result = "Pass"
@@ -695,10 +695,10 @@ Write-Host "`n[5/6] Audit logging test..." -ForegroundColor Yellow
 try {
     # Generate some audit entries
     New-SAIFAuditEntry -Action "IntegrationTest" -Result "Success" -Details @{Stage = 4}
-    
+
     # Retrieve logs
     $logs = Get-BattleMedicLog -Latest 5
-    
+
     if ($logs) {
         $testResults.Tests += @{
             Name = "AuditLogging"
@@ -724,7 +724,7 @@ Write-Host "`n[6/6] Report generation test..." -ForegroundColor Yellow
 try {
     $report = Get-SystemHealthReport -Detailed
     $htmlReport = Get-SystemHealthReport -Format HTML
-    
+
     if ($report -and $htmlReport) {
         $testResults.Tests += @{
             Name = "ReportGeneration"
@@ -835,11 +835,11 @@ try {
     if (-not $SkipRequirements) {
         Write-Host "`n━━━ STAGE 0: Requirements Check ━━━" -ForegroundColor Yellow
         $reqScript = ".\Test-BattleMedicRequirements.ps1"
-        
+
         if (Test-Path $reqScript) {
             $reqResults = & $reqScript -GenerateReport
             $testSession.Results['Requirements'] = $reqResults
-            
+
             if (-not $reqResults.CanDeploy) {
                 throw "System does not meet requirements for deployment"
             }
@@ -847,30 +847,30 @@ try {
             Write-Warning "Requirements script not found - skipping"
         }
     }
-    
+
     # Install module if not present
     if (-not (Get-Module -ListAvailable -Name BattleMedic)) {
         Write-Host "`n━━━ Installing Battle Medic Module ━━━" -ForegroundColor Yellow
         # Assume module files are in current directory
         $modulePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\BattleMedic"
-        
+
         if (-not (Test-Path $modulePath)) {
             New-Item -ItemType Directory -Path $modulePath -Force
         }
-        
+
         Copy-Item -Path ".\BattleMedic\*" -Destination $modulePath -Recurse -Force
         Write-Host "Module installed to: $modulePath" -ForegroundColor Green
     }
-    
+
     # Import module
     Write-Host "`n━━━ Importing Battle Medic Module ━━━" -ForegroundColor Yellow
     Import-Module BattleMedic -Force
     Write-Host "✓ Module imported successfully" -ForegroundColor Green
-    
+
     # Stage 1: Read-Only Testing
     Write-Host "`n━━━ STAGE 1: Read-Only Testing ━━━" -ForegroundColor Yellow
     $stage1Script = ".\Stage1_ReadOnly_Test.ps1"
-    
+
     if (Test-Path $stage1Script) {
         $stage1Results = & $stage1Script
         $testSession.Results['Stage1'] = @{
@@ -880,39 +880,39 @@ try {
         Write-Host "✓ Stage 1 completed successfully" -ForegroundColor Green
     } else {
         Write-Warning "Stage 1 script not found - using inline test"
-        
+
         # Inline Stage 1 test
         $env = Test-BattleMedicEnvironment
         $diag = Get-BattleMedicDiagnostic -Quick
-        
+
         $testSession.Results['Stage1'] = @{
             Status = 'Completed'
             Environment = $env.IsValid
             DiagnosticPriority = $diag.Priority
         }
     }
-    
+
     # Decision point
     Write-Host "`nStage 1 Results:" -ForegroundColor Cyan
     Write-Host "  Environment Valid: $($env.IsValid)"
     Write-Host "  System Priority: $($diag.Priority)"
-    
+
     $continue = Read-Host "`nContinue to Stage 2 (Checkpoint Testing)? (Y/N)"
     if ($continue -ne 'Y') {
         throw "Testing stopped by user after Stage 1"
     }
-    
+
     # Stage 2: Checkpoint Testing
     if (([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         Write-Host "`n━━━ STAGE 2: Checkpoint Testing ━━━" -ForegroundColor Yellow
-        
+
         $checkpoint = New-RecoveryCheckpoint -Name "BattleMedic_Test_$(Get-Date -Format 'yyyyMMddHHmmss')"
-        
+
         $testSession.Results['Stage2'] = @{
             Status = 'Completed'
             CheckpointCreated = $checkpoint.Success
         }
-        
+
         if ($checkpoint.Success) {
             Write-Host "✓ Stage 2 completed - Checkpoint system functional" -ForegroundColor Green
         } else {
@@ -925,61 +925,61 @@ try {
             Reason = 'No admin rights'
         }
     }
-    
+
     # Stage 3: Limited Recovery Testing
     Write-Host "`n━━━ STAGE 3: Limited Recovery Testing ━━━" -ForegroundColor Yellow
-    
+
     # Create safe test scenario
     $testPath = "$env:TEMP\BattleMedic_SafeTest_$(Get-Random)"
     New-Item -ItemType Directory -Path $testPath -Force | Out-Null
     "Test" * 100 | Out-File "$testPath\test.tmp"
-    
+
     # Test cleanup
     $cleanup = Start-EmergencyCleanup -TargetFreeGB 0 -Force
-    
+
     # Verify test files removed
     $cleaned = -not (Test-Path $testPath)
-    
+
     $testSession.Results['Stage3'] = @{
         Status = 'Completed'
         CleanupSuccess = $cleaned
     }
-    
+
     Write-Host "✓ Stage 3 completed - Recovery operations verified" -ForegroundColor Green
-    
+
     # Stage 4: Integration Testing
     Write-Host "`n━━━ STAGE 4: Full Integration Testing ━━━" -ForegroundColor Yellow
-    
+
     $integration = Initialize-BattleMedic -Force
     $fullDiag = Get-BattleMedicDiagnostic -IncludeHardware
     $report = Get-SystemHealthReport
-    
+
     $testSession.Results['Stage4'] = @{
         Status = 'Completed'
         InitSuccess = ($null -ne $integration)
         DiagSuccess = ($null -ne $fullDiag)
         ReportSuccess = ($null -ne $report)
     }
-    
+
     Write-Host "✓ Stage 4 completed - Full integration verified" -ForegroundColor Green
-    
+
     $testSession.FinalStatus = 'Success'
-    
+
 } catch {
     Write-Host "`n✗ TEST FAILED: $_" -ForegroundColor Red
     $testSession.FinalStatus = 'Failed'
     $testSession.FailureReason = $_.Exception.Message
-    
+
 } finally {
     # Calculate duration
     $testSession.EndTime = Get-Date
     $testSession.Duration = $testSession.EndTime - $testSession.StartTime
-    
+
     # Final Summary
     Write-Host "`n" + "═" * 60 -ForegroundColor Gray
     Write-Host "TEST SESSION COMPLETE" -ForegroundColor Cyan
     Write-Host "═" * 60 -ForegroundColor Gray
-    
+
     Write-Host "Status: " -NoNewline
     if ($testSession.FinalStatus -eq 'Success') {
         Write-Host "SUCCESS" -ForegroundColor Green
@@ -991,14 +991,14 @@ try {
     } else {
         Write-Host "FAILED" -ForegroundColor Red
         Write-Host "`n✗ Do not deploy to production until issues are resolved" -ForegroundColor Red
-        
+
         if ($testSession.FailureReason) {
             Write-Host "Failure reason: $($testSession.FailureReason)" -ForegroundColor Yellow
         }
     }
-    
+
     Write-Host "`nDuration: $([Math]::Round($testSession.Duration.TotalMinutes, 2)) minutes" -ForegroundColor Gray
-    
+
     # Save results
     $resultsFile = Join-Path $OutputPath "BattleMedic_TestResults_$(Get-Date -Format 'yyyyMMdd_HHmmss').json"
     $testSession | ConvertTo-Json -Depth 5 | Out-File $resultsFile
@@ -1031,7 +1031,7 @@ System: _________________ Date: _____________ Tester: _____________
 - [ ] Get-BattleMedicDiagnostic returns results
 - [ ] Logging creates audit entries
 
-### Safety Tests  
+### Safety Tests
 - [ ] Checkpoint creation works
 - [ ] Idempotent operations verified
 - [ ] No changes when state correct

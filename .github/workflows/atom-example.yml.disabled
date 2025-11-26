@@ -13,28 +13,28 @@ jobs:
   example-with-atom:
     name: Example Job with ATOM Logging
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v5
-      
+
       - name: Log workflow start
         uses: ./.github/actions/atom-log
         with:
           event_type: CI
           message: "Started example workflow for ${{ github.ref }}"
-      
+
       - name: Run example task
         run: |
           echo "Running example task..."
           sleep 2
           echo "Task completed"
-      
+
       - name: Log task completion
         uses: ./.github/actions/atom-log
         with:
           event_type: CI
           message: "Example task completed successfully"
-      
+
       - name: Conditional logging on failure
         if: failure()
         uses: ./.github/actions/atom-log

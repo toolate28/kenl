@@ -220,37 +220,37 @@ After selecting your pathway:
 ```mermaid
 graph TD
     Start([🚀 Start Here]) --> Q1{What do you want to do?}
-    
+
     Q1 --> |Play games on Linux| Gaming[🎮 Gaming Pathway]
     Q1 --> |Develop software| Dev[💻 Development Pathway]
     Q1 --> |Fix Windows issues| Recovery[🔧 Recovery Pathway]
     Q1 --> |Migrate from Windows| Migration[🚀 Migration Pathway]
-    
+
     Gaming --> G1[Import KENL2-gaming]
     G1 --> G2[Research games on ProtonDB]
     G2 --> G3[Create Play Cards]
     G3 --> G4[Share with friends]
-    
+
     Dev --> D1[Import KENL3-dev]
     D1 --> D2[Set up Distrobox]
     D2 --> D3[Install AI tools]
     D3 --> D4[Configure MCP]
-    
+
     Recovery --> R1[Import BattleMedic]
     R1 --> R2[Run diagnostics]
     R2 --> R3[Apply fixes]
     R3 --> R4[Document recovery]
-    
+
     Migration --> M1[Import KENL0 Windows]
     M1 --> M2[Plan partitions]
     M2 --> M3[Create dual-boot]
     M3 --> M4[Verify & backup]
-    
+
     G4 --> Complete([✅ KENL Configured])
     D4 --> Complete
     R4 --> Complete
     M4 --> Complete
-    
+
     style Start fill:#5865F2,color:#fff
     style Complete fill:#57F287,color:#000
     style Gaming fill:#ED4245,color:#fff

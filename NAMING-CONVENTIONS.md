@@ -819,7 +819,7 @@ c872d6f refactor: apply SAIF handover pattern to Logdy integration
    ```markdown
    ## Title Format
    {emoji} {type}: {ATOM-TAG} - {Description}
-   
+
    Examples:
    - ✨ feat: ATOM-FEAT-20251116-010 - Add live dashboard
    - 🐛 fix: ATOM-FIX-20251116-012 - Fix broken links
@@ -829,7 +829,7 @@ c872d6f refactor: apply SAIF handover pattern to Logdy integration
    ```markdown
    ## Title Format
    {emoji} [{TYPE}] {ATOM-TAG}: {Issue Description}
-   
+
    Examples:
    - 🐛 [BUG] ATOM-FIX-20251116-020: Dashboard incorrect IP
    - ✨ [FEATURE] ATOM-FEAT-20251116-021: Custom metrics

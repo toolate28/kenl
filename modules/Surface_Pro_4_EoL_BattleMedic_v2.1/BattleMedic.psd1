@@ -103,13 +103,13 @@ FunctionsToExport = @(
     'Get-BattleMedicVersion',
     'Get-BattleMedicConfig',
     'Set-BattleMedicConfig',
-    
+
     # Diagnostic Functions
     'Get-BattleMedicDiagnostic',
     'Get-SystemHealthReport',
     'Test-SystemPriority',
     'Get-HardwareStatus',
-    
+
     # Recovery Operations (Idempotent)
     'Start-BattleMedicRecovery',
     'Repair-WOFDriver',
@@ -118,26 +118,26 @@ FunctionsToExport = @(
     'Reset-WindowsUpdate',
     'New-RecoveryCheckpoint',
     'Restore-RecoveryCheckpoint',
-    
+
     # SP4 Specific (Auto-detected)
     'Get-SP4Status',
     'Repair-SP4ScreenFlicker',
     'Repair-SP4TypeCover',
     'Reset-SP4GPUDriver',
     'Start-SP4ThermalMitigation',
-    
+
     # WinRE Integration
     'Install-BattleMedicToWinRE',
     'Start-WinRERecovery',
     'Get-WinREStatus',
     'Test-WinREAvailable',
-    
+
     # Logging and Reporting (SAIF Compliant)
     'Get-BattleMedicLog',
     'Export-BattleMedicReport',
     'New-SAIFAuditEntry',
     'Get-RecoveryHistory',
-    
+
     # User Interface
     'Show-RecoveryMenu',
     'Start-GuidedRecovery',
@@ -177,11 +177,11 @@ FileList = @(
     'BattleMedic.psm1',
     'LICENSE',
     'README.md',
-    
+
     # Initialization Scripts
     'Scripts\Initialize-Environment.ps1',
     'Scripts\Test-Prerequisites.ps1',
-    
+
     # Nested Modules
     'Modules\BattleMedic.Core.psm1',
     'Modules\BattleMedic.Diagnostics.psm1',
@@ -190,28 +190,28 @@ FileList = @(
     'Modules\BattleMedic.WinRE.psm1',
     'Modules\BattleMedic.Logging.psm1',
     'Modules\BattleMedic.Compatibility.psm1',
-    
+
     # Type and Format Definitions
     'Types\BattleMedic.Types.ps1xml',
     'Formats\BattleMedic.Format.ps1xml',
-    
+
     # Configuration
     'Config\DefaultConfig.json',
     'Config\SP4Config.json',
     'Config\SAIFTemplate.json',
-    
+
     # Resources
     'Resources\RecoveryMenu.xaml',
     'Resources\Messages.psd1',
     'Resources\ErrorCodes.json',
-    
+
     # Documentation
     'Documentation\BattleMedic-Manual.md',
     'Documentation\QuickStart.md',
     'Documentation\TechnicalReference.md',
     'Documentation\SP4-KnownIssues.md',
     'Documentation\SAIF-Compliance.md',
-    
+
     # Tests
     'Tests\BattleMedic.Tests.ps1',
     'Tests\Compatibility.Tests.ps1',
@@ -220,10 +220,10 @@ FileList = @(
 
 # Private data to pass to the module
 PrivateData = @{
-    
+
     # PSData for PowerShell Gallery
     PSData = @{
-        
+
         # Tags for module discovery
         Tags = @(
             'Recovery', 'Diagnostics', 'Surface', 'SurfacePro4', 'SP4',
@@ -233,12 +233,12 @@ PrivateData = @{
             'CrossPlatform', 'PSEdition_Desktop', 'PSEdition_Core',
             'Windows', 'SAIF', 'Audit', 'Compliance'
         )
-        
+
         # URLs
         LicenseUri = 'https://github.com/battlemedic/BattleMedic/blob/main/LICENSE'
         ProjectUri = 'https://github.com/battlemedic/BattleMedic'
         IconUri = 'https://github.com/battlemedic/BattleMedic/blob/main/Resources/icon.png'
-        
+
         # Release Notes
         ReleaseNotes = @'
 Version 2.1.0 - Production Ready
@@ -266,20 +266,20 @@ BUG FIXES:
 BREAKING CHANGES:
 • None - Full backward compatibility maintained
 '@
-        
+
         # Requirements
         RequireLicenseAcceptance = $false
-        
+
         # Dependencies handled internally
         ExternalModuleDependencies = @()
     }
-    
+
     # Internal Configuration
     ModuleConfig = @{
         # Compatibility Settings
         MinPSVersion = '3.0'
         MaxPSVersion = '7.99'
-        
+
         # Feature Flags
         Features = @{
             AutoDetectSP4 = $true
@@ -288,7 +288,7 @@ BREAKING CHANGES:
             AutoCreateCheckpoints = $true
             EnableTelemetry = $false
         }
-        
+
         # Environment Detection
         SupportedOS = @(
             'Microsoft Windows 10*',
@@ -298,7 +298,7 @@ BREAKING CHANGES:
             'Microsoft Windows Server 2019*',
             'Microsoft Windows Server 2022*'
         )
-        
+
         # Claude Code Integration
         ClaudeCodeCompatible = $true
         ClaudeCodeVersion = '1.0+'

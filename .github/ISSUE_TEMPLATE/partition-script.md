@@ -26,9 +26,9 @@ Partition 2: Claude-AI-Data (500GB, ext4)
 <!-- What happened instead? -->
 
 ## Steps to Reproduce
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Error Output
 ```powershell

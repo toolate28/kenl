@@ -483,7 +483,7 @@ export const kenlTools = {
       intent: "string"
     }
   },
-  
+
   // Play Card Operations
   "playcard-create": {
     description: "Generate Play Card YAML",
@@ -493,7 +493,7 @@ export const kenlTools = {
       settings: "object"
     }
   },
-  
+
   // Module Operations
   "kenl-module-info": {
     description: "Get module documentation",
@@ -501,12 +501,12 @@ export const kenlTools = {
       module: "KENL0" | "KENL1" | ... | "KENL13"
     }
   },
-  
+
   // System Operations (rpm-ostree, ujust)
   "system-status": {
     description: "Get rpm-ostree deployment status"
   },
-  
+
   "ujust-recipes": {
     description: "List available ujust recipes"
   }
