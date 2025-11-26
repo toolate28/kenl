@@ -49,13 +49,13 @@ $psGallery = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
 if (-not $psGallery) {
     Write-Host "  [!] PSGallery not found. Registering..." -ForegroundColor Yellow
     try {
-        Register-PSRepository -Default -ErrorAction Stop
+        Register-PSRepository -Name PSGallery -SourceLocation 'https://www.powershellgallery.com/api/v2' -InstallationPolicy Trusted -ErrorAction Stop
         Write-Host "  [✓] PSGallery registered" -ForegroundColor Green
     }
     catch {
         Write-Warning "  [✗] Failed to register PSGallery: $_"
         Write-Host "`n  Try running manually:" -ForegroundColor Yellow
-        Write-Host "  Register-PSRepository -Default" -ForegroundColor Gray
+        Write-Host "  Register-PSRepository -Name PSGallery -SourceLocation 'https://www.powershellgallery.com/api/v2' -InstallationPolicy Trusted" -ForegroundColor Gray
     }
 }
 
