@@ -391,7 +391,14 @@ function kenl-switch {
     }
 
     $targetDir = $moduleMap[$Module]
-    if (-not $targetDir) { $targetDir = $Module }
+    if (-not $targetDir) { 
+        # Validate module name doesn't contain path separators or relative path components
+        if ($Module -match '[/\\]' -or $Module -match '\.\.') {
+            Write-Host "Invalid module name. Name cannot contain path separators or relative path components." -ForegroundColor Red
+            return
+        }
+        $targetDir = $Module 
+    }
 
     $fullPath = Join-Path $env:KENL_HOME "modules\$targetDir"
     
