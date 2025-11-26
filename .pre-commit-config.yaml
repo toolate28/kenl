@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: shellcheck
         name: shellcheck
-        files: '\.(sh|bash|zsh)$'
+        files: '\.(sh|bash)$'
         args: ['--severity', 'style', '--external-sources']
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
