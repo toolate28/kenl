@@ -5,9 +5,24 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
 [![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
-[![ATOM: ATOM-DOC-20251126-003](https://img.shields.io/badge/ATOM-DOC--20251126--003-yellow.svg)]()
+[![ATOM: ATOM-DOC-20251126-005](https://img.shields.io/badge/ATOM-DOC--20251126--005-yellow.svg)]()
 
-> **Start Here:** [📚 GETTING-STARTED.md](./GETTING-STARTED.md) - Set up Obsidian, import your first file, and build your personalized KENL environment.
+---
+
+## 🧭 Choose Your Pathway
+
+**Navigate directly to what you need - no scrolling required:**
+
+| I want to... | Start Here | Time |
+|--------------|------------|------|
+| 🎮 **Play games on Linux** | [Gaming Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-gaming-pathway) | 15 min |
+| 💻 **Develop with AI assistance** | [Development Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-development-pathway) | 20 min |
+| 🔧 **Fix system issues** | [Recovery Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-recovery-pathway) | Varies |
+| 🚀 **Migrate from Windows** | [Migration Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-migration-pathway) | 1-2 hrs |
+| 📖 **Learn the framework** | [Learning Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-learning-pathway) | Self-paced |
+| 🤖 **AI Agent on repo** | [Agent Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-agent-pathway) | N/A |
+
+**Full guided setup:** [📚 GETTING-STARTED.md](./GETTING-STARTED.md)
 
 ---
 
@@ -17,14 +32,12 @@
 # 1. Clone KENL
 git clone https://github.com/toolate28/kenl.git ~/.kenl && cd ~/.kenl
 
-# 2. Open GETTING-STARTED.md in Obsidian (your first vault document)
-# 3. Select your pathway: Gaming | Development | Recovery | Migration
-# 4. Follow the guided checklist
+# 2. Choose your pathway above OR open in Obsidian
+# 3. Follow the guided checklist for your goal
 ```
 
-**Then install PowerShell profile for dynamic banners:**
+**PowerShell profile for dynamic banners (optional):**
 ```powershell
-# Adds Show-KenlBanner, current playcard display, and module navigation
 . ~/.kenl/scripts/Install-KenlProfile.ps1
 ```
 
@@ -122,16 +135,16 @@ graph TD
 
 ## Pathways
 
-Choose your entry point based on what you want to accomplish:
+**Detailed pathway documentation:** [📁 DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md)
 
-| Pathway | For | Start With |
-|---------|-----|------------|
-| 🎮 **Gaming** | Linux gaming, Play Cards, Proton | [KENL2-gaming](./modules/KENL2-gaming/) |
-| 💻 **Development** | Claude Code, Ollama, MCP, Distrobox | [KENL3-dev](./modules/KENL3-dev/) |
-| 🔧 **Recovery** | Windows fixes, Surface Pro 4, diagnostics | [BattleMedic](./modules/Surface_Pro_4_EoL_BattleMedic_v2.1/) |
-| 🚀 **Migration** | Windows 10 EOL, dual-boot setup | [KENL0-system](./modules/KENL0-system/) |
-
-**Full guided setup:** [📚 GETTING-STARTED.md](./GETTING-STARTED.md)
+| Pathway | Description | Quick Start |
+|---------|-------------|-------------|
+| 🎮 [Gaming](./claude-landing/DOCUMENTATION-PATHWAYS.md#-gaming-pathway) | Play Cards, Proton optimization | `./modules/KENL2-gaming/research-game.sh "Game"` |
+| 💻 [Development](./claude-landing/DOCUMENTATION-PATHWAYS.md#-development-pathway) | AI-assisted dev with Ollama/Claude | `distrobox create -n kenl-dev` |
+| 🔧 [Recovery](./claude-landing/DOCUMENTATION-PATHWAYS.md#-recovery-pathway) | BattleMedic diagnostics | `Import-Module BattleMedic` |
+| 🚀 [Migration](./claude-landing/DOCUMENTATION-PATHWAYS.md#-migration-pathway) | Windows → Linux dual-boot | See partition scripts |
+| 📖 [Learning](./claude-landing/DOCUMENTATION-PATHWAYS.md#-learning-pathway) | Cheatsheets, case studies | Browse KENL7-learning |
+| 🤖 [Agent](./claude-landing/DOCUMENTATION-PATHWAYS.md#-agent-pathway) | AI Agent system integration | Read AI-AGENT-SYSTEM.md |
 
 ---
 
@@ -220,27 +233,28 @@ graph TB
 
 ## Documentation
 
-| Audience | Start Here | Description |
-|----------|------------|-------------|
-| **Everyone** | [📚 GETTING-STARTED.md](./GETTING-STARTED.md) | Obsidian setup, pathway selection |
-| **New Users** | [claude-landing/](./claude-landing/) | Current state, recent work, quick reference |
-| **AI Agents** | [claude-landing/CURRENT-STATE.md](./claude-landing/CURRENT-STATE.md) | Environment snapshot + CTF flag validation |
-| **Gamers** | [KENL2 Gaming](./modules/KENL2-gaming/) | Play Cards, Proton optimization |
-| **Developers** | [KENL3 Dev](./modules/KENL3-dev/) | Distrobox, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) |
-| **Windows Users** | [KENL0 Windows Support](./modules/KENL0-system/windows-support/) | EOL migration, dual-boot, Surface Pro 4 |
-| **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | Code style, ARCREF + ADR requirements |
+**🧭 Full Navigation Hub:** [DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md)
 
-**Traceability:**
-- [ATOM-REGISTER.md](./ATOM-REGISTER.md) - Complete ATOM tag tracking
-- [governance/](./governance/) - ARCREF artifacts and ADR decisions
+### Quick Links by Audience
 
-**Real-World Scenarios:** [case-studies/](./case-studies/) - Complete storyboards (BIOS updates, dual-boot, troubleshooting)
+| Audience | Start Here | Next Step |
+|----------|------------|-----------|
+| **Everyone** | [GETTING-STARTED.md](./GETTING-STARTED.md) | [Choose Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md) |
+| **AI Agents** | [AI-AGENT-SYSTEM.md](./claude-landing/AI-AGENT-SYSTEM.md) | [CURRENT-STATE.md](./claude-landing/CURRENT-STATE.md) |
+| **Gamers** | [Gaming Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-gaming-pathway) | [KENL2 README](./modules/KENL2-gaming/README.md) |
+| **Developers** | [Dev Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-development-pathway) | [KENL3 README](./modules/KENL3-dev/README.md) |
+| **Windows Users** | [Migration Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-migration-pathway) | [Partition Scripts](./scripts/windows-partition-scripts/) |
+| **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | [Governance](./governance/) |
 
-**Standards & Guidelines:**
-- [Visual Elements Standard](./VISUAL-ELEMENTS-STANDARD.md) - Professional presentation guidelines
-- [Security Policy](./SECURITY.md) - Vulnerability reporting and disclosure
-- [Code of Conduct](./CODE_OF_CONDUCT.md) - Community participation guidelines
-- [Acknowledgments](./ACKNOWLEDGMENTS.md) - Third-party attribution and credits
+### Documentation Categories
+
+| Category | Location | Purpose |
+|----------|----------|---------|
+| **Pathways** | [claude-landing/DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md) | Navigation hub |
+| **Traceability** | [ATOM-REGISTER.md](./ATOM-REGISTER.md) | ATOM tag tracking |
+| **Case Studies** | [case-studies/](./case-studies/) | Real-world scenarios |
+| **Governance** | [governance/](./governance/) | ARCREF + ADR decisions |
+| **Standards** | [VISUAL-ELEMENTS-STANDARD.md](./VISUAL-ELEMENTS-STANDARD.md), [SECURITY.md](./SECURITY.md) | Guidelines |
 
 ---
 

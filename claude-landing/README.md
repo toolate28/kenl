@@ -1,56 +1,112 @@
 # Claude Landing Zone
 
-**Purpose:** Immediate orientation documents for any Claude instance (Claude Code, Claude Desktop, etc.) working on the KENL project.
-
-## CTF Flag System
-
-**These documents contain "flags" - documented expectations about the current state.**
-
-When resuming work, you should **"capture the flags"** by validating each expectation against reality:
-
-- ✅ **Flag validates:** Documented state matches reality → proceed
-- 🚩 **Flag fails:** Mismatch detected → investigate before proceeding
-- ⚠️ **Flag partial:** Some aspects match, some don't → use judgment
-
-**Flags range from simple (typos, file paths) to complex (performance metrics, hidden edge cases).**
-
-**See:** RECENT-WORK.md "CTF Flag Capture Protocol" for detailed validation checklist.
+**Purpose:** Immediate orientation and system integration for AI agents working on the KENL project.
 
 ---
 
-## Quick Start
+## 🤖 AI Agent Quick Start
 
-**First time here?** Read these in order:
+**Read these files in order:**
 
-1. **CURRENT-STATE.md** - Where we are right now (platform, branch, phase)
-2. **RECENT-WORK.md** - What was just completed (last session's work)
-3. **NEXT-STEPS.md** - Immediate actionable tasks
-4. **HARDWARE.md** - Hardware specs and configuration
-5. **QUICK-REFERENCE.md** - Common commands, paths, key files
-
-## Supporting Documents
-
-- **TESTING-RESULTS.md** - Recent validation results (network, modules, games)
-- **MIGRATION-PLAN.md** - Windows → Bazzite migration roadmap
-- **OBSIDIAN-QUICK-START.md** - Local Obsidian vault setup for SAGE methodology
-
-## Update Frequency
-
-These documents should be updated:
-- **After each major session** - Update RECENT-WORK.md and CURRENT-STATE.md
-- **When state changes** - Branch changes, platform migrations, hardware updates
-- **After testing** - Add results to TESTING-RESULTS.md
-- **Before long breaks** - Ensure NEXT-STEPS.md is current
-
-## ATOM Tracking
-
-All documents in this directory use ATOM tags for traceability:
-- Format: `ATOM-DOC-YYYYMMDD-NNN`
-- See: `atom-sage-framework/README.md` for details
+| Order | File | Purpose |
+|-------|------|---------|
+| 1 | [AI-AGENT-SYSTEM.md](./AI-AGENT-SYSTEM.md) | **System framework** - Ingestion, monitoring, review, update |
+| 2 | [CURRENT-STATE.md](./CURRENT-STATE.md) | Current environment snapshot |
+| 3 | [RECENT-WORK.md](./RECENT-WORK.md) | Last session's work and context |
+| 4 | [NEXT-STEPS.md](./NEXT-STEPS.md) | Immediate actionable tasks |
+| 5 | [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) | Commands, paths, key files |
 
 ---
 
-*Last Updated: 2025-11-18*
-*ATOM: ATOM-DOC-20251118-005*
+## 🧭 Navigation Hub
 
-> **Note:** This document was reverted to the 2025-11-15 version on 2025-11-18 to undo erroneous changes. Previous ATOM tag: ATOM-DOC-20251115-004.
+**[📁 DOCUMENTATION-PATHWAYS.md](./DOCUMENTATION-PATHWAYS.md)** - Navigate to any KENL documentation
+
+---
+
+## 🚩 CTF Flag System
+
+**Documents contain "flags" - documented expectations about current state.**
+
+When resuming work:
+
+| Flag Status | Meaning | Action |
+|-------------|---------|--------|
+| ✅ **Validates** | Documented = Reality | Proceed |
+| 🚩 **Fails** | Mismatch detected | Investigate |
+| ⚠️ **Partial** | Some match, some don't | Use judgment |
+
+---
+
+## 📁 Directory Contents
+
+### Core Context Files
+
+| File | Purpose | Update Frequency |
+|------|---------|------------------|
+| `AI-AGENT-SYSTEM.md` | Agent learning/context framework | Stable |
+| `CURRENT-STATE.md` | Environment snapshot | Every session |
+| `RECENT-WORK.md` | Last session summary | Every session |
+| `NEXT-STEPS.md` | Immediate tasks | When tasks change |
+| `QUICK-REFERENCE.md` | Commands/paths | When discovered |
+| `DOCUMENTATION-PATHWAYS.md` | Navigation hub | Stable |
+
+### Agent-Facing Standards
+
+| File | Purpose |
+|------|---------|
+| `AGENT-FACING-CONTENT-DESIGN.md` | Writing patterns for AI |
+| `CLI-FORMATTING-STANDARDS.md` | CLI output formatting |
+| `MARKDOWN-TABLE-FORMATTING.md` | Table alignment rules |
+
+### Reference Documents
+
+| File | Purpose |
+|------|---------|
+| `HARDWARE.md` | Hardware specs |
+| `MIGRATION-PLAN.md` | Windows → Bazzite roadmap |
+| `TESTING-RESULTS.md` | Validation results |
+
+---
+
+## 🔄 Session Protocol
+
+### Start of Session
+
+```
+1. Read AI-AGENT-SYSTEM.md (understand framework)
+2. Read CURRENT-STATE.md (validate environment)
+3. Read RECENT-WORK.md (understand context)
+4. Check NEXT-STEPS.md (identify tasks)
+5. Validate CTF flags match reality
+```
+
+### During Work
+
+```
+1. Log ATOM tags for all decisions
+2. Drop SAIF flags at checkpoints
+3. Commit frequently via report_progress
+```
+
+### End of Session
+
+```
+1. Update CURRENT-STATE.md
+2. Update RECENT-WORK.md
+3. Update NEXT-STEPS.md
+4. Drop SAIF-HANDOVER flag
+```
+
+---
+
+## 🏷️ ATOM Tracking
+
+All documents use ATOM tags for traceability:
+- **Format:** `ATOM-DOC-YYYYMMDD-NNN`
+- **Registry:** [../ATOM-REGISTER.md](../ATOM-REGISTER.md)
+
+---
+
+*Last Updated: 2025-11-26*
+*ATOM: ATOM-DOC-20251126-006*
