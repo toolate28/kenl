@@ -296,6 +296,11 @@ function Set-CurrentPlaycard {
     $targetPath = Join-Path $env:KENL_HOME "current-playcard.yaml"
     
     if ($Name) {
+        # Validate name doesn't contain path separators or relative path components
+        if ($Name -match '[/\\]' -or $Name -match '\.\.') {
+            Write-Host "Invalid playcard name. Name cannot contain path separators or relative path components." -ForegroundColor Red
+            return
+        }
         $Path = Join-Path $env:KENL_HOME "modules\KENL2-gaming\play-cards\games\$Name.yaml"
     }
     
