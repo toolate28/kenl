@@ -25,7 +25,7 @@ repos:
       - id: shellcheck
         name: shellcheck
         files: '\.(sh|bash|zsh)$'
-        args: ['--external-sources']
+        args: ['--severity', 'style', '--external-sources']
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.103.0
