@@ -1,0 +1,123 @@
+name: PowerShell Linting and Formatting
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.ps1'
+      - '**.psm1'
+      - '**.psd1'
+      - 'PSScriptAnalyzerSettings.psd1'
+      - '.github/workflows/powershell-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.ps1'
+      - '**.psm1'
+      - '**.psd1'
+      - 'PSScriptAnalyzerSettings.psd1'
+      - '.github/workflows/powershell-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  psscriptanalyzer:
+    name: PSScriptAnalyzer
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup PowerShell (Ubuntu)
+        if: matrix.runner == 'ubuntu-latest'
+        uses: milliewalky/setup-pwsh@v1
+        with:
+          tag: 'v7.5.0'
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          # Ensure NuGet provider is available non-interactively
+          Install-PackageProvider -Name NuGet -Force -Scope CurrentUser -ErrorAction Stop
+          if (-not (Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue)) {
+            Register-PSRepository -Name PSGallery -SourceLocation 'https://www.powershellgallery.com/api/v2' -InstallationPolicy Trusted
+          } else {
+            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+          }
+          Install-Module -Name PSScriptAnalyzer -Force -AllowClobber -Scope CurrentUser -ErrorAction Stop
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Write-Host "🔍 Running PSScriptAnalyzer..."
+          $settings = 'PSScriptAnalyzerSettings.psd1'
+          $exclude = @('vendor','node_modules','.git')
+          if (Test-Path $settings) {
+            $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings $settings -ExcludePath $exclude
+          } else {
+            Write-Host "PSScriptAnalyzer settings not found; running with defaults"
+            $results = Invoke-ScriptAnalyzer -Path . -Recurse -ExcludePath $exclude
+          }
+          if ($results.Count -gt 0) {
+            $results | Format-Table -AutoSize
+            $errors = $results | Where-Object { $_.Severity -eq 'Error' }
+            if ($errors.Count -gt 0) {
+              Write-Error ("❌ PSScriptAnalyzer found {0} errors" -f $errors.Count)
+              exit 1
+            }
+            Write-Host ("⚠️  PSScriptAnalyzer found {0} warnings" -f $results.Count)
+          } else {
+            Write-Host "✅ No PSScriptAnalyzer issues found"
+          }
+
+  powershell-formatter:
+    name: PowerShell Formatting Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup PowerShell
+        uses: milliewalky/setup-pwsh@v1
+        with:
+          tag: 'v7.5.0'
+
+      - name: Install PowerShell-Beautifier
+        shell: pwsh
+        run: |
+          Install-PackageProvider -Name NuGet -Force -Scope CurrentUser -ErrorAction Stop
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+          Install-Module -Name PowerShell-Beautifier -Force -AllowClobber -Scope CurrentUser -ErrorAction Stop
+
+      - name: Check PowerShell Formatting
+        shell: pwsh
+        run: |
+          Write-Host "🔍 Checking PowerShell script formatting..."
+          $scripts = Get-ChildItem -Path . -Recurse -Include *.ps1,*.psm1 -File |
+            Where-Object { $_.FullName -notmatch '(vendor|node_modules|\.git)' }
+
+          $hasIssues = $false
+          foreach ($script in $scripts) {
+            $content = Get-Content -Path $script.FullName -Raw
+            $formatted = Edit-DTWBeautifyScript -SourceText $content -PassThru
+            if ($content -ne $formatted) {
+              Write-Host "❌ Formatting issues in: $($script.FullName)"
+              $hasIssues = $true
+            }
+          }
+
+          if ($hasIssues) {
+            Write-Host ""
+            Write-Host "Run 'Edit-DTWBeautifyScript -SourcePath <file>' to auto-format."
+            exit 1
+          }
+          Write-Host "✅ PowerShell formatting check passed"

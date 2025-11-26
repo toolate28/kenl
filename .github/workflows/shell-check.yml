@@ -1,0 +1,95 @@
+name: Shell Linting and Formatting
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.sh'
+      - '**.bash'
+      - '.github/workflows/shell-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.sh'
+      - '**.bash'
+      - '.github/workflows/shell-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run ShellCheck
+        run: |
+          echo "🔍 Running ShellCheck on shell scripts..."
+          find . -type f \( -name "*.sh" -o -name "*.bash" \) \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            -print0 | xargs -0 -r shellcheck -f tty -S warning || exit 1
+          echo "✅ ShellCheck passed"
+
+  shfmt:
+    name: shfmt (Formatting)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install shfmt
+        run: |
+          curl -sS https://webi.sh/shfmt | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Run shfmt check
+        run: |
+          echo "🔍 Checking shell script formatting with shfmt..."
+          find . -type f \( -name "*.sh" -o -name "*.bash" \) \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            -print0 | xargs -0 -r ~/.local/bin/shfmt -d -i 2 -ci || {
+              echo "❌ Formatting issues found. Run 'shfmt -w -i 2 -ci <file>' to fix."
+              exit 1
+            }
+          echo "✅ shfmt check passed"
+
+  bashate:
+    name: Bashate (Style Check)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install bashate
+        run: pip install bashate
+
+      - name: Run bashate
+        run: |
+          echo "🔍 Running bashate style checks..."
+          # Find all shell scripts and run bashate
+          # Ignore E006 (line too long) and E003 (indent) as shfmt handles formatting
+          find . -type f \( -name "*.sh" -o -name "*.bash" \) \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            ! -path "./vendor/*" \
+            -print0 | xargs -0 -r bashate -i E003,E006 || exit 1
+          echo "✅ bashate check passed"

@@ -1,0 +1,128 @@
+name: TypeScript Linting and Checking
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.ts'
+      - '**.tsx'
+      - '**.js'
+      - '**.jsx'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - '.eslintrc*'
+      - '.prettierrc*'
+      - '.github/workflows/typescript-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.ts'
+      - '**.tsx'
+      - '**.js'
+      - '**.jsx'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - '.eslintrc*'
+      - '.prettierrc*'
+      - '.github/workflows/typescript-check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  typescript-check:
+    name: TypeScript/JavaScript Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Find TypeScript directories
+        id: find-ts
+        run: |
+          # Find directories containing package.json with TypeScript files
+          ts_dirs=""
+          for pkg in $(find . -name "package.json" -not -path "./node_modules/*" -not -path "*/node_modules/*"); do
+            dir=$(dirname "$pkg")
+            if find "$dir" -maxdepth 3 \( -name "*.ts" -o -name "*.tsx" \) 2>/dev/null | grep -q .; then
+              ts_dirs="$ts_dirs $dir"
+            fi
+          done
+          echo "ts_dirs=$ts_dirs" >> "$GITHUB_OUTPUT"
+          if [ -z "$ts_dirs" ]; then
+            echo "has_ts=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_ts=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install and Run Checks
+        if: steps.find-ts.outputs.has_ts == 'true'
+        run: |
+          for dir in ${{ steps.find-ts.outputs.ts_dirs }}; do
+            echo ""
+            echo "📁 Processing: $dir"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            cd "$dir"
+
+            # Install dependencies
+            if [ -f package-lock.json ]; then
+              npm ci 2>/dev/null || npm install
+            else
+              npm install
+            fi
+
+            # Run ESLint if configured
+            if [ -f .eslintrc.js ] || [ -f .eslintrc.json ] || [ -f .eslintrc.yml ] || [ -f .eslintrc.yaml ] || grep -q '"eslint"' package.json 2>/dev/null; then
+              echo "🔍 Running ESLint..."
+              npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0 || {
+                echo "❌ ESLint found issues in $dir"
+                # Non-blocking for now - TODO: make blocking once eslint is configured
+              }
+            else
+              echo "ℹ️  ESLint not configured - installing and running with defaults..."
+              npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin 2>/dev/null || true
+              npx eslint . --ext .ts,.tsx --parser @typescript-eslint/parser --no-eslintrc || true
+            fi
+
+            # Run Prettier if configured
+            if [ -f .prettierrc ] || [ -f .prettierrc.json ] || [ -f .prettierrc.yaml ] || [ -f .prettierrc.yml ] || [ -f .prettierrc.js ] || grep -q '"prettier"' package.json 2>/dev/null; then
+              echo "🔍 Running Prettier check..."
+              npx prettier --check "**/*.{ts,tsx,js,jsx,json}" 2>/dev/null || {
+                echo "⚠️  Prettier found formatting issues in $dir"
+                echo "Run 'npx prettier --write .' to fix"
+              }
+            else
+              echo "ℹ️  Prettier not configured - skipping format check"
+            fi
+
+            # Run TypeScript compiler
+            if [ -f tsconfig.json ]; then
+              echo "🔍 Running TypeScript type check (tsc --noEmit)..."
+              npx tsc --noEmit || {
+                echo "❌ TypeScript found type errors in $dir"
+                exit 1
+              }
+              echo "✅ TypeScript check passed"
+            else
+              echo "ℹ️  No tsconfig.json found - skipping tsc"
+            fi
+
+            cd - > /dev/null
+          done
+
+      - name: No TypeScript found
+        if: steps.find-ts.outputs.has_ts == 'false'
+        run: |
+          echo "ℹ️  No TypeScript/JavaScript projects found in repository"
+          echo "This workflow will run when .ts, .tsx, .js, or .jsx files are added"
