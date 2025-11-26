@@ -4,7 +4,8 @@ atom: ATOM-DOC-20251126-010
 classification: INDEX
 status: production
 created: 2025-11-26
-version: 1.0.0
+updated: 2025-11-26
+version: 1.1.0
 ---
 
 # KENL Root Document Index
@@ -12,6 +13,8 @@ version: 1.0.0
 **Purpose:** 1-line review of every root-level document, its location rationale, and current state.
 
 **Auto-update:** This index should be updated when documents are added, moved, or archived.
+
+**Archive:** Files marked as 📦 Archive-candidate have been moved to `.archive/` directory.
 
 ---
 
@@ -26,6 +29,7 @@ version: 1.0.0
 | `SECURITY.md` | Vulnerability reporting process | ✅ Active | Standard repo root for security |
 | `CODE_OF_CONDUCT.md` | Community participation guidelines | ✅ Active | Standard repo root for community |
 | `CHANGELOG.md` | Version history | ✅ Active | Standard repo root |
+| `ACKNOWLEDGMENTS.md` | Third-party attributions | ✅ Active | Standard repo root |
 
 ---
 
@@ -52,30 +56,36 @@ version: 1.0.0
 
 ---
 
-## 🔍 Audits and Reviews (Historical Context)
+## 🔍 Audits and Reviews
 
-| Document | Purpose | State | Location Rationale |
-|----------|---------|-------|-------------------|
-| `AUDIT-FINDINGS-2025-11-16.md` | Nov 16 audit results | 📦 Archive-candidate | Historical record, move to .archive |
-| `AUDIT_REPORT_LICENSE_LEGAL.md` | License compliance audit | ✅ Active | Legal reference |
-| `COMPREHENSIVE-REVIEW-SUMMARY.md` | Repository review summary | 📦 Archive-candidate | Historical, move to .archive |
-| `IMPROVEMENTS-2025-11-16.md` | Nov 16 improvements | 📦 Archive-candidate | Historical, move to .archive |
-| `START-HERE-COMPREHENSIVE-REVIEW.md` | Review starting point | 📦 Archive-candidate | Superseded by GETTING-STARTED.md |
-| `evaluation_summary.md` | Evaluation results | 📦 Archive-candidate | Historical, move to .archive |
+| Document | Purpose | State | Location |
+|----------|---------|-------|----------|
+| `AUDIT_REPORT_LICENSE_LEGAL.md` | License compliance audit | ✅ Active | Root (legal reference) |
+
+**Archived (2025-11-26):**
+- `.archive/audits/AUDIT-FINDINGS-2025-11-16.md`
+- `.archive/audits/COMPREHENSIVE-REVIEW-SUMMARY.md`
+- `.archive/audits/IMPROVEMENTS-2025-11-16.md`
+- `.archive/audits/evaluation_summary.md`
+- `.archive/audits/START-HERE-COMPREHENSIVE-REVIEW.md`
 
 ---
 
-## 🛠️ Technical Planning (Internal/Development)
+## 🛠️ Technical Documentation
 
 | Document | Purpose | State | Location Rationale |
 |----------|---------|-------|-------------------|
-| `CLEANUP-EXECUTION-PLAN.md` | Cleanup task planning | 📦 Archive-candidate | Contains broken links, outdated |
-| `BRANCH-CONSOLIDATION-STRATEGY.md` | Branch merge strategy | 📦 Archive-candidate | Temporary planning doc |
-| `MERGE-INSTRUCTIONS.md` | Merge workflow instructions | 📦 Archive-candidate | Temporary planning doc |
-| `CI-FAILURE-ANALYSIS.md` | CI debugging notes | 📦 Archive-candidate | Troubleshooting record |
-| `CI-PRECOMMIT-FIX.md` | Pre-commit fix notes | 📦 Archive-candidate | Troubleshooting record |
 | `PR-DAY-ZERO-DESIGN.md` | PR workflow design | ✅ Active | Process design reference |
 | `WORKSPACE.md` | Workspace configuration | ✅ Active | Environment config |
+| `DOCUMENT-INDEX.md` | This file - root doc inventory | ✅ Active | Navigation hub |
+
+**Archived (2025-11-26):**
+- `.archive/planning/CLEANUP-EXECUTION-PLAN.md`
+- `.archive/planning/BRANCH-CONSOLIDATION-STRATEGY.md`
+- `.archive/planning/MERGE-INSTRUCTIONS.md`
+- `.archive/planning/CI-FAILURE-ANALYSIS.md`
+- `.archive/planning/CI-PRECOMMIT-FIX.md`
+- `.archive/planning/BLIND-SPOTS-AND-UNIFIED-ROADMAP.md`
 
 ---
 
@@ -85,18 +95,7 @@ version: 1.0.0
 |----------|---------|-------|-------------------|
 | `SAIF-PATTERN-ANALYSIS.md` | SAIF command-flag pattern analysis | ✅ Active | Pattern documentation |
 | `PROMPT-ANALYSIS-AND-OPTIMIZATION.md` | AI prompt optimization | ✅ Active | AI prompt reference |
-| `BLIND-SPOTS-AND-UNIFIED-ROADMAP.md` | Gap analysis and roadmap | ⚠️ Review | Contains placeholder images, needs cleanup |
 | `ALIGNED-SIGHT.md` | Alignment documentation | ✅ Active | Vision alignment |
-
----
-
-## 📝 Session and Collaboration Records
-
-| Document | Purpose | State | Location Rationale |
-|----------|---------|-------|-------------------|
-| `ABOUT-OUR-COLLABORATION.md` | User-specific collaboration notes | 📦 Archive-candidate | Personal notes, move to .archive |
-| `SESSION_SUMMARY_2025-11-26.md` | Session summary | 📦 Archive-candidate | Temporary, move to .archive |
-| `README-DOGFOODING-SECTION.md` | Dogfooding section draft | 📦 Archive-candidate | Draft content, integrate or archive |
 
 ---
 
@@ -106,8 +105,7 @@ version: 1.0.0
 |-------|---------|--------|
 | ✅ Active | Document is current and in correct location | None |
 | ⚠️ Review | Document needs content review | Schedule review |
-| 📦 Archive-candidate | Move to `.archive/` directory | Run archive script |
-| ❌ Deprecated | Remove or replace | Remove from repo |
+| 📦 Archived | Moved to `.archive/` directory | See `.archive/README.md` |
 
 ---
 
@@ -133,12 +131,8 @@ Run link validation:
 ./scripts/validate-links.sh
 ```
 
-**Known issues in non-core documents:**
-- `CLEANUP-EXECUTION-PLAN.md`: Multiple broken links (archive candidate)
-- `BLIND-SPOTS-AND-UNIFIED-ROADMAP.md`: Placeholder image references
-- `atom-sage-framework/`: Some relative path issues
-
 ---
 
 **ATOM:** ATOM-DOC-20251126-010
+**Version:** 1.1.0
 **Last Updated:** 2025-11-26
