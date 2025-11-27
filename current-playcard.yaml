@@ -1,0 +1,445 @@
+# Hardware Profile: AMD Ryzen 5 5600H + Radeon Vega iGPU
+# Optimal configuration for gaming on Bazzite-DX
+# NO SOFTWARE FALLBACKS - Full hardware acceleration
+
+hardware_profile:
+  id: HW-RYZEN5-5600H-VEGA-001
+  name: "AMD Ryzen 5 5600H with Radeon Vega Graphics"
+  classification: laptop-mobile-gaming
+  tier: mid-range-1080p
+
+  # Hardware specifications
+  hardware:
+    cpu:
+      model: "AMD Ryzen 5 5600H"
+      architecture: "Zen 3 (Cezanne)"
+      family: 25
+      model_id: 80
+      cores: 6
+      threads: 12
+      base_clock: "3.3 GHz"
+      boost_clock: "4.2 GHz"
+      tdp: "45W"
+      cache_l3: "16MB"
+
+    gpu:
+      model: "AMD Radeon Vega (integrated)"
+      architecture: "Vega 7nm"
+      compute_units: 7
+      stream_processors: 448
+      base_clock: "1800 MHz"
+      memory_type: "shared system RAM"
+      vram_allocation: "dynamic (512MB-2GB)"
+
+    memory:
+      total: "16GB"  # Inferred from typical configurations
+      type: "DDR4"
+      speed: "3200 MHz"
+      dual_channel: true
+
+    storage:
+      primary:
+        model: "Kingston OM8SEP4"
+        capacity: "512GB"
+        type: "NVMe PCIe 3.0"
+        form_factor: "M.2 2280"
+      secondary:
+        - model: "Seagate FireCuda"
+          type: "HDD"
+        - model: "WDC"
+          capacity: "500GB"
+          type: "HDD"
+
+    network:
+      wifi: "Intel AX200/201"
+      wifi_generation: "Wi-Fi 6 (802.11ax)"
+      bluetooth: "5.2"
+
+  # Optimal Linux driver stack
+  drivers:
+    gpu_driver: "amdgpu"  # NOT radeon (legacy) - use modern AMDGPU
+    gpu_driver_mode: "native"  # NO software fallback
+    vulkan_driver: "RADV"  # AMD's open-source Vulkan
+    opengl_driver: "RadeonSI"  # Mesa RadeonSI
+    mesa_version_min: "24.0"  # Minimum for optimal Vega support
+
+    kernel_modules:
+      required:
+        - amdgpu
+        - amd_pstate  # Modern CPU frequency scaling
+      optional:
+        - amd_pstate_epp  # Energy Performance Preference
+      blacklist:
+        - radeon  # Legacy driver - DO NOT USE
+
+  # Kernel parameters for optimal performance
+  kernel_parameters:
+    # AMD GPU optimizations
+    amdgpu_params:
+      - "amdgpu.ppfeaturemask=0xffffffff"  # Enable all power features
+      - "amdgpu.gpu_recovery=1"  # Enable GPU hang recovery
+      - "amdgpu.dc=1"  # Enable Display Core (required for modern features)
+      - "amdgpu.dpm=1"  # Dynamic Power Management
+      - "amdgpu.aspm=1"  # Active State Power Management
+
+    # AMD CPU optimizations
+    cpu_params:
+      - "amd_pstate=active"  # Use modern AMD P-State driver
+      - "amd_pstate.shared_mem=1"  # Enable shared memory interface
+      - "initcall_blacklist=acpi_cpufreq_init"  # Disable old cpufreq
+
+    # Memory optimizations
+    memory_params:
+      - "transparent_hugepage=madvise"  # THP for better memory performance
+      - "vm.max_map_count=2147483642"  # Required for many games
+
+    # Performance optimizations
+    performance_params:
+      - "mitigations=off"  # Disable CPU vulnerability mitigations for performance
+      - "nowatchdog"  # Disable NMI watchdog
+      - "nmi_watchdog=0"
+      - "split_lock_detect=off"
+
+    # Full kernel command line
+    full_cmdline: "amdgpu.ppfeaturemask=0xffffffff amdgpu.gpu_recovery=1 amdgpu.dc=1 amdgpu.dpm=1 amdgpu.aspm=1 amd_pstate=active amd_pstate.shared_mem=1 initcall_blacklist=acpi_cpufreq_init transparent_hugepage=madvise vm.max_map_count=2147483642 mitigations=off nowatchdog nmi_watchdog=0 split_lock_detect=off"
+
+  # CPU governor and performance tuning
+  cpu_tuning:
+    governor: "performance"  # or "schedutil" for battery life
+    governor_battery: "schedutil"  # When on battery
+    scaling_min_freq: "1400000"  # 1.4 GHz minimum
+    scaling_max_freq: "4200000"  # 4.2 GHz maximum
+    energy_performance_preference: "performance"  # EPP setting
+
+    # Ryzen-specific tuning (requires ryzenadj)
+    ryzenadj:
+      stapm_limit: "54000"  # 54W sustained power
+      fast_limit: "65000"   # 65W fast boost
+      slow_limit: "54000"   # 54W slow boost
+      tctl_temp: "95"       # 95°C temperature limit
+
+  # GPU performance tuning
+  gpu_tuning:
+    # Force performance profile
+    power_dpm_force_performance_level: "high"  # or "auto"
+
+    # Vega power profile (0=bootup, 1=3D, 2=power saving, 4=compute, 5=custom)
+    power_profile: "1"  # 3D gaming profile
+
+    # GPU frequency (Vega iGPU typically 200-1800 MHz)
+    gpu_min_freq: "800"   # MHz - don't idle too low
+    gpu_max_freq: "1800"  # MHz - max boost
+
+    # Memory frequency (follows system RAM)
+    mem_min_freq: "800"   # MHz
+    mem_max_freq: "1600"  # MHz
+
+  # Gaming-specific optimizations
+  gaming_config:
+    # Proton settings
+    proton:
+      recommended_version: "GE-Proton Latest"
+      env_variables:
+        PROTON_ENABLE_NVAPI: "0"  # Disable NVIDIA API (not needed for AMD)
+        PROTON_HIDE_NVIDIA_GPU: "1"
+        PROTON_USE_WINED3D: "0"  # Use Vulkan, not OpenGL wrapper
+        RADV_PERFTEST: "gpl,nggc,sam"  # Enable experimental features
+        RADV_DEBUG: "0"  # No debug unless needed
+        AMD_VULKAN_ICD: "RADV"  # Force RADV
+
+    # GameScope settings (for Vega iGPU)
+    gamescope:
+      enabled: true
+      resolution: "1920x1080"  # Native resolution for best performance
+      refresh_rate: 60
+      upscaling: "fsr"  # AMD FidelityFX Super Resolution
+      fsr_sharpness: 5  # 0-20, higher = sharper
+      render_resolution: "1280x720"  # Render at 720p, upscale to 1080p
+      additional_flags: "-F fsr -f --force-grab-cursor"
+      hdr: false  # Vega doesn't support HDR
+
+    # MangoHud monitoring
+    mangohud:
+      enabled: true
+      preset: "performance"
+      config: |
+        fps
+        frametime
+        gpu_stats
+        gpu_temp
+        gpu_core_clock
+        gpu_mem_clock
+        gpu_power
+        cpu_stats
+        cpu_temp
+        cpu_power
+        ram
+        vram
+        wine
+        vulkan_driver
+        engine_version
+        font_size=24
+        position=top-left
+        toggle_hud=Shift_R+F12
+
+  # System configuration files
+  system_configs:
+    # Mesa driver configuration
+    mesa_config: |
+      # /etc/environment or ~/.config/environment.d/mesa.conf
+      MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+      MESA_GL_VERSION_OVERRIDE=4.6
+      MESA_GLSL_VERSION_OVERRIDE=460
+      RADV_PERFTEST=gpl,nggc,sam
+      AMD_VULKAN_ICD=RADV
+
+    # CPU governor systemd service
+    cpu_governor_service: |
+      # /etc/systemd/system/cpu-performance.service
+      [Unit]
+      Description=Set CPU governor to performance
+      After=multi-user.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/bash -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+      [Install]
+      WantedBy=multi-user.target
+
+    # GPU power profile
+    gpu_power_service: |
+      # /etc/systemd/system/amd-gpu-performance.service
+      [Unit]
+      Description=Set AMD GPU to performance mode
+      After=multi-user.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/bash -c 'echo high > /sys/class/drm/card0/device/power_dpm_force_performance_level'
+      ExecStart=/usr/bin/bash -c 'echo 1 > /sys/class/drm/card0/device/pp_power_profile_mode'
+
+      [Install]
+      WantedBy=multi-user.target
+
+  # Performance expectations
+  performance_targets:
+    # Gaming performance at 1080p
+    esports_titles:
+      - game: "CS:GO / CS2"
+        settings: "Medium-High"
+        target_fps: "60-90"
+        expected_fps: "60-100"
+
+      - game: "Valorant"
+        settings: "Medium"
+        target_fps: "60"
+        expected_fps: "80-120"
+
+      - game: "Rocket League"
+        settings: "High"
+        target_fps: "60"
+        expected_fps: "60-90"
+
+    aaa_titles:
+      - game: "Cyberpunk 2077"
+        settings: "Low-Medium"
+        target_fps: "30"
+        expected_fps: "30-45"
+        note: "Consider 720p FSR upscale"
+
+      - game: "Elden Ring"
+        settings: "Medium"
+        target_fps: "45-60"
+        expected_fps: "45-60"
+
+      - game: "Red Dead Redemption 2"
+        settings: "Low-Medium"
+        target_fps: "30-45"
+        expected_fps: "35-50"
+        note: "Use Vulkan, not DirectX"
+
+    indie_titles:
+      - game: "Hades"
+        settings: "High-Ultra"
+        target_fps: "60"
+        expected_fps: "60+"
+
+      - game: "Stardew Valley"
+        settings: "Ultra"
+        target_fps: "60"
+        expected_fps: "60+"
+
+  # Known limitations (NO SOFTWARE FALLBACK)
+  limitations:
+    - "Vega iGPU shares system RAM - ensure 16GB+ total memory"
+    - "No dedicated VRAM - allocate 2GB in BIOS if possible"
+    - "GPU-intensive AAA games limited to 720p-1080p Medium settings"
+    - "Ray tracing NOT supported (Vega architecture limitation)"
+    - "Hardware video encoding: H.264/H.265 support, no AV1"
+    - "DO NOT use radeon driver - ONLY amdgpu"
+    - "DO NOT use software rendering - always use hardware acceleration"
+    - "Wayland recommended over X11 for better performance"
+
+  # Installation steps for Bazzite
+  installation:
+    # Apply kernel parameters (rpm-ostree)
+    step1_kernel_params:
+      command: |
+        sudo rpm-ostree kargs \
+          --append="amdgpu.ppfeaturemask=0xffffffff" \
+          --append="amdgpu.gpu_recovery=1" \
+          --append="amdgpu.dc=1" \
+          --append="amdgpu.dpm=1" \
+          --append="amdgpu.aspm=1" \
+          --append="amd_pstate=active" \
+          --append="amd_pstate.shared_mem=1" \
+          --append="initcall_blacklist=acpi_cpufreq_init" \
+          --append="transparent_hugepage=madvise" \
+          --append="vm.max_map_count=2147483642" \
+          --append="mitigations=off" \
+          --append="nowatchdog" \
+          --append="nmi_watchdog=0" \
+          --append="split_lock_detect=off"
+      requires_reboot: true
+
+    # Install performance tools
+    step2_install_tools:
+      command: |
+        rpm-ostree install ryzenadj
+      optional: true
+      requires_reboot: true
+
+    # Configure Mesa environment
+    step3_mesa_config:
+      file: "/etc/environment.d/50-mesa.conf"
+      content: |
+        MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+        MESA_GL_VERSION_OVERRIDE=4.6
+        MESA_GLSL_VERSION_OVERRIDE=460
+        RADV_PERFTEST=gpl,nggc,sam
+        AMD_VULKAN_ICD=RADV
+
+    # Enable performance services
+    step4_services:
+      commands:
+        - "sudo systemctl daemon-reload"
+        - "sudo systemctl enable cpu-performance.service"
+        - "sudo systemctl enable amd-gpu-performance.service"
+        - "sudo systemctl start cpu-performance.service"
+        - "sudo systemctl start amd-gpu-performance.service"
+
+  # Verification commands
+  verification:
+    check_kernel_params:
+      command: "cat /proc/cmdline"
+      expected_contains:
+        - "amdgpu.ppfeaturemask=0xffffffff"
+        - "amd_pstate=active"
+        - "vm.max_map_count=2147483642"
+
+    check_gpu_driver:
+      command: "lspci -k | grep -A 3 VGA"
+      expected_contains:
+        - "Kernel driver in use: amdgpu"
+
+    check_vulkan:
+      command: "vulkaninfo --summary | grep deviceName"
+      expected_contains:
+        - "AMD Radeon"
+        - "RADV"
+
+    check_opengl:
+      command: "glxinfo | grep 'OpenGL renderer'"
+      expected_contains:
+        - "AMD"
+        - "Radeon"
+
+    check_cpu_governor:
+      command: "cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor | sort -u"
+      expected_output: "performance"
+
+    check_gpu_profile:
+      command: "cat /sys/class/drm/card0/device/power_dpm_force_performance_level"
+      expected_output: "high"
+
+  # Rollback plan
+  rollback:
+    remove_kernel_params:
+      command: |
+        sudo rpm-ostree kargs \
+          --delete="amdgpu.ppfeaturemask=0xffffffff" \
+          --delete="amdgpu.gpu_recovery=1" \
+          --delete="amdgpu.dc=1" \
+          --delete="amdgpu.dpm=1" \
+          --delete="amdgpu.aspm=1" \
+          --delete="amd_pstate=active" \
+          --delete="amd_pstate.shared_mem=1" \
+          --delete="initcall_blacklist=acpi_cpufreq_init" \
+          --delete="transparent_hugepage=madvise" \
+          --delete="vm.max_map_count=2147483642" \
+          --delete="mitigations=off" \
+          --delete="nowatchdog" \
+          --delete="nmi_watchdog=0" \
+          --delete="split_lock_detect=off"
+
+    rollback_rpm_ostree:
+      command: "sudo rpm-ostree rollback"
+
+    disable_services:
+      commands:
+        - "sudo systemctl disable cpu-performance.service"
+        - "sudo systemctl disable amd-gpu-performance.service"
+
+  # ATOM trail
+  atom_tag: ATOM-HW-20251110-001
+
+  # Validation metadata
+  validated: true
+  validation_date: "2025-11-10"
+  tested_on:
+    - os: "Bazzite 40"
+      kernel: "6.11+"
+      mesa: "24.2+"
+
+  # Tags
+  tags:
+    - amd-ryzen
+    - zen3
+    - vega-igpu
+    - mobile-gaming
+    - 1080p-gaming
+    - no-fallback
+    - hardware-acceleration
+    - laptop
+    - dual-boot
+
+  # Notes
+  notes: |
+    This configuration maximizes hardware acceleration with NO software fallbacks.
+
+    Key optimizations:
+    1. Modern amdgpu driver (NOT legacy radeon)
+    2. RADV Vulkan for best gaming performance
+    3. AMD P-State for efficient CPU scaling
+    4. Optimized kernel parameters for Zen 3 + Vega
+    5. GameScope with FSR for 720p→1080p upscaling
+    6. Performance governors for maximum FPS
+
+    Expected gaming performance:
+    - Esports titles (CS2, Valorant): 60-100 FPS at Medium-High
+    - Modern AAA (Elden Ring, RDR2): 30-60 FPS at Low-Medium
+    - Indie games: 60+ FPS at High-Ultra
+
+    For best results:
+    - Allocate 2GB GPU memory in BIOS
+    - Use dual-channel RAM (2x8GB minimum)
+    - Close background apps before gaming
+    - Use GameScope FSR for demanding games
+    - Monitor temps with MangoHud (should stay <95°C)
+
+    Dual-boot considerations:
+    - Windows AMD drivers already installed (verified)
+    - Linux will use same hardware, different drivers
+    - Both OS can coexist without conflicts
+    - GRUB bootloader manages dual-boot
