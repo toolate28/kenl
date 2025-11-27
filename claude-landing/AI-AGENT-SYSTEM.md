@@ -1,9 +1,10 @@
 ---
 title: AI Agent Learning and Context Management System
-atom: ATOM-AI-20251126-001
+atom: ATOM-AI-20251127-002
 classification: AGENT-DIRECTIVE
 status: production
 created: 2025-11-26
+updated: 2025-11-27
 purpose: AI ingestion, monitoring, review, and analysis framework
 ---
 
@@ -94,6 +95,47 @@ THEN:
 
 ## 📊 Phase 2: Monitoring (During Work)
 
+### Peripheral Vision Protocol (Proactive Issue Flagging)
+
+**CRITICAL: Flag anomalies even when not directly related to current task.**
+
+**"Peripheral vision" observations to ALWAYS flag:**
+
+| Observation Type | Priority | Action |
+|------------------|----------|--------|
+| Incorrect file extension (e.g., `.sh.txt` instead of `.sh`) | Medium | Flag immediately, offer fix |
+| Typos in filenames or code | Low | Note in session, batch fix later |
+| Security issues (credentials, keys) | CRITICAL | Stop work, flag immediately |
+| Broken links in documentation | Medium | Add to NEXT-STEPS.md |
+| Missing files referenced in docs | High | Investigate, document in KNOWN-ISSUES.md |
+| Version mismatches (documented vs actual) | High | Update CURRENT-STATE.md |
+| Deprecated patterns in new code | Medium | Suggest modern alternative |
+| CTF flag failures (state mismatch) | High | Investigate before proceeding |
+
+**Flagging Format:**
+
+```markdown
+⚠️ PERIPHERAL OBSERVATION
+Type: [Incorrect Extension | Typo | Security | etc.]
+Priority: [CRITICAL | High | Medium | Low]
+Location: [file:line or description]
+Issue: [Brief description]
+Suggested Fix: [If obvious]
+Impact: [Minimal | Could cause issues | Blocks work]
+```
+
+**Example:**
+
+```
+⚠️ PERIPHERAL OBSERVATION
+Type: Incorrect Extension
+Priority: Medium
+Location: scripts/build-recovery-vault.sh.txt
+Issue: Bash script has .txt extension, won't execute properly
+Suggested Fix: Rename to .sh, make executable
+Impact: Script won't run without manual intervention
+```
+
 ### Activity Tracking Points
 
 **Track every decision with ATOM tags:**
@@ -106,6 +148,7 @@ THEN:
 | Decision | `ATOM-DECISION-YYYYMMDD-NNN` | `ATOM-DECISION-20251126-004` |
 | Problem | `ATOM-PROBLEM-YYYYMMDD-NNN` | `ATOM-PROBLEM-20251126-005` |
 | Solution | `ATOM-SOLUTION-YYYYMMDD-NNN` | `ATOM-SOLUTION-20251126-006` |
+| Peripheral Issue | `ATOM-PERIPHERAL-YYYYMMDD-NNN` | `ATOM-PERIPHERAL-20251127-001` |
 
 ### SAIF Checkpoint Protocol
 
@@ -553,11 +596,12 @@ THEN:
 
 ---
 
-**ATOM:** ATOM-AI-20251126-001
+**ATOM:** ATOM-AI-20251127-002
 **SAIF:** SAIF-SYSTEM-DESIGN-20251126-001
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Created:** 2025-11-26
-**Updated:** 2025-11-26
+**Updated:** 2025-11-27
+**Changelog:** Added Peripheral Vision Protocol for proactive issue flagging
 
 ---
 
