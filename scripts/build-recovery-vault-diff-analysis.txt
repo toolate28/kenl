@@ -1,0 +1,288 @@
+--- scripts/build-recovery-vault.sh	2025-11-27 20:03:27.285371200 +1100
++++ scripts/build-recovery-vault.sh.commented	2025-11-27 20:42:03.724860400 +1100
+@@ -1,35 +1,249 @@
+-#!/bin/bash
+-#
+-# SAIF Recovery Vault Builder
+-# Executes DIRECTIVE-BUILD-RECOVERY-VAULT.md
+-#
+-
+-set -e  # Exit on error
+-
+-echo "╔════════════════════════════════════════╗"
+-echo "║  SAIF Recovery Vault Builder v1.0     ║"
+-echo "╚════════════════════════════════════════╝"
+-echo ""
+-echo "This will create a guided Obsidian vault for Surface Pro 4 recovery."
+-echo ""
+-read -p "Proceed? (yes/no): " confirm
+-
+-if [[ "$confirm" != "yes" ]]; then
+-    echo "Cancelled."
+-    exit 0
+-fi
+-
+-# Execute directive (pass to Claude Code CLI)
+-if command -v claude &> /dev/null; then
+-    echo ""
+-    echo "Passing directive to Claude Code CLI..."
+-    claude --file claude-landing/DIRECTIVE-BUILD-RECOVERY-VAULT.md --execute
+-else
+-    echo ""
+-    echo "⚠️  Claude Code CLI not found."
+-    echo "Install: https://docs.anthropic.com/claude/docs/claude-code"
+-    echo ""
+-    echo "Or execute manually:"
+-    echo "  cat claude-landing/DIRECTIVE-BUILD-RECOVERY-VAULT.md"
+-    exit 1
+-fi
+\ No newline at end of file
++#!/bin/bash
++#
++# SAIF Recovery Vault Builder
++# Executes DIRECTIVE-BUILD-RECOVERY-VAULT.md
++#
++# ATOM: ATOM-SCRIPT-20251127-004
++# Commentary Version: Original script with AI agent thought process
++# Purpose: Document reasoning, assumptions, and potential oversights
++#
++# AGENT COMMENTARY:
++# This script was created as a simple wrapper to execute the comprehensive
++# directive in DIRECTIVE-BUILD-RECOVERY-VAULT.md. The design philosophy was
++# "minimal wrapper, directive does the work" - but this reveals several
++# assumptions and potential issues worth examining.
++
++# DECISION: Use `set -e` to exit on any error
++# REASONING: Safety-first approach - if any command fails, stop immediately
++# ASSUMPTION: All errors are fatal and should halt execution
++# POTENTIAL ISSUE: This might be too aggressive - some errors could be recoverable
++# ALTERNATIVE CONSIDERED: `set -euo pipefail` for stricter error handling
++# WHY NOT CHOSEN: Wanted to keep it simple, but this means:
++#   - Unset variables won't cause errors (could lead to subtle bugs)
++#   - Pipeline failures in middle commands might be hidden
++# PERIPHERAL OBSERVATION: Should this script have error recovery logic?
++set -e  # Exit on error
++
++# DECISION: Use box-drawing characters for banner
++# REASONING: Makes output visually distinctive, easy to spot in logs
++# ASSUMPTION: User's terminal supports UTF-8 and box-drawing characters
++# POTENTIAL ISSUE: Windows Command Prompt (not Git Bash) might show garbage
++# EDGE CASE NOT HANDLED: Terminal width < 40 characters (banner wraps ugly)
++# ALTERNATIVE CONSIDERED: Simple ASCII "===" banner
++# WHY NOT CHOSEN: Aesthetics - wanted professional appearance
++# MISSED CONSIDERATION: No check for terminal capability before using Unicode
++echo "╔════════════════════════════════════════╗"
++echo "║  SAIF Recovery Vault Builder v1.0     ║"
++echo "╚════════════════════════════════════════╝"
++echo ""
++
++# DECISION: Add explanatory message before confirmation prompt
++# REASONING: User should know what they're agreeing to
++# ASSUMPTION: User understands what "Obsidian vault" and "Surface Pro 4 recovery" mean
++# POTENTIAL ISSUE: No explanation of time required (~45 min per directive)
++# MISSED CONSIDERATION: Should warn about disk space requirements (~50MB for vault)
++echo "This will create a guided Obsidian vault for Surface Pro 4 recovery."
++echo ""
++
++# DECISION: Use simple yes/no confirmation
++# REASONING: Standard Unix convention, clear intent
++# ASSUMPTION: User types exactly "yes" (not "y", "Y", "YES", etc.)
++# POTENTIAL ISSUE: Case-sensitive check means "Yes" or "y" will cancel
++# EDGE CASE NOT HANDLED: User presses Enter (empty input) - should this default to 'no'?
++# ALTERNATIVE CONSIDERED: Accept "y" or "yes" (case-insensitive)
++# WHY NOT CHOSEN: Simplicity - exact match is clearer intent
++# SECURITY CONSIDERATION: Good - requires explicit "yes", not just Enter
++read -p "Proceed? (yes/no): " confirm
++
++# DECISION: String comparison with != instead of pattern matching
++# REASONING: Exact match required for safety
++# ASSUMPTION: User understands only "yes" (lowercase) proceeds
++# POTENTIAL ISSUE: Unintuitive UX - "y" should probably work
++# MISSED CONSIDERATION: No validation of input (what if user types random string?)
++# BETTER APPROACH: Could use case statement or regex for flexible matching
++if [[ "$confirm" != "yes" ]]; then
++    # DECISION: Simple "Cancelled." message
++    # REASONING: Clear, concise feedback
++    # ASSUMPTION: User doesn't need explanation of what was cancelled
++    # MISSED CONSIDERATION: Could show what was NOT done (no vault created, no files changed)
++    echo "Cancelled."
++
++    # DECISION: Exit with code 0 (success)
++    # REASONING: User intentionally cancelled - not an error condition
++    # ASSUMPTION: Calling scripts treat user cancellation as success
++    # POTENTIAL ISSUE: Some CI/CD systems might want non-zero exit for "didn't complete"
++    # ALTERNATIVE CONSIDERED: Exit code 130 (standard for Ctrl+C/user interrupt)
++    # WHY NOT CHOSEN: User typed "no", didn't interrupt - this is clean exit
++    exit 0
++fi
++
++# DECISION: Check for `claude` command availability
++# REASONING: Script purpose is to invoke Claude Code CLI with directive
++# ASSUMPTION: Claude Code CLI command is named `claude` (not `claude-code`, `claude-cli`, etc.)
++# POTENTIAL ISSUE: What if user has different Claude CLI installed?
++# EDGE CASE NOT HANDLED: Command exists but is wrong version or broken
++# MISSED CONSIDERATION: No version check - directive might need specific Claude Code version
++# BETTER APPROACH: Could check `claude --version` and parse output
++if command -v claude &> /dev/null; then
++    echo ""
++    echo "Passing directive to Claude Code CLI..."
++
++    # DECISION: Use `--file` and `--execute` flags
++    # REASONING: Assumes Claude Code CLI has these flags for directive execution
++    # CRITICAL ASSUMPTION: These flags actually exist in Claude Code CLI
++    # POTENTIAL ISSUE: As of late 2024, Claude Code CLI might not have `--execute` flag
++    # EDGE CASE NOT HANDLED: What if file path is relative and we're in wrong directory?
++    # MISSED CONSIDERATION: No validation that directive file exists before invoking
++    # PERIPHERAL OBSERVATION: This command might fail! Should verify claude CLI API first
++    # ALTERNATIVE CONSIDERED: Read directive, pass as stdin: `cat ... | claude --execute`
++    # WHY NOT CHOSEN: Assumed --file flag exists (may be incorrect assumption)
++    claude --file claude-landing/DIRECTIVE-BUILD-RECOVERY-VAULT.md --execute
++
++    # CRITICAL OVERSIGHT: No error handling for claude command failure!
++    # If `claude` exits with error, this script exits due to `set -e`
++    # But no cleanup, no explanation to user, no SAIF checkpoint logged
++    # BETTER APPROACH: Capture exit code, provide helpful error message
++
++else
++    # DECISION: Provide helpful error message with installation link
++    # REASONING: User needs to know what to do if claude not found
++    # ASSUMPTION: User can access anthropic.com docs
++    # ASSUMPTION: Docs URL is stable (will not 404 in future)
++    echo ""
++    echo "⚠️  Claude Code CLI not found."
++    echo "Install: https://docs.anthropic.com/claude/docs/claude-code"
++    echo ""
++
++    # DECISION: Show manual execution alternative
++    # REASONING: User should have fallback if they don't want to install CLI
++    # ASSUMPTION: User knows how to interpret directive markdown manually
++    # POTENTIAL ISSUE: `cat` output might be huge (972 lines) and unhelpful raw
++    # MISSED CONSIDERATION: Could suggest opening in Obsidian or editor instead
++    echo "Or execute manually:"
++    echo "  cat claude-landing/DIRECTIVE-BUILD-RECOVERY-VAULT.md"
++
++    # DECISION: Exit with code 1 (error)
++    # REASONING: Required tool missing - this is an error condition
++    # ASSUMPTION: Calling scripts should treat this as failure
++    # CORRECT DECISION: Yes - missing dependency should fail
++    exit 1
++fi
++
++# CRITICAL OVERSIGHT: No exit code at end of successful path!
++# If claude command succeeds, script will exit with claude's exit code (implicit)
++# This is GOOD if claude returns 0 on success
++# But if claude returns non-zero, we exit with that code (may be unexpected)
++# BETTER APPROACH: Explicit `exit 0` at end, or capture and handle claude exit code
++
++# ============================================================================
++# AGENT SELF-REFLECTION: What Would I Have Missed?
++# ============================================================================
++#
++# 1. ASSUMPTION ABOUT CLAUDE CLI:
++#    - Assumed `--file` and `--execute` flags exist
++#    - Did not verify Claude Code CLI actually has these capabilities
++#    - As of late 2024, Claude Code works differently (interactive or file-based)
++#    - This script might not work at all!
++#
++# 2. ERROR HANDLING GAPS:
++#    - No validation of directive file existence
++#    - No validation of working directory (must be in repo root)
++#    - No cleanup on failure
++#    - No SAIF checkpoint logging
++#
++# 3. USER EXPERIENCE ISSUES:
++#    - No progress indication during directive execution
++#    - No estimated time to completion
++#    - No way to resume if interrupted
++#    - Confirmation prompt is too strict (only accepts "yes")
++#
++# 4. SECURITY CONSIDERATIONS:
++#    - Directive could contain malicious commands (blindly executed)
++#    - No validation of directive integrity (hash check)
++#    - No sandbox or dry-run mode
++#
++# 5. PLATFORM ASSUMPTIONS:
++#    - Assumes bash is available (won't work on Windows CMD)
++#    - Assumes UTF-8 terminal (box characters might break)
++#    - Assumes relative paths work (depends on CWD)
++#
++# 6. MISSING FEATURES:
++#    - No --help flag
++#    - No --dry-run mode
++#    - No --verbose flag
++#    - No logging to file
++#    - No ATOM trail integration
++#
++# 7. DOCUMENTATION GAPS:
++#    - No inline comments in original (this commentary version fixes that)
++#    - No usage examples
++#    - No requirements section
++#    - No exit code documentation
++#
++# ============================================================================
++# WHAT SHOULD HAVE BEEN DONE DIFFERENTLY?
++# ============================================================================
++#
++# BETTER VERSION WOULD INCLUDE:
++#
++# 1. Validation at start:
++#    - Check we're in correct directory (repo root)
++#    - Check directive file exists and is readable
++#    - Check disk space available
++#    - Check required tools (bash, mkdir, cat, etc.)
++#
++# 2. Flexible confirmation:
++#    - Accept "y", "yes", "Y", "YES" as affirmative
++#    - Accept "n", "no", "N", "NO" as negative
++#    - Treat empty input as "no" (safe default)
++#
++# 3. Robust Claude CLI detection:
++#    - Check `claude --version` and parse output
++#    - Verify it's Claude Code CLI (not some other 'claude' command)
++#    - Validate it supports required flags
++#
++# 4. Better execution model:
++#    - Don't assume `--execute` flag exists
++#    - Instead: Instruct user to run directive manually OR
++#    - Execute directive steps directly in bash (parse markdown, run commands)
++#
++# 5. Error recovery:
++#    - Trap errors and provide context
++#    - Suggest next steps on failure
++#    - Log to SAIF trail on success/failure
++#
++# 6. Progress indication:
++#    - Show which phase of directive is executing
++#    - Estimated time remaining
++#    - Ability to pause/resume
++#
++# ============================================================================
++# ATOM TRAIL ANALYSIS NOTES:
++# ============================================================================
++#
++# Original script (build-recovery-vault.sh) was created with:
++# ATOM: ATOM-DOC-20251127-001 (part of recovery vault commit)
++#
++# This commentary version:
++# ATOM: ATOM-SCRIPT-20251127-004
++#
++# Comparing these two will reveal:
++# - What the original agent was thinking (assumptions)
++# - What the original agent missed (oversights)
++# - Where additional validation is needed
++# - Where documentation should be improved
++#
++# EXPECTED DIFF ANALYSIS FINDINGS:
++# 1. Original is very sparse (35 lines including blanks)
++# 2. Commentary version reveals many assumptions made
++# 3. Several edge cases not handled
++# 4. Claude CLI invocation might not work as intended
++# 5. Error handling is minimal
++#
++# RECOMMENDATIONS FOR REVIEW:
++# - Test if `claude --file --execute` actually works
++# - Add validation steps at script start
++# - Improve confirmation prompt UX
++# - Add help/usage documentation
++# - Consider removing Claude CLI dependency entirely
++#   (directive can be executed manually or via different mechanism)
