@@ -350,6 +350,6 @@ EOF
 ---
 
 **Next Steps:**
-- Read [ATOM-INTEGRATION.md](ATOM-INTEGRATION.md) for audit trail details
+- **ATOM Integration (Phase 2):** The ATOM audit trail integration guide (`ATOM-INTEGRATION.md`) is planned for Phase 2. For now, refer to the [../README.md](../README.md) for a summary of ATOM methodology and audit trail concepts. All context-sync operations are logged with ATOM tags for traceability; see comments in your ADRs and commit messages for examples.
 - Explore [../README.md](../README.md) for architecture overview
 - Join KENL community for tips and Play Card sharing
