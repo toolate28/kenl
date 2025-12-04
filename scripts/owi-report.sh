@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
+#
+# owi-report.sh
 # OWI Documentation Report Generator
+#
+# Purpose: Generate comprehensive documentation index from OWI metadata
+# Prerequisites: Bash 4+, read access to repository files with OWI frontmatter
+# Usage: ./owi-report.sh [STATUS_FILTER] [FORMAT]
+# Arguments:
+#   STATUS_FILTER  Filter by status (all, active, draft, archived) - default: all
+#   FORMAT         Output format (markdown, json) - default: markdown
+# Output: Documentation index showing all OWI-tagged files
+# Next steps: Review output, commit DOCUMENT-INDEX.md if generated
+# Integration: Uses KENL1 OWI metadata standard, works with add-owi-metadata.sh
+# Related: See OWI_METADATA_STANDARD.md for metadata format
+#
 # ATOM-TOOL-20251105-026
 
 set -euo pipefail
