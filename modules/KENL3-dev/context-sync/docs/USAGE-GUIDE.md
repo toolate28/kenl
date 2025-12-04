@@ -2,6 +2,8 @@
 
 **Quick reference for common context-sync workflows in KENL**
 
+> **Note:** This is Phase 1 implementation. ATOM bridge scripts (`atom-bridge/`) and advanced integrations are planned for Phase 2. Current guide focuses on core context-sync usage via MCP server.
+
 ---
 
 ## Quick Start Checklist
@@ -31,12 +33,15 @@ context-sync << 'EOF'
 }
 EOF
 
-# Tag with ATOM for traceability
-cd ~/kenl/modules/KENL3-dev/context-sync
-./atom-bridge/sync-atom-trail.sh --decision "Use PostgreSQL"
+# Tag with ATOM for traceability (Phase 2 - coming soon)
+# cd ~/kenl/modules/KENL3-dev/context-sync
+# ./atom-bridge/sync-atom-trail.sh --decision "Use PostgreSQL"
+
+# For now, manually log ATOM tag:
+echo "ATOM-DECISION-$(date +%Y%m%d)-001: Use PostgreSQL over MySQL" >> ~/.kenl/atom-trail.log
 ```
 
-**Result:** Decision stored in `~/.context-sync/data.db`, retrievable in future chats
+**Result:** Decision stored in `~/.context-sync/data.db`, retrievable in future chats. ATOM tag logged for audit trail.
 
 ---
 
@@ -130,38 +135,35 @@ EOF
 
 ---
 
-### 6. Cross-Agent Coordination
+### 6. Cross-Agent Coordination (Phase 2 - Planned)
 
 **When to use:** Using multiple AI tools (Claude + Cursor + Copilot)
 
+> **Note:** ATOM bridge scripts coming in Phase 2. For now, context-sync works with any MCP-compatible AI agent via the same SQLite database.
+
 ```bash
-# Query what Claude decided
-./atom-bridge/query-context-sync.sh --agent "claude-code" --limit 10
+# Current approach: All agents share same context-sync database
+# Each agent accesses ~/.context-sync/data.db via MCP
 
-# Query what Cursor did
-./atom-bridge/query-context-sync.sh --agent "cursor-ide" --limit 10
-
-# See influence chain
-./atom-bridge/query-context-sync.sh --show-influenced-by
+# Phase 2 will add:
+# ./atom-bridge/query-context-sync.sh --agent "claude-code" --limit 10
+# ./atom-bridge/query-context-sync.sh --show-influenced-by
 ```
 
 ---
 
-### 7. Export to Cloudflare D1 (Cloud Backup)
+### 7. Export to Cloudflare D1 (Phase 2 - Planned)
 
 **When to use:** Want cloud persistence, multi-device sync
 
+> **Note:** Cloud backup integration coming in Phase 2.
+
 ```bash
-# Setup (one-time)
-export CLOUDFLARE_API_TOKEN="your-token"
-export CLOUDFLARE_ACCOUNT_ID="your-account-id"
-
-# Export ATOM trail + context-sync to D1
-cd ~/kenl/modules/KENL3-dev/context-sync
-./atom-bridge/export-to-d1.sh --all
-
-# Schedule daily backups (optional)
-echo "0 2 * * * ~/kenl/modules/KENL3-dev/context-sync/atom-bridge/export-to-d1.sh --incremental" | crontab -
+# Phase 2 will add:
+# export CLOUDFLARE_API_TOKEN="your-token"
+# export CLOUDFLARE_ACCOUNT_ID="your-account-id"
+# cd ~/kenl/modules/KENL3-dev/context-sync
+# ./atom-bridge/export-to-d1.sh --all
 ```
 
 ---
