@@ -12,7 +12,7 @@
 #   - MCP configuration created at ~/.config/claude/mcp-servers/context-sync.json
 # Next steps:
 #   - Restart Claude Code to load MCP server
-#   - Run ./test-installation.sh to verify setup
+#   - Verify setup: Run 'context-sync --version' to confirm installation, and check that ~/.config/claude/mcp-servers/context-sync.json exists
 #   - See ../docs/USAGE-GUIDE.md for common workflows
 # Integration:
 #   - Uses KENL1 ATOM framework for operation tracking
