@@ -374,7 +374,7 @@ context-sync search_content --query "ATOM-GAMING-001"
 
 ## Troubleshooting
 
-See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
+See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) (coming in Phase 2) for detailed solutions. For now, use the quick fixes below.
 
 ### Quick Fixes
 
