@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kenl-atom-visual-presentation.md",
+                "file": "AI-INTEGRATION-GUIDE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "kenl-atom-visual-presentation"
+              "title": "AI-INTEGRATION-GUIDE"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "a181d6e7ee608445",
   "lastOpenFiles": [
-    "kenl-atom-visual-presentation.md",
+    "M811_Disassembly_Visual_Guide.pdf",
     "kenl-context-sync-atom-directive.md",
+    "kenl-atom-visual-presentation.md",
     "atom-context-sync-proposal.md",
     "scripts/README-DASHBOARD.md",
     "ALIGNED-SIGHT.md",
