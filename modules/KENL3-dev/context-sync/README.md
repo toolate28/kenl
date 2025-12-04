@@ -448,8 +448,8 @@ context-sync is specifically designed for AI assistance. Use freely for:
 
 ### Internal Documentation
 - [USAGE-GUIDE.md](docs/USAGE-GUIDE.md) - Common workflows
-- [ATOM-INTEGRATION.md](docs/ATOM-INTEGRATION.md) - ATOM bridge architecture
-- [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) - Issue resolution
+- [ATOM-INTEGRATION.md](docs/ATOM-INTEGRATION.md) - ATOM bridge architecture *(Coming in Phase 2)*
+- [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) - Issue resolution *(Coming in Phase 2)*
 
 ### External Resources
 - [context-sync GitHub](https://github.com/cyanheads/context-sync) - Official repository
