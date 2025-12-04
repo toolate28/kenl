@@ -136,7 +136,7 @@ See module README for specific system package requirements.
 
 \`\`\`bash
 # Most KENL modules operate from repo without installation
-cd \$KENL_ROOT/modules/${module_key}
+cd ~/kenl/modules/${module_key}
 
 # Follow module-specific README for setup instructions
 cat README.md
@@ -146,7 +146,7 @@ cat README.md
 
 \`\`\`bash
 # Verify module files exist
-ls -la \$KENL_ROOT/modules/${module_key}
+ls -la ~/kenl/modules/${module_key}
 \`\`\`
 
 ---
@@ -219,7 +219,7 @@ See module \`README.md\` for system integration details.
 
 \`\`\`bash
 # Update with kenl repo
-cd \$KENL_ROOT
+cd ~/kenl
 git pull origin main
 \`\`\`
 
@@ -227,7 +227,7 @@ git pull origin main
 
 \`\`\`bash
 # Verify module files exist
-ls -la \$KENL_ROOT/modules/${module_key}
+ls -la ~/kenl/modules/${module_key}
 \`\`\`
 
 ---

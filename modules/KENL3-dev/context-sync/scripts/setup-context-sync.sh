@@ -207,7 +207,7 @@ else
       "args": ["-y", "@context-sync/server"],
       "env": {
         "CONTEXT_SYNC_PROJECT": "$PROJECT_NAME",
-        "CONTEXT_SYNC_DB": "\${HOME}/.context-sync/data.db"
+        "CONTEXT_SYNC_DB": "$HOME/.context-sync/data.db"
       }
     }
   }
