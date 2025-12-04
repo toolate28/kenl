@@ -6,7 +6,11 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash($PSVersionTable.PSVersion)",
+      "Bash(git mv:*)",
+      "Bash(chmod:*)",
+      "Bash(vision\" - issues not directly related to current task but important to surface.\n\nChanges:\n- Update AI-AGENT-SYSTEM.md to v2.1.0\n- Add Peripheral Vision Protocol section with priority matrix\n- Define flagging format and examples\n- Add ATOM-PERIPHERAL tracking type\n- Update CURRENT-STATE.md with session status\n- Document MiniOS ISO location (C:\\Users\\iamto\\Downloads\\iso)\n\nPeripheral Vision Priority Levels:\n- CRITICAL: Security issues (credentials, keys)\n- High: Missing files, version mismatches, CTF failures\n- Medium: Incorrect extensions, broken links, deprecated patterns\n- Low: Typos in filenames\n\nExample Issue Caught:\n- scripts/build-recovery-vault.sh.txt → .sh (fixed in 26d3ee6)\n\nThis protocol ensures AI agents flag issues even when not task-related,\nprioritizing them appropriately for user attention.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\n\nATOM-AI-20251127-002\nATOM-STATUS-20251127-003\nSAIF-PROTOCOL-UPDATE-20251127-001\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "da8f7e6eff3aadb1",
+    "id": "4976957d2f25fd6e",
     "type": "split",
     "children": [
       {
-        "id": "8a436b0c7ce2612e",
+        "id": "3743c902371c8b5e",
         "type": "tabs",
         "children": [
           {
-            "id": "91f3cad8f2c94ae1",
+            "id": "a181d6e7ee608445",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "kenl-atom-visual-presentation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "kenl-atom-visual-presentation"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "87bbcae0626405b6",
+    "id": "3ffeb825b313a733",
     "type": "split",
     "children": [
       {
-        "id": "9b1cdeb3b6e210c7",
+        "id": "a7078708bd8e5d39",
         "type": "tabs",
         "children": [
           {
-            "id": "1fa289d9ef06d61f",
+            "id": "18364710e5db1ab2",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "cfe9d5863c2f0346",
+            "id": "a85cdc8eb74bee0c",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "03dc4b950780940e",
+            "id": "8bfa2c91ccd0f949",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -78,23 +78,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "06326d7af609b29a",
+    "id": "534cd2c9ab656eea",
     "type": "split",
     "children": [
       {
-        "id": "2b695c67ec7ba9a3",
+        "id": "adba34954f0a4300",
         "type": "tabs",
         "children": [
           {
-            "id": "ae9855cb236bc2a3",
+            "id": "41bc59aa29120d6f",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "USAGE_PRIVACY.md",
+                "file": "cloudflare-infrastructure/workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for USAGE_PRIVACY"
+              "title": "Backlinks for SAIF-DEPLOY-WITH-EXISTING-ACCOUNT"
             }
           },
           {
-            "id": "e607f216927c25d7",
+            "id": "ca581df25551764a",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "USAGE_PRIVACY.md",
+                "file": "cloudflare-infrastructure/workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from USAGE_PRIVACY"
+              "title": "Outgoing links from SAIF-DEPLOY-WITH-EXISTING-ACCOUNT"
             }
           },
           {
-            "id": "ffec2aec19773a0c",
+            "id": "39be71f39820625f",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +137,7 @@
             }
           },
           {
-            "id": "de6fd0ed1b367d4c",
+            "id": "4be8e01ae16836ea",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,18 +151,18 @@
             }
           },
           {
-            "id": "a3408d06cdff6f88",
+            "id": "2a380ab04e3b8c26",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "USAGE_PRIVACY.md",
+                "file": "cloudflare-infrastructure/workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of USAGE_PRIVACY"
+              "title": "Outline of SAIF-DEPLOY-WITH-EXISTING-ACCOUNT"
             }
           }
         ]
@@ -183,11 +183,25 @@
       "bases:Create new base": false
     }
   },
-  "active": "91f3cad8f2c94ae1",
+  "active": "a181d6e7ee608445",
   "lastOpenFiles": [
-    "USAGE_PRIVACY.md",
-    "README.md",
-    "PROFILES_SETUP.md",
-    "WORKFLOW_DIAGRAM.md"
+    "kenl-atom-visual-presentation.md",
+    "kenl-context-sync-atom-directive.md",
+    "atom-context-sync-proposal.md",
+    "scripts/README-DASHBOARD.md",
+    "ALIGNED-SIGHT.md",
+    "AI-INTEGRATION-GUIDE.md",
+    "ATOM-REGISTER.md",
+    "AUDIT_REPORT_LICENSE_LEGAL.md",
+    "BAZZITE-DX-IWI-INSTALLATION-SAIF.md",
+    "CHANGELOG.md",
+    "DOCUMENT-INDEX.md",
+    "OWI_FRAMEWORK_OVERVIEW.md",
+    "SCRIPT-ENVIRONMENT-TAGGING-STANDARD.md",
+    "cloudflare-infrastructure/workflows/SAIF-DEPLOY-WITH-EXISTING-ACCOUNT.md",
+    "Untitled.canvas",
+    "cloudflare-infrastructure/START-HERE.md",
+    "cloudflare-infrastructure/README.md",
+    "cloudflare-infrastructure/QUICKSTART-WINDOWS.md"
   ]
 }
