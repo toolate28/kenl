@@ -199,19 +199,17 @@ if [[ -f "$CONTEXT_SYNC_DIR/mcp-configs/context-sync.json" ]]; then
     echo -e "${KENL_BLUE}   Location: $MCP_CONFIG_FILE${KENL_RESET}"
 else
     # Create from scratch if template missing
-    cat > "$MCP_CONFIG_FILE" << EOF
-{
-  "mcpServers": {
-    "context-sync": {
-      "command": "npx",
-      "args": ["-y", "@context-sync/server"],
-      "env": {
-        "CONTEXT_SYNC_PROJECT": "$PROJECT_NAME"
+    jq -n --arg project "$PROJECT_NAME" '{
+      mcpServers: {
+        "context-sync": {
+          command: "npx",
+          args: ["-y", "@context-sync/server"],
+          env: {
+            CONTEXT_SYNC_PROJECT: $project
+          }
+        }
       }
-    }
-  }
-}
-EOF
+    }' > "$MCP_CONFIG_FILE"
     echo -e "${KENL_GREEN}✅ MCP configuration generated${KENL_RESET}"
     echo -e "${KENL_BLUE}   Location: $MCP_CONFIG_FILE${KENL_RESET}"
 fi
