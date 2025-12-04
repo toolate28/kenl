@@ -506,9 +506,9 @@ Database persists at `~/.context-sync/data.db` for recovery if needed.
 
 ## Version History
 
-| Version | Date       | Changes                          | ATOM Tag            |
-|---------|------------|----------------------------------|---------------------|
-| 1.0.0   | 2024-12-04 | Initial integration with kennel branding | ATOM-DOC-20251204-001 |
+| Version | Date       | Changes                                      | ATOM Tag              |
+|---------|------------|----------------------------------------------|-----------------------|
+| 1.0.0   | 2024-12-04 | Initial integration with kennel branding     | ATOM-DOC-20251204-001 |
 
 ---
 
