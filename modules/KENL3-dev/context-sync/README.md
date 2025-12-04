@@ -231,13 +231,13 @@ context-sync search_content --query "HALO Infinite"
 
 Traditional AI memory is like stray dogs wandering the streets—context scattered, decisions lost, no sense of home. **context-sync builds proper kennels:**
 
-| Without context-sync (Stray) | With context-sync (Kennel) |
-|------------------------------|----------------------------|
-| AI forgets between chats     | Memory persists forever    |
-| Repeat research every time   | Query previous decisions   |
-| No cross-project learning    | Patterns across projects   |
-| Lost architectural rationale | Full decision trail        |
-| Each agent works in isolation| Coordinated multi-agent    |
+| Without context-sync (Stray)           | With context-sync (Kennel)      |
+|----------------------------------------|-------------------------------|
+| Each agent works in isolation          | Coordinated multi-agent        |
+| AI forgets between chats               | Memory persists forever         |
+| Repeat research every time             | Query previous decisions        |
+| No cross-project learning              | Patterns across projects        |
+| Lost architectural rationale           | Full decision trail             |
 
 **KENL Builder Mentality Applied:**
 
