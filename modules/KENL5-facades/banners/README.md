@@ -82,7 +82,7 @@ Special banner for context-sync module showcasing the dog kennel → memory meta
 - Shows integration components (CLI, Code, D1, ATOM)
 - Emphasizes "safe home for AI decisions"
 
-**Size:** 80 columns × 21 lines
+**Size:** 80 columns × 26 lines
 
 ## Installation
 
