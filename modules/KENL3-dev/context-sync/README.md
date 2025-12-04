@@ -55,7 +55,14 @@ Just as dog kennels provide safe, organized homes for dogs, **context-sync provi
 - 🔬 **Code Analysis**: Dependency graphs, call traces, type lookups
 - 🎯 **Platform Switching**: Use same context in Claude Desktop, Cursor, Copilot
 
-### KENL Integrations (added by this module)
+### KENL Integrations (Phase 1: MCP + Documentation)
+
+- 🏠 **Memory Kennel Setup**: Automated installation with kennel branding
+- 📚 **Dog Kennel Documentation**: Comprehensive guides with visual metaphors
+- 🎨 **ASCII Art Banner**: Kennel banner for terminals and docs
+- 🔧 **MCP Configuration**: Ready-to-use Claude Code integration
+
+### KENL Integrations (Phase 2: Planned)
 
 - 🏷️ **ATOM Trail Sync**: Export KENL ATOM tags to context-sync SQLite
 - ☁️ **Cloudflare D1 Backup**: Optional cloud persistence for ATOM trail
@@ -70,8 +77,8 @@ Just as dog kennels provide safe, organized homes for dogs, **context-sync provi
 ### Installation
 
 ```bash
-# Navigate to context-sync module
-cd ~/kenl/modules/KENL3-dev/context-sync
+# Navigate to context-sync module (adapt path to your clone location)
+cd /path/to/kenl/modules/KENL3-dev/context-sync
 
 # Run setup script (installs context-sync via npm)
 ./scripts/setup-context-sync.sh
@@ -103,17 +110,17 @@ context-sync/
 ├── README.md                     # This file (with kennel branding 🐕)
 ├── scripts/
 │   ├── setup-context-sync.sh     # Installation script
-│   └── test-installation.sh      # Verify setup works
+│   └── test-installation.sh      # Verify setup works (planned)
 ├── mcp-configs/
 │   └── context-sync.json         # Claude Code MCP server config
-├── atom-bridge/
-│   ├── sync-atom-trail.sh        # Export ATOM trail to context-sync
-│   ├── query-context-sync.sh     # Query with ATOM metadata
-│   └── export-to-d1.sh           # Cloudflare D1 cloud backup
+├── atom-bridge/                  # ATOM integration (planned for Phase 2)
+│   ├── sync-atom-trail.sh        # Export ATOM trail to context-sync (TODO)
+│   ├── query-context-sync.sh     # Query with ATOM metadata (TODO)
+│   └── export-to-d1.sh           # Cloudflare D1 cloud backup (TODO)
 └── docs/
     ├── USAGE-GUIDE.md            # Common workflows
-    ├── ATOM-INTEGRATION.md       # How ATOM and context-sync work together
-    └── TROUBLESHOOTING.md        # Common issues and fixes
+    ├── ATOM-INTEGRATION.md       # ATOM architecture (planned)
+    └── TROUBLESHOOTING.md        # Common issues (planned)
 ```
 
 ---
