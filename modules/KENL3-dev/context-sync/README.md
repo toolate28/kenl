@@ -78,7 +78,7 @@ Just as dog kennels provide safe, organized homes for dogs, **context-sync provi
 
 ```bash
 # Navigate to context-sync module (adapt path to your clone location)
-cd /path/to/kenl/modules/KENL3-dev/context-sync
+cd ~/kenl/modules/KENL3-dev/context-sync
 
 # Run setup script (installs context-sync via npm)
 ./scripts/setup-context-sync.sh
