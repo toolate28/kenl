@@ -1,14 +1,33 @@
 #!/usr/bin/env bash
 #
 # generate-manifests.sh
-# Generates basic MANIFEST.md files for all KENL modules
+# Generates basic MANIFEST.md files for all KENL modules with ATOM traceability
 #
-# Version: 1.0.0
+# Purpose: Auto-generate MANIFEST.md documentation for each KENL module
+# Prerequisites: Bash 4+, write access to modules/ directory
+# Usage: ./generate-manifests.sh
+# Output: Creates/updates modules/KENL*/MANIFEST.md files
+# Next steps: Review generated manifests, commit with ATOM tag
+# Integration: Uses KENL1 ATOM framework for module documentation tracking
+# Rollback: git restore modules/KENL*/MANIFEST.md
+#
+# Version: 1.1.0
 # ATOM: ATOM-CFG-20251112-004
 
 set -euo pipefail
 
-MODULES_DIR="/home/user/kenl/modules"
+# Detect repository root dynamically
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+MODULES_DIR="$REPO_ROOT/modules"
+
+# Validate modules directory exists
+if [[ ! -d "$MODULES_DIR" ]]; then
+    echo "❌ Error: Modules directory not found: $MODULES_DIR"
+    echo "💡 Hint: Run this script from the kenl repository (scripts/generate-manifests.sh)"
+    exit 1
+fi
+
 DATE=$(date +%Y-%m-%d)
 DATENUM=$(date +%Y%m%d)
 
@@ -117,7 +136,7 @@ See module README for specific system package requirements.
 
 \`\`\`bash
 # Most KENL modules operate from repo without installation
-cd ~/kenl/modules/${module_key}
+cd \$KENL_ROOT/modules/${module_key}
 
 # Follow module-specific README for setup instructions
 cat README.md
@@ -127,7 +146,7 @@ cat README.md
 
 \`\`\`bash
 # Verify module files exist
-ls -la ~/kenl/modules/${module_key}
+ls -la \$KENL_ROOT/modules/${module_key}
 \`\`\`
 
 ---
@@ -200,7 +219,7 @@ See module \`README.md\` for system integration details.
 
 \`\`\`bash
 # Update with kenl repo
-cd ~/kenl
+cd \$KENL_ROOT
 git pull origin main
 \`\`\`
 
@@ -208,7 +227,7 @@ git pull origin main
 
 \`\`\`bash
 # Verify module files exist
-ls -la ~/kenl/modules/${module_key}
+ls -la \$KENL_ROOT/modules/${module_key}
 \`\`\`
 
 ---

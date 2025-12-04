@@ -69,6 +69,21 @@ Dynamic banner that displays current modules/KENL context with appropriate color
 - Displays available commands
 - Updates based on `~/.kenl/current-context`
 
+### 7. Context-Sync Memory Kennel Banner (`kenl-banner-context-sync.txt`)
+Special banner for context-sync module showcasing the dog kennel → memory metaphor.
+
+**Best for:**
+- KENL3-dev context-sync module documentation
+- Demonstrating persistent AI memory concept
+- Introducing the "memory kennel" philosophy
+
+**Features:**
+- Dog kennel visual with memory icons 🐕💾
+- Shows integration components (CLI, Code, D1, ATOM)
+- Emphasizes "safe home for AI decisions"
+
+**Size:** 80 columns × 21 lines
+
 ## Installation
 
 ### Quick Install

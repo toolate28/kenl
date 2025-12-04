@@ -1,9 +1,33 @@
 #!/usr/bin/env bash
+#
+# kenl-dashboard.sh
 # KENL Live Dashboard - Real-time repository and system metrics
-# ATOM: ATOM-SYS-20251116-001
+#
+# Purpose: Display real-time status of KENL modules, git state, and system health
+# Prerequisites: git, bash 4+, read access to repository
 # Usage: ./scripts/kenl-dashboard.sh [--json|--compact]
+# Options:
+#   --json    Output in JSON format for programmatic use
+#   --compact Display condensed dashboard view
+# Output: Terminal dashboard or JSON status report  
+# Next steps: Use with KENL4 (monitoring) for Grafana integration, pipe to monitoring systems
+# Integration: Feeds KENL4 dashboards, integrates with ATOM trail
+# Related: KENL4-monitoring for persistent visualizations
+#
+# ATOM: ATOM-SYS-20251116-001
 
 set -euo pipefail
+
+# Detect repository root dynamically
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Validate repository structure
+if [[ ! -d "$REPO_ROOT/modules" ]]; then
+    echo "❌ Error: KENL repository structure not found at: $REPO_ROOT"
+    echo "💡 Hint: Run from kenl repository root or scripts/ directory"
+    exit 1
+fi
 
 # Color codes (compatible with Windows Git Bash)
 RESET='\033[0m'
