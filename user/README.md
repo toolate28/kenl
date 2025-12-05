@@ -149,9 +149,11 @@ git commit -m "docs: add shared template to user directory"
 
 ## 🆘 Getting Help
 
-- **For KENL-specific questions:** See [../GETTING-STARTED.md](../GETTING-STARTED.md)
-- **For documentation navigation:** See [../claude-landing/DOCUMENTATION-PATHWAYS.md](../claude-landing/DOCUMENTATION-PATHWAYS.md)
-- **For general documentation:** See [../docs/](../docs/)
+**Note:** These paths are relative to the repository root. If you cloned KENL to `~/.kenl`, these paths will work as-is.
+
+- **For KENL-specific questions:** See [GETTING-STARTED.md](../GETTING-STARTED.md)
+- **For documentation navigation:** See [claude-landing/DOCUMENTATION-PATHWAYS.md](../claude-landing/DOCUMENTATION-PATHWAYS.md)
+- **For general documentation:** See [docs/](../docs/)
 
 ---
 

@@ -724,7 +724,7 @@ docs: ATOM-DOC-20251116-004 - Add comprehensive markdown table formatting guide
 | `documentation` | ATOM-DOC  | 📚    |
 | `gaming`        | ATOM-GWI  | 🎮    |
 | `security`      | ATOM-SEC  | 🔒    |
-| `performance`   | ATOM-PERF | ⚡    |                                                                                             |
+| `performance`   | ATOM-PERF | ⚡    |
 
 ---
 
