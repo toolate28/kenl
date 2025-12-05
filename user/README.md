@@ -1,53 +1,84 @@
 ---
 title: User Landing Directory
-atom: ATOM-DOC-20251205-004
+atom: ATOM-DOC-20251205-008
 classification: USER
 status: production
 created: 2025-12-05
-version: 1.0.0
+updated: 2025-12-05
+version: 1.1.0
 ---
 
-# User Landing Directory
+# 👤 User Landing Directory
 
-**Purpose:** Your personal workspace for project-specific files, configurations, and symlinks to local projects.
+> **Your Personal Workspace** — Project files, configs, and symlinks that stay private by default
 
 ---
 
 ## 🎯 What This Directory Is For
 
-The `user/` directory is your **personal landing zone** within KENL. Use it to:
+The `user/` directory is your **personal command center** within KENL. Use it to:
 
-- **Symlink local projects** - Point to projects you're actively working on
-- **Store project-specific configs** - Keep Play Cards, SAIF workflows, or custom scripts
-- **Maintain personal notes** - Document your specific setup or use cases
-- **Quick access** - All your relevant files in one place
+| Feature | Benefit |
+|---------|---------|
+| 🔗 **Symlink local projects** | Point to projects you're actively working on |
+| ⚙️ **Store project-specific configs** | Keep Play Cards, SAIF workflows, custom scripts |
+| 📝 **Maintain personal notes** | Document your specific setup or use cases |
+| ⚡ **Quick access** | All your relevant files in one place |
 
-**Git Behavior:** By default, `user/` ignores everything except the README and example templates, so your personal files stay private.
+<table>
+<tr>
+<td>
+
+### 🔒 Privacy First
+
+Everything in `user/` is **gitignored by default** except:
+- ✅ This README
+- ✅ Example templates (optional)
+
+Your personal files stay **local and private** 🛡️
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 📁 Recommended Structure
+## 📁 Directory Layout
 
-```
-user/
-├── README.md                    # This file
-├── .gitignore                   # Ignores personal files
-├── projects/                    # Symlinks to your local projects
-│   ├── my-game-config -> /path/to/game-config/
-│   └── my-dev-project -> /path/to/dev-project/
-├── play-cards/                  # Your personal Play Cards
-│   └── my-custom-game.yaml
-├── scripts/                     # Personal utility scripts
-│   └── my-setup.sh
-└── notes/                       # Personal documentation
-    └── my-setup-notes.md
+```ascii
+user/                                    ← Your personal workspace
+│
+├── 📄 README.md                         ← You are here!
+├── 🚫 .gitignore                        ← Keeps your files private
+│
+├── 🔗 projects/                         ← Symlinks to local projects
+│   ├── my-game-config → /path/to/game-config/
+│   └── my-dev-project → /path/to/dev-project/
+│
+├── 🎮 play-cards/                       ← Your personal Play Cards
+│   └── battlefield-custom.yaml
+│
+├── 🔧 scripts/                          ← Personal utility scripts  
+│   ├── my-setup.sh
+│   └── backup-configs.sh
+│
+├── 📝 notes/                            ← Personal documentation
+│   ├── my-setup-notes.md
+│   └── troubleshooting-log.md
+│
+└── ⚙️ configs/                          ← Custom configurations
+    └── custom-saif-workflow.yaml
 ```
 
 ---
 
 ## 🔗 Creating Project Symlinks
 
-### Linux/macOS
+<table>
+<tr>
+<td width="33%">
+
+### 🐧 Linux/macOS
 
 ```bash
 # Navigate to user directory
@@ -60,7 +91,10 @@ ln -s /path/to/your/project project-name
 ls -la
 ```
 
-### Windows (PowerShell - requires admin)
+</td>
+<td width="33%">
+
+### 🪟 Windows (with admin)
 
 ```powershell
 # Navigate to user directory
@@ -73,58 +107,94 @@ New-Item -ItemType SymbolicLink -Path "project-name" -Target "C:\path\to\your\pr
 Get-ChildItem
 ```
 
-### Windows (PowerShell - without admin, junction)
+</td>
+<td width="33%">
+
+### 🪟 Windows (no admin)
 
 ```powershell
 # Create directory junction (no admin needed)
 cmd /c mklink /J "project-name" "C:\path\to\your\project"
 ```
 
+</td>
+</tr>
+</table>
+
 ---
 
-## 📋 Example Use Cases
+## 📋 Example Workflows
 
-### Gaming Setup
+<table>
+<tr>
+<td width="33%">
 
-```bash
+### 🎮 Gaming Setup
+
+```ascii
 user/
 ├── play-cards/
-│   ├── battlefield-6.yaml
-│   └── halo-infinite.yaml
+│   ├── bf6.yaml
+│   └── halo.yaml
 └── notes/
-    └── gaming-tweaks.md
+    └── tweaks.md
 ```
 
-### Development Environment
+**Use case:** Track game configs and optimization notes
 
-```bash
+</td>
+<td width="33%">
+
+### 💻 Development
+
+```ascii
 user/
 ├── projects/
-│   ├── web-app -> /home/dev/projects/my-web-app/
-│   └── api-service -> /home/dev/projects/api/
+│   ├── web-app/
+│   └── api/
 └── scripts/
-    └── dev-env-setup.sh
+    └── setup.sh
 ```
 
-### System Administration
+**Use case:** Quick access to active projects
 
-```bash
+</td>
+<td width="33%">
+
+### ⚙️ System Admin
+
+```ascii
 user/
 ├── configs/
-│   ├── network-monitoring.yaml
-│   └── backup-schedule.yaml
+│   └── backup.yaml
 └── notes/
-    └── system-maintenance-log.md
+    └── maint-log.md
 ```
+
+**Use case:** Track system configurations
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🚫 What NOT to Put Here
 
-- **Secrets or credentials** - Use `~/.secrets/` or environment variables
-- **Large binary files** - Keep binaries in appropriate system locations
-- **Generated files** - Build artifacts should stay in project directories
-- **Shared configurations** - Use `modules/` for team-shared configs
+<table>
+<tr>
+<td>
+
+| ❌ Don't Store | ✅ Store Instead |
+|----------------|------------------|
+| Secrets/credentials | `~/.secrets/` or env variables |
+| Large binary files | System locations (`/usr/local/bin`) |
+| Generated/build files | Project directories |
+| Team-shared configs | `modules/` directory |
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -157,15 +227,24 @@ git commit -m "docs: add shared template to user directory"
 
 ---
 
-## 📝 Notes
+## 💡 Pro Tips
 
-- This directory is **optional** - KENL works fine without it
-- Symlinks are a convenience, not a requirement
-- Structure is a **recommendation**, not a rule
-- Make it work for **your** workflow
+> **🔧 Optional Directory** — KENL works perfectly fine without customizing this space
+
+> **🔗 Symlinks are convenient** — But not required! Use whatever workflow suits you
+
+> **📐 Flexible Structure** — These are recommendations, not requirements. Adapt to your needs!
+
+> **🎯 Make it yours** — This is YOUR workspace. Organize it however works best for you!
 
 ---
 
-**ATOM:** ATOM-DOC-20251205-004
-**Version:** 1.0.0
-**Last Updated:** 2025-12-05
+<div align="center">
+
+**🏷️ ATOM:** `ATOM-DOC-20251205-008` | **📊 Version:** `1.1.0` | **📅 Updated:** `2025-12-05`
+
+---
+
+**[⬆️ Back to Top](#-user-landing-directory)** | **[🏠 Back to Root](../README.md)** | **[📚 View Docs](../docs/)**
+
+</div>
