@@ -3,9 +3,9 @@
 **Intent-Driven Gaming & Development with SAIF Process**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)]()
-[![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)]()
-[![ATOM: ATOM-DOC-20251126-005](https://img.shields.io/badge/ATOM-DOC--20251126--005-yellow.svg)]()
+[![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg)](https://github.com/toolate28/kenl)
+[![Platform: Bazzite](https://img.shields.io/badge/Platform-Bazzite-blueviolet.svg)](https://bazzite.gg/)
+[![ATOM: ATOM-DOC-20251126-005](https://img.shields.io/badge/ATOM-DOC--20251126--005-yellow.svg)](./ATOM-REGISTER.md)
 
 ---
 
