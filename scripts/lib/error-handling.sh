@@ -86,13 +86,13 @@ get_install_instruction() {
     local package="$1"
     local command="${2:-$1}"
     local distro=""
-    
+
     # Detect distribution
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         distro="${ID:-unknown}"
     fi
-    
+
     case "$distro" in
         fedora|rhel|centos)
             echo "sudo dnf install $package"
@@ -119,14 +119,14 @@ require_command() {
     local command="$1"
     local package="${2:-$1}"
     local description="${3:-$command}"
-    
+
     if ! has_command "$command"; then
         log_error "Required command not found: $command"
         log_error "Description: $description"
         log_error "Installation: $(get_install_instruction "$package" "$command")"
         return 1
     fi
-    
+
     log_debug "Found command: $command"
     return 0
 }
@@ -138,14 +138,14 @@ check_optional_command() {
     local command="$1"
     local package="${2:-$1}"
     local description="${3:-$command}"
-    
+
     if ! has_command "$command"; then
         log_warn "Optional command not found: $command"
         log_warn "Description: $description"
         log_warn "Installation: $(get_install_instruction "$package" "$command")"
         return 1
     fi
-    
+
     log_debug "Found optional command: $command"
     return 0
 }
@@ -156,13 +156,13 @@ check_optional_command() {
 require_commands() {
     local missing_commands=()
     local cmd
-    
+
     for cmd in "$@"; do
         if ! has_command "$cmd"; then
             missing_commands+=("$cmd")
         fi
     done
-    
+
     if [ ${#missing_commands[@]} -gt 0 ]; then
         log_error "Missing required commands: ${missing_commands[*]}"
         log_error ""
@@ -172,7 +172,7 @@ require_commands() {
         done
         return 1
     fi
-    
+
     return 0
 }
 
@@ -182,13 +182,13 @@ require_commands() {
 require_directory() {
     local missing_dirs=()
     local dir
-    
+
     for dir in "$@"; do
         if [ ! -d "$dir" ]; then
             missing_dirs+=("$dir")
         fi
     done
-    
+
     if [ ${#missing_dirs[@]} -gt 0 ]; then
         log_error "Missing required directories:"
         for dir in "${missing_dirs[@]}"; do
@@ -196,7 +196,7 @@ require_directory() {
         done
         return 1
     fi
-    
+
     return 0
 }
 
@@ -206,13 +206,13 @@ require_directory() {
 require_file() {
     local missing_files=()
     local file
-    
+
     for file in "$@"; do
         if [ ! -f "$file" ]; then
             missing_files+=("$file")
         fi
     done
-    
+
     if [ ${#missing_files[@]} -gt 0 ]; then
         log_error "Missing required files:"
         for file in "${missing_files[@]}"; do
@@ -220,7 +220,7 @@ require_file() {
         done
         return 1
     fi
-    
+
     return 0
 }
 
@@ -233,15 +233,15 @@ require_file() {
 die() {
     local message="$1"
     local recovery="${2:-}"
-    
+
     log_error "$message"
-    
+
     if [ -n "$recovery" ]; then
         echo ""
         log_info "Recovery suggestion:"
         echo "  $recovery" >&2
     fi
-    
+
     exit 1
 }
 
@@ -251,7 +251,7 @@ run_or_die() {
     local cmd="$1"
     local error_msg="$2"
     local recovery="${3:-}"
-    
+
     if ! eval "$cmd"; then
         die "$error_msg" "$recovery"
     fi
@@ -263,9 +263,9 @@ run_or_die() {
 try_command() {
     local cmd="$1"
     local description="${2:-$cmd}"
-    
+
     log_debug "Trying: $description"
-    
+
     if eval "$cmd" &>/dev/null; then
         log_debug "Success: $description"
         return 0
@@ -282,14 +282,14 @@ execute_step() {
     local cmd="$1"
     local description="$2"
     local dry_run="${3:-false}"
-    
+
     if [ "$dry_run" = "true" ]; then
         log_info "[DRY RUN] Would execute: $description"
         return 0
     fi
-    
+
     log_info "Executing: $description"
-    
+
     if eval "$cmd"; then
         log_success "$description"
         return 0
@@ -309,7 +309,7 @@ execute_step() {
 detect_platform() {
     local os
     os=$(uname -s | tr '[:upper:]' '[:lower:]')
-    
+
     case "$os" in
         linux*)
             # Check for WSL
@@ -350,7 +350,7 @@ is_immutable() {
 # Usage: warn_if_immutable "operation description"
 warn_if_immutable() {
     local operation="$1"
-    
+
     if is_immutable; then
         log_warn "Running on immutable system (rpm-ostree)"
         log_warn "Operation '$operation' should be user-space only"
@@ -397,7 +397,7 @@ backup_file() {
     local file="$1"
     local backup
     backup="${file}.backup.$(date +%Y%m%d_%H%M%S)"
-    
+
     if [ -f "$file" ]; then
         if cp "$file" "$backup"; then
             log_info "Backed up: $file -> $backup"
@@ -418,7 +418,7 @@ backup_file() {
 restore_file() {
     local backup="$1"
     local original="$2"
-    
+
     if [ -f "$backup" ]; then
         if cp "$backup" "$original"; then
             log_info "Restored: $backup -> $original"
@@ -438,7 +438,7 @@ restore_file() {
 generate_rollback_instructions() {
     local operation="$1"
     local rollback_cmd="$2"
-    
+
     echo ""
     echo "═══════════════════════════════════════════════════════════"
     echo "  ROLLBACK INSTRUCTIONS"
@@ -465,9 +465,9 @@ show_spinner() {
     local message="$1"
     local delay=0.1
     local spinstr='|/-\'
-    
+
     printf "%s " "$message" >&2
-    
+
     while true; do
         local temp=${spinstr#?}
         printf "[%c]" "$spinstr" >&2
@@ -485,7 +485,7 @@ show_spinner() {
 # Usage: if validate_atom_tag "ATOM-CFG-20251205-001"; then ... fi
 validate_atom_tag() {
     local tag="$1"
-    
+
     if echo "$tag" | grep -qE '^ATOM-[A-Z]+-[0-9]{8}-[0-9]{3}$'; then
         return 0
     else
@@ -500,9 +500,9 @@ validate_atom_tag() {
 confirm_action() {
     local prompt="${1:-Continue?}"
     local response
-    
+
     read -r -p "$prompt (y/N): " response
-    
+
     case "$response" in
         [yY][eE][sS]|[yY])
             return 0
@@ -522,11 +522,11 @@ confirm_action() {
 suggest_recovery() {
     local error_type="$1"
     local context="${2:-}"
-    
+
     echo ""
     log_info "Recovery suggestions for: $error_type"
     echo ""
-    
+
     case "$error_type" in
         missing_dependency)
             echo "  1. Install missing dependencies (see error messages above)"

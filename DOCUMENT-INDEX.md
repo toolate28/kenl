@@ -1,11 +1,11 @@
 ---
 title: KENL Root Document Index
-atom: ATOM-DOC-20251205-003
+atom: ATOM-DOC-20251205-005
 classification: INDEX
 status: production
 created: 2025-11-26
 updated: 2025-12-05
-version: 1.2.0
+version: 1.3.0
 ---
 
 # KENL Root Document Index
@@ -33,26 +33,42 @@ version: 1.2.0
 
 ---
 
-## 📋 Framework Standards (Reference Documents)
+## 📁 User Directory (Personal Workspace)
 
 | Document | Purpose | State | Location Rationale |
 |----------|---------|-------|-------------------|
-| `OWI_FRAMEWORK_OVERVIEW.md` | OWI methodology explanation | ✅ Active | Framework reference |
-| `OWI_METADATA_STANDARD.md` | OWI metadata format specification | ✅ Active | Standard specification |
-| `VISUAL-ELEMENTS-STANDARD.md` | Emoji, color, Mermaid conventions | ✅ Active | Style guide for all docs |
-| `NAMING-CONVENTIONS.md` | Branch, commit, tag naming rules | ✅ Active | Development standard |
-| `SCRIPT-ENVIRONMENT-TAGGING-STANDARD.md` | Script header format | ✅ Active | Script development standard |
-| `ATOM-REGISTER.md` | ATOM tag tracking registry | ✅ Active | Traceability requirement |
+| `user/README.md` | User workspace guide and setup instructions | ✅ Active | Personal project landing zone |
+| `user/.gitignore` | Prevents committing personal files | ✅ Active | Privacy protection |
+
+**Purpose:** Personal workspace for project-specific files, symlinks to local projects, and custom configurations.
+
+---
+
+## 📋 Framework Standards (Reference Documents)
+
+**Location:** `docs/standards/`
+
+| Document | Purpose | State | Previous Location |
+|----------|---------|-------|-------------------|
+| `docs/standards/OWI_FRAMEWORK_OVERVIEW.md` | OWI methodology explanation | ✅ Active | Moved from root |
+| `docs/standards/OWI_METADATA_STANDARD.md` | OWI metadata format specification | ✅ Active | Moved from root |
+| `docs/standards/VISUAL-ELEMENTS-STANDARD.md` | Emoji, color, Mermaid conventions | ✅ Active | Moved from root |
+| `docs/standards/NAMING-CONVENTIONS.md` | Branch, commit, tag naming rules | ✅ Active | Moved from root |
+| `docs/standards/SCRIPT-ENVIRONMENT-TAGGING-STANDARD.md` | Script header format | ✅ Active | Moved from root |
+| `ATOM-REGISTER.md` | ATOM tag tracking registry | ✅ Active | Root (traceability requirement) |
 
 ---
 
 ## 📖 Guides and Walkthroughs
 
-| Document | Purpose | State | Location Rationale |
+**Location:** `docs/guides/`
+
+| Document | Purpose | State | Previous Location |
 |----------|---------|-------|-------------------|
-| `AI-INTEGRATION-GUIDE.md` | Per-module AI usage guide | ✅ Active | Central AI guidance |
-| `BAZZITE-DX-IWI-INSTALLATION-SAIF.md` | Complete Bazzite installation walkthrough | ✅ Active | Primary installation guide |
-| `GITHUB-COPILOT-AGENT-BRIEFING.md` | Copilot agent instructions | ✅ Active | Agent onboarding |
+| `docs/guides/AI-INTEGRATION-GUIDE.md` | Per-module AI usage guide | ✅ Active | Moved from root |
+| `docs/guides/BAZZITE-DX-IWI-INSTALLATION-SAIF.md` | Complete Bazzite installation walkthrough | ✅ Active | Moved from root |
+| `docs/guides/COMPLETE-DEVELOPMENT-SETUP.md` | Development environment setup | ✅ Active | Moved from root |
+| `docs/guides/GITHUB-COPILOT-AGENT-BRIEFING.md` | Copilot agent instructions | ✅ Active | Moved from root |
 
 ---
 
@@ -73,11 +89,17 @@ version: 1.2.0
 
 ## 🛠️ Technical Documentation
 
-| Document | Purpose | State | Location Rationale |
+**Location:** `docs/technical/`
+
+| Document | Purpose | State | Previous Location |
 |----------|---------|-------|-------------------|
-| `PR-DAY-ZERO-DESIGN.md` | PR workflow design | ✅ Active | Process design reference |
-| `WORKSPACE.md` | Workspace configuration | ✅ Active | Environment config |
-| `DOCUMENT-INDEX.md` | This file - root doc inventory | ✅ Active | Navigation hub |
+| `docs/technical/PR-DAY-ZERO-DESIGN.md` | PR workflow design | ✅ Active | Moved from root |
+| `docs/technical/WORKSPACE.md` | Workspace configuration | ✅ Active | Moved from root |
+| `docs/technical/SAIF-WORKFLOW-PROGRESS-REPORT.md` | SAIF workflow progress tracking | ✅ Active | Moved from root |
+| `docs/technical/atom-context-sync-proposal.md` | Context sync proposal | ✅ Active | Moved from root |
+| `docs/technical/kenl-atom-visual-presentation.md` | ATOM visual presentation | ✅ Active | Moved from root |
+| `docs/technical/kenl-context-sync-atom-directive.md` | Context sync directive | ✅ Active | Moved from root |
+| `DOCUMENT-INDEX.md` | This file - root doc inventory | ✅ Active | Root (navigation hub) |
 
 **Archived (2025-11-26):**
 - `.archive/planning/CLEANUP-EXECUTION-PLAN.md`
@@ -91,11 +113,13 @@ version: 1.2.0
 
 ## 📐 Analysis and Optimization
 
-| Document | Purpose | State | Location Rationale |
+**Location:** `docs/analysis/`
+
+| Document | Purpose | State | Previous Location |
 |----------|---------|-------|-------------------|
-| `SAIF-PATTERN-ANALYSIS.md` | SAIF command-flag pattern analysis | ✅ Active | Pattern documentation |
-| `PROMPT-ANALYSIS-AND-OPTIMIZATION.md` | AI prompt optimization | ✅ Active | AI prompt reference |
-| `ALIGNED-SIGHT.md` | Alignment documentation | ✅ Active | Vision alignment |
+| `docs/analysis/SAIF-PATTERN-ANALYSIS.md` | SAIF command-flag pattern analysis | ✅ Active | Moved from root |
+| `docs/analysis/PROMPT-ANALYSIS-AND-OPTIMIZATION.md` | AI prompt optimization | ✅ Active | Moved from root |
+| `docs/analysis/ALIGNED-SIGHT.md` | Alignment documentation | ✅ Active | Moved from root |
 
 ---
 
@@ -135,15 +159,22 @@ Run link validation:
 
 ## 🔄 Recent Updates (2025-12-05)
 
-**Polish Pass Changes:**
+**Documentation Reorganization:**
+- ✅ **User Directory**: Created `user/` as personal workspace for project-specific files and symlinks
+- ✅ **Standards**: Moved framework standards to `docs/standards/`
+- ✅ **Guides**: Moved installation/integration guides to `docs/guides/`
+- ✅ **Analysis**: Moved pattern analysis docs to `docs/analysis/`
+- ✅ **Technical**: Moved technical design docs to `docs/technical/`
+- ✅ **Structure**: Updated README, copilot-instructions, and DOCUMENT-INDEX to reflect new organization
+
+**Previous Polish Pass Changes:**
 - ✅ **KENL8-security**: Removed Vault/TOTP references, added security analysis Jupyter notebook
 - ✅ **macOS Support**: Removed macOS references (focus on Windows/Linux)
 - ✅ **Obsidian**: Made optional - users can choose AI-assisted (with Obsidian) or self-propelled (any editor) workflows
 - ✅ **context-sync**: Clarified as AI-agent-only requirement
-- ✅ **Documentation**: Updated for workflow flexibility and cross-platform text editor support
 
 ---
 
-**ATOM:** ATOM-DOC-20251205-003
-**Version:** 1.2.0
+**ATOM:** ATOM-DOC-20251205-005
+**Version:** 1.3.0
 **Last Updated:** 2025-12-05

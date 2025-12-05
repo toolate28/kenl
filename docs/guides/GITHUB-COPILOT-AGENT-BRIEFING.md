@@ -236,7 +236,7 @@ audience: GitHub Copilot, Coding Agents, VS Code AI
 
 set -euo pipefail  # Exit on error, undefined variables, pipe failures
 
-# Color codes (from VISUAL-ELEMENTS-STANDARD.md)
+# Color codes (from docs/standards/VISUAL-ELEMENTS-STANDARD.md)
 GREEN="\033[0;32m"
 CYAN="\033[0;36m"
 YELLOW="\033[1;33m"
@@ -286,10 +286,10 @@ All scripts must:
 - `modules/KENL2-gaming/guides/1.8TB_EXTERNAL_DRIVE_LAYOUT.md`
 
 **Visual Standards:**
-- `VISUAL-ELEMENTS-STANDARD.md` (colors, emojis, formatting)
+- `docs/standards/VISUAL-ELEMENTS-STANDARD.md` (colors, emojis, formatting)
 
 **SAIF Pattern:**
-- `SAIF-PATTERN-ANALYSIS.md` (command→flag semantics)
+- `docs/analysis/SAIF-PATTERN-ANALYSIS.md` (command→flag semantics)
 
 ---
 

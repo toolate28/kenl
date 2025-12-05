@@ -72,7 +72,7 @@ check_yaml_syntax() {
     else
         log_warn "Python3 not available - using basic validation"
         log_info "For full YAML validation, install: pip install pyyaml"
-        
+
         # Fallback: basic check
         if grep -q "^[a-z_]*:" "$file" 2>/dev/null; then
             return 0
@@ -142,7 +142,7 @@ main() {
     echo ""
     log_info "Validating: $playcard_file"
     echo ""
-    
+
     # Check for optional dependencies
     check_optional_command "python3" "python3" "Python for full YAML validation" || true
 

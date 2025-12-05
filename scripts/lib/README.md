@@ -8,7 +8,7 @@ Reusable library functions for KENL scripts providing consistent error handling,
 
 Centralized error handling and dependency management library for all KENL scripts.
 
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **ATOM:** ATOM-TOOL-20251205-001
 
 ## Usage
@@ -202,27 +202,27 @@ main() {
             *) die "Unknown option: $1" "Run with --help for usage" ;;
         esac
     done
-    
+
     log_info "Starting script..."
-    
+
     # Check prerequisites
     require_commands "git" "make" || die "Missing required commands"
     check_optional_command "jq" "jq" "JSON processor"
-    
+
     # Warn if on immutable system
     warn_if_immutable "file modification"
-    
+
     # Create backup
     backup=$(backup_file "$CONFIG_FILE")
-    
+
     # Execute with dry-run support
     execute_step "make build" "Build project" "$DRY_RUN"
-    
+
     # Show rollback instructions
     generate_rollback_instructions \
         "configuration update" \
         "cp $backup $CONFIG_FILE"
-    
+
     log_success "Script completed successfully"
 }
 

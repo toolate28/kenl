@@ -1,9 +1,9 @@
 # KENL Dual-Boot Gaming Setup: Agent Execution Directive
 
-**ATOM:** ATOM-DIRECTIVE-DUALBOOT-20241127-001  
-**Target:** Local Claude agent with system access  
-**Scenario:** Battlefield 2042 (Windows 11) + Halo Infinite (Bazzite-DX)  
-**Duration:** 90-120 minutes total  
+**ATOM:** ATOM-DIRECTIVE-DUALBOOT-20241127-001
+**Target:** Local Claude agent with system access
+**Scenario:** Battlefield 2042 (Windows 11) + Halo Infinite (Bazzite-DX)
+**Duration:** 90-120 minutes total
 **Approval Gates:** 7 mandatory checkpoints
 
 ---
@@ -32,8 +32,8 @@
 
 ## Phase 0: Pre-Flight Checks
 
-**Duration:** 5 minutes  
-**Risk Level:** Low  
+**Duration:** 5 minutes
+**Risk Level:** Low
 **Rollback:** N/A (read-only)
 
 ### Checklist
@@ -86,8 +86,8 @@
 
 ## Phase 1: Windows 11 Setup
 
-**Duration:** 15-20 minutes  
-**Risk Level:** Low (user-space only)  
+**Duration:** 15-20 minutes
+**Risk Level:** Low (user-space only)
 **Rollback:** `npm uninstall -g @context-sync/server`
 
 ### Step 1.1: Install Node.js (if needed)
@@ -234,8 +234,8 @@ Write-Host "  ATOM trail: $env:TEMP\atom_trail.log"
 
 ## Phase 2: Bazzite-DX Setup
 
-**Duration:** 20-30 minutes  
-**Risk Level:** Low (container-only)  
+**Duration:** 20-30 minutes
+**Risk Level:** Low (container-only)
 **Rollback:** `distrobox rm kenl`
 
 ### Step 2.1: Create KENL Container (if not exists)
@@ -366,8 +366,8 @@ echo "ATOM-INIT-BAZZITE-20241127-011: dual-boot-gaming project initialized" >> /
 
 ## Phase 3: Cloudflare D1 Deployment
 
-**Duration:** 10-15 minutes  
-**Risk Level:** Low (cloud-only)  
+**Duration:** 10-15 minutes
+**Risk Level:** Low (cloud-only)
 **Rollback:** `wrangler d1 delete atom-trail`
 
 ### Step 3.1: Install Wrangler (on either OS)
@@ -477,26 +477,26 @@ cat > src/index.js << 'EOF'
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    
+
     // CORS headers
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     };
-    
+
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders });
     }
-    
+
     // POST /sync - Sync ATOM entry to D1
     if (url.pathname === '/sync' && request.method === 'POST') {
       try {
         const data = await request.json();
-        
+
         const result = await env.DB.prepare(
-          `INSERT INTO atom_trail 
-           (atom_id, operation, platform, agent, timestamp, signature, 
+          `INSERT INTO atom_trail
+           (atom_id, operation, platform, agent, timestamp, signature,
             previous_atom, metadata, game, token_cost)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(
@@ -511,32 +511,32 @@ export default {
           data.game || null,
           data.token_cost || 0
         ).run();
-        
-        return new Response(JSON.stringify({ 
-          success: true, 
-          atom_id: data.atom_id 
+
+        return new Response(JSON.stringify({
+          success: true,
+          atom_id: data.atom_id
         }), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       } catch (error) {
-        return new Response(JSON.stringify({ 
-          success: false, 
-          error: error.message 
+        return new Response(JSON.stringify({
+          success: false,
+          error: error.message
         }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
     }
-    
+
     // GET /query?platform=X&game=Y
     if (url.pathname === '/query' && request.method === 'GET') {
       const platform = url.searchParams.get('platform');
       const game = url.searchParams.get('game');
-      
+
       let query = 'SELECT * FROM atom_trail WHERE 1=1';
       const bindings = [];
-      
+
       if (platform) {
         query += ' AND platform = ?';
         bindings.push(platform);
@@ -545,36 +545,36 @@ export default {
         query += ' AND game = ?';
         bindings.push(game);
       }
-      
+
       query += ' ORDER BY timestamp DESC LIMIT 50';
-      
+
       const result = await env.DB.prepare(query).bind(...bindings).all();
-      
+
       return new Response(JSON.stringify(result.results), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
-    
+
     // GET /config/:game
     if (url.pathname.startsWith('/config/')) {
       const game = url.pathname.split('/')[2];
-      
+
       const result = await env.DB.prepare(
         'SELECT * FROM game_configs WHERE game_name = ? ORDER BY updated_at DESC LIMIT 1'
       ).bind(game).first();
-      
+
       if (!result) {
         return new Response(JSON.stringify({ error: 'Config not found' }), {
           status: 404,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
-      
+
       return new Response(result.config_json, {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
-    
+
     return new Response('KENL ATOM Sync Worker', {
       headers: { ...corsHeaders, 'Content-Type': 'text/plain' }
     });
@@ -631,8 +631,8 @@ source ~/.bashrc
 
 ## Phase 4: Battlefield 2042 Configuration (Windows)
 
-**Duration:** 20-30 minutes  
-**Risk Level:** Medium (game settings modified)  
+**Duration:** 20-30 minutes
+**Risk Level:** Medium (game settings modified)
 **Rollback:** Restore EA App settings backup
 
 ### Step 4.1: Research BF 2042 Optimization
@@ -809,7 +809,7 @@ foreach (`$atom in `$atoms | Where-Object { `$_ -match "ATOM-.*-WIN-" }) {
   `$parts = `$atom -split ": "
   `$atomId = `$parts[0]
   `$operation = `$parts[1]
-  
+
   `$payload = @{
     atom_id = `$atomId
     operation = `$operation
@@ -818,9 +818,9 @@ foreach (`$atom in `$atoms | Where-Object { `$_ -match "ATOM-.*-WIN-" }) {
     timestamp = (Get-Date).ToString("o")
     game = "bf2042"
   } | ConvertTo-Json
-  
+
   Invoke-RestMethod -Uri "`$workerUrl/sync" -Method POST -Body `$payload -ContentType "application/json"
-  
+
   Write-Host "✓ Synced: `$atomId"
 }
 "@
@@ -839,8 +839,8 @@ Write-Host "Run to sync ATOM trail to D1"
 
 ## Phase 5: Halo Infinite Configuration (Bazzite)
 
-**Duration:** 20-30 minutes  
-**Risk Level:** Medium (game settings modified)  
+**Duration:** 20-30 minutes
+**Risk Level:** Medium (game settings modified)
 **Rollback:** Remove `~/.config/gaming-intent/halo-infinite.env`
 
 ### Step 5.1: Research with Cross-Reference (inside KENL)
@@ -1045,7 +1045,7 @@ while IFS= read -r line; do
   if [[ $line =~ ATOM-.*-BAZZITE- ]]; then
     ATOM_ID=$(echo "$line" | cut -d: -f1)
     OPERATION=$(echo "$line" | cut -d: -f2-)
-    
+
     PAYLOAD=$(jq -n \
       --arg aid "$ATOM_ID" \
       --arg op "$OPERATION" \
@@ -1061,11 +1061,11 @@ while IFS= read -r line; do
         timestamp: $ts,
         game: $game
       }')
-    
+
     curl -X POST "$WORKER_URL/sync" \
       -H "Content-Type: application/json" \
       -d "$PAYLOAD"
-    
+
     echo "✓ Synced: $ATOM_ID"
   fi
 done < /tmp/atom_trail.log
@@ -1085,8 +1085,8 @@ echo "Run to sync ATOM trail to D1"
 
 ## Phase 6: Cross-Platform Verification
 
-**Duration:** 10 minutes  
-**Risk Level:** Low (read-only)  
+**Duration:** 10 minutes
+**Risk Level:** Low (read-only)
 **Rollback:** N/A
 
 ### Step 6.1: Test Cross-OS Memory (Windows Query)
@@ -1181,8 +1181,8 @@ echo "ATOM-VERIFY-PATTERN-20241127-025: Learning pattern verified (High preset a
 
 ## Phase 7: PDF User Guide Generation
 
-**Duration:** 10-15 minutes  
-**Risk Level:** Low (documentation only)  
+**Duration:** 10-15 minutes
+**Risk Level:** Low (documentation only)
 **Rollback:** Delete PDF
 
 ### Step 7.1: Generate PDF-Optimized Markdown
@@ -1503,13 +1503,13 @@ Example: ATOM-CFG-WIN-20241127-017
 
 ## Agent Signature
 
-**Directive ID:** ATOM-DIRECTIVE-DUALBOOT-20241127-001  
-**Agent:** Claude Code (local execution)  
-**Status:** Ready for execution  
-**Estimated Duration:** 90-120 minutes  
-**Human Approvals Required:** 7 gates  
-**Risk Level:** Medium (game config changes)  
-**Rollback Available:** Yes (full or partial)  
+**Directive ID:** ATOM-DIRECTIVE-DUALBOOT-20241127-001
+**Agent:** Claude Code (local execution)
+**Status:** Ready for execution
+**Estimated Duration:** 90-120 minutes
+**Human Approvals Required:** 7 gates
+**Risk Level:** Medium (game config changes)
+**Rollback Available:** Yes (full or partial)
 
 **Execute:** Await human authorization to begin Phase 0
 

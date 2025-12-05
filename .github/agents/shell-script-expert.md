@@ -35,7 +35,7 @@ set -euo pipefail  # Exit on error, undefined vars, pipe failures
 ### Error Handling
 
 ```bash
-# Color codes (from VISUAL-ELEMENTS-STANDARD.md)
+# Color codes (from docs/standards/VISUAL-ELEMENTS-STANDARD.md)
 GREEN="\033[0;32m"
 CYAN="\033[0;36m"
 YELLOW="\033[1;33m"
@@ -150,7 +150,7 @@ Before submitting script changes:
 - [ ] Rollback instructions documented
 - [ ] SAIF flag generated on success
 - [ ] Dependencies checked before execution
-- [ ] Color output follows VISUAL-ELEMENTS-STANDARD.md
+- [ ] Color output follows docs/standards/VISUAL-ELEMENTS-STANDARD.md
 - [ ] Script tested in isolated environment
 - [ ] Usage examples included in comments
 
@@ -192,7 +192,7 @@ Create a script to validate external drive partition layout for Bazzite-DX insta
 ## References
 
 - [Shell Script Standards](../copilot-instructions.md#shell-script-standards)
-- [Visual Elements Standard](../../VISUAL-ELEMENTS-STANDARD.md)
+- [Visual Elements Standard](../../docs/standards/VISUAL-ELEMENTS-STANDARD.md)
 - [ATOM Framework](../../modules/KENL1-framework/README.md)
-- [SAIF Pattern Analysis](../../SAIF-PATTERN-ANALYSIS.md)
+- [SAIF Pattern Analysis](../../docs/analysis/SAIF-PATTERN-ANALYSIS.md)
 - [User-Space Operations Guide](../../modules/KENL0-system/README.md)

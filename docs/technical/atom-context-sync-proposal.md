@@ -1,7 +1,7 @@
 ![[kenl-context-sync-atom-directive]]# ATOM Tags Integration Proposal for context-sync
 
-**ATOM:** ATOM-ANALYSIS-20241127-001  
-**Date:** 2024-11-27  
+**ATOM:** ATOM-ANALYSIS-20241127-001
+**Date:** 2024-11-27
 **Scope:** Value proposition for ATOM-style audit trails in context-sync
 
 ---
@@ -21,7 +21,7 @@ ATOM tags could significantly enhance context-sync's **traceability, reproducibi
 
 Structured identifiers capturing the **complete lineage** of an operation:
 - **Format:** `ATOM-{TYPE}-{YYYYMMDD}-{COUNTER}`
-- **Examples:** 
+- **Examples:**
   - `ATOM-MCP-20241127-001` (first MCP tool call of the day)
   - `ATOM-SAGE-20241127-002` (second SAGE methodology execution)
   - `ATOM-CFG-20241127-003` (third configuration change)
@@ -91,7 +91,7 @@ Inspired by database ACID principles:
       "influenced_by": ["ATOM-RESEARCH-20241126-023"]
     },
     {
-      "atom_id": "ATOM-DECISION-20241127-002", 
+      "atom_id": "ATOM-DECISION-20241127-002",
       "title": "Deploy to Vercel",
       "agent": "cursor-ide",
       "influenced_by": ["ATOM-DECISION-20241127-001"], // ← Links to React choice
@@ -344,7 +344,7 @@ context-sync reconstruct \
 
 ```sql
 -- Query ATOM trail across all projects
-SELECT 
+SELECT
   atom_id,
   metadata->>'tech_stack' as stack,
   COUNT(*) as usage_count
@@ -377,7 +377,7 @@ ORDER BY usage_count DESC;
 - [ ] Basic ATOM generation (no signatures yet)
 - [ ] Documentation: "How to use ATOM tags"
 
-**Timeline:** 2-3 weeks  
+**Timeline:** 2-3 weeks
 **Breaking Changes:** None
 
 ### Phase 2: Agent Coordination (v1.2.0)
@@ -388,7 +388,7 @@ ORDER BY usage_count DESC;
 - [ ] Cross-project ATOM search
 - [ ] Token cost tracking per agent
 
-**Timeline:** 4-6 weeks  
+**Timeline:** 4-6 weeks
 **Breaking Changes:** None (still opt-in)
 
 ### Phase 3: Signatures & Verification (v1.3.0)
@@ -399,7 +399,7 @@ ORDER BY usage_count DESC;
 - [ ] `verify_atom_trail` tool (detect tampering)
 - [ ] Export compliance reports
 
-**Timeline:** 6-8 weeks  
+**Timeline:** 6-8 weeks
 **Breaking Changes:** None
 
 ### Phase 4: Deep Integration (v2.0.0)
@@ -410,7 +410,7 @@ ORDER BY usage_count DESC;
 - [ ] Deprecate separate `atom_tag_operation` tool
 - [ ] Performance optimization (indexed queries)
 
-**Timeline:** 8-12 weeks  
+**Timeline:** 8-12 weeks
 **Breaking Changes:** Yes (schema update)
 
 ---
@@ -519,6 +519,6 @@ The value proposition is strongest for:
 
 ---
 
-**ATOM:** ATOM-ANALYSIS-20241127-001  
-**Author:** toolated (via Claude Sonnet 4.5)  
+**ATOM:** ATOM-ANALYSIS-20241127-001
+**Author:** toolated (via Claude Sonnet 4.5)
 **Status:** Proposal for community feedback

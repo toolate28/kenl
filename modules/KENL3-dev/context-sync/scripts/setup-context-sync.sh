@@ -6,7 +6,7 @@
 # Purpose: Automates context-sync installation, project initialization, and MCP configuration
 # Prerequisites: Node.js 18+, npm 9+, write access to ~/.config/
 # Usage: ./setup-context-sync.sh [--skip-npm] [--project-name NAME]
-# Output: 
+# Output:
 #   - context-sync installed globally via npm
 #   - bazza-dx project initialized in context-sync
 #   - MCP configuration created at ~/.config/claude/mcp-servers/context-sync.json
@@ -135,7 +135,7 @@ echo ""
 if [[ "$SKIP_NPM_INSTALL" == false ]]; then
     echo -e "${KENL_BOLD}[2/5] Installing context-sync from npm...${KENL_RESET}"
     echo -e "${KENL_CYAN}🏗️  Building the kennel foundation...${KENL_RESET}"
-    
+
     if npm install -g @context-sync/server; then
         echo -e "${KENL_GREEN}✅ context-sync installed successfully${KENL_RESET}"
     else

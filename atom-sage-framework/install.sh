@@ -46,13 +46,13 @@ else
     YELLOW='\033[1;33m'
     BLUE='\033[0;34m'
     NC='\033[0m' # No Color
-    
+
     log_info() { echo -e "${BLUE}[INFO]${NC} $*"; }
     log_success() { echo -e "${GREEN}[SUCCESS]${NC} $*"; }
     log_warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
     log_error() { echo -e "${RED}[ERROR]${NC} $*" >&2; }
     die() { log_error "$1"; exit 1; }
-    require_not_root() { 
+    require_not_root() {
         if [ "${EUID:-$(id -u)}" -eq 0 ]; then
             die "This script should NOT be run as root" "Run without sudo: $0 $*"
         fi
@@ -108,7 +108,7 @@ EOF
 
 check_shell() {
     log_info "Checking shell compatibility..."
-    
+
     if [ -n "${BASH_VERSION:-}" ]; then
         log_success "Running in Bash (version: ${BASH_VERSION})"
         return 0
@@ -463,7 +463,7 @@ main() {
                 ;;
         esac
     done
-    
+
     echo ""
     echo "════════════════════════════════════════════════════════════"
     echo "  ATOM+SAGE Framework Installer v${VERSION}"
@@ -478,7 +478,7 @@ main() {
 
     # Check we're not running as root
     require_not_root || exit 1
-    
+
     # Warn if on immutable system
     warn_if_immutable "ATOM+SAGE installation"
 
@@ -493,7 +493,7 @@ main() {
     if [ "$DRY_RUN" = "false" ] && command -v "${INSTALL_DIR}/atom" &> /dev/null; then
         "${INSTALL_DIR}/atom" STATUS "ATOM+SAGE Framework v${VERSION} installed" > /dev/null 2>&1 || true
     fi
-    
+
     # Show rollback instructions
     if [ "$DRY_RUN" = "false" ]; then
         {

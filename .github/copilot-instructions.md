@@ -32,6 +32,7 @@ Every KENL operation must ensure:
 kenl/
 ├── .github/              # GitHub configuration, workflows, templates
 ├── claude-landing/       # START HERE - AI agent orientation documents
+├── user/                 # User workspace for project-specific files and symlinks
 ├── modules/              # 14 KENL modules (KENL0-13)
 │   ├── KENL0-system/     # System operations, PowerShell modules
 │   ├── KENL1-framework/  # ATOM + SAGE core
@@ -39,18 +40,23 @@ kenl/
 │   ├── KENL3-dev/        # Distrobox, Claude Code, Ollama/Qwen, MCP
 │   ├── KENL4-monitoring/ # Prometheus, Grafana, ATOM DB
 │   └── ...               # KENL5-13 (see README.md for full list)
+├── docs/                 # General documentation
+│   ├── standards/        # Framework standards and conventions
+│   ├── guides/           # Installation and integration guides
+│   ├── analysis/         # Pattern analysis and optimization
+│   └── technical/        # Technical design documents
+├── dotfiles/             # SAIF workflows and system configurations
 ├── governance/           # Governance artifacts
 │   ├── mcp-governance/   # ARCREF templates and artifacts
 │   └── 02-Decisions/     # ADR (Architectural Decision Records)
 ├── scripts/              # Utility scripts (bash, PowerShell)
-├── docs/                 # Additional documentation
 └── case-studies/         # Real-world scenarios (RWS-*.md)
 ```
 
 **Key Entry Points:**
-- `CLAUDE.md` - Primary instructions for Claude Code agent
 - `README.md` - Project overview and quick start
 - `CONTRIBUTING.md` - Contribution guidelines
+- `user/` - Personal workspace for project files and symlinks
 - `claude-landing/CURRENT-STATE.md` - Current environment snapshot
 - `claude-landing/QUICK-REFERENCE.md` - Common paths and commands
 
@@ -537,7 +543,7 @@ Focus on maintaining high-quality documentation following KENL standards.
 - Update frontmatter dates and metadata
 
 ## Standards
-- Follow VISUAL-ELEMENTS-STANDARD.md for colors and emojis
+- Follow docs/standards/VISUAL-ELEMENTS-STANDARD.md for colors and emojis
 - Use claude-landing/ for AI-agent-specific docs
 - Maintain consistency across all module READMEs
 ```
@@ -558,7 +564,7 @@ Specialized in creating POSIX-compliant shell scripts for KENL.
 ## Standards
 - Use `#!/usr/bin/env bash` shebang
 - Include `set -euo pipefail`
-- Follow color scheme from VISUAL-ELEMENTS-STANDARD.md
+- Follow color scheme from docs/standards/VISUAL-ELEMENTS-STANDARD.md
 - Test on both Bazzite-DX and Windows 11 (if applicable)
 ```
 

@@ -339,13 +339,13 @@ EOF
 
 **Common Issues & Solutions**
 
-- **context-sync not found:**  
+- **context-sync not found:**
   Ensure you ran `./scripts/setup-context-sync.sh` and your `$PATH` includes `~/.local/bin`.
 
-- **MCP server not responding:**  
+- **MCP server not responding:**
   Restart Claude Code and verify MCP server is running (`ps aux | grep mcp-server`).
 
-- **Project not initializing:**  
+- **Project not initializing:**
   Check for typos in your initialization command and ensure your working directory is writable.
 ---
 

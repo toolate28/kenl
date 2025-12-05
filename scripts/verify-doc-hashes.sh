@@ -43,7 +43,7 @@ else
     GREEN='\033[0;32m'
     YELLOW='\033[1;33m'
     NC='\033[0m' # No Color
-    
+
     log_error() { echo "[ERROR] $*" >&2; }
     log_warn() { echo "[WARN] $*" >&2; }
     log_info() { echo "[INFO] $*"; }
@@ -134,9 +134,9 @@ EOF
 
 check_prerequisites() {
     log_info "Checking prerequisites..."
-    
+
     local missing=0
-    
+
     # Check for sha256sum or shasum
     if has_command sha256sum; then
         log_debug "Found sha256sum"
@@ -147,17 +147,17 @@ check_prerequisites() {
         log_error "Install coreutils package or use macOS built-in shasum"
         missing=1
     fi
-    
+
     # Check for sed
     if ! require_command sed "sed" "Stream editor for text manipulation"; then
         missing=1
     fi
-    
+
     # Check for grep
     if ! require_command grep "grep" "Pattern matching tool"; then
         missing=1
     fi
-    
+
     if [ $missing -eq 0 ]; then
         log_success "All prerequisites found"
         return 0
@@ -319,13 +319,13 @@ case "$MODE" in
         fi
 
         file="$FILE_ARG"
-        
+
         if ! require_file "$file"; then
             die "File not found: $file"
         fi
 
         hash=$(compute_hash "$file")
-        
+
         echo "═══════════════════════════════════════════════════════════"
         log_success "Hash generated for: $file"
         echo "═══════════════════════════════════════════════════════════"

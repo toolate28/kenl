@@ -9,7 +9,7 @@ This agent is responsible for creating and maintaining documentation across the 
 ## Responsibilities
 
 - Update markdown documentation with proper formatting
-- Ensure Mermaid diagrams follow visual standards from VISUAL-ELEMENTS-STANDARD.md
+- Ensure Mermaid diagrams follow visual standards from docs/standards/VISUAL-ELEMENTS-STANDARD.md
 - Validate table formatting (longest-string-first rule)
 - Add ATOM-DOC tags to all documentation changes
 - Update frontmatter dates and metadata
@@ -21,7 +21,7 @@ This agent is responsible for creating and maintaining documentation across the 
 
 ### Markdown Formatting
 
-- Follow VISUAL-ELEMENTS-STANDARD.md for colors and emojis
+- Follow docs/standards/VISUAL-ELEMENTS-STANDARD.md for colors and emojis
 - Use claude-landing/ for AI-agent-specific docs
 - Maintain consistency across all module READMEs
 - Ensure proper heading hierarchy (H1 -> H2 -> H3)
@@ -104,7 +104,7 @@ Update the KENL2-gaming module README to document the new Play Card validation f
 
 ## References
 
-- [Visual Elements Standard](../../VISUAL-ELEMENTS-STANDARD.md)
+- [Visual Elements Standard](../../docs/standards/VISUAL-ELEMENTS-STANDARD.md)
 - [Markdown Table Formatting Guide](../../claude-landing/MARKDOWN-TABLE-FORMATTING.md)
 - [Contributing Guidelines](../../CONTRIBUTING.md)
 - [ATOM Framework](../../modules/KENL1-framework/README.md)

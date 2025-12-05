@@ -477,8 +477,8 @@ lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINT
 NAME          SIZE  FSTYPE  LABEL           MOUNTPOINT
 nvme0n1       512G
 ├─nvme0n1p1   100M  vfat    EFI System
-├─nvme0n1p2   16M              
-├─nvme0n1p3   400G  ntfs    Windows         
+├─nvme0n1p2   16M
+├─nvme0n1p3   400G  ntfs    Windows
 └─nvme0n1p4   600M  ntfs    Recovery
 \`\`\`
 

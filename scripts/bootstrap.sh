@@ -68,7 +68,7 @@ EOF
 
 check_python_installation() {
     log_info "Checking for Python installation..."
-    
+
     if has_command python3; then
         local python_version
         python_version=$(python3 --version 2>&1 | cut -d' ' -f2)
@@ -89,7 +89,7 @@ check_python_installation() {
 
 check_pip_installation() {
     log_info "Checking for pip installation..."
-    
+
     if has_command pip3; then
         log_success "Found pip3"
         return 0
@@ -99,23 +99,23 @@ check_pip_installation() {
     else
         log_warn "pip not found"
         log_warn "pip is recommended for installing pre-commit"
-        
+
         if has_command python3; then
             log_info "Try installing pip with: python3 -m ensurepip --user"
         fi
-        
+
         return 1
     fi
 }
 
 install_precommit() {
     log_info "Installing pre-commit..."
-    
+
     if [ "$DRY_RUN" = "true" ]; then
         log_info "[DRY RUN] Would install pre-commit via pip"
         return 0
     fi
-    
+
     local pip_cmd=""
     if has_command pip3; then
         pip_cmd="pip3"
@@ -125,7 +125,7 @@ install_precommit() {
         log_error "No pip command available"
         return 1
     fi
-    
+
     if $pip_cmd install --user pre-commit; then
         log_success "pre-commit installed successfully"
         return 0
@@ -138,19 +138,19 @@ install_precommit() {
 
 install_precommit_hooks() {
     log_info "Installing pre-commit hooks..."
-    
+
     if [ "$DRY_RUN" = "true" ]; then
         log_info "[DRY RUN] Would install pre-commit hooks in .git/hooks/"
         return 0
     fi
-    
+
     if ! has_command pre-commit; then
         log_error "pre-commit command not found"
         log_error "Installation may have failed or ~/.local/bin not in PATH"
         log_info "Add to PATH: export PATH=\"\$HOME/.local/bin:\$PATH\""
         return 1
     fi
-    
+
     if pre-commit install; then
         log_success "pre-commit hooks installed"
         return 0
@@ -162,20 +162,20 @@ install_precommit_hooks() {
 
 run_precommit_checks() {
     log_info "Running pre-commit on all files..."
-    
+
     if [ "$DRY_RUN" = "true" ]; then
         log_info "[DRY RUN] Would run: pre-commit run --all-files"
         return 0
     fi
-    
+
     if ! has_command pre-commit; then
         log_warn "pre-commit not available, skipping validation"
         return 1
     fi
-    
+
     echo ""
     echo "═══════════════════════════════════════════════════════════"
-    
+
     if pre-commit run --all-files; then
         echo "═══════════════════════════════════════════════════════════"
         log_success "All pre-commit checks passed"
@@ -191,7 +191,7 @@ run_precommit_checks() {
 
 check_test_infrastructure() {
     log_info "Checking for test infrastructure..."
-    
+
     if has_command pytest; then
         log_success "pytest found - run tests with: pytest"
         return 0
@@ -248,24 +248,24 @@ main() {
                 ;;
         esac
     done
-    
+
     echo ""
     echo "═══════════════════════════════════════════════════════════"
     echo "  KENL Bootstrap Script v2.0"
     echo "═══════════════════════════════════════════════════════════"
     echo ""
-    
+
     if [ "$DRY_RUN" = "true" ]; then
         log_info "Running in DRY RUN mode - no changes will be made"
         echo ""
     fi
-    
+
     # Check prerequisites
     local errors=0
-    
+
     check_python_installation || ((errors++))
     check_pip_installation || ((errors++))
-    
+
     if [ $errors -gt 0 ]; then
         echo ""
         log_error "Prerequisites check failed"
@@ -273,9 +273,9 @@ main() {
         suggest_recovery "missing_dependency"
         exit 1
     fi
-    
+
     echo ""
-    
+
     # Install pre-commit if not present
     if has_command pre-commit; then
         log_success "pre-commit already installed"
@@ -288,23 +288,23 @@ main() {
             exit 1
         }
     fi
-    
+
     # Install hooks
     install_precommit_hooks || {
         log_error "Failed to install pre-commit hooks"
         exit 1
     }
-    
+
     # Run validation
     run_precommit_checks
-    
+
     # Check for test infrastructure (optional)
     echo ""
     check_test_infrastructure
-    
+
     # Show next steps
     show_next_steps
-    
+
     # Generate rollback instructions
     if [ "$DRY_RUN" = "false" ]; then
         echo ""

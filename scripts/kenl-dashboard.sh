@@ -9,7 +9,7 @@
 # Options:
 #   --json    Output in JSON format for programmatic use
 #   --compact Display condensed dashboard view
-# Output: Terminal dashboard or JSON status report  
+# Output: Terminal dashboard or JSON status report
 # Next steps: Use with KENL4 (monitoring) for Grafana integration, pipe to monitoring systems
 # Integration: Feeds KENL4 dashboards, integrates with ATOM trail
 # Related: KENL4-monitoring for persistent visualizations

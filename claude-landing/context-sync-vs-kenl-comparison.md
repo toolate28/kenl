@@ -1,6 +1,6 @@
 # context-sync vs KENL: Architecture Comparison
 
-**Date:** 2024-11-27  
+**Date:** 2024-11-27
 **ATOM:** ATOM-COMP-20241127-001
 
 ---
@@ -80,7 +80,7 @@ Host: Bazzite-DX (Fedora Atomic, immutable)
       ├─ Node.js (nvm, user-space)
       ├─ Python 3.12 (SAGE automation)
       └─ Development tools (just, shellcheck)
-      
+
 Agent Orchestration:
   Claude (10%)  ──> Complex reasoning, SAGE execution
   Perplexity (30%)  ──> Research, documentation
@@ -447,7 +447,7 @@ claude-code --project ~/projects/bazza-dx
 
 ---
 
-**ATOM:** ATOM-COMP-20241127-001  
-**Generated:** 2024-11-27  
-**Author:** toolated (via Claude Sonnet 4.5)  
+**ATOM:** ATOM-COMP-20241127-001
+**Generated:** 2024-11-27
+**Author:** toolated (via Claude Sonnet 4.5)
 **Status:** Recommendation pending validation

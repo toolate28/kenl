@@ -1,8 +1,8 @@
 # KENL + context-sync + ATOM Integration Directive
 
-**ATOM:** ATOM-DIRECTIVE-20241127-001  
-**Target Agent:** Local Claude instance (Claude Code, Claude Desktop)  
-**Context:** Full Bazza-DX project knowledge available  
+**ATOM:** ATOM-DIRECTIVE-20241127-001
+**Target Agent:** Local Claude instance (Claude Code, Claude Desktop)
+**Context:** Full Bazza-DX project knowledge available
 **Execution Mode:** Autonomous with human approval gates
 
 ---
@@ -191,13 +191,13 @@ CREATE TABLE IF NOT EXISTS atom_trail (
   signature TEXT,
   previous_atom TEXT,
   metadata JSON,
-  
+
   -- Link to context-sync operations
   context_sync_ref TEXT,
-  
+
   -- Token tracking
   token_cost INTEGER,
-  
+
   FOREIGN KEY (previous_atom) REFERENCES atom_trail(atom_id)
 );
 
@@ -322,13 +322,13 @@ async function atomTagOperation(operation, atomType, metadata = {}) {
     `${process.env.HOME}/projects/bazza-dx/scripts/generate_atom.sh ${atomType} '${JSON.stringify(metadata)}'`,
     { encoding: 'utf-8' }
   );
-  
+
   const atom = JSON.parse(atomJson);
-  
+
   // Insert into atom_trail
   return new Promise((resolve, reject) => {
     db.run(
-      `INSERT INTO atom_trail 
+      `INSERT INTO atom_trail
        (atom_id, operation, agent, timestamp, signature, previous_atom, metadata, context_sync_ref)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
@@ -355,29 +355,29 @@ async function atomTagOperation(operation, atomType, metadata = {}) {
 async function queryAtomTrail(filters = {}) {
   let query = 'SELECT * FROM atom_trail WHERE 1=1';
   const params = [];
-  
+
   if (filters.operation) {
     query += ' AND operation = ?';
     params.push(filters.operation);
   }
-  
+
   if (filters.agent) {
     query += ' AND agent = ?';
     params.push(filters.agent);
   }
-  
+
   if (filters.since) {
     query += ' AND timestamp >= ?';
     params.push(filters.since);
   }
-  
+
   query += ' ORDER BY timestamp DESC';
-  
+
   if (filters.limit) {
     query += ' LIMIT ?';
     params.push(filters.limit);
   }
-  
+
   return new Promise((resolve, reject) => {
     db.all(query, params, (err, rows) => {
       if (err) reject(err);
@@ -396,24 +396,24 @@ module.exports = {
 if (require.main === module) {
   const command = process.argv[2];
   const args = JSON.parse(process.argv[3] || '{}');
-  
+
   (async () => {
     switch (command) {
       case 'tag':
         const atom = await atomTagOperation(args.operation, args.type, args.metadata);
         console.log(JSON.stringify(atom, null, 2));
         break;
-        
+
       case 'query':
         const results = await queryAtomTrail(args);
         console.log(JSON.stringify(results, null, 2));
         break;
-        
+
       default:
         console.error('Unknown command:', command);
         process.exit(1);
     }
-    
+
     db.close();
   })();
 }
@@ -756,7 +756,7 @@ This directive includes 5 mandatory approval gates:
 
 ---
 
-**ATOM:** ATOM-DIRECTIVE-20241127-001  
-**Status:** Ready for agent execution  
-**Estimated Time:** 45-60 minutes  
+**ATOM:** ATOM-DIRECTIVE-20241127-001
+**Status:** Ready for agent execution
+**Estimated Time:** 45-60 minutes
 **Risk Level:** Low (all operations reversible)

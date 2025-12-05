@@ -235,6 +235,7 @@ graph TB
 
 **🧭 Full Navigation Hub:** [DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md)
 **📋 Document Index:** [DOCUMENT-INDEX.md](./DOCUMENT-INDEX.md) - 1-line review of all root documents
+**👤 User Landing:** [user/](./user/) - Your personal workspace for project-specific files and symlinks
 
 ### Quick Links by Audience
 
@@ -247,16 +248,18 @@ graph TB
 | **Windows Users** | [Migration Pathway](./claude-landing/DOCUMENTATION-PATHWAYS.md#-migration-pathway) | [Partition Scripts](./scripts/windows-partition-scripts/) |
 | **Contributors** | [CONTRIBUTING.md](./CONTRIBUTING.md) | [Governance](./governance/) |
 
-### Documentation Categories
+### Documentation Structure
 
 | Category | Location | Purpose |
 |----------|----------|---------|
-| **Pathways** | [claude-landing/DOCUMENTATION-PATHWAYS.md](./claude-landing/DOCUMENTATION-PATHWAYS.md) | Navigation hub |
-| **Document Index** | [DOCUMENT-INDEX.md](./DOCUMENT-INDEX.md) | Root doc review |
-| **Traceability** | [ATOM-REGISTER.md](./ATOM-REGISTER.md) | ATOM tag tracking |
+| **User Workspace** | [user/](./user/) | Personal project files and symlinks |
+| **AI Agent Landing** | [claude-landing/](./claude-landing/) | AI agent orientation documents |
+| **Documentation** | [docs/](./docs/) | Standards, guides, analysis, technical docs |
+| **Modules** | [modules/](./modules/) | 14 KENL modules (KENL0-13) |
+| **Dotfiles** | [dotfiles/](./dotfiles/) | SAIF workflows and system configurations |
 | **Case Studies** | [case-studies/](./case-studies/) | Real-world scenarios |
 | **Governance** | [governance/](./governance/) | ARCREF + ADR decisions |
-| **Standards** | [VISUAL-ELEMENTS-STANDARD.md](./VISUAL-ELEMENTS-STANDARD.md), [SECURITY.md](./SECURITY.md) | Guidelines |
+| **Scripts** | [scripts/](./scripts/) | Utility scripts and automation |
 
 ---
 

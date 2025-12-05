@@ -14,7 +14,7 @@
 #   - Run owi-report.sh to regenerate documentation index
 #   - Review changes with git diff
 #   - Commit with appropriate ATOM tag
-# Integration: 
+# Integration:
 #   - Uses KENL1 OWI metadata standard
 #   - Works with owi-report.sh for index generation
 #   - Auto-detects classification based on file path

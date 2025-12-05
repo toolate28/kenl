@@ -1,0 +1,27 @@
+# User Landing Directory - Git Ignore
+#
+# By default, ignore everything in user/ directory to keep personal files private.
+# This allows users to store project-specific files, symlinks, and configurations
+# without accidentally committing them to the repository.
+
+# Ignore everything by default
+*
+
+# But track these files
+!README.md
+!.gitignore
+
+# Track example templates if you create any
+!*-example.yaml
+!*-example.sh
+!*-example.md
+
+# Explicitly ignore common patterns
+*.log
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+.env
+.secrets/

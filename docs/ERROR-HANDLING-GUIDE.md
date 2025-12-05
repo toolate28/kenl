@@ -289,16 +289,16 @@ fi
 ```bash
 check_prerequisites() {
     log_info "Checking prerequisites..."
-    
+
     # Check required commands
     require_commands "bash" "grep" "sed" || return 1
-    
+
     # Check optional commands
     check_optional_command "jq" || true
-    
+
     # Check platform
     warn_if_immutable "file modifications"
-    
+
     log_success "All prerequisites satisfied"
 }
 ```
@@ -446,7 +446,7 @@ See `scripts/example-script-template.sh` for a complete example demonstrating al
    ```bash
    # Before
    echo "Starting process..."
-   
+
    # After
    log_info "Starting process..."
    ```
@@ -458,7 +458,7 @@ See `scripts/example-script-template.sh` for a complete example demonstrating al
        echo "git not found"
        exit 1
    fi
-   
+
    # After
    require_command "git" "git" "Version control system"
    ```
@@ -470,7 +470,7 @@ See `scripts/example-script-template.sh` for a complete example demonstrating al
    case $1 in
        --dry-run) DRY_RUN=true ;;
    esac
-   
+
    # Use execute_step
    execute_step "dangerous_command" "Description" "$DRY_RUN"
    ```
@@ -528,7 +528,7 @@ perform_update() {
         "apply:Apply updates"
         "cleanup:Clean temporary files"
     )
-    
+
     for step in "${steps[@]}"; do
         IFS=: read -r cmd desc <<< "$step"
         execute_step "$cmd" "$desc" "$DRY_RUN" || {
