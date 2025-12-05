@@ -30,7 +30,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-# HASH_FILE="$REPO_ROOT/.doc-hashes"  # Reserved for future use
+# Future enhancement: Track hash history in $REPO_ROOT/.doc-hashes
+# Currently hashes are stored in YAML frontmatter only
 
 # Load error handling library
 if [ -f "$SCRIPT_DIR/lib/error-handling.sh" ]; then

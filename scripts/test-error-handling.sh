@@ -13,7 +13,10 @@
 # ATOM: ATOM-TEST-20251205-001
 #
 
-set -uo pipefail  # Note: removed -e to allow tests to continue on failure
+set -euo pipefail
+
+# Note: Tests use explicit error handling with || true to continue on failure
+# This ensures we get a complete test report even when some tests fail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -36,6 +39,7 @@ test_assert() {
     
     ((TESTS_RUN++))
     
+    # Explicitly handle test failure without exiting
     if eval "$condition"; then
         log_success "PASS: $description"
         ((TESTS_PASSED++))
@@ -44,7 +48,7 @@ test_assert() {
         log_error "FAIL: $description"
         ((TESTS_FAILED++))
         return 1
-    fi
+    fi || true  # Ensure test suite continues even on assertion failure
 }
 
 test_section() {
@@ -217,16 +221,16 @@ main() {
     echo "═══════════════════════════════════════════════════════════"
     echo ""
     
-    # Run all test suites
-    test_logging_functions
-    test_command_checking
-    test_platform_detection
-    test_root_checking
-    test_file_validation
-    test_backup_restore
-    test_atom_validation
-    test_execute_step
-    test_installation_instructions
+    # Run all test suites (continue even if individual tests fail)
+    test_logging_functions || true
+    test_command_checking || true
+    test_platform_detection || true
+    test_root_checking || true
+    test_file_validation || true
+    test_backup_restore || true
+    test_atom_validation || true
+    test_execute_step || true
+    test_installation_instructions || true
     
     # Print summary
     echo ""
