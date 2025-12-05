@@ -1,35 +1,60 @@
 ---
-title: KENL Getting Started - Obsidian Vault Initialization
+title: KENL Getting Started
 classification: SAIF-ENTRY-POINT
-atom: ATOM-DOC-20251126-001
+atom: ATOM-DOC-20251205-001
 created: 2025-11-26
-version: 2.0.0
+updated: 2025-12-05
+version: 2.1.0
 status: production
 ---
 
 # KENL Getting Started
 
-> **Your first step:** Set up the Obsidian vault, import this file, and let the guided pathways build your personalized KENL environment.
+> **Your first step:** Choose your workflow style, then follow the appropriate setup path.
 
 ---
 
-## 🎯 What You're About to Do
+## 🎯 Choose Your Workflow
 
-This guide follows the **SAIF (System-Aware Intent Flagging)** process:
+KENL supports two primary workflows:
 
-1. **Install Obsidian** (5 minutes)
-2. **Create your KENL vault** (2 minutes)
-3. **Import this file** - your first note becomes your dashboard
-4. **Select your pathway** - Gaming, Development, System Recovery, or Migration
-5. **Follow guided steps** - each step imports/verifies the modules you need
+### 🤖 AI-Assisted Workflow (Claude Code, Cursor, Copilot)
+**Best for:** Users working with AI coding assistants
+- **Tools:** Obsidian (optional) + context-sync MCP server
+- **Benefit:** Persistent AI memory across chat sessions
+- **Setup:** [Option A below](#option-a-ai-assisted-with-obsidian-optional)
+
+### 🧑 Self-Propelled Workflow (Direct file editing)
+**Best for:** Users who prefer traditional text editors
+- **Tools:** Any text editor (VS Code, Vim, Nano, Notepad++)
+- **Benefit:** Lightweight, no additional dependencies
+- **Setup:** [Option B below](#option-b-self-propelled-workflow)
+
+---
+
+## Option A: AI-Assisted (with Obsidian - Optional)
+
+This workflow uses Obsidian for documentation navigation (optional) and context-sync for AI memory persistence.
+
+### When to use Obsidian:
+- ✅ You want visual documentation navigation
+- ✅ You use graph views and bidirectional linking
+- ✅ You work with multiple interconnected documents
+
+### When to skip Obsidian:
+- ❌ You prefer terminal-based workflows
+- ❌ You already use VS Code or another editor
+- ❌ You want minimal dependencies
 
 By the end, you'll have a personalized, documented, rollback-safe system tailored to YOUR needs.
 
 ---
 
-## Step 1: Install Obsidian
+### Step 1A: Install Obsidian (Optional)
 
-### Linux (Bazzite/Fedora)
+**Skip this step if you prefer using your existing text editor.**
+
+#### Linux (Bazzite/Fedora)
 
 ```bash
 # Flatpak (recommended for immutable systems)
@@ -39,7 +64,7 @@ flatpak install flathub md.obsidian.Obsidian -y
 flatpak override md.obsidian.Obsidian --filesystem=home --user
 ```
 
-### Windows
+#### Windows
 
 ```powershell
 # Option 1: Winget (Windows 11)
@@ -52,11 +77,48 @@ choco install obsidian -y
 Start-Process "https://obsidian.md/download"
 ```
 
+### Step 1B: Install context-sync (for AI memory)
 
+```bash
+# Install context-sync MCP server globally
+npm install -g @context-sync/server
+
+# Verify installation
+context-sync --version
+```
+
+See [modules/KENL3-dev/context-sync/README.md](modules/KENL3-dev/context-sync/README.md) for detailed setup.
 
 ---
 
-## Step 2: Clone KENL Repository
+## Option B: Self-Propelled Workflow
+
+This workflow uses standard text editors and file navigation.
+
+### Step 1B: Choose Your Editor
+
+Any of these work great with KENL:
+
+| Editor | Best For | Installation |
+|--------|----------|--------------|
+| **VS Code** | Feature-rich IDE | `winget install Microsoft.VisualStudioCode` |
+| **Vim/Neovim** | Terminal power users | Pre-installed on Linux |
+| **Nano** | Simple terminal editing | Pre-installed on Linux |
+| **Notepad++** | Windows lightweight | `winget install Notepad++.Notepad++` |
+| **Sublime Text** | Fast, minimalist | `winget install SublimeText.SublimeText` |
+
+**Recommendation:** VS Code provides excellent Markdown preview and Git integration.
+
+### Step 1B Alternative: Browser-Based Documentation
+
+You can also navigate KENL documentation directly on GitHub without any local tools:
+- Browse: https://github.com/toolate28/kenl
+- Navigate modules using web interface
+- Use GitHub's Markdown rendering
+
+---
+
+## Step 2: Clone KENL Repository (Both Workflows)
 
 ```bash
 # Clone to standard location
@@ -68,16 +130,18 @@ git clone https://github.com/toolate28/kenl.git $env:USERPROFILE\.kenl
 
 ---
 
-## Step 3: Create Your Vault
+## Step 3: Setup Your Workspace
 
-### Option A: Use KENL Directory as Vault (Recommended)
+### For AI-Assisted Workflow (with Obsidian):
+
+#### Option 3A: Use KENL Directory as Vault (Recommended)
 
 1. Open Obsidian
 2. Click **"Open folder as vault"**
 3. Navigate to `~/.kenl` (or `%USERPROFILE%\.kenl` on Windows)
 4. Click **Open**
 
-### Option B: Create Separate Vault with Links
+#### Option 3B: Create Separate Vault with Links
 
 ```bash
 # Create vault with standard structure
@@ -87,6 +151,30 @@ mkdir -p ~/.kenl-vault/{00-Dashboard,01-ATOM-Trails,02-Modules,03-Playcards,04-A
 ln -s ~/.kenl/modules ~/.kenl-vault/02-Modules/kenl-modules
 ln -s ~/.kenl/claude-landing ~/.kenl-vault/00-Dashboard/claude-landing
 ```
+
+### For Self-Propelled Workflow:
+
+Simply open the cloned repository in your preferred editor:
+
+```bash
+# VS Code
+code ~/.kenl
+
+# Or navigate in terminal
+cd ~/.kenl
+ls -la  # View all files
+
+# View README
+cat README.md
+# Or with pager
+less README.md
+```
+
+**Navigation Tips:**
+- Start with `README.md` for overview
+- Browse `modules/` directory for specific functionality
+- Check `claude-landing/DOCUMENTATION-PATHWAYS.md` for guided paths
+- View Play Cards in `modules/KENL2-gaming/play-cards/`
 
 ---
 

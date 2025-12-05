@@ -21,9 +21,28 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-**ATOM:** ATOM-DOC-20251204-001  
+**ATOM:** ATOM-DOC-20251205-002  
 **Status:** Production Ready  
-**Module:** KENL3-dev (Development Tools)
+**Module:** KENL3-dev (Development Tools)  
+**Requirement:** AI-assisted workflow only (Claude Code, Cursor, Copilot)
+
+---
+
+## ⚠️ Important: Is This For You?
+
+**context-sync is ONLY needed if you use AI coding assistants.**
+
+### ✅ Use context-sync if:
+- You use **Claude Code**, **Cursor**, or **GitHub Copilot**
+- You want AI to remember decisions across chat sessions
+- You work with multiple AI agents on the same project
+
+### ❌ Skip context-sync if:
+- You **don't use AI coding assistants**
+- You prefer **direct file editing** (VS Code, Vim, etc.)
+- You want a **lightweight setup** without AI memory
+
+**For self-propelled workflows**, use your preferred text editor to navigate KENL documentation directly. No additional tools needed!
 
 ---
 

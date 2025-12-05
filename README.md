@@ -32,7 +32,7 @@
 # 1. Clone KENL
 git clone https://github.com/toolate28/kenl.git ~/.kenl && cd ~/.kenl
 
-# 2. Choose your pathway above OR open in Obsidian
+# 2. Choose your pathway above (terminal or Obsidian - your choice)
 # 3. Follow the guided checklist for your goal
 ```
 
