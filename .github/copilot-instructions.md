@@ -56,6 +56,50 @@ kenl/
 
 ## Setup and Development
 
+### Environment Detection (CRITICAL - Run First!)
+
+**Before making changes, detect your environment:**
+
+```bash
+# Detect OS and environment type
+uname -a
+cat /etc/os-release 2>/dev/null | head -3
+
+# Check if in distrobox container (user-space only)
+if [ -f /run/.containerenv ]; then
+    echo "✅ Distrobox container - user-space operations only"
+    echo "   Safe to modify: ~/.local, ~/.config, ~/.kenl"
+    echo "   NEVER modify: /etc, /usr, /opt"
+else
+    echo "⚠️  Host system or non-container environment"
+fi
+
+# Check if rpm-ostree based (Bazzite/Fedora Atomic)
+if command -v rpm-ostree >/dev/null 2>&1; then
+    echo "✅ Immutable OS (rpm-ostree) - user-space only!"
+    rpm-ostree status | head -5
+fi
+```
+
+**Script Naming Convention Hints:**
+- `script.sh` (lowercase) → Usually Windows/WSL/general scripts
+- `SCRIPT.sh` (UPPERCASE) → Usually Bazzite/rpm-ostree specific scripts
+
+**Environment-Specific Constraints:**
+
+| Environment | User-Space Only | System Modifications | Package Manager |
+|-------------|-----------------|----------------------|-----------------|
+| **Bazzite-DX** | ✅ YES (`~/.local`, `~/.config`) | ❌ NO (immutable) | `flatpak`, `distrobox` |
+| **Distrobox** | ✅ YES (isolated container) | ❌ NO (host untouched) | `apt`, `dnf` inside container |
+| **Windows 11** | ⚠️  Limited | ✅ YES (testing phase) | PowerShell modules |
+| **GitHub CI** | ✅ YES (ephemeral) | ✅ YES (disposable) | `apt` |
+
+**CRITICAL RULES:**
+1. **Bazzite/Distrobox:** NEVER suggest `sudo` for system files
+2. **Bazzite/Distrobox:** All operations in `~/.local`, `~/.config`, `~/.kenl`
+3. **Windows:** First command should NOT be Linux-specific (avoid errors)
+4. **CI:** Can use system modifications (disposable environment)
+
 ### Initial Setup
 
 ```bash

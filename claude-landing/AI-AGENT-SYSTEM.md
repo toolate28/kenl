@@ -59,12 +59,36 @@ graph TB
 
 ## 📥 Phase 1: Ingestion (Session Start)
 
+### STEP 0: Detect Operating Environment (CRITICAL!)
+
+**Run BEFORE reading any files:**
+
+```bash
+# Quick OS detection
+uname -a 2>/dev/null && echo "=== Linux/Unix detected ===" || echo "=== Windows detected ==="
+
+# Check for distrobox (user-space only mode)
+if [ -f /run/.containerenv ]; then
+    echo "✅ Distrobox container - user-space operations only"
+fi
+
+# Check for rpm-ostree (immutable OS)
+if command -v rpm-ostree >/dev/null 2>&1; then
+    echo "⚠️  Immutable OS - NEVER use sudo for system modifications"
+fi
+```
+
+**Platform-Specific Awareness:**
+- 🐧 **Bazzite/Distrobox:** User-space only (`~/.local`, `~/.config`, `~/.kenl`)
+- 🪟 **Windows 11:** Pre-migration testing phase
+- 🤖 **GitHub CI:** Ubuntu 24.04 (disposable environment)
+
 ### YOU MUST Read These Files (In Order):
 
-1. **CURRENT-STATE.md** - Current environment snapshot
-2. **RECENT-WORK.md** - Last session's work and context
-3. **NEXT-STEPS.md** - Immediate actionable tasks
-4. **QUICK-REFERENCE.md** - Common paths and commands
+1. **QUICK-REFERENCE.md** - OS-specific first commands (READ FIRST!)
+2. **CURRENT-STATE.md** - Current environment snapshot
+3. **RECENT-WORK.md** - Last session's work and context
+4. **NEXT-STEPS.md** - Immediate actionable tasks
 
 ### Context Validation Checklist
 
@@ -73,6 +97,8 @@ graph TB
 
 Before proceeding, validate these expectations:
 
+- [ ] Operating system detected and constraints understood
+- [ ] User-space vs system-level permissions confirmed
 - [ ] Branch name matches documented state
 - [ ] Platform matches (Windows/Linux/CI)
 - [ ] Active module context is correct
