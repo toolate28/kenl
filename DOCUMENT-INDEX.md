@@ -1,11 +1,11 @@
 ---
 title: KENL Root Document Index
-atom: ATOM-DOC-20251126-010
+atom: ATOM-DOC-20251205-003
 classification: INDEX
 status: production
 created: 2025-11-26
-updated: 2025-11-26
-version: 1.1.0
+updated: 2025-12-05
+version: 1.2.0
 ---
 
 # KENL Root Document Index
@@ -23,7 +23,7 @@ version: 1.1.0
 | Document | Purpose | State | Location Rationale |
 |----------|---------|-------|-------------------|
 | `README.md` | Primary entry point with pathway navigation | ✅ Active | Standard repo root location |
-| `GETTING-STARTED.md` | Obsidian vault setup and pathway selection | ✅ Active | User onboarding entry point |
+| `GETTING-STARTED.md` | Workflow selection (AI-assisted or self-propelled) and setup | ✅ Active | User onboarding entry point |
 | `CONTRIBUTING.md` | Contribution guidelines and PR checklist | ✅ Active | Standard repo root for contributors |
 | `LICENSE` | MIT license | ✅ Active | Standard repo root |
 | `SECURITY.md` | Vulnerability reporting process | ✅ Active | Standard repo root for security |
@@ -133,6 +133,17 @@ Run link validation:
 
 ---
 
-**ATOM:** ATOM-DOC-20251126-010
-**Version:** 1.1.0
-**Last Updated:** 2025-11-26
+## 🔄 Recent Updates (2025-12-05)
+
+**Polish Pass Changes:**
+- ✅ **KENL8-security**: Removed Vault/TOTP references, added security analysis Jupyter notebook
+- ✅ **macOS Support**: Removed macOS references (focus on Windows/Linux)
+- ✅ **Obsidian**: Made optional - users can choose AI-assisted (with Obsidian) or self-propelled (any editor) workflows
+- ✅ **context-sync**: Clarified as AI-agent-only requirement
+- ✅ **Documentation**: Updated for workflow flexibility and cross-platform text editor support
+
+---
+
+**ATOM:** ATOM-DOC-20251205-003
+**Version:** 1.2.0
+**Last Updated:** 2025-12-05
