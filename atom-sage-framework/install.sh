@@ -1,62 +1,156 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
 #───────────────────────────────────────────────────────────────────────────────
 # ATOM+SAGE Framework Installer
 # Pure POSIX shell implementation - zero external dependencies
 #───────────────────────────────────────────────────────────────────────────────
+#
+# Purpose: Install ATOM+SAGE framework commands and configuration
+# Prerequisites: Bash or Zsh
+# Usage: ./install.sh [--dry-run] [--help]
+# Options:
+#   --dry-run       Show what would be done without making changes
+#   --help          Show this help message
+# Output: Installed ATOM commands in ~/.local/bin
+# Next steps:
+#   - Add ~/.local/bin to PATH (see instructions)
+#   - Run: atom STATUS "First ATOM tag"
+#   - Run: atom-analytics --summary
+# Integration:
+#   - Uses KENL error handling library (if available)
+#   - Creates user-space installation (no sudo required)
+# Related: See atom-sage-framework/README.md
+#
+# Version: 2.0.0
+# ATOM: ATOM-TOOL-20251205-005
+#
 
-VERSION="1.0.0"
+set -euo pipefail
+
+VERSION="2.0.0"
 INSTALL_DIR="${HOME}/.local/bin"
 CONFIG_DIR="${HOME}/.config/atom-sage"
 TRAIL_DIR="${HOME}/.config/atom-sage/trails"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Options
+DRY_RUN=false
+
+# Try to load KENL error handling library if available
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/../scripts/lib/error-handling.sh" ]; then
+    # shellcheck source=../scripts/lib/error-handling.sh
+    source "$SCRIPT_DIR/../scripts/lib/error-handling.sh"
+else
+    # Fallback definitions if library not available
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[1;33m'
+    BLUE='\033[0;34m'
+    NC='\033[0m' # No Color
+    
+    log_info() { echo -e "${BLUE}[INFO]${NC} $*"; }
+    log_success() { echo -e "${GREEN}[SUCCESS]${NC} $*"; }
+    log_warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
+    log_error() { echo -e "${RED}[ERROR]${NC} $*" >&2; }
+    die() { log_error "$1"; exit 1; }
+    require_not_root() { 
+        if [ "${EUID:-$(id -u)}" -eq 0 ]; then
+            die "This script should NOT be run as root" "Run without sudo: $0 $*"
+        fi
+    }
+    warn_if_immutable() { :; }  # No-op if library not available
+    generate_rollback_instructions() {
+        echo ""
+        echo "═══════════════════════════════════════════════════════════"
+        echo "  ROLLBACK INSTRUCTIONS"
+        echo "═══════════════════════════════════════════════════════════"
+        echo ""
+        echo "Operation: $1"
+        echo ""
+        echo "To rollback, run:"
+        echo "  $2"
+        echo ""
+        echo "═══════════════════════════════════════════════════════════"
+    }
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # Helper Functions
 #───────────────────────────────────────────────────────────────────────────────
 
-log_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
+show_help() {
+    cat << 'EOF'
+ATOM+SAGE Framework Installer
 
-log_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
+Usage: ./install.sh [OPTIONS]
 
-log_warn() {
-    echo -e "${YELLOW}[WARN]${NC} $1"
-}
+Installs ATOM+SAGE framework commands for intent-driven operations.
 
-log_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
+Options:
+  --dry-run    Show what would be done without making changes
+  --help       Show this help message
+
+Installation locations:
+  Commands:  ~/.local/bin/
+  Config:    ~/.config/atom-sage/
+  Trails:    ~/.config/atom-sage/trails/
+
+Commands installed:
+  atom               Create ATOM tags with intent logging
+  atom-analytics     Analyze ATOM trails for insights
+
+Examples:
+  ./install.sh            # Normal installation
+  ./install.sh --dry-run  # Preview changes
+
+For more information, see README.md
+EOF
 }
 
 check_shell() {
-    if [ -z "${BASH_VERSION:-}" ] && [ -z "${ZSH_VERSION:-}" ]; then
-        log_warn "Detected non-bash/zsh shell. ATOM+SAGE requires bash or zsh."
+    log_info "Checking shell compatibility..."
+    
+    if [ -n "${BASH_VERSION:-}" ]; then
+        log_success "Running in Bash (version: ${BASH_VERSION})"
+        return 0
+    elif [ -n "${ZSH_VERSION:-}" ]; then
+        log_success "Running in Zsh (version: ${ZSH_VERSION})"
+        return 0
+    else
+        log_warn "Detected non-bash/zsh shell"
+        log_warn "ATOM+SAGE requires bash or zsh for full functionality"
         log_info "Proceeding with bash compatibility mode..."
+        return 1
     fi
 }
 
 create_directories() {
     log_info "Creating directory structure..."
 
-    mkdir -p "${INSTALL_DIR}"
-    mkdir -p "${CONFIG_DIR}"
-    mkdir -p "${TRAIL_DIR}"
+    if [ "$DRY_RUN" = "true" ]; then
+        log_info "[DRY RUN] Would create: ${INSTALL_DIR}"
+        log_info "[DRY RUN] Would create: ${CONFIG_DIR}"
+        log_info "[DRY RUN] Would create: ${TRAIL_DIR}"
+        return 0
+    fi
 
-    log_success "Directories created"
+    if mkdir -p "${INSTALL_DIR}" "${CONFIG_DIR}" "${TRAIL_DIR}"; then
+        log_success "Directories created:"
+        log_info "  Commands: ${INSTALL_DIR}"
+        log_info "  Config:   ${CONFIG_DIR}"
+        log_info "  Trails:   ${TRAIL_DIR}"
+    else
+        log_error "Failed to create directories"
+        return 1
+    fi
 }
 
 install_atom_command() {
     log_info "Installing 'atom' command..."
+
+    if [ "$DRY_RUN" = "true" ]; then
+        log_info "[DRY RUN] Would create: ${INSTALL_DIR}/atom"
+        return 0
+    fi
 
     cat > "${INSTALL_DIR}/atom" << 'ATOM_EOF'
 #!/usr/bin/env bash
@@ -111,6 +205,11 @@ ATOM_EOF
 
 install_atom_analytics() {
     log_info "Installing 'atom-analytics' command..."
+
+    if [ "$DRY_RUN" = "true" ]; then
+        log_info "[DRY RUN] Would create: ${INSTALL_DIR}/atom-analytics"
+        return 0
+    fi
 
     cat > "${INSTALL_DIR}/atom-analytics" << 'ANALYTICS_EOF'
 #!/usr/bin/env bash
@@ -346,6 +445,25 @@ show_install_summary() {
 #───────────────────────────────────────────────────────────────────────────────
 
 main() {
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --dry-run)
+                DRY_RUN=true
+                shift
+                ;;
+            --help|-h)
+                show_help
+                exit 0
+                ;;
+            *)
+                log_error "Unknown option: $1"
+                show_help
+                exit 1
+                ;;
+        esac
+    done
+    
     echo ""
     echo "════════════════════════════════════════════════════════════"
     echo "  ATOM+SAGE Framework Installer v${VERSION}"
@@ -353,16 +471,44 @@ main() {
     echo "════════════════════════════════════════════════════════════"
     echo ""
 
+    if [ "$DRY_RUN" = "true" ]; then
+        log_info "Running in DRY RUN mode - no changes will be made"
+        echo ""
+    fi
+
+    # Check we're not running as root
+    require_not_root || exit 1
+    
+    # Warn if on immutable system
+    warn_if_immutable "ATOM+SAGE installation"
+
     check_shell
-    create_directories
-    install_atom_command
-    install_atom_analytics
+    create_directories || die "Failed to create directories"
+    install_atom_command || die "Failed to install atom command"
+    install_atom_analytics || die "Failed to install atom-analytics command"
     add_to_path
     show_install_summary
 
-    # Create initial ATOM tag
-    if command -v "${INSTALL_DIR}/atom" &> /dev/null; then
+    # Create initial ATOM tag (only if not dry-run)
+    if [ "$DRY_RUN" = "false" ] && command -v "${INSTALL_DIR}/atom" &> /dev/null; then
         "${INSTALL_DIR}/atom" STATUS "ATOM+SAGE Framework v${VERSION} installed" > /dev/null 2>&1 || true
+    fi
+    
+    # Show rollback instructions
+    if [ "$DRY_RUN" = "false" ]; then
+        {
+            echo ""
+            echo "═══════════════════════════════════════════════════════════"
+            echo "  ROLLBACK INSTRUCTIONS"
+            echo "═══════════════════════════════════════════════════════════"
+            echo ""
+            echo "Operation: ATOM+SAGE framework installation"
+            echo ""
+            echo "To rollback, run:"
+            echo "  rm -rf ${INSTALL_DIR}/atom ${INSTALL_DIR}/atom-analytics ${CONFIG_DIR}"
+            echo ""
+            echo "═══════════════════════════════════════════════════════════"
+        }
     fi
 }
 

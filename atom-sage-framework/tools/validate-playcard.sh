@@ -3,10 +3,42 @@
 # Play Card Validation Tool
 # Validates play card YAML format and required fields
 #───────────────────────────────────────────────────────────────────────────────
+#
+# Purpose: Validate KENL play card YAML files for correctness and completeness
+# Prerequisites: Python 3 (optional, for full YAML parsing)
+# Usage: ./validate-playcard.sh PLAYCARD_FILE
+# Output: Validation results with errors and warnings
+# Integration: Uses KENL error handling library if available
+# Related: See play-cards/ directory for examples
+#
+# Version: 2.0.0
+# ATOM: ATOM-TOOL-20251205-006
+#
 
 set -euo pipefail
 
-VERSION="1.0.0"
+VERSION="2.0.0"
+
+# Try to load KENL error handling library if available
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/../../scripts/lib/error-handling.sh" ]; then
+    # shellcheck source=../../scripts/lib/error-handling.sh
+    source "$SCRIPT_DIR/../../scripts/lib/error-handling.sh"
+else
+    # Fallback definitions
+    log_info() { echo "[INFO] $*"; }
+    log_success() { echo "[SUCCESS] $*"; }
+    log_warn() { echo "[WARN] $*" >&2; }
+    log_error() { echo "[ERROR] $*" >&2; }
+    has_command() { command -v "$1" &>/dev/null; }
+    check_optional_command() {
+        if ! has_command "$1"; then
+            log_warn "Optional command not found: $1"
+            return 1
+        fi
+        return 0
+    }
+fi
 
 show_help() {
     cat << EOF
@@ -30,17 +62,22 @@ EOF
 check_yaml_syntax() {
     local file="$1"
 
-    if command -v python3 &>/dev/null; then
+    if has_command python3; then
         if python3 -c "import yaml; yaml.safe_load(open('$file'))" 2>/dev/null; then
             return 0
         else
+            log_error "Python YAML parsing failed"
             return 1
         fi
     else
+        log_warn "Python3 not available - using basic validation"
+        log_info "For full YAML validation, install: pip install pyyaml"
+        
         # Fallback: basic check
         if grep -q "^[a-z_]*:" "$file" 2>/dev/null; then
             return 0
         else
+            log_error "File does not appear to contain YAML"
             return 1
         fi
     fi
@@ -85,16 +122,30 @@ main() {
 
     playcard_file="$1"
 
+    # Validate file exists
     if [ ! -f "$playcard_file" ]; then
-        echo "✗ File not found: $playcard_file"
+        log_error "File not found: $playcard_file"
+        log_info "Usage: $0 <playcard-file.yaml>"
+        exit 1
+    fi
+
+    # Check if file is readable
+    if [ ! -r "$playcard_file" ]; then
+        log_error "File not readable: $playcard_file"
+        log_info "Check file permissions: ls -la $playcard_file"
         exit 1
     fi
 
     echo "════════════════════════════════════════════════════════════"
-    echo "  Play Card Validation"
+    echo "  Play Card Validation v${VERSION}"
     echo "════════════════════════════════════════════════════════════"
     echo ""
-    echo "Validating: $playcard_file"
+    log_info "Validating: $playcard_file"
+    echo ""
+    
+    # Check for optional dependencies
+    check_optional_command "python3" "python3" "Python for full YAML validation" || true
+
     echo ""
 
     local errors=0
