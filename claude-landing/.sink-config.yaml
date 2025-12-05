@@ -1,0 +1,293 @@
+---
+title: Agent Documentation Sink Configuration
+version: 1.0.0
+atom: ATOM-CONFIG-20251205-007
+status: production
+classification: SINK-CONFIG
+---
+
+# Agent Documentation Sink Configuration
+
+## Purpose
+
+Automated cleanup and archival system for agent-generated documentation. Keeps claude-landing/ directory clean and organized without manual intervention.
+
+---
+
+## Naming Conventions
+
+### Anchored Files (NEVER Archive)
+**Pattern:** No ATOM tag in filename
+
+These are **system-critical** or **hand-curated** documents that should remain permanently:
+
+- `CURRENT-STATE.md` - Current environment snapshot
+- `RECENT-WORK.md` - Recent session summary
+- `NEXT-STEPS.md` - Immediate tasks
+- `QUICK-REFERENCE.md` - Common commands
+- `AI-AGENT-SYSTEM.md` - Agent framework
+- `DOCUMENTATION-PATHWAYS.md` - Navigation hub
+- `README.md` - Sink overview
+- Any file matching: `^[A-Z][A-Z-]+\.md$` (no date, no ATOM)
+
+### Auto-Archive Files (Cleanup Eligible)
+**Pattern:** Contains ATOM tag or date in filename
+
+These are **agent-generated** or **session-specific** documents:
+
+- `ATOM-DIRECTIVE-DUALBOOT-20241127-001.md` - Specific directive
+- `SESSION-2025-11-17-LOGDY-SAIF-COMPLETE.md` - Session notes
+- `context-sync-vs-kenl-comparison.md` - Analysis (stale after implementation)
+- `kenl-atom-visual-presentation.md` - Generated presentation
+
+**Patterns:**
+- `ATOM-*-YYYYMMDD-NNN.md`
+- `SESSION-YYYY-MM-DD-*.md`
+- `*-analysis.md`
+- `*-assessment.md`
+- `*-comparison.md`
+- Files older than `MAX_AGE_DAYS`
+
+---
+
+## Counter System
+
+### Counter File
+**Location:** `claude-landing/.sink-counter`
+
+```
+LAST_CLEANUP=2025-12-05
+FILE_COUNT=32
+ARCHIVABLE_COUNT=12
+CLEANUP_THRESHOLD=50
+```
+
+### Automatic Triggers
+
+| Trigger | Threshold | Action |
+|---------|-----------|--------|
+| File count > 50 | `FILE_COUNT > CLEANUP_THRESHOLD` | Initiate cleanup |
+| Archivable > 30% | `ARCHIVABLE_COUNT / FILE_COUNT > 0.3` | Suggest cleanup |
+| Days since cleanup > 30 | `TODAY - LAST_CLEANUP > 30` | Routine maintenance |
+
+---
+
+## Cleanup Operations
+
+### Phase 1: Identify (Automatic)
+```bash
+# Agent reads directory
+find . -name "ATOM-*.md" -o -name "SESSION-*.md"
+find . -name "*-analysis.md" -o -name "*-assessment.md"
+
+# Check file ages
+find . -name "*.md" -mtime +90  # Older than 90 days
+```
+
+### Phase 2: Spot Check (Semi-Automatic)
+**Random 2% audit** of files to be archived:
+
+```bash
+# Select 2% random sample for review
+TOTAL=$(ls ATOM-*.md SESSION-*.md | wc -l)
+SAMPLE_SIZE=$((TOTAL * 2 / 100))
+ls ATOM-*.md SESSION-*.md | shuf -n $SAMPLE_SIZE
+```
+
+**Agent reviews sample:**
+- ✅ Confirms safe to archive
+- ⚠️ Flags any that should stay
+- 🔒 Marks exceptions as "anchor" (rename to remove ATOM/date)
+
+### Phase 3: Archive (Automatic)
+```bash
+# Create dated archive directory
+ARCHIVE_DIR=".archive/sessions/$(date +%Y-%m)"
+mkdir -p "$ARCHIVE_DIR"
+
+# Move eligible files
+mv ATOM-*.md "$ARCHIVE_DIR/"
+mv SESSION-*.md "$ARCHIVE_DIR/"
+
+# Update counter
+echo "LAST_CLEANUP=$(date +%Y-%m-%d)" > .sink-counter
+```
+
+---
+
+## Archival Rules
+
+### Always Archive (After 90 days)
+- `ATOM-DIRECTIVE-*` - Completed directives
+- `ATOM-ANALYSIS-*` - Completed analyses
+- `ATOM-RESEARCH-*` - Research results
+- `SESSION-*` - Session notes
+- `*-comparison.md` - Comparisons (after decision made)
+
+### Never Archive (Anchored)
+- `CURRENT-STATE.md` - Always current
+- `RECENT-WORK.md` - Rolling window
+- `NEXT-STEPS.md` - Active tasks
+- `QUICK-REFERENCE.md` - Reference material
+- `AI-AGENT-SYSTEM.md` - Framework docs
+- `DOCUMENTATION-PATHWAYS.md` - Navigation
+- `README.md` - Sink documentation
+
+### Maybe Archive (Manual Review)
+- `HARDWARE.md` - Stable until hardware changes
+- `MIGRATION-PLAN.md` - Active until migration complete
+- `TESTING-RESULTS.md` - Depends on relevance
+- Files without clear ATOM tag or date pattern
+
+---
+
+## Agent Workflow
+
+### On Session Start
+```bash
+# Read counter
+if [ ! -f .sink-counter ]; then
+    # Initialize counter
+    cat > .sink-counter <<EOF
+LAST_CLEANUP=$(date +%Y-%m-%d)
+FILE_COUNT=$(ls -1 *.md | wc -l)
+ARCHIVABLE_COUNT=0
+CLEANUP_THRESHOLD=50
+EOF
+fi
+
+# Check if cleanup needed
+source .sink-counter
+CURRENT_COUNT=$(ls -1 *.md | wc -l)
+
+if [ $CURRENT_COUNT -gt $CLEANUP_THRESHOLD ]; then
+    echo "⚠️  Sink cleanup recommended ($CURRENT_COUNT files > $CLEANUP_THRESHOLD threshold)"
+    echo "Run: ./cleanup-sink.sh"
+fi
+```
+
+### During Session
+**Agent automatically categorizes new files:**
+
+- Writing directive? → Use `ATOM-DIRECTIVE-YYYYMMDD-NNN.md`
+- Session notes? → Use `SESSION-YYYY-MM-DD-<topic>.md`
+- Analysis? → Use `<topic>-analysis-YYYYMMDD.md`
+- Updating system docs? → Use anchored name (no ATOM/date)
+
+### On Session End
+```bash
+# Update counter
+FILE_COUNT=$(ls -1 *.md | wc -l)
+ARCHIVABLE_COUNT=$(ls -1 ATOM-*.md SESSION-*.md 2>/dev/null | wc -l)
+
+cat > .sink-counter <<EOF
+LAST_CLEANUP=$LAST_CLEANUP
+FILE_COUNT=$FILE_COUNT
+ARCHIVABLE_COUNT=$ARCHIVABLE_COUNT
+CLEANUP_THRESHOLD=50
+EOF
+```
+
+---
+
+## Cleanup Script Interface
+
+**Location:** `claude-landing/cleanup-sink.sh`
+
+```bash
+#!/usr/bin/env bash
+# Sink cleanup with spot-check audit
+
+MODE=${1:-preview}  # preview, audit, execute
+
+case $MODE in
+    preview)
+        echo "📋 Preview Mode - Files eligible for archive:"
+        find . -maxdepth 1 \( -name "ATOM-*.md" -o -name "SESSION-*.md" \) -mtime +90
+        ;;
+    audit)
+        echo "🔍 Audit Mode - Random 2% sample for review:"
+        find . -maxdepth 1 \( -name "ATOM-*.md" -o -name "SESSION-*.md" \) -mtime +90 | shuf -n 2
+        echo ""
+        echo "Review these files. Are they safe to archive? (y/n)"
+        ;;
+    execute)
+        echo "🗂️  Execute Mode - Archiving files..."
+        ARCHIVE_DIR=".archive/sessions/$(date +%Y-%m)"
+        mkdir -p "$ARCHIVE_DIR"
+        find . -maxdepth 1 \( -name "ATOM-*.md" -o -name "SESSION-*.md" \) -mtime +90 -exec mv {} "$ARCHIVE_DIR/" \;
+        echo "✅ Archived to $ARCHIVE_DIR"
+        echo "LAST_CLEANUP=$(date +%Y-%m-%d)" >> .sink-counter
+        ;;
+esac
+```
+
+---
+
+## Examples
+
+### Good Naming (Anchored)
+```
+✅ CURRENT-STATE.md           # System critical
+✅ AI-AGENT-SYSTEM.md          # Framework doc
+✅ QUICK-REFERENCE.md          # Reference material
+✅ DOCUMENTATION-PATHWAYS.md   # Navigation
+✅ HARDWARE.md                 # Stable reference
+```
+
+### Good Naming (Auto-Archive)
+```
+✅ ATOM-DIRECTIVE-20251205-001.md       # Specific directive
+✅ SESSION-2025-12-05-module-refactor.md # Session notes
+✅ context-sync-analysis-20251127.md     # Completed analysis
+✅ gpu-hang-assessment-DRAFT.md          # Temporary analysis
+```
+
+### Bad Naming (Ambiguous)
+```
+❌ important-doc.md              # No clear category
+❌ notes.md                      # Too generic
+❌ stuff-from-tuesday.md         # Unclear lifecycle
+```
+
+**Fix:** Either anchor (no ATOM) or add ATOM/date tag
+
+---
+
+## Metrics
+
+**Tracked in `.sink-counter`:**
+
+```yaml
+metrics:
+  total_files: 32
+  anchored_files: 15  # No ATOM/date in name
+  archivable_files: 12  # ATOM/date in name
+  archived_this_month: 8
+  last_cleanup_date: 2025-12-05
+  avg_files_per_session: 2.5
+  cleanup_frequency_days: 30
+```
+
+---
+
+## Rollback
+
+**If cleanup archives something important:**
+
+```bash
+# List recent archives
+ls -la .archive/sessions/$(date +%Y-%m)/
+
+# Restore specific file
+mv .archive/sessions/2025-12/ATOM-DIRECTIVE-20251205-001.md ./
+
+# Restore entire archive
+mv .archive/sessions/2025-12/* ./
+```
+
+---
+
+**ATOM:** ATOM-CONFIG-20251205-007  
+**Version:** 1.0.0  
+**Last Updated:** 2025-12-05
