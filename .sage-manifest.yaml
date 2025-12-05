@@ -40,15 +40,33 @@ integrations:
 
 directories:
   modules:
-    gaming:
+    kenl0-system:
+      purpose: "System operations and PowerShell modules"
+      ref_tag: "[KENL0::SYSTEM::ROOT]"
+    kenl1-framework:
+      purpose: "ATOM + SAGE core framework"
+      ref_tag: "[KENL1::FRAMEWORK::ROOT]"
+    kenl2-gaming:
       purpose: "Gaming optimization modules and Play Cards"
-      ref_tag: "[GAMING::OPTIMIZATION::ROOT]"
-    ai-local:
-      purpose: "Local AI instance management (Qwen, Ollama)"
-      ref_tag: "[AI::LOCAL::ROOT]"
-    win10-exodus:
-      purpose: "Windows 10 EOL migration toolkit"
-      ref_tag: "[MIGRATION::WIN10::ROOT]"
+      ref_tag: "[KENL2::GAMING::ROOT]"
+    kenl3-dev:
+      purpose: "Development environment with Distrobox, Claude Code, Ollama/Qwen, MCP"
+      ref_tag: "[KENL3::DEV::ROOT]"
+    kenl4-monitoring:
+      purpose: "Monitoring and observability with ATOM DB"
+      ref_tag: "[KENL4::MONITORING::ROOT]"
+    kenl5-system-tools:
+      purpose: "System tools: backup, security, theming (consolidated)"
+      ref_tag: "[KENL5::SYSTEM-TOOLS::ROOT]"
+    kenl6-library:
+      purpose: "Library & content: game library, media server, resources (consolidated)"
+      ref_tag: "[KENL6::LIBRARY::ROOT]"
+    kenl7-learning:
+      purpose: "Guides, cheatsheets, tutorials"
+      ref_tag: "[KENL7::LEARNING::ROOT]"
+    kenl8-iwi:
+      purpose: "Installing With Intent framework"
+      ref_tag: "[KENL8::IWI::ROOT]"
 
   knowledge:
     decisions:

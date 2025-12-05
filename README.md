@@ -150,46 +150,42 @@ graph TD
 
 ## Modules
 
-**14 specialized layers** (KENL0-13) that work together:
+**8 specialized modules** (v2.0 - consolidated for clarity):
 
-| Module | Purpose | Module | Purpose |
-|--------|---------|--------|---------|
-| [**KENL0** System](./modules/KENL0-system/) | rpm-ostree, firmware, PowerShell modules | [**KENL7** Learning](./modules/KENL7-learning/) | Guides, cheatsheets |
-| [**KENL1** Framework](./modules/KENL1-framework/) | ATOM + SAGE core | [**KENL8** Security](./modules/KENL8-security/) | GPG, SSH, encryption |
-| [**KENL2** Gaming](./modules/KENL2-gaming/) | Play Cards, Proton | [**KENL9** Library](./modules/KENL9-library/) | Game management |
-| [**KENL3** Development](./modules/KENL3-dev/) | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | [**KENL10** Backup](./modules/KENL10-backup/) | Snapshots, recovery |
-| [**KENL4** Monitoring](./modules/KENL4-monitoring/) | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | [**KENL11** Media](./modules/KENL11-media/) | Streaming, Docker |
-| [**KENL5** Facades](./modules/KENL5-facades/) | Visual themes, context | [**KENL12** Resources](./modules/KENL12-resources/) | Downloads, community |
-| [**KENL6** Social](./modules/KENL6-social/) | Sharing, community | [**KENL13** IWI](./modules/KENL13-iwi/) | Intent-With-Insight |
+| Module | Purpose | Status |
+|--------|---------|--------|
+| [**KENL0** System](./modules/KENL0-system/) | rpm-ostree, firmware, PowerShell modules | ✅ Production |
+| [**KENL1** Framework](./modules/KENL1-framework/) | ATOM + SAGE core | ✅ Production |
+| [**KENL2** Gaming](./modules/KENL2-gaming/) | Play Cards, Proton configs | ✅ Production |
+| [**KENL3** Development](./modules/KENL3-dev/) | Distrobox, Claude Code, [Ollama/Qwen](./modules/KENL3-dev/guides/OLLAMA-QWEN-LOCAL-AI-SETUP.md), [MCP](./modules/KENL3-dev/guides/MCP-INTEGRATION-GUIDE.md) | ✅ Production |
+| [**KENL4** Monitoring](./modules/KENL4-monitoring/) | Prometheus, Grafana, [ATOM DB](./modules/KENL4-monitoring/docs/ATOM-DATABASE-ARCHITECTURE.md) | ✅ Production |
+| [**KENL5** System Tools](./modules/KENL5-system-tools/) | Backup + Security + Theming (consolidated) | ✅ Production |
+| [**KENL6** Library](./modules/KENL6-library/) | Game Library + Media Server + Resources (consolidated) | ✅ Production |
+| [**KENL7** Learning](./modules/KENL7-learning/) | Guides, cheatsheets, tutorials | ✅ Production |
+| [**KENL8** IWI](./modules/KENL8-iwi/) | Installing With Intent framework | ✅ Production |
 
 **Each module has its own README** - navigate to `modules/KENLX-<name>/` and start there.
 
-#### Module Stack
+**v2.0 Consolidation:** Modules reduced from 14 → 8 for improved clarity and maintainability. See `.archive/modules-deprecated/README.md` for migration details.
+
+#### Module Stack (v2.0 - Consolidated)
 
 ```mermaid
 graph TB
-    subgraph Gaming["🎮 Gaming Stack"]
+    subgraph Gaming["🎮 Gaming & Content"]
         KENL2[KENL2 Gaming]
-        KENL6[KENL6 Social]
-        KENL9[KENL9 Library]
+        KENL6[KENL6 Library<br/>Game + Media + Resources]
     end
 
-    subgraph Development["💻 Development Stack"]
+    subgraph Development["💻 Development & Learning"]
         KENL3[KENL3 Development]
         KENL7[KENL7 Learning]
-        KENL8[KENL8 Security]
     end
 
-    subgraph Operations["⚙️ Operations Stack"]
+    subgraph Operations["⚙️ Operations & Tools"]
         KENL4[KENL4 Monitoring]
-        KENL10[KENL10 Backup]
-        KENL11[KENL11 Media]
-    end
-
-    subgraph Resources["📦 Resources Stack"]
-        KENL5[KENL5 Facades]
-        KENL12[KENL12 Resources]
-        KENL13[KENL13 IWI]
+        KENL5[KENL5 System Tools<br/>Backup + Security + Theming]
+        KENL8[KENL8 IWI]
     end
 
     subgraph Core["🔧 Core Framework"]
