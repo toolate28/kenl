@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "USAGE_PRIVACY.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "USAGE_PRIVACY"
+              "title": "README"
             }
           }
         ]
@@ -185,9 +185,9 @@
   },
   "active": "91f3cad8f2c94ae1",
   "lastOpenFiles": [
+    "USAGE_PRIVACY.md",
     "README.md",
     "PROFILES_SETUP.md",
-    "WORKFLOW_DIAGRAM.md",
-    "USAGE_PRIVACY.md"
+    "WORKFLOW_DIAGRAM.md"
   ]
 }

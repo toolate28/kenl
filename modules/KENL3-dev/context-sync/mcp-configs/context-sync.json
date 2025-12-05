@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "context-sync": {
+      "command": "npx",
+      "args": ["-y", "@context-sync/server"],
+      "env": {
+        "CONTEXT_SYNC_PROJECT": "bazza-dx"
+      }
+    }
+  }
+}

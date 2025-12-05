@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
+#
+# validate-links.sh
 # KENL Link Validator
-# ATOM-CI-20251116-001: Fix ShellCheck errors and harden CI validation
-# Catches broken internal links before they hit production
+#
+# Purpose: Check markdown links for broken references before production
+# Prerequisites: Bash 4+, read access to markdown files
 # Usage: ./scripts/validate-links.sh [--fix]
+# Options:
+#   --fix    Enable auto-fix mode (currently planned, not yet implemented)
+# Output: List of broken links with line numbers and suggested fixes
+# Next steps:
+#   - Fix reported broken links manually
+#   - Re-run to verify all links work
+#   - Can be added to pre-commit hooks or CI
+# Integration: Validates links across all KENL module documentation
+# Related: Part of CI pipeline (ATOM-CI-20251116-001)
+#
+# ATOM-CI-20251116-001
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$REPO_ROOT"
 
 RED='\033[0;31m'

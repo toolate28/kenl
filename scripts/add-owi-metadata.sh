@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
+#
+# add-owi-metadata.sh
 # Add OWI Metadata to Documentation Files
+#
+# Purpose: Inject OWI frontmatter metadata into markdown files for tracking
+# Prerequisites: Bash 4+, write access to target files
+# Usage: ./add-owi-metadata.sh [--dry-run] [--skip-confirm]
+# Options:
+#   --dry-run       Show what would be changed without modifying files
+#   --skip-confirm  Skip confirmation prompts (use in automation)
+# Output: Updated markdown files with OWI frontmatter
+# Next steps:
+#   - Run owi-report.sh to regenerate documentation index
+#   - Review changes with git diff
+#   - Commit with appropriate ATOM tag
+# Integration: 
+#   - Uses KENL1 OWI metadata standard
+#   - Works with owi-report.sh for index generation
+#   - Auto-detects classification based on file path
+# Related: See OWI_METADATA_STANDARD.md for metadata format
+#
 # Version: 2.0.0
 # ATOM-TOOL-20251105-025
 
