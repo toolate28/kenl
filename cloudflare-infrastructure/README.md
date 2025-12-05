@@ -3,14 +3,14 @@ project: KENL Cloudflare Infrastructure
 atom: ATOM-README-20251116-002
 classification: OWI-STANDARD
 status: production-ready
-platform: Windows, Linux, macOS
+platform: Windows, Linux
 ---
 
 # KENL Cloudflare Infrastructure
 
 **Modular, cross-platform Cloudflare deployment for KENL with SAIF workflows**
 
-> 🌍 **Platform Support**: Windows 10/11, Linux (any distro), macOS 12+
+> 🌍 **Platform Support**: Windows 10/11, Linux (any distro)
 
 ---
 
@@ -113,27 +113,7 @@ wrangler login
 ```
 </details>
 
-<details>
-<summary><b>macOS (Zsh/Bash)</b></summary>
 
-```bash
-# Install Node.js (via Homebrew)
-brew install node
-
-# Install Wrangler CLI
-npm install -g wrangler
-
-# Clone (choose Option A, B, or C above)
-git clone https://github.com/toolate28/kenl.git
-cd kenl/cloudflare-infrastructure
-
-# Authenticate
-wrangler login
-
-# Deploy
-./workflows/SAIF-CLOUDFLARE-SETUP.md
-```
-</details>
 
 ---
 

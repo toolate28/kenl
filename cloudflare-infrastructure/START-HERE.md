@@ -40,18 +40,7 @@ npm install -g wrangler
 
 </details>
 
-<details>
-<summary><b>🍎 macOS</b></summary>
 
-```bash
-# Install via Homebrew
-brew install node
-npm install -g wrangler
-```
-
-**Next**: Go to Step 2 ↓
-
-</details>
 
 ---
 

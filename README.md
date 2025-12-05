@@ -285,7 +285,7 @@ kenl-status              # Comprehensive status
 - Current playcard (game being configured)
 - Recent ATOM and SAIF entries
 
-### PowerShell Modules (Windows/Linux/macOS)
+### PowerShell Modules (Windows/Linux)
 
 Cross-platform PowerShell modules for KENL operations:
 
