@@ -1,29 +1,82 @@
 ---
 title: KENL Quick Reference
-date: 2025-11-12
-atom: ATOM-DOC-20251112-006
+date: 2025-12-05
+atom: ATOM-DOC-20251205-001
 ---
 
 # KENL Quick Reference
 
-**Last Updated:** 2025-11-12
+**Last Updated:** 2025-12-05
 
-## First Steps (New Claude Instance)
+## ⚡ Quick OS Detection (Run This First!)
 
-### 1. Read Orientation Docs
-1. **Check current state:** `cat claude-landing/CURRENT-STATE.md`
-2. **Check recent work:** `cat claude-landing/RECENT-WORK.md`
-3. **Review CTF protocol:** See RECENT-WORK.md "CTF Flag Capture Protocol" section
+**Detect your environment before reading further:**
 
-### 2. Capture the Flags (Validate Documented Expectations)
+```bash
+# Linux (Bazzite-DX, Ubuntu CI, Distrobox)
+uname -a && cat /etc/os-release 2>/dev/null | head -3
 
-**Purpose:** Verify documented state matches reality before proceeding
+# Check if in distrobox
+if [ -f /run/.containerenv ]; then
+    echo "✅ Running in distrobox container (user-space mode)"
+else
+    echo "❌ Running on host system"
+fi
+```
 
 ```powershell
-# Platform (expect Windows 11)
+# Windows 11 (Pre-migration testing)
 $PSVersionTable
+Get-WmiObject Win32_OperatingSystem | Select-Object Caption,Version
+```
 
-# Git state (expect branch: main, recent commits match docs)
+**Script naming convention hint:**
+- 📄 `script.sh` (lowercase) → Likely Windows/WSL scripts
+- 📄 `SCRIPT.sh` (UPPERCASE) → Likely Bazzite/rpm-ostree scripts
+
+---
+
+## 🎯 Platform-Specific First Commands
+
+### 🐧 Linux (Bazzite-DX / Distrobox)
+
+**You're operating in user-space only (`~/.local`, `~/.config`, `~/.kenl`).**
+
+```bash
+# Check environment
+pwd
+whoami
+cat /etc/os-release | grep PRETTY_NAME
+
+# Git state
+git status
+git log --oneline -5
+
+# Network baseline (if not in CI)
+ping -c 3 1.1.1.1 2>/dev/null || echo "No network or ping restricted"
+
+# Check ATOM counter
+cat ~/.kenl/.atom-counter 2>/dev/null || echo "0"
+
+# List available modules
+ls -la modules/
+```
+
+**⚠️ NEVER:**
+- Use `sudo` for system modifications (immutable OS)
+- Modify `/etc`, `/usr`, `/opt`
+- Suggest rpm-ostree layering without explicit permission
+
+### 🪟 Windows 11 (Pre-Migration Testing)
+
+**You're testing before Bazzite migration.**
+
+```powershell
+# Platform validation
+$PSVersionTable
+Get-KenlPlatform  # After loading modules
+
+# Git state
 git status
 git log --oneline -5
 
@@ -33,13 +86,46 @@ Test-KenlNetwork
 # PowerShell modules (should load without errors)
 Import-Module ./modules/KENL0-system/powershell/KENL.psm1
 Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1
-Get-KenlPlatform
 
-# Hardware (expect AMD Ryzen 5 5600H + Vega)
-# Check CPU: Get-WmiObject Win32_Processor | Select-Object Name
-# External drive (expect corrupted 2TB)
-# Check: Get-Disk | Where-Object BusType -eq USB
+# Hardware validation
+Get-WmiObject Win32_Processor | Select-Object Name
+Get-Disk | Where-Object BusType -eq USB  # External drive check
 ```
+
+### 🤖 GitHub Actions CI
+
+**You're in automated testing (Ubuntu 24.04).**
+
+```bash
+# Verify CI environment
+echo "CI: $CI"
+echo "GITHUB_ACTIONS: $GITHUB_ACTIONS"
+cat /etc/os-release | head -3
+
+# Run pre-commit checks
+pre-commit run --all-files
+
+# No network-dependent tests
+# No hardware validation needed
+```
+
+---
+
+## First Steps (New Claude Instance)
+
+### 1. Detect Platform (See Above) 
+**👆 Run OS detection commands before proceeding!**
+
+### 2. Read Orientation Docs
+1. **Check current state:** `cat claude-landing/CURRENT-STATE.md`
+2. **Check recent work:** `cat claude-landing/RECENT-WORK.md`
+3. **Review CTF protocol:** See RECENT-WORK.md "CTF Flag Capture Protocol" section
+
+### 3. Capture the Flags (Validate Documented Expectations)
+
+**Purpose:** Verify documented state matches reality before proceeding
+
+**Run platform-specific commands from "Platform-Specific First Commands" section above.**
 
 ### 3. Report Validation Results
 
