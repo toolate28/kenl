@@ -370,7 +370,7 @@ context-sync search_content --query "ATOM-GAMING-001"
 
 # 4. Result includes full context:
 # - What: Fixed HALO launch
-# - When: 2024-12-04 03:00:00
+# - When: 2025-12-04 03:00:00
 # - Why: EA App auth + anti-cheat issues
 # - How: Applied GE-Proton 9-20
 # - Evidence: Play Card HALO-INFINITE-001
@@ -527,7 +527,7 @@ Database persists at `~/.context-sync/data.db` for recovery if needed.
 
 | Version | Date       | Changes                                      | ATOM Tag              |
 |---------|------------|----------------------------------------------|-----------------------|
-| 1.0.0   | 2024-12-04 | Initial integration with kennel branding     | ATOM-DOC-20251204-001 |
+| 1.0.0   | 2025-12-04 | Initial integration with kennel branding     | ATOM-DOC-20251204-001 |
 
 ---
 
