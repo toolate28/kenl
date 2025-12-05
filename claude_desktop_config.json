@@ -29,6 +29,16 @@
         "CLOUDFLARE_API_TOKEN": "gWe5cEvGXY-n3jhrOapCbdz0pu5Yhg5GVpUzToeu",
         "CLOUDFLARE_ACCOUNT_ID": "3ddeb355f4954bb1ee4f9486b2908e7e"
       }
+    },
+    "context-sync": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@context-sync/server"
+      ],
+      "env": {
+        "CONTEXT_SYNC_PROJECT": "kenl-bazza-dx"
+      }
     }
   },
   "globalShortcut": "CommandOrControl+Shift+Space"
