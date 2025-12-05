@@ -1,0 +1,244 @@
+#!/usr/bin/env bash
+#
+# iwi-verify-resources
+# Verifies integrity of all trusted resources in KENL13-iwi
+#
+# Version: 1.0.0
+# ATOM: ATOM-IWI-20251112-020
+#
+
+set -euo pipefail
+
+# Colors
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly CYAN='\033[0;36m'
+readonly NC='\033[0m' # No Color
+
+# Paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MODULE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+RESOURCES_DIR="$MODULE_DIR/resources"
+CHECKSUMS_DIR="$RESOURCES_DIR/checksums"
+SIGNATURES_DIR="$RESOURCES_DIR/signatures"
+
+# Counters
+TOTAL_CHECKS=0
+PASSED_CHECKS=0
+FAILED_CHECKS=0
+
+log_info() {
+    echo -e "${CYAN}[INFO]${NC} $1"
+}
+
+log_success() {
+    echo -e "${GREEN}[✓]${NC} $1"
+}
+
+log_error() {
+    echo -e "${RED}[✗]${NC} $1" >&2
+}
+
+log_warn() {
+    echo -e "${YELLOW}[⚠]${NC} $1"
+}
+
+# Verify single file checksum
+verify_checksum() {
+    local file="$1"
+    local expected_hash="$2"
+
+    ((TOTAL_CHECKS++))
+
+    if [[ ! -f "$file" ]]; then
+        log_error "File missing: $file"
+        ((FAILED_CHECKS++))
+        return 1
+    fi
+
+    local actual_hash=$(sha256sum "$file" | awk '{print $1}')
+
+    if [[ "$expected_hash" == "$actual_hash" ]]; then
+        log_success "$(basename "$file") (sha256: ${actual_hash:0:16}...)"
+        ((PASSED_CHECKS++))
+        return 0
+    else
+        log_error "$(basename "$file") - HASH MISMATCH"
+        log_error "  Expected: $expected_hash"
+        log_error "  Actual:   $actual_hash"
+        ((FAILED_CHECKS++))
+        return 1
+    fi
+}
+
+# Verify GPG signature
+verify_signature() {
+    local sig_file="$1"
+    local data_file="$2"
+
+    ((TOTAL_CHECKS++))
+
+    if ! command -v gpg &> /dev/null; then
+        log_warn "GPG not installed - skipping signature verification"
+        return 0
+    fi
+
+    if [[ ! -f "$sig_file" ]]; then
+        log_warn "Signature file missing: $sig_file"
+        return 0
+    fi
+
+    if gpg --verify "$sig_file" "$data_file" &> /dev/null; then
+        log_success "GPG signature verified: $(basename "$sig_file")"
+        ((PASSED_CHECKS++))
+        return 0
+    else
+        log_error "GPG signature verification failed: $(basename "$sig_file")"
+        ((FAILED_CHECKS++))
+        return 1
+    fi
+}
+
+# Verify Bazzite documentation
+verify_bazzite_docs() {
+    log_info "Verifying Bazzite documentation..."
+
+    local checksums_file="$CHECKSUMS_DIR/bazzite-docs.sha256"
+
+    if [[ ! -f "$checksums_file" ]]; then
+        log_warn "Checksums file missing: $checksums_file"
+        log_warn "Skipping Bazzite docs verification"
+        return 0
+    fi
+
+    while IFS= read -r line; do
+        # Skip empty lines and comments
+        [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+        local expected_hash=$(echo "$line" | awk '{print $1}')
+        local file_path="$MODULE_DIR/$(echo "$line" | awk '{print $2}')"
+
+        verify_checksum "$file_path" "$expected_hash"
+    done < "$checksums_file"
+
+    # Verify GPG signature on checksums file
+    if [[ -f "$SIGNATURES_DIR/bazzite-docs.sig" ]]; then
+        verify_signature "$SIGNATURES_DIR/bazzite-docs.sig" "$checksums_file"
+    fi
+}
+
+# Verify ISO hashes
+verify_iso_hashes() {
+    log_info "Verifying Bazzite ISO hashes..."
+
+    local checksums_file="$CHECKSUMS_DIR/iso-hashes.sha256"
+
+    if [[ ! -f "$checksums_file" ]]; then
+        log_warn "ISO hashes file missing: $checksums_file"
+        log_warn "Skipping ISO hash verification"
+        return 0
+    fi
+
+    while IFS= read -r line; do
+        [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+        local expected_hash=$(echo "$line" | awk '{print $1}')
+        local file_path="$MODULE_DIR/$(echo "$line" | awk '{print $2}')"
+
+        verify_checksum "$file_path" "$expected_hash"
+    done < "$checksums_file"
+}
+
+# Verify templates
+verify_templates() {
+    log_info "Verifying templates..."
+
+    local checksums_file="$CHECKSUMS_DIR/templates.sha256"
+
+    if [[ ! -f "$checksums_file" ]]; then
+        log_warn "Templates checksums file missing: $checksums_file"
+        log_warn "Skipping template verification"
+        return 0
+    fi
+
+    while IFS= read -r line; do
+        [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+        local expected_hash=$(echo "$line" | awk '{print $1}')
+        local file_path="$MODULE_DIR/$(echo "$line" | awk '{print $2}')"
+
+        verify_checksum "$file_path" "$expected_hash"
+    done < "$checksums_file"
+}
+
+# Verify examples
+verify_examples() {
+    log_info "Verifying examples..."
+
+    local checksums_file="$CHECKSUMS_DIR/examples.sha256"
+
+    if [[ ! -f "$checksums_file" ]]; then
+        log_warn "Examples checksums file missing: $checksums_file"
+        log_warn "Skipping examples verification"
+        return 0
+    fi
+
+    while IFS= read -r line; do
+        [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+        local expected_hash=$(echo "$line" | awk '{print $1}')
+        local file_path="$MODULE_DIR/$(echo "$line" | awk '{print $2}')"
+
+        verify_checksum "$file_path" "$expected_hash"
+    done < "$checksums_file"
+}
+
+# Main verification
+main() {
+    echo "╔════════════════════════════════════════════════════════════╗"
+    echo "║           iWi Resource Verification v1.0.0                 ║"
+    echo "╚════════════════════════════════════════════════════════════╝"
+    echo ""
+
+    # Verify resources directory exists
+    if [[ ! -d "$RESOURCES_DIR" ]]; then
+        log_error "Resources directory not found: $RESOURCES_DIR"
+        exit 1
+    fi
+
+    # Run all verifications
+    verify_bazzite_docs
+    echo ""
+    verify_iso_hashes
+    echo ""
+    verify_templates
+    echo ""
+    verify_examples
+
+    # Final summary
+    echo ""
+    echo "═══════════════════════════════════════════════════════════"
+    echo "  Verification Summary"
+    echo "═══════════════════════════════════════════════════════════"
+    echo "Total checks:  $TOTAL_CHECKS"
+    echo "Passed:        $PASSED_CHECKS"
+    echo "Failed:        $FAILED_CHECKS"
+    echo "═══════════════════════════════════════════════════════════"
+    echo ""
+
+    if [[ $FAILED_CHECKS -eq 0 ]]; then
+        log_success "All resources verified successfully"
+        echo ""
+        echo "Safe to use KENL13-iwi resources for installation."
+        exit 0
+    else
+        log_error "$FAILED_CHECKS verification(s) failed"
+        echo ""
+        echo "DO NOT use resources until verification issues are resolved."
+        echo "Run: ./bin/iwi-update-resources to re-download and verify."
+        exit 1
+    fi
+}
+
+main "$@"

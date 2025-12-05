@@ -1,0 +1,50 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║   📚 KENL9: LIBRARY - Multi-OS Game Library Management                        ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   🎮 SHARED LIBRARY SETUP                📦 STORAGE OPTIMIZATION              ║
+║   ──────────────────────                 ─────────────────────              ║
+║   partition-external.sh /dev/sdb         compress-inactive.sh                ║
+║   → Partition external drive             → Compress old games (save 30-40%)  ║
+║   → Auto-mount in /etc/fstab                                                 ║
+║                                           decompress-game.sh "Game"          ║
+║   setup-steam-library.sh                 → Decompress for playing            ║
+║   → Add to Steam (Linux + Windows)                                           ║
+║   → Configure shared NTFS partition      move-game.sh "Game" /target/        ║
+║                                           → Move between libraries           ║
+║                                                                               ║
+║   💾 SAVE GAME SYNC                      🔄 MIGRATION                         ║
+║   ────────────────                       ──────────                          ║
+║   find-saves.sh "Game Name"              scan-windows-games.sh               ║
+║   → Detect save locations                → Import Windows installs           ║
+║   → Linux + Windows paths                → Detect anti-cheat games           ║
+║                                                                               ║
+║   setup-sync.sh "Game Name"              optimize-performance.sh             ║
+║   → Symlink saves to shared location     → Move most-played to SSD           ║
+║   → Both OSes read same saves            → 50-60% faster load times          ║
+║                                                                               ║
+║   🚀 LAUNCHERS                           ⚠️  WINDOWS-ONLY GAMES               ║
+║   ───────────                            ────────────────────                ║
+║   Steam:    Shared NTFS (auto-detect)    track-windows-only.sh "BF6"         ║
+║   Heroic:   Epic/GOG (Linux)             → Mark as anti-cheat                ║
+║   EA App:   Windows-only partition       → Install to /mnt/windows-only/     ║
+║                                           → Note: Boot Windows to play        ║
+║                                                                               ║
+║   📊 TRACKING                            💡 QUICK TASKS                       ║
+║   ──────────                             ─────────────                       ║
+║   list-libraries.sh                      # Setup new drive                   ║
+║   → Show all Steam libraries             partition-external.sh /dev/sdb      ║
+║   → Usage stats per library              setup-steam-library.sh              ║
+║                                                                               ║
+║   library-stats.sh                       # Sync Elden Ring saves             ║
+║   → Total games: 47                      find-saves.sh "Elden Ring"          ║
+║   → Shared: 35 (Linux + Windows)         setup-sync.sh "Elden Ring"          ║
+║   → Windows-only: 12 (anti-cheat)                                            ║
+║                                           # Free space (compress old)         ║
+║                                           compress-inactive.sh                ║
+║   💡 TIP: Install game ONCE on shared NTFS, play from Linux + Windows         ║
+║        Saves 500GB+ on typical dual-boot setup!                              ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
