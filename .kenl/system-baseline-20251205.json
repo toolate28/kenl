@@ -1,0 +1,24 @@
+{
+  "date": "2025-12-05",
+  "environment": {
+    "container_os": "Debian 12 (bookworm)",
+    "host_kernel": "6.17.7-ba19.fc43.x86_64",
+    "host_os": "Bazzite",
+    "container_type": "distrobox",
+    "host_access": "available via distrobox-host-exec"
+  },
+  "counters": {
+    "atom": 4,
+    "saif": 6
+  },
+  "mcp_servers": {
+    "cloudflare": "cloned, needs configuration"
+  },
+  "gaming_tools": {
+    "gamescope": "available",
+    "mangohud": "available"
+  },
+  "issues_found": [
+    "env.sh line 23 syntax error (FIXED)"
+  ]
+}

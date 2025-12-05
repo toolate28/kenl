@@ -81,3 +81,6 @@ PROTON_WINE_ASSESSMENT.md
 # Local AI / Claude settings and locks
 modules/.claude/
 scripts/parallel-work.lock
+~/.kenl/.secrets/
+**/.env
+.secrets/
