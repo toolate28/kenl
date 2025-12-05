@@ -1,0 +1,52 @@
+---
+# Play Card: Halo Infinite
+# Generated: 2025-11-30T14:05:08Z
+# Status: draft
+
+game: "Halo Infinite"
+verified: 2025-11-30
+status: testing  # draft, testing, verified, deprecated
+
+hardware:
+  gpu: "Unknown"
+  cpu: "Unknown"
+  ram: "16GB"  # Update this
+
+configuration:
+  proton: "GE-Proton latest"
+  steam_app_id: "unknown"
+  launch_options: ""
+
+  # MangoHud settings
+  mangohud: true
+  mangohud_config: |
+    fps_limit=0
+    vsync=0
+    gpu_stats
+    cpu_stats
+    fps
+    frametime
+
+performance:
+  fps_avg: 0
+  fps_1_percent_low: 0
+  fps_0_1_percent_low: 0
+  resolution: "1920x1080"
+  graphics_preset: "High"
+
+compatibility:
+  rating: untested  # platinum, gold, silver, bronze, borked, untested
+  anti_cheat: unknown
+  multiplayer: unknown
+  issues: []
+  workarounds: []
+
+notes: |
+  Initial Play Card created - needs testing!
+
+tags:
+  - draft
+  - needs-verification
+
+references:
+  - protondb: "https://www.protondb.com/search?q=Halo+Infinite"

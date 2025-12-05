@@ -1,0 +1,293 @@
+---
+title: Steam Game 1790600 Play Card
+game_id: 1790600
+platform: Steam
+classification: GAMING-PLAYCARD
+atom: ATOM-PLAYCARD-20251205-001
+saif: SAIF-GAMING-PLAYCARD-20251205-001
+date: 2025-12-05
+hardware: AMD Ryzen 5 5600H + Radeon Vega iGPU
+---
+
+# Steam Game ID: 1790600 Play Card
+
+**Note:** Game title to be determined (Steam app ID 1790600)
+
+---
+
+## Hardware Profile
+
+**From:** `~/.kenl/current-playcard.yaml`
+
+```yaml
+hardware:
+  cpu:
+    model: "AMD Ryzen 5 5600H"
+    cores: 6
+    threads: 12
+    base_clock: "3.3 GHz"
+    boost_clock: "4.2 GHz"
+
+  gpu:
+    model: "AMD Radeon Vega (integrated)"
+    architecture: "Vega 7nm"
+    compute_units: 7
+    stream_processors: 448
+    memory_type: "shared system RAM"
+
+  memory:
+    total: "16GB"
+    type: "DDR4"
+    speed: "3200 MHz"
+```
+
+---
+
+## Launch Configuration
+
+### Steam Launch Command
+
+```bash
+steam -applaunch 1790600
+```
+
+### Optimized Launch Script
+
+**Location:** `~/.kenl/steam-game-1790600-launch.sh`
+
+**Environment Variables:**
+```bash
+RADV_PERFTEST=gpl,nggc,sam        # AMD RADV optimizations
+AMD_VULKAN_ICD=RADV               # Force RADV driver
+PROTON_ENABLE_NVAPI=0             # Disable NVIDIA API
+PROTON_HIDE_NVIDIA_GPU=1          # Hide NVIDIA GPU detection
+mangohud                           # Enable FPS overlay
+```
+
+### GameScope Settings (Optional)
+
+```bash
+gamescope -W 1920 -H 1080 -r 60 -F fsr -f \
+  -- steam -applaunch 1790600
+```
+
+**Parameters:**
+- `-W 1920 -H 1080`: Native 1080p resolution
+- `-r 60`: 60Hz refresh rate
+- `-F fsr`: AMD FidelityFX Super Resolution upscaling
+- `-f`: Fullscreen mode
+
+---
+
+## MangoHud Configuration
+
+**Config:** `~/.config/MangoHud/MangoHud.conf`
+
+```ini
+# FPS and frame timing
+fps
+frametime=1
+frame_timing=1
+
+# GPU stats
+gpu_stats
+gpu_temp
+gpu_core_clock
+gpu_mem_clock
+gpu_power
+
+# CPU stats
+cpu_stats
+cpu_temp
+cpu_power
+
+# Memory
+ram
+vram
+
+# Proton/Wine info
+wine
+vulkan_driver
+engine_version
+
+# Display settings
+font_size=24
+position=top-left
+toggle_hud=Shift_R+F12
+```
+
+---
+
+## Performance Expectations
+
+### Target Performance (1080p)
+
+**Estimated based on hardware:**
+- **Low settings:** 45-60 FPS
+- **Medium settings:** 30-45 FPS
+- **High settings:** 20-30 FPS
+
+**Note:** Actual performance depends on game optimization and Proton compatibility.
+
+### Proton Version
+
+**Recommended:** GE-Proton Latest
+- Better compatibility
+- Performance optimizations
+- Enhanced game support
+
+**Install via Steam:**
+1. Steam → Settings → Compatibility
+2. Enable Steam Play for all titles
+3. Download GE-Proton from: https://github.com/GloriousEggroll/proton-ge-custom
+
+---
+
+## Launch Procedure
+
+### Method 1: Direct Steam Launch
+
+```bash
+steam -applaunch 1790600
+```
+
+### Method 2: Optimized Script
+
+```bash
+~/.kenl/steam-game-1790600-launch.sh
+```
+
+Launches in background, logs to `/tmp/steam-1790600.log`
+
+### Method 3: GameScope + MangoHud
+
+```bash
+mangohud gamescope -W 1920 -H 1080 -r 60 -F fsr -f \
+  -- steam -applaunch 1790600
+```
+
+### Method 4: Flatpak Steam
+
+```bash
+flatpak run com.valvesoftware.Steam -applaunch 1790600
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**1. Game won't launch:**
+```bash
+# Check Proton version
+# Steam → Game Properties → Compatibility
+# Force specific Proton version (GE-Proton recommended)
+```
+
+**2. Low FPS:**
+```bash
+# Verify CPU governor is 'performance'
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+# Check GPU power profile
+cat /sys/class/drm/card0/device/power_dpm_force_performance_level
+```
+
+**3. Vulkan errors:**
+```bash
+# Verify RADV driver
+vulkaninfo --summary | grep deviceName
+
+# Should show: AMD Radeon Vega + RADV
+```
+
+**4. MangoHud not showing:**
+```bash
+# Check MangoHud installation
+flatpak list | grep MangoHud
+
+# Force enable
+MANGOHUD=1 steam -applaunch 1790600
+```
+
+---
+
+## Benchmarking
+
+### Create Benchmark Test
+
+```bash
+# Launch with benchmark mode (if game supports)
+# Record session with MangoHud
+MANGOHUD_OUTPUT=/tmp/mangohud-1790600.csv \
+  mangohud steam -applaunch 1790600
+
+# Analyze results
+cat /tmp/mangohud-1790600.csv
+```
+
+### Performance Metrics to Track
+
+- **Average FPS:** Target 30-60 depending on settings
+- **Frame time:** Target <33ms (30 FPS) or <16ms (60 FPS)
+- **GPU temp:** Should stay <85°C
+- **CPU temp:** Should stay <95°C
+- **GPU clock:** Should boost to ~1800 MHz
+- **CPU clock:** Should boost to ~4.2 GHz
+
+---
+
+## ATOM Trail Integration
+
+### Before Launch
+
+```bash
+echo "ATOM-GAMING-20251205-001: Launching Steam game 1790600" >> ~/.kenl/.atom-trail.log
+```
+
+### After Session
+
+```bash
+# Log session results
+DURATION="2h 15m"  # Actual playtime
+AVG_FPS="42"       # From MangoHud
+MAX_TEMP="78°C"    # Max GPU temp
+
+echo "ATOM-GAMING-20251205-002: Session complete - ${DURATION}, ${AVG_FPS} FPS avg, ${MAX_TEMP} max" >> ~/.kenl/.atom-trail.log
+```
+
+---
+
+## SAIF Flags
+
+- `SAIF-GAMING-20251205-001`: Play card created
+- `SAIF-GAMING-20251205-002`: Launch script configured
+- `SAIF-GAMING-20251205-003`: Performance baseline established
+- `SAIF-GAMING-20251205-004`: First gaming session completed
+
+---
+
+## Next Steps
+
+1. **Launch test:** Run game to verify it works
+2. **Performance test:** 15-minute session with MangoHud
+3. **Settings optimization:** Adjust graphics based on FPS
+4. **Document results:** Update this play card with actual performance
+5. **Share findings:** Contribute to KENL community profiles
+
+---
+
+## References
+
+- **Hardware Playcard:** `~/.kenl/current-playcard.yaml`
+- **SAIF Workflow:** `~/.kenl/claude-landing/SAIF-SYSTEM-STATE-ANALYSIS.md`
+- **Steam DB:** https://steamdb.info/app/1790600/
+- **ProtonDB:** https://www.protondb.com/app/1790600
+
+---
+
+**Status:** READY TO TEST
+**Classification:** GAMING-PLAYCARD
+**ATOM:** ATOM-PLAYCARD-20251205-001
+**SAIF:** SAIF-GAMING-PLAYCARD-20251205-001
