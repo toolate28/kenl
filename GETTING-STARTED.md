@@ -52,11 +52,7 @@ choco install obsidian -y
 Start-Process "https://obsidian.md/download"
 ```
 
-### macOS
 
-```bash
-brew install --cask obsidian
-```
 
 ---
 
