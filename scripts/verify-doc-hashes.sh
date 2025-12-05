@@ -30,7 +30,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-HASH_FILE="$REPO_ROOT/.doc-hashes"
+# HASH_FILE="$REPO_ROOT/.doc-hashes"  # Reserved for future use
 
 # Load error handling library
 if [ -f "$SCRIPT_DIR/lib/error-handling.sh" ]; then
@@ -38,6 +38,11 @@ if [ -f "$SCRIPT_DIR/lib/error-handling.sh" ]; then
     source "$SCRIPT_DIR/lib/error-handling.sh"
 else
     # Fallback definitions
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[1;33m'
+    NC='\033[0m' # No Color
+    
     log_error() { echo "[ERROR] $*" >&2; }
     log_warn() { echo "[WARN] $*" >&2; }
     log_info() { echo "[INFO] $*"; }
@@ -45,12 +50,6 @@ else
     log_debug() { if [ "${DEBUG:-0}" = "1" ]; then echo "[DEBUG] $*" >&2; fi; }
     die() { log_error "$1"; exit 1; }
 fi
-
-# Colors (kept for backwards compatibility)
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
 
 # Consistent pattern for hash field
 HASH_PATTERN='^hash:'
@@ -167,7 +166,12 @@ check_prerequisites() {
     fi
 }
 
-# Parse arguments
+# Parse arguments - check for help first
+if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
+    show_help
+    exit 0
+fi
+
 MODE="${1:-verify}"
 shift || true
 
@@ -343,7 +347,7 @@ case "$MODE" in
 esac
 
 # Show rollback instructions for update operations
-if [ "$MODE" = "update" ] && [ "$DRY_RUN" = "false" ] && [ $updated -gt 0 ]; then
+if [ "$MODE" = "update" ] && [ "$DRY_RUN" = "false" ] && [ "$updated" -gt 0 ]; then
     echo ""
     generate_rollback_instructions \
         "document hash update" \
