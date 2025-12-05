@@ -6,7 +6,22 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(rpm-ostree status:*)",
+      "Bash(hostnamectl:*)",
+      "Bash(systemd-detect-virt:*)",
+      "Bash(echo:*)",
+      "Bash(env)",
+      "Bash(cat:*)",
+      "Bash(distrobox list:*)",
+      "Bash(distrobox-host-exec which:*)",
+      "Bash(~/.kenl/.gitignore)",
+      "Bash(git config:*)",
+      "Bash(~/.kenl/.atom-trail.log)",
+      "Bash(ollama list:*)",
+      "Bash(flatpak list:*)",
+      "Bash(curl:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []

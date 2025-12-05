@@ -2,17 +2,31 @@
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\Matthew Ruhnau\\kenl", "C:\\Users\\Matthew Ruhnau\\AppData\\Local\\KENL", "C:\\Users\\Matthew Ruhnau\\Documents\\PowerShell"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/toolated/.kenl",
+        "/home/toolated/.config",
+        "/home/toolated/projects"
+      ]
     },
     "git": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "C:\\Users\\Matthew Ruhnau\\kenl"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git",
+        "--repository",
+        "/home/toolated/.kenl"
+      ]
     },
     "cloudflare": {
       "command": "npx",
-      "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+      "args": [
+        "-y",
+        "@cloudflare/mcp-server-cloudflare"
+      ],
       "env": {
-        "CLOUDFLARE_API_TOKEN": "YOUR_API_TOKEN_HERE",
+        "CLOUDFLARE_API_TOKEN": "gWe5cEvGXY-n3jhrOapCbdz0pu5Yhg5GVpUzToeu",
         "CLOUDFLARE_ACCOUNT_ID": "3ddeb355f4954bb1ee4f9486b2908e7e"
       }
     }
