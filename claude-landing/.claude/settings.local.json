@@ -21,7 +21,8 @@
       "Bash(ollama list:*)",
       "Bash(flatpak list:*)",
       "Bash(curl:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []
