@@ -18,12 +18,12 @@ version: 1.1.0
 
 The `user/` directory is your **personal command center** within KENL. Use it to:
 
-| Feature                                  | Benefit                                          |
-|------------------------------------------|--------------------------------------------------|
-| ⚙️ **Store project-specific configs**   | Keep Play Cards, SAIF workflows, custom scripts |
-| 🔗 **Symlink local projects**           | Point to projects you're actively working on    |
-| 📝 **Maintain personal notes**          | Document your specific setup or use cases       |
-| ⚡ **Quick access**                      | All your relevant files in one place            |
+| Feature                                  | Benefit                                         |
+|------------------------------------------|-------------------------------------------------|
+|    **Store project-specific configs**    | Keep Play Cards, SAIF workflows, custom scripts |
+|    **Symlink local projects**            | Point to projects you're actively working on    |
+|     **Maintain personal notes**          | Document your specific setup or use cases       |
+|     **Quick access**                     | All your relevant files in one place            |
 
 <table>
 <tr>
@@ -185,7 +185,7 @@ user/
 <tr>
 <td>
 
-| ❌ Don't Store        | ✅ Store Instead                    |
+| ❌ Don't Store        | ✅ Store Instead                   |
 |-----------------------|-------------------------------------|
 | Large binary files    | System locations (`/usr/local/bin`) |
 | Secrets/credentials   | `~/.secrets/` or env variables      |
