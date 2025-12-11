@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cloudflare/00-MASTER-DIRECTIVE.md",
+                "file": "IMPROVEMENTS_COMPLETE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-MASTER-DIRECTIVE"
+              "title": "IMPROVEMENTS_COMPLETE"
             }
           }
         ]
@@ -185,17 +185,23 @@
   },
   "active": "236169e3338b0a90",
   "lastOpenFiles": [
+    "TEST_VERIFICATION_REPORT.md",
+    "START_HERE.md",
+    "SNIPPETS.md",
+    "DOCUMENT_REGISTER.md",
+    "DEPLOYMENT_GUIDE.md",
+    "CLAUDE_INSTANCE_GUIDE.md",
     "NEXT_INSTANCE_GUIDE.md",
-    "cloudflare/00-MASTER-DIRECTIVE 1.md",
     "OPTIMIZATION_ASSESSMENT.md",
-    "FINAL_TEST_REPORT.md",
     "IMPROVEMENTS_V2_FORMATTED.md",
+    "FINAL_TEST_REPORT.md",
+    "cloudflare/00-MASTER-DIRECTIVE.md",
+    "cloudflare/00-MASTER-DIRECTIVE 1.md",
     "Untitled",
     "INDEX.md",
     "IMPROVEMENTS_COMPLETE.md",
     "IMPLEMENTATION_PROMPTS.md",
     "IMPLEMENTATION_COMPLETE.md",
-    "CLAUDE_INSTANCE_GUIDE.md",
     "logs/setup-20251209-155430.log",
     "logs/setup-20251209-155023.log",
     "logs/setup-20251209-154321.log",
@@ -204,7 +210,6 @@
     "README_BRANDED.md",
     "PACKAGE_CONTENTS.md",
     "PROJECT_STATE.md",
-    "PROJECT_OVERVIEW.md",
-    "DEPLOYMENT_GUIDE.md"
+    "PROJECT_OVERVIEW.md"
   ]
 }
