@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\Users\\iamto\\.kenl\\claude-landing\" log --oneline -10)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"cd ''C:\\Users\\iamto\\.kenl\\claude-landing\\claudenpc-server-suite''; .\\Update-Documentation-v2.0.0.ps1 -WhatIf\")",
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"cd ''C:\\Users\\iamto\\.kenl\\claude-landing\\claudenpc-server-suite''; .\\Update-Documentation-v2.0.0.ps1 -WhatIf\")"
+    ]
+  }
+}
