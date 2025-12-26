@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "claude-landing/claudenpc-server-suite/cloudflare/00-MASTER-DIRECTIVE 1.md",
-                "mode": "source",
+                "file": "claude-landing/claudenpc-server-suite/IMPROVEMENTS_V2_FORMATTED.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-MASTER-DIRECTIVE 1"
+              "title": "IMPROVEMENTS_V2_FORMATTED"
             }
           }
         ]
@@ -183,8 +183,25 @@
       "bases:Create new base": false
     }
   },
-  "active": "a181d6e7ee608445",
+  "active": "18364710e5db1ab2",
   "lastOpenFiles": [
+    "claude-landing/claudenpc-server-suite/collaboration-constellation-mermaid.pdf",
+    "claude-landing/OBSIDIAN-QUICK-START.md",
+    "claude-landing/QUICK-REFERENCE.md",
+    "claude-landing/RECENT-WORK.md",
+    "claude-landing/NEXT_STAGE_READY.md",
+    "claude-landing/claudenpc-server-suite/PROJECT_OVERVIEW.md",
+    "COMPLETE-DEVELOPMENT-SETUP.md",
+    "SAIF-WORKFLOW-PROGRESS-REPORT.md",
+    "QUICK-START-NEXT-STEPS.md",
+    "DOCUMENT-INDEX.md",
+    "GETTING-STARTED.md",
+    "VISUAL-ELEMENTS-STANDARD.md",
+    "WORKSPACE.md",
+    "README.md",
+    "modules/KENL2-gaming/MANIFEST.md",
+    "ATOM-REGISTER.md",
+    "OWI_METADATA_STANDARD.md",
     "claude-landing/claudenpc-server-suite/cloudflare/00-MASTER-DIRECTIVE.md",
     "claude-landing/claudenpc-server-suite/cloudflare/00-MASTER-DIRECTIVE 1.md",
     "claude-landing/claudenpc-server-suite/DOCUMENT_REGISTER.md",
@@ -194,24 +211,7 @@
     "claude-landing/SAIF-SYSTEM-STATE-ANALYSIS.md",
     "claude-landing/kenl-atom-visual-presentation.md",
     "claude-landing/ATOM-DIRECTIVE-DUALBOOT-20241127-001.md",
-    "claude-landing/CLAUDE-CLI-INIT.md",
-    "claude-landing/CURRENT-STATE.md",
-    "claude-landing/AI-AGENT-SYSTEM.md",
-    "modules/Surface_Pro_4_EoL_BattleMedic_v2.1/BattleMedic-Complete-Manual.md",
-    "docs/IMPLEMENTATION-SUMMARY.md",
-    "AI-INTEGRATION-GUIDE.md",
     "M811_Disassembly_Visual_Guide.pdf",
-    "kenl-context-sync-atom-directive.md",
-    "kenl-atom-visual-presentation.md",
-    "atom-context-sync-proposal.md",
-    "scripts/README-DASHBOARD.md",
-    "ALIGNED-SIGHT.md",
-    "ATOM-REGISTER.md",
-    "AUDIT_REPORT_LICENSE_LEGAL.md",
-    "BAZZITE-DX-IWI-INSTALLATION-SAIF.md",
-    "CHANGELOG.md",
-    "DOCUMENT-INDEX.md",
-    "OWI_FRAMEWORK_OVERVIEW.md",
     "Untitled.canvas"
   ]
 }

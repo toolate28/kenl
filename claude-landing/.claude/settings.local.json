@@ -24,7 +24,8 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nfeat: complete ClaudeNPC Server Suite v1.0.0 delivery package\n\nAdded comprehensive Minecraft server setup framework with AI-powered NPCs:\n\nCore Framework:\n- Production-ready PowerShell modules (Display, Logger, Safety, Config)\n- 5-phase automated installation system\n- Utility scripts for server management and monitoring\n\nDocumentation (220+ pages):\n- Complete setup and deployment guides\n- Implementation prompts for 5 advanced AI features\n- Branded documentation with professional formatting\n\nProject Structure:\n- GitLab City vision documentation\n- ClaudeNPC plugin specifications\n- Phase-based implementation order guide\n\nSAIF Counter: 2 → 3\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push)",
       "Bash(git pull:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(bun run:*)"
     ],
     "deny": [],
     "ask": []
