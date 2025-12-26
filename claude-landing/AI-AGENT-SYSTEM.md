@@ -59,25 +59,59 @@ graph TB
 
 ## 📥 Phase 1: Ingestion (Session Start)
 
+### Primary Orientation: bump.md Protocol
+
+**NEW: High-Mass Context Routing**
+
+The `bump.md` system provides single-file orientation with accumulated context. Use this as your primary entry point:
+
+**Orientation Flow:**
+```
+1. bump.md (systemwide) → High-mass context + task routing
+   ↓
+2. {project}/bump.md (if applicable) → Project-specific focus
+   ↓
+3. Supplemental files below → Detailed environment data
+```
+
+**Momentum Equation:**
+- **Mass** = Accumulated context in bump.md (frameworks, history, state)
+- **Velocity** = User's simple instruction ("check bump.md and proceed")
+- **Result** = Large stable output without extensive back-and-forth
+
 ### YOU MUST Read These Files (In Order):
 
-1. **CURRENT-STATE.md** - Current environment snapshot
-2. **RECENT-WORK.md** - Last session's work and context
-3. **NEXT-STEPS.md** - Immediate actionable tasks
-4. **QUICK-REFERENCE.md** - Common paths and commands
+**Primary (START HERE):**
+1. **bump.md** - High-mass orientation, task routing, system context
+
+**Supplemental (after bump.md):**
+2. **CURRENT-STATE.md** - Detailed environment snapshot
+3. **RECENT-WORK.md** - Last session's work and context
+4. **NEXT-STEPS.md** - Immediate actionable tasks
+5. **QUICK-REFERENCE.md** - Common paths and commands
 
 ### Context Validation Checklist
 
 ```markdown
-✅ CTF FLAG CAPTURE PROTOCOL
+✅ CTF FLAG CAPTURE PROTOCOL + bump.md Verification
 
 Before proceeding, validate these expectations:
 
+From bump.md "Current State" section:
+- [ ] System status matches documented state
+- [ ] "What's Working" items verified
+- [ ] "What's Not Working" items acknowledged
+- [ ] Critical alerts reviewed
+- [ ] Your Mission is clear and understood
+
+From environment validation:
 - [ ] Branch name matches documented state
 - [ ] Platform matches (Windows/Linux/CI)
 - [ ] Active module context is correct
 - [ ] Last ATOM tag sequence is valid
 - [ ] No unexpected file changes since last session
+
+Apply Tomorrow's Test: "Does documented state match reality?"
 ```
 
 ### IF Context Mismatch:
@@ -86,9 +120,12 @@ Before proceeding, validate these expectations:
 IF: Documented state ≠ Reality
 THEN:
   1. Stop current task
-  2. Document discrepancy in SESSION-NOTES
-  3. Update CURRENT-STATE.md with actual state
-  4. Flag for human review if significant
+  2. Update bump.md "Current State" section with actual state
+  3. Mark unknowns explicitly (don't fabricate)
+  4. Document discrepancy in latest Work Session
+  5. Update CURRENT-STATE.md as supplemental detail
+  6. Flag for human review if significant
+  7. Apply Tomorrow's Test before continuing
 ```
 
 ---
@@ -199,12 +236,23 @@ Examples:
 ```markdown
 ✅ SESSION END PROTOCOL
 
+Primary handover:
+- [ ] bump.md updated with new Work Session entry (at TOP)
+- [ ] bump.md "Current State" section reflects final state
+- [ ] bump.md "Your Mission" updated if task changed
 - [ ] All changes committed via report_progress
-- [ ] CURRENT-STATE.md updated with new state
+
+Supplemental documentation:
+- [ ] CURRENT-STATE.md updated with detailed environment state
 - [ ] RECENT-WORK.md updated with session summary
 - [ ] NEXT-STEPS.md updated with remaining tasks
 - [ ] ATOM tags logged for all significant actions
 - [ ] SAIF-HANDOVER flag dropped if work continues
+
+Tomorrow's Test Applied:
+- [ ] Next instance can orient from bump.md alone
+- [ ] Claims are honest and verifiable
+- [ ] Unknowns marked explicitly, not fabricated
 ```
 
 ### Pattern Detection
@@ -252,7 +300,9 @@ How to apply this learning
 
 | File | Update When | What to Update |
 |------|-------------|----------------|
-| `CURRENT-STATE.md` | Every session | Branch, platform, active work |
+| `bump.md` | **Every session** | **Work Sessions (top), Current State, Your Mission** |
+| `{project}/bump.md` | **Project work** | **Project-specific state, task progress** |
+| `CURRENT-STATE.md` | Every session | Detailed environment snapshot (supplements bump.md) |
 | `RECENT-WORK.md` | Every session | Summary, outcomes, next actions |
 | `NEXT-STEPS.md` | Tasks change | Priority, status, blockers |
 | `QUICK-REFERENCE.md` | New paths/commands discovered | Commands, paths, files |
@@ -336,11 +386,13 @@ graph LR
 
 | File | Purpose | Update Frequency |
 |------|---------|------------------|
-| `CURRENT-STATE.md` | Environment snapshot | Every session |
+| **`bump.md`** | **Primary orientation & task routing** | **Every session** |
+| **`{project}/bump.md`** | **Project-specific orientation** | **During project work** |
+| `CURRENT-STATE.md` | Detailed environment snapshot | Every session |
 | `RECENT-WORK.md` | Last session summary | Every session |
 | `NEXT-STEPS.md` | Immediate tasks | When tasks change |
 | `QUICK-REFERENCE.md` | Commands/paths | When discovered |
-| `AI-AGENT-SYSTEM.md` | This file | Rarely |
+| `AI-AGENT-SYSTEM.md` | This file - framework details | Rarely |
 | `AGENT-FACING-CONTENT-DESIGN.md` | Writing patterns | When patterns evolve |
 
 ### System Knowledge Files
@@ -598,10 +650,12 @@ THEN:
 
 **ATOM:** ATOM-AI-20251127-002
 **SAIF:** SAIF-SYSTEM-DESIGN-20251126-001
-**Version:** 2.1.0
+**Version:** 2.2.0
 **Created:** 2025-11-26
-**Updated:** 2025-11-27
-**Changelog:** Added Peripheral Vision Protocol for proactive issue flagging
+**Updated:** 2025-12-27
+**Changelog:**
+- v2.2.0 (2025-12-27): Integrated bump.md as primary orientation system
+- v2.1.0 (2025-11-27): Added Peripheral Vision Protocol for proactive issue flagging
 
 ---
 
@@ -609,9 +663,14 @@ THEN:
 
 **Session Start:**
 ```
-1. Read: CURRENT-STATE.md → RECENT-WORK.md → NEXT-STEPS.md
-2. Validate: Check CTF flags match reality
-3. Plan: Outline approach before making changes
+1. Read: bump.md (PRIMARY - high-mass context routing)
+   - Verify "Current State" matches reality
+   - Understand "Your Mission"
+   - Review latest Work Session
+2. Read: {project}/bump.md (if working on specific project)
+3. Read: Supplemental files (CURRENT-STATE.md, RECENT-WORK.md, NEXT-STEPS.md)
+4. Validate: Apply CTF flags + Tomorrow's Test
+5. Plan: Outline approach before making changes
 ```
 
 **During Work:**
@@ -619,11 +678,24 @@ THEN:
 1. Track: Log ATOM tags for decisions
 2. Checkpoint: Drop SAIF flags at key points
 3. Commit: Use report_progress frequently
+4. Monitor: Apply Peripheral Vision Protocol (flag anomalies)
 ```
 
 **Session End:**
 ```
-1. Update: CURRENT-STATE.md, RECENT-WORK.md, NEXT-STEPS.md
-2. Store: Use store_memory for reusable knowledge
-3. Handover: Prepare context for next session
+1. Update bump.md:
+   - Add new Work Session entry at TOP
+   - Update "Current State" to final state
+   - Apply Tomorrow's Test to all claims
+2. Update: CURRENT-STATE.md, RECENT-WORK.md, NEXT-STEPS.md (supplemental)
+3. Store: Use store_memory for reusable knowledge
+4. Handover: Next instance can orient from bump.md alone
 ```
+
+**Frameworks Integration:**
+- **bump.md**: Primary orientation (you start here)
+- **ATOM**: Decision tracking throughout work
+- **SAIF**: Staged checkpoints at key points
+- **CTF**: Validation (documented vs reality)
+- **Tomorrow's Test**: Honesty check before claims
+- **Peripheral Vision**: Flag issues proactively
