@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "claude-landing/claudenpc-server-suite/IMPROVEMENTS_V2_FORMATTED.md",
+                "file": "claude-landing/claudenpc-server-suite/bump.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "IMPROVEMENTS_V2_FORMATTED"
+              "title": "bump"
+            }
+          },
+          {
+            "id": "c5246b7cc73e6dbd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "claude-landing/QUICK-REFERENCE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "QUICK-REFERENCE"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,10 +198,17 @@
       "bases:Create new base": false
     }
   },
-  "active": "18364710e5db1ab2",
+  "active": "c5246b7cc73e6dbd",
   "lastOpenFiles": [
-    "claude-landing/claudenpc-server-suite/collaboration-constellation-mermaid.pdf",
     "claude-landing/OBSIDIAN-QUICK-START.md",
+    "claude-landing/00_START_HERE.md",
+    "claude-landing/TERMINOLOGY.md",
+    "claude-landing/claudenpc-server-suite/orchard_scatter.md",
+    "Untitled.md",
+    "claude-landing/claudenpc-server-suite/New Text Document.txt",
+    "claude-landing/claudenpc-server-suite/bump.md",
+    "claude-landing/claudenpc-server-suite/IMPROVEMENTS_V2_FORMATTED.md",
+    "claude-landing/claudenpc-server-suite/collaboration-constellation-mermaid.pdf",
     "claude-landing/QUICK-REFERENCE.md",
     "claude-landing/RECENT-WORK.md",
     "claude-landing/NEXT_STAGE_READY.md",
@@ -206,11 +228,6 @@
     "claude-landing/claudenpc-server-suite/cloudflare/00-MASTER-DIRECTIVE 1.md",
     "claude-landing/claudenpc-server-suite/DOCUMENT_REGISTER.md",
     "atom-sage-framework/docs/VALIDATION_COMPLETE.md",
-    "atom-sage-framework/README.md",
-    "claude-landing/IMPLEMENTATION_ORDER.md",
-    "claude-landing/SAIF-SYSTEM-STATE-ANALYSIS.md",
-    "claude-landing/kenl-atom-visual-presentation.md",
-    "claude-landing/ATOM-DIRECTIVE-DUALBOOT-20241127-001.md",
     "M811_Disassembly_Visual_Guide.pdf",
     "Untitled.canvas"
   ]

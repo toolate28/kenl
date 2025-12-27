@@ -84,3 +84,6 @@ scripts/parallel-work.lock
 ~/.kenl/.secrets/
 **/.env
 .secrets/
+
+# Separate repository for Claude Code hooks with Bun
+claude-landing/claude-bun-win11-hooks/
