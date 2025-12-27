@@ -87,3 +87,6 @@ scripts/parallel-work.lock
 
 # Separate repository for Claude Code hooks with Bun
 claude-landing/claude-bun-win11-hooks/
+
+# KENL5-facades wallpapers (binary assets - use external CDN)
+modules/KENL5-facades/wallpapers/
