@@ -1,0 +1,9 @@
+com\claudenpc\ConversationManager.class
+com\claudenpc\NPCListener.class
+com\claudenpc\ClaudeAPIClient$Message.class
+com\claudenpc\ClaudeNPCCommand.class
+com\claudenpc\ClaudeAPIClient$1.class
+com\claudenpc\ConfigManager.class
+com\claudenpc\ConversationManager$ConversationHistory.class
+com\claudenpc\ClaudeNPC.class
+com\claudenpc\ClaudeAPIClient.class
