@@ -1,0 +1,74 @@
+{
+  "$schema": "https://docs.waveterm.dev/schemas/settings.json",
+  "name": "KENL Development Environment - WaveTerm Configuration",
+  "version": "1.0.0",
+  "profiles": [
+    {
+      "name": "Claude Dashboard Monitor",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks\\.claude\\hooks",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { Write-Host 'Claude Dashboard running at http://localhost:3456' -ForegroundColor Green; Write-Host 'Logs: .claude/hooks/hooks-log.txt' -ForegroundColor Cyan }"],
+      "icon": "dashboard",
+      "color": "#61AFEF"
+    },
+    {
+      "name": "KENL PowerShell Modules",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { Import-Module ./modules/KENL0-system/powershell/KENL.psm1 -ErrorAction SilentlyContinue; Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1 -ErrorAction SilentlyContinue; Write-Host 'KENL Modules Loaded' -ForegroundColor Green; Get-KenlPlatform }"],
+      "icon": "terminal",
+      "color": "#98C379"
+    },
+    {
+      "name": "ClaudeNPC Server Suite",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing\\claudenpc-server-suite",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { Write-Host 'ClaudeNPC Phase 1 Complete - Ready for Testing' -ForegroundColor Green; Write-Host 'Phase 2 Roadmap: PHASE_2_ROADMAP.md' -ForegroundColor Cyan }"],
+      "icon": "minecraft",
+      "color": "#E5C07B"
+    },
+    {
+      "name": "Bun Development",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { Write-Host 'Bun Runtime Environment' -ForegroundColor Green; bun --version }"],
+      "icon": "code",
+      "color": "#C678DD"
+    },
+    {
+      "name": "Network Diagnostics",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1 -ErrorAction SilentlyContinue; Write-Host 'Network Diagnostics Ready' -ForegroundColor Green; Write-Host 'Run: Test-KenlNetwork' -ForegroundColor Yellow }"],
+      "icon": "network",
+      "color": "#56B6C2"
+    },
+    {
+      "name": "Git Operations",
+      "cwd": "C:\\Users\\iamto\\.kenl\\claude-landing",
+      "command": "pwsh",
+      "args": ["-NoExit", "-Command", "& { git status; Write-Host 'Git Repository: claude-landing' -ForegroundColor Green }"],
+      "icon": "git",
+      "color": "#E06C75"
+    }
+  ],
+  "settings": {
+    "theme": "dark",
+    "fontSize": 14,
+    "fontFamily": "Cascadia Code, Consolas, monospace",
+    "cursorStyle": "block",
+    "cursorBlink": true,
+    "scrollback": 10000,
+    "copyOnSelect": true,
+    "rightClickSelectsWord": true,
+    "quickEdit": true
+  },
+  "startup": {
+    "autoOpenProfiles": [
+      "Claude Dashboard Monitor",
+      "KENL PowerShell Modules",
+      "Git Operations"
+    ],
+    "layout": "grid-3"
+  }
+}

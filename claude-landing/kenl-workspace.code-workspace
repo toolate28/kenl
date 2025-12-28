@@ -1,0 +1,140 @@
+{
+	"folders": [
+		{
+			"name": "🏠 KENL Landing Zone",
+			"path": "."
+		},
+		{
+			"name": "🍞 Claude Bun Hooks",
+			"path": "claude-bun-win11-hooks"
+		},
+		{
+			"name": "🎮 ClaudeNPC Server Suite",
+			"path": "claudenpc-server-suite"
+		},
+		{
+			"name": "⚙️ KENL Modules",
+			"path": "../modules"
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "One Dark Pro",
+		"editor.fontSize": 14,
+		"editor.fontFamily": "'Cascadia Code', 'Fira Code', Consolas, monospace",
+		"editor.fontLigatures": true,
+		"editor.minimap.enabled": true,
+		"editor.rulers": [80, 120],
+		"editor.wordWrap": "on",
+		"editor.formatOnSave": true,
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.renderWhitespace": "boundary",
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 1000,
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/.git": false,
+			"**/dist": true,
+			"**/build": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/dist": true,
+			"**/build": true
+		},
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"terminal.integrated.fontSize": 13,
+		"terminal.integrated.fontFamily": "'Cascadia Code'",
+		"terminal.integrated.cursorBlinking": true,
+		"terminal.integrated.cursorStyle": "block",
+		"terminal.integrated.scrollback": 10000,
+		"git.enableSmartCommit": true,
+		"git.confirmSync": false,
+		"git.autofetch": true,
+		"markdown.preview.fontSize": 14,
+		"markdown.preview.lineHeight": 1.6,
+		"typescript.updateImportsOnFileMove.enabled": "always",
+		"javascript.updateImportsOnFileMove.enabled": "always",
+		"powershell.codeFormatting.preset": "OTBS",
+		"powershell.integratedConsole.showOnStartup": false,
+		"explorer.confirmDelete": false,
+		"explorer.confirmDragAndDrop": false,
+		"files.associations": {
+			"*.md": "markdown",
+			"*.ps1": "powershell",
+			"*.psm1": "powershell",
+			"*.psd1": "powershell"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.powershell",
+			"yzhang.markdown-all-in-one",
+			"davidanson.vscode-markdownlint",
+			"esbenp.prettier-vscode",
+			"ms-vscode.vscode-typescript-next",
+			"oven.bun-vscode",
+			"github.copilot",
+			"eamodio.gitlens",
+			"streetsidesoftware.code-spell-checker"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Start Claude Dashboard",
+				"type": "shell",
+				"command": "cd claude-bun-win11-hooks/.claude/hooks && bun run viewer",
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "always",
+					"panel": "new"
+				},
+				"runOptions": {
+					"runOn": "folderOpen"
+				}
+			},
+			{
+				"label": "Test KENL Network",
+				"type": "shell",
+				"command": "pwsh -Command \"Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Test-KenlNetwork\"",
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "always",
+					"panel": "dedicated"
+				}
+			},
+			{
+				"label": "Run Bun Tests",
+				"type": "shell",
+				"command": "cd claude-bun-win11-hooks/.claude/hooks && bun run test",
+				"problemMatcher": [],
+				"group": {
+					"kind": "test",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "Git Status All",
+				"type": "shell",
+				"command": "git status",
+				"problemMatcher": []
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "Debug Claude Dashboard",
+				"runtimeExecutable": "bun",
+				"runtimeArgs": ["run", "viewer/server.ts"],
+				"cwd": "${workspaceFolder}/claude-bun-win11-hooks/.claude/hooks",
+				"console": "integratedTerminal"
+			}
+		]
+	}
+}

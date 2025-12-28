@@ -1,0 +1,65 @@
+{
+  "name": "KENL Development - Windows Terminal Profiles",
+  "version": "1.0.0",
+  "profiles": [
+    {
+      "name": "Claude Dashboard",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks\\.claude\\hooks'; Write-Host '🔍 Claude Dashboard: http://localhost:3456' -ForegroundColor Green; Write-Host 'Logs: hooks-log.txt' -ForegroundColor Cyan; bun run viewer\"",
+      "icon": "📊",
+      "tabColor": "#61AFEF",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks\\.claude\\hooks"
+    },
+    {
+      "name": "KENL PowerShell",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing'; Import-Module ./modules/KENL0-system/powershell/KENL.psm1; Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Write-Host '✅ KENL Modules Loaded' -ForegroundColor Green; Write-Host 'Available: Get-KenlPlatform, Test-KenlNetwork, Optimize-KenlNetwork' -ForegroundColor Yellow\"",
+      "icon": "⚡",
+      "tabColor": "#98C379",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing"
+    },
+    {
+      "name": "ClaudeNPC Dev",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing\\claudenpc-server-suite'; Write-Host '🎮 ClaudeNPC Server Suite' -ForegroundColor Green; Write-Host 'Phase 1: Complete ✅' -ForegroundColor Cyan; Write-Host 'Phase 2: PHASE_2_ROADMAP.md' -ForegroundColor Yellow; ls *.md | Select-Object -First 10\"",
+      "icon": "🎮",
+      "tabColor": "#E5C07B",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing\\claudenpc-server-suite"
+    },
+    {
+      "name": "Bun Runtime",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks'; Write-Host '🍞 Bun JavaScript Runtime' -ForegroundColor Green; bun --version; Write-Host 'Commands: bun run viewer, bun run test' -ForegroundColor Cyan\"",
+      "icon": "🍞",
+      "tabColor": "#C678DD",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing\\claude-bun-win11-hooks"
+    },
+    {
+      "name": "Network Monitor",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing'; Import-Module ./modules/KENL0-system/powershell/KENL.Network.psm1; Write-Host '📡 Network Diagnostics' -ForegroundColor Green; Write-Host 'Running Test-KenlNetwork...' -ForegroundColor Cyan; Test-KenlNetwork\"",
+      "icon": "📡",
+      "tabColor": "#56B6C2",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing"
+    },
+    {
+      "name": "Git Status",
+      "commandline": "pwsh.exe -NoExit -Command \"cd 'C:\\Users\\iamto\\.kenl\\claude-landing'; Write-Host '📦 Git Repository Status' -ForegroundColor Green; git status; Write-Host '\\nRecent commits:' -ForegroundColor Cyan; git log --oneline -5\"",
+      "icon": "📦",
+      "tabColor": "#E06C75",
+      "colorScheme": "One Half Dark",
+      "startingDirectory": "C:\\Users\\iamto\\.kenl\\claude-landing"
+    },
+    {
+      "name": "System Monitor",
+      "commandline": "pwsh.exe -NoExit -Command \"Write-Host '💻 System Monitor' -ForegroundColor Green; Write-Host '\\nCPU: AMD Ryzen 5 5600H' -ForegroundColor Cyan; Write-Host 'RAM: 16GB DDR4' -ForegroundColor Cyan; Write-Host 'Platform: Windows 11' -ForegroundColor Cyan; Write-Host '\\nActive Services:' -ForegroundColor Yellow; netstat -ano | Select-String '3456|8081|25565' | Select-Object -First 10\"",
+      "icon": "💻",
+      "tabColor": "#D19A66",
+      "colorScheme": "One Half Dark"
+    }
+  ],
+  "defaultProfile": "KENL PowerShell",
+  "launchMode": "maximized",
+  "tabWidthMode": "equal",
+  "theme": "dark"
+}
