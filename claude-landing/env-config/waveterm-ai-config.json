@@ -1,0 +1,130 @@
+{
+  "$schema": "https://docs.waveterm.dev/schemas/ai-config.json",
+  "name": "KENL WaveTerm AI Configuration",
+  "version": "1.0.0",
+  "aiSettings": {
+    "enabled": true,
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-5",
+    "apiKeyEnvVar": "ANTHROPIC_API_KEY",
+    "maxTokens": 4096,
+    "temperature": 0.7,
+    "systemPrompt": "You are a helpful AI assistant integrated into WaveTerm for the KENL development environment. You help with:\n- PowerShell scripting and module development\n- Git operations and repository management\n- Network diagnostics and system monitoring\n- ClaudeNPC Minecraft plugin development\n- Logdy Central ATOM trail management\n\nBe concise, technical, and provide actionable suggestions.",
+    "contextAwareness": {
+      "includeWorkingDirectory": true,
+      "includeEnvironmentVars": true,
+      "includeRecentCommands": true,
+      "includeGitStatus": true,
+      "maxCommandHistory": 10
+    },
+    "shortcuts": {
+      "enabled": true,
+      "prefix": "/ai",
+      "commands": {
+        "/ai-help": "Show AI capabilities and available commands",
+        "/ai-explain": "Explain the last command or output",
+        "/ai-fix": "Suggest fixes for errors in recent output",
+        "/ai-optimize": "Suggest optimizations for current workflow",
+        "/ai-atom": "Help write ATOM trail entries"
+      }
+    },
+    "autoSuggestions": {
+      "enabled": true,
+      "triggerOnError": true,
+      "triggerOnLongRunning": false,
+      "errorPatterns": [
+        "error",
+        "exception",
+        "failed",
+        "not found",
+        "permission denied",
+        "syntax error"
+      ]
+    }
+  },
+  "profiles": {
+    "development": {
+      "model": "claude-sonnet-4-5",
+      "temperature": 0.7,
+      "maxTokens": 4096,
+      "systemPrompt": "Development mode: Provide detailed explanations and code examples."
+    },
+    "production": {
+      "model": "claude-sonnet-4",
+      "temperature": 0.3,
+      "maxTokens": 2048,
+      "systemPrompt": "Production mode: Provide concise, production-ready solutions."
+    },
+    "learning": {
+      "model": "claude-sonnet-4-5",
+      "temperature": 0.9,
+      "maxTokens": 8192,
+      "systemPrompt": "Learning mode: Provide educational explanations with examples and best practices."
+    }
+  },
+  "integrations": {
+    "claudeCode": {
+      "enabled": true,
+      "hookIntegration": true,
+      "dashboardUrl": "http://localhost:3456"
+    },
+    "logdyCentral": {
+      "enabled": true,
+      "atomTrailPath": "$env:USERPROFILE\\.kenl\\.atom-trail",
+      "webUiUrl": "http://localhost:8081",
+      "autoLogCommands": true
+    },
+    "git": {
+      "enabled": true,
+      "autoCommitMessages": true,
+      "prDescriptions": true,
+      "branchSuggestions": true
+    }
+  },
+  "customCommands": [
+    {
+      "name": "atom-log",
+      "description": "Write ATOM trail entry with AI assistance",
+      "prompt": "Help me create an ATOM trail entry for: ${input}",
+      "outputFormat": "powershell"
+    },
+    {
+      "name": "debug-error",
+      "description": "Debug the last error",
+      "prompt": "Analyze this error and suggest fixes: ${lastError}",
+      "includeContext": true
+    },
+    {
+      "name": "git-commit",
+      "description": "Generate commit message",
+      "prompt": "Generate a commit message for these changes: ${gitDiff}",
+      "outputFormat": "text"
+    },
+    {
+      "name": "explain-output",
+      "description": "Explain command output",
+      "prompt": "Explain this command output in detail: ${lastOutput}",
+      "includeContext": true
+    }
+  ],
+  "ui": {
+    "inlineAssistant": {
+      "enabled": true,
+      "position": "bottom-right",
+      "theme": "dark",
+      "opacity": 0.95
+    },
+    "chatPanel": {
+      "enabled": true,
+      "defaultWidth": 400,
+      "persistHistory": true,
+      "maxHistoryEntries": 100
+    },
+    "notifications": {
+      "enabled": true,
+      "showSuggestions": true,
+      "showErrors": true,
+      "position": "top-right"
+    }
+  }
+}
