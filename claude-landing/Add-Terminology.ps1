@@ -1,0 +1,272 @@
+# Add-Terminology.ps1
+# Dynamic terminology addition for KENL/SAIF + Claude Code skills
+
+param(
+    [Parameter(Mandatory, Position=0)]
+    [ValidateSet("Term", "Alias", "Skill", "Function", "Pattern")]
+    [string]$Type,
+
+    [Parameter(Mandatory, Position=1)]
+    [string]$Name,
+
+    [Parameter(Mandatory, Position=2)]
+    [string]$Definition,
+
+    [string]$Category,
+    [string]$Evidence,
+    [string]$Example,
+    [switch]$CreateSkill,
+    [switch]$CreateAlias,
+    [switch]$DryRun
+)
+
+$ErrorActionPreference = "Stop"
+
+$timestamp = Get-Date -Format "yyyy-MM-dd"
+$kenlRoot = Join-Path $env:USERPROFILE ".kenl\claude-landing"
+$terminologyFile = Join-Path $kenlRoot "TERMINOLOGY.md"
+
+# ============================================
+# Terminology Addition
+# ============================================
+
+function Add-TermToFile {
+    param($Term, $Definition, $Category, $Evidence, $Example)
+
+    Write-Host "`nAdding terminology to TERMINOLOGY.md..." -ForegroundColor Cyan
+
+    # Read current file
+    $content = Get-Content $terminologyFile -Raw
+
+    # Create new section
+    $newSection = @"
+
+### $Term
+**Definition:** $Definition
+$(if ($Category) { "**Category:** $Category" })
+$(if ($Evidence) { "**Evidence:** $Evidence" })
+$(if ($Example) {
+@"
+**Example:**
+``````
+$Example
+``````
+"@ })
+**Added:** $timestamp (via Add-Terminology.ps1)
+
+"@
+
+    # Find insertion point (before "## Terminology Evolution Protocol" or end of file)
+    $insertMarker = "## Terminology Evolution Protocol"
+    if ($content -match $insertMarker) {
+        $content = $content -replace "($insertMarker)", "$newSection`n`$1"
+    } else {
+        $content += "`n$newSection"
+    }
+
+    if ($DryRun) {
+        Write-Host "DRY RUN - Would add:" -ForegroundColor Yellow
+        Write-Host $newSection -ForegroundColor Gray
+    } else {
+        Set-Content -Path $terminologyFile -Value $content -NoNewline
+        Write-Host "  [OK] Added to TERMINOLOGY.md" -ForegroundColor Green
+    }
+}
+
+# ============================================
+# PowerShell Alias Addition
+# ============================================
+
+function Add-PowerShellAlias {
+    param($Name, $Definition)
+
+    Write-Host "`nAdding PowerShell alias..." -ForegroundColor Cyan
+
+    $commandCenterModule = Join-Path $kenlRoot "env-config\KENL-CommandCenter.psm1"
+
+    if (-not (Test-Path $commandCenterModule)) {
+        Write-Host "  [WARN] Command Center module not found" -ForegroundColor Yellow
+        return
+    }
+
+    # Check if alias already exists
+    $moduleContent = Get-Content $commandCenterModule -Raw
+    if ($moduleContent -match "Set-Alias.*-Name $Name") {
+        Write-Host "  [INFO] Alias '$Name' already exists" -ForegroundColor Yellow
+        return
+    }
+
+    # Add alias before Export-ModuleMember
+    $aliasLine = "Set-Alias -Name $Name -Value $Definition"
+    $updatedContent = $moduleContent -replace "(Export-ModuleMember)", "$aliasLine`n`$1"
+
+    if ($DryRun) {
+        Write-Host "DRY RUN - Would add alias:" -ForegroundColor Yellow
+        Write-Host "  $aliasLine" -ForegroundColor Gray
+    } else {
+        Set-Content -Path $commandCenterModule -Value $updatedContent -NoNewline
+        Write-Host "  [OK] Added alias: $Name -> $Definition" -ForegroundColor Green
+    }
+}
+
+# ============================================
+# Claude Code Skill Creation
+# ============================================
+
+function Add-ClaudeSkill {
+    param($Name, $Definition, $Example)
+
+    Write-Host "`nCreating Claude Code skill..." -ForegroundColor Cyan
+
+    $skillsDir = Join-Path $kenlRoot ".claude\skills"
+    New-Item -ItemType Directory -Force -Path $skillsDir | Out-Null
+
+    $skillFile = Join-Path $skillsDir "$Name.md"
+
+    if (Test-Path $skillFile) {
+        Write-Host "  [WARN] Skill '$Name' already exists" -ForegroundColor Yellow
+        return
+    }
+
+    $skillContent = @"
+# $Name
+
+## Description
+$Definition
+
+## Usage
+``````bash
+claude skill run $Name
+``````
+
+$(if ($Example) {
+@"
+## Example
+``````
+$Example
+``````
+"@
+})
+
+## Created
+- Date: $timestamp
+- Tool: Add-Terminology.ps1
+- Type: Dynamic skill
+
+## Integration
+This skill is part of the KENL/SAIF dynamic terminology system.
+"@
+
+    if ($DryRun) {
+        Write-Host "DRY RUN - Would create skill:" -ForegroundColor Yellow
+        Write-Host "  File: $skillFile" -ForegroundColor Gray
+    } else {
+        Set-Content -Path $skillFile -Value $skillContent
+        Write-Host "  [OK] Created skill: $skillFile" -ForegroundColor Green
+    }
+}
+
+# ============================================
+# Quick Function Addition
+# ============================================
+
+function Add-QuickFunction {
+    param($Name, $Definition)
+
+    Write-Host "`nCreating quick function..." -ForegroundColor Cyan
+
+    $functionsDir = Join-Path $kenlRoot "quick-functions"
+    New-Item -ItemType Directory -Force -Path $functionsDir | Out-Null
+
+    $functionFile = Join-Path $functionsDir "$Name.ps1"
+
+    $functionContent = @"
+# $Name
+# Auto-generated by Add-Terminology.ps1
+# Created: $timestamp
+
+<#
+.SYNOPSIS
+    $Definition
+#>
+
+function $Name {
+    param()
+
+    # TODO: Implement function logic
+    Write-Host "$Name called" -ForegroundColor Cyan
+    Write-Host "Definition: $Definition" -ForegroundColor Gray
+}
+
+# Export for module use
+Export-ModuleMember -Function $Name
+"@
+
+    if ($DryRun) {
+        Write-Host "DRY RUN - Would create function:" -ForegroundColor Yellow
+        Write-Host "  File: $functionFile" -ForegroundColor Gray
+    } else {
+        Set-Content -Path $functionFile -Value $functionContent
+        Write-Host "  [OK] Created function: $functionFile" -ForegroundColor Green
+    }
+}
+
+# ============================================
+# Main Execution
+# ============================================
+
+Write-Host "=" * 60 -ForegroundColor Gray
+Write-Host "Dynamic Terminology Addition System" -ForegroundColor Cyan
+Write-Host "=" * 60 -ForegroundColor Gray
+
+Write-Host "`nType: $Type" -ForegroundColor White
+Write-Host "Name: $Name" -ForegroundColor White
+Write-Host "Definition: $Definition" -ForegroundColor White
+
+switch ($Type) {
+    "Term" {
+        Add-TermToFile -Term $Name -Definition $Definition -Category $Category -Evidence $Evidence -Example $Example
+        if ($CreateSkill) {
+            Add-ClaudeSkill -Name $Name -Definition $Definition -Example $Example
+        }
+    }
+
+    "Alias" {
+        Add-PowerShellAlias -Name $Name -Definition $Definition
+        Add-TermToFile -Term $Name -Definition "PowerShell alias: $Name -> $Definition" -Category "Aliases"
+    }
+
+    "Skill" {
+        Add-ClaudeSkill -Name $Name -Definition $Definition -Example $Example
+        Add-TermToFile -Term $Name -Definition $Definition -Category "Claude Skills" -Example $Example
+    }
+
+    "Function" {
+        Add-QuickFunction -Name $Name -Definition $Definition
+        if ($CreateAlias) {
+            Add-PowerShellAlias -Name $Name -Definition $Name
+        }
+        Add-TermToFile -Term $Name -Definition $Definition -Category "Quick Functions"
+    }
+
+    "Pattern" {
+        Add-TermToFile -Term $Name -Definition $Definition -Category "Patterns" -Evidence $Evidence -Example $Example
+    }
+}
+
+# Add ATOM trail entry
+$atomScript = Join-Path $kenlRoot "Write-AtomTrail.ps1"
+if (Test-Path $atomScript) {
+    & $atomScript -Type CONFIG -Message "Added $Type '$Name' to terminology system" -Context CLI
+}
+
+Write-Host "`n" + "=" * 60 -ForegroundColor Gray
+if (-not $DryRun) {
+    Write-Host "Terminology addition complete!" -ForegroundColor Green
+    Write-Host "`nNext steps:" -ForegroundColor Cyan
+    Write-Host "  1. Review changes: git diff TERMINOLOGY.md" -ForegroundColor White
+    Write-Host "  2. Commit: git add . && git commit -m 'docs: add $Name terminology'" -ForegroundColor White
+    Write-Host "  3. Reload modules: Import-Module ./env-config/KENL-CommandCenter.psm1 -Force" -ForegroundColor White
+} else {
+    Write-Host "DRY RUN complete - no changes made" -ForegroundColor Yellow
+}
