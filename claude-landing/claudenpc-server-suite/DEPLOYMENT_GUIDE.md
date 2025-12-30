@@ -1,5 +1,9 @@
 # 🚀 ClaudeNPC Server Suite - Deployment Guide
 
+**Version:** v2.0.0 Enhanced Edition
+**Last Updated:** December 11, 2024
+**Status:** Production Ready
+
 **Complete guide to deploying and extending the modular setup framework**
 
 ---

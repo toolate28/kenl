@@ -8,7 +8,7 @@
 ║     ╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗██║ ╚████║██║          ║
 ║      ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝          ║
 ║                                                                              ║
-║                    🚀 COMPLETE BRANDED EXPORT v1.0.0                         ║
+║                    🚀 COMPLETE BRANDED EXPORT v2.0.0                         ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -299,4 +299,4 @@ Share your configs, get help, contribute back
 ```
 
 **Built with ❤️ by Claude Sonnet 4**  
-**SAIF Methodology • December 2024 • Version 1.0.0**
+**SAIF Methodology • December 2024 • Version 2.0.0**

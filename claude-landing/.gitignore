@@ -1,0 +1,24 @@
+
+# Java build artifacts
+**/target/
+*.jar
+*.war
+*.ear
+*.class
+*.log
+
+# Maven
+**/dependency-reduced-pom.xml
+
+# Build outputs
+**/build/
+**/out/
+**/bin/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+

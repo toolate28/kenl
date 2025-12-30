@@ -12,7 +12,20 @@
       "Bash(git push:*)",
       "Bash(git pull --rebase)",
       "Bash(du:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(java:*)",
+      "Bash(javac:*)",
+      "Bash(mvn:*)",
+      "Bash(Test-NetConnection -ComputerName localhost -Port 25565 -WarningAction SilentlyContinue)",
+      "Bash(Select-Object -First 3)",
+      "Bash(where:*)",
+      "Bash(powershell.exe -Command \"winget install --id Apache.Maven --silent --accept-source-agreements --accept-package-agreements\")",
+      "Bash(curl:*)",
+      "Bash(powershell.exe -NoProfile -Command \"choco install maven -y\")",
+      "Bash(powershell.exe -NoProfile -Command \"refreshenv; mvn -version\")",
+      "Bash(\"/c/Users/iamto/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.12/apache-maven-3.9.12/bin/mvn.cmd\" clean package)",
+      "Bash(unzip:*)",
+      "Bash(git config:*)"
     ]
   }
 }

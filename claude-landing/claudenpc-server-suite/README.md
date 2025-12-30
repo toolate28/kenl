@@ -1,5 +1,9 @@
 # 🎮 ClaudeNPC Server Suite - Modular Setup Framework
 
+**Version:** v2.0.0 Enhanced Edition
+**Last Updated:** December 11, 2024
+**Status:** Production Ready
+
 **Production-ready, modular installation framework for PaperMC + AI-powered NPCs**
 
 ---

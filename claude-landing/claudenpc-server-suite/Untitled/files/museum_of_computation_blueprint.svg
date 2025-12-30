@@ -1,0 +1,233 @@
+<svg viewBox="0 0 1600 2000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="800" y="40" font-size="36" font-weight="bold" text-anchor="middle" fill="#1a1a2e">
+    Museum of Computation: Synthesis & Redstone Translation
+  </text>
+  
+  <!-- Museum as Orchard Model -->
+  <g id="orchard-structure">
+    <!-- Center hub -->
+    <circle cx="800" cy="300" r="80" fill="#ffd700" stroke="#1a1a2e" stroke-width="3"/>
+    <text x="800" y="300" font-size="14" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#1a1a2e">
+      FOUNDATIONAL
+    </text>
+    <text x="800" y="320" font-size="14" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#1a1a2e">
+      CONCEPTS
+    </text>
+    <text x="800" y="345" font-size="11" text-anchor="middle" dominant-baseline="middle" fill="#1a1a2e">
+      What makes it hard?
+    </text>
+    
+    <!-- Three bottom constellations (input) -->
+    <!-- Compute -->
+    <circle cx="350" cy="450" r="70" fill="#ff6b6b" stroke="#1a1a2e" stroke-width="2" opacity="0.8"/>
+    <text x="350" y="440" font-size="13" font-weight="bold" text-anchor="middle" fill="white">COMPUTE</text>
+    <text x="350" y="460" font-size="10" text-anchor="middle" fill="white">(Workers)</text>
+    
+    <!-- Memory Bandwidth -->
+    <circle cx="800" cy="500" r="70" fill="#4ecdc4" stroke="#1a1a2e" stroke-width="2" opacity="0.8"/>
+    <text x="800" y="490" font-size="13" font-weight="bold" text-anchor="middle" fill="white">MEMORY</text>
+    <text x="800" y="510" font-size="13" font-weight="bold" text-anchor="middle" fill="white">BANDWIDTH</text>
+    <text x="800" y="525" font-size="10" text-anchor="middle" fill="white">(Conveyor)</text>
+    
+    <!-- Sequence -->
+    <circle cx="1250" cy="450" r="70" fill="#a8d8ea" stroke="#1a1a2e" stroke-width="2" opacity="0.8"/>
+    <text x="1250" y="450" font-size="13" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#1a1a2e">SEQUENCE</text>
+    <text x="1250" y="470" font-size="10" text-anchor="middle" fill="#1a1a2e">(Steps)</text>
+    
+    <!-- Connections to center -->
+    <line x1="380" y1="400" x2="750" y2="350" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="800" y1="430" x2="800" y2="380" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="1220" y1="400" x2="850" y2="350" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  </g>
+  
+  <!-- OPTIMIZATION STRATEGIES (Middle tier) -->
+  <g id="optimization-tier">
+    <!-- Title -->
+    <text x="800" y="620" font-size="18" font-weight="bold" text-anchor="middle" fill="#1a1a2e">
+      OPTIMIZATION STRATEGIES
+    </text>
+    <text x="800" y="645" font-size="12" text-anchor="middle" fill="#666">
+      How do we fix it?
+    </text>
+    
+    <!-- Parallel Execution -->
+    <rect x="200" y="700" width="200" height="120" fill="#ff6b6b" stroke="#1a1a2e" stroke-width="2" rx="8" opacity="0.7"/>
+    <text x="300" y="735" font-size="13" font-weight="bold" text-anchor="middle" fill="white">PARALLEL</text>
+    <text x="300" y="755" font-size="13" font-weight="bold" text-anchor="middle" fill="white">EXECUTION</text>
+    <text x="300" y="775" font-size="10" text-anchor="middle" fill="white">(Extra Hands)</text>
+    <text x="300" y="795" font-size="9" text-anchor="middle" fill="white">2-3× speedup</text>
+    
+    <!-- Sparse Patterns -->
+    <rect x="700" y="700" width="200" height="120" fill="#4ecdc4" stroke="#1a1a2e" stroke-width="2" rx="8" opacity="0.7"/>
+    <text x="800" y="735" font-size="13" font-weight="bold" text-anchor="middle" fill="white">SPARSE</text>
+    <text x="800" y="755" font-size="13" font-weight="bold" text-anchor="middle" fill="white">PATTERNS</text>
+    <text x="800" y="775" font-size="10" text-anchor="middle" fill="white">(Skip Stations)</text>
+    <text x="800" y="795" font-size="9" text-anchor="middle" fill="white">8-10× speedup</text>
+    
+    <!-- Predict & Correct -->
+    <rect x="1200" y="700" width="200" height="120" fill="#a8d8ea" stroke="#1a1a2e" stroke-width="2" rx="8" opacity="0.7"/>
+    <text x="1300" y="735" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a2e">PREDICT &</text>
+    <text x="1300" y="755" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a1a2e">CORRECT</text>
+    <text x="1300" y="775" font-size="10" text-anchor="middle" fill="#1a1a2e">(Smart Guessing)</text>
+    <text x="1300" y="795" font-size="9" text-anchor="middle" fill="#1a1a2e">2-3.5× speedup</text>
+  </g>
+  
+  <!-- FAILURE MODES WING (Lower tier) -->
+  <g id="failure-modes">
+    <rect x="150" y="920" width="1300" height="280" fill="#f0f0f0" stroke="#1a1a2e" stroke-width="2" stroke-dasharray="10,5" rx="8"/>
+    
+    <text x="800" y="950" font-size="16" font-weight="bold" text-anchor="middle" fill="#d32f2f">
+      FAILURE MODES WING: Where Optimization Breaks
+    </text>
+    
+    <!-- Batch Size Paradox -->
+    <rect x="200" y="980" width="280" height="140" fill="#ffcdd2" stroke="#d32f2f" stroke-width="2" rx="6"/>
+    <text x="340" y="1010" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Batch Size</text>
+    <text x="340" y="1030" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Paradox</text>
+    <text x="340" y="1055" font-size="10" text-anchor="middle" fill="#333">Speculative decoding</text>
+    <text x="340" y="1070" font-size="10" text-anchor="middle" fill="#333">shows 1.4-1.8× slowdown</text>
+    <text x="340" y="1085" font-size="10" text-anchor="middle" fill="#333">at high QPS</text>
+    <text x="340" y="1105" font-size="9" text-anchor="middle" fill="#666">Why? Helper becomes</text>
+    
+    <!-- Quantization Destruction -->
+    <rect x="620" y="980" width="280" height="140" fill="#ffcdd2" stroke="#d32f2f" stroke-width="2" rx="6"/>
+    <text x="760" y="1010" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Quantization</text>
+    <text x="760" y="1030" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Destruction</text>
+    <text x="760" y="1055" font-size="10" text-anchor="middle" fill="#333">4-bit quantization causes</text>
+    <text x="760" y="1070" font-size="10" text-anchor="middle" fill="#333">69% accuracy loss</text>
+    <text x="760" y="1085" font-size="10" text-anchor="middle" fill="#333">on math tasks</text>
+    <text x="760" y="1105" font-size="9" text-anchor="middle" fill="#666">Signal degradation</text>
+    
+    <!-- Context Window Trade-off -->
+    <rect x="1040" y="980" width="280" height="140" fill="#ffcdd2" stroke="#d32f2f" stroke-width="2" rx="6"/>
+    <text x="1180" y="1010" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Context Window</text>
+    <text x="1180" y="1030" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a1a2e">Trade-offs</text>
+    <text x="1180" y="1055" font-size="10" text-anchor="middle" fill="#333">Every optimization</text>
+    <text x="1180" y="1070" font-size="10" text-anchor="middle" fill="#333">has trade-offs:</text>
+    <text x="1180" y="1085" font-size="10" text-anchor="middle" fill="#333">speed vs accuracy</text>
+    <text x="1180" y="1105" font-size="9" text-anchor="middle" fill="#666">No free lunch</text>
+  </g>
+  
+  <!-- REDSTONE TESTBEDS (Right side interactive zones) -->
+  <g id="testbed-zones">
+    <text x="1450" y="200" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a1a2e">
+      INTERACTIVE
+    </text>
+    <text x="1450" y="220" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a1a2e">
+      REDSTONE
+    </text>
+    <text x="1450" y="240" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a1a2e">
+      TESTBEDS
+    </text>
+    
+    <!-- Assembly Line Testbed -->
+    <rect x="1300" y="280" width="280" height="100" fill="#fff9c4" stroke="#f57f17" stroke-width="2" rx="6"/>
+    <text x="1440" y="305" font-size="12" font-weight="bold" text-anchor="middle" fill="#f57f17">Zone 1: Assembly Line</text>
+    <text x="1440" y="330" font-size="10" text-anchor="middle" fill="#333">Hoppers = workers</text>
+    <text x="1440" y="345" font-size="10" text-anchor="middle" fill="#333">Items = tokens</text>
+    <text x="1440" y="360" font-size="9" text-anchor="middle" fill="#666">Discover: when does adding</text>
+    <text x="1440" y="372" font-size="9" text-anchor="middle" fill="#666">more workers actually slow down?</text>
+    
+    <!-- Predictor Testbed -->
+    <rect x="1300" y="410" width="280" height="100" fill="#fff9c4" stroke="#f57f17" stroke-width="2" rx="6"/>
+    <text x="1440" y="435" font-size="12" font-weight="bold" text-anchor="middle" fill="#f57f17">Zone 2: The Predictor</text>
+    <text x="1440" y="460" font-size="10" text-anchor="middle" fill="#333">Fast predictor makes guesses</text>
+    <text x="1440" y="475" font-size="10" text-anchor="middle" fill="#333">Manager accepts/rejects</text>
+    <text x="1440" y="490" font-size="9" text-anchor="middle" fill="#666">Key insight: bad predictor</text>
+    <text x="1440" y="502" font-size="9" text-anchor="middle" fill="#666">is worse than no predictor</text>
+    
+    <!-- Selective Attention Testbed -->
+    <rect x="1300" y="540" width="280" height="100" fill="#fff9c4" stroke="#f57f17" stroke-width="2" rx="6"/>
+    <text x="1440" y="565" font-size="12" font-weight="bold" text-anchor="middle" fill="#f57f17">Zone 3: Selective Attention</text>
+    <text x="1440" y="590" font-size="10" text-anchor="middle" fill="#333">Configure which tokens matter</text>
+    <text x="1440" y="605" font-size="10" text-anchor="middle" fill="#333">A-shape patterns (recent + periodic)</text>
+    <text x="1440" y="620" font-size="9" text-anchor="middle" fill="#666">Works on retrieval, breaks</text>
+    <text x="1440" y="632" font-size="9" text-anchor="middle" fill="#666">on reasoning tasks</text>
+  </g>
+  
+  <!-- DUAL TRACK STRUCTURE -->
+  <g id="dual-tracks">
+    <!-- Left: Technical Track -->
+    <rect x="100" y="1350" width="650" height="500" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" rx="10"/>
+    <text x="425" y="1385" font-size="16" font-weight="bold" text-anchor="middle" fill="#1976d2">
+      TECHNICAL TRACK
+    </text>
+    <text x="425" y="1410" font-size="11" text-anchor="middle" fill="#666">
+      For people who want the math
+    </text>
+    
+    <text x="125" y="1450" font-size="12" font-weight="bold" fill="#1a1a2e">Entry point:</text>
+    <text x="125" y="1472" font-size="10" fill="#333">• GPU compute: 300 teraFLOPs</text>
+    <text x="125" y="1492" font-size="10" fill="#333">• Memory bandwidth: 2 TB/sec</text>
+    <text x="125" y="1512" font-size="10" fill="#333">• Need 50-100 bytes per FLOP</text>
+    <text x="125" y="1532" font-size="10" fill="#333">• Can only access ~1 byte per FLOP</text>
+    <text x="125" y="1552" font-size="10" fill="#333">• Result: compute starves</text>
+    
+    <text x="125" y="1590" font-size="12" font-weight="bold" fill="#1a1a2e">Redstone shows:</text>
+    <text x="125" y="1612" font-size="10" fill="#333">• 4-block memory lane (slow)</text>
+    <text x="125" y="1632" font-size="10" fill="#333">• 32-block compute (mostly waiting)</text>
+    <text x="125" y="1652" font-size="10" fill="#333">• 8:1 mismatch visible in ticks</text>
+    <text x="125" y="1672" font-size="10" fill="#333">• Observer + comparator detects ratio</text>
+    
+    <text x="125" y="1710" font-size="12" font-weight="bold" fill="#1a1a2e">Decision DNA discovered:</text>
+    <text x="125" y="1732" font-size="10" fill="#333">• GPUs designed for data parallelism</text>
+    <text x="125" y="1752" font-size="10" fill="#333">• Repurposed for sequential generation</text>
+    <text x="125" y="1772" font-size="10" fill="#333">• Parallelism ≠ speedup without locality</text>
+    <text x="125" y="1792" font-size="10" fill="#333">• Memory is the real constraint</text>
+    
+    <text x="125" y="1830" font-size="11" font-weight="bold" fill="#d32f2f">Questions that emerge:</text>
+    <text x="125" y="1852" font-size="10" fill="#333">❓ Why is KV cache necessary?</text>
+    <text x="125" y="1872" font-size="10" fill="#333">❓ What breaks if we forget older tokens?</text>
+    
+    <!-- Right: Kids Track -->
+    <rect x="850" y="1350" width="650" height="500" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" rx="10"/>
+    <text x="1175" y="1385" font-size="16" font-weight="bold" text-anchor="middle" fill="#7b1fa2">
+      KIDS TRACK
+    </text>
+    <text x="1175" y="1410" font-size="11" text-anchor="middle" fill="#666">
+      For everyone (parents included!)
+    </text>
+    
+    <text x="870" y="1450" font-size="12" font-weight="bold" fill="#1a1a2e">The story:</text>
+    <text x="870" y="1472" font-size="10" fill="#333">"A really fast worker who can do</text>
+    <text x="870" y="1492" font-size="10" fill="#333">32 tasks per second.</text>
+    <text x="870" y="1512" font-size="10" fill="#333">But the supply line only brings</text>
+    <text x="870" y="1532" font-size="10" fill="#333">them new tasks every 4 seconds.</text>
+    <text x="870" y="1552" font-size="10" fill="#333">So the worker sits... and sits... and sits."</text>
+    
+    <text x="870" y="1590" font-size="12" font-weight="bold" fill="#1a1a2e">What they see in Redstone:</text>
+    <text x="870" y="1612" font-size="10" fill="#333">• Hopper slowly filling blocks from "memory"</text>
+    <text x="870" y="1632" font-size="10" fill="#333">• Dispenser trying to push them to "compute"</text>
+    <text x="870" y="1652" font-size="10" fill="#333">• System slows to match the slowest part</text>
+    <text x="870" y="1672" font-size="10" fill="#333">• You can SEE the bottleneck form</text>
+    
+    <text x="870" y="1710" font-size="12" font-weight="bold" fill="#1a1a2e">The question emerges naturally:</text>
+    <text x="870" y="1732" font-size="10" fill="#333">"Why does it slow down?"</text>
+    <text x="870" y="1752" font-size="10" fill="#333">"What would make it faster?"</text>
+    <text x="870" y="1772" font-size="10" fill="#333">"Why can't we just make</text>
+    <text x="870" y="1792" font-size="10" fill="#333">the supply line faster?"</text>
+    
+    <text x="870" y="1830" font-size="11" font-weight="bold" fill="#7b1fa2">Learning happens when:</text>
+    <text x="870" y="1852" font-size="10" fill="#333">✓ They see the problem directly</text>
+    <text x="870" y="1872" font-size="10" fill="#333">✓ They ask why, not being told</text>
+  </g>
+  
+  <!-- NEGATIVE SPACE ANALYSIS -->
+  <g id="negative-space">
+    <rect x="100" y="1900" width="1400" height="80" fill="#fce4ec" stroke="#c2185b" stroke-width="2" rx="6"/>
+    <text x="800" y="1925" font-size="13" font-weight="bold" text-anchor="middle" fill="#c2185b">
+      NEGATIVE SPACE: What doesn't exist (yet) or breaks
+    </text>
+    <text x="800" y="1948" font-size="10" text-anchor="middle" fill="#333">
+      No papers on "good draft models for speculation" • No theory on optimal sparsity patterns • Quantization+Pruning together? Never studied (likely fails)
+    </text>
+  </g>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <text x="100" y="1995" font-size="9" fill="#666">
+      Status: Blueprint complete | Implementation phase ready | Awaiting content prioritization
+    </text>
+  </g>
+</svg>

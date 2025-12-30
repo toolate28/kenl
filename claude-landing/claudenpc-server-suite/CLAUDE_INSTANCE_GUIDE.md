@@ -1,5 +1,9 @@
 # 🤖 Guide for New Claude Instances
 
+**Version:** v2.0.0 Enhanced Edition
+**Last Updated:** December 11, 2024
+**Status:** Production Ready
+
 **Everything you need to understand and extend this project**
 
 ---

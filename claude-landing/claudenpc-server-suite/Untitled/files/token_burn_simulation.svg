@@ -1,0 +1,238 @@
+<svg viewBox="0 0 1600 2200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 28px; font-weight: bold; fill: #1a1a2e; }
+      .subtitle { font-size: 14px; fill: #666; }
+      .label { font-size: 12px; fill: #333; }
+      .metric { font-size: 11px; fill: #666; }
+      .busy { fill: #4caf50; }
+      .idle { fill: #f44336; }
+      .working { fill: #2196f3; }
+      .network { stroke: #666; stroke-width: 2; fill: none; }
+      .data { stroke: #4caf50; stroke-width: 3; }
+      .wait { stroke: #f44336; stroke-width: 2; stroke-dasharray: 5,5; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="40" class="title" text-anchor="middle">Token Burn Simulation: Where Computational Waste Happens</text>
+  <text x="800" y="65" class="subtitle" text-anchor="middle">How information asymmetry creates idle cycles in sequential vs parallel processing</text>
+
+  <!-- Section 1: SEQUENTIAL PROCESSING -->
+  <g id="sequential">
+    <text x="200" y="120" class="title" font-size="20">SEQUENTIAL PROCESSING</text>
+    <text x="200" y="145" class="subtitle">(Left-to-right autoregressive generation)</text>
+
+    <!-- Timeline -->
+    <text x="200" y="185" class="label" font-weight="bold">Execution Timeline:</text>
+
+    <!-- Token 1 -->
+    <g>
+      <rect x="200" y="210" width="100" height="60" class="busy" rx="4"/>
+      <text x="250" y="235" class="label" text-anchor="middle" font-weight="bold" fill="white">Token 1</text>
+      <text x="250" y="255" class="label" text-anchor="middle" fill="white">Computing</text>
+
+      <rect x="310" y="210" width="140" height="60" class="idle" rx="4"/>
+      <text x="380" y="230" class="label" text-anchor="middle" font-weight="bold" fill="white">Idle Cycle</text>
+      <text x="380" y="250" class="label" text-anchor="middle" fill="white">(Waiting for T1)</text>
+
+      <line x1="300" y1="240" x2="310" y2="240" class="wait"/>
+      <text x="305" y="200" class="metric" text-anchor="middle">Wait</text>
+    </g>
+
+    <!-- Token 2 -->
+    <g>
+      <rect x="200" y="290" width="100" height="60" class="busy" rx="4"/>
+      <text x="250" y="315" class="label" text-anchor="middle" font-weight="bold" fill="white">Token 2</text>
+      <text x="250" y="335" class="label" text-anchor="middle" fill="white">Computing</text>
+
+      <rect x="310" y="290" width="140" height="60" class="idle" rx="4"/>
+      <text x="380" y="310" class="label" text-anchor="middle" font-weight="bold" fill="white">Idle Cycle</text>
+      <text x="380" y="330" class="label" text-anchor="middle" fill="white">(Waiting for T2)</text>
+
+      <line x1="300" y1="320" x2="310" y2="320" class="wait"/>
+    </g>
+
+    <!-- Token 3 -->
+    <g>
+      <rect x="200" y="370" width="100" height="60" class="busy" rx="4"/>
+      <text x="250" y="395" class="label" text-anchor="middle" font-weight="bold" fill="white">Token 3</text>
+      <text x="250" y="415" class="label" text-anchor="middle" fill="white">Computing</text>
+
+      <rect x="310" y="370" width="140" height="60" class="idle" rx="4"/>
+      <text x="380" y="390" class="label" text-anchor="middle" font-weight="bold" fill="white">Idle Cycle</text>
+      <text x="380" y="410" class="label" text-anchor="middle" fill="white">(Waiting for T3)</text>
+
+      <line x1="300" y1="400" x2="310" y2="400" class="wait"/>
+    </g>
+
+    <!-- Pattern continues -->
+    <text x="250" y="460" class="label" text-anchor="middle">... pattern continues ...</text>
+
+    <!-- Worker Pool Utilization -->
+    <text x="200" y="500" class="label" font-weight="bold">GPU Worker Pool Status:</text>
+
+    <!-- Utilization bar -->
+    <rect x="200" y="520" width="400" height="40" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
+    <rect x="200" y="520" width="100" height="40" class="busy" rx="4"/>
+    <text x="300" y="550" class="label" text-anchor="middle" fill="white" font-weight="bold">25% Busy</text>
+    <text x="450" y="550" class="label" text-anchor="start" fill="#333">75% Idle</text>
+
+    <!-- Analysis -->
+    <g id="seq-analysis">
+      <text x="200" y="600" class="label" font-weight="bold">Why This Wastes Computation:</text>
+      
+      <text x="220" y="625" class="metric">1. Token N cannot start until Token N-1 outputs</text>
+      <text x="220" y="650" class="metric">2. Information asymmetry: N doesn't know what N-1 will compute</text>
+      <text x="220" y="675" class="metric">3. GPU forced to run serially despite 1000s of worker threads</text>
+      <text x="220" y="700" class="metric">4. Result: Massive parallelism sits idle</text>
+
+      <text x="200" y="740" class="label" font-weight="bold">Token Burn Metric:</text>
+      <rect x="200" y="755" width="400" height="35" fill="#ffebee" stroke="#d32f2f" stroke-width="2" rx="4"/>
+      <text x="400" y="780" class="label" text-anchor="middle" font-weight="bold" fill="#d32f2f">Burn: 75% of GPU cycles wasted per token</text>
+    </g>
+  </g>
+
+  <!-- Section 2: PARALLEL PROCESSING (WITH SPECULATION) -->
+  <g id="parallel" transform="translate(0, 850)">
+    <text x="200" y="120" class="title" font-size="20">PARALLEL PROCESSING</text>
+    <text x="200" y="145" class="subtitle">(Batched with speculative decoding)</text>
+
+    <!-- Timeline -->
+    <text x="200" y="185" class="label" font-weight="bold">Execution Timeline:</text>
+
+    <!-- Batch processing -->
+    <g>
+      <rect x="200" y="210" width="250" height="60" class="working" rx="4"/>
+      <text x="325" y="230" class="label" text-anchor="middle" font-weight="bold" fill="white">Batch [T₁, T₂, T₃, ...]</text>
+      <text x="325" y="255" class="label" text-anchor="middle" fill="white">All compute in parallel</text>
+    </g>
+
+    <!-- Speculation phase -->
+    <g transform="translate(0, 80)">
+      <rect x="200" y="210" width="150" height="60" class="busy" rx="4"/>
+      <text x="275" y="235" class="label" text-anchor="middle" font-weight="bold" fill="white">T₁ Outputs</text>
+      <text x="275" y="255" class="label" text-anchor="middle" fill="white">(Actual)</text>
+
+      <rect x="360" y="210" width="150" height="60" fill="#ff9800" rx="4"/>
+      <text x="435" y="235" class="label" text-anchor="middle" font-weight="bold" fill="white">T₂ Speculates</text>
+      <text x="435" y="255" class="label" text-anchor="middle" fill="white">(Predicted)</text>
+
+      <!-- Verification -->
+      <line x1="345" y1="240" x2="360" y2="240" class="data"/>
+      <text x="352" y="200" class="metric" text-anchor="middle" fill="#4caf50">Verify</text>
+    </g>
+
+    <!-- Worker Pool Utilization -->
+    <text x="200" y="400" class="label" font-weight="bold">GPU Worker Pool Status:</text>
+
+    <!-- Utilization bar -->
+    <rect x="200" y="420" width="400" height="40" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
+    <rect x="200" y="420" width="380" height="40" class="working" rx="4"/>
+    <text x="400" y="450" class="label" text-anchor="middle" fill="white" font-weight="bold">95% Busy</text>
+
+    <!-- Analysis -->
+    <g id="par-analysis">
+      <text x="200" y="500" class="label" font-weight="bold">Why This Works Better:</text>
+      
+      <text x="220" y="525" class="metric">1. All tokens compute simultaneously (no waiting)</text>
+      <text x="220" y="550" class="metric">2. T₂ speculates about T₁'s output while T₁ still computing</text>
+      <text x="220" y="575" class="metric">3. Speculation succeeds ~90% of time (patterns are predictable)</text>
+      <text x="220" y="600" class="metric">4. Failed speculation → recompute (rare, only costs 1 batch)</text>
+
+      <text x="200" y="640" class="label" font-weight="bold">Token Burn Metric:</text>
+      <rect x="200" y="655" width="400" height="35" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="4"/>
+      <text x="400" y="680" class="label" text-anchor="middle" font-weight="bold" fill="#4caf50">Burn: ~5% of GPU cycles wasted per token</text>
+    </g>
+  </g>
+
+  <!-- Section 3: LEARNED COMPRESSION (TITAN+MIRAS APPROACH) -->
+  <g id="learned" transform="translate(0, 1700)">
+    <text x="200" y="120" class="title" font-size="20">LEARNED COMPRESSION</text>
+    <text x="200" y="145" class="subtitle">(TITAN+MIRAS: Pre-warming information patterns)</text>
+
+    <!-- Timeline -->
+    <text x="200" y="185" class="label" font-weight="bold">Execution Timeline:</text>
+
+    <!-- Pattern lookup phase -->
+    <g>
+      <rect x="200" y="210" width="250" height="60" fill="#9c27b0" rx="4"/>
+      <text x="325" y="230" class="label" text-anchor="middle" font-weight="bold" fill="white">Pattern Lookup</text>
+      <text x="325" y="255" class="label" text-anchor="middle" fill="white">(Pre-computed from training)</text>
+    </g>
+
+    <!-- Batch processing with warm cache -->
+    <g transform="translate(0, 80)">
+      <rect x="200" y="210" width="250" height="60" class="busy" rx="4"/>
+      <text x="325" y="230" class="label" text-anchor="middle" font-weight="bold" fill="white">Batch [T₁, T₂, T₃, ...]</text>
+      <text x="325" y="255" class="label" text-anchor="middle" fill="white">Uses pre-warmed patterns</text>
+    </g>
+
+    <!-- Verification (lightweight) -->
+    <g transform="translate(0, 160)">
+      <rect x="200" y="210" width="250" height="60" fill="#81c784" rx="4"/>
+      <text x="325" y="235" class="label" text-anchor="middle" font-weight="bold" fill="white">Verification (Cheap)</text>
+      <text x="325" y="255" class="label" text-anchor="middle" fill="white">~1% overhead for confirming</text>
+    </g>
+
+    <!-- Worker Pool Utilization -->
+    <text x="200" y="480" class="label" font-weight="bold">GPU Worker Pool Status:</text>
+
+    <!-- Utilization bar -->
+    <rect x="200" y="500" width="400" height="40" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
+    <rect x="200" y="500" width="395" height="40" class="busy" rx="4"/>
+    <text x="400" y="530" class="label" text-anchor="middle" fill="white" font-weight="bold">98% Busy</text>
+
+    <!-- Analysis -->
+    <g id="learned-analysis">
+      <text x="200" y="580" class="label" font-weight="bold">Why This Is Optimal:</text>
+      
+      <text x="220" y="605" class="metric">1. Information asymmetry RESOLVED: patterns pre-computed</text>
+      <text x="220" y="630" class="metric">2. All tokens compute in parallel with warm cache</text>
+      <text x="220" y="655" class="metric">3. Verification succeeds ~99% of time (patterns cover cases)</text>
+      <text x="220" y="680" class="metric">4. No speculation overhead—information already available</text>
+
+      <text x="200" y="720" class="label" font-weight="bold">Token Burn Metric:</text>
+      <rect x="200" y="735" width="400" height="35" fill="#e0f2f1" stroke="#009688" stroke-width="2" rx="4"/>
+      <text x="400" y="760" class="label" text-anchor="middle" font-weight="bold" fill="#009688">Burn: <1% of GPU cycles wasted per token</text>
+    </g>
+  </g>
+
+  <!-- SUMMARY COMPARISON -->
+  <g id="summary" transform="translate(0, 2050)">
+    <text x="800" y="30" class="title" text-anchor="middle" font-size="22">Summary: The Information Asymmetry Problem</text>
+
+    <!-- Comparison table -->
+    <rect x="100" y="50" width="1400" height="120" fill="#f5f5f5" stroke="#999" stroke-width="2" rx="4"/>
+
+    <!-- Headers -->
+    <text x="150" y="80" class="label" font-weight="bold">Approach</text>
+    <text x="400" y="80" class="label" font-weight="bold">Token Burn</text>
+    <text x="700" y="80" class="label" font-weight="bold">GPU Utilization</text>
+    <text x="1050" y="80" class="label" font-weight="bold">Key Insight</text>
+
+    <!-- Sequential -->
+    <text x="150" y="120" class="metric">Sequential</text>
+    <text x="400" y="120" class="metric" fill="#d32f2f">75% wasted</text>
+    <text x="700" y="120" class="metric">15% busy</text>
+    <text x="1050" y="120" class="metric">Information trapped</text>
+
+    <!-- Parallel -->
+    <text x="150" y="155" class="metric">Parallel (Speculative)</text>
+    <text x="400" y="155" class="metric" fill="#ff9800">~5% wasted</text>
+    <text x="700" y="155" class="metric">95% busy</text>
+    <text x="1050" y="155" class="metric">Speculation helps</text>
+
+    <!-- Learned -->
+    <text x="150" y="145" class="metric">Learned Compression</text>
+    <text x="400" y="145" class="metric" fill="#4caf50">&lt;1% wasted</text>
+    <text x="700" y="145" class="metric">98% busy</text>
+    <text x="1050" y="145" class="metric">Patterns pre-computed</text>
+
+    <!-- The key realization -->
+    <rect x="100" y="200" width="1400" height="60" fill="#fff3e0" stroke="#ff6f00" stroke-width="2" rx="4"/>
+    <text x="800" y="225" class="label" text-anchor="middle" font-weight="bold" fill="#ff6f00">The Real Issue: Information Asymmetry</text>
+    <text x="800" y="250" class="metric" text-anchor="middle" fill="#333">Token N doesn't know what Token N-1 will output. The "burn" is the cost of this ignorance.</text>
+  </g>
+
+</svg>
