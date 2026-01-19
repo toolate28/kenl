@@ -11,7 +11,8 @@ Write-Host "══════════════════════�
 Write-Host ""
 
 # Create download directory
-$downloadDir = "C:\Users\Matthew Ruhnau\Downloads\bazzite"
+# Personal info redacted - use environment variables
+$downloadDir = "$env:USERPROFILE\Downloads\bazzite"
 New-Item -ItemType Directory -Force -Path $downloadDir | Out-Null
 Set-Location $downloadDir
 
@@ -87,7 +88,8 @@ Write-Host "══════════════════════�
 Write-Host ""
 
 # Log ATOM trail
-$atomLog = "C:\Users\Matthew Ruhnau\kenl-atom-trail.log"
+# Personal info redacted - use environment variables
+$atomLog = "$env:USERPROFILE\kenl-atom-trail.log"
 "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | ATOM-CFG-20251112-005 | Bazzite KDE ISO downloaded and verified" | Out-File -FilePath $atomLog -Append
 
 Read-Host "Press Enter to exit"

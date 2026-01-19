@@ -226,7 +226,7 @@ Logs saved to: .archive\logs\error-20251112-144233.log
 ```
 ┌─ SYSTEM STATUS ───────────────────────────────────┐
 │ 🖥️  Platform:    Windows 11 Pro (Build 22631.4602) │
-│ 💾 Working Dir:  C:\Users\Matthew Ruhnau\kenl      │
+│ 💾 Working Dir:  %USERPROFILE%\kenl                │
 │ 🌿 Git Branch:   main (clean)                      │
 │ ⏰ Session Time: 14m 32s                           │
 └────────────────────────────────────────────────────┘

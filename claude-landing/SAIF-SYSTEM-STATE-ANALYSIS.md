@@ -164,12 +164,12 @@ ATOM-CRED-20251205-003: Proton credentials secured in keyring
     "filesystem": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\Matthew Ruhnau\\kenl", ...]
+        "%USERPROFILE%\\kenl", ...]
     },
     "git": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-git",
-        "--repository", "C:\\Users\\Matthew Ruhnau\\kenl"]
+        "--repository", "%USERPROFILE%\\kenl"]
     },
     "cloudflare": {
       "command": "npx",

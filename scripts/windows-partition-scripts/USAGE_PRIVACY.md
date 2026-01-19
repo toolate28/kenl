@@ -20,7 +20,7 @@ owi-version: 1.0.0
 When you run the partition scripts, they create files containing:
 
 **Sensitive Information:**
-- ✗ Your Windows username (`C:\Users\Matthew Ruhnau\Desktop\...`)
+- ✗ Your Windows username (`%USERPROFILE%\Desktop\...` - example: `C:\Users\YourName\Desktop\...`)
 - ✗ Disk serial numbers and hardware IDs
 - ✗ Partition UUIDs (unique identifiers)
 - ✗ Your custom disk sizes and drive letter preferences
@@ -29,7 +29,7 @@ When you run the partition scripts, they create files containing:
 **Example from handover document:**
 ```markdown
 **Timestamp:** 2025-11-12 16:48:33
-**User:** C:\Users\Matthew Ruhnau\Desktop
+**User:** %USERPROFILE%\Desktop (example: C:\Users\YourName\Desktop)
 **Disk:** Seagate FireCuda (Serial: ZCT2X9GK)
 **UUIDs:**
 - sdb1: A8F2-4D91
@@ -187,7 +187,7 @@ git status
 # Always verify before push
 git status                               # Check staged files
 git diff --cached                        # Review changes
-grep -r "Matthew Ruhnau" *               # Search for personal data (example)
+grep -r "YourName" *                     # Search for personal data (replace with your actual name)
 
 # Only push if clean
 git push origin main
@@ -347,7 +347,7 @@ git log -1 --stat             # Check last commit
 **Manual Search:**
 ```bash
 # Linux/Git Bash
-grep -r "Matthew Ruhnau" .    # Replace with your name
+grep -r "YourName" .    # Replace with your actual Windows username
 grep -r "Serial Number:" .
 grep -r "UUID=" . --include="*.ps1"
 

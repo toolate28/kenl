@@ -97,7 +97,7 @@ Before running partition commands:
 
 **Environment:** Windows 11
 **Branch:** main
-**Working Dir:** `C:\Users\Matthew Ruhnau\kenl`
+**Working Dir:** `%USERPROFILE%\kenl`
 **Shell:** Git Bash (PowerShell available via `powershell` command)
 
 **External Drive:** 2TB Seagate (verify with Get-Disk)

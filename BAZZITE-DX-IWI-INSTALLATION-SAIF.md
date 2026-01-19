@@ -48,7 +48,7 @@ hardware: AMD Ryzen 5 5600H + Radeon Vega
 
 ```powershell
 # Import KENL.Network module
-cd C:\Users\Matthew Ruhnau\kenl\modules\KENL0-system\powershell
+cd $env:USERPROFILE\kenl\modules\KENL0-system\powershell
 Import-Module .\KENL.Network.psm1 -Force
 
 # Test network latency (establishes baseline)
@@ -94,8 +94,8 @@ Get-Disk | Format-Table -AutoSize
 Get-Partition | Format-Table -AutoSize
 
 # Export for reference
-Get-Disk | Out-File -FilePath "C:\Users\Matthew Ruhnau\kenl\WINDOWS-DISK-LAYOUT-BEFORE.txt"
-Get-Partition | Out-File -FilePath "C:\Users\Matthew Ruhnau\kenl\WINDOWS-PARTITIONS-BEFORE.txt" -Append
+Get-Disk | Out-File -FilePath "$env:USERPROFILE\kenl\WINDOWS-DISK-LAYOUT-BEFORE.txt"
+Get-Partition | Out-File -FilePath "$env:USERPROFILE\kenl\WINDOWS-PARTITIONS-BEFORE.txt" -Append
 
 # Check external 2TB drive status
 Get-Partition -DiskNumber 1 | Format-Table -AutoSize

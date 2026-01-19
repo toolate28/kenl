@@ -132,11 +132,11 @@ Get-ChildItem Z:\ -Recurse -ErrorAction SilentlyContinue | Measure-Object
 #### 1.3 Backup Critical Data
 
 **Windows System:**
-- Documents: `C:\Users\Matthew Ruhnau\Documents`
-- Downloads: `C:\Users\Matthew Ruhnau\Downloads`
-- PowerShell Profile: `C:\Users\Matthew Ruhnau\Documents\PowerShell\`
-- SSH Keys: `C:\Users\Matthew Ruhnau\.ssh\` (if present)
-- GPG Keys: `C:\Users\Matthew Ruhnau\.gnupg\` (if present)
+- Documents: `%USERPROFILE%\Documents`
+- Downloads: `%USERPROFILE%\Downloads`
+- PowerShell Profile: `%USERPROFILE%\Documents\PowerShell\`
+- SSH Keys: `%USERPROFILE%\.ssh\` (if present)
+- GPG Keys: `%USERPROFILE%\.gnupg\` (if present)
 
 **Development:**
 - Git repositories (if not pushed)
