@@ -212,7 +212,8 @@ sudo blkid "${TARGET_DRIVE}"*
 echo ""
 
 # Create handover document (save to Windows filesystem)
-HANDOVER_FILE="/mnt/c/Users/Matthew Ruhnau/Desktop/HANDOVER-WSL2-PARTITION-$(date +%Y%m%d-%H%M%S).md"
+# Personal info redacted - use environment variables
+HANDOVER_FILE="/mnt/c/Users/$USER/Desktop/HANDOVER-WSL2-PARTITION-$(date +%Y%m%d-%H%M%S).md"
 cat > "$HANDOVER_FILE" <<EOF
 # WSL2 Partition Creation Handover
 **ATOM-CFG-20251112-003**
@@ -319,7 +320,7 @@ echo -e "${GREEN}  ✅ STEP 2 COMPLETE: Partitions Created via WSL2!${NC}"
 echo -e "${GREEN}═══════════════════════════════════════════════════════════${NC}"
 echo ""
 echo -e "${CYAN}📝 Handover document created (on your Windows Desktop):${NC}"
-echo -e "   C:\\Users\\Matthew Ruhnau\\Desktop\\HANDOVER-WSL2-PARTITION-*.md"
+echo -e "   %USERPROFILE%\\Desktop\\HANDOVER-WSL2-PARTITION-*.md"
 echo ""
 echo -e "${YELLOW}Next Actions:${NC}"
 echo ""

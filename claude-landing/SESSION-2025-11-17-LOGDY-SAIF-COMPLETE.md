@@ -13,7 +13,7 @@ Successfully implemented **complete SAIF framework visibility** through Logdy Ce
 ### What Was Fixed
 
 **Critical Bug:** Path quoting issue in Start-LogdyCentral.ps1
-- Spaces in "Matthew Ruhnau" caused path to split: `C:\Users\Matthew` + `Ruhnau\.kenl\.atom-trail`
+- Spaces in usernames caused path to split: `C:\Users\First` + `Last\.kenl\.atom-trail`
 - **Fix:** Added quotes around path variable: `` "`"$atomTrailExpanded`"" ``
 - **Result:** Logdy now successfully follows the ATOM trail file
 
@@ -83,7 +83,7 @@ Created JavaScript middlewares in `~/.config/logdy/middlewares.json`:
 
 #### 4. PowerShell Profile
 
-Created optimized profile at: `C:\Users\Matthew Ruhnau\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+Created optimized profile at: `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 
 **Features:**
 - **Banner:** Shows KENL metrics on startup
