@@ -39,7 +39,7 @@ jobs:
 
       - name: Setup PowerShell (Ubuntu)
         if: matrix.runner == 'ubuntu-latest'
-        uses: milliewalky/setup-pwsh@v1
+        uses: milliewalky/setup-pwsh@111b66da66b9e4c068052ed1ae34fcbeb9adcf36 # v1
         with:
           tag: 'v7.5.0'
 
@@ -87,7 +87,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Setup PowerShell
-        uses: milliewalky/setup-pwsh@v1
+        uses: milliewalky/setup-pwsh@111b66da66b9e4c068052ed1ae34fcbeb9adcf36 # v1
         with:
           tag: 'v7.5.0'
 
